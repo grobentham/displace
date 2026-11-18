@@ -1,20 +1,29 @@
-import sys, time, datetime as dt
+import sys, time, datetime as dt, urllib.request
 sys.path.insert(0, "engine")
-import series_store as S, prices
-src = S.Public()
-for sid, mode in (("CPILFESL", "pct"), ("PAYEMS", "diff"), ("ICSA", "level")):
-    t = time.time(); v = src.vintages(sid); print(f"LIVE {sid} vintages {len(v)} {v[:2]}..{v[-2:]} {time.time()-t:.1f}s")
-    rows = []
-    t = time.time()
-    for x in [y for y in v if y >= "2026-06-01"]:
-        snap = src.snapshot(sid, x, (dt.date.fromisoformat(x) - dt.timedelta(days=420)).isoformat())
-        S.chain(rows, x, snap, mode)
-    print(f"LIVE {sid} chained {len(rows)} in {time.time()-t:.1f}s")
-    for i in range(1, len(rows)):
-        a, b = rows[i - 1], rows[i]
-        ch = (b[1] / a[1] - 1) * 100 if mode == "pct" else b[1] - a[1] if mode == "diff" else b[1]
-        print(f"LIVE   {b[0]} published {b[2]} -> {ch:.3f}")
-d = src.daily("DFF", "2026-11-01"); print("LIVE DFF", d[-2:])
-d = src.daily("DTWEXBGS", "2026-11-01"); print("LIVE DTWEXBGS", d[-2:])
-for m in ("gold", "nq"):
-    r, s = prices.closes(m, "2026-11-01"); print("LIVE", m, s, r[-2:] if r else None)
+UA={"User-Agent":"Mozilla/5.0 (Displace data engine; +https://github.com/grobentham/displace)"}
+def t(u, n=5):
+    for i in range(n):
+        s=time.time()
+        try:
+            b=urllib.request.urlopen(urllib.request.Request(u,headers=UA),timeout=40).read(); print(f"LIVE {u[:70]} try{i} OK {time.time()-s:.1f}s {len(b)}B")
+        except Exception as e: print(f"LIVE {u[:70]} try{i} FAIL {time.time()-s:.1f}s {e!r}")
+        time.sleep(1)
+t("https://alfred.stlouisfed.org/series/downloaddata?seid=CPILFESL")
+t("https://alfred.stlouisfed.org/graph/alfredgraph.csv?id=CPILFESL&cosd=2025-09-01&coed=2026-10-24&vintage_date=2026-10-24")
+t("https://fred.stlouisfed.org/graph/fredgraph.csv?id=DFF&cosd=2026-10-01")
+t("https://fred.stlouisfed.org/series/CPILFESL", 2)
+import series_store as S
+src=S.Public()
+for sid, mode in (("CPILFESL","pct"),("PAYEMS","diff"),("ICSA","level")):
+    try:
+        v=src.vintages(sid); rows=[]; s=time.time()
+        for x in [y for y in v if y>="2026-06-01"]:
+            S.chain(rows,x,src.snapshot(sid,x,(dt.date.fromisoformat(x)-dt.timedelta(days=420)).isoformat()),mode)
+        print(f"LIVE {sid} {len(v)} vintages, chained {len(rows)} in {time.time()-s:.1f}s")
+        for i in range(1,len(rows)):
+            a,b=rows[i-1],rows[i]; ch=(b[1]/a[1]-1)*100 if mode=="pct" else b[1]-a[1] if mode=="diff" else b[1]
+            print(f"LIVE   {b[0]} published {b[2]} -> {ch:.3f}")
+    except Exception as e: print("LIVE", sid, "FAIL", repr(e))
+import prices
+for m in ("gold","nq"):
+    r,s=prices.closes(m,"2026-11-01"); print("LIVE",m,s,r[-2:] if r else None)
