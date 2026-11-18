@@ -95,8 +95,8 @@ def run(tmp, now, upto):
                                 "Employment Situation": 50, "FOMC Press Release": 101,
                                 "Unemployment Insurance Weekly Claims": 180, "Gross Domestic Product": 53}
     fredapi.release_dates = lambda rid, s, e="9999-12-31": [x for x in REL_DATES.get(rid, []) if s <= x <= e] if rid in REL_DATES else None
-    prices = importlib.import_module("prices")
-    prices.gold = lambda start, log=print: (None, "")  # no network in tests
+    earnings = importlib.import_module("earnings")
+    earnings.run = lambda *args: None
     eng = importlib.import_module("engine")
     eng.main()
     sys.path.pop(0)
@@ -204,8 +204,8 @@ def edge_tests():
     fredapi.releases = lambda: None
     fredapi.release_dates = lambda *a, **k: None
     before = json.load(open(os.path.join(tmp, "site", "data", "calendar", "events.json")))["events"]
-    prices = importlib.import_module("prices")
-    prices.gold = lambda start, log=print: (None, "")  # no network in tests
+    earnings = importlib.import_module("earnings")
+    earnings.run = lambda *args: None
     eng = importlib.import_module("engine")
     eng.main()
     sys.path.pop(0)

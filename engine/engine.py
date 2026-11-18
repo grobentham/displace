@@ -14,8 +14,7 @@ Each run:
   4. Measures how 2-year yields, 10-year yields and the dollar moved on past release days compared with normal days.
   5. Writes the daily brief, weekly outlook, Fed tracker, macro pulse, release stats, iCal feeds and an engine status file.
 
-Set FRED_API_KEY (free from fred.stlouisfed.org). Without it, the engine keeps the data it has and
-still writes the calendar, brief and outlook from its rules.
+Public FRED data and ALFRED snapshots work without an API key.
 """
 import datetime as dt
 import json
@@ -28,8 +27,7 @@ from zoneinfo import ZoneInfo
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import calendar_rules as rules  # noqa: E402
 import fredapi  # noqa: E402
-import direction  # noqa: E402
-import prices  # noqa: E402
+import publicdata  # noqa: E402
 import quality as qa  # noqa: E402
 from catalog import (HISTORY_KEYS, MARKETS, NAMES, NOTES, REACTION_KEYS, REACTION_SERIES,  # noqa: E402
                      RELEASES, RULED, WHY)
@@ -44,6 +42,7 @@ HIST_START = "2014-01-01"  # one long fetch per series, reused for figures and a
 MON = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
 LOG, WARN = [], []
 QA = qa.Report()
+SOURCE = fredapi if fredapi.KEY else publicdata
 PENDING_PATH = None  # set in main
 HORIZON = 150  # days of calendar ahead
 
@@ -71,12 +70,12 @@ def save(path, obj, raw=None):
     os.makedirs(os.path.dirname(path), exist_ok=True)
     new = raw if raw is not None else json.dumps(obj, indent=1, ensure_ascii=False) + "\n"
     try:
-        with open(path, encoding="utf-8") as f:
+        with open(path, encoding="utf-8", newline="") as f:
             if f.read() == new:
                 return False
     except FileNotFoundError:
         pass
-    with open(path, "w", encoding="utf-8") as f:
+    with open(path, "w", encoding="utf-8", newline="") as f:
         f.write(new)
     return True
 
@@ -167,11 +166,20 @@ def auto_events():
     out, answered = [], set()
     start = (TODAY - dt.timedelta(days=14)).isoformat()
     end = (TODAY + dt.timedelta(days=HORIZON)).isoformat()
-    names = fredapi.releases() or {}
+    names = (fredapi.releases() or {}) if fredapi.KEY else {}
     fomc_dates = []
+    bea = [] if fredapi.KEY else publicdata.bea_releases(NY)
     for key, cfg in RELEASES.items():
+        agency = [(published, period, est) for kind, published, period, est in bea
+                  if kind == key and start <= published.date().isoformat() <= end]
+        if agency:
+            answered.add(key)
+            for published, period, est in agency:
+                title = cfg["title"].format(per=period, est=est)
+                out.append(make_event(published.date(), key, {**cfg, "time": published.strftime("%H:%M")}, title, auto="public"))
+            continue
         rid = next((i for n, i in names.items() if re.search(cfg["fred"], n)), None) or cfg["rid"]
-        dates = fredapi.release_dates(rid, start, end)
+        dates = SOURCE.release_dates(rid, start, end)
         if dates is None:
             continue
         answered.add(key)
@@ -193,7 +201,7 @@ def auto_events():
             else:
                 lab, _, _ = period_for(key, d)
                 title = cfg["title"].format(per=lab)
-            out.append(make_event(d, key, cfg, title))
+            out.append(make_event(d, key, cfg, title, auto="fred" if fredapi.KEY else "public"))
     # rules
     hol_dates = set()
     for y in {TODAY.year, TODAY.year + 1}:
@@ -235,9 +243,12 @@ def merge(events, autos, answered):
     key = lambda e: (kind_of(e), e["date"], holiday_kind(e) if kind_of(e) == "holiday" else "")
     have = {key(e): e for e in events}
     auto_keys = {key(a) for a in autos}
+    public_through = {}
     added = 0
     for a in autos:
         k = key(a)
+        if a.get("auto") == "public":
+            public_through[k[0]] = max(public_through.get(k[0], ""), a["date"])
         if k in have:
             continue
         # weekly claims: skip if a claims event already sits within two days (e.g. a holiday shift)
@@ -248,6 +259,8 @@ def merge(events, autos, answered):
         added += 1
     removed = 0
     for e in list(events):
+        if not fredapi.KEY and e.get("auto") in ("public", "fred") and e["date"] > public_through.get(kind_of(e), ""):
+            continue
         if e.get("auto") and not e.get("actual") and d_(e["date"]) > TODAY and kind_of(e) in answered and key(e) not in auto_keys:
             events.remove(e)
             removed += 1
@@ -294,7 +307,7 @@ def fmt(mode, v):
         return f"{0.0 if v == 0 else v:.1f}%"
     if mode in ("diff", "thousands"):
         return f"{round(v)}K"
-    if mode == "claims":
+    if mode in ("claims", "diffPersons"):
         return f"{round(v / 1000)}K"
     if mode == "claimsM":
         return f"{v / 1e6:.2f}M"
@@ -318,7 +331,7 @@ def transformed(obs, mode):
             if i == 0:
                 continue
             out.append((d, (v / obs[i - 1][1] - 1) * 100, rt))
-        elif mode == "diff":
+        elif mode in ("diff", "diffPersons"):
             if i == 0:
                 continue
             out.append((d, v - obs[i - 1][1], rt))
@@ -334,7 +347,7 @@ def transformed(obs, mode):
 
 
 def series_obs(series):
-    return fredapi.observations(series, HIST_START)
+    return SOURCE.observations(series, HIST_START)
 
 
 def event_key(e):
@@ -396,6 +409,53 @@ def component_figures(e, k, label, series, mode, released):
     want_m = per.month - (3 if k == "gdp" else 1)
     want = dt.date(per.year if want_m > 0 else per.year - 1, want_m if want_m > 0 else want_m + 12, 1)
     return None, (fmt(mode, tr[-1][1]) if tr[-1][0] == want.isoformat() else None), tr
+
+
+def snapshot_dates(release):
+    before = release - dt.timedelta(days=1)
+    after = release + dt.timedelta(days=1)
+    while after.weekday() >= 5:
+        after += dt.timedelta(days=1)
+    return before.isoformat(), min(TODAY, after).isoformat()
+
+
+def public_figures(e, kind, series, mode, released):
+    """Verify an observation against the archived snapshot before its release."""
+    release = d_(e["date"])
+    period = title_period(e, kind)
+    if kind == "claims":
+        period = release - dt.timedelta(days=(release.weekday() - 5) % 7)
+        if series == "CCSA":
+            period -= dt.timedelta(days=7)
+    elif kind == "fomc":
+        period = release + dt.timedelta(days=1)
+    if period is None:
+        return None, None, None
+
+    target = period.isoformat()
+    if not released:
+        # The most recent earlier observation is a prior reading, never an actual.
+        current = transformed(series_obs(series) or [], mode)
+        earlier = [row for row in current if row[0] < target]
+        return None, fmt(mode, earlier[-1][1]) if earlier else None, None
+
+    before_date, after_date = snapshot_dates(release)
+    before = publicdata.observations(series, HIST_START, before_date)
+    after = publicdata.observations(series, HIST_START, after_date)
+    if not before or not after:
+        return None, None, None
+    prior = transformed(before, mode)
+    available = [row for row in transformed(after, mode) if row[0] <= target]
+    old = next((row[1] for row in prior if row[0] == target), None)
+    earlier = [row for row in available if row[0] < target]
+    actual = available[-1] if available and available[-1][0] == target else None
+    if old is not None:
+        # GDP and provisional surveys can publish a second estimate of the same period.
+        if kind not in ("gdp", "umich") or not actual or actual[1] == old:
+            return None, fmt(mode, old), None
+        return fmt(mode, actual[1]), fmt(mode, old), available
+    previous = fmt(mode, earlier[-1][1]) if earlier else None
+    return (fmt(mode, actual[1]), previous, available) if actual else (None, previous, None)
 
 
 def per_label(iso, k):
@@ -522,7 +582,7 @@ def update_figures(events, hist, pending):
     run_key = NOW.isoformat(timespec="minutes")
     ordered = sorted(events, key=when)
     claims_next = next((e["id"] for e in ordered if kind_of(e) == "claims" and not e.get("actual") and when(e) > NOW - dt.timedelta(hours=6)), None)
-    hist_changed = False
+    candidates = []
     for e in events:
         k = kind_of(e)
         if k in (None, "holiday", "minutes", "beige"):
@@ -541,9 +601,21 @@ def update_figures(events, hist, pending):
         if rk == "claims" and e["id"] != claims_next and NOW < when(e):
             continue
         released = NOW >= when(e) + dt.timedelta(minutes=20)
+        candidates.append((e, rk, released))
+    if not fredapi.KEY:
+        requests = {(series, HIST_START, vintage)
+                    for event, kind, released in candidates
+                    for _, series, _ in RELEASES[kind]["comps"]
+                    for vintage in (snapshot_dates(d_(event["date"])) if released else ("",))}
+        publicdata.prefetch_observations(requests)
+    hist_changed = False
+    for e, rk, released in candidates:
         comps, head_hist, head_ok = [], None, True
         for i, (label, series, mode) in enumerate(RELEASES[rk]["comps"]):
-            act, prev, h = component_figures(e, rk, label, series, mode, released)
+            if fredapi.KEY:
+                act, prev, h = component_figures(e, rk, label, series, mode, released)
+            else:
+                act, prev, h = public_figures(e, rk, series, mode, released)
             if prev and not qa.plausible(series, mode, prev):
                 QA.check(f"plausible previous: {e['id']} {label}", False, f"{prev} rejected", critical=True)
                 prev = None
@@ -561,7 +633,8 @@ def update_figures(events, hist, pending):
                     e["revised"] = prev
                 if act and head_ok:
                     e["actual"] = act
-                    e["provenance"] = {"via": "FRED", "series": series, "published": (h[-1][2] if h else "")}
+                    e["provenance"] = {"via": "FRED", "series": series, "published": h[-1][2]} if fredapi.KEY else {
+                        "via": "ALFRED", "series": series, "asof": h[-1][2]}
             if act or prev:
                 comps.append({"label": label, **({"actual": act} if act else {}), **({"previous": prev} if prev else {})})
         if comps and (head_ok or not e.get("actual")):
@@ -585,7 +658,7 @@ def update_figures(events, hist, pending):
 def market_tiles():
     tiles = {}
     for key, label, series, kind in MARKETS:
-        obs = fredapi.observations(series, (TODAY - dt.timedelta(days=400)).isoformat())
+        obs = SOURCE.observations(series, (TODAY - dt.timedelta(days=400)).isoformat())
         if not obs or len(obs) < 2:
             continue
         v = [x[1] for x in obs]
@@ -611,10 +684,10 @@ def market_tiles():
 
 def reactions(events):
     """How 2y/10y yields and the dollar moved on past release days, against the average day."""
-    names = fredapi.releases() or {}
+    names = (fredapi.releases() or {}) if fredapi.KEY else {}
     daily = {}
     for key, series, unit in REACTION_SERIES:
-        obs = fredapi.observations(series, (TODAY - dt.timedelta(days=4 * 365)).isoformat())
+        obs = SOURCE.observations(series, (TODAY - dt.timedelta(days=4 * 365)).isoformat())
         if obs and len(obs) > 30:
             daily[key] = obs
     if not daily:
@@ -635,7 +708,19 @@ def reactions(events):
     for k in REACTION_KEYS:
         cfg = RELEASES[k]
         rid = next((i for n, i in names.items() if re.search(cfg["fred"], n)), None) or cfg["rid"]
-        dates = fredapi.release_dates(rid, (TODAY - dt.timedelta(days=3 * 365)).isoformat(), TODAY.isoformat())
+        start = (TODAY - dt.timedelta(days=3 * 365)).isoformat()
+        if fredapi.KEY:
+            dates = SOURCE.release_dates(rid, start, TODAY.isoformat())
+        else:
+            dates = []
+            months = 6 if k != "claims" else 4
+            for offset in range(0, 36, months):
+                end = TODAY - dt.timedelta(days=offset * 30)
+                window = SOURCE.release_dates(rid, (end - dt.timedelta(days=months * 30 - 1)).isoformat(), end.isoformat())
+                dates.extend(window or [])
+                if len(dates) >= (12 if k != "claims" else 26):
+                    break
+            dates = sorted(set(dates))
         if not dates:
             continue
         dates = [x for x in dates if x < TODAY.isoformat() and d_(x).weekday() < 5]
@@ -795,8 +880,8 @@ def write_outlook(events):
 
 def write_fed(events, tiles):
     man = load(os.path.join(ENG, "manual.json"), {})
-    lo = fredapi.observations("DFEDTARL", "2015-01-01")
-    hi = fredapi.observations("DFEDTARU", "2015-01-01")
+    lo = SOURCE.observations("DFEDTARL", "2015-01-01")
+    hi = SOURCE.observations("DFEDTARU", "2015-01-01")
     fed = {"asof": TODAY.isoformat()}
     if lo and hi:
         fed["rate"] = f"{lo[-1][1]:.2f}%–{hi[-1][1]:.2f}%"
@@ -878,62 +963,9 @@ def ics(events, only_high=False):
 
 
 # ---------------------------------------------------------------- run
-def run_direction(events):
-    """Direction engine: refit daily from FRED + gold history, apply to this fortnight's releases every run."""
-    mpath, cpath, lpath = (os.path.join(DATA, "direction", "model.json"), os.path.join(DATA, "direction", "current.json"),
-                           os.path.join(ENG, "direction_log.json"))
-    model = load(mpath, None)
-    rows = load(lpath, [])
-    old = load(cpath, {})
-    stale = not model or model.get("version") != 2 or (TODAY - d_(model["asof"])).days >= 6
-    fresh_release = any(e.get("actual") and e["date"] == TODAY.isoformat() and kind_of(e) in direction.MODELS and
-                        not any(p["date"] == e["date"] for p in (model or {}).get("kinds", {}).get(kind_of(e), {}).get("last", []))
-                        for e in events)
-    record = old.get("live")
-    if fredapi.KEY and (stale or fresh_release or TODAY.weekday() == 6 or NOW.hour in (15, 16)):
-        recs = {}
-        for e in events:
-            k = kind_of(e)
-            if k in direction.MODELS and e.get("actual") and e.get("forecast"):
-                f = direction.figure(e["forecast"], direction.MODELS[k]["mult"])
-                if f is not None:
-                    recs[(k, e["date"])] = f
-        for hk, ser in (load(os.path.join(DATA, "history", "main.json"), {}).get("series") or {}).items():
-            k = next((a for a, b in HISTORY_KEYS.items() if b == hk), None)
-            if k in direction.MODELS:
-                for r in ser.get("rows", []):
-                    f = direction.figure(r.get("forecast"), direction.MODELS[k]["mult"])
-                    if f is not None and r.get("date"):
-                        recs.setdefault((k, r["date"]), f)
-        new, closes = direction.fit(fredapi.observations, lambda s: prices.gold(s, log=log), recs, TODAY, log=log, live_rows=rows)
-        if new and new["kinds"]:
-            model = new
-            record = direction.score(rows, closes)
-        else:
-            warn("direction engine: refit failed, kept the last model")
-    live = direction.apply(model, events, kind_of, TODAY)
-    if not direction.check(QA, model, live):
-        warn("direction output failed quality checks: kept the last good version")
-        return
-    direction.log_calls(rows, live)
-    if model:
-        save(mpath, model)
-    save(lpath, rows)
-    proven = [m["bt"] for k in (model or {}).get("kinds", {}).values() for m in k["assets"].values() if m["bt"].get("proven")]
-    save(cpath, {"asof": NOW.isoformat(timespec="minutes"), "modelAsof": (model or {}).get("asof"),
-                 "assets": (model or {}).get("assets", {}), "sources": (model or {}).get("sources", {}),
-                 "regime": (model or {}).get("regime", {}),
-                 "rules": {f"{k}:{a}": {"proven": m["bt"].get("proven"), "why": m["bt"].get("why"), "calls": m["bt"]["calls"],
-                                         "hits": m["bt"]["hits"], "skill": m["bt"]["brierSkill"], "reliability": m["bt"]["reliability"]}
-                           for k, km in (model or {}).get("kinds", {}).items() for a, m in km["assets"].items()},
-                 "proven": len(proven), "backtest": {"calls": sum(b["calls"] for b in proven), "hits": sum(b["hits"] for b in proven)},
-                 "live": record or {"calls": 0, "hits": 0, "open": len(rows), "byAsset": {}, "recent": []},
-                 "events": live})
-    log(f"direction: {len(live)} releases, {len(proven)} proven rules")
-
-
 def main():
-    log("engine run", NOW.isoformat(timespec="minutes"), "with FRED" if fredapi.KEY else "without FRED key")
+    source_name = "FRED API" if fredapi.KEY else "public FRED and ALFRED"
+    log("engine run", NOW.isoformat(timespec="minutes"), "using", source_name)
     cal = load(os.path.join(DATA, "calendar", "events.json"), {"events": []})
     hist = load(os.path.join(DATA, "history", "main.json"), {"series": {}})
     events = cal.get("events", [])
@@ -941,8 +973,7 @@ def main():
     pending = load(pending_path, {})
     autos, answered = auto_events()
     for k in RELEASES:
-        if fredapi.KEY:
-            QA.check(f"source: FRED calendar for {k}", k in answered, "no dates returned; keeping existing dates")
+        QA.check(f"source: release calendar for {k}", k in answered, "no dates returned; keeping existing dates")
     merge(events, autos, answered)
     merge_schedule(events)
     events = prune(events)
@@ -971,7 +1002,7 @@ def main():
         log("calendar saved")
     if not calendar_ok:
         events = old.get("events", events)
-    if hist_changed:
+    if calendar_ok and hist_changed:
         n0 = len(QA.critical_fail)
         qa.check_history(QA, hist)
         if len(QA.critical_fail) == n0:
@@ -979,18 +1010,14 @@ def main():
             save(os.path.join(DATA, "history", "main.json"), hist)
         else:
             warn("release stats failed quality checks: kept the last good version")
-    tiles = market_tiles() if fredapi.KEY else load(os.path.join(DATA, "markets", "latest.json"), {}).get("tiles", {})
-    if fredapi.KEY and tiles:
+    tiles = {**load(os.path.join(DATA, "markets", "latest.json"), {}).get("tiles", {}), **market_tiles()}
+    if tiles:
         tiles = qa.check_markets(QA, tiles, {k: s for k, _, s, _ in MARKETS}, TODAY)
         save(os.path.join(DATA, "markets", "latest.json"), {"asof": TODAY.isoformat(), "tiles": tiles})
-    if fredapi.KEY and (TODAY.weekday() == 6 or not load(os.path.join(DATA, "history", "reactions.json"), {}).get("series") or NOW.hour in (15, 16)):
+    if TODAY.weekday() == 6 or not load(os.path.join(DATA, "history", "reactions.json"), {}).get("series"):
         rx = qa.check_reactions(QA, reactions(events))
         if rx and rx["series"]:
             save(os.path.join(DATA, "history", "reactions.json"), rx)
-    try:
-        run_direction(events)
-    except Exception as ex:  # never let the direction engine break the calendar
-        warn(f"direction engine error: {ex!r}")
     write_brief(events, tiles)
     write_outlook(events)
     write_fed(events, tiles)
@@ -1008,13 +1035,12 @@ def main():
     if d_(through) < TODAY + dt.timedelta(days=35):
         warn(f"release calendar only runs to {through}")
         with open(stale_path, "w") as fh:
-            fh.write(f"The release calendar only runs to {through}. Check the FRED_API_KEY secret, or add dates to engine/schedule.json.\n")
+            fh.write(f"The release calendar only runs to {through}. Check source coverage or add confirmed dates to engine/schedule.json.\n")
     elif os.path.exists(stale_path):
         os.remove(stale_path)
-    if fredapi.KEY and fredapi.STATS["errors"]:
-        warn(f"FRED errors on {fredapi.STATS['errors']} request(s): {', '.join(map(str, fredapi.STATS['failed'][:8]))}")
-    if not fredapi.KEY:
-        warn("FRED_API_KEY is not set: figures, markets and reactions are not updating")
+    source_stats = SOURCE.STATS
+    if source_stats["errors"]:
+        warn(f"Data source errors on {source_stats['errors']} request(s): {', '.join(map(str, source_stats['failed'][:8]))}")
     qrep = QA.to_json(NOW.isoformat(timespec="minutes"))
     save(os.path.join(DATA, "engine", "quality.json"), qrep)
     fail_path = os.path.join(ENG, "QUALITY_FAIL")
@@ -1027,9 +1053,10 @@ def main():
     elif os.path.exists(fail_path):
         os.remove(fail_path)
     log(f"quality: {QA.passed}/{len(QA.checks)} checks passed, {len(QA.held)} held, {len(QA.rejected)} rejected")
-    status = {"lastRun": NOW.isoformat(timespec="minutes"), "fred": bool(fredapi.KEY), "fredCalls": fredapi.STATS["calls"],
+    status = {"lastRun": NOW.isoformat(timespec="minutes"), "source": source_name, "fredCalls": source_stats["calls"],
+              "fred": bool(fredapi.KEY or source_stats["calls"] > source_stats["errors"]),
               "quality": {"passed": QA.passed, "total": len(QA.checks), "held": len(QA.held), "rejected": len(QA.rejected), "critical": len(QA.critical_fail)},
-              "fredErrors": fredapi.STATS["errors"], "calendarThrough": through, "events": len(events),
+              "fredErrors": source_stats["errors"], "calendarThrough": through, "events": len(events),
               "upcoming": sum(1 for e in events if e["date"] >= TODAY.isoformat()), "warnings": WARN, "log": LOG[-30:]}
     save(os.path.join(DATA, "engine", "status.json"), status)
     return 0
