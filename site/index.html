@@ -1252,6 +1252,8 @@ html.static .pro-how{display:none}
 .morning-outlook .outlook-heading{margin:0 0 9px;color:#d0ddeb;font-size:.86rem;line-height:1.3;letter-spacing:.01em}
 .outlook-call{display:block;margin:0 0 10px;color:var(--outlook-accent);font-size:clamp(2.15rem,4.25vw,3.6rem);font-weight:750;letter-spacing:-.05em;line-height:1.03}
 .morning-outlook p{margin:0;color:#edf4ff;font-size:.96rem;line-height:1.45}
+.morning-outlook .outlook-catalyst{margin-top:10px;color:#d0ddeb;font-size:.84rem;line-height:1.4}
+.outlook-catalyst strong{color:var(--outlook-accent)}
 .morning-outlook details{margin-top:10px;color:#cdd9e8;font-size:.81rem;line-height:1.5}
 .morning-outlook summary,.morning-outlook a{color:var(--outlook-accent);text-underline-offset:3px}
 .morning-outlook summary{cursor:pointer;width:fit-content}
@@ -1272,10 +1274,18 @@ html.static .pro-how{display:none}
 .morning-grid li p{margin-top:4px;color:#465366}
 .morning-grid time{display:block;margin-bottom:1px;color:#145f9d;font-size:.8rem;font-weight:700;font-variant-numeric:tabular-nums}
 .morning-grid a{color:#0758a1;font-weight:650;text-decoration:underline;text-underline-offset:2px}
+.morning-grid .morning-meta{margin:0 0 3px;color:#566277;font-size:.77rem;line-height:1.35}
+.morning-meta time{display:inline;color:inherit;font-size:inherit}
+.morning-metrics{display:grid;gap:5px;margin:7px 0 0}
+.morning-metrics div{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:8px}
+.morning-metrics dt,.morning-metrics dd{font-size:.8rem;line-height:1.35}
+.morning-metrics dt{color:#566277}
+.morning-metrics dd{margin:0;color:#24354b;font-weight:650;font-variant-numeric:tabular-nums}
 .morning-grid .morning-focus{margin-top:8px;color:#465366}
 .morning-grid .daily-more{margin-top:9px;font-size:.84rem}
 .daily-more summary{color:#0758a1;cursor:pointer;font-weight:650}
 .daily-more ul{margin-top:7px}
+.daily-more summary:focus-visible{outline:2px solid #0758a1;outline-offset:3px}
 .morning-topic .morning-coverage{margin-top:7px;font-size:.8rem;color:#566277}
 .morning-foot{margin:12px 0 0;font-size:.8rem;color:#566277}
 @media(max-width:740px){.morning-outlook,.morning-grid{grid-template-columns:minmax(0,1fr)}.morning-outlook{gap:13px}}
@@ -2767,7 +2777,7 @@ window.claude={use:function(n){return Promise.resolve(n==="db"?db:null);},isStat
     item.append(node("dt",label),valueNode);
     return item;
   }
-  function outlookBlock(outlook){
+  function outlookBlock(outlook,focus){
     var rates=outlook.rates,tone=outlook.label==="Bullish tilt"?" bullish":outlook.label==="Bearish tilt"?" bearish":"";
     var box=node("section",null,"morning-outlook"+tone+(rates?"":" single")),summary=node("div");
     var title=node("h3","NQ rates outlook","outlook-heading");
@@ -2777,7 +2787,13 @@ window.claude={use:function(n){return Promise.resolve(n==="db"?db:null);},isStat
     var treasury=node("a","U.S. Treasury yield data");
     treasury.href="https://home.treasury.gov/resource-center/data-chart-center/interest-rates";
     method.append(node("summary","About this outlook"),node("p","When both Treasury yields fall by at least "+outlook.thresholdBp+" bp, the rates outlook shows a bullish tilt. When both rise by that amount, it shows a bearish tilt. Smaller or mixed moves show Neutral."),treasury);
-    summary.append(title,node("strong",outlook.label,"outlook-call"),node("p",outlook.reason),method);
+    summary.append(title,node("strong",outlook.label,"outlook-call"),node("p",outlook.reason));
+    if(focus&&Date.parse(focus.at)>Date.now()){
+      var catalyst=node("p",null,"outlook-catalyst");
+      catalyst.append(node("strong","Top release ahead · "),document.createTextNode(focus.title+" · "),briefTime(focus.at));
+      summary.append(catalyst);
+    }
+    summary.append(method);
     box.append(summary);
     if(rates){
       var evidence=node("div",null,"outlook-yields"),list=node("dl");
@@ -2787,12 +2803,34 @@ window.claude={use:function(n){return Promise.resolve(n==="db"?db:null);},isStat
     }
     return box;
   }
+  function briefTime(stamp){
+    var at=node("time",sgtEvent.format(new Date(stamp))+" SGT");at.dateTime=stamp;return at;
+  }
+  function briefMeta(stamp,source){
+    var meta=node("p",null,"morning-meta");
+    if(stamp)meta.append(briefTime(stamp));
+    if(source)meta.append(document.createTextNode((stamp?" · ":"")+source));
+    return meta;
+  }
+  function metricsList(metrics){
+    var list=node("dl",null,"morning-metrics");
+    metrics.forEach(function(metric){
+      var pair=node("div");pair.append(node("dt",metric.label),node("dd",metric.value));list.append(pair);
+    });
+    return list;
+  }
+  function briefDetails(label,content){
+    var details=node("details",null,"daily-more");details.append(node("summary",label),content);return details;
+  }
   function earningsBlock(data){
     var box=node("div",null,"morning-topic"),rows=node("ul");
     box.append(node("h3","Earnings"));
     data.reports.forEach(function(item){
-      var row=node("li");row.append(headline({title:item.symbol+" results",url:item.url}));
-      if(item.summary)row.append(node("p",item.summary));
+      var row=node("li");
+      if(item.published)row.append(briefMeta(item.published,item.symbol));
+      row.append(headline({title:item.published?item.title:item.symbol+" results",url:item.url}));
+      if(item.metrics&&item.metrics.length)row.append(metricsList(item.metrics));
+      else if(item.summary)row.append(node("p",item.summary));
       rows.append(row);
     });
     data.upcoming.forEach(function(item){
@@ -2800,7 +2838,9 @@ window.claude={use:function(n){return Promise.resolve(n==="db"?db:null);},isStat
       var timing=item.timeConfirmed?sgtEvent.format(new Date(item.at))+" SGT":
         (item.at?sgtDay.format(new Date(item.at))+" · ":"")+
         (item.session==="AMC"?"after U.S. close":item.session==="BMO"?"before U.S. open":"time unconfirmed · U.S. date "+item.date);
-      row.append(headline({title:heading,url:item.url}),node("p",timing+(item.confirmed?"":" · tentative")));rows.append(row);
+      row.append(headline({title:heading,url:item.url}),node("p",timing+(item.confirmed?"":" · tentative")));
+      if(item.source)row.append(briefMeta(null,item.source));
+      rows.append(row);
     });
     if(rows.childElementCount)box.append(rows);
     else box.append(node("p","No results or upcoming reports found for the companies checked."));
@@ -2812,12 +2852,35 @@ window.claude={use:function(n){return Promise.resolve(n==="db"?db:null);},isStat
     rows.forEach(function(item){
       var row=node("li"),at=node("time",sgtEvent.format(new Date(item.at)));
       at.dateTime=item.at;
-      row.append(at,document.createTextNode(" "+item.title));
+      row.append(at,headline(item));
+      if(item.source)row.append(briefMeta(null,item.source));
       var figures=[];
       if(item.actual)figures.push("Actual "+item.actual);
       if(item.forecast)figures.push("Forecast "+item.forecast);
       if(item.previous)figures.push("Previous "+item.previous);
-      if(figures.length)row.append(node("p",figures.join(" · ")));
+      if(item.revised)figures.push("Revised prior "+item.revised);
+      if(figures.length)row.append(node("p",(item.metric?item.metric+" · ":"")+figures.join(" · ")));
+      if(item.forecastSource)row.append(briefMeta(null,"Forecast from "+item.forecastSource));
+      if(item.watch)row.append(node("p",item.watch));
+      if(item.components&&item.components.length){
+        var metrics=item.components.map(function(component){
+          return {label:component.label,value:component.actual+(component.previous?" · Prior "+component.previous:"")};
+        });
+        row.append(briefDetails("More figures",metricsList(metrics)));
+      }
+      list.append(row);
+    });
+    return list;
+  }
+  function briefUpdates(items){
+    var list=node("ul");
+    items.forEach(function(item){
+      var row=node("li");row.append(briefMeta(item.published,item.source),headline(item));
+      if(item.analysis)row.append(node("p",item.analysis));
+      if(item.context){
+        var context=node("p",item.context);
+        row.append(item.analysis?briefDetails("Why it matters",context):context);
+      }
       list.append(row);
     });
     return list;
@@ -2839,25 +2902,16 @@ window.claude={use:function(n){return Promise.resolve(n==="db"?db:null);},isStat
     var grid=node("div",null,"morning-grid"),recent=node("div",null,"morning-topic"),upcoming=node("div",null,"morning-topic");
     recent.append(node("h3","What changed"));
     if(edition.updates.length){
-      var updates=node("ul");
-      edition.updates.forEach(function(item){
-        var row=node("li");
-        if(Date.parse(item.published)>=Date.parse(edition.opensAt)){
-          var at=node("time",sgtEvent.format(new Date(item.published))+" SGT");at.dateTime=item.published;row.append(at);
-        }
-        row.append(headline(item));if(item.analysis)row.append(node("p",item.analysis));updates.append(row);
-      });
-      recent.append(updates);
+      recent.append(briefUpdates(edition.updates.slice(0,3)));
+      if(edition.updates.length>3)recent.append(briefDetails("More updates ("+(edition.updates.length-3)+")",briefUpdates(edition.updates.slice(3))));
     }else recent.append(node("p",edition.feedsChecked&&!edition.feedIssues?"No major official updates in the last 24 hours.":"No recent updates available from the feeds checked."));
     upcoming.append(node("h3","Release schedule · SGT"));
     if(edition.upcoming.length)upcoming.append(releaseList(edition.upcoming));
     else upcoming.append(node("p",edition.calendarCovered?"No major U.S. releases scheduled in this edition.":"Schedule coverage is limited for this edition."));
     if(edition.moreReleases&&edition.moreReleases.length){
-      var moreReleases=node("details",null,"daily-more");
-      moreReleases.append(node("summary","More releases ("+edition.moreReleases.length+")"),releaseList(edition.moreReleases));
-      upcoming.append(moreReleases);
+      upcoming.append(briefDetails("More releases ("+edition.moreReleases.length+")",releaseList(edition.moreReleases)));
     }
-    if(edition.focus){var focus=node("p",null,"morning-focus");if(edition.upcoming.length>1)focus.append(node("strong",edition.focus.title+". "));focus.append(document.createTextNode(edition.focus.text));upcoming.append(focus);}
+    if(edition.focus&&edition.focus.text)upcoming.append(node("p",edition.focus.text,"morning-focus"));
     if(edition.nextFed)upcoming.append(node("p","Next Fed decision · "+edition.nextFed,"morning-focus"));
     grid.append(upcoming);
     if(edition.earnings)grid.append(earningsBlock(edition.earnings));
@@ -2874,7 +2928,7 @@ window.claude={use:function(n){return Promise.resolve(n==="db"?db:null);},isStat
     if(!edition.feedsChecked)footer.push("News refresh pending");
     else if(edition.feedIssues)footer.push("Some news feeds were unavailable");
     var content=[grid,node("p",footer.join(" · "),"morning-foot")];
-    if(edition.outlook)content.unshift(outlookBlock(edition.outlook));
+    if(edition.outlook)content.unshift(outlookBlock(edition.outlook,edition.focus));
     morningContent.replaceChildren.apply(morningContent,content);
   }
   window.claude.use("db").then(function(db){
