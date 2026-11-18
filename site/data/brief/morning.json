@@ -1,0 +1,35 @@
+{
+ "version": 1,
+ "editions": [
+  {
+   "date": "2026-11-18",
+   "opensAt": "2026-11-18T07:00+08:00",
+   "generatedAt": "2026-11-18T13:21:19+08:00",
+   "updates": [
+    {
+     "title": "Retail sales (Oct)",
+     "url": "https://www.census.gov/retail/sales.html",
+     "analysis": "Retail sales came in at 0.2% against a 0.2% forecast, in line with expectations. The previous reading was 0.8%."
+    }
+   ],
+   "upcoming": [
+    {
+     "at": "2026-11-19T03:00+08:00",
+     "title": "FOMC minutes (Oct 27–28 meeting)"
+    }
+   ],
+   "focus": {
+    "title": "FOMC minutes",
+    "text": "The minutes show how officials weighed the last decision."
+   },
+   "treasury": {
+    "date": "2026-11-17",
+    "yield": 4.8,
+    "changeBp": -3
+   },
+   "calendarCovered": true,
+   "feedsChecked": true,
+   "feedIssues": false
+  }
+ ]
+}
