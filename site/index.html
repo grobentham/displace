@@ -751,6 +751,10 @@ footer .legal{padding-top:16px;display:flex;justify-content:space-between;gap:10
 .nx-rec{display:flex;gap:14px;flex-wrap:wrap;margin-top:12px;padding-top:10px;border-top:1px solid rgba(255,255,255,.07);font-size:.78rem;color:#a1a1a6}.nx-rec b{color:#f5f5f7}
 .nx-mini{display:block;margin-top:4px;font-size:.74rem}.nx-mini .up{color:#30d158}.nx-mini .down{color:#ff453a}
 @media (max-width:640px){.nx-sc{grid-template-columns:1fr;gap:6px}}
+.sm{margin-top:12px;padding-top:12px;border-top:1px solid rgba(255,255,255,.07)}.sm-h b{display:block;font-size:.84rem;color:#f5f5f7}.sm-h span{display:block;font-size:.74rem;color:#8e9bb3;margin:2px 0 8px;line-height:1.4}
+.sm-w{overflow-x:auto}.sm table{width:100%;border-collapse:collapse;font-size:.8rem;min-width:420px}.sm th,.sm td{text-align:left;padding:8px 6px;border-top:1px solid rgba(255,255,255,.07);vertical-align:top}.sm tr:first-child th{border-top:0;color:#8e9bb3;font-size:.7rem;font-weight:600}.sm th{color:#d1d1d6;font-weight:600;white-space:nowrap}
+.sm td b{display:block;font-weight:700}.sm td b.up{color:#30d158}.sm td b.down{color:#ff453a}.sm td b.mix{color:#a1a1a6}.sm td small{color:#8e9bb3;font-size:.72rem}.sm-na{color:#6e6e73}.sm-f{margin:8px 0 0;font-size:.72rem;color:#8e9bb3;line-height:1.45}
+.ecd .nx-dir{margin:0 0 14px}
 .nx-why{margin-top:10px;font-size:.8rem;color:#a1a1a6}.nx-why summary{cursor:pointer;color:#64d2ff;font-weight:600}.nx-why table{width:100%;border-collapse:collapse;margin:8px 0}.nx-why td,.nx-why th{text-align:left;padding:6px 4px;border-top:1px solid rgba(255,255,255,.07);font-weight:500}.nx-why th{color:#8e9bb3;font-size:.72rem}.nx-why p{margin:6px 0 0;line-height:1.45}
 .mx-how{max-width:900px;margin:44px auto 0;background:var(--tile);border-radius:22px;padding:22px 26px;text-align:left}
 .mx-how>b{display:block;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:12px}
@@ -3716,7 +3720,7 @@ function render(){if(!$("ec-list"))return;chips();
   remCard();guide();record();}
 /* direction engine */
 var DIR=null;
-var DIRN={usd:"Dollar",gold:"Gold",eur:"EUR/USD",nq:"Nasdaq 100",y2:"2-yr yield",y10:"10-yr yield"},DORD=["gold","usd","eur","nq","y2","y10"];
+var DIRN={usd:"Dollar",gold:"Gold",eur:"EUR/USD",nq:"Nasdaq 100 (NQ)",y2:"2-yr yield",y10:"10-yr yield"},DORD=["gold","nq","usd","eur","y2","y10"];
 function arw(d){return d==="up"?"▲":"▼";}
 function pc(p){return Math.round(p*100)+"%";}
 function dirFor(id){return DIR&&DIR.events&&DIR.events[id]||null;}
@@ -3729,15 +3733,25 @@ function dchips(v,A){var on=A.filter(function(a){return v[a]&&!v[a].none;}),off=
 function regLine(){var r=DIR&&DIR.regime;if(!r)return"";return'<span class="nx-src">Conditions now: Fed '+(r.hike===1?"hiking":r.hike===-1?"cutting":"on hold")+' · core inflation '+(r.infl?"above":"below")+' 3%</span>';}
 function rulesFor(k){var R=DIR&&DIR.rules;if(!R)return"";var rows=assets().map(function(a){var x=R[k+":"+a];if(!x)return"";return'<tr><td>'+DIRN[a]+'</td><td>'+(x.calls?x.hits+"/"+x.calls+" ("+pc(x.hits/x.calls)+")":"–")+'</td><td>'+(x.proven?'<b style="color:#30d158">Proven</b>':'<span style="color:#8e9bb3">'+esc(x.why||"Not proven")+'</span>')+'</td></tr>';}).join("");
   return'<details class="nx-why"><summary>How this was tested</summary><table><tr><th>Market</th><th>Right on unseen releases</th><th>Status</th></tr>'+rows+'</table><p>Every past release was replayed using only the data available before it. A rule is published only if it was right 55%+ of the time over 30+ calls, stays significant after correcting for the number of rules tested, beat a coin flip on probability accuracy, worked in both the earlier and later half of history, and is still working on its latest 20 calls.</p></details>';}
+function scenCell(a,c){if(!c||!c.n)return'<td class="sm-na">–</td>';var up=c.up>=0.5,mixed=Math.abs(c.up-0.5)<0.06||c.n<12;return'<td><b class="'+(mixed?"mix":up?"up":"down")+'">'+(mixed?"↕ Mixed ("+pc(c.up)+" up)":up?"▲ "+pc(c.up)+" up":"▼ "+pc(1-c.up)+" down")+'</b><small>typical '+mv(a,c.med)+' · '+c.n+' days</small></td>';}
+function scenMap(k){var S=DIR&&DIR.scenarios&&DIR.scenarios[k];if(!S)return"";var A=DORD.filter(function(a){return S.assets[a];});if(!A.length)return"";
+  var row=function(a){var x=S.assets[a];return'<tr><th>'+DIRN[a]+'</th>'+scenCell(a,x.hot)+scenCell(a,x.inline)+scenCell(a,x.cool)+'</tr>';};
+  var main=A.filter(function(a){return a==="gold"||a==="nq";}),rest=A.filter(function(a){return a!=="gold"&&a!=="nq";});
+  return'<div class="sm"><div class="sm-h"><b>Scenario map</b><span>How each market closed on '+esc(S.name)+' release days since '+esc(String(S.since).slice(0,4))+', by surprise ('+esc(S.metric)+' vs '+(S.basis||"consensus or recent trend")+')</span></div>'+
+   '<div class="sm-w"><table><tr><th></th><th>Hotter than expected</th><th>In line</th><th>Cooler than expected</th></tr>'+main.map(row).join("")+'</table></div>'+
+   (rest.length?'<details class="nx-why"><summary>Dollar, EUR/USD and yields</summary><div class="sm-w"><table>'+rest.map(row).join("")+'</table></div></details>':'')+
+   '<p class="sm-f">Historical record, weighted toward recent years. A lean is only shown above when the rule also passed out-of-sample tests. '+esc(DIR.disclaimer||"")+'</p></div>';}
+function dirDet(e){if(!DIR)return"";var v=dirFor(e.id),k=(v&&v.kind)||kindOf(e);if(k==="gdp"&&/second|third/i.test(e.title||""))return"";if(!k||!(DIR.scenarios&&DIR.scenarios[k]))return"";if(!isPro())return dirLock();
+  if(v&&v.stage==="post")return dirPost(e);if(v&&v.stage==="pre")return dirPre(e);return'<div class="nx-dir">'+scenMap(k)+'</div>';}
 function dirLock(){return'<div class="nx-dir"><div class="nx-top"><span class="nx-k">Direction engine · Pro</span></div><p style="margin:0 0 12px;color:#a1a1a6;font-size:.88rem">Which way gold, the dollar and yields have tended to close after this release, tested on releases the model never saw.</p><button type="button" class="pillbtn" data-pro-go>See Pro</button></div>';}
 function dirPre(e){var v=dirFor(e.id);if(!v||v.stage!=="pre")return"";if(!isPro())return dirLock();var A=assets(),any=A.some(function(a){return(v.hot[a]&&!v.hot[a].none)||(v.cool[a]&&!v.cool[a].none);});
   return'<div class="nx-dir"><div class="nx-top"><span class="nx-k">Direction engine</span>'+regLine()+'</div>'+
    (any?'<div class="nx-sc"><b>If higher than expected</b><div class="nx-chips">'+dchips(v.hot,A)+'</div></div><div class="nx-sc"><b>If lower than expected</b><div class="nx-chips">'+dchips(v.cool,A)+'</div></div>'
-     :'<p style="margin:0;color:#a1a1a6;font-size:.88rem">No proven direction for this release. Its past reactions failed the engine\'s tests, so it stays out.</p>')+recLine()+rulesFor(v.kind)+'</div>';}
+     :'<p style="margin:0;color:#a1a1a6;font-size:.88rem">No tested lean for this release: its past reactions failed the engine\'s out-of-sample tests. The historical record is below.</p>')+scenMap(v.kind)+recLine()+rulesFor(v.kind)+'</div>';}
 function dirPost(e){var v=dirFor(e.id);if(!v||v.stage!=="post")return"";if(!isPro())return dirLock();var A=assets(),lab=v.bin==="hot"?"higher than expected":v.bin==="cool"?"lower than expected":"in line with expectations";
   return'<div class="nx-dir"><div class="nx-top"><span class="nx-k">Just released · '+esc(e.title)+'</span><span class="nx-src">'+esc(e.actual)+(e.forecast?' vs '+esc(e.forecast)+' forecast':'')+' · '+lab+'</span></div><div class="nx-call">'+
    A.map(function(a){var c=v.calls[a];if(!c)return"";return c.none?'<div class="none"><small>'+DIRN[a]+'</small><b>No call</b><span>'+esc(c.why)+'</span></div>':'<div class="'+c.dir+'"><small>'+DIRN[a]+'</small><b>'+arw(c.dir)+' '+pc(c.p)+'</b><span>chance it closes '+(c.dir==="up"?"higher":"lower")+' today'+(c.iqr?' · typical day '+mv(a,c.iqr[0])+' to '+mv(a,c.iqr[1]):'')+'</span></div>';}).join("")+'</div>'+recLine()+rulesFor(v.kind)+'</div>';}
-function dirMini(e){var v=dirFor(e.id);if(!v||v.stage!=="pre")return"";var h=["gold","usd"].map(function(a){var c=v.hot[a];return c&&!c.none?'<b class="'+c.dir+'">'+DIRN[a]+' '+arw(c.dir)+'</b>':"";}).filter(Boolean);
+function dirMini(e){var v=dirFor(e.id);if(!v||v.stage!=="pre")return"";var h=["gold","nq"].map(function(a){var c=v.hot[a];return c&&!c.none?'<b class="'+c.dir+'">'+DIRN[a]+' '+arw(c.dir)+'</b>':"";}).filter(Boolean);
   return h.length?'<span class="nx-mini">If higher: '+h.join(" · ")+'</span>':"";}
 function justOut(){if(!DIR||!DIR.events)return null;var now=Date.now(),b=null;list().forEach(function(e){var v=DIR.events[e.id];if(v&&v.stage==="post"&&e.actual&&e.time&&now-instant(e.date,e.time)<20*3600000)b=e;});return b;}
 try{if(window.claude&&window.claude.isStatic)window.claude.use("db").then(function(db){db.doc("direction/current").onSnapshot(function(s){DIR=s.data();render();},function(){});});}catch(x){}
@@ -3975,7 +3989,7 @@ function setupPersonalImpact(){
     render();
   });
 }
-function det(e){var I=info(e),impact=impactHTML(e,I);return'<div class="ecd">'+impact+briefHTML(e,!!impact)+compsHTML(e)+valsDetail(e)+(e.note?'<p class="ecd-n">'+esc(e.note)+'</p>':'')+(I?infoHTML(I):'')+'</div>';}
+function det(e){var I=info(e),impact=impactHTML(e,I);return'<div class="ecd">'+impact+(typeof dirDet==="function"?dirDet(e):"")+briefHTML(e,!!impact)+compsHTML(e)+valsDetail(e)+(e.note?'<p class="ecd-n">'+esc(e.note)+'</p>':'')+(I?infoHTML(I):'')+'</div>';}
 function guide(){var g=$("ng-grid");if(!g||g._d===DATA)return;g._d=DATA;
   var nx={};list().forEach(function(e){var I=info(e);if(I&&!nx[I.k]&&e.date>=nyToday())nx[I.k]=e;});
   g.innerHTML=NI.filter(function(I){return I.k!=="half";}).map(function(I){var e=nx[I.k];return'<details class="ngc i-'+I.imp+'"><summary><span class="eci"><i></i></span><span class="ngt"><b>'+esc(I.n)+'</b><small>'+esc(I.when)+'</small></span><span class="ngn">'+(e?"Next: "+esc(dayLabel(e.date))+(e.time?" · "+e.time:""):"")+'</span><span class="ecx" aria-hidden="true">›</span></summary>'+infoHTML(I)+'</details>';}).join("");}

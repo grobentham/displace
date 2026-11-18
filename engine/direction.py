@@ -54,7 +54,7 @@ MODELS = {
     "jolts": dict(head=("JTSJOL", "level"), comps=[], metric="job openings", window=3, mult=1e-3),
     "gdp": dict(head=("A191RL1Q225SBEA", "level"), comps=[], metric="real GDP, annualized", window=3, mult=1),
     "umich": dict(head=("UMCSENT", "level"), comps=[("MICH", "level", 1)], metric="consumer sentiment", window=3, mult=1),
-    "homes": dict(head=("HSN1F", "level"), comps=[], metric="new home sales", window=3, mult=1),
+    "homes": dict(head=("HSN1F", "level"), comps=[], metric="new home sales", window=3, mult=1e-3),
 }
 ASSETS = {  # key: (FRED series or None for gold, unit, name, invert)
     "gold": (None, "pct", "Gold", False),
@@ -399,7 +399,7 @@ def bh(tests, q=FDR_Q):
 HIGH = ("cpi", "nfp", "retail", "pce", "gdp", "ppi")
 
 
-def fit(fetch_obs, gold_fn, records, today, log=print, live_rows=()):
+def fit(fetch_obs, gold_fn, records, today, log=print, live_rows=(), price_fns=None):
     cache = {}
 
     def fetch(s, start, initial=False):
@@ -409,7 +409,9 @@ def fit(fetch_obs, gold_fn, records, today, log=print, live_rows=()):
         return cache[key]
     px, srcs = {}, {}
     for a, (series, unit, name, _) in ASSETS.items():
-        if series:
+        if price_fns and a in price_fns:
+            rows, src = price_fns[a](START)
+        elif series:
             o = fetch(series, START)
             rows, src = ([(d, v) for d, v, _ in o] if o else None), f"FRED {series}"
         else:
