@@ -506,7 +506,7 @@ def _call(model, kind, a, z, trend):
             "iqr": [c["q1"], c["q3"]], "bt": [bt["hits"], bt["calls"]]}
 
 
-def apply(model, events, kind_of, today, horizon=14):
+def apply(model, events, kind_of, today, horizon=14, use_consensus=False):
     out = {}
     if not model or model.get("version") != 2:
         return out
@@ -525,7 +525,7 @@ def apply(model, events, kind_of, today, horizon=14):
                 z, basis = last["z"], last["basis"]  # full composite from the refit after the release
             else:
                 x = figure(e["actual"], km["mult"])
-                fc = figure(e.get("forecast"), km["mult"])
+                fc = figure(e.get("forecast"), km["mult"]) if use_consensus else None
                 prior = [v for d, v in km["recent"] if d < e["date"]][-km["window"]:]
                 exp_ = fc if fc is not None else (sum(prior) / len(prior) if len(prior) == km["window"] else None)
                 if x is None or exp_ is None:

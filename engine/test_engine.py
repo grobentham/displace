@@ -90,6 +90,7 @@ def run(tmp, now, upto):
         sys.modules.pop(m, None)
     fredapi = importlib.import_module("fredapi")
     world = fake_world(upto)
+    fredapi.probe = lambda *a, **k: True
     fredapi.observations = lambda s, start, initial=False: [o for o in world.get(s, []) if o[0] >= start] or None
     fredapi.releases = lambda: {"Consumer Price Index": 10, "Advance Monthly Sales for Retail and Food Services": 9,
                                 "Employment Situation": 50, "FOMC Press Release": 101,

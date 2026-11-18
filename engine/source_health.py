@@ -1,7 +1,7 @@
 """Record source checks independently of the data validation score."""
 
 MONITORED_SOURCES = (
-    "fred", "alfred", "bls", "bea", "census", "treasury", "nyFed", "nasdaqCalendar",
+    "fred", "alfred", "bls", "bea", "census", "treasury", "nyFed", "fedStatements", "nasdaqCalendar",
 )
 CHECKS = {}
 

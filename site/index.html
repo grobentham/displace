@@ -2710,7 +2710,7 @@ window.claude={use:function(n){return Promise.resolve(n==="db"?db:null);},isStat
   var healthMode=document.getElementById("health-mode"),healthMetrics=document.getElementById("health-metrics");
   var healthDetails=document.getElementById("health-details"),healthSources=document.getElementById("health-sources");
   var monitored={fred:"FRED",alfred:"ALFRED archives",bls:"Bureau of Labor Statistics",bea:"Bureau of Economic Analysis",
-    census:"Census Bureau",treasury:"U.S. Treasury",nyFed:"New York Fed rates",nasdaqCalendar:"Nasdaq earnings calendar"};
+    census:"Census Bureau",treasury:"U.S. Treasury",nyFed:"New York Fed rates",fedStatements:"Fed statements",nasdaqCalendar:"Nasdaq earnings calendar"};
   var states={available:"Last check succeeded",partial:"Some checks failed",unavailable:"Unavailable at last check",not_checked:"Skipped this run"};
   var healthTime=new Intl.DateTimeFormat("en-SG",{day:"numeric",month:"short",year:"numeric",hour:"2-digit",minute:"2-digit",hourCycle:"h23",timeZone:"Asia/Singapore"});
   var observationDay=new Intl.DateTimeFormat("en-SG",{day:"numeric",month:"short",year:"numeric",timeZone:"UTC"});
@@ -3737,8 +3737,8 @@ function scenCell(a,c){if(!c||!c.n)return'<td class="sm-na">–</td>';var up=c.u
 function scenMap(k){var S=DIR&&DIR.scenarios&&DIR.scenarios[k];if(!S)return"";var A=DORD.filter(function(a){return S.assets[a];});if(!A.length)return"";
   var row=function(a){var x=S.assets[a];return'<tr><th>'+DIRN[a]+'</th>'+scenCell(a,x.hot)+scenCell(a,x.inline)+scenCell(a,x.cool)+'</tr>';};
   var main=A.filter(function(a){return a==="gold"||a==="nq";}),rest=A.filter(function(a){return a!=="gold"&&a!=="nq";});
-  return'<div class="sm"><div class="sm-h"><b>Scenario map</b><span>How each market closed on '+esc(S.name)+' release days since '+esc(String(S.since).slice(0,4))+', by surprise ('+esc(S.metric)+' vs '+(S.basis||"consensus or recent trend")+')</span></div>'+
-   '<div class="sm-w"><table><tr><th></th><th>Hotter than expected</th><th>In line</th><th>Cooler than expected</th></tr>'+main.map(row).join("")+'</table></div>'+
+  return'<div class="sm"><div class="sm-h"><b>Scenario map</b><span>How each market closed on '+esc(S.name)+' release days since '+esc(String(S.since).slice(0,4))+', by how far the '+esc(S.metric)+' landed from the average of its previous readings</span></div>'+
+   '<div class="sm-w"><table><tr><th></th><th>Above recent trend</th><th>Near trend</th><th>Below recent trend</th></tr>'+main.map(row).join("")+'</table></div>'+
    (rest.length?'<details class="nx-why"><summary>Dollar, EUR/USD and yields</summary><div class="sm-w"><table>'+rest.map(row).join("")+'</table></div></details>':'')+
    '<p class="sm-f">Historical record, weighted toward recent years. A lean is only shown above when the rule also passed out-of-sample tests. '+esc(DIR.disclaimer||"")+'</p></div>';}
 function dirDet(e){if(!DIR)return"";var v=dirFor(e.id),k=(v&&v.kind)||kindOf(e);if(k==="gdp"&&/second|third/i.test(e.title||""))return"";if(!k||!(DIR.scenarios&&DIR.scenarios[k]))return"";if(!isPro())return dirLock();
@@ -3746,13 +3746,13 @@ function dirDet(e){if(!DIR)return"";var v=dirFor(e.id),k=(v&&v.kind)||kindOf(e);
 function dirLock(){return'<div class="nx-dir"><div class="nx-top"><span class="nx-k">Direction engine · Pro</span></div><p style="margin:0 0 12px;color:#a1a1a6;font-size:.88rem">Which way gold, the dollar and yields have tended to close after this release, tested on releases the model never saw.</p><button type="button" class="pillbtn" data-pro-go>See Pro</button></div>';}
 function dirPre(e){var v=dirFor(e.id);if(!v||v.stage!=="pre")return"";if(!isPro())return dirLock();var A=assets(),any=A.some(function(a){return(v.hot[a]&&!v.hot[a].none)||(v.cool[a]&&!v.cool[a].none);});
   return'<div class="nx-dir"><div class="nx-top"><span class="nx-k">Direction engine</span>'+regLine()+'</div>'+
-   (any?'<div class="nx-sc"><b>If higher than expected</b><div class="nx-chips">'+dchips(v.hot,A)+'</div></div><div class="nx-sc"><b>If lower than expected</b><div class="nx-chips">'+dchips(v.cool,A)+'</div></div>'
+   (any?'<div class="nx-sc"><b>If above its recent trend</b><div class="nx-chips">'+dchips(v.hot,A)+'</div></div><div class="nx-sc"><b>If below its recent trend</b><div class="nx-chips">'+dchips(v.cool,A)+'</div></div>'
      :'<p style="margin:0;color:#a1a1a6;font-size:.88rem">No tested lean for this release: its past reactions failed the engine\'s out-of-sample tests. The historical record is below.</p>')+scenMap(v.kind)+recLine()+rulesFor(v.kind)+'</div>';}
-function dirPost(e){var v=dirFor(e.id);if(!v||v.stage!=="post")return"";if(!isPro())return dirLock();var A=assets(),lab=v.bin==="hot"?"higher than expected":v.bin==="cool"?"lower than expected":"in line with expectations";
+function dirPost(e){var v=dirFor(e.id);if(!v||v.stage!=="post")return"";if(!isPro())return dirLock();var A=assets(),lab=v.bin==="hot"?"above its recent trend":v.bin==="cool"?"below its recent trend":"close to its recent trend";
   return'<div class="nx-dir"><div class="nx-top"><span class="nx-k">Just released · '+esc(e.title)+'</span><span class="nx-src">'+esc(e.actual)+(e.forecast?' vs '+esc(e.forecast)+' forecast':'')+' · '+lab+'</span></div><div class="nx-call">'+
    A.map(function(a){var c=v.calls[a];if(!c)return"";return c.none?'<div class="none"><small>'+DIRN[a]+'</small><b>No call</b><span>'+esc(c.why)+'</span></div>':'<div class="'+c.dir+'"><small>'+DIRN[a]+'</small><b>'+arw(c.dir)+' '+pc(c.p)+'</b><span>chance it closes '+(c.dir==="up"?"higher":"lower")+' today'+(c.iqr?' · typical day '+mv(a,c.iqr[0])+' to '+mv(a,c.iqr[1]):'')+'</span></div>';}).join("")+'</div>'+recLine()+rulesFor(v.kind)+'</div>';}
 function dirMini(e){var v=dirFor(e.id);if(!v||v.stage!=="pre")return"";var h=["gold","nq"].map(function(a){var c=v.hot[a];return c&&!c.none?'<b class="'+c.dir+'">'+DIRN[a]+' '+arw(c.dir)+'</b>':"";}).filter(Boolean);
-  return h.length?'<span class="nx-mini">If higher: '+h.join(" · ")+'</span>':"";}
+  return h.length?'<span class="nx-mini">If above trend: '+h.join(" · ")+'</span>':"";}
 function justOut(){if(!DIR||!DIR.events)return null;var now=Date.now(),b=null;list().forEach(function(e){var v=DIR.events[e.id];if(v&&v.stage==="post"&&e.actual&&e.time&&now-instant(e.date,e.time)<20*3600000)b=e;});return b;}
 try{if(window.claude&&window.claude.isStatic)window.claude.use("db").then(function(db){db.doc("direction/current").onSnapshot(function(s){DIR=s.data();render();},function(){});});}catch(x){}
 /* news hero: countdown, consensus, last release, upcoming strip */
