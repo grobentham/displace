@@ -1,0 +1,13 @@
+name: Probe sources (temporary)
+on:
+  pull_request:
+    paths: [".github/probe/**", ".github/workflows/probe.yml"]
+permissions:
+  contents: read
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v5
+      - run: python3 .github/probe/probe.py
