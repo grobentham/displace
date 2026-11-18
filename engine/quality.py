@@ -27,12 +27,13 @@ BOUNDS = {
     ("JTSJOL", "millions"): (3, 15), ("JTSQUR", "pctlevel"): (1, 4.5),
     ("UMCSENT", "level1"): (40, 115), ("MICH", "pctlevel"): (0, 15),
     ("DGORDER", "pct"): (-25, 30), ("ADXTNO", "pct"): (-10, 10),
-    ("HSN1F", "thousands"): (300, 1500), ("ADPMNUSNERSA", "diff"): (-2000, 2000),
+    ("HSN1F", "thousands"): (300, 1500), ("ADPMNUSNERSA", "diffPersons"): (-2000, 2000),
     ("DFEDTARU", "rate"): (0, 10),
 }
 MARKET_BOUNDS = {"DGS2": (0, 10), "DGS10": (0, 10), "T10Y2Y": (-3, 4), "T10YIE": (0, 5), "DFII10": (-2, 5), "DFF": (0, 10),
                  "DTWEXBGS": (80, 160), "DCOILWTICO": (0, 250), "NFCI": (-2, 5), "MORTGAGE30US": (1, 15)}
 MARKET_DAY_MOVE = {"yield": 75, "spread": 75, "index": 4.0, "price": 30.0, "index2": 1.5}  # bp or %
+HISTORY_SCALE = {"diffPersons": 1000, "claims": 1000, "claimsM": 1_000_000, "millions": 1000}
 
 FORBIDDEN = re.compile(
     r"\b(buy|sell|go long|go short|going long|going short|entry|entries|stop[- ]loss|take[- ]profit|price target|"
@@ -101,7 +102,8 @@ def gate_figure(rep, event_id, label, series, mode, shown, history_vals, pending
         return "reject"
     rep.check(f"plausible: {event_id} {label}", True)
     v = number(shown)
-    z = robust_z(v, history_vals)
+    scale = HISTORY_SCALE.get(mode, 1)
+    z = robust_z(v, [value / scale for value in history_vals if value is not None])
     if z > 6:
         key = f"{event_id}|{label}"
         prev = pending.get(key)
