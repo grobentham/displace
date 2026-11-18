@@ -66,8 +66,8 @@ jobs:
 
       - name: Refresh calendar and news
         run: |
-          python engine/engine.py
-          python engine/news.py
+          python -u engine/engine.py
+          python -u engine/news.py
 
       - name: Save new data
         run: |
