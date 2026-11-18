@@ -1,0 +1,4 @@
+{
+ "_help": "Economists' consensus forecasts you add by hand, keyed by event id from site/data/calendar/events.json. fsrc = where it came from (e.g. 'Reuters poll'). The engine copies these onto the calendar on its next run.",
+ "forecasts": {}
+}

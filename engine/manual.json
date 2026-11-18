@@ -1,0 +1,12 @@
+{
+ "_help": "Optional hand-written context. Leave a field empty to hide it. The engine uses rateFallback only when it can't reach FRED.",
+ "rateFallback": "3.75%–4.00%",
+ "fedPricing": {
+  "text": "",
+  "asof": ""
+ },
+ "fedWatch": {
+  "text": "",
+  "asof": ""
+ }
+}

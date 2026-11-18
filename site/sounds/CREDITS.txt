@@ -1,0 +1,17 @@
+Ambient recordings on the Mindset page. All are CC0 or public domain. Each was trimmed to about a minute,
+level-matched and converted to MP3.
+
+From noixer (github.com/abetusk/noixer), chosen there as CC0 sounds from freesound.org:
+rain.mp3       Spring night rain, by ali-k (freesound.org/people/ali-k/sounds/156049) - CC0
+waterfall.mp3  Small waterfall, by ali-k (freesound.org/people/ali-k/sounds/155940) - CC0
+waves.mp3      Waves of Hawaii, by florianreichelt (freesound.org/people/florianreichelt/sounds/450755) - CC0
+forest.mp3     Forest day, by sonidosreales245 (freesound.org/people/sonidosreales245/sounds/517042) - CC0
+campfire.mp3   Campfire, by cagancelik (freesound.org/people/cagancelik/sounds/433783) - CC0
+purr.mp3       Cat purr, by yetcop (freesound.org/people/yetcop/sounds/252645) - CC0
+chimes.mp3     Wind chime, by smand (freesound.org/people/smand/sounds/525052) - CC0
+bowl.mp3       Singing bowl, by buddhassoundofsilence (freesound.org/people/buddhassoundofsilence/sounds/521549) - CC0
+
+From Blanket (github.com/rafaelmardojai/blanket, SOUNDS_LICENSING.md):
+stream.mp3     Stream, by gluckose (freesound.org/people/gluckose/sounds/333987) - CC0
+birds.mp3      Birds, by kvgarlic (freesound.org/people/kvgarlic/sounds/156826) - CC0
+night.mp3      Crickets chirping at night, by Lisa Redfern (soundbible.com/2083-Crickets-Chirping-At-Night.html) - Public Domain

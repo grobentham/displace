@@ -1,0 +1,7 @@
+{"_help": "Dates a company has announced itself. Add one line per report; the engine fills in the rest from Nasdaq's calendar. session is BMO (before the open) or AMC (after the close). time is optional (New York, 24h).",
+ "events": [
+  {"t": "NVDA", "date": "2026-11-17", "session": "AMC", "time": "16:20", "period": "Q3 FY27", "url": "https://investor.nvidia.com"},
+  {"t": "WMT", "date": "2026-11-19", "session": "BMO", "time": "07:00", "period": "Q3 FY27", "url": "https://corporate.walmart.com/news/events/fy2027-q3-earnings-release"},
+  {"t": "CRM", "date": "2026-12-02", "session": "AMC", "period": "Q3 FY27", "url": "https://investor.salesforce.com"},
+  {"t": "AVGO", "date": "2026-12-09", "session": "AMC", "period": "Q4 FY26", "url": "https://investors.broadcom.com"}
+ ]}

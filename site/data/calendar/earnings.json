@@ -1,0 +1,61 @@
+{
+ "updated": "2026-11-18",
+ "events": [
+  {
+   "id": "20261117-earn-nvda",
+   "date": "2026-11-17",
+   "time": "16:20",
+   "title": "NVIDIA (NVDA) earnings · Q3 FY27",
+   "cur": "USD",
+   "impact": "earnings",
+   "src": "Company announcement",
+   "tier": "mega",
+   "status": "confirmed",
+   "session": "AMC",
+   "note": "Reports after the close. Futures react in the evening and the move carries into the next open. Date confirmed by the company.",
+   "url": "https://investor.nvidia.com"
+  },
+  {
+   "id": "20261119-earn-wmt",
+   "date": "2026-11-19",
+   "time": "07:00",
+   "title": "Walmart (WMT) earnings · Q3 FY27",
+   "cur": "USD",
+   "impact": "earnings",
+   "src": "Company announcement",
+   "tier": "notable",
+   "status": "confirmed",
+   "session": "BMO",
+   "note": "Reports before the open. The move lands in the same session's opening range. Date confirmed by the company.",
+   "url": "https://corporate.walmart.com/news/events/fy2027-q3-earnings-release"
+  },
+  {
+   "id": "20261202-earn-crm",
+   "date": "2026-12-02",
+   "time": "16:05",
+   "title": "Salesforce (CRM) earnings · Q3 FY27",
+   "cur": "USD",
+   "impact": "earnings",
+   "src": "Company announcement",
+   "tier": "notable",
+   "status": "confirmed",
+   "session": "AMC",
+   "note": "Reports after the close. Futures react in the evening and the move carries into the next open. Date confirmed by the company.",
+   "url": "https://investor.salesforce.com"
+  },
+  {
+   "id": "20261209-earn-avgo",
+   "date": "2026-12-09",
+   "time": "16:05",
+   "title": "Broadcom (AVGO) earnings · Q4 FY26",
+   "cur": "USD",
+   "impact": "earnings",
+   "src": "Company announcement",
+   "tier": "mega",
+   "status": "confirmed",
+   "session": "AMC",
+   "note": "Reports after the close. Futures react in the evening and the move carries into the next open. Date confirmed by the company.",
+   "url": "https://investors.broadcom.com"
+  }
+ ]
+}
