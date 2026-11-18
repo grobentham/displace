@@ -108,9 +108,7 @@ def find(ev, date, word):
 
 
 def main():
-    tmp = tempfile.mkdtemp()
-    for d in ("engine", "site"):
-        shutil.copytree(os.path.join(ROOT, d), os.path.join(tmp, d), ignore=shutil.ignore_patterns("__pycache__", "STALE"))
+    tmp = fresh_copy()
     # Sunday before: calendar builds itself, no actual yet
     d = run(tmp, "2026-11-15T10:00:00-05:00", "2026-11-15")
     ev = d("calendar/events.json")["events"]
@@ -147,8 +145,17 @@ def main():
 
 def fresh_copy():
     tmp = tempfile.mkdtemp()
-    for d in ("engine", "site"):
-        shutil.copytree(os.path.join(ROOT, d), os.path.join(tmp, d), ignore=shutil.ignore_patterns("__pycache__", "STALE", "pending.json"))
+    shutil.copytree(os.path.join(ROOT, "engine"), os.path.join(tmp, "engine"),
+                    ignore=shutil.ignore_patterns("__pycache__", "STALE", "pending.json"))
+    # Give the mocked release calendars a fixed seed instead of live data or overrides.
+    with open(os.path.join(tmp, "engine", "schedule.json"), "w", encoding="utf-8") as f:
+        json.dump({"events": []}, f)
+    calendar = os.path.join(tmp, "site", "data", "calendar")
+    os.makedirs(calendar)
+    with open(os.path.join(calendar, "events.json"), "w", encoding="utf-8") as f:
+        json.dump({"events": [{"id": "20261117-retail-sales-oct", "date": "2026-11-17",
+                              "time": "08:30", "title": "Retail sales (Oct)", "cur": "USD",
+                              "impact": "high", "src": "Census"}]}, f)
     return tmp
 
 
