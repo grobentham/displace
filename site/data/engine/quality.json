@@ -1,10 +1,41 @@
 {
- "asof": "2026-11-18T07:38-05:00",
+ "asof": "2026-11-18T07:59-05:00",
  "passed": 11,
- "total": 11,
+ "total": 16,
  "critical": 0,
  "rejected": [],
  "held": [],
  "droppedText": [],
- "failures": []
+ "failures": [
+  {
+   "name": "reactions: cpi sample size",
+   "ok": false,
+   "detail": "only 1 release days, hidden until there are 6",
+   "critical": false
+  },
+  {
+   "name": "reactions: nfp sample size",
+   "ok": false,
+   "detail": "only 1 release days, hidden until there are 6",
+   "critical": false
+  },
+  {
+   "name": "reactions: retail sample size",
+   "ok": false,
+   "detail": "only 1 release days, hidden until there are 6",
+   "critical": false
+  },
+  {
+   "name": "reactions: ppi sample size",
+   "ok": false,
+   "detail": "only 1 release days, hidden until there are 6",
+   "critical": false
+  },
+  {
+   "name": "reactions: claims sample size",
+   "ok": false,
+   "detail": "only 1 release days, hidden until there are 6",
+   "critical": false
+  }
+ ]
 }

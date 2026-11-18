@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-17",
+ "updated": "2026-11-18",
  "through": "2027-03-31",
  "events": [
   {
@@ -373,7 +373,13 @@
    "note": "The statement is scheduled for 14:00 New York time, followed by the press conference at 14:30.",
    "id": "20261209-fomc-rate-decision-projections-dot-plot",
    "previous": "4.00%",
-   "metric": "federal funds rate upper bound"
+   "metric": "federal funds rate upper bound",
+   "components": [
+    {
+     "label": "Fed funds target, upper bound",
+     "previous": "4.00%"
+    }
+   ]
   },
   {
    "date": "2026-12-10",
