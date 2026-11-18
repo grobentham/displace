@@ -11,7 +11,11 @@ def t(u, n=5):
 t("https://alfred.stlouisfed.org/series/downloaddata?seid=CPILFESL")
 t("https://alfred.stlouisfed.org/graph/alfredgraph.csv?id=CPILFESL&cosd=2025-09-01&coed=2026-10-24&vintage_date=2026-10-24")
 t("https://fred.stlouisfed.org/graph/fredgraph.csv?id=DFF&cosd=2026-10-01")
-t("https://fred.stlouisfed.org/series/CPILFESL", 2)
+import publicdata
+for i in range(3):
+    s=time.time()
+    try: publicdata.download("https://fred.stlouisfed.org/graph/fredgraph.csv?id=DGS2&cosd=2026-10-01", tries=1); print(f"LIVE engine-downloader OK {time.time()-s:.1f}s")
+    except Exception as e: print(f"LIVE engine-downloader FAIL {e!r}")
 import series_store as S
 src=S.Public()
 for sid, mode in (("CPILFESL","pct"),("PAYEMS","diff"),("ICSA","level")):
@@ -26,4 +30,4 @@ for sid, mode in (("CPILFESL","pct"),("PAYEMS","diff"),("ICSA","level")):
     except Exception as e: print("LIVE", sid, "FAIL", repr(e))
 import prices
 for m in ("gold","nq"):
-    r,s=prices.closes(m,"2026-11-01"); print("LIVE",m,s,r[-2:] if r else None)
+    r,s=prices.closes(m,"2026-01-01"); print("LIVE",m,s,r[-2:] if r else None)

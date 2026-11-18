@@ -26,7 +26,8 @@ ALFRED_AVAILABLE = True
 def download(url, *, timeout=25, payload=None, tries=3):
     """GET (or POST JSON) with retries. GitHub's runners sometimes take ~5 s to resolve a host name or fail a
     lookup outright, so a short timeout or a single try makes healthy sources look down."""
-    headers = {"User-Agent": "Displace/1.0 (public economic data reader)"}
+    # St. Louis Fed servers stall requests whose User-Agent does not look like a browser; this one is answered.
+    headers = {"User-Agent": "Mozilla/5.0 (Displace data engine; +https://github.com/grobentham/displace)"}
     if payload is not None:
         headers["Content-Type"] = "application/json"
     for attempt in range(tries):
