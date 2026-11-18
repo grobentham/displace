@@ -25,6 +25,7 @@ import sys
 from zoneinfo import ZoneInfo
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import agencies  # noqa: E402
 import calendar_rules as rules  # noqa: E402
 import fredapi  # noqa: E402
 import publicdata  # noqa: E402
@@ -327,18 +328,18 @@ def transformed(obs, mode):
     out = []
     idx = {o[0]: i for i, o in enumerate(obs)}
     for i, (d, v, rt) in enumerate(obs):
-        if mode == "pct":
-            if i == 0:
+        if mode in ("pct", "diff", "diffPersons"):
+            if i == 0 or (d_(d) - d_(obs[i - 1][0])).days > 31:
                 continue
-            out.append((d, (v / obs[i - 1][1] - 1) * 100, rt))
-        elif mode in ("diff", "diffPersons"):
-            if i == 0:
-                continue
-            out.append((d, v - obs[i - 1][1], rt))
+            previous = obs[i - 1][1]
+            if mode != "pct":
+                out.append((d, v - previous, rt))
+            elif previous:
+                out.append((d, (v / previous - 1) * 100, rt))
         elif mode == "yoy":
             dd = d_(d)
             j = idx.get(dd.replace(year=dd.year - 1).isoformat())
-            if j is None:
+            if j is None or not obs[j][1]:
                 continue
             out.append((d, (v / obs[j][1] - 1) * 100, rt))
         else:
@@ -456,6 +457,44 @@ def public_figures(e, kind, series, mode, released):
         return fmt(mode, actual[1]), fmt(mode, old), available
     previous = fmt(mode, earlier[-1][1]) if earlier else None
     return (fmt(mode, actual[1]), previous, available) if actual else (None, previous, None)
+
+
+def agency_figures(event, kind, series, mode, released):
+    """Match a direct agency reading to its reported period and scheduled release."""
+    period = title_period(event, kind)
+    if not period:
+        return None, None, None, None
+    if kind == "retail" and series == "RSAFS" and mode == "pct":
+        report = agencies.retail()
+        if report:
+            published, reported_period, change = report
+            source = {"via": "Census Bureau", "url": agencies.CENSUS_RETAIL, "published": published.isoformat()}
+            if released and reported_period == period and published.isoformat() == event["date"]:
+                return fmt(mode, change), None, None, source
+            if reported_period < period < reported_period + dt.timedelta(days=32):
+                return None, fmt(mode, change), None, None
+    if (kind == "gdp" or (kind == "pce" and mode == "pct")) and series in ("A191RL1Q225SBEA", "PCEPILFE", "PCEPI"):
+        report = agencies.bea_report(kind)
+        if report:
+            published, reported_period, stage, values, url = report
+            value = values.get(series)
+            stage_matches = stage is None or stage in event["title"].lower()
+            if value is not None and stage_matches and released and reported_period == period and published.isoformat() == event["date"]:
+                source = {"via": "BEA", "url": url, "published": published.isoformat()}
+                return fmt(mode, value), None, None, source
+    identifier = agencies.BLS_SERIES.get(series)
+    if not identifier:
+        return None, None, None, None
+    checked = TODAY.isoformat()
+    observations = agencies.bls(checked).get(identifier, [])
+    values = [row for row in transformed(observations, mode) if row[0] <= period.isoformat()]
+    prior = [row for row in values if row[0] < period.isoformat()]
+    previous = fmt(mode, prior[-1][1]) if prior and (period - d_(prior[-1][0])).days <= 31 else None
+    if released and values and values[-1][0] == period.isoformat():
+        source = {"via": "BLS", "series": identifier, "asof": checked,
+                  "url": f"https://data.bls.gov/timeseries/{identifier}"}
+        return fmt(mode, values[-1][1]), previous, values, source
+    return None, previous, None, None
 
 
 def per_label(iso, k):
@@ -612,10 +651,16 @@ def update_figures(events, hist, pending):
     for e, rk, released in candidates:
         comps, head_hist, head_ok = [], None, True
         for i, (label, series, mode) in enumerate(RELEASES[rk]["comps"]):
+            provenance = None
             if fredapi.KEY:
                 act, prev, h = component_figures(e, rk, label, series, mode, released)
             else:
                 act, prev, h = public_figures(e, rk, series, mode, released)
+                if not act:
+                    direct, earlier, direct_history, provenance = agency_figures(e, rk, series, mode, released)
+                    act = direct
+                    prev = earlier if earlier is not None else prev
+                    h = direct_history if direct else h
             if prev and not qa.plausible(series, mode, prev):
                 QA.check(f"plausible previous: {e['id']} {label}", False, f"{prev} rejected", critical=True)
                 prev = None
@@ -633,8 +678,8 @@ def update_figures(events, hist, pending):
                     e["revised"] = prev
                 if act and head_ok:
                     e["actual"] = act
-                    e["provenance"] = {"via": "FRED", "series": series, "published": h[-1][2]} if fredapi.KEY else {
-                        "via": "ALFRED", "series": series, "asof": h[-1][2]}
+                    e["provenance"] = provenance or ({"via": "FRED", "series": series, "published": h[-1][2]} if fredapi.KEY else {
+                        "via": "ALFRED", "series": series, "asof": h[-1][2]})
             if act or prev:
                 comps.append({"label": label, **({"actual": act} if act else {}), **({"previous": prev} if prev else {})})
         if comps and (head_ok or not e.get("actual")):
@@ -658,7 +703,10 @@ def update_figures(events, hist, pending):
 def market_tiles():
     tiles = {}
     for key, label, series, kind in MARKETS:
-        obs = SOURCE.observations(series, (TODAY - dt.timedelta(days=400)).isoformat())
+        start = (TODAY - dt.timedelta(days=400)).isoformat()
+        obs = SOURCE.observations(series, start)
+        if not obs and not fredapi.KEY:
+            obs = agencies.market_observations(series, start, TODAY)
         if not obs or len(obs) < 2:
             continue
         v = [x[1] for x in obs]
@@ -882,6 +930,10 @@ def write_fed(events, tiles):
     man = load(os.path.join(ENG, "manual.json"), {})
     lo = SOURCE.observations("DFEDTARL", "2015-01-01")
     hi = SOURCE.observations("DFEDTARU", "2015-01-01")
+    if not fredapi.KEY and (not lo or not hi):
+        start = (TODAY - dt.timedelta(days=50)).isoformat()
+        lo = agencies.market_observations("DFEDTARL", start, TODAY)
+        hi = agencies.market_observations("DFEDTARU", start, TODAY)
     fed = {"asof": TODAY.isoformat()}
     if lo and hi:
         fed["rate"] = f"{lo[-1][1]:.2f}%–{hi[-1][1]:.2f}%"
@@ -964,7 +1016,15 @@ def ics(events, only_high=False):
 
 # ---------------------------------------------------------------- run
 def main():
-    source_name = "FRED API" if fredapi.KEY else "public FRED and ALFRED"
+    if fredapi.KEY:
+        source_name = "FRED API"
+    else:
+        publicdata.check_fred_access(TODAY)
+        source_name = "public FRED and agency data" if publicdata.FRED_AVAILABLE else "direct public agencies"
+        if not publicdata.FRED_AVAILABLE:
+            log("Public FRED downloads unavailable; using direct agency sources")
+        if not publicdata.ALFRED_AVAILABLE:
+            log("ALFRED archive unavailable; using direct release data where available")
     log("engine run", NOW.isoformat(timespec="minutes"), "using", source_name)
     cal = load(os.path.join(DATA, "calendar", "events.json"), {"events": []})
     hist = load(os.path.join(DATA, "history", "main.json"), {"series": {}})
@@ -973,7 +1033,8 @@ def main():
     pending = load(pending_path, {})
     autos, answered = auto_events()
     for k in RELEASES:
-        QA.check(f"source: release calendar for {k}", k in answered, "no dates returned; keeping existing dates")
+        if fredapi.KEY or publicdata.FRED_AVAILABLE or k in ("gdp", "pce"):
+            QA.check(f"source: release calendar for {k}", k in answered, "no dates returned; keeping existing dates")
     merge(events, autos, answered)
     merge_schedule(events)
     events = prune(events)
@@ -1014,7 +1075,7 @@ def main():
     if tiles:
         tiles = qa.check_markets(QA, tiles, {k: s for k, _, s, _ in MARKETS}, TODAY)
         save(os.path.join(DATA, "markets", "latest.json"), {"asof": TODAY.isoformat(), "tiles": tiles})
-    if TODAY.weekday() == 6 or not load(os.path.join(DATA, "history", "reactions.json"), {}).get("series"):
+    if (fredapi.KEY or publicdata.FRED_AVAILABLE) and (TODAY.weekday() == 6 or not load(os.path.join(DATA, "history", "reactions.json"), {}).get("series")):
         rx = qa.check_reactions(QA, reactions(events))
         if rx and rx["series"]:
             save(os.path.join(DATA, "history", "reactions.json"), rx)
