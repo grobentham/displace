@@ -49,21 +49,21 @@ def market_outlook(opens, markets):
     last_close = opens.astimezone(NY).date()
     session = last_close + DAY
     if not cash_session(session):
-        return {"label": "No U.S. session", "reason": "U.S. cash equities are closed during this edition’s window."}
+        return {"label": "No U.S. session", "reason": "U.S. cash equities are closed during this edition’s window.", "rates": None}
     while not cash_session(last_close):
         last_close -= DAY
     tiles = markets.get("tiles", {})
     two, ten = tiles.get("y2", {}), tiles.get("y10", {})
     if any(tile.get("date") != last_close.isoformat() or not isinstance(tile.get("d1"), (int, float))
            or not isfinite(tile["d1"]) for tile in (two, ten)):
-        return {"label": "Data pending", "reason": "The latest U.S. session’s 2-year and 10-year yields are needed for a rates-based tilt."}
+        return {"label": "Data pending", "reason": "Waiting for both Treasury yields from the latest U.S. session.", "rates": None}
     short, long = two["d1"], ten["d1"]
-    moves = f"2-year {short:+g} bp and 10-year {long:+g} bp on {last_close.isoformat()}."
+    rates = {"date": last_close.isoformat(), "twoYearBp": short, "tenYearBp": long}
     if short <= -RATE_THRESHOLD and long <= -RATE_THRESHOLD:
-        return {"label": "Bullish tilt", "reason": f"Yields fell across both maturities, easing pressure on tech valuations. {moves}"}
+        return {"label": "Bullish tilt", "reason": "Yields fell across both maturities, easing pressure on tech valuations.", "rates": rates}
     if short >= RATE_THRESHOLD and long >= RATE_THRESHOLD:
-        return {"label": "Bearish tilt", "reason": f"Yields rose across both maturities, adding pressure on tech valuations. {moves}"}
-    return {"label": "Neutral", "reason": f"Treasury moves gave no clear rates signal. {moves}"}
+        return {"label": "Bearish tilt", "reason": "Yields rose across both maturities, adding pressure on tech valuations.", "rates": rates}
+    return {"label": "Neutral", "reason": "Treasury moves gave no clear directional signal for tech stocks.", "rates": rates}
 
 
 def scheduled_earnings(opens, end, earnings):
@@ -134,7 +134,8 @@ def publish(now, data, read_reports=get_reports):
     editions = load(target, {}).get("editions", [])
     opens = edition_time(now)
     date = opens.date().isoformat()
-    if any(edition["date"] == date and "outlook" in edition and "earnings" in edition for edition in editions):
+    if any(edition["date"] == date and "rates" in (edition.get("outlook") or {}) and "earnings" in edition
+           for edition in editions):
         print(f"Morning brief for {date} SGT already prepared.")
         return
 
