@@ -35,10 +35,12 @@ def _day(label, target):
 
 
 def parse(charts):
-    """-> (past, latest)
-    past:   {(kind, release date): nowcast the day before}
-    latest: {(kind, 'YYYY-MM' target month): latest nowcast}, for releases still to come"""
-    past, latest = {}, {}
+    """-> (past, latest, daily)
+    past:   {(kind, release date): nowcast the day before}, where the chart marks the release
+    latest: {(kind, 'YYYY-MM' target month): latest nowcast}
+    daily:  {(kind, 'YYYY-MM'): [(date, nowcast)]}, every day published, for releases the chart doesn't mark
+            (the monthly charts stop before PCE comes out, so PCE is matched to its release date by the caller)"""
+    past, latest, daily = {}, {}, {}
     for ch in charts:
         sub = ((ch.get("chart") or {}).get("subcaption") or "").strip()
         mm = re.fullmatch(r"(\d{4})-(\d{1,2})", sub)
@@ -68,33 +70,40 @@ def parse(charts):
                     pass
             if not vals:
                 continue
+            daily[(kind, target.strftime("%Y-%m"))] = [(d.isoformat(), v) for d, v in vals]
             rel = releases.get(marker)
             if rel:
                 before = [v for d, v in vals if d < rel]
                 if before:
                     past[(kind, rel.isoformat())] = before[-1]
-            else:
-                latest[(kind, target.strftime("%Y-%m"))] = vals[-1][1]
-    return past, latest
+            latest[(kind, target.strftime("%Y-%m"))] = vals[-1][1]
+    return past, latest, daily
+
+
+def before(daily, kind, month, release_date):
+    """The last nowcast for `month` published before `release_date`, or None."""
+    vals = [v for d, v in daily.get((kind, month), []) if d < release_date]
+    return vals[-1] if vals else None
 
 
 def load(log=print):
     """Fetch and parse, falling back to the last good copy in engine/cache/nowcast.json."""
     try:
         charts = json.loads(publicdata.download(URL, max_bytes=40 * 1024 * 1024))
-        past, latest = parse(charts)
+        past, latest, daily = parse(charts)
         if len(past) < 50:
             raise ValueError(f"only {len(past)} past nowcasts parsed")
         os.makedirs(os.path.dirname(CACHE), exist_ok=True)
         with open(CACHE, "w") as fh:
             json.dump({"past": {f"{k}|{d}": v for (k, d), v in sorted(past.items())},
-                       "latest": {f"{k}|{m}": v for (k, m), v in sorted(latest.items())}}, fh, indent=0)
-        return past, latest
+                       "latest": {f"{k}|{m}": v for (k, m), v in sorted(latest.items())},
+                       "daily": {f"{k}|{m}": v for (k, m), v in sorted(daily.items())}}, fh, separators=(",", ":"))
+        return past, latest, daily
     except Exception as e:
         log(f"nowcast: Cleveland Fed file unavailable ({e}); using the cached copy")
     try:
         c = json.load(open(CACHE))
         split = lambda d: {tuple(k.split("|")): v for k, v in d.items()}
-        return split(c.get("past", {})), split(c.get("latest", {}))
+        return split(c.get("past", {})), split(c.get("latest", {})), {k: [tuple(x) for x in v] for k, v in split(c.get("daily", {})).items()}
     except (OSError, ValueError):
-        return {}, {}
+        return {}, {}, {}
