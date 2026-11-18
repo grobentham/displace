@@ -209,7 +209,9 @@
      "label": "Continuing claims",
      "previous": "1.70M"
     }
-   ]
+   ],
+   "forecast": "198K",
+   "fsrc": "ForexFactory consensus"
   },
   {
    "date": "2026-11-20",
@@ -220,8 +222,8 @@
    "src": "University of Michigan",
    "note": "",
    "id": "20261120-umich-consumer-sentiment-final-nov",
-   "forecast": "51.0",
-   "fsrc": "AP preview",
+   "forecast": "51.7",
+   "fsrc": "ForexFactory consensus",
    "previous": "48.0",
    "metric": "UMich consumer sentiment index",
    "components": [

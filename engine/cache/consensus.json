@@ -1,0 +1,29 @@
+{
+ "20261117-retail-sales-oct": {
+  "kind": "retail",
+  "date": "2026-11-17",
+  "title": "Retail Sales m/m",
+  "first": "0.1%",
+  "seen": "2026-11-18T09:58-05:00",
+  "forecast": "0.1%",
+  "last": "2026-11-18T09:58-05:00"
+ },
+ "20261119-initial-jobless-claims": {
+  "kind": "claims",
+  "date": "2026-11-19",
+  "title": "Unemployment Claims",
+  "first": "198K",
+  "seen": "2026-11-18T09:58-05:00",
+  "forecast": "198K",
+  "last": "2026-11-18T09:58-05:00"
+ },
+ "20261120-umich-consumer-sentiment-final-nov": {
+  "kind": "umich",
+  "date": "2026-11-20",
+  "title": "Revised UoM Consumer Sentiment",
+  "first": "51.7",
+  "seen": "2026-11-18T09:58-05:00",
+  "forecast": "51.7",
+  "last": "2026-11-18T09:58-05:00"
+ }
+}
