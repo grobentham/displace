@@ -1,13 +1,18 @@
 """Prepare the daily Singapore morning brief from the published engine data."""
 import datetime as dt
+from math import isfinite
 from pathlib import Path
 from zoneinfo import ZoneInfo
 
+from calendar_rules import nyse_holidays
 from engine import DATA, NY, NOW, WHY, clean, kind_of, load, save, when
+from earnings import WATCH, TIMES
+from earnings_news import FEEDS, get_reports
 
 SGT = ZoneInfo("Asia/Singapore")
 DAY = dt.timedelta(days=1)
 LEAD = dt.timedelta(minutes=20)
+RATE_THRESHOLD = 3
 
 
 def edition_time(now):
@@ -36,7 +41,60 @@ def treasury_context(markets, cutoff):
     return {"date": tile["date"], "yield": tile["value"], "changeBp": tile.get("d1")}
 
 
-def build_edition(opens, now, calendar, news, markets):
+def cash_session(day):
+    return day.weekday() < 5 and day not in nyse_holidays(day.year)
+
+
+def market_outlook(opens, markets):
+    last_close = opens.astimezone(NY).date()
+    session = last_close + DAY
+    if not cash_session(session):
+        return {"label": "No U.S. session", "reason": "U.S. cash equities are closed during this edition’s window."}
+    while not cash_session(last_close):
+        last_close -= DAY
+    tiles = markets.get("tiles", {})
+    two, ten = tiles.get("y2", {}), tiles.get("y10", {})
+    if any(tile.get("date") != last_close.isoformat() or not isinstance(tile.get("d1"), (int, float))
+           or not isfinite(tile["d1"]) for tile in (two, ten)):
+        return {"label": "Data pending", "reason": "The latest U.S. session’s 2-year and 10-year yields are needed for a rates-based tilt."}
+    short, long = two["d1"], ten["d1"]
+    moves = f"2-year {short:+g} bp and 10-year {long:+g} bp on {last_close.isoformat()}."
+    if short <= -RATE_THRESHOLD and long <= -RATE_THRESHOLD:
+        return {"label": "Bullish tilt", "reason": f"Yields fell across both maturities, easing pressure on tech valuations. {moves}"}
+    if short >= RATE_THRESHOLD and long >= RATE_THRESHOLD:
+        return {"label": "Bearish tilt", "reason": f"Yields rose across both maturities, adding pressure on tech valuations. {moves}"}
+    return {"label": "Neutral", "reason": f"Treasury moves gave no clear rates signal. {moves}"}
+
+
+def scheduled_earnings(opens, end, earnings):
+    selected = []
+    for item in earnings.get("events", []):
+        symbol = item["id"].rsplit("-earn-", 1)[-1].upper()
+        if symbol not in WATCH:
+            continue
+        session = item.get("session", "")
+        clock = item.get("time")
+        if not clock:
+            if item["date"] != end.astimezone(NY).date().isoformat():
+                continue
+            sort_at = when(item)
+        else:
+            sort_at = when(item)
+            if not opens <= sort_at < end:
+                continue
+        row = {"symbol": symbol, "title": WATCH[symbol][0], "session": session,
+               "date": item["date"], "confirmed": item.get("status") == "confirmed"}
+        if clock:
+            row["at"] = sort_at.astimezone(SGT).isoformat(timespec="minutes")
+            row["timeConfirmed"] = clock != TIMES.get(session)
+        if item.get("url", "").startswith("https://"):
+            row["url"] = item["url"]
+        selected.append((WATCH[symbol][1] != "mega", sort_at, row))
+    selected.sort(key=lambda entry: entry[:2])
+    return [row for _, _, row in selected[:2]]
+
+
+def build_edition(opens, now, calendar, news, markets, earnings=None, reports=(), sources_read=0):
     end, cutoff = opens + DAY, min(opens, now)
     scheduled = []
     for event in calendar.get("events", []):
@@ -62,27 +120,33 @@ def build_edition(opens, now, calendar, news, markets):
         "updates": recent_updates(news, opens - DAY, cutoff), "upcoming": next_releases,
         "focus": {"title": clean(lead["title"]), "text": why} if why else None,
         "treasury": treasury_context(markets, cutoff),
+        "outlook": {**market_outlook(opens, markets), "thresholdBp": RATE_THRESHOLD},
+        "earnings": {"reports": list(reports), "upcoming": scheduled_earnings(opens, end, earnings or {}),
+                     "sourcesRead": sources_read, "sourcesTotal": len(FEEDS)},
         "calendarCovered": calendar.get("through", "") >= end.astimezone(NY).date().isoformat(),
         "feedsChecked": checked is not None and now - dt.timedelta(hours=2) <= checked <= now,
         "feedIssues": any(ok is False for ok in news.get("sources", {}).values()),
     }
 
 
-def publish(now, data):
+def publish(now, data, read_reports=get_reports):
     target = data / "brief" / "morning.json"
     editions = load(target, {}).get("editions", [])
     opens = edition_time(now)
     date = opens.date().isoformat()
-    if any(edition["date"] == date for edition in editions):
+    if any(edition["date"] == date and "outlook" in edition and "earnings" in edition for edition in editions):
         print(f"Morning brief for {date} SGT already prepared.")
         return
 
+    reports, sources_read = read_reports(opens - DAY, min(opens, now))
     edition = build_edition(opens, now,
                             load(data / "calendar" / "events.json", {}),
                             load(data / "news" / "latest.json", {}),
-                            load(data / "markets" / "latest.json", {}))
+                            load(data / "markets" / "latest.json", {}),
+                            load(data / "calendar" / "earnings.json", {}), reports, sources_read)
+    editions = [item for item in editions if item["date"] != date]
     editions = sorted([*editions, edition], key=lambda item: item["date"], reverse=True)[:2]
-    save(target, {"version": 1, "editions": editions})
+    save(target, {"version": 2, "editions": editions})
     print(f"Prepared morning brief for {opens.isoformat(timespec='minutes')}.")
 
 
