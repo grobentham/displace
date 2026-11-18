@@ -88,6 +88,10 @@ def main():
         P.prices.MARKETS["gold"] = ([("sim gold", lambda: gold_rows)], False)
         P.prices.MARKETS["nq"] = ([("sim nq", lambda: nq_rows)], True)
         P.series_store.agencies.market_observations = lambda *a: []
+        # a simulated nowcast for core CPI (the prior three months' average), so the nowcast basis is exercised
+        core = P.D.transform([o for o in series["CPILFESL"]], "pct")
+        past = {("cpi", core[i][2]): sum(v for _, v, _ in core[i - 3:i]) / 3 for i in range(3, len(core))}
+        P.nowcast.load = lambda log=None: (past, {("cpi", "2026-10"): 0.25, ("cpi", "2026-11"): 0.22})
 
         # 1. Release morning, 10:00 NY: first fit, post-release call for today, scenario map for the next CPI
         P.series_store.HISTORY_FROM = "2008-01-01"
@@ -105,6 +109,9 @@ def main():
         assert pre["hot"]["nq"].get("none"), "a lean was published for an unproven rule"
         post = out["events"]["cpi-oct"]
         assert post["stage"] == "post" and post["bin"] == "hot" and post["calls"]["gold"]["dir"] == "down", post
+        assert out["basis"] == {"cpi": "nowcast"} and out["scenarios"]["cpi"]["basis"] == "nowcast"
+        assert post["z"] > 2, f"a 0.6% print against a ~0.25% expectation should be a big surprise: {post['z']}"
+        assert pre["expect"] == 0.22 and pre["basis"] == "nowcast", pre
         assert "gdp-2nd" not in out["events"], "GDP revision treated as a first release"
         logged = json.load(open(os.path.join(tmp, "site", "data", "direction", "log.json")))["rows"]
         assert {(r["id"], r["asset"]) for r in logged} >= {("cpi-oct", "gold")}, logged

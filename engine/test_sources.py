@@ -12,6 +12,8 @@ sys.path.insert(0, HERE)
 os.environ["ENGINE_NOW"] = "2026-12-10T10:00:00-05:00"
 
 import agencies  # noqa: E402
+import consensus  # noqa: E402
+import nowcast  # noqa: E402
 import engine as E  # noqa: E402
 import fredapi  # noqa: E402
 import publicdata  # noqa: E402
@@ -85,8 +87,51 @@ def fred_fallback():
     print("fred probe ok")
 
 
+def nowcast_parse():
+    def chart(sub, cats, series):
+        return {"chart": {"subcaption": sub}, "categories": [{"category": cats}],
+                "dataset": [{"seriesname": n, "data": [{"value": v} for v in vals]} for n, vals in series.items()]}
+    oct_chart = chart("2026-10", [{"label": "11/06"}, {"label": "11/09"}, {"label": "11/10"},
+                                  {"label": "CPI Oct", "vline": "true"}, {"label": "11/12"},
+                                  {"label": "CPI Sep", "vline": "true"}],
+                      {"CPI Inflation": ["0.30", "0.31", "0.32", "0.33"], "Core CPI Inflation": ["0.24", "0.25", "0.26", "0.27"],
+                       "Actual Core CPI Inflation": ["", "", "0.30", ""], "Core PCE Inflation": ["0.20", "0.21", "0.22", "0.23"]})
+    nov_chart = chart("2026-11", [{"label": "11/16"}, {"label": "11/17"}], {"Core CPI Inflation": ["0.19", "0.18"]})
+    dec_chart = chart("2026-12", [{"label": "12/30"}, {"label": "01/04"}, {"label": "CPI Dec", "vline": "true"}],
+                      {"Core CPI Inflation": ["0.21", "0.22"]})
+    past, latest = nowcast.parse([oct_chart, nov_chart, dec_chart])
+    assert past[("cpi", "2026-11-10")] == 0.25, past  # the day before release, core, not the actual
+    assert ("cpi", "2026-09-10") not in past and ("pce", "2026-10") in latest, (past, latest)
+    assert latest[("cpi", "2026-11")] == 0.18 and past[("cpi", "2027-01-04")] == 0.21, (past, latest)
+    print("nowcast parse ok")
+
+
+def consensus_feed():
+    import zoneinfo
+    ny = zoneinfo.ZoneInfo("America/New_York")
+    events = [{"id": "c", "date": "2026-11-19", "time": "08:30", "title": "Initial jobless claims"},
+              {"id": "j", "date": "2026-12-01", "time": "10:00", "title": "JOLTS job openings (Oct)"},
+              {"id": "r", "date": "2026-11-17", "time": "08:30", "title": "Retail sales (Oct)", "actual": "0.2%", "forecast": "0.2%"},
+              {"id": "m", "date": "2026-11-20", "time": "10:00", "title": "UMich consumer sentiment, final (Nov)"}]
+    feed = [{"title": "Unemployment Claims", "country": "USD", "date": "2026-11-19T08:30:00-05:00", "forecast": "198K"},
+            {"title": "JOLTS Job Openings", "country": "USD", "date": "2026-12-01T10:00:00-05:00", "forecast": "7.20M"},
+            {"title": "Retail Sales m/m", "country": "USD", "date": "2026-11-17T08:30:00-05:00", "forecast": "0.1%"},
+            {"title": "Revised UoM Consumer Sentiment", "country": "USD", "date": "2026-11-20T10:00:00-05:00", "forecast": "51.7"},
+            {"title": "Unemployment Claims", "country": "CAD", "date": "2026-11-19T08:30:00-05:00", "forecast": "9K"}]
+    tmp = tempfile.mkdtemp()
+    consensus.ARCHIVE = os.path.join(tmp, "consensus.json")
+    n = consensus.apply(events, E.kind_of, ny, manual_ids={"m"}, fetch=lambda url: json.dumps(feed).encode(), log=lambda *a: None)
+    got = {e["id"]: e.get("forecast") for e in events}
+    assert got == {"c": "198K", "j": "7.2M", "r": "0.2%", "m": None} and n == 2, got
+    arch = json.load(open(consensus.ARCHIVE))
+    assert set(arch) == {"c", "j", "r", "m"}, arch  # every consensus seen is archived, even when not applied
+    print("consensus feed ok")
+
+
 if __name__ == "__main__":
     fed_decision()
     reactions_keyless()
     fred_fallback()
+    nowcast_parse()
+    consensus_feed()
     print("source tests passed")

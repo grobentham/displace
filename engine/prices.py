@@ -47,14 +47,22 @@ def parse_stooq(txt):
     return out
 
 
-def parse_yahoo(txt):
+HL = {}  # market -> {date: [high, low]} from the last Yahoo download in this run
+
+
+def parse_yahoo(txt, hl=None):
     d = json.loads(txt)
     r = d["chart"]["result"][0]
     tz = r.get("meta", {}).get("gmtoffset", 0)
+    q = r["indicators"]["quote"][0]
     out = {}
-    for t, c in zip(r["timestamp"], r["indicators"]["quote"][0]["close"]):
+    for i, (t, c) in enumerate(zip(r["timestamp"], q["close"])):
         if c:
-            out[dt.datetime.utcfromtimestamp(t + tz).date().isoformat()] = float(c)
+            day = dt.datetime.fromtimestamp(t + tz, dt.timezone.utc).date().isoformat()
+            out[day] = float(c)
+            h, lo = (q.get("high") or [None] * (i + 1))[i], (q.get("low") or [None] * (i + 1))[i]
+            if hl is not None and h and lo and h >= lo > 0:
+                hl[day] = [float(h), float(lo)]
     return out
 
 
@@ -62,8 +70,9 @@ def stooq(symbol):
     return lambda: parse_stooq(_fetch(f"https://stooq.com/q/d/l/?s={symbol}&i=d"))
 
 
-def yahoo(symbol):
-    return lambda: parse_yahoo(_fetch(f"https://query1.finance.yahoo.com/v8/finance/chart/{symbol}?range=20y&interval=1d"))
+def yahoo(symbol, market):
+    return lambda: parse_yahoo(_fetch(f"https://query1.finance.yahoo.com/v8/finance/chart/{symbol}?range=20y&interval=1d"),
+                               HL.setdefault(market, {}))
 
 
 def fred_csv(series):
@@ -83,8 +92,8 @@ def fred_csv(series):
 MARKETS = {
     # name: (sources [(label, fn)], splice: may different sources be merged into one history)
     # Stooq now answers automated requests with a browser check, so it is no longer used.
-    "gold": ([("Yahoo COMEX gold", yahoo("GC=F"))], False),
-    "nq": ([("Yahoo Nasdaq-100", yahoo("%5ENDX")), ("FRED Nasdaq-100", fred_csv("NASDAQ100"))], True),
+    "gold": ([("Yahoo COMEX gold", yahoo("GC=F", "gold"))], False),
+    "nq": ([("Yahoo Nasdaq-100", yahoo("%5ENDX", "nq")), ("FRED Nasdaq-100", fred_csv("NASDAQ100"))], True),
 }
 
 
@@ -116,6 +125,8 @@ def closes(name, start, now=None, log=print, sources=None):
         fresh = now - dt.datetime.fromisoformat(cache["fetched"]) < dt.timedelta(hours=REFRESH_HOURS)
     except (TypeError, ValueError):
         pass
+    if fresh and not cache.get("hl"):
+        fresh = False  # no highs and lows yet (older cache, or the close-only backup): try the main source
     if not fresh and name not in _TRIED:
         _TRIED.add(name)
         for label, fn in srcs:
@@ -130,6 +141,8 @@ def closes(name, start, now=None, log=print, sources=None):
             if cache["source"] and cache["source"] != label and not splice:
                 cache["closes"] = {}
             cache["closes"].update(got)
+            if HL.get(name):
+                cache.setdefault("hl", {}).update(HL[name])
             cache["source"] = label
             cache["fetched"] = now.isoformat(timespec="minutes")
             _save(name, cache)
@@ -144,3 +157,10 @@ def gold(start, log=print):
 
 def nq(start, log=print):
     return closes("nq", start, log=log)
+
+
+def ranges(name, start):
+    """[(date, high, low, close)] from the cache (run closes() first to refresh it)."""
+    cache = _load(name)
+    hl, cl = cache.get("hl") or {}, cache["closes"]
+    return [(d, hl[d][0], hl[d][1], cl[d]) for d in sorted(hl) if d >= start and d in cl]

@@ -1103,6 +1103,12 @@ def main():
     merge(events, autos, answered)
     merge_schedule(events)
     events = prune(events)
+    try:  # consensus forecasts from ForexFactory's free weekly feed; hand-entered ones in forecasts.json win
+        import consensus
+        manual = set(load(os.path.join(ENG, "forecasts.json"), {}).get("forecasts", {}))
+        consensus.apply(events, kind_of, NY, manual_ids=manual, log=log, now=NOW)
+    except Exception as ex:
+        warn(f"consensus feed error: {ex!r}")
     hist_changed = update_figures(events, hist, pending)
     save(pending_path, pending)
     for e in events:
