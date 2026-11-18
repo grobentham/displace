@@ -134,7 +134,8 @@ def release_items(events, now):
         source = event.get("provenance") or {}
         series = source.get("series") or RELEASES[kind]["comps"][0][1]
         archive = source.get("via") == "ALFRED"
-        url = f"{ALFRED}/series?seid={series}&vintage_date={source['asof']}" if archive else f"{FRED}/series/{series}"
+        url = source.get("url") or (f"{ALFRED}/series?seid={series}&vintage_date={source['asof']}"
+                                    if archive else f"{FRED}/series/{series}")
         yield {"id": event["id"], "title": event["title"], "source": event["src"], "url": url,
                "published": timestamp(published), "analysis": event.get("recap") or recap(event, kind),
                "context": CONTEXT[kind]}

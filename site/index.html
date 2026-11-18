@@ -3490,7 +3490,7 @@ function valsDetail(e){if(e.impact==="holiday"||e.impact==="earnings"||!e.time)r
   if(c)bits.push(c==="up"?"Came in above forecast.":c==="dn"?"Came in below forecast.":"Came in line with forecast.");
   if(e.revised)bits.push("Previous revised to "+esc(e.revised)+".");
   if(e.fsrc)bits.push("Forecast: "+esc(e.fsrc)+".");
-  if(e.provenance&&e.provenance.series){var p=e.provenance;bits.push("Actual: "+esc(e.src||"agency")+" data via "+esc(p.via||"FRED")+" ("+esc(p.series)+")"+(p.asof?", archive snapshot "+esc(p.asof):p.published?", published "+esc(p.published):"")+". Percent changes calculated from published levels may differ slightly from official rounding.");}
+  if(e.provenance){var p=e.provenance;bits.push("Actual: "+esc(p.via||e.src||"agency")+(p.series?" ("+esc(p.series)+")":"")+(p.asof?(p.via==="ALFRED"?", archive snapshot ":", checked ")+esc(p.asof):p.published?", published "+esc(p.published):"")+".");}
   if(!e.actual&&!e.forecast&&!(instant(e.date,e.time)<Date.now()))bits.push("The forecast is added once economists' consensus is published, usually in the week of the release. The actual number is added shortly after it comes out.");
   return bits.length?'<p class="ecd-v">'+bits.join(" ")+'</p>':"";}
 /* news details */

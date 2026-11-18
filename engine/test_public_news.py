@@ -3,6 +3,7 @@ import datetime as dt
 import unittest
 from unittest.mock import patch
 
+import agencies
 import engine
 import news
 import publicdata
@@ -59,6 +60,28 @@ class PublicDataTests(unittest.TestCase):
         report = quality.Report()
         result = quality.gate_figure(report, "weekly", "Claims", "ICSA", "claims", "200K", history, {}, "run")
         self.assertEqual(result, "publish")
+
+    def test_census_report_matches_release_date_and_period(self):
+        body = (b"FOR IMMEDIATE RELEASE: Tuesday, November 17, 2026 "
+                b"Advance estimates of U.S. retail and food services sales for October 2026, "
+                b"adjusted for seasonal variation, were $748.2 billion, up 0.2 percent "
+                b"(&plusmn;0.4 percent)* from the previous month.")
+        reading = agencies.retail_from_page(body)
+        event = {"title": "Retail sales (Oct)", "date": "2026-11-17"}
+        with patch.object(agencies, "retail", return_value=reading):
+            actual, _, _, source = engine.agency_figures(event, "retail", "RSAFS", "pct", True)
+            self.assertEqual((actual, source["published"]), ("0.2%", "2026-11-17"))
+            event["date"] = "2026-11-16"
+            self.assertIsNone(engine.agency_figures(event, "retail", "RSAFS", "pct", True)[0])
+
+    def test_bea_headlines_distinguish_the_monthly_core_inflation_reading(self):
+        body = (b"EMBARGOED UNTIL RELEASE AT 8:30 a.m. EDT, Thursday, October 29, 2026 "
+                b"Personal Income and Outlays, September 2026. From the preceding month, "
+                b"the PCE price index for September increased 0.5 percent. Excluding food and energy, "
+                b"the PCE price index increased 0.3 percent. From the same month one year ago, "
+                b"the PCE price index increased 3.6 percent.")
+        published, period, _, values = agencies.parse_bea_report("pce", body)
+        self.assertEqual((str(published), str(period), values["PCEPILFE"]), ("2026-10-29", "2026-09-01", 0.3))
 
 
 class NewsDigestTests(unittest.TestCase):

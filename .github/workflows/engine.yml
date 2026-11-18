@@ -41,36 +41,6 @@ jobs:
           python engine/test_engine.py
           python engine/test_earnings.py
           python engine/test_public_news.py
-      - name: Probe public agency connections
-        if: github.event_name == 'pull_request'
-        run: |
-          python -u - <<'PY'
-          from concurrent.futures import ThreadPoolExecutor
-          from urllib.request import Request, urlopen
-          urls = {
-              "FRED graph": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DGS2",
-              "FRED text": "https://fred.stlouisfed.org/data/DGS2.txt",
-              "ALFRED": "https://alfred.stlouisfed.org/graph/alfredgraph.csv?id=PAYEMS&vintage_date=2026-11-06",
-              "BLS series": "https://api.bls.gov/publicAPI/v1/timeseries/data/CUSR0000SA0",
-              "BLS release": "https://www.bls.gov/news.release/empsit.htm",
-              "Census retail": "https://www.census.gov/retail/sales.html",
-              "Census schedule": "https://www.census.gov/economic-indicators/calendar-listview-2026.html",
-              "BEA news": "https://www.bea.gov/news/current-releases",
-              "Treasury curves": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/pages/xml?data=daily_treasury_yield_curve&field_tdr_date_value=2026",
-              "DOL claims": "https://www.dol.gov/newsroom/releases/eta",
-              "Fed H10": "https://www.federalreserve.gov/releases/h10/current/",
-          }
-          def check(item):
-              key, url = item
-              try:
-                  request = Request(url, headers={"User-Agent": "Displace/1.0 (public economic data reader)"})
-                  with urlopen(request, timeout=9) as response:
-                      print(key, response.status, response.headers.get("Content-Type"), repr(response.read(95)), flush=True)
-              except Exception as error:
-                  print(key, repr(error), flush=True)
-          with ThreadPoolExecutor(max_workers=8) as pool:
-              list(pool.map(check, urls.items()))
-          PY
 
   publish:
     if: github.ref == 'refs/heads/main'
