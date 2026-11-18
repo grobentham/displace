@@ -10,6 +10,8 @@ import re
 from urllib.parse import urlencode
 from urllib.request import Request, urlopen
 
+from source_health import record
+
 FRED = "https://fred.stlouisfed.org"
 ALFRED = "https://alfred.stlouisfed.org"
 BEA_CALENDAR = "https://www.bea.gov/news/schedule/ics/online-calendar-subscription.ics"
@@ -47,6 +49,8 @@ def check_fred_access(today):
 
     with ThreadPoolExecutor(max_workers=2) as pool:
         FRED_AVAILABLE, ALFRED_AVAILABLE = pool.map(reachable, urls)
+    record("fred", FRED_AVAILABLE)
+    record("alfred", ALFRED_AVAILABLE)
 
 
 def read_csv(body, column, start, vintage=""):
@@ -87,9 +91,13 @@ def observations(series, start, vintage=""):
         url = FRED + "/graph/fredgraph.csv"
         column = series
     STATS["calls"] += 1
+    provider = "alfred" if vintage else "fred"
     try:
-        return read_csv(download(url + "?" + urlencode(params)), column, start, vintage)
+        rows = read_csv(download(url + "?" + urlencode(params)), column, start, vintage)
+        record(provider, True)
+        return rows
     except (OSError, ValueError):
+        record(provider, False)
         failed(series)
         return None
 
@@ -149,9 +157,11 @@ def release_dates(release_id, start, end):
         dates = sorted(date for date in calendar.dates if start <= date <= end)
         # Empty or changed HTML must leave the existing schedule in place.
         if dates:
+            record("fred", True)
             return dates
     except (OSError, ValueError):
         pass
+    record("fred", False)
     failed(f"release {release_id}")
     return None
 
@@ -179,8 +189,10 @@ def bea_releases(tz):
     try:
         releases = list(parse_bea_calendar(download(BEA_CALENDAR), tz))
         if releases:
+            record("bea", True)
             return releases
     except (OSError, ValueError):
         pass
+    record("bea", False)
     failed("BEA calendar")
     return []

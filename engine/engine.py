@@ -30,6 +30,7 @@ import calendar_rules as rules  # noqa: E402
 import fredapi  # noqa: E402
 import publicdata  # noqa: E402
 import quality as qa  # noqa: E402
+import source_health  # noqa: E402
 from catalog import (HISTORY_KEYS, MARKETS, NAMES, NOTES, REACTION_KEYS, REACTION_SERIES,  # noqa: E402
                      RELEASES, RULED, WHY)
 
@@ -167,7 +168,11 @@ def auto_events():
     out, answered = [], set()
     start = (TODAY - dt.timedelta(days=14)).isoformat()
     end = (TODAY + dt.timedelta(days=HORIZON)).isoformat()
-    names = (fredapi.releases() or {}) if fredapi.KEY else {}
+    names = {}
+    if fredapi.KEY:
+        releases = fredapi.releases()
+        source_health.record("fred", releases is not None)
+        names = releases or {}
     fomc_dates = []
     bea = [] if fredapi.KEY else publicdata.bea_releases(NY)
     for key, cfg in RELEASES.items():
@@ -1016,6 +1021,7 @@ def ics(events, only_high=False):
 
 # ---------------------------------------------------------------- run
 def main():
+    source_health.CHECKS.clear()
     if fredapi.KEY:
         source_name = "FRED API"
     else:
@@ -1056,10 +1062,12 @@ def main():
     calendar_ok = not any(c["name"].startswith(("calendar:", "figure format")) for c in QA.critical_fail)
     body = {"through": events[-1]["date"] if events else TODAY.isoformat(), "events": events}
     old = load(os.path.join(DATA, "calendar", "events.json"), {})
+    calendar_date = old.get("updated")
     if not calendar_ok:
         warn("calendar failed quality checks: kept the last good calendar")
     elif {"through": old.get("through"), "events": old.get("events")} != body:
-        save(os.path.join(DATA, "calendar", "events.json"), {"updated": TODAY.isoformat(), **body})
+        calendar_date = TODAY.isoformat()
+        save(os.path.join(DATA, "calendar", "events.json"), {"updated": calendar_date, **body})
         log("calendar saved")
     if not calendar_ok:
         events = old.get("events", events)
@@ -1114,12 +1122,19 @@ def main():
     elif os.path.exists(fail_path):
         os.remove(fail_path)
     log(f"quality: {QA.passed}/{len(QA.checks)} checks passed, {len(QA.held)} held, {len(QA.rejected)} rejected")
-    status = {"lastRun": NOW.isoformat(timespec="minutes"), "source": source_name, "fredCalls": source_stats["calls"],
-              "fred": bool(fredapi.KEY or source_stats["calls"] > source_stats["errors"]),
+    checked_at = NOW.isoformat(timespec="minutes")
+    status_file = os.path.join(DATA, "engine", "status.json")
+    sources = source_health.snapshot(load(status_file, {}).get("sources", {}), checked_at)
+    latest = max((e for e in events if e.get("actual") and e.get("time") and when(e) <= NOW), key=when, default=None)
+    freshness = {"calendarUpdatedOn": calendar_date,
+                 "latestActual": {"title": latest["title"], "date": latest["date"]} if latest else None,
+                 "marketDates": {key: tiles[key]["date"] for key in ("y2", "y10", "effr") if key in tiles}}
+    status = {"lastRun": checked_at, "source": source_name, "fredCalls": source_stats["calls"],
+              "fred": sources["fred"]["state"] in ("available", "partial"), "sources": sources, "freshness": freshness,
               "quality": {"passed": QA.passed, "total": len(QA.checks), "held": len(QA.held), "rejected": len(QA.rejected), "critical": len(QA.critical_fail)},
               "fredErrors": source_stats["errors"], "calendarThrough": through, "events": len(events),
               "upcoming": sum(1 for e in events if e["date"] >= TODAY.isoformat()), "warnings": WARN, "log": LOG[-30:]}
-    save(os.path.join(DATA, "engine", "status.json"), status)
+    save(status_file, status)
     return 0
 
 

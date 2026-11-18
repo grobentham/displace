@@ -11,6 +11,8 @@ import urllib.error
 import urllib.parse
 import urllib.request
 
+from source_health import record
+
 KEY = os.environ.get("FRED_API_KEY", "").strip()
 BASE = "https://api.stlouisfed.org/fred/"
 STATS = {"calls": 0, "errors": 0, "failed": []}
@@ -29,6 +31,7 @@ def _get(path, **params):
             STATS["calls"] += 1
             with urllib.request.urlopen(url, timeout=30) as r:
                 data = json.load(r)
+            record("fred", True)
             _cache[url] = data
             time.sleep(0.15)  # stay well under FRED's 120 requests a minute
             return data
@@ -43,6 +46,7 @@ def _get(path, **params):
                 continue
             break
     STATS["errors"] += 1
+    record("fred", False)
     STATS["failed"].append(params.get("series_id") or params.get("release_id") or path)
     _cache[url] = None
     return None

@@ -12,6 +12,8 @@ import os
 import time
 import urllib.request
 
+from source_health import record
+
 # ticker: (name, tier). "mega" = the heaviest Nasdaq-100 weights, "notable" = other big movers of the index.
 WATCH = {
     "AAPL": ("Apple", "mega"), "MSFT": ("Microsoft", "mega"), "NVDA": ("NVIDIA", "mega"), "AMZN": ("Amazon", "mega"),
@@ -33,17 +35,19 @@ HEAD = {"User-Agent": "Mozilla/5.0 (compatible; DisplaceEngine/1.0)", "Accept": 
 
 def fetch_day(day):
     """Rows of Nasdaq's calendar for one date, or None if it couldn't be read."""
+    rows = None
     try:
         req = urllib.request.Request(URL.format(d=day.isoformat()), headers=HEAD)
         with urllib.request.urlopen(req, timeout=8) as r:
             body = json.load(r)
         data = (body or {}).get("data")
-        if not isinstance(data, dict) or "rows" not in data:
-            return None
-        rows = data["rows"]
-        return [] if rows is None else rows if isinstance(rows, list) else None
+        if isinstance(data, dict) and "rows" in data:
+            values = data["rows"]
+            rows = [] if values is None else values if isinstance(values, list) else None
     except Exception:
-        return None
+        pass
+    record("nasdaqCalendar", rows is not None)
+    return rows
 
 
 def session_of(raw):

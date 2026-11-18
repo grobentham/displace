@@ -8,6 +8,7 @@ import re
 import xml.etree.ElementTree as ET
 
 from publicdata import download
+from source_health import record
 
 BLS_URL = "https://api.bls.gov/publicAPI/v1/timeseries/data/"
 BLS_SERIES = {
@@ -50,9 +51,12 @@ def bls(asof):
     payload = json.dumps({"seriesid": list(BLS_SERIES.values()), "startyear": str(year - 2),
                           "endyear": str(year)}).encode()
     try:
-        return parse_bls(download(BLS_URL, payload=payload), asof)
+        rows = parse_bls(download(BLS_URL, payload=payload), asof)
     except (OSError, ValueError, KeyError, TypeError):
-        return {}
+        rows = {}
+    for series in BLS_SERIES.values():
+        record("bls", bool(rows.get(series)))
+    return rows
 
 
 class PageText(HTMLParser):
@@ -87,9 +91,11 @@ def retail_from_page(body):
 @lru_cache(maxsize=1)
 def retail():
     try:
-        return retail_from_page(download(CENSUS_RETAIL))
+        result = retail_from_page(download(CENSUS_RETAIL))
     except (OSError, ValueError):
-        return None
+        result = None
+    record("census", result is not None)
+    return result
 
 
 def parse_bea_report(kind, body):
@@ -140,9 +146,11 @@ def bea_report(kind):
         try:
             reading = parse_bea_report(kind, download(url))
             if reading:
+                record("bea", True)
                 return (*reading, url)
         except (OSError, ValueError):
             pass
+    record("bea", False)
     return None
 
 
@@ -165,17 +173,22 @@ def treasury_from_xml(body):
 @lru_cache(maxsize=2)
 def treasury(year):
     try:
-        return treasury_from_xml(download(TREASURY_URL + str(year)))
+        rates = treasury_from_xml(download(TREASURY_URL + str(year)))
     except (OSError, ValueError, TypeError, ET.ParseError):
-        return {}
+        rates = {}
+    for series in ("DGS2", "DGS10"):
+        record("treasury", bool(rates.get(series)))
+    return rates
 
 
 @lru_cache(maxsize=1)
 def nyfed():
     try:
-        return json.loads(download(NYFED_URL))["refRates"]
+        rates = json.loads(download(NYFED_URL))["refRates"]
     except (OSError, ValueError, KeyError, TypeError):
-        return []
+        rates = []
+    record("nyFed", bool(rates))
+    return rates
 
 
 def market_observations(series, start, today):
