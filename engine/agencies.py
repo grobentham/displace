@@ -4,6 +4,7 @@ from functools import lru_cache
 from html.parser import HTMLParser
 import json
 import math
+import os
 import re
 import xml.etree.ElementTree as ET
 
@@ -11,6 +12,7 @@ from publicdata import download
 from source_health import record
 
 BLS_URL = "https://api.bls.gov/publicAPI/v1/timeseries/data/"
+BLS_KEY = os.environ.get("BLS_API_KEY", "").strip()
 BLS_SERIES = {
     "CPIAUCSL": "CUSR0000SA0", "CPILFESL": "CUSR0000SA0L1E",
     "PAYEMS": "CES0000000001", "UNRATE": "LNS14000000", "CES0500000003": "CES0500000003",
@@ -21,6 +23,9 @@ BEA_NEWS = "https://www.bea.gov/news/current-releases"
 TREASURY_URL = ("https://home.treasury.gov/resource-center/data-chart-center/interest-rates/pages/xml"
                 "?data=daily_treasury_yield_curve&field_tdr_date_value=")
 NYFED_URL = "https://markets.newyorkfed.org/api/rates/unsecured/effr/last/25.json"
+NYFED_PAGE = "https://www.newyorkfed.org/markets/reference-rates/effr"
+FED_FEED = "https://www.federalreserve.gov/feeds/press_monetary.xml"
+RATE = r"\d+(?:-\d+/\d+|\.\d+)?"
 DATA_NS = "{http://schemas.microsoft.com/ado/2007/08/dataservices}"
 
 
@@ -48,10 +53,13 @@ def parse_bls(body, asof):
 @lru_cache(maxsize=1)
 def bls(asof):
     year = dt.date.fromisoformat(asof).year
-    payload = json.dumps({"seriesid": list(BLS_SERIES.values()), "startyear": str(year - 2),
-                          "endyear": str(year)}).encode()
+    request = {"seriesid": list(BLS_SERIES.values()), "startyear": str(year - 2), "endyear": str(year)}
+    url = BLS_URL
+    if BLS_KEY:  # free key: 500 requests a day instead of 25
+        request["registrationkey"] = BLS_KEY
+        url = BLS_URL.replace("/v1/", "/v2/")
     try:
-        rows = parse_bls(download(BLS_URL, payload=payload), asof)
+        rows = parse_bls(download(url, payload=json.dumps(request).encode()), asof)
     except (OSError, ValueError, KeyError, TypeError):
         rows = {}
     for series in BLS_SERIES.values():
@@ -201,3 +209,48 @@ def market_observations(series, start, today):
         return sorted((row["effectiveDate"], row[field], "") for row in nyfed()
                       if isinstance(row.get(field), (int, float)) and start <= row["effectiveDate"] <= today.isoformat())
     return []
+
+
+def rate_number(text):
+    """'3-3/4' -> 3.75, '4.25' -> 4.25, '4' -> 4.0."""
+    whole, _, frac = text.partition("-")
+    value = float(whole)
+    if frac:
+        num, den = frac.split("/")
+        value += int(num) / int(den)
+    return value
+
+
+def decision_from_statement(body):
+    """(low, high) target range from an FOMC statement, or None."""
+    text = " ".join(page_text(body).split())
+    match = re.search(rf"decided to (?:raise|lower|maintain|keep) the target range for the federal funds rate"
+                      rf"(?: by [^.]{{0,60}}?)? (?:at|to) ({RATE}) (?:to|-|–) ({RATE}) percent", text, re.I)
+    if not match:
+        return None
+    low, high = rate_number(match[1]), rate_number(match[2])
+    return (low, high) if 0 <= low < high <= 25 else None
+
+
+def fed_decision(day, tz):
+    """(upper bound, statement url) from the Fed's statement published on `day` (New York date), or None."""
+    from email.utils import parsedate_to_datetime
+    try:
+        body = download(FED_FEED)
+        if b"<!DOCTYPE" in body.upper() or b"<!ENTITY" in body.upper():
+            raise ValueError("Unsupported XML declarations")
+        for item in ET.fromstring(body).findall("./channel/item"):
+            title = (item.findtext("title") or "").lower()
+            link = (item.findtext("link") or "").strip()
+            if "fomc statement" not in title or not link.startswith("https://www.federalreserve.gov/"):
+                continue
+            if parsedate_to_datetime(item.findtext("pubDate") or "").astimezone(tz).date() != day:
+                continue
+            rng = decision_from_statement(download(link))
+            if rng:
+                record("fedStatements", True)
+                return rng[1], link
+    except (OSError, ValueError, TypeError, ET.ParseError):
+        pass
+    record("fedStatements", False)
+    return None

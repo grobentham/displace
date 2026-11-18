@@ -75,8 +75,8 @@ Each available series shows changes and a sparkline. Treasury yields and the eff
 **Calendar feeds.** `calendar.ics` (all releases) and `calendar-high.ics` (high impact), with 15-minute alerts, to subscribe to in Google, Apple or Outlook Calendar.
 
 **News-outcome engine (gold, NQ, dollar, yields).** `engine/predict.py` runs the tested model in `engine/direction.py` after every engine run and writes `site/data/direction/current.json`, which the News calendar shows:
-- **Scenario map, every release:** if the figure comes in hotter, in line or cooler than expected (consensus where recorded, otherwise the recent trend), how often gold, the Nasdaq-100 and the other markets closed higher that day and the typical move. History since 2010 from figures *as first published*, so no hindsight revisions.
-- **Lean, proven rules only:** before a release, "if hotter: gold ▼ 68%"; after it, the lean for that day's close. Shown only for release × market rules that were right 55%+ over 30+ unseen releases, survive a multiple-testing correction, beat a coin flip on calibration, worked in both halves of history and are still working on their latest 20 calls. Everything else shows "no proven edge".
+- **Scenario map, every release:** if the figure lands above, near or below the average of its previous readings (the same measure in training and live; free consensus history is too short to train on), how often gold, the Nasdaq-100 and the other markets closed higher that day and the typical move. History since 2010 from figures *as first published*, so no hindsight revisions.
+- **Lean, proven rules only:** before a release, "if above its recent trend: gold ▼ 68%"; after it, the lean for that day's close. Shown only for release × market rules that were right 55%+ over 30+ unseen releases, survive a multiple-testing correction, beat a coin flip on calibration, worked in both halves of history and are still working on their latest 20 calls. Everything else shows "no proven edge".
 - **Public track record:** every post-release lean is logged in `site/data/direction/log.json` before the close and scored against the actual close. Leans are withdrawn at the close, today's unfinished price bar is never used, and the recent record feeds a circuit breaker that switches a rule off.
 - **Data:** the release history is loaded once from the official FRED/ALFRED API (needs the free `FRED_API_KEY` secret, see setup) and then kept current from the engine's own confirmed figures, so it keeps working when FRED is unreachable. Gold and Nasdaq-100 closes come from Stooq with Yahoo as fallback; yields from Treasury; fed funds from the New York Fed. All cached in `engine/cache/`.
 
@@ -108,6 +108,8 @@ Add forecasts by hand if you want them (see below).
 
 1. **Turn on Pages:** repo **Settings → Pages → Build and deployment → Source: GitHub Actions**.
 2. **News-outcome history (once):** get a free FRED API key at https://fred.stlouisfed.org/docs/api/api_key.html and add it as a repository secret named `FRED_API_KEY` (**Settings → Secrets and variables → Actions → New repository secret**). The first run loads 15+ years of first-release history into `engine/cache/`. If GitHub's runners can't reach FRED, run `FRED_API_KEY=yourkey python engine/predict.py` once on your own computer and commit `engine/cache/`.
+   The same key also lets the main engine read FRED's API for figures the agencies don't publish in a free, machine-readable form (jobless claims, durable goods, UMich, new home sales, ADP) and for the dollar, oil, breakevens and mortgage rates. Each run first checks the key can reach FRED; if it can't, it switches to the keyless agency sources for that run.
+   Optional: a free BLS key (https://data.bls.gov/registrationEngine/) as the `BLS_API_KEY` secret raises the BLS limit from 25 to 500 requests a day.
 3. **Publish the site:** **Actions → Engine → Run workflow**. Subsequent scheduled runs refresh the data and deploy the site at `https://<your-username>.github.io/displace/`.
 
 ## Day-to-day
@@ -139,6 +141,7 @@ python engine/test_public_news.py
 python engine/test_earnings.py
 python engine/test_direction.py
 python engine/test_predict.py
+python engine/test_sources.py
 ```
 
 `test_direction.py` checks the model on simulated markets where the truth is known (it must find real effects, find nothing in noise and state honest probabilities). `test_predict.py` runs the whole news-outcome pipeline offline.

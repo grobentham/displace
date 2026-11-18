@@ -52,6 +52,21 @@ def _get(path, **params):
     return None
 
 
+def probe(timeout=10):
+    """One quick request: can this runner reach the FRED API with the key? Never raises."""
+    if not KEY:
+        return False
+    url = BASE + "series/observations?" + urllib.parse.urlencode(
+        {"series_id": "DGS2", "sort_order": "desc", "limit": 3, "api_key": KEY, "file_type": "json"})
+    try:
+        with urllib.request.urlopen(url, timeout=timeout) as r:
+            ok = bool(json.load(r).get("observations"))
+    except Exception:
+        ok = False
+    record("fred", ok)
+    return ok
+
+
 def observations(series, start, initial=False):
     """[(date, value, realtime_start)] for a series. initial=True gives values as first published."""
     p = {"series_id": series, "observation_start": start}

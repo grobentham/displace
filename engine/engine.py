@@ -466,6 +466,8 @@ def public_figures(e, kind, series, mode, released):
 
 def agency_figures(event, kind, series, mode, released):
     """Match a direct agency reading to its reported period and scheduled release."""
+    if kind == "fomc":
+        return fomc_figures(event, series, mode, released)
     period = title_period(event, kind)
     if not period:
         return None, None, None, None
@@ -499,6 +501,26 @@ def agency_figures(event, kind, series, mode, released):
         source = {"via": "BLS", "series": identifier, "asof": checked,
                   "url": f"https://data.bls.gov/timeseries/{identifier}"}
         return fmt(mode, values[-1][1]), previous, values, source
+    return None, previous, None, None
+
+
+def fomc_figures(event, series, mode, released):
+    """Fed decision without FRED: the statement itself at 14:00, else the New York Fed's target range,
+    which shows the new range from the day after the decision."""
+    if series != "DFEDTARU":
+        return None, None, None, None
+    day = d_(event["date"])
+    rows = agencies.market_observations("DFEDTARU", (day - dt.timedelta(days=60)).isoformat(), TODAY)
+    before = [r for r in rows if r[0] <= event["date"]]
+    previous = fmt(mode, before[-1][1]) if before else None
+    if not released:
+        return None, previous, None, None
+    got = agencies.fed_decision(day, NY)
+    if got:
+        return fmt(mode, got[0]), previous, None, {"via": "Federal Reserve", "url": got[1], "published": event["date"]}
+    after = [r for r in rows if r[0] > event["date"]]
+    if after:
+        return fmt(mode, after[0][1]), previous, None, {"via": "New York Fed", "url": agencies.NYFED_PAGE, "published": after[0][0]}
     return None, previous, None, None
 
 
@@ -735,11 +757,40 @@ def market_tiles():
     return tiles
 
 
+def keyless_daily(start):
+    """Daily yields (and the dollar, if cached) without FRED: the history cached by the news-outcome engine,
+    topped up from the Treasury yield curve."""
+    import series_store
+    out = {}
+    for key, series, _ in REACTION_SERIES:
+        rows = {r[0]: (r[0], r[1], "") for r in series_store.load(series, False)["rows"] if r[0] >= start}
+        if series in ("DGS2", "DGS10"):
+            rows.update({d: (d, v, "") for d, v, _ in agencies.market_observations(series, f"{TODAY.year - 1}-01-01", TODAY)})
+        if len(rows) > 30:
+            out[key] = [rows[d] for d in sorted(rows)]
+    return out
+
+
+def keyless_dates(k, events):
+    """Past release days for a report: the calendar, plus release dates in the cached first-release history."""
+    import series_store
+    dates = {e["date"] for e in events if kind_of(e) == k and e.get("actual") and e["date"] < TODAY.isoformat()
+             and (k != "gdp" or "advance" in e["title"].lower())}
+    head = RELEASES[k]["comps"][0][1]
+    dates |= {r[2] for r in series_store.load(head, True)["rows"] if r[2]}
+    return sorted(dates)
+
+
 def reactions(events):
     """How 2y/10y yields and the dollar moved on past release days, against the average day."""
     names = (fredapi.releases() or {}) if fredapi.KEY else {}
+    keyless = not (fredapi.KEY or publicdata.FRED_AVAILABLE)
     daily = {}
+    if keyless:
+        daily = keyless_daily((TODAY - dt.timedelta(days=4 * 365)).isoformat())
     for key, series, unit in REACTION_SERIES:
+        if keyless:
+            break
         obs = SOURCE.observations(series, (TODAY - dt.timedelta(days=4 * 365)).isoformat())
         if obs and len(obs) > 30:
             daily[key] = obs
@@ -762,7 +813,9 @@ def reactions(events):
         cfg = RELEASES[k]
         rid = next((i for n, i in names.items() if re.search(cfg["fred"], n)), None) or cfg["rid"]
         start = (TODAY - dt.timedelta(days=3 * 365)).isoformat()
-        if fredapi.KEY:
+        if keyless:
+            dates = [x for x in keyless_dates(k, events) if x >= start]
+        elif fredapi.KEY:
             dates = SOURCE.release_dates(rid, start, TODAY.isoformat())
         else:
             dates = []
@@ -1021,7 +1074,13 @@ def ics(events, only_high=False):
 
 # ---------------------------------------------------------------- run
 def main():
+    global SOURCE
     source_health.CHECKS.clear()
+    if fredapi.KEY and not fredapi.probe():
+        # A key that can't reach FRED from this runner must not switch off the keyless agency sources.
+        log("FRED API unreachable with the key; using keyless sources this run")
+        fredapi.KEY = ""
+        SOURCE = publicdata
     if fredapi.KEY:
         source_name = "FRED API"
     else:
@@ -1083,7 +1142,7 @@ def main():
     if tiles:
         tiles = qa.check_markets(QA, tiles, {k: s for k, _, s, _ in MARKETS}, TODAY)
         save(os.path.join(DATA, "markets", "latest.json"), {"asof": TODAY.isoformat(), "tiles": tiles})
-    if (fredapi.KEY or publicdata.FRED_AVAILABLE) and (TODAY.weekday() == 6 or not load(os.path.join(DATA, "history", "reactions.json"), {}).get("series")):
+    if TODAY.weekday() == 6 or not load(os.path.join(DATA, "history", "reactions.json"), {}).get("series"):
         rx = qa.check_reactions(QA, reactions(events))
         if rx and rx["series"]:
             save(os.path.join(DATA, "history", "reactions.json"), rx)

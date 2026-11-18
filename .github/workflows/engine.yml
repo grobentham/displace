@@ -44,6 +44,7 @@ jobs:
           python engine/test_public_news.py
           python engine/test_morning.py
           python engine/test_predict.py
+          python engine/test_sources.py
           python engine/test_direction.py
 
   publish:
@@ -69,6 +70,11 @@ jobs:
           python-version: "3.12"
 
       - name: Refresh calendar and news
+        env:
+          # Optional. With a reachable key the engine reads FRED's API (claims, durables, UMich, home sales,
+          # the dollar, oil...); without one, or if FRED can't be reached, it uses the direct agency sources.
+          FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
+          BLS_API_KEY: ${{ secrets.BLS_API_KEY }}
         run: |
           python -u engine/engine.py
           python -u engine/news.py
