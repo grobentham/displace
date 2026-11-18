@@ -18,8 +18,8 @@ DESCRIPTION:Initial jobless claims
 TRIGGER:-PT15M
 END:VALARM
 SUMMARY:🟠 Initial jobless claims
-DESCRIPTION:Lands an hour before the 9:30 open. Let the release candle prin
- t. Previous: 189K Actual: 200K Education only\, not financial advice.
+DESCRIPTION:Scheduled one hour before the U.S. stock market opens. Previous
+ : 189K Actual: 200K Education only\, not financial advice.
 END:VEVENT
 BEGIN:VEVENT
 UID:20261113-ppi-producer-prices-oct@displace
@@ -32,8 +32,8 @@ DESCRIPTION:PPI producer prices (Oct)
 TRIGGER:-PT15M
 END:VALARM
 SUMMARY:🟠 PPI producer prices (Oct)
-DESCRIPTION:Lands an hour before the 9:30 open. Let the release candle prin
- t. Previous: 1.3% Actual: 0.3% Education only\, not financial advice.
+DESCRIPTION:Scheduled one hour before the U.S. stock market opens. Previous
+ : 1.3% Actual: 0.3% Education only\, not financial advice.
 END:VEVENT
 BEGIN:VEVENT
 UID:20261117-retail-sales-oct@displace
@@ -46,10 +46,8 @@ DESCRIPTION:Retail sales (Oct)
 TRIGGER:-PT15M
 END:VALARM
 SUMMARY:🔴 Retail sales (Oct)
-DESCRIPTION:Lands an hour before the 9:30 open. Let the release candle prin
- t\; ICT traders often wait for the raid that follows and trade the NY AM k
- ill zone after it. Previous: 0.8% Forecast: 0.2% Actual: 0.2% Education on
- ly\, not financial advice.
+DESCRIPTION:Scheduled one hour before the U.S. stock market opens. Previous
+ : 0.8% Forecast: 0.2% Actual: 0.2% Education only\, not financial advice.
 END:VEVENT
 BEGIN:VEVENT
 UID:20261118-fomc-minutes-oct-27-28-meeting@displace
@@ -62,8 +60,7 @@ DESCRIPTION:FOMC minutes (Oct 27–28 meeting)
 TRIGGER:-PT15M
 END:VALARM
 SUMMARY:🟠 FOMC minutes (Oct 27–28 meeting)
-DESCRIPTION:Released at 14:00 New York\, during the NY PM session. Can move
-  markets in the afternoon. Education only\, not financial advice.
+DESCRIPTION:Education only\, not financial advice.
 END:VEVENT
 BEGIN:VEVENT
 UID:20261119-initial-jobless-claims@displace
@@ -76,9 +73,8 @@ DESCRIPTION:Initial jobless claims
 TRIGGER:-PT15M
 END:VALARM
 SUMMARY:🟠 Initial jobless claims
-DESCRIPTION:Weekly jobless claims. Usually a smaller move\, but the 8:30 ca
- ndle can still spike. Previous: 200K Education only\, not financial advice
- .
+DESCRIPTION:Weekly initial claims for unemployment insurance. Previous: 200
+ K Education only\, not financial advice.
 END:VEVENT
 BEGIN:VEVENT
 UID:20261120-umich-consumer-sentiment-final-nov@displace
@@ -91,9 +87,8 @@ DESCRIPTION:UMich consumer sentiment\, final (Nov)
 TRIGGER:-PT15M
 END:VALARM
 SUMMARY:🟠 UMich consumer sentiment\, final (Nov)
-DESCRIPTION:Lands at 10:00\, inside the NY AM kill zone. Usually a smaller 
- move than the 8:30 data\, but it can kick off the 10–11 Silver Bullet ho
- ur. Previous: 48.0 Forecast: 51.0 Education only\, not financial advice.
+DESCRIPTION:Previous: 48.0 Forecast: 51.0 Education only\, not financial ad
+ vice.
 END:VEVENT
 BEGIN:VEVENT
 UID:20261124-consumer-confidence-nov@displace
@@ -106,9 +101,7 @@ DESCRIPTION:Consumer confidence (Nov)
 TRIGGER:-PT15M
 END:VALARM
 SUMMARY:🟠 Consumer confidence (Nov)
-DESCRIPTION:Lands at 10:00\, inside the NY AM kill zone and the start of th
- e Silver Bullet hour. Previous: 91.7 Education only\, not financial advice
- .
+DESCRIPTION:Previous: 91.7 Education only\, not financial advice.
 END:VEVENT
 BEGIN:VEVENT
 UID:20261125-durable-goods-orders-oct@displace
@@ -121,9 +114,8 @@ DESCRIPTION:Durable goods orders (Oct)
 TRIGGER:-PT15M
 END:VALARM
 SUMMARY:🟠 Durable goods orders (Oct)
-DESCRIPTION:Lands an hour before the 9:30 open. Let the release candle prin
- t\; ICT traders often wait for the raid that follows and trade the NY AM k
- ill zone after it. Previous: 1.8% Education only\, not financial advice.
+DESCRIPTION:Scheduled one hour before the U.S. stock market opens. Previous
+ : 1.8% Education only\, not financial advice.
 END:VEVENT
 BEGIN:VEVENT
 UID:20261125-gdp-second-estimate-q3@displace
@@ -136,9 +128,8 @@ DESCRIPTION:GDP\, second estimate (Q3)
 TRIGGER:-PT15M
 END:VALARM
 SUMMARY:🔴 GDP\, second estimate (Q3)
-DESCRIPTION:Lands an hour before the 9:30 open. Let the release candle prin
- t\; ICT traders often wait for the raid that follows and trade the NY AM k
- ill zone after it. Previous: 3.4% Education only\, not financial advice.
+DESCRIPTION:Scheduled one hour before the U.S. stock market opens. Previous
+ : 3.4% Education only\, not financial advice.
 END:VEVENT
 BEGIN:VEVENT
 UID:20261125-initial-jobless-claims-moved-to-wednesda@displace
@@ -151,8 +142,8 @@ DESCRIPTION:Initial jobless claims (moved to Wednesday for Thanksgiving)
 TRIGGER:-PT15M
 END:VALARM
 SUMMARY:🟠 Initial jobless claims (moved to Wednesday for Thanksgiving)
-DESCRIPTION:Weekly jobless claims. Usually a smaller move\, but the 8:30 ca
- ndle can still spike. Education only\, not financial advice.
+DESCRIPTION:Weekly initial claims for unemployment insurance. Education onl
+ y\, not financial advice.
 END:VEVENT
 BEGIN:VEVENT
 UID:20261125-pce-inflation-personal-income-and-outlay@displace
@@ -165,9 +156,8 @@ DESCRIPTION:PCE inflation · Personal income and outlays (Oct)
 TRIGGER:-PT15M
 END:VALARM
 SUMMARY:🔴 PCE inflation · Personal income and outlays (Oct)
-DESCRIPTION:Lands an hour before the 9:30 open. Let the release candle prin
- t\; ICT traders often wait for the raid that follows and trade the NY AM k
- ill zone after it. Previous: 0.3% Education only\, not financial advice.
+DESCRIPTION:Scheduled one hour before the U.S. stock market opens. Previous
+ : 0.3% Education only\, not financial advice.
 END:VEVENT
 BEGIN:VEVENT
 UID:20261125-new-home-sales-oct@displace
@@ -180,9 +170,7 @@ DESCRIPTION:New home sales (Oct)
 TRIGGER:-PT15M
 END:VALARM
 SUMMARY:🟠 New home sales (Oct)
-DESCRIPTION:Lands at 10:00\, inside the NY AM kill zone and the start of th
- e Silver Bullet hour. Previous: 676K Education only\, not financial advice
- .
+DESCRIPTION:Previous: 676K Education only\, not financial advice.
 END:VEVENT
 BEGIN:VEVENT
 UID:20261125-beige-book@displace
@@ -195,8 +183,7 @@ DESCRIPTION:Beige Book
 TRIGGER:-PT15M
 END:VALARM
 SUMMARY:🟠 Beige Book
-DESCRIPTION:Released at 14:00 New York\, during the NY PM session. Can move
-  markets in the afternoon. Education only\, not financial advice.
+DESCRIPTION:Education only\, not financial advice.
 END:VEVENT
 BEGIN:VEVENT
 UID:20261126-thanksgiving-us-markets-closed@displace
@@ -204,8 +191,8 @@ DTSTAMP:20261118T060032Z
 DTSTART;VALUE=DATE:20261126
 DTEND;VALUE=DATE:20261127
 SUMMARY:Thanksgiving: US markets closed
-DESCRIPTION:US stock market closed. Futures and forex liquidity is thin\; m
- ost ICT traders take the day off. Education only\, not financial advice.
+DESCRIPTION:U.S. stock markets are closed. Futures may trade shortened hour
+ s. Education only\, not financial advice.
 END:VEVENT
 BEGIN:VEVENT
 UID:20261127-day-after-thanksgiving-shortened-session@displace
@@ -213,8 +200,8 @@ DTSTAMP:20261118T060032Z
 DTSTART;VALUE=DATE:20261127
 DTEND;VALUE=DATE:20261128
 SUMMARY:Day after Thanksgiving: shortened session
-DESCRIPTION:Shortened US session: the stock market closes at 13:00 New York
- . Thin\, holiday-affected trade. Education only\, not financial advice.
+DESCRIPTION:The U.S. stock market closes at 13:00 New York time. Education 
+ only\, not financial advice.
 END:VEVENT
 BEGIN:VEVENT
 UID:20261201-ism-manufacturing-pmi-nov@displace
@@ -227,9 +214,7 @@ DESCRIPTION:ISM Manufacturing PMI (Nov)
 TRIGGER:-PT15M
 END:VALARM
 SUMMARY:🔴 ISM Manufacturing PMI (Nov)
-DESCRIPTION:Lands inside the NY AM kill zone\, right at the start of the 10
- –11 Silver Bullet hour. Expect a fast candle\; let it settle before trus
- ting a setup. Previous: 55.5 Education only\, not financial advice.
+DESCRIPTION:Previous: 55.5 Education only\, not financial advice.
 END:VEVENT
 BEGIN:VEVENT
 UID:20261201-jolts-job-openings-oct@displace
@@ -242,9 +227,7 @@ DESCRIPTION:JOLTS job openings (Oct)
 TRIGGER:-PT15M
 END:VALARM
 SUMMARY:🟠 JOLTS job openings (Oct)
-DESCRIPTION:Lands inside the NY AM kill zone\, right at the start of the 10
- –11 Silver Bullet hour. Expect a fast candle\; let it settle before trus
- ting a setup. Previous: 7.52M Education only\, not financial advice.
+DESCRIPTION:Previous: 7.52M Education only\, not financial advice.
 END:VEVENT
 BEGIN:VEVENT
 UID:20261202-adp-private-payrolls-nov@displace
@@ -257,9 +240,9 @@ DESCRIPTION:ADP private payrolls (Nov)
 TRIGGER:-PT15M
 END:VALARM
 SUMMARY:🟠 ADP private payrolls (Nov)
-DESCRIPTION:Lands 15 minutes before the 8:30 slot. A preview of Friday's jo
- bs report\; moves are usually smaller. Previous: 86K Education only\, not 
- financial advice.
+DESCRIPTION:ADP uses private payroll data. The BLS publishes the official j
+ obs report separately. Previous: 86K Education only\, not financial advice
+ .
 END:VEVENT
 BEGIN:VEVENT
 UID:20261203-initial-jobless-claims@displace
@@ -272,8 +255,8 @@ DESCRIPTION:Initial jobless claims
 TRIGGER:-PT15M
 END:VALARM
 SUMMARY:🟠 Initial jobless claims
-DESCRIPTION:Weekly jobless claims. Usually a smaller move\, but the 8:30 ca
- ndle can still spike. Education only\, not financial advice.
+DESCRIPTION:Weekly initial claims for unemployment insurance. Education onl
+ y\, not financial advice.
 END:VEVENT
 BEGIN:VEVENT
 UID:20261203-ism-services-pmi-nov@displace
@@ -286,9 +269,7 @@ DESCRIPTION:ISM Services PMI (Nov)
 TRIGGER:-PT15M
 END:VALARM
 SUMMARY:🔴 ISM Services PMI (Nov)
-DESCRIPTION:Lands inside the NY AM kill zone\, right at the start of the 10
- –11 Silver Bullet hour. Expect a fast candle\; let it settle before trus
- ting a setup. Previous: 54.5 Education only\, not financial advice.
+DESCRIPTION:Previous: 54.5 Education only\, not financial advice.
 END:VEVENT
 BEGIN:VEVENT
 UID:20261204-non-farm-payrolls-employment-situation-n@displace
@@ -301,10 +282,8 @@ DESCRIPTION:Non-farm payrolls · Employment situation (Nov)
 TRIGGER:-PT15M
 END:VALARM
 SUMMARY:🔴 Non-farm payrolls · Employment situation (Nov)
-DESCRIPTION:The biggest monthly release. Lands an hour before the 9:30 open
- . Let the release candle print\; ICT traders often wait for the raid that 
- follows and trade the NY AM kill zone after it. Previous: 165K Education o
- nly\, not financial advice.
+DESCRIPTION:Scheduled one hour before the U.S. stock market opens. Previous
+ : 165K Education only\, not financial advice.
 END:VEVENT
 BEGIN:VEVENT
 UID:20261204-umich-consumer-sentiment-preliminary-dec@displace
@@ -317,9 +296,7 @@ DESCRIPTION:UMich consumer sentiment\, preliminary (Dec)
 TRIGGER:-PT15M
 END:VALARM
 SUMMARY:🟠 UMich consumer sentiment\, preliminary (Dec)
-DESCRIPTION:Lands at 10:00\, inside the NY AM kill zone. Usually a smaller 
- move than the 8:30 data\, but it can kick off the 10–11 Silver Bullet ho
- ur. Education only\, not financial advice.
+DESCRIPTION:Education only\, not financial advice.
 END:VEVENT
 BEGIN:VEVENT
 UID:20261209-fomc-rate-decision-projections-dot-plot@displace
@@ -332,9 +309,9 @@ DESCRIPTION:FOMC rate decision + projections (dot plot)
 TRIGGER:-PT15M
 END:VALARM
 SUMMARY:🔴 FOMC rate decision + projections (dot plot)
-DESCRIPTION:Statement at 14:00\, press conference at 14:30 New York. Volati
- lity often spills into the afternoon\; many ICT traders stay flat into the
-  release. Previous: 4.00% Education only\, not financial advice.
+DESCRIPTION:The statement is scheduled for 14:00 New York time\, followed b
+ y the press conference at 14:30. Previous: 4.00% Education only\, not fina
+ ncial advice.
 END:VEVENT
 BEGIN:VEVENT
 UID:20261210-cpi-inflation-nov@displace
@@ -347,9 +324,8 @@ DESCRIPTION:CPI inflation (Nov)
 TRIGGER:-PT15M
 END:VALARM
 SUMMARY:🔴 CPI inflation (Nov)
-DESCRIPTION:Lands an hour before the 9:30 open. Let the release candle prin
- t\; ICT traders often wait for the raid that follows and trade the NY AM k
- ill zone after it. Previous: 0.3% Education only\, not financial advice.
+DESCRIPTION:Scheduled one hour before the U.S. stock market opens. Previous
+ : 0.3% Education only\, not financial advice.
 END:VEVENT
 BEGIN:VEVENT
 UID:20261210-initial-jobless-claims@displace
@@ -362,8 +338,8 @@ DESCRIPTION:Initial jobless claims
 TRIGGER:-PT15M
 END:VALARM
 SUMMARY:🟠 Initial jobless claims
-DESCRIPTION:Weekly jobless claims. Usually a smaller move\, but the 8:30 ca
- ndle can still spike. Education only\, not financial advice.
+DESCRIPTION:Weekly initial claims for unemployment insurance. Education onl
+ y\, not financial advice.
 END:VEVENT
 BEGIN:VEVENT
 UID:20261215-ppi-producer-prices-nov@displace
@@ -376,9 +352,8 @@ DESCRIPTION:PPI producer prices (Nov)
 TRIGGER:-PT15M
 END:VALARM
 SUMMARY:🟠 PPI producer prices (Nov)
-DESCRIPTION:Lands an hour before the 9:30 open. Let the release candle prin
- t\; ICT traders often wait for the raid that follows and trade the NY AM k
- ill zone after it. Previous: 0.3% Education only\, not financial advice.
+DESCRIPTION:Scheduled one hour before the U.S. stock market opens. Previous
+ : 0.3% Education only\, not financial advice.
 END:VEVENT
 BEGIN:VEVENT
 UID:20261216-retail-sales-nov@displace
@@ -391,9 +366,8 @@ DESCRIPTION:Retail sales (Nov)
 TRIGGER:-PT15M
 END:VALARM
 SUMMARY:🔴 Retail sales (Nov)
-DESCRIPTION:Lands an hour before the 9:30 open. Let the release candle prin
- t\; ICT traders often wait for the raid that follows and trade the NY AM k
- ill zone after it. Previous: 0.2% Education only\, not financial advice.
+DESCRIPTION:Scheduled one hour before the U.S. stock market opens. Previous
+ : 0.2% Education only\, not financial advice.
 END:VEVENT
 BEGIN:VEVENT
 UID:20261217-bank-of-england-rate-decision@displace
@@ -406,9 +380,8 @@ DESCRIPTION:Bank of England rate decision
 TRIGGER:-PT15M
 END:VALARM
 SUMMARY:🔴 Bank of England rate decision
-DESCRIPTION:Decision at 12:00 London\, which is 07:00 New York. Moves GBPUS
- D during the London session. Previous: 4.00% Education only\, not financia
- l advice.
+DESCRIPTION:The decision is released at noon London time. Previous: 4.00% E
+ ducation only\, not financial advice.
 END:VEVENT
 BEGIN:VEVENT
 UID:20261217-ecb-rate-decision@displace
@@ -421,9 +394,9 @@ DESCRIPTION:ECB rate decision
 TRIGGER:-PT15M
 END:VALARM
 SUMMARY:🔴 ECB rate decision
-DESCRIPTION:Decision at 14:15 Frankfurt\, press conference at 14:45. Moves 
- EURUSD and the dollar during the London–NY overlap. Previous: 2.50% Educ
- ation only\, not financial advice.
+DESCRIPTION:The decision is scheduled for 14:15 Frankfurt time\, followed b
+ y the press conference at 14:45. Previous: 2.50% Education only\, not fina
+ ncial advice.
 END:VEVENT
 BEGIN:VEVENT
 UID:20261217-initial-jobless-claims@displace
@@ -436,8 +409,8 @@ DESCRIPTION:Initial jobless claims
 TRIGGER:-PT15M
 END:VALARM
 SUMMARY:🟠 Initial jobless claims
-DESCRIPTION:Weekly jobless claims. Usually a smaller move\, but the 8:30 ca
- ndle can still spike. Education only\, not financial advice.
+DESCRIPTION:Weekly initial claims for unemployment insurance. Education onl
+ y\, not financial advice.
 END:VEVENT
 BEGIN:VEVENT
 UID:20261218-umich-consumer-sentiment-final-dec@displace
@@ -450,9 +423,7 @@ DESCRIPTION:UMich consumer sentiment\, final (Dec)
 TRIGGER:-PT15M
 END:VALARM
 SUMMARY:🟠 UMich consumer sentiment\, final (Dec)
-DESCRIPTION:Lands at 10:00\, inside the NY AM kill zone. Usually a smaller 
- move than the 8:30 data\, but it can kick off the 10–11 Silver Bullet ho
- ur. Education only\, not financial advice.
+DESCRIPTION:Education only\, not financial advice.
 END:VEVENT
 BEGIN:VEVENT
 UID:20261223-durable-goods-orders-nov@displace
@@ -465,9 +436,8 @@ DESCRIPTION:Durable goods orders (Nov)
 TRIGGER:-PT15M
 END:VALARM
 SUMMARY:🟠 Durable goods orders (Nov)
-DESCRIPTION:Lands an hour before the 9:30 open. Let the release candle prin
- t\; ICT traders often wait for the raid that follows and trade the NY AM k
- ill zone after it. Education only\, not financial advice.
+DESCRIPTION:Scheduled one hour before the U.S. stock market opens. Educatio
+ n only\, not financial advice.
 END:VEVENT
 BEGIN:VEVENT
 UID:20261223-gdp-third-estimate-q3@displace
@@ -480,9 +450,8 @@ DESCRIPTION:GDP\, third estimate (Q3)
 TRIGGER:-PT15M
 END:VALARM
 SUMMARY:🟠 GDP\, third estimate (Q3)
-DESCRIPTION:Lands an hour before the 9:30 open. Let the release candle prin
- t\; ICT traders often wait for the raid that follows and trade the NY AM k
- ill zone after it. Education only\, not financial advice.
+DESCRIPTION:Scheduled one hour before the U.S. stock market opens. Educatio
+ n only\, not financial advice.
 END:VEVENT
 BEGIN:VEVENT
 UID:20261223-pce-inflation-personal-income-and-outlay@displace
@@ -495,9 +464,8 @@ DESCRIPTION:PCE inflation · Personal income and outlays (Nov)
 TRIGGER:-PT15M
 END:VALARM
 SUMMARY:🔴 PCE inflation · Personal income and outlays (Nov)
-DESCRIPTION:Lands an hour before the 9:30 open. Let the release candle prin
- t\; ICT traders often wait for the raid that follows and trade the NY AM k
- ill zone after it. Education only\, not financial advice.
+DESCRIPTION:Scheduled one hour before the U.S. stock market opens. Educatio
+ n only\, not financial advice.
 END:VEVENT
 BEGIN:VEVENT
 UID:20261223-new-home-sales-nov@displace
@@ -510,8 +478,7 @@ DESCRIPTION:New home sales (Nov)
 TRIGGER:-PT15M
 END:VALARM
 SUMMARY:🟠 New home sales (Nov)
-DESCRIPTION:Lands at 10:00\, inside the NY AM kill zone and the start of th
- e Silver Bullet hour. Education only\, not financial advice.
+DESCRIPTION:Education only\, not financial advice.
 END:VEVENT
 BEGIN:VEVENT
 UID:20261224-christmas-eve-shortened-session@displace
@@ -519,8 +486,8 @@ DTSTAMP:20261118T060032Z
 DTSTART;VALUE=DATE:20261224
 DTEND;VALUE=DATE:20261225
 SUMMARY:Christmas Eve: shortened session
-DESCRIPTION:Shortened US session: the stock market closes at 13:00 New York
- . Thin\, holiday-affected trade. Education only\, not financial advice.
+DESCRIPTION:The U.S. stock market closes at 13:00 New York time. Education 
+ only\, not financial advice.
 END:VEVENT
 BEGIN:VEVENT
 UID:20261224-initial-jobless-claims@displace
@@ -533,8 +500,8 @@ DESCRIPTION:Initial jobless claims
 TRIGGER:-PT15M
 END:VALARM
 SUMMARY:🟠 Initial jobless claims
-DESCRIPTION:Weekly jobless claims. Usually a smaller move\, but the 8:30 ca
- ndle can still spike. Education only\, not financial advice.
+DESCRIPTION:Weekly initial claims for unemployment insurance. Education onl
+ y\, not financial advice.
 END:VEVENT
 BEGIN:VEVENT
 UID:20261225-christmas-day-us-markets-closed@displace
@@ -542,8 +509,8 @@ DTSTAMP:20261118T060032Z
 DTSTART;VALUE=DATE:20261225
 DTEND;VALUE=DATE:20261226
 SUMMARY:Christmas Day: US markets closed
-DESCRIPTION:US stock market closed. Futures and forex liquidity is thin\; m
- ost ICT traders take the day off. Education only\, not financial advice.
+DESCRIPTION:U.S. stock markets are closed. Futures may trade shortened hour
+ s. Education only\, not financial advice.
 END:VEVENT
 BEGIN:VEVENT
 UID:20261229-consumer-confidence-dec@displace
@@ -570,8 +537,7 @@ DESCRIPTION:FOMC minutes (Dec 8–9 meeting)
 TRIGGER:-PT15M
 END:VALARM
 SUMMARY:🟠 FOMC minutes (Dec 8–9 meeting)
-DESCRIPTION:Released at 14:00 New York\, during the NY PM session. Can move
-  markets in the afternoon. Education only\, not financial advice.
+DESCRIPTION:Education only\, not financial advice.
 END:VEVENT
 BEGIN:VEVENT
 UID:20261231-initial-jobless-claims@displace
@@ -584,8 +550,8 @@ DESCRIPTION:Initial jobless claims
 TRIGGER:-PT15M
 END:VALARM
 SUMMARY:🟠 Initial jobless claims
-DESCRIPTION:Weekly jobless claims. Usually a smaller move\, but the 8:30 ca
- ndle can still spike. Education only\, not financial advice.
+DESCRIPTION:Weekly initial claims for unemployment insurance. Education onl
+ y\, not financial advice.
 END:VEVENT
 BEGIN:VEVENT
 UID:20270101-new-year-s-day-us-markets-closed@displace
@@ -593,8 +559,8 @@ DTSTAMP:20261118T060032Z
 DTSTART;VALUE=DATE:20270101
 DTEND;VALUE=DATE:20270102
 SUMMARY:New Year's Day: US markets closed
-DESCRIPTION:US stock market closed. Futures and forex liquidity is thin\; m
- ost ICT traders take the day off. Education only\, not financial advice.
+DESCRIPTION:U.S. stock markets are closed. Futures may trade shortened hour
+ s. Education only\, not financial advice.
 END:VEVENT
 BEGIN:VEVENT
 UID:20270104-ism-manufacturing-pmi-dec@displace
@@ -621,8 +587,7 @@ DESCRIPTION:JOLTS job openings (Nov)
 TRIGGER:-PT15M
 END:VALARM
 SUMMARY:🟠 JOLTS job openings (Nov)
-DESCRIPTION:Lands at 10:00\, inside the NY AM kill zone and the start of th
- e Silver Bullet hour. Education only\, not financial advice.
+DESCRIPTION:Education only\, not financial advice.
 END:VEVENT
 BEGIN:VEVENT
 UID:20270106-ism-services-pmi-dec@displace
@@ -649,8 +614,8 @@ DESCRIPTION:Initial jobless claims
 TRIGGER:-PT15M
 END:VALARM
 SUMMARY:🟠 Initial jobless claims
-DESCRIPTION:Weekly jobless claims. Usually a smaller move\, but the 8:30 ca
- ndle can still spike. Education only\, not financial advice.
+DESCRIPTION:Weekly initial claims for unemployment insurance. Education onl
+ y\, not financial advice.
 END:VEVENT
 BEGIN:VEVENT
 UID:20270108-non-farm-payrolls-employment-situation-d@displace
@@ -663,10 +628,8 @@ DESCRIPTION:Non-farm payrolls · Employment situation (Dec)
 TRIGGER:-PT15M
 END:VALARM
 SUMMARY:🔴 Non-farm payrolls · Employment situation (Dec)
-DESCRIPTION:The biggest monthly release. Lands an hour before the 9:30 open
- . Let the release candle print\; ICT traders often wait for the raid that 
- follows and trade the NY AM kill zone after it. Education only\, not finan
- cial advice.
+DESCRIPTION:Scheduled one hour before the U.S. stock market opens. Educatio
+ n only\, not financial advice.
 END:VEVENT
 BEGIN:VEVENT
 UID:20270108-umich-consumer-sentiment-preliminary-jan@displace
@@ -679,8 +642,7 @@ DESCRIPTION:UMich consumer sentiment\, preliminary (Jan)
 TRIGGER:-PT15M
 END:VALARM
 SUMMARY:🟠 UMich consumer sentiment\, preliminary (Jan)
-DESCRIPTION:Lands at 10:00\, inside the NY AM kill zone and the start of th
- e Silver Bullet hour. Education only\, not financial advice.
+DESCRIPTION:Education only\, not financial advice.
 END:VEVENT
 BEGIN:VEVENT
 UID:20270113-cpi-inflation-dec@displace
@@ -693,9 +655,8 @@ DESCRIPTION:CPI inflation (Dec)
 TRIGGER:-PT15M
 END:VALARM
 SUMMARY:🔴 CPI inflation (Dec)
-DESCRIPTION:Lands an hour before the 9:30 open. Let the release candle prin
- t\; ICT traders often wait for the raid that follows and trade the NY AM k
- ill zone after it. Education only\, not financial advice.
+DESCRIPTION:Scheduled one hour before the U.S. stock market opens. Educatio
+ n only\, not financial advice.
 END:VEVENT
 BEGIN:VEVENT
 UID:20270113-beige-book@displace
@@ -708,8 +669,7 @@ DESCRIPTION:Beige Book
 TRIGGER:-PT15M
 END:VALARM
 SUMMARY:🟠 Beige Book
-DESCRIPTION:Released at 14:00 New York\, during the NY PM session. Can move
-  markets in the afternoon. Education only\, not financial advice.
+DESCRIPTION:Education only\, not financial advice.
 END:VEVENT
 BEGIN:VEVENT
 UID:20270114-initial-jobless-claims@displace
@@ -722,8 +682,8 @@ DESCRIPTION:Initial jobless claims
 TRIGGER:-PT15M
 END:VALARM
 SUMMARY:🟠 Initial jobless claims
-DESCRIPTION:Weekly jobless claims. Usually a smaller move\, but the 8:30 ca
- ndle can still spike. Education only\, not financial advice.
+DESCRIPTION:Weekly initial claims for unemployment insurance. Education onl
+ y\, not financial advice.
 END:VEVENT
 BEGIN:VEVENT
 UID:20270114-ppi-producer-prices-dec@displace
@@ -736,9 +696,8 @@ DESCRIPTION:PPI producer prices (Dec)
 TRIGGER:-PT15M
 END:VALARM
 SUMMARY:🟠 PPI producer prices (Dec)
-DESCRIPTION:Lands an hour before the 9:30 open. Let the release candle prin
- t\; ICT traders often wait for the raid that follows and trade the NY AM k
- ill zone after it. Education only\, not financial advice.
+DESCRIPTION:Scheduled one hour before the U.S. stock market opens. Educatio
+ n only\, not financial advice.
 END:VEVENT
 BEGIN:VEVENT
 UID:20270115-retail-sales-dec@displace
@@ -751,9 +710,8 @@ DESCRIPTION:Retail sales (Dec)
 TRIGGER:-PT15M
 END:VALARM
 SUMMARY:🔴 Retail sales (Dec)
-DESCRIPTION:Lands an hour before the 9:30 open. Let the release candle prin
- t\; ICT traders often wait for the raid that follows and trade the NY AM k
- ill zone after it. Education only\, not financial advice.
+DESCRIPTION:Scheduled one hour before the U.S. stock market opens. Educatio
+ n only\, not financial advice.
 END:VEVENT
 BEGIN:VEVENT
 UID:20270118-martin-luther-king-jr-day-us-markets-clo@displace
@@ -761,8 +719,8 @@ DTSTAMP:20261118T060032Z
 DTSTART;VALUE=DATE:20270118
 DTEND;VALUE=DATE:20270119
 SUMMARY:Martin Luther King Jr. Day: US markets closed
-DESCRIPTION:US stock market closed. Futures and forex liquidity is thin\; m
- ost ICT traders take the day off. Education only\, not financial advice.
+DESCRIPTION:U.S. stock markets are closed. Futures may trade shortened hour
+ s. Education only\, not financial advice.
 END:VEVENT
 BEGIN:VEVENT
 UID:20270121-initial-jobless-claims@displace
@@ -775,8 +733,8 @@ DESCRIPTION:Initial jobless claims
 TRIGGER:-PT15M
 END:VALARM
 SUMMARY:🟠 Initial jobless claims
-DESCRIPTION:Weekly jobless claims. Usually a smaller move\, but the 8:30 ca
- ndle can still spike. Education only\, not financial advice.
+DESCRIPTION:Weekly initial claims for unemployment insurance. Education onl
+ y\, not financial advice.
 END:VEVENT
 BEGIN:VEVENT
 UID:20270122-umich-consumer-sentiment-final-jan@displace
@@ -789,8 +747,7 @@ DESCRIPTION:UMich consumer sentiment\, final (Jan)
 TRIGGER:-PT15M
 END:VALARM
 SUMMARY:🟠 UMich consumer sentiment\, final (Jan)
-DESCRIPTION:Lands at 10:00\, inside the NY AM kill zone and the start of th
- e Silver Bullet hour. Education only\, not financial advice.
+DESCRIPTION:Education only\, not financial advice.
 END:VEVENT
 BEGIN:VEVENT
 UID:20270126-consumer-confidence-jan@displace
@@ -817,9 +774,8 @@ DESCRIPTION:Durable goods orders (Dec)
 TRIGGER:-PT15M
 END:VALARM
 SUMMARY:🟠 Durable goods orders (Dec)
-DESCRIPTION:Lands an hour before the 9:30 open. Let the release candle prin
- t\; ICT traders often wait for the raid that follows and trade the NY AM k
- ill zone after it. Education only\, not financial advice.
+DESCRIPTION:Scheduled one hour before the U.S. stock market opens. Educatio
+ n only\, not financial advice.
 END:VEVENT
 BEGIN:VEVENT
 UID:20270127-new-home-sales-dec@displace
@@ -832,8 +788,7 @@ DESCRIPTION:New home sales (Dec)
 TRIGGER:-PT15M
 END:VALARM
 SUMMARY:🟠 New home sales (Dec)
-DESCRIPTION:Lands at 10:00\, inside the NY AM kill zone and the start of th
- e Silver Bullet hour. Education only\, not financial advice.
+DESCRIPTION:Education only\, not financial advice.
 END:VEVENT
 BEGIN:VEVENT
 UID:20270127-fomc-rate-decision@displace
@@ -846,10 +801,9 @@ DESCRIPTION:FOMC rate decision
 TRIGGER:-PT15M
 END:VALARM
 SUMMARY:🔴 FOMC rate decision
-DESCRIPTION:Statement at 14:00\, press conference at 14:30 New York. Volati
- lity often spills into the afternoon\; many ICT traders stay flat into the
-  release. Date is the Fed's tentative schedule. Education only\, not finan
- cial advice.
+DESCRIPTION:The statement is scheduled for 14:00 New York time\, followed b
+ y the press conference at 14:30. Date is the Fed's tentative schedule. Edu
+ cation only\, not financial advice.
 END:VEVENT
 BEGIN:VEVENT
 UID:20270128-gdp-advance-estimate-q4@displace
@@ -862,8 +816,8 @@ DESCRIPTION:GDP\, advance estimate (Q4)
 TRIGGER:-PT15M
 END:VALARM
 SUMMARY:🔴 GDP\, advance estimate (Q4)
-DESCRIPTION:Lands an hour before the 9:30 open. Let the release candle prin
- t. Education only\, not financial advice.
+DESCRIPTION:Scheduled one hour before the U.S. stock market opens. Educatio
+ n only\, not financial advice.
 END:VEVENT
 BEGIN:VEVENT
 UID:20270128-initial-jobless-claims@displace
@@ -876,8 +830,8 @@ DESCRIPTION:Initial jobless claims
 TRIGGER:-PT15M
 END:VALARM
 SUMMARY:🟠 Initial jobless claims
-DESCRIPTION:Weekly jobless claims. Usually a smaller move\, but the 8:30 ca
- ndle can still spike. Education only\, not financial advice.
+DESCRIPTION:Weekly initial claims for unemployment insurance. Education onl
+ y\, not financial advice.
 END:VEVENT
 BEGIN:VEVENT
 UID:20270128-pce-inflation-personal-income-and-outlay@displace
@@ -890,9 +844,8 @@ DESCRIPTION:PCE inflation · Personal income and outlays (Dec)
 TRIGGER:-PT15M
 END:VALARM
 SUMMARY:🔴 PCE inflation · Personal income and outlays (Dec)
-DESCRIPTION:Lands an hour before the 9:30 open. Let the release candle prin
- t\; ICT traders often wait for the raid that follows and trade the NY AM k
- ill zone after it. Education only\, not financial advice.
+DESCRIPTION:Scheduled one hour before the U.S. stock market opens. Educatio
+ n only\, not financial advice.
 END:VEVENT
 BEGIN:VEVENT
 UID:20270201-ism-manufacturing-pmi-jan@displace
@@ -933,8 +886,8 @@ DESCRIPTION:Bank of England rate decision
 TRIGGER:-PT15M
 END:VALARM
 SUMMARY:🔴 Bank of England rate decision
-DESCRIPTION:Decision at 12:00 London\, which is 07:00 New York. Moves GBPUS
- D during the London session. Education only\, not financial advice.
+DESCRIPTION:The decision is released at noon London time. Education only\, 
+ not financial advice.
 END:VEVENT
 BEGIN:VEVENT
 UID:20270204-initial-jobless-claims@displace
@@ -947,8 +900,8 @@ DESCRIPTION:Initial jobless claims
 TRIGGER:-PT15M
 END:VALARM
 SUMMARY:🟠 Initial jobless claims
-DESCRIPTION:Weekly jobless claims. Usually a smaller move\, but the 8:30 ca
- ndle can still spike. Education only\, not financial advice.
+DESCRIPTION:Weekly initial claims for unemployment insurance. Education onl
+ y\, not financial advice.
 END:VEVENT
 BEGIN:VEVENT
 UID:20270205-non-farm-payrolls-employment-situation-j@displace
@@ -961,10 +914,8 @@ DESCRIPTION:Non-farm payrolls · Employment situation (Jan)
 TRIGGER:-PT15M
 END:VALARM
 SUMMARY:🔴 Non-farm payrolls · Employment situation (Jan)
-DESCRIPTION:The biggest monthly release. Lands an hour before the 9:30 open
- . Let the release candle print\; ICT traders often wait for the raid that 
- follows and trade the NY AM kill zone after it. Education only\, not finan
- cial advice.
+DESCRIPTION:Scheduled one hour before the U.S. stock market opens. Educatio
+ n only\, not financial advice.
 END:VEVENT
 BEGIN:VEVENT
 UID:20270211-cpi-inflation-jan@displace
@@ -977,9 +928,8 @@ DESCRIPTION:CPI inflation (Jan)
 TRIGGER:-PT15M
 END:VALARM
 SUMMARY:🔴 CPI inflation (Jan)
-DESCRIPTION:Lands an hour before the 9:30 open. Let the release candle prin
- t\; ICT traders often wait for the raid that follows and trade the NY AM k
- ill zone after it. Education only\, not financial advice.
+DESCRIPTION:Scheduled one hour before the U.S. stock market opens. Educatio
+ n only\, not financial advice.
 END:VEVENT
 BEGIN:VEVENT
 UID:20270211-initial-jobless-claims@displace
@@ -992,8 +942,8 @@ DESCRIPTION:Initial jobless claims
 TRIGGER:-PT15M
 END:VALARM
 SUMMARY:🟠 Initial jobless claims
-DESCRIPTION:Weekly jobless claims. Usually a smaller move\, but the 8:30 ca
- ndle can still spike. Education only\, not financial advice.
+DESCRIPTION:Weekly initial claims for unemployment insurance. Education onl
+ y\, not financial advice.
 END:VEVENT
 BEGIN:VEVENT
 UID:20270212-ppi-producer-prices-jan@displace
@@ -1006,9 +956,8 @@ DESCRIPTION:PPI producer prices (Jan)
 TRIGGER:-PT15M
 END:VALARM
 SUMMARY:🟠 PPI producer prices (Jan)
-DESCRIPTION:Lands an hour before the 9:30 open. Let the release candle prin
- t\; ICT traders often wait for the raid that follows and trade the NY AM k
- ill zone after it. Education only\, not financial advice.
+DESCRIPTION:Scheduled one hour before the U.S. stock market opens. Educatio
+ n only\, not financial advice.
 END:VEVENT
 BEGIN:VEVENT
 UID:20270215-presidents-day-us-markets-closed@displace
@@ -1016,8 +965,8 @@ DTSTAMP:20261118T060032Z
 DTSTART;VALUE=DATE:20270215
 DTEND;VALUE=DATE:20270216
 SUMMARY:Presidents' Day: US markets closed
-DESCRIPTION:US stock market closed. Futures and forex liquidity is thin\; m
- ost ICT traders take the day off. Education only\, not financial advice.
+DESCRIPTION:U.S. stock markets are closed. Futures may trade shortened hour
+ s. Education only\, not financial advice.
 END:VEVENT
 BEGIN:VEVENT
 UID:20270218-initial-jobless-claims@displace
@@ -1030,8 +979,8 @@ DESCRIPTION:Initial jobless claims
 TRIGGER:-PT15M
 END:VALARM
 SUMMARY:🟠 Initial jobless claims
-DESCRIPTION:Weekly jobless claims. Usually a smaller move\, but the 8:30 ca
- ndle can still spike. Education only\, not financial advice.
+DESCRIPTION:Weekly initial claims for unemployment insurance. Education onl
+ y\, not financial advice.
 END:VEVENT
 BEGIN:VEVENT
 UID:20270223-consumer-confidence-feb@displace
@@ -1058,9 +1007,8 @@ DESCRIPTION:GDP\, second estimate (Q4)
 TRIGGER:-PT15M
 END:VALARM
 SUMMARY:🔴 GDP\, second estimate (Q4)
-DESCRIPTION:Lands an hour before the 9:30 open. Let the release candle prin
- t\; ICT traders often wait for the raid that follows and trade the NY AM k
- ill zone after it. Education only\, not financial advice.
+DESCRIPTION:Scheduled one hour before the U.S. stock market opens. Educatio
+ n only\, not financial advice.
 END:VEVENT
 BEGIN:VEVENT
 UID:20270225-initial-jobless-claims@displace
@@ -1073,8 +1021,8 @@ DESCRIPTION:Initial jobless claims
 TRIGGER:-PT15M
 END:VALARM
 SUMMARY:🟠 Initial jobless claims
-DESCRIPTION:Weekly jobless claims. Usually a smaller move\, but the 8:30 ca
- ndle can still spike. Education only\, not financial advice.
+DESCRIPTION:Weekly initial claims for unemployment insurance. Education onl
+ y\, not financial advice.
 END:VEVENT
 BEGIN:VEVENT
 UID:20270225-pce-inflation-personal-income-and-outlay@displace
@@ -1087,8 +1035,8 @@ DESCRIPTION:PCE inflation · Personal income and outlays (Jan)
 TRIGGER:-PT15M
 END:VALARM
 SUMMARY:🔴 PCE inflation · Personal income and outlays (Jan)
-DESCRIPTION:Lands an hour before the 9:30 open. Let the release candle prin
- t. Education only\, not financial advice.
+DESCRIPTION:Scheduled one hour before the U.S. stock market opens. Educatio
+ n only\, not financial advice.
 END:VEVENT
 BEGIN:VEVENT
 UID:20270301-ism-manufacturing-pmi-feb@displace
@@ -1152,8 +1100,8 @@ DESCRIPTION:GDP\, third estimate (Q4)
 TRIGGER:-PT15M
 END:VALARM
 SUMMARY:🔴 GDP\, third estimate (Q4)
-DESCRIPTION:Lands an hour before the 9:30 open. Let the release candle prin
- t. Education only\, not financial advice.
+DESCRIPTION:Scheduled one hour before the U.S. stock market opens. Educatio
+ n only\, not financial advice.
 END:VEVENT
 BEGIN:VEVENT
 UID:20270331-pce-inflation-personal-income-and-outlay@displace
@@ -1166,7 +1114,7 @@ DESCRIPTION:PCE inflation · Personal income and outlays (Feb)
 TRIGGER:-PT15M
 END:VALARM
 SUMMARY:🔴 PCE inflation · Personal income and outlays (Feb)
-DESCRIPTION:Lands an hour before the 9:30 open. Let the release candle prin
- t. Education only\, not financial advice.
+DESCRIPTION:Scheduled one hour before the U.S. stock market opens. Educatio
+ n only\, not financial advice.
 END:VEVENT
 END:VCALENDAR

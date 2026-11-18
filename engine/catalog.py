@@ -67,10 +67,8 @@ RULED = {
 }
 
 NOTES = {
-    "08:15": "Lands 75 minutes before the 9:30 open.",
-    "08:30": "Lands an hour before the 9:30 open. Let the release candle print.",
-    "10:00": "Lands at 10:00, inside the NY AM kill zone and the start of the Silver Bullet hour.",
-    "14:00": "Released at 14:00 New York, during the NY PM session.",
+    "08:15": "Scheduled 75 minutes before the U.S. stock market opens.",
+    "08:30": "Scheduled one hour before the U.S. stock market opens.",
 }
 
 NAMES = {"cpi": "Core CPI", "ppi": "PPI", "nfp": "Payrolls", "retail": "Retail sales", "gdp": "GDP",

@@ -23,8 +23,8 @@ WATCH = {
     "ASML": ("ASML", "notable"),
 }
 TIMES = {"BMO": "07:00", "AMC": "16:05"}
-NOTE = {"BMO": "Reports before the open. The move lands in the same session's opening range.",
-        "AMC": "Reports after the close. Futures react in the evening and the move carries into the next open.",
+NOTE = {"BMO": "Results scheduled before the U.S. stock market opens.",
+        "AMC": "Results scheduled after the U.S. stock market closes.",
         "": "Time not published yet."}
 SRC_CO, SRC_NQ = "Company announcement", "Nasdaq earnings calendar"
 URL = "https://api.nasdaq.com/api/calendar/earnings?date={d}"
@@ -56,7 +56,7 @@ def event(tkr, day, sess, status, src, period="", url=""):
     e = {"id": f"{day.replace('-', '')}-earn-{tkr.lower()}", "date": day, "time": TIMES.get(sess, ""),
          "title": f"{name} ({tkr}) earnings" + (f" · {period}" if period else ""), "cur": "USD", "impact": "earnings",
          "src": src, "tier": tier, "status": status, "session": sess,
-         "note": NOTE[sess] + (" Date confirmed by the company." if status == "confirmed" else " Date from the Nasdaq calendar. Companies sometimes move it; check their investor page.")}
+         "note": NOTE[sess] + (" Date confirmed by the company." if status == "confirmed" else " Date from the Nasdaq calendar. Check the company's investor relations page for changes.")}
     if url:
         e["url"] = url
     return e
