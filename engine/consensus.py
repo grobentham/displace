@@ -11,6 +11,7 @@ import os
 import re
 
 import publicdata
+import tv
 
 URL = "https://nfs.faireconomy.media/ff_calendar_thisweek.json"
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -93,4 +94,96 @@ def apply(events, kind_of, tz, manual_ids=(), fetch=publicdata.download, log=pri
         json.dump(dict(sorted(archive.items())), fh, indent=1)
     if n:
         log(f"consensus: {n} forecast(s) filled from ForexFactory")
+    return n
+
+
+# ----------------------------------------------------------------- TradingView: consensus for any week, and history
+TV_SOURCE = "TradingView consensus"
+TV_HEAD = {"cpi": "Core Inflation Rate MoM", "ppi": "PPI MoM", "pce": "Core PCE Price Index MoM", "nfp": "Non Farm Payrolls",
+           "retail": "Retail Sales MoM", "claims": "Initial Jobless Claims", "jolts": "JOLTs Job Openings",
+           "adp": "ADP Employment Change", "durables": "Durable Goods Orders MoM", "homes": "New Home Sales",
+           "ism-m": "ISM Manufacturing PMI", "ism-s": "ISM Services PMI", "conf": "CB Consumer Confidence",
+           "fomc": "Interest Rate"}
+PCT = {"cpi", "ppi", "pce", "retail", "durables", "gdp", "fomc"}
+THOUSANDS = {"nfp", "claims", "adp"}
+
+
+def tv_title(kind, e):
+    t = e.get("title", "").lower()
+    if kind == "gdp":
+        return "GDP Growth Rate QoQ Adv" if "advance" in t else "GDP Growth Rate QoQ 2nd Est" if "second" in t else "GDP Growth Rate QoQ Final"
+    if kind == "umich":
+        return "Michigan Consumer Sentiment Final" if "final" in t else "Michigan Consumer Sentiment Prel"
+    return TV_HEAD.get(kind)
+
+
+def tv_format(kind, v):
+    if v is None:
+        return ""
+    v = float(v)
+    if kind in PCT:
+        return f"{v:.2f}%" if kind == "fomc" else f"{v:.1f}%"
+    if kind in THOUSANDS:
+        return f"{v:.0f}K"
+    if kind == "jolts":
+        return f"{v:.1f}M" if v < 100 else f"{v / 1000:.1f}M"
+    if kind == "homes":
+        return f"{v * 1000:.0f}K" if v < 10 else f"{v:.0f}K"
+    return f"{v:.1f}"
+
+
+def tv_index(raw=None):
+    """{(title, New York date, 'HH:MM'): forecast}"""
+    out = {}
+    for r in raw if raw is not None else tv.raw_events():
+        if r.get("f") is None:
+            continue
+        when = dt.datetime.fromisoformat(r["d"].replace("Z", "+00:00")).astimezone(tv.NY)
+        out[(r["t"], when.date().isoformat(), when.strftime("%H:%M"))] = r["f"]
+    return out
+
+
+def tv_lookup(idx, kind, e):
+    title = tv_title(kind, e)
+    if not title:
+        return None
+    v = idx.get((title, e["date"], e.get("time") or ""))
+    if v is None:  # time differs slightly (e.g. a moved release): same day is enough
+        v = next((f for (t, d, _), f in idx.items() if t == title and d == e["date"]), None)
+    return tv_format(kind, v) if v is not None else None
+
+
+def apply_tv(events, kind_of, manual_ids=(), raw=None, log=print):
+    """Fill missing forecasts from TradingView (any week, past or upcoming). Never overrides an existing one."""
+    idx = tv_index(raw)
+    n = 0
+    for e in events:
+        k = kind_of(e)
+        if e["id"] in manual_ids or e.get("forecast") or k not in TITLES and k not in ("gdp", "umich"):
+            continue
+        fc = tv_lookup(idx, k, e)
+        if fc:
+            e["forecast"], e["fsrc"] = fc, TV_SOURCE
+            n += 1
+    if n:
+        log(f"consensus: {n} forecast(s) filled from TradingView")
+    return n
+
+
+def backfill_history(hist, raw=None, kinds=None):
+    """Add the consensus to past rows of the release stats that don't have one."""
+    idx = tv_index(raw)
+    n = 0
+    for key, ser in (hist.get("series") or {}).items():
+        kind = (kinds or {}).get(key, key)
+        for row in ser.get("rows", []):
+            if row.get("forecast") or not row.get("date"):
+                continue
+            ev = {"date": row["date"], "title": row.get("period", ""), "time": ""}
+            if kind == "gdp":
+                ev["title"] = "advance"
+            fc = tv_lookup(idx, kind, ev)
+            if fc:
+                row["forecast"] = fc
+                n += 1
     return n

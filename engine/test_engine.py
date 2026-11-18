@@ -100,6 +100,8 @@ def run(tmp, now, upto):
     earnings.run = lambda *args: None
     consensus = importlib.import_module("consensus")
     consensus.apply = lambda *args, **kw: 0  # keep the live ForexFactory feed out of the fake world
+    consensus.apply_tv = lambda *args, **kw: 0
+    consensus.backfill_history = lambda *args, **kw: 0
     eng = importlib.import_module("engine")
     eng.main()
     sys.path.pop(0)
@@ -218,6 +220,8 @@ def edge_tests():
     earnings.run = lambda *args: None
     consensus = importlib.import_module("consensus")
     consensus.apply = lambda *args, **kw: 0  # keep the live ForexFactory feed out of the fake world
+    consensus.apply_tv = lambda *args, **kw: 0
+    consensus.backfill_history = lambda *args, **kw: 0
     eng = importlib.import_module("engine")
     eng.main()
     sys.path.pop(0)

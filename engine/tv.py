@@ -53,6 +53,8 @@ GROUPS = {"inflation": ("cpi", "ppi", "pce"), "labor": ("nfp", "claims", "jolts"
           "sentiment": ("umich", "conf"), "housing": ("homes",)}
 GROUP_OF = {k: g for g, ks in GROUPS.items() for k in ks}
 TITLES = {t: (k, s, w) for k, comps in REPORTS.items() for t, s, w in comps}
+# kept for showing the consensus on the calendar, not used by the model
+DISPLAY = {"GDP Growth Rate QoQ 2nd Est", "GDP Growth Rate QoQ Final", "Interest Rate"}
 
 
 def _months(a, b):
@@ -77,7 +79,7 @@ def _fetch(a, b, tries=4):
 def _compact(raw):
     out = []
     for e in raw:
-        if e.get("title") in TITLES and e.get("date"):
+        if (e.get("title") in TITLES or e.get("title") in DISPLAY) and e.get("date"):
             out.append({"t": e["title"], "d": e["date"], "a": e.get("actual"), "f": e.get("forecast"),
                         "p": e.get("previous"), "u": e.get("unit"), "s": e.get("scale")})
     return out
@@ -143,6 +145,8 @@ def releases(raw=None):
     hist = {}  # title -> past surprises
     slots = {}  # (kind, when) -> {"parts": [(z, w)], "comps": [...]}
     for e in raw:
+        if e["t"] not in TITLES:
+            continue
         k, sign, w = TITLES[e["t"]]
         when = dt.datetime.fromisoformat(e["d"].replace("Z", "+00:00")).astimezone(NY)
         a, f = _num(e["a"]), _num(e["f"])
