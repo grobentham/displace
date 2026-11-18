@@ -1,33 +1,33 @@
 {
- "lastRun": "2026-11-18T11:35-05:00",
+ "lastRun": "2026-11-18T11:41-05:00",
  "source": "public FRED and agency data",
  "fredCalls": 76,
  "fred": true,
  "sources": {
   "fred": {
    "state": "partial",
-   "checkedAt": "2026-11-18T11:35-05:00",
-   "lastSuccessAt": "2026-11-18T11:35-05:00"
+   "checkedAt": "2026-11-18T11:41-05:00",
+   "lastSuccessAt": "2026-11-18T11:41-05:00"
   },
   "alfred": {
    "state": "available",
-   "checkedAt": "2026-11-18T11:35-05:00",
-   "lastSuccessAt": "2026-11-18T11:35-05:00"
+   "checkedAt": "2026-11-18T11:41-05:00",
+   "lastSuccessAt": "2026-11-18T11:41-05:00"
   },
   "bls": {
    "state": "available",
-   "checkedAt": "2026-11-18T11:35-05:00",
-   "lastSuccessAt": "2026-11-18T11:35-05:00"
+   "checkedAt": "2026-11-18T11:41-05:00",
+   "lastSuccessAt": "2026-11-18T11:41-05:00"
   },
   "bea": {
    "state": "available",
-   "checkedAt": "2026-11-18T11:35-05:00",
-   "lastSuccessAt": "2026-11-18T11:35-05:00"
+   "checkedAt": "2026-11-18T11:41-05:00",
+   "lastSuccessAt": "2026-11-18T11:41-05:00"
   },
   "census": {
    "state": "available",
-   "checkedAt": "2026-11-18T11:35-05:00",
-   "lastSuccessAt": "2026-11-18T11:35-05:00"
+   "checkedAt": "2026-11-18T11:41-05:00",
+   "lastSuccessAt": "2026-11-18T11:41-05:00"
   },
   "treasury": {
    "state": "not_checked",
@@ -36,8 +36,8 @@
   },
   "nyFed": {
    "state": "available",
-   "checkedAt": "2026-11-18T11:35-05:00",
-   "lastSuccessAt": "2026-11-18T11:35-05:00"
+   "checkedAt": "2026-11-18T11:41-05:00",
+   "lastSuccessAt": "2026-11-18T11:41-05:00"
   },
   "fedStatements": {
    "state": "not_checked",
@@ -46,8 +46,8 @@
   },
   "nasdaqCalendar": {
    "state": "available",
-   "checkedAt": "2026-11-18T11:35-05:00",
-   "lastSuccessAt": "2026-11-18T11:35-05:00"
+   "checkedAt": "2026-11-18T11:41-05:00",
+   "lastSuccessAt": "2026-11-18T11:41-05:00"
   }
  },
  "freshness": {
@@ -77,7 +77,7 @@
   "Data source errors on 1 request(s): release 101"
  ],
  "log": [
-  "engine run 2026-11-18T11:35-05:00 using public FRED and agency data",
+  "engine run 2026-11-18T11:41-05:00 using public FRED and agency data",
   "quality: 27/28 checks passed, 0 held, 0 rejected"
  ]
 }
