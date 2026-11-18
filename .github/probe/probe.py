@@ -1,32 +1,19 @@
-import time, urllib.request, re
+import time, urllib.request, urllib.parse, re, io, zipfile
 UA={"User-Agent":"Mozilla/5.0 (Displace data engine; +https://github.com/grobentham/displace)"}
-def get(u,t=40):
-    s=time.time(); r=urllib.request.urlopen(urllib.request.Request(u,headers=UA),timeout=t); b=r.read(5_000_000); return b,time.time()-s
-def show(k,u):
+u="https://alfred.stlouisfed.org/series/downloaddata?seid=CPILFESL"
+h=urllib.request.urlopen(urllib.request.Request(u,headers=UA),timeout=40).read().decode("utf8","replace")
+sel=re.search(r'<select[^>]*name="form\[file_type\]"[^>]*>(.*?)</select>',h,re.S).group(1)
+print("PROBE file_type options", re.findall(r'<option[^>]*value="([^"]*)"[^>]*>\s*([^<]+)',sel))
+hid=re.findall(r'<input[^>]*type="hidden"[^>]*>',h); print("PROBE hidden",hid[:5])
+vint=re.findall(r'<option[^>]*value="(\d{4}-\d\d-\d\d)"',re.search(r'name="form\[selected_vintage_dates\]\[\]"[^>]*>(.*?)</select>',h,re.S).group(1))
+for ft in ("1","2","3","4"):
+    data=[("form[obs_start_date]","2024-01-01"),("form[obs_end_date]","2026-11-01"),("form[units]","lin"),("form[file_format]","csv"),("form[file_type]",ft),("form[download_data]","")]+[("form[selected_vintage_dates][]",v) for v in vint if v>="2024-01-01"]
     try:
-        b,t=get(u); print(f"PROBE {k} OK {len(b)}B {t:.1f}s :: {b[:500]!r}")
-        return b
-    except Exception as e:
-        print(f"PROBE {k} FAIL {e!r}")
-# 1. multiple vintages in one ALFRED CSV
-show("alfred_multi_comma","https://alfred.stlouisfed.org/graph/alfredgraph.csv?id=CPILFESL&cosd=2026-06-01&coed=2026-11-13&vintage_date=2026-09-11,2026-10-24,2026-11-10")
-show("alfred_multi_repeat","https://alfred.stlouisfed.org/graph/alfredgraph.csv?id=CPILFESL&cosd=2026-06-01&coed=2026-11-13&vintage_date=2026-09-11&vintage_date=2026-10-24")
-# 2. downloaddata form structure
-try:
-    b,t=get("https://alfred.stlouisfed.org/series/downloaddata?seid=CPILFESL")
-    h=b.decode("utf8","replace")
-    for m in re.finditer(r"<form[^>]*>",h): print("PROBE form",m.group(0)[:300])
-    names=sorted(set(re.findall(r'name="([^"]+)"',h))); print("PROBE names",names[:80])
-    for sel in re.finditer(r'<select[^>]*name="([^"]+)"[^>]*>(.*?)</select>',h,re.S):
-        opts=re.findall(r'<option[^>]*value="([^"]*)"',sel.group(2)); print("PROBE select",sel.group(1),len(opts),opts[:5],opts[-3:])
-    i=h.find("nitial"); print("PROBE initial ctx",h[max(0,i-400):i+400].replace("\n"," ")[:800])
-except Exception as e: print("PROBE dd FAIL",repr(e))
-# 3. vintage dates list
-show("alfred_vintagedates","https://alfred.stlouisfed.org/series?seid=CPILFESL")
-# 4. FRED timing repeated (DNS/latency)
-for i in range(4):
-    try:
-        b,t=get("https://fred.stlouisfed.org/graph/fredgraph.csv?id=DGS2&cosd=2026-10-01",t=30); print(f"PROBE fred_timing {i} {t:.1f}s {len(b)}B")
-    except Exception as e: print("PROBE fred_timing FAIL",repr(e))
-for u in ["https://api.bls.gov/publicAPI/v1/timeseries/data/CUSR0000SA0L1E","https://home.treasury.gov/resource-center/data-chart-center/interest-rates/pages/xml?data=daily_treasury_real_yield_curve&field_tdr_date_value=2026","https://www.chicagofed.org/-/media/publications/nfci/nfci-data-series-csv.csv"]:
-    show("retry_"+u.split('/')[2],u)
+        r=urllib.request.urlopen(urllib.request.Request(u,data=urllib.parse.urlencode(data).encode(),headers=UA),timeout=60)
+        b=r.read(); ct=r.headers.get("Content-Type"); print(f"PROBE post ft={ft} {ct} {len(b)}B disp={r.headers.get('Content-Disposition')}")
+        if b[:2]==b"PK":
+            z=zipfile.ZipFile(io.BytesIO(b))
+            for n in z.namelist():
+                t=z.read(n).decode("utf8","replace"); print(f"PROBE   zip {n} :: {t[:600]!r}")
+        else: print(f"PROBE   body :: {b[:600]!r}")
+    except Exception as e: print("PROBE post FAIL",ft,repr(e))
