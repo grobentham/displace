@@ -148,15 +148,11 @@ def summary(model, live, log_rows, px, now):
             "events": live, "disclaimer": DISCLAIMER}
 
 
-def run(now=None, fred=None):
+def run(now=None, source=None, budget=series_store.BUDGET_SECONDS):
     import engine as E  # calendar helpers (kind_of, title_period); importing does not run the engine
     now = now or now_ny()
     today = now.date()
-    fred = fred or series_store.fredapi
-    if fred is series_store.fredapi and fred.KEY and not fred.probe():
-        log("history: FRED API unreachable with the key; using cached history this run")
-        fred.KEY = ""
-    store = series_store.Store(now, log=log, fred=fred,
+    store = series_store.Store(now, series_store.model_modes(D.MODELS), log=log, source=source, budget=budget,
                                cutoff=None if now.time() >= SETTLED else today.isoformat())
     kind_of = kind_for(E.kind_of)
     cal = load(os.path.join(DATA, "calendar", "events.json"), {"events": []})
@@ -177,10 +173,13 @@ def run(now=None, fred=None):
     # Touch every input once so caches refresh, then refit only when something changed or the model is a day old.
     model, px = None, {}
     fp_before = fingerprint(input_files())
-    for sid in {"DFF", "CPILFESL"} | {cfg["head"][0] for cfg in D.MODELS.values()}:
-        store(sid, "2008-01-01", initial=sid != "DFF")
-    for cfg in D.MODELS.values():
-        for sid, _, _ in cfg["comps"]:
+    # most-traded releases first, so they are ready first while the history loads over the first runs
+    store("DFF", "2008-01-01")
+    order = [k for k in ("cpi", "nfp", "pce", "retail", "ppi", "gdp", "claims") if k in D.MODELS]
+    order += [k for k in D.MODELS if k not in order]
+    for k in order:
+        cfg = D.MODELS[k]
+        for sid in [cfg["head"][0]] + [c[0] for c in cfg["comps"]]:
             store(sid, "2008-01-01", initial=True)
     added = series_store.extend_from_events(events, D.MODELS, RELEASES, kind_of, E.title_period, D.figure, log=log)
     if added:
@@ -208,7 +207,7 @@ def run(now=None, fred=None):
             if rows and len(rows) > 250:
                 px[a] = D.Px(rows, unit)
     if not model or not model.get("kinds"):
-        log("direction: no model yet. Add the FRED_API_KEY secret once so the history can be loaded.")
+        log("direction: no model yet; the release history is still loading from ALFRED (a few runs)")
         return False
     if fp_before != fp:
         log("direction: history or prices updated this run")
@@ -225,6 +224,7 @@ def run(now=None, fred=None):
                 fh.write(f"- {c['name']}: {c['detail']}\n")
         return False
     out = summary(model, live, log_rows, px, now)
+    out["loading"] = sorted(store.loading)
     out["log"] = LOGLINES[-20:]
     save(LOG_PATH, {"rows": log_rows[-2000:]})
     save(OUT, out)

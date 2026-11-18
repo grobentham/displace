@@ -92,7 +92,7 @@ def get_reports(start, cutoff, fetch=download, log=print):
     def read(pair):
         ticker, feed = pair
         try:
-            items = sorted(report_items(fetch(feed, timeout=6), feed, start, cutoff), reverse=True)
+            items = sorted(report_items(fetch(feed, timeout=20), feed, start, cutoff), reverse=True)
         except (OSError, ValueError, TypeError, ET.ParseError) as error:
             log(f"Earnings feed unavailable for {ticker}: {error}")
             return None
@@ -102,7 +102,7 @@ def get_reports(start, cutoff, fetch=download, log=print):
         page = release_page(ticker, url)
         metrics = []
         try:
-            metrics = report_metrics(fetch(page, timeout=6))
+            metrics = report_metrics(fetch(page, timeout=20))
         except (OSError, ValueError) as error:
             log(f"Earnings figures unavailable for {ticker}: {error}")
         return [(at, {"symbol": ticker, "title": title, "url": page if metrics else url,

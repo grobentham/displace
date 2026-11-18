@@ -38,7 +38,7 @@ def fetch_day(day):
     rows = None
     try:
         req = urllib.request.Request(URL.format(d=day.isoformat()), headers=HEAD)
-        with urllib.request.urlopen(req, timeout=8) as r:
+        with urllib.request.urlopen(req, timeout=20) as r:
             body = json.load(r)
         data = (body or {}).get("data")
         if isinstance(data, dict) and "rows" in data:
