@@ -80,24 +80,6 @@ def kind_for(kind_of):
     return k
 
 
-def consensus_records(events, hist, kind_of):
-    """{(kind, release date): consensus in the model's units} from recorded forecasts."""
-    out = {}
-    hk = {"cpi": "cpi", "nfp": "nfp", "retail": "retail", "pce": "pce", "gdp": "gdp"}
-    for k, key in hk.items():
-        for r in (hist.get("series", {}).get(key) or {}).get("rows", []):
-            v = D.figure(r.get("forecast"), D.MODELS[k]["mult"])
-            if v is not None and r.get("date"):
-                out[(k, r["date"])] = v
-    for e in events:
-        k = kind_of(e)
-        if k in D.MODELS and e.get("forecast"):
-            v = D.figure(e["forecast"], D.MODELS[k]["mult"])
-            if v is not None:
-                out[(k, e["date"])] = v
-    return out
-
-
 def fingerprint(paths):
     """Hash of the data itself (not fetch timestamps), so a refresh that brings nothing new doesn't refit."""
     h = hashlib.sha256()
@@ -170,12 +152,15 @@ def run(now=None, fred=None):
     import engine as E  # calendar helpers (kind_of, title_period); importing does not run the engine
     now = now or now_ny()
     today = now.date()
-    store = series_store.Store(now, log=log, fred=fred or series_store.fredapi,
+    fred = fred or series_store.fredapi
+    if fred is series_store.fredapi and fred.KEY and not fred.probe():
+        log("history: FRED API unreachable with the key; using cached history this run")
+        fred.KEY = ""
+    store = series_store.Store(now, log=log, fred=fred,
                                cutoff=None if now.time() >= SETTLED else today.isoformat())
     kind_of = kind_for(E.kind_of)
     cal = load(os.path.join(DATA, "calendar", "events.json"), {"events": []})
     events = cal.get("events", [])
-    hist = load(os.path.join(DATA, "history", "main.json"), {"series": {}})
 
     settled = today.isoformat()
 
@@ -205,7 +190,9 @@ def run(now=None, fred=None):
     if refit:
         log("direction: fitting (inputs changed)" if cached.get("model") else "direction: first fit")
         t0 = dt.datetime.now()
-        model, px = D.fit(store, None, consensus_records(events, hist, kind_of), today, log=log,
+        # Surprises are measured against each release's recent trend, both in training and live. Free consensus
+        # history only goes back about a year, so mixing it in would put live surprises on a different scale.
+        model, px = D.fit(store, None, {}, today, log=log,
                           live_rows=[r for r in log_rows if "hit" in r], price_fns=price_fns)
         log(f"direction: fit took {(dt.datetime.now() - t0).seconds}s")
         if model and model.get("kinds"):
