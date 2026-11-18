@@ -23,7 +23,7 @@ FRED_AVAILABLE = True
 ALFRED_AVAILABLE = True
 
 
-def download(url, *, timeout=25, payload=None, tries=3):
+def download(url, *, timeout=25, payload=None, tries=3, max_bytes=None):
     """GET (or POST JSON) with retries. GitHub's runners sometimes take ~5 s to resolve a host name or fail a
     lookup outright, so a short timeout or a single try makes healthy sources look down."""
     # St. Louis Fed servers stall requests whose User-Agent does not look like a browser; this one is answered.
@@ -33,7 +33,7 @@ def download(url, *, timeout=25, payload=None, tries=3):
     for attempt in range(tries):
         try:
             with urlopen(Request(url, data=payload, headers=headers), timeout=timeout) as response:
-                body = response.read(MAX_DOWNLOAD + 1)
+                body = response.read((max_bytes or MAX_DOWNLOAD) + 1)
             break
         except HTTPError as e:
             if e.code not in (429, 500, 502, 503, 504) or attempt == tries - 1:
@@ -42,7 +42,7 @@ def download(url, *, timeout=25, payload=None, tries=3):
             if attempt == tries - 1:
                 raise
         time.sleep(2 * (attempt + 1))
-    if len(body) > MAX_DOWNLOAD:
+    if len(body) > (max_bytes or MAX_DOWNLOAD):
         raise ValueError("Download exceeded the size limit")
     return body
 

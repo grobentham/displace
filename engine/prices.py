@@ -125,6 +125,8 @@ def closes(name, start, now=None, log=print, sources=None):
         fresh = now - dt.datetime.fromisoformat(cache["fetched"]) < dt.timedelta(hours=REFRESH_HOURS)
     except (TypeError, ValueError):
         pass
+    if fresh and not cache.get("hl"):
+        fresh = False  # no highs and lows yet (older cache, or the close-only backup): try the main source
     if not fresh and name not in _TRIED:
         _TRIED.add(name)
         for label, fn in srcs:
