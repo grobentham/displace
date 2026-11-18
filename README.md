@@ -65,7 +65,7 @@ Each also gets a recap and goes into the 12-month release stats.
 Each available series shows changes and a sparkline. Treasury yields and the effective federal funds rate can refresh directly from Treasury and the New York Fed when FRED is unavailable.
 
 **Briefs.** The engine writes:
-- **Daily brief:** a 7 a.m. Singapore edition with the NQ outlook, earnings, market context, and the release schedule. Confirmed figures and news update in the same edition as the engine runs.
+- **Daily brief:** a 7 a.m. Singapore edition with the NQ rates outlook, the top upcoming release, issuer-reported earnings figures, and source-linked news. Release details include the figures to watch, recorded forecasts, and confirmed results and revisions. Intraday updates appear alongside the overnight recap.
 - **Weekly outlook**
 - **Fed tracker:** rate, last move, days to the next decision, and where the 2-year sits against the policy rate.
 
