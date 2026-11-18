@@ -8,9 +8,34 @@ import engine
 import news
 import publicdata
 import quality
+import source_health
 
 
 class PublicDataTests(unittest.TestCase):
+    def test_source_checks_keep_last_success_and_track_fallbacks_independently(self):
+        initial = "2026-11-17T08:00-05:00"
+        later = "2026-11-18T08:00-05:00"
+        with (
+            patch.object(source_health, "CHECKS", {}),
+            patch.object(publicdata, "FRED_AVAILABLE", True),
+            patch.object(publicdata, "ALFRED_AVAILABLE", True),
+        ):
+            source_health.record("fred", True)
+            source_health.record("census", True)
+            before = source_health.snapshot({}, initial)
+            source_health.CHECKS.clear()
+            with patch.object(publicdata, "download", side_effect=OSError("fixture offline")):
+                publicdata.check_fred_access(dt.date(2026, 11, 18))
+            source_health.record("bea", True)
+            source_health.record("treasury", True)
+            source_health.record("treasury", False)
+            after = source_health.snapshot(before, later)
+        self.assertEqual(after["fred"], {"state": "unavailable", "checkedAt": later, "lastSuccessAt": initial})
+        self.assertEqual(after["alfred"]["state"], "unavailable")
+        self.assertEqual(after["bea"], {"state": "available", "checkedAt": later, "lastSuccessAt": later})
+        self.assertEqual(after["treasury"]["state"], "partial")
+        self.assertEqual(after["census"], {"state": "not_checked", "checkedAt": initial, "lastSuccessAt": initial})
+
     def test_release_calendar_skips_undated_and_unrelated_rows(self):
         parser = publicdata.ReleaseCalendar(10)
         parser.feed("""
@@ -114,6 +139,10 @@ class NewsDigestTests(unittest.TestCase):
         same = news.build([], first, now + dt.timedelta(days=1), fetch=offline, log=lambda *_: None)
         self.assertEqual(same["items"], first["items"])
         self.assertFalse(same["sources"]["Federal Reserve"])
+        self.assertEqual(same["sourceHealth"]["Federal Reserve"], {
+            "state": "unavailable", "checkedAt": news.timestamp(now + dt.timedelta(days=1)),
+            "lastSuccessAt": first["checkedAt"],
+        })
 
 
 if __name__ == "__main__":

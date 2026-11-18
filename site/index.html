@@ -697,11 +697,7 @@ footer .legal{padding-top:16px;display:flex;justify-content:space-between;gap:10
 /* news hero */
 .nx{display:grid;grid-template-columns:minmax(0,1fr);gap:12px;margin-bottom:6px;min-width:0;max-width:100%}.nx>*,.nx-f,.nx-up{min-width:0}
 .nx-main{position:relative;overflow:hidden;background:radial-gradient(120% 140% at 100% 0%,rgba(10,132,255,.28),transparent 55%),radial-gradient(90% 120% at 0% 100%,rgba(48,209,88,.14),transparent 60%),#0b0d12;color:#f5f5f7;border-radius:24px;padding:24px;border:1px solid rgba(255,255,255,.08)}
-.nx-top{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
 .nx-k{font:600 .74rem/1 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.12em;text-transform:uppercase;color:#8e9bb3}
-.nx-live{display:inline-flex;align-items:center;gap:6px;font:600 .72rem/1 ui-monospace,SFMono-Regular,Menlo,monospace;color:#30d158;letter-spacing:.06em}
-.nx-live i{width:7px;height:7px;border-radius:50%;background:#30d158;box-shadow:0 0 0 0 rgba(48,209,88,.6);animation:nxp 2s infinite}
-@keyframes nxp{70%{box-shadow:0 0 0 8px rgba(48,209,88,0)}100%{box-shadow:0 0 0 0 rgba(48,209,88,0)}}
 .nx-t{font-size:clamp(1.7rem,5vw,2.6rem);font-weight:700;letter-spacing:-.03em;line-height:1.08;margin:14px 0 6px}
 .nx-when{color:#a1a1a6;font-size:.98rem}.nx-when b{color:#f5f5f7;font-weight:600}
 .nx-cd{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:20px 0 18px;max-width:440px}
@@ -1112,7 +1108,6 @@ a:focus-visible,button:focus-visible{outline:2px solid #0071e3;outline-offset:2p
 .ecl{display:flex;gap:8px;align-items:center;font-size:.86rem;color:var(--muted);font-weight:600}
 .ecl select{font:inherit;padding:7px 10px;border-radius:10px;border:1px solid var(--line);background:#fff;color:var(--ink)}
 .ecok{color:#248a3d;font-weight:600;font-size:.88rem}.ecno{color:#c93400;font-size:.85rem}
-.ec-live{color:#248a3d;font-weight:600}
 .al-toast a{color:#2997ff;font-size:.88rem;margin-top:4px}
 .nbar{position:fixed;left:20px;bottom:24px;z-index:150;max-width:min(560px,calc(100vw - 40px));display:none;align-items:center;gap:12px;background:#fff;color:var(--ink);border-radius:16px;padding:12px 12px 12px 16px;box-shadow:0 20px 50px -18px rgba(0,0,0,.4),0 0 0 1px rgba(0,0,0,.05)}
 .nbar.on{display:flex;animation:toolin .4s ease}
@@ -1293,6 +1288,22 @@ html.static .pro-how{display:none}
 .dn-item p:not(.dn-meta){font-size:.91rem;line-height:1.5;margin:5px 0 0}
 .dn-context{color:var(--muted)}
 .dn-more summary{color:var(--ac);cursor:pointer;font-size:.9rem;font-weight:650}
+.data-health .dn-head{margin-bottom:10px}
+.data-health .dn-head h2{font-size:1.16rem}
+.health-mode{margin:0;color:#465366;font-size:.85rem;font-weight:650}
+.health-mode[data-attention="true"]{color:#904811}
+.health-metrics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:0}
+.health-metrics div{padding:9px 11px;border-radius:11px;background:#f5f7fa}
+.health-metrics dt{color:#526176;font-size:.76rem}
+.health-metrics dd{margin:3px 0 0;font-size:.87rem;font-weight:650;overflow-wrap:anywhere}
+.health-details{margin-top:10px;font-size:.84rem}
+.health-details summary{color:#0758a1;cursor:pointer;font-weight:650}
+.health-sources{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 16px;list-style:none;padding:0;margin:8px 0 0}
+.health-sources li{border-top:1px solid var(--line);padding:8px 0;line-height:1.45;min-width:0}
+.health-sources span,.health-sources small{display:block;color:#526176}
+.health-sources small{font-size:.76rem}
+.health-sources li[data-state="unavailable"] span,.health-sources li[data-state="partial"] span{color:#904811;font-weight:600}
+@media(max-width:600px){.health-metrics{grid-template-columns:repeat(2,minmax(0,1fr))}.health-sources{grid-template-columns:1fr}}
 @media(max-width:640px){.dn-grid{grid-template-columns:1fr}}
 .dk-k{display:flex;justify-content:space-between;gap:10px;align-items:baseline}.dk-k span{font-size:.75rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#8944ab}.dk-k small{color:var(--muted);font-size:.8rem}
 .dk-card h3{font-size:1.25rem;margin:6px 0 12px;letter-spacing:-.01em}
@@ -1332,7 +1343,6 @@ html.static .pro-how{display:none}
 .ecomp-r{display:grid;grid-template-columns:1fr 90px 90px;gap:10px;padding:7px 0;border-bottom:1px solid var(--line);font-size:.9rem;font-variant-numeric:tabular-nums}.ecomp-r:last-child{border:0}.ecomp-h{font-size:.72rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
 .efacts{margin:0;padding:10px 14px 10px 30px;background:#eef6ff;border-radius:12px;font-size:.9rem;line-height:1.5}.efacts li{margin:2px 0}
 .ecr-ics{flex-basis:100%;display:flex;gap:12px;align-items:center;flex-wrap:wrap;font-size:.86rem;color:var(--muted);border-top:1px solid var(--line);padding-top:10px}.ecr-ics a{font-weight:600}.ecr-raw{font-weight:400!important;color:var(--muted)!important}
-.ec-eng{color:var(--muted)}
 .dk-rec{margin:0 0 6px!important;padding-left:10px;border-left:3px solid #0071e3}
 .fd-days{margin:2px 0 0;font-size:.85rem;color:var(--muted)}
 .pl-g{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:10px}.pl-t{background:var(--gray);border-radius:14px;padding:12px 14px;display:grid;gap:2px}.pl-t small{font-size:.72rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.03em}.pl-t b{font-size:1.25rem;font-variant-numeric:tabular-nums}
@@ -2426,6 +2436,11 @@ svg.cd line.wick{animation:fadein .5s ease-out both}
       <header class="morning-heading"><h2 id="morning-title">Daily brief</h2><p id="morning-status" role="status">Loading the latest edition…</p></header>
       <div id="morning-content"></div>
     </section>
+    <section class="dk-card data-health" id="news-data-health" aria-labelledby="health-title">
+      <div class="dn-head"><h2 id="health-title">Data status</h2><p class="health-mode" id="health-mode" role="status">Loading source checks…</p></div>
+      <dl class="health-metrics" id="health-metrics"></dl>
+      <details class="health-details" id="health-details" hidden><summary>Source checks and last successes</summary><ul class="health-sources" id="health-sources"></ul></details>
+    </section>
     <div class="tool on" id="econcal">
         <div class="ec-next" id="ec-next"></div>
         <section class="dk-card" id="nqi-setup" aria-labelledby="nqi-title" hidden>
@@ -2651,7 +2666,8 @@ window.claude={use:function(n){return Promise.resolve(n==="db"?db:null);},isStat
   var section=document.getElementById("displace-news");
   if(!section)return;
   var morning=document.getElementById("daily-brief");
-  if(!window.claude||!window.claude.isStatic){section.hidden=morning.hidden=true;return;}
+  var health=document.getElementById("news-data-health");
+  if(!window.claude||!window.claude.isStatic){section.hidden=morning.hidden=health.hidden=true;return;}
   var grid=document.getElementById("dn-grid"),more=document.getElementById("dn-more");
   var older=document.getElementById("dn-older"),status=document.getElementById("dn-status");
   var dateFormat=new Intl.DateTimeFormat(undefined,{month:"short",day:"numeric",year:"numeric",hour:"numeric",minute:"2-digit",timeZone:"America/New_York"});
@@ -2677,8 +2693,57 @@ window.claude={use:function(n){return Promise.resolve(n==="db"?db:null);},isStat
     if(item.context)el.append(node("p",item.context,"dn-context"));
     return el;
   }
+  var healthMode=document.getElementById("health-mode"),healthMetrics=document.getElementById("health-metrics");
+  var healthDetails=document.getElementById("health-details"),healthSources=document.getElementById("health-sources");
+  var monitored={fred:"FRED",alfred:"ALFRED archives",bls:"Bureau of Labor Statistics",bea:"Bureau of Economic Analysis",
+    census:"Census Bureau",treasury:"U.S. Treasury",nyFed:"New York Fed rates",nasdaqCalendar:"Nasdaq earnings calendar"};
+  var states={available:"Last check succeeded",partial:"Some checks failed",unavailable:"Unavailable at last check",not_checked:"Skipped this run"};
+  var healthTime=new Intl.DateTimeFormat("en-SG",{day:"numeric",month:"short",year:"numeric",hour:"2-digit",minute:"2-digit",hourCycle:"h23",timeZone:"Asia/Singapore"});
+  var observationDay=new Intl.DateTimeFormat("en-SG",{day:"numeric",month:"short",year:"numeric",timeZone:"UTC"});
+  var engineStatus=null, officialSources={};
+  function checkedTime(value){return Number.isFinite(Date.parse(value))?healthTime.format(new Date(value))+" SGT":"";}
+  function observation(value){var date=new Date(value+"T12:00:00Z");return Number.isFinite(date.getTime())?observationDay.format(date):"";}
+  function healthMetric(label,value){var tile=node("div");tile.append(node("dt",label),node("dd",value));return tile;}
+  function sourceRow(label,check){
+    var row=node("li");row.dataset.state=check.state;
+    row.append(node("strong",label),node("span",states[check.state]||"Check history unavailable"));
+    if(check.checkedAt&&check.state!=="not_checked")row.append(node("small","Checked "+checkedTime(check.checkedAt)));
+    if(check.lastSuccessAt&&(check.state==="not_checked"||check.lastSuccessAt!==check.checkedAt))row.append(node("small","Last successful "+checkedTime(check.lastSuccessAt)));
+    else if(!check.lastSuccessAt)row.append(node("small","No successful check recorded"));
+    return row;
+  }
+  function renderHealth(){
+    var report=engineStatus;
+    if(!report){healthMode.textContent="Engine status is temporarily unavailable.";return;}
+    var sources=report.sources||{},fallback=report.source==="direct public agencies";
+    var blocked=["fred","alfred"].filter(function(key){return sources[key]&&sources[key].state==="unavailable";}).map(function(key){return key==="fred"?"FRED":"ALFRED";});
+    var behind=Date.now()-Date.parse(report.lastRun)>36*60*60*1000;
+    var line=fallback?"Agency fallbacks in use":report.source||"Source mode unavailable";
+    if(blocked.length)line+=" · "+blocked.join(" and ")+" unavailable";
+    if(behind)line+=" · Engine check overdue";
+    if(healthMode.textContent!==line)healthMode.textContent=line;
+    healthMode.dataset.attention=String(fallback||blocked.length>0||behind);
+    var tiles=[],quality=report.quality,fresh=report.freshness||{},market=fresh.marketDates||{};
+    if(quality&&quality.total)tiles.push(healthMetric("Validation checks",quality.passed+" of "+quality.total+" passed"+(quality.held?" · "+quality.held+" held":"")));
+    if(report.lastRun)tiles.push(healthMetric("Engine run",checkedTime(report.lastRun)));
+    if(fresh.latestActual)tiles.push(healthMetric("Latest actual shown",fresh.latestActual.title+" · "+observation(fresh.latestActual.date)));
+    if(market.y2||market.y10){
+      var dates=market.y2&&market.y2===market.y10?observation(market.y2):
+        [market.y2?"2-year "+observation(market.y2):"",market.y10?"10-year "+observation(market.y10):""].filter(Boolean).join(" · ");
+      tiles.push(healthMetric("Treasury observation date",dates));
+    }
+    if(fresh.calendarUpdatedOn)tiles.push(healthMetric("Calendar snapshot",observation(fresh.calendarUpdatedOn)));
+    if(market.effr)tiles.push(healthMetric("Effective fed funds date",observation(market.effr)));
+    healthMetrics.replaceChildren.apply(healthMetrics,tiles);
+    var rows=Object.keys(monitored).filter(function(key){return sources[key];}).map(function(key){return sourceRow(monitored[key],sources[key]);});
+    Object.keys(officialSources).forEach(function(name){rows.push(sourceRow(name+" news feed",officialSources[name]));});
+    healthSources.replaceChildren.apply(healthSources,rows);
+    healthDetails.hidden=!rows.length;
+  }
   function render(doc){
     if(!doc||!Array.isArray(doc.items)){status.textContent="Official updates are temporarily unavailable.";return;}
+    officialSources=doc.sourceHealth||{};
+    if(engineStatus)renderHealth();
     var date=format(doc.checkedAt);
     var delayed=Object.entries(doc.sources||{}).filter(function(source){return source[1]===false;}).map(function(source){return source[0];});
     var title=doc.items.length&&date?"Checked "+date:"No recent official updates";
@@ -2814,12 +2879,14 @@ window.claude={use:function(n){return Promise.resolve(n==="db"?db:null);},isStat
   }
   window.claude.use("db").then(function(db){
     db.doc("news/latest").onSnapshot(function(snapshot){render(snapshot.data());});
+    db.doc("engine/status").onSnapshot(function(snapshot){var doc=snapshot.data();if(doc&&doc.lastRun)engineStatus=doc;renderHealth();});
     db.doc("brief/morning").onSnapshot(function(snapshot){
       var doc=snapshot.data();
       if(doc&&(doc.version===1||doc.version===2)&&Array.isArray(doc.editions))editions=doc.editions;
       showMorning();
     });
-  }).catch(function(){render(null);showMorning();});
+  }).catch(function(){render(null);renderHealth();showMorning();});
+  setInterval(function(){if(engineStatus&&!document.hidden)renderHealth();},60000);
   document.addEventListener("visibilitychange",function(){if(!document.hidden&&editions.length)showMorning();});
 })();
 </script>
@@ -3591,8 +3658,8 @@ function render(){if(!$("ec-list"))return;chips();
     $("ec-list").innerHTML=(st.day?'<div class="ec-dayf"><span>Showing <b>'+dayLabel(st.day)+'</b> only</span><button type="button" data-day="">Show all days</button></div>':'')+order.map(function(d){return'<div class="ecday'+(d===t?" today":"")+'"><div class="ecdh"><b>'+dayLabel(d)+'</b>'+(d===t?'<span class="ectd">Today</span>':'')+'</div>'+g[d].map(function(e){var past=e.time&&instant(e.date,e.time)<now;
       var on=isRem(e);return'<div class="ecrow i-'+e.impact+(past?" past":"")+(st.open[e.id]?" open":"")+'"><button type="button" class="ecmain" data-id="'+esc(e.id)+'" aria-expanded="'+!!st.open[e.id]+'"><span class="ect"><b>'+(e.time?(st.tz==="me"?local24(e):e.time):"All day")+'</b><small>'+(e.time?(st.tz==="me"?e.time+" NY":local(e)+" you"):"")+'</small></span><span class="eci"><i></i></span><span class="ecc">'+esc(e.cur)+'</span><span class="ecn"><b>'+esc(e.title)+'</b><small>'+esc(e.src)+(past?" · released":(e.time?" · in "+until(instant(e.date,e.time)-now):""))+'</small></span>'+vals(e,past)+'<span class="ecx" aria-hidden="true">›</span></button>'+(e.time&&!past?'<button type="button" class="ecbell'+(on?" on":"")+'" data-bell="'+esc(e.id)+'" aria-pressed="'+on+'" aria-label="'+(on?"Remove reminder":"Remind me")+' for '+esc(e.title)+'" title="'+(on?"Reminder set":"Remind me")+'"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M6 16v-5a6 6 0 0 1 12 0v5l1.5 2h-15zM10 20a2 2 0 0 0 4 0"/></svg></button>':'<span></span>')+(st.open[e.id]?det(e):'')+'</div>';}).join("")+'</div>';}).join("");}
   var up=DATA.updated?new Date(DATA.updated+"T12:00:00Z").toLocaleDateString("en-US",{month:"short",day:"numeric",year:"numeric",timeZone:"UTC"}):"";
-  $("ec-src").innerHTML=(live?'<span class="ec-live">● Updates automatically</span> ':'')+"Last refreshed "+up+" from the agencies' own published schedules: BLS, BEA, Census Bureau, Dept. of Labor, Federal Reserve, ISM, University of Michigan, ECB and Bank of England. Times are New York. Agencies occasionally reschedule; check the source if a date matters to you.";
-  remCard();guide();record();engineLine();}
+  $("ec-src").textContent=(up?"Calendar snapshot dated "+up+". ":"")+"Agencies may change scheduled dates. Open a release for its source.";
+  remCard();guide();record();}
 /* direction engine */
 var DIR=null;
 var DIRN={usd:"Dollar",gold:"Gold",eur:"EUR/USD",nq:"Nasdaq 100",y2:"2-yr yield",y10:"10-yr yield"},DORD=["gold","usd","eur","nq","y2","y10"];
@@ -3638,7 +3705,7 @@ function hero(nh,now){var el=$("ec-next");if(!el)return;el.className="nx";
   if(!nh){el.innerHTML='<div class="nx-main"><div class="nx-k">Next high-impact release</div><div class="nx-t">Nothing scheduled yet</div></div>';HX=null;return;}
   var T=instant(nh.date,nh.time),on=isRem(nh),C=consensus(nh),L=lastRel(nh),ld=new Date(T).toLocaleDateString([],{weekday:"long",day:"numeric",month:"long"});
   var up=list().filter(function(e){return e.id!==nh.id&&e.time&&(e.impact==="high"||e.impact==="medium")&&instant(e.date,e.time)>now;}).slice(0,8);
-  el.innerHTML='<div class="nx-main"><div class="nx-top"><span class="nx-k">Next high-impact release</span><span class="nx-live"><i></i>LIVE</span></div>'+
+  el.innerHTML='<div class="nx-main"><span class="nx-k">Next high-impact release</span>'+
    '<div class="nx-t">'+esc(nh.title)+'</div><div class="nx-when"><b>'+ld+' · '+local(nh)+'</b> ('+tzLabel()+') · '+nh.time+' New York</div>'+
    '<div class="nx-cd" id="nx-cd"><div><b>00</b><small>Days</small></div><div><b>00</b><small>Hrs</small></div><div><b>00</b><small>Min</small></div><div><b>00</b><small>Sec</small></div></div>'+
    '<div class="nx-act"><button type="button" class="pri" data-nxopen="'+esc(nh.id)+'">Read briefing</button><button type="button" class="nxbell" data-bell="'+esc(nh.id)+'" aria-pressed="'+on+'">'+(on?"✓ Reminder set":"🔔 Remind me")+'</button></div></div>'+
@@ -3663,9 +3730,6 @@ setInterval(tickHero,1000);
 document.addEventListener("click",function(e){var b=e.target.closest("[data-nxopen]");if(!b)return;var id=b.dataset.nxopen,ev=list().filter(function(x){return x.id===id;})[0];if(!ev)return;
   var t=nyToday();st.day=null;st.q="";if($("ec-q"))$("ec-q").value="";if(st.range==="past")st.range="7";if(st.range!=="all"&&ev.date>addDays(t,+st.range-1))st.range=ev.date>addDays(t,29)?"all":"30";st.imp[ev.impact]=1;st.cur[ev.cur]=1;st.open[id]=true;save();render();
   setTimeout(function(){var r=document.querySelector('.ecmain[data-id="'+(window.CSS&&CSS.escape?CSS.escape(id):id)+'"]');if(r)r.scrollIntoView({behavior:"smooth",block:"center"});},60);});
-var ENG=null;function engineLine(){var el=$("ec-src");if(!el||!ENG||!ENG.lastRun)return;var m=Math.max(0,Math.round((Date.now()-new Date(ENG.lastRun).getTime())/60000)),ago=m<60?m+" min ago":m<1440?Math.round(m/60)+" h ago":Math.round(m/1440)+" days ago";
-  var x=el.querySelector(".ec-eng");if(!x){x=document.createElement("span");x.className="ec-eng";el.appendChild(x);}var q=ENG.quality;x.textContent=" Data engine last ran "+ago+(q&&q.total?" · quality checks "+q.passed+"/"+q.total+" passed"+(q.held?" · "+q.held+" figure"+(q.held>1?"s":"")+" awaiting confirmation":""):"")+".";}
-try{if(window.claude&&window.claude.isStatic)window.claude.use("db").then(function(db){db.doc("engine/status").onSnapshot(function(s){ENG=s.data();engineLine();},function(){});});}catch(x){}
 /* actual / forecast / previous */
 function num(v){if(v==null||v==="")return NaN;var m=String(v).replace(/,/g,"").match(/-?\d+(\.\d+)?/);if(!m)return NaN;var n=+m[0],u=String(v).toUpperCase();if(/\dK/.test(u))n*=1e3;if(/\dM/.test(u))n*=1e6;if(/\dB/.test(u))n*=1e9;return n;}
 function cmp(e){var a=num(e.actual),f=num(e.forecast);if(isNaN(a)||isNaN(f))return"";return a>f?"up":a<f?"dn":"eq";}
@@ -3940,10 +4004,10 @@ document.addEventListener("click",function(e){var w=e.target.closest("#cw [data-
 /* clock card on the Time page */
 function clockCard(){var el=$("clk-news");if(!el)return;var td=todays(),nh=nextHigh();
   el.innerHTML='<div class="cnh"><b>News today</b><a href="#calendar">Full calendar ›</a></div>'+(td.length?td.map(function(e){return'<div class="cnr i-'+e.impact+'"><i></i><span>'+(e.time||"All day")+'</span><b>'+esc(e.title)+'</b></div>';}).join(""):'<p>No scheduled US releases today.</p>')+(nh?'<p class="cnx">Next high-impact: <b>'+esc(nh.title)+'</b>, '+dayLabel(nh.date)+' '+nh.time+' NY (in '+until(instant(nh.date,nh.time)-Date.now())+')</p>':'');}
-var live=false;setupPersonalImpact();ECON.on(render);ECON.on(clockCard);ECON.on(bar);setInterval(function(){render();clockCard();},60000);
+setupPersonalImpact();ECON.on(render);ECON.on(clockCard);ECON.on(bar);setInterval(function(){render();clockCard();},60000);
 /* newer data from the site's database, when signed in */
 function take(s){var d=s&&(typeof s.data==="function"?s.data():s);if(!s||s.exists===false||!d)return;if(!(d.events&&d.events.length&&String(d.updated||"")>=String(BUNDLE.updated)))return;var th=String(d.through||d.events[d.events.length-1].date),ev=d.events.concat(BUNDLE.events.filter(function(e){return e.date>th;})).sort(function(x,y){return (x.date+(x.time||"00:00"))<(y.date+(y.time||"00:00"))?-1:1;}),nd={updated:d.updated,through:ev.length?ev[ev.length-1].date:th,events:ev};if(JSON.stringify(nd)!==JSON.stringify(DATA)){DATA=nd;emit();}}
-try{if(window.claude&&typeof window.claude.use==="function")window.claude.use("db").then(function(db){if(!db)return;var ref=db.doc("calendar/events");live=true;render();
+try{if(window.claude&&typeof window.claude.use==="function")window.claude.use("db").then(function(db){if(!db)return;var ref=db.doc("calendar/events");
   var subbed=false;try{if(typeof ref.onSnapshot==="function"){ref.onSnapshot(take,function(){});subbed=true;}}catch(e){}
   function pull(){ref.get().then(take).catch(function(){});}
   if(!subbed){pull();setInterval(pull,15*60000);document.addEventListener("visibilitychange",function(){if(!document.hidden)pull();});}}).catch(function(){});}catch(e){}

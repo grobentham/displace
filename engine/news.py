@@ -163,7 +163,13 @@ def build(events, previous, now, fetch=download, log=print):
             cached[item["url"]] = item
     items = [*release_items(events, now), *cached.values()]
     items.sort(key=lambda item: item["published"], reverse=True)
-    return {"checkedAt": timestamp(now), "sources": sources, "items": items[:20]}
+    checked_at = timestamp(now)
+    prior_health = previous.get("sourceHealth", {})
+    health = {source: {"state": "available" if ok else "unavailable", "checkedAt": checked_at,
+                       "lastSuccessAt": checked_at if ok else prior_health.get(source, {}).get("lastSuccessAt")
+                       or (previous.get("checkedAt") if previous.get("sources", {}).get(source) else None)}
+              for source, ok in sources.items()}
+    return {"checkedAt": checked_at, "sources": sources, "sourceHealth": health, "items": items[:20]}
 
 
 if __name__ == "__main__":
