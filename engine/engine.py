@@ -1107,9 +1107,16 @@ def main():
         import consensus
         manual = set(load(os.path.join(ENG, "forecasts.json"), {}).get("forecasts", {}))
         consensus.apply(events, kind_of, NY, manual_ids=manual, log=log, now=NOW)
+        consensus.apply_tv(events, kind_of, manual_ids=manual, log=log)
     except Exception as ex:
         warn(f"consensus feed error: {ex!r}")
     hist_changed = update_figures(events, hist, pending)
+    try:  # consensus for past rows of the release stats
+        import consensus
+        if consensus.backfill_history(hist, kinds={v: k for k, v in HISTORY_KEYS.items()}):
+            hist_changed = True
+    except Exception as ex:
+        warn(f"consensus history error: {ex!r}")
     save(pending_path, pending)
     for e in events:
         k = kind_of(e)
