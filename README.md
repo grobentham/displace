@@ -16,8 +16,8 @@ Everything here is education. The engine never writes entries, targets or trade 
 | `engine/news.py` | Latest economic news from confirmed releases and central-bank feeds. |
 | `engine/schedule.json` | Release dates the engine knows about. **You add new dates here.** |
 | `engine/earnings_seed.json` | Earnings dates a company has announced itself (optional). The engine also reads Nasdaq's public earnings calendar for 24 Nasdaq-100 names and merges both into `site/data/calendar/earnings.json`. A company's own date always wins. |
-| `engine/predict.py` | News-outcome engine: runs `engine/direction.py` and writes `site/data/direction/`. |
-| `engine/series_store.py`, `engine/prices.py` | Cached history (first-published release figures, rates) and daily gold / Nasdaq-100 closes, in `engine/cache/`. |
+| `engine/predict.py` | News-outcome engine: `tv.py` (consensus surprises), `bars.py` (hourly bars), `surprise.py` (the model), `moves.py` (expected move); writes `site/data/direction/`. |
+| `engine/series_store.py`, `engine/prices.py` | Daily rates, dollar, gold and Nasdaq-100 closes, cached in `engine/cache/`. |
 | `engine/watch.py` | Opens an issue when a major release's figure hasn't arrived 3 hours after it came out. |
 | `engine/forecasts.json` | Economists' consensus forecasts you enter by hand (optional). |
 | `engine/manual.json` | Optional notes for the Fed tracker (market pricing, Fed commentary). |
@@ -74,11 +74,13 @@ Each available series shows changes and a sparkline. Treasury yields and the eff
 
 **Calendar feeds.** `calendar.ics` (all releases) and `calendar-high.ics` (high impact), with 15-minute alerts, to subscribe to in Google, Apple or Outlook Calendar.
 
-**News-outcome engine (gold, NQ, dollar, yields).** `engine/predict.py` runs the tested model in `engine/direction.py` after every engine run and writes `site/data/direction/current.json`, which the News calendar shows:
-- **Scenario map, every release:** if the figure lands above, near or below the average of its previous readings (the same measure in training and live; free consensus history is too short to train on), how often gold, the Nasdaq-100 and the other markets closed higher that day and the typical move. History since 2010 from figures *as first published*, so no hindsight revisions.
-- **Lean, proven rules only:** before a release, "if above its recent trend: gold ▼ 68%"; after it, the lean for that day's close. Shown only for release × market rules that were right 55%+ over 30+ unseen releases, survive a multiple-testing correction, beat a coin flip on calibration, worked in both halves of history and are still working on their latest 20 calls. Everything else shows "no proven edge".
-- **Public track record:** every post-release lean is logged in `site/data/direction/log.json` before the close and scored against the actual close. Leans are withdrawn at the close, today's unfinished price bar is never used, and the recent record feeds a circuit breaker that switches a rule off.
-- **Data, no API keys:** the release history comes from ALFRED, the St. Louis Fed's public archive of every past edition of each series. For each past release date the engine reads the series as it stood that morning and keeps the newly published figure, so the model sees exactly what traders saw, with no later revisions. The first runs load 15+ years in the background (about nine minutes per run, resumable); after that it refreshes weekly and adds each new figure from the calendar. Gold (COMEX futures) and Nasdaq-100 closes come from Yahoo, with FRED's public Nasdaq-100 series as a backup; daily rates and the dollar from FRED's public downloads, with the Treasury and the New York Fed as backups. All cached in `engine/cache/`.
+**News-outcome engine (gold, NQ, dollar, 2-year yield).** `engine/predict.py` runs after every engine run and writes `site/data/direction/current.json`, which the News calendar shows:
+- **Surprise = actual vs consensus.** TradingView's free economic calendar gives every US release since 2010 with the consensus forecast (`engine/tv.py`, cached in `engine/cache/tv/`). Each report's surprise is scaled by its own typical surprise (walk-forward), and reports with several headline figures are combined (CPI core + headline; payrolls, unemployment and wages; ...). 17 reports, pooled into five themes: inflation, labor, activity, sentiment, housing.
+- **Two horizons.** The first ~2 hours after the release for gold and Nasdaq-100 futures (hourly bars from Yahoo, archived in `engine/cache/bars/` so the history keeps growing beyond Yahoo's two-year window), and the release-day close for gold, the Nasdaq-100, the dollar index and the 2-year yield.
+- **Model** (`engine/surprise.py`): per market and theme, P(up) = 0.5 + k (sigmoid(b z) - 0.5). No intercept, so a market's usual drift can never pass as a news edge; k is fitted from the model's own out-of-sample record so probabilities are honest.
+- **Proof.** Every release is replayed using only earlier releases. A lean is shown only for market x theme rules right 55%+ of the time over 30+ unseen calls (20+ for the first two hours) that survive a multiple-testing correction, beat a coin flip on calibration, held in both halves of their history and are still working on their latest 20 calls. Everything else shows the scenario map (above / near / below consensus) as the historical record.
+- **Public track record:** post-release leans are logged in `site/data/direction/log.json` and scored when their window closes (two hours, or the close). Unfinished bars are never used to train or score.
+- **Expected move** (`engine/moves.py`): the day's likely range for gold and NQ, scaled to recent volatility.
 
 **Quality control.** Nothing is published without passing these checks.
 - **Plausibility:** every figure must fall inside a hard range for its series (core CPI m/m between −1.5% and 2%, jobless claims between 100K and 1.5M, and so on). Anything outside is rejected and never published.
@@ -136,9 +138,9 @@ You can edit any of these files straight on github.com. Committing a change runs
 python engine/test_engine.py
 python engine/test_public_news.py
 python engine/test_earnings.py
-python engine/test_direction.py
+python engine/test_surprise.py
 python engine/test_predict.py
 python engine/test_sources.py
 ```
 
-`test_direction.py` checks the model on simulated markets where the truth is known (it must find real effects, find nothing in noise and state honest probabilities). `test_predict.py` runs the whole news-outcome pipeline offline.
+`test_surprise.py` checks the model on simulated markets where the truth is known (it must find real effects, find nothing in noise and state honest probabilities). `test_predict.py` runs the whole news-outcome pipeline offline.

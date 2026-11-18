@@ -46,7 +46,7 @@ jobs:
           python engine/test_predict.py
           python engine/test_sources.py
           python engine/test_moves.py
-          python engine/test_direction.py
+          python engine/test_surprise.py
 
   publish:
     if: github.ref == 'refs/heads/main'
