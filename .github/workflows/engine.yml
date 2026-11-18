@@ -12,6 +12,7 @@ on:
     - cron: "30 19 * * 1-5"  # after 14:00 (Fed) releases
     - cron: "20 22 * * 1-5"  # late data and archived readings
     - cron: "20 22 * * 0"    # Sunday: weekly outlook
+    - cron: "40 22 * * *"    # prepare the 07:00 SGT brief starting at 06:40 SGT
   workflow_dispatch:
   pull_request:
     branches: [main]
@@ -41,6 +42,7 @@ jobs:
           python engine/test_engine.py
           python engine/test_earnings.py
           python engine/test_public_news.py
+          python engine/test_morning.py
 
   publish:
     if: github.ref == 'refs/heads/main'
@@ -68,6 +70,7 @@ jobs:
         run: |
           python -u engine/engine.py
           python -u engine/news.py
+          python -u engine/morning.py
 
       - name: Save new data
         run: |

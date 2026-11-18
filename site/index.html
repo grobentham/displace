@@ -1250,6 +1250,16 @@ html.static .pro-how{display:none}
 /* ===== pro desk ===== */
 .dk-card{background:#fff;border:1px solid var(--line);border-radius:20px;padding:20px 22px;margin-bottom:14px}
 .dk-brief{border-color:#e6d3fb;box-shadow:0 10px 30px -18px rgba(120,60,200,.35)}
+.morning-brief{border-color:#cce2ff;background:linear-gradient(135deg,#eef6ff,#fff 55%);text-align:left}
+.morning-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px 28px}
+.morning-grid ul{list-style:none;padding:0;margin:0;display:grid;gap:9px}
+.morning-grid p,.morning-grid li{margin:0;font-size:.94rem;line-height:1.45;overflow-wrap:anywhere}
+.morning-grid li p{margin-top:3px;color:#424245}
+.morning-grid time{display:inline-block;color:#005bb5;font-weight:700;font-variant-numeric:tabular-nums;margin-right:8px}
+.morning-grid a{color:#005bb5;text-decoration:underline;text-underline-offset:2px}
+.morning-grid .morning-focus{margin-top:9px;color:#424245}
+.morning-foot{margin:12px 0 0;padding-top:10px;border-top:1px solid var(--line);font-size:.83rem;color:#424245}
+@media(max-width:640px){.morning-grid{grid-template-columns:1fr}}
 .dn-head{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:6px 18px;margin-bottom:12px}
 .dn-head h2{font-size:1.4rem;margin:0}.dn-status,.dn-meta{color:var(--muted);font-size:.82rem;margin:0}
 .dn-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 22px}
@@ -1262,6 +1272,7 @@ html.static .pro-how{display:none}
 @media(max-width:640px){.dn-grid{grid-template-columns:1fr}}
 .dk-k{display:flex;justify-content:space-between;gap:10px;align-items:baseline}.dk-k span{font-size:.75rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#8944ab}.dk-k small{color:var(--muted);font-size:.8rem}
 .dk-card h3{font-size:1.25rem;margin:6px 0 12px;letter-spacing:-.01em}
+.morning-grid h3{font-size:.95rem;margin:0 0 6px}
 .dk-sec{margin-top:12px}.dk-sec b{display:block;font-size:.78rem;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);margin-bottom:4px}.dk-sec p{margin:0;line-height:1.55;font-size:.95rem}
 .dk-tl{list-style:none;padding:0;margin:0;display:grid;gap:6px}.dk-tl li{display:grid;grid-template-columns:56px 1fr;gap:10px;font-size:.93rem;line-height:1.45}.dk-tl time{font-weight:700;font-variant-numeric:tabular-nums}
 .dk-dis{font-size:.78rem;color:var(--muted);margin:14px 0 0}
@@ -1569,6 +1580,7 @@ svg.cd line.wick{animation:fadein .5s ease-out both}
     <div class="ctas">
       <a class="pillbtn lg" href="#join">Join Displace free</a>
       <a class="more" href="#path">See the learning path</a>
+      <a class="more" href="#morning-brief">Read the morning brief</a>
     </div>
     <div class="chooser" role="group" aria-label="Where are you starting?">
       <span>Where are you starting?</span>
@@ -2388,6 +2400,10 @@ svg.cd line.wick{animation:fadein .5s ease-out both}
 <section class="toolpage newspage" id="calendar" style="--ac:#0071e3;--ac2:#30d158">
   <div class="wide">
     <header class="nhero"><div class="kick">News</div><h1 class="h-lg">Economic calendar</h1><p class="sub">Follow scheduled releases and official policy updates in New York time and yours. See reported figures and how they compare with earlier readings.</p><p class="ndis">For education only. Briefings describe reported data and historical reactions.</p></header>
+    <section class="dk-card morning-brief" id="morning-brief" aria-labelledby="morning-title">
+      <div class="dn-head"><h2 id="morning-title">Morning brief</h2><p class="dn-status" id="morning-status" role="status">Loading the latest edition…</p></div>
+      <div id="morning-content"></div>
+    </section>
     <div class="tool on" id="econcal">
         <div class="ec-next" id="ec-next"></div>
         <section class="dk-card" id="nqi-setup" aria-labelledby="nqi-title" hidden>
@@ -2616,7 +2632,8 @@ window.claude={use:function(n){return Promise.resolve(n==="db"?db:null);},isStat
   "use strict";
   var section=document.getElementById("displace-news");
   if(!section)return;
-  if(!window.claude||!window.claude.isStatic){section.hidden=true;return;}
+  var morning=document.getElementById("morning-brief");
+  if(!window.claude||!window.claude.isStatic){section.hidden=morning.hidden=true;return;}
   var grid=document.getElementById("dn-grid"),more=document.getElementById("dn-more");
   var older=document.getElementById("dn-older"),status=document.getElementById("dn-status");
   var dateFormat=new Intl.DateTimeFormat(undefined,{month:"short",day:"numeric",year:"numeric",hour:"numeric",minute:"2-digit",timeZone:"America/New_York"});
@@ -2624,16 +2641,19 @@ window.claude={use:function(n){return Promise.resolve(n==="db"?db:null);},isStat
   function node(tag,value,cls){
     var el=document.createElement(tag);el.textContent=value||"";if(cls)el.className=cls;return el;
   }
-  function card(item){
-    var el=node("article",null,"dn-item");
-    var title=node("h3",item.title);
+  function headline(item){
     try{
       var url=new URL(item.url);
       if(url.protocol==="https:"){
         var link=node("a",item.title);link.href=url.href;link.target="_blank";link.rel="noopener noreferrer";
-        title.replaceChildren(link);
+        return link;
       }
     }catch(error){}
+    return node("span",item.title);
+  }
+  function card(item){
+    var el=node("article",null,"dn-item"),title=node("h3");
+    title.append(headline(item));
     el.append(node("p",[item.source,format(item.published)].filter(Boolean).join(" · "),"dn-meta"),title);
     if(item.analysis)el.append(node("p",item.analysis));
     if(item.context)el.append(node("p",item.context,"dn-context"));
@@ -2650,9 +2670,60 @@ window.claude={use:function(n){return Promise.resolve(n==="db"?db:null);},isStat
     older.replaceChildren.apply(older,doc.items.slice(6).map(card));
     more.hidden=doc.items.length<=6;
   }
+  var morningStatus=document.getElementById("morning-status"),morningContent=document.getElementById("morning-content");
+  var sgtDate=new Intl.DateTimeFormat("en-SG",{weekday:"long",day:"numeric",month:"long",timeZone:"Asia/Singapore"});
+  var sgtEvent=new Intl.DateTimeFormat("en-SG",{weekday:"short",hour:"2-digit",minute:"2-digit",hourCycle:"h23",timeZone:"Asia/Singapore"});
+  var sgtTime=new Intl.DateTimeFormat("en-SG",{hour:"2-digit",minute:"2-digit",hourCycle:"h23",timeZone:"Asia/Singapore"});
+  var editions=[],shown=null,wakeup;
+  function showMorning(){
+    clearTimeout(wakeup);
+    var now=Date.now(),edition=editions.find(function(item){return Date.parse(item.opensAt)<=now;});
+    var change=edition?Date.parse(edition.opensAt)+24*60*60*1000:Infinity;
+    editions.forEach(function(item){var at=Date.parse(item.opensAt);if(at>now&&(change<=now||at<change))change=at;});
+    if(change>now&&Number.isFinite(change))wakeup=setTimeout(showMorning,change-now);
+    if(!edition){
+      morningStatus.textContent=editions.length?"Next edition at 7:00 a.m. SGT.":"Morning brief is temporarily unavailable.";
+      return;
+    }
+    var stale=now>=Date.parse(edition.opensAt)+24*60*60*1000;
+    morningStatus.textContent=sgtDate.format(new Date(edition.opensAt))+" · 7:00 a.m. SGT"+(stale?" · Next edition pending":"");
+    if(shown===edition)return;
+    shown=edition;
+    var grid=node("div",null,"morning-grid"),recent=node("div"),upcoming=node("div");
+    recent.append(node("h3","What changed"));
+    if(edition.updates.length){
+      var updates=node("ul");
+      edition.updates.forEach(function(item){var row=node("li");row.append(headline(item));if(item.analysis)row.append(node("p",item.analysis));updates.append(row);});
+      recent.append(updates);
+    }else recent.append(node("p",edition.feedsChecked&&!edition.feedIssues?"No major official updates in the last 24 hours.":"No recent updates available from the feeds checked."));
+    upcoming.append(node("h3","What to watch · SGT"));
+    if(edition.upcoming.length){
+      var releases=node("ul");
+      edition.upcoming.forEach(function(item){var row=node("li"),at=node("time",sgtEvent.format(new Date(item.at)));at.dateTime=item.at;row.append(at,document.createTextNode(item.title+(item.forecast?" · Forecast "+item.forecast:"")));releases.append(row);});
+      upcoming.append(releases);
+    }else upcoming.append(node("p",edition.calendarCovered?"No major U.S. releases scheduled in the next 24 hours.":"Schedule coverage is limited for the next 24 hours."));
+    if(edition.focus){var focus=node("p",null,"morning-focus");focus.append(node("strong",edition.focus.title+". "),document.createTextNode(edition.focus.text));upcoming.append(focus);}
+    grid.append(recent,upcoming);
+    var footer=[];
+    var treasury=edition.treasury;
+    if(treasury){
+      var delta=treasury.changeBp,move=Number.isFinite(delta)?(delta?" ("+(delta>0?"+":"−")+Math.abs(delta)+" bp)":" (unchanged)"):"";
+      footer.push("U.S. 2-year yield "+treasury.yield.toFixed(2)+"%"+move+" as of "+treasury.date);
+    }
+    footer.push("Compiled "+sgtTime.format(new Date(edition.generatedAt))+" SGT");
+    if(!edition.feedsChecked)footer.push("News refresh pending");
+    else if(edition.feedIssues)footer.push("Some news feeds were unavailable");
+    morningContent.replaceChildren(grid,node("p",footer.join(" · "),"morning-foot"));
+  }
   window.claude.use("db").then(function(db){
     db.doc("news/latest").onSnapshot(function(snapshot){render(snapshot.data());});
-  }).catch(function(){render(null);});
+    db.doc("brief/morning").onSnapshot(function(snapshot){
+      var doc=snapshot.data();
+      if(doc&&doc.version===1&&Array.isArray(doc.editions))editions=doc.editions;
+      showMorning();
+    });
+  }).catch(function(){render(null);showMorning();});
+  document.addEventListener("visibilitychange",function(){if(!document.hidden&&editions.length)showMorning();});
 })();
 </script>
 <script>
