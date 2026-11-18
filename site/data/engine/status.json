@@ -1,8 +1,62 @@
 {
- "lastRun": "2026-11-18T03:31-05:00",
+ "lastRun": "2026-11-18T03:46-05:00",
  "source": "direct public agencies",
  "fredCalls": 1,
- "fred": true,
+ "fred": false,
+ "sources": {
+  "fred": {
+   "state": "unavailable",
+   "checkedAt": "2026-11-18T03:46-05:00",
+   "lastSuccessAt": null
+  },
+  "alfred": {
+   "state": "unavailable",
+   "checkedAt": "2026-11-18T03:46-05:00",
+   "lastSuccessAt": null
+  },
+  "bls": {
+   "state": "available",
+   "checkedAt": "2026-11-18T03:46-05:00",
+   "lastSuccessAt": "2026-11-18T03:46-05:00"
+  },
+  "bea": {
+   "state": "available",
+   "checkedAt": "2026-11-18T03:46-05:00",
+   "lastSuccessAt": "2026-11-18T03:46-05:00"
+  },
+  "census": {
+   "state": "available",
+   "checkedAt": "2026-11-18T03:46-05:00",
+   "lastSuccessAt": "2026-11-18T03:46-05:00"
+  },
+  "treasury": {
+   "state": "available",
+   "checkedAt": "2026-11-18T03:46-05:00",
+   "lastSuccessAt": "2026-11-18T03:46-05:00"
+  },
+  "nyFed": {
+   "state": "available",
+   "checkedAt": "2026-11-18T03:46-05:00",
+   "lastSuccessAt": "2026-11-18T03:46-05:00"
+  },
+  "nasdaqCalendar": {
+   "state": "available",
+   "checkedAt": "2026-11-18T03:46-05:00",
+   "lastSuccessAt": "2026-11-18T03:46-05:00"
+  }
+ },
+ "freshness": {
+  "calendarUpdatedOn": "2026-11-17",
+  "latestActual": {
+   "title": "Retail sales (Oct)",
+   "date": "2026-11-17"
+  },
+  "marketDates": {
+   "y2": "2026-11-17",
+   "y10": "2026-11-17",
+   "effr": "2026-11-16"
+  }
+ },
  "quality": {
   "passed": 11,
   "total": 11,
@@ -18,7 +72,7 @@
  "log": [
   "Public FRED downloads unavailable; using direct agency sources",
   "ALFRED archive unavailable; using direct release data where available",
-  "engine run 2026-11-18T03:31-05:00 using direct public agencies",
+  "engine run 2026-11-18T03:46-05:00 using direct public agencies",
   "quality: 11/11 checks passed, 0 held, 0 rejected"
  ]
 }
