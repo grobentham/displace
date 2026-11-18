@@ -65,6 +65,7 @@ ASSETS = {  # key: (FRED series or None for gold, unit, name, invert)
     "y10": ("DGS10", "bp", "10-year yield", False),
 }
 BINS = ("hot", "cool", "inline")
+BASIS = {}  # kind -> name of the recorded expectation, e.g. {"cpi": "nowcast"}; set by the caller
 NF = 6  # logistic features: 1, z, z*infl, z*hike, z*cut, trend
 
 
@@ -109,19 +110,23 @@ def scale_of(s):
     return (statistics.median(s) * 1.4826 or None) if len(s) >= MIN_N else None
 
 
-def surprises(vals, window, records=None, kind=None):
-    """{release date: (z, value, expected, basis)} with walk-forward scaling."""
+def surprises(vals, window, records=None, kind=None, recorded_only=False):
+    """{release date: (z, value, expected, basis)} with walk-forward scaling.
+    recorded_only: use only releases that have a recorded expectation (e.g. a nowcast), so every surprise in
+    the sample, and its scale, is measured the same way."""
     out, hist = {}, []
     for i, (period, x, rt) in enumerate(vals):
         if not rt or i < window:
             continue
         fc = records.get((kind, rt)) if records else None
+        if recorded_only and fc is None:
+            continue
         exp_ = fc if fc is not None else sum(v[1] for v in vals[i - window:i]) / window
         s = x - exp_
         sc = scale_of(hist)
         hist.append(s)
         if sc and rt >= START:
-            out[rt] = (max(-6, min(6, s / sc)), x, exp_, "consensus" if fc is not None else "trend", period)
+            out[rt] = (max(-6, min(6, s / sc)), x, exp_, BASIS.get(kind, "consensus") if fc is not None else "trend", period)
     return out
 
 
@@ -314,7 +319,7 @@ def build_points(kind, fetch_obs, records, px, other_dates, fed, infl):
     if not obs:
         return [], None
     vals = transform(obs, hm)
-    head = surprises(vals, cfg["window"], records, kind)
+    head = surprises(vals, cfg["window"], records, kind, recorded_only=kind in BASIS)
     comps = []
     for s, m, sign in cfg["comps"]:
         o = [x for x in (fetch_obs(s, "2008-01-01", initial=True) or []) if x[2]]
@@ -333,7 +338,8 @@ def build_points(kind, fetch_obs, records, px, other_dates, fed, infl):
         pts.append({"date": rt, "period": period, "z": round(z, 3), "zh": round(zh, 3), "x": x, "exp": exp_, "basis": basis,
                     "bin": bucket(z), "r": r, "trend": tr, "hike": fed(rt), "infl": infl(rt),
                     "w": 0.5 if rt in other_dates else 1.0})
-    return pts, {"vals": vals, "scale": scale_of([v[1] for v in head.values()])}
+    # scale of the SURPRISES (value - expected), the same yardstick walk-forward used for each z
+    return pts, {"vals": vals, "scale": scale_of([v[1] - v[2] for v in head.values()])}
 
 
 def walk_forward(pts, asset):
@@ -440,6 +446,7 @@ def fit(fetch_obs, gold_fn, records, today, log=print, live_rows=(), price_fns=N
             log(f"direction: not enough history for {kind}")
             continue
         km = {"metric": cfg["metric"], "n": len(pts), "since": pts[0]["date"], "scale": meta["scale"], "mult": cfg["mult"],
+              "basis": BASIS.get(kind, "trend"),
               "window": cfg["window"], "recent": [[rt, x] for _, x, rt in meta["vals"][-8:]], "assets": {},
               "last": [{k: p[k] for k in ("date", "period", "z", "bin", "basis", "hike", "infl")} | {"trend": p["trend"]} for p in pts[-3:]]}
         for a in px:
@@ -506,7 +513,7 @@ def _call(model, kind, a, z, trend):
             "iqr": [c["q1"], c["q3"]], "bt": [bt["hits"], bt["calls"]]}
 
 
-def apply(model, events, kind_of, today, horizon=14, use_consensus=False):
+def apply(model, events, kind_of, today, horizon=14, use_consensus=False, records=None):
     out = {}
     if not model or model.get("version") != 2:
         return out
@@ -525,16 +532,22 @@ def apply(model, events, kind_of, today, horizon=14, use_consensus=False):
                 z, basis = last["z"], last["basis"]  # full composite from the refit after the release
             else:
                 x = figure(e["actual"], km["mult"])
-                fc = figure(e.get("forecast"), km["mult"]) if use_consensus else None
+                fc = (records or {}).get((k, e["date"]))
+                if fc is None and use_consensus:
+                    fc = figure(e.get("forecast"), km["mult"])
+                if fc is None and km.get("basis") not in (None, "trend"):
+                    continue  # this release is modelled against a recorded expectation we don't have
                 prior = [v for d, v in km["recent"] if d < e["date"]][-km["window"]:]
                 exp_ = fc if fc is not None else (sum(prior) / len(prior) if len(prior) == km["window"] else None)
                 if x is None or exp_ is None:
                     continue
-                z, basis = max(-6, min(6, (x - exp_) / km["scale"])), "consensus" if fc is not None else "trend"
+                z, basis = max(-6, min(6, (x - exp_) / km["scale"])), (km.get("basis") or "consensus") if fc is not None else "trend"
             out[e["id"]] = {"kind": k, "date": e["date"], "stage": "post", "z": round(z, 2), "bin": bucket(z), "basis": basis,
                             "calls": {a: c for a in model["assets"] if (c := _call(model, k, a, z, trend.get(a, 0)))}}
         elif days >= 0:
-            out[e["id"]] = {"kind": k, "date": e["date"], "stage": "pre",
+            exp_ = (records or {}).get((k, e["date"]))
+            out[e["id"]] = {"kind": k, "date": e["date"], "stage": "pre", "basis": km.get("basis", "trend"),
+                            **({"expect": round(exp_, 3)} if exp_ is not None else {}),
                             "hot": {a: c for a in model["assets"] if (c := _call(model, k, a, 1.0, trend.get(a, 0)))},
                             "cool": {a: c for a in model["assets"] if (c := _call(model, k, a, -1.0, trend.get(a, 0)))}}
     return out
