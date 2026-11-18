@@ -10,20 +10,24 @@
      "id": "20261117-retail-sales-oct",
      "title": "Retail sales (Oct)",
      "url": "https://www.census.gov/retail/sales.html",
+     "source": "Census Bureau",
      "analysis": "Retail sales came in at 0.2% against a 0.2% forecast, in line with expectations. The previous reading was 0.8%.",
+     "context": "Retail sales are reported in dollars. Changes can reflect prices as well as the volume of goods sold.",
      "published": "2026-11-17T21:30:00+08:00"
     }
    ],
    "upcoming": [
     {
      "at": "2026-11-19T03:00+08:00",
-     "title": "FOMC minutes (Oct 27–28 meeting)"
+     "title": "FOMC minutes (Oct 27–28 meeting)",
+     "watch": "Look for disagreement over inflation and jobs, and what officials said would justify a change in rates.",
+     "source": "Federal Reserve"
     }
    ],
    "moreReleases": [],
    "focus": {
     "title": "FOMC minutes",
-    "text": "The minutes show how officials weighed the last decision."
+    "at": "2026-11-19T03:00+08:00"
    },
    "nextFed": "Dec 8–9",
    "otherCloses": [],
@@ -34,7 +38,7 @@
    },
    "outlook": {
     "label": "Neutral",
-    "reason": "Treasury moves gave no clear directional signal for tech stocks.",
+    "reason": "The 10-year yield moved by less than 3 bp. A tilt requires both yields to reach that threshold.",
     "rates": {
      "date": "2026-11-17",
      "twoYearBp": -3,
@@ -60,6 +64,7 @@
       "session": "AMC",
       "date": "2026-11-18",
       "confirmed": false,
+      "source": "Nasdaq earnings calendar",
       "at": "2026-11-19T05:05+08:00",
       "timeConfirmed": false
      }
@@ -69,7 +74,8 @@
    },
    "calendarCovered": true,
    "feedsChecked": true,
-   "feedIssues": false
+   "feedIssues": false,
+   "refreshedAt": "2026-11-18T20:38:57+08:00"
   }
  ]
 }
