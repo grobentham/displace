@@ -171,6 +171,24 @@ def main():
         assert len(full["rows"]) == len([o for o in series["ICSA"] if o[2] >= "2008-01-01"]), len(full["rows"])
         assert [r[0] for r in full["rows"]] == sorted(r[0] for r in full["rows"]), "history out of order"
 
+        # 6b. A vintage that keeps failing is retried on later runs and skipped after three; history stays ordered
+        for f in os.listdir(st.CACHE_DIR):
+            if f.startswith("ICSA"):
+                os.remove(os.path.join(st.CACHE_DIR, f))
+        bad = sorted({o[2] for o in series["ICSA"]})[40]
+        st.time.sleep = lambda s: None
+        for run in range(1, 6):
+            src = Alfred(series)
+            orig = src.snapshot
+            src.snapshot = lambda sid, v, start, orig=orig: (_ for _ in ()).throw(OSError("flaky")) if v == bad else orig(sid, v, start)
+            later = when + dt.timedelta(hours=run)
+            got = st.Store(later, st.model_modes(P.D.MODELS), log=lambda *a: None, source=src)("ICSA", "2008-01-01", initial=True)
+            c = st.load("ICSA", True)
+            if run < 3:
+                assert got is None and c.get("through", "") < bad, (run, c.get("through"))
+        assert got and c.get("complete") and c["fails"][bad] == 3
+        assert [r[0] for r in c["rows"]] == sorted(r[0] for r in c["rows"])
+
         # 7. Chaining keeps the published change even when earlier months were revised in the same vintage
         rows = [["2026-08-01", 100.0, "2026-09-10"]]
         st.chain(rows, "2026-10-10", [("2026-08-01", 200.0), ("2026-09-01", 202.0)], "pct")  # Aug revised up a lot
