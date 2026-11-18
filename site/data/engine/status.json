@@ -1,53 +1,53 @@
 {
- "lastRun": "2026-11-18T12:02-05:00",
+ "lastRun": "2026-11-18T12:41-05:00",
  "source": "public FRED and agency data",
- "fredCalls": 76,
+ "fredCalls": 75,
  "fred": true,
  "sources": {
   "fred": {
-   "state": "partial",
-   "checkedAt": "2026-11-18T12:02-05:00",
-   "lastSuccessAt": "2026-11-18T12:02-05:00"
+   "state": "available",
+   "checkedAt": "2026-11-18T12:41-05:00",
+   "lastSuccessAt": "2026-11-18T12:41-05:00"
   },
   "alfred": {
    "state": "available",
-   "checkedAt": "2026-11-18T12:02-05:00",
-   "lastSuccessAt": "2026-11-18T12:02-05:00"
+   "checkedAt": "2026-11-18T12:41-05:00",
+   "lastSuccessAt": "2026-11-18T12:41-05:00"
   },
   "bls": {
    "state": "available",
-   "checkedAt": "2026-11-18T12:02-05:00",
-   "lastSuccessAt": "2026-11-18T12:02-05:00"
+   "checkedAt": "2026-11-18T12:41-05:00",
+   "lastSuccessAt": "2026-11-18T12:41-05:00"
   },
   "bea": {
    "state": "available",
-   "checkedAt": "2026-11-18T12:02-05:00",
-   "lastSuccessAt": "2026-11-18T12:02-05:00"
+   "checkedAt": "2026-11-18T12:41-05:00",
+   "lastSuccessAt": "2026-11-18T12:41-05:00"
   },
   "census": {
    "state": "available",
-   "checkedAt": "2026-11-18T12:02-05:00",
-   "lastSuccessAt": "2026-11-18T12:02-05:00"
+   "checkedAt": "2026-11-18T12:41-05:00",
+   "lastSuccessAt": "2026-11-18T12:41-05:00"
   },
   "treasury": {
-   "state": "not_checked",
-   "checkedAt": "2026-11-18T08:07-05:00",
-   "lastSuccessAt": "2026-11-18T08:07-05:00"
+   "state": "available",
+   "checkedAt": "2026-11-18T12:41-05:00",
+   "lastSuccessAt": "2026-11-18T12:41-05:00"
   },
   "nyFed": {
    "state": "available",
-   "checkedAt": "2026-11-18T12:02-05:00",
-   "lastSuccessAt": "2026-11-18T12:02-05:00"
+   "checkedAt": "2026-11-18T12:41-05:00",
+   "lastSuccessAt": "2026-11-18T12:41-05:00"
   },
   "fedStatements": {
-   "state": "not_checked",
-   "checkedAt": null,
-   "lastSuccessAt": null
+   "state": "available",
+   "checkedAt": "2026-11-18T12:41-05:00",
+   "lastSuccessAt": "2026-11-18T12:41-05:00"
   },
   "nasdaqCalendar": {
    "state": "available",
-   "checkedAt": "2026-11-18T12:02-05:00",
-   "lastSuccessAt": "2026-11-18T12:02-05:00"
+   "checkedAt": "2026-11-18T12:41-05:00",
+   "lastSuccessAt": "2026-11-18T12:41-05:00"
   }
  },
  "freshness": {
@@ -57,29 +57,28 @@
    "date": "2026-11-17"
   },
   "marketDates": {
-   "y2": "2026-11-16",
-   "y10": "2026-11-16",
-   "effr": "2026-11-16"
+   "y2": "2026-11-17",
+   "y10": "2026-11-17",
+   "effr": "2026-11-17"
   }
  },
  "quality": {
-  "passed": 33,
-  "total": 34,
+  "passed": 28,
+  "total": 28,
   "held": 0,
   "rejected": 0,
   "critical": 0
  },
- "fredErrors": 1,
- "calendarThrough": "2027-03-31",
- "events": 89,
- "upcoming": 81,
- "warnings": [
-  "Data source errors on 1 request(s): release 101"
- ],
+ "fredErrors": 0,
+ "calendarThrough": "2027-04-07",
+ "events": 93,
+ "upcoming": 85,
+ "warnings": [],
  "log": [
-  "engine run 2026-11-18T12:02-05:00 using public FRED and agency data",
-  "consensus: 9 forecast(s) filled from TradingView",
+  "engine run 2026-11-18T12:41-05:00 using public FRED and agency data",
+  "calendar: 4 added, 0 removed",
+  "consensus: 1 forecast(s) filled from TradingView",
   "calendar saved",
-  "quality: 33/34 checks passed, 0 held, 0 rejected"
+  "quality: 28/28 checks passed, 0 held, 0 rejected"
  ]
 }

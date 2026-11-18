@@ -1,6 +1,6 @@
 {
  "updated": "2026-11-18",
- "through": "2027-03-31",
+ "through": "2027-04-07",
  "events": [
   {
    "id": "20261104-adp-private-payrolls-oct",
@@ -305,7 +305,9 @@
      "label": "Real GDP, annualized",
      "previous": "2.2%"
     }
-   ]
+   ],
+   "forecast": "3.4%",
+   "fsrc": "TradingView consensus"
   },
   {
    "date": "2026-11-25",
@@ -1219,6 +1221,17 @@
    "id": "20270215-presidents-day-us-markets-closed"
   },
   {
+   "id": "20270217-fomc-minutes-jan-26-27-meeting",
+   "date": "2027-02-17",
+   "time": "14:00",
+   "title": "FOMC minutes (Jan 26–27 meeting)",
+   "cur": "USD",
+   "impact": "medium",
+   "src": "Federal Reserve",
+   "note": "Released three weeks after each decision.",
+   "auto": "rule"
+  },
+  {
    "date": "2027-02-18",
    "time": "08:30",
    "title": "Initial jobless claims",
@@ -1297,6 +1310,29 @@
    "auto": "rule"
   },
   {
+   "id": "20270303-beige-book",
+   "date": "2027-03-03",
+   "time": "14:00",
+   "title": "Beige Book",
+   "cur": "USD",
+   "impact": "medium",
+   "src": "Federal Reserve",
+   "note": "Usually two weeks before each Fed meeting; confirm on federalreserve.gov.",
+   "auto": "rule"
+  },
+  {
+   "id": "20270317-fomc-rate-decision-projections-dot-plot",
+   "date": "2027-03-17",
+   "time": "14:00",
+   "title": "FOMC rate decision + projections (dot plot)",
+   "cur": "USD",
+   "impact": "high",
+   "src": "Federal Reserve",
+   "note": "",
+   "auto": "public",
+   "metric": "Fed funds target, upper bound"
+  },
+  {
    "id": "20270326-good-friday",
    "date": "2027-03-26",
    "time": "",
@@ -1341,6 +1377,17 @@
    "note": "Scheduled one hour before the U.S. stock market opens.",
    "auto": "public",
    "metric": "Core PCE m/m"
+  },
+  {
+   "id": "20270407-fomc-minutes-mar-16-17-meeting",
+   "date": "2027-04-07",
+   "time": "14:00",
+   "title": "FOMC minutes (Mar 16–17 meeting)",
+   "cur": "USD",
+   "impact": "medium",
+   "src": "Federal Reserve",
+   "note": "Released three weeks after each decision.",
+   "auto": "rule"
   }
  ]
 }
