@@ -47,14 +47,19 @@ REPORTS = {
     "umich": [("Michigan Consumer Sentiment Prel", 1, 1), ("Michigan Consumer Sentiment Final", 1, 1)],
     "conf": [("CB Consumer Confidence", 1, 1)],
     "homes": [("New Home Sales", 1, 1)],
+    "fomc": [("Interest Rate", 1, 1)],
 }
+# The Fed's decision rarely differs from the consensus, so its surprises can't set their own scale:
+# a quarter-point surprise counts as one typical surprise.
+FIXED_SCALE = {"Interest Rate": 0.25}
+CACHE_VERSION = 2  # bump when REPORTS gains titles, so older months are downloaded again
 GROUPS = {"inflation": ("cpi", "ppi", "pce"), "labor": ("nfp", "claims", "jolts", "adp"),
           "activity": ("retail", "durables", "gdp", "ism-m", "ism-s", "philly", "empire"),
-          "sentiment": ("umich", "conf"), "housing": ("homes",)}
+          "sentiment": ("umich", "conf"), "housing": ("homes",), "fed": ("fomc",)}
 GROUP_OF = {k: g for g, ks in GROUPS.items() for k in ks}
 TITLES = {t: (k, s, w) for k, comps in REPORTS.items() for t, s, w in comps}
 # kept for showing the consensus on the calendar, not used by the model
-DISPLAY = {"GDP Growth Rate QoQ 2nd Est", "GDP Growth Rate QoQ Final", "Interest Rate"}
+DISPLAY = {"GDP Growth Rate QoQ 2nd Est", "GDP Growth Rate QoQ Final"}
 
 
 def _months(a, b):
@@ -93,7 +98,7 @@ def sync(today, log=print, fetch=_fetch, budget=240):
     t0, n, failed = time.monotonic(), 0, 0
     for a, b in _months(START, end):
         path = os.path.join(CACHE_DIR, a.strftime("%Y-%m") + ".json")
-        if os.path.exists(path) and a < fresh_from:
+        if os.path.exists(path) and a < fresh_from and _version(path) >= CACHE_VERSION:
             continue
         if time.monotonic() - t0 > budget:
             log("tv: download budget used; the rest loads next run")
@@ -107,9 +112,21 @@ def sync(today, log=print, fetch=_fetch, budget=240):
                 break
             continue
         with open(path, "w") as fh:
-            json.dump(rows, fh, separators=(",", ":"))
+            json.dump({"v": CACHE_VERSION, "rows": rows}, fh, separators=(",", ":"))
         n += 1
     return n
+
+
+def _version(path):
+    try:
+        c = json.load(open(path))
+    except (OSError, ValueError):
+        return 0
+    return c.get("v", 1) if isinstance(c, dict) else 1
+
+
+def _rows(c):
+    return c.get("rows", []) if isinstance(c, dict) else c
 
 
 def raw_events():
@@ -118,7 +135,7 @@ def raw_events():
         for f in sorted(os.listdir(CACHE_DIR)):
             if f.endswith(".json"):
                 try:
-                    out += json.load(open(os.path.join(CACHE_DIR, f)))
+                    out += _rows(json.load(open(os.path.join(CACHE_DIR, f))))
                 except ValueError:
                     pass
     seen, uniq = set(), []
@@ -151,20 +168,27 @@ def releases(raw=None):
         when = dt.datetime.fromisoformat(e["d"].replace("Z", "+00:00")).astimezone(NY)
         a, f = _num(e["a"]), _num(e["f"])
         slot = slots.setdefault((k, when), {"parts": [], "comps": []})
-        slot["comps"].append({"title": e["t"], "actual": a, "forecast": f, "unit": e.get("u"), "scale": e.get("s"),
-                              "weight": w})
+        slot["comps"].append({"title": e["t"], "actual": a, "forecast": f, "previous": _num(e.get("p")),
+                              "unit": e.get("u"), "scale": e.get("s"), "weight": w})
         if a is None or f is None:
             continue
         past = hist.setdefault(e["t"], [])
-        if len(past) >= MIN_HIST:
+        sc = FIXED_SCALE.get(e["t"])
+        if sc is None and len(past) >= MIN_HIST:
             sc = statistics.median(abs(x) for x in past) * 1.4826
-            if sc > 0:
-                slot["parts"].append((max(-CLIP, min(CLIP, sign * (a - f) / sc)), w))
+        if sc:
+            slot["parts"].append((max(-CLIP, min(CLIP, sign * (a - f) / sc)), w))
         past.append(a - f)
     out = []
     for (k, when), s in sorted(slots.items(), key=lambda x: x[0][1]):
         z = sum(z * w for z, w in s["parts"]) / sum(w for _, w in s["parts"]) if s["parts"] else None
-        out.append({"when": when, "kind": k, "group": GROUP_OF[k], "z": z, "comps": s["comps"]})
+        rel = {"when": when, "kind": k, "group": GROUP_OF[k], "z": z, "comps": s["comps"]}
+        if k == "fomc" and s["comps"]:
+            c = s["comps"][0]
+            if c["actual"] is not None and c["previous"] is not None:
+                d = c["actual"] - c["previous"]
+                rel["decision"] = "hike" if d > 0.01 else "cut" if d < -0.01 else "hold"
+        out.append(rel)
     return out
 
 

@@ -71,8 +71,32 @@ def main():
     log = [{"asset": "gold2h", "when": "2026-10-01T08:30:00-04:00", "dir": "down"}]
     S.score(log, {"gold2h": S.Hourly([], dt.datetime(2026, 10, 1, 9, tzinfo=NY))}, None)
     assert "hit" not in log[0]
+    # minute reactions: Dukascopy history first, then 5-minute bars, never an unfinished window
+    rel = dt.datetime(2020, 1, 14, 8, 30, tzinfo=NY)  # 13:30 UTC
+    pts = [100.0] * 30 + [None] * 121 + [None] * 120
+    pts[30 + 15] = 101.0
+    pts[30 + 120] = 99.0
+    m15 = S.Minutes(15, duka={"2020-01-14T13:30": pts})
+    assert abs(m15.move(rel) - 1.0) < 1e-9 and abs(S.Minutes(120, duka={"2020-01-14T13:30": pts}).move(rel) + 1.0) < 1e-9
+    later = dt.datetime(2026, 12, 10, 8, 30, tzinfo=NY)
+    b5 = [(later - dt.timedelta(minutes=5), 0, 0, 0, 200.0), (later + dt.timedelta(minutes=10), 0, 0, 0, 202.0)]
+    assert abs(S.Minutes(15, bars5=b5, complete_before=later + dt.timedelta(minutes=20)).move(later) - 1.0) < 1e-9
+    assert S.Minutes(15, bars5=b5, complete_before=later + dt.timedelta(minutes=10)).move(later) is None
+    test_hist_bias()
     print("surprise tests passed")
 
+
+
+def test_hist_bias():
+    m = {"scenarios": {"cpi": {"assets": {"gold": {"hot": {"n": 40, "up": 0.3}, "cool": {"n": 40, "up": 0.55},
+                                                     "inline": {"n": 10, "up": 0.9}}}}}}
+    assert S.hist_bias(m, "cpi", "gold", "hot") == {"dir": "down", "p": 0.7, "n": 40}
+    assert S.hist_bias(m, "cpi", "gold", "cool") is None      # could be chance
+    assert S.hist_bias(m, "cpi", "gold", "inline") is None    # too few
+    rows = [{"asset": "gold", "dir": "up", "when": "2025-01-01T10:00:00-05:00", "tier": "hist"},
+            {"asset": "gold", "dir": "up", "when": "2025-01-01T10:00:00-05:00"}]
+    r = S.score(rows, {}, None)
+    assert r["open"] == 1 and r["hist"]["open"] == 1
 
 if __name__ == "__main__":
     main()

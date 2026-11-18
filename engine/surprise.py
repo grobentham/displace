@@ -5,8 +5,10 @@ than expected. Reports are pooled by theme (inflation, labor, activity, sentimen
 from hundreds of releases instead of a few dozen.
 
 Markets and horizons
-  gold2h, nq2h   first ~2 hours: open of the hourly bar holding the release -> close one bar later
-                 (08:30 release: 08:00 -> 10:00 New York). Hourly futures bars, archived since mid-2024.
+  gold15m, nq15m first 15 minutes: the minute before the release -> 15 minutes after
+  gold2h, nq2h   first 2 hours: the minute before the release -> 2 hours after
+                 Minute prices from Dukascopy (history since 2010) and archived 5-minute futures bars; where
+                 neither exists, the hourly bar holding the release -> the close one bar later.
   gold, nq       release-day close vs the day before (2010 onward)
   usd, y2        Fed broad dollar index and the 2-year Treasury yield, release-day close vs the day before
 
@@ -29,14 +31,16 @@ import statistics
 import tv
 
 MARKETS = {  # key: (name, unit, horizon)
+    "gold15m": ("Gold, first 15m", "pct", "15m"), "nq15m": ("Nasdaq 100, first 15m", "pct", "15m"),
     "gold2h": ("Gold, first 2h", "pct", "2h"), "nq2h": ("Nasdaq 100, first 2h", "pct", "2h"),
     "gold": ("Gold, close", "pct", "close"), "nq": ("Nasdaq 100, close", "pct", "close"),
     "usd": ("Dollar, close", "pct", "close"), "y2": ("2-yr yield, close", "bp", "close"),
 }
 HALF_LIFE = 5.0
 EDGE = 0.05
-MIN_TRAIN = {"2h": 25, "close": 60}
-MIN_CALLS = {"2h": 20, "close": 30}
+MIN_TRAIN = {"15m": 25, "2h": 25, "close": 60}
+MIN_CALLS = {"15m": 20, "2h": 20, "close": 30}
+MINUTES = {"15m": 15, "2h": 120}
 PROVEN_RATE, FDR_Q, BREAKER_N = 0.55, 0.10, 20
 BIN = 0.5  # |z| below this counts as "in line" in the scenario map
 
@@ -78,11 +82,47 @@ class Hourly:
         return (end[4] / o - 1) * 100 if o else None
 
 
+class Minutes:
+    """Move from the minute before a release to `minutes` after it.
+    duka: {"YYYY-MM-DDTHH:MM" (UTC release time): [closes from -before to +after minutes]} (Dukascopy history)
+    bars5: [(start NY, o, h, l, c)] 5-minute bars (Yahoo archive, going forward); fallback: an Hourly source."""
+
+    def __init__(self, minutes, duka=None, before=30, bars5=(), complete_before=None, fallback=None):
+        self.minutes, self.duka, self.before = minutes, duka or {}, before
+        self.by5 = {r[0]: r for r in bars5}
+        self.complete_before = complete_before
+        self.fallback = fallback
+
+    def _duka(self, when):
+        pts = self.duka.get(when.astimezone(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M"))
+        if not pts:
+            return None
+        p0 = next((p for p in reversed(pts[:self.before]) if p), None)  # last close before the release minute
+        i = self.before + self.minutes
+        p1 = next((pts[j] for j in (i, i - 1, i - 2) if 0 <= j < len(pts) and pts[j]), None)
+        return (p1 / p0 - 1) * 100 if p0 and p1 else None
+
+    def _bars5(self, when):
+        a = self.by5.get(when - dt.timedelta(minutes=5))
+        b = self.by5.get(when + dt.timedelta(minutes=self.minutes - 5))
+        if not a or not b or (self.complete_before and when + dt.timedelta(minutes=self.minutes) > self.complete_before):
+            return None
+        return (b[4] / a[4] - 1) * 100 if a[4] else None
+
+    def move(self, when):
+        m = self._duka(when)
+        if m is None:
+            m = self._bars5(when)
+        if m is None and self.fallback is not None:
+            m = self.fallback.move(when)
+        return m
+
+
 def reaction(markets, key, when):
     m = markets.get(key)
     if m is None:
         return None
-    return m.move(when) if MARKETS[key][2] == "2h" else m.move(when.date().isoformat())
+    return m.move(when) if MARKETS[key][2] in MINUTES else m.move(when.date().isoformat())
 
 
 # ----------------------------------------------------------------- model
@@ -175,7 +215,7 @@ def bh(pvals, q=FDR_Q):
 
 
 def dataset(rels, markets, key, settled_before):
-    """[(when, z, up, move, kind)] for one market."""
+    """[(when, z, up, move, kind, decision)] for one market."""
     out = []
     for r in rels:
         if r["z"] is None or r["when"] >= settled_before:
@@ -183,7 +223,7 @@ def dataset(rels, markets, key, settled_before):
         m = reaction(markets, key, r["when"])
         if m is None or m == 0:
             continue
-        out.append((r["when"], r["z"], 1 if m > 0 else 0, m, r["kind"]))
+        out.append((r["when"], r["z"], 1 if m > 0 else 0, m, r["kind"], r.get("decision")))
     return out
 
 
@@ -196,7 +236,7 @@ def fit(rels, markets, now, live_rows=()):
     for g, kinds in tv.GROUPS.items():
         gm = model["groups"].setdefault(g, {})
         for key in markets:
-            pts = [(w, z, y) for w, z, y, _, k in data[key] if k in kinds]
+            pts = [(w, z, y) for w, z, y, _, k, _ in data[key] if k in kinds]
             hz = MARKETS[key][2]
             if len(pts) < MIN_TRAIN[hz] + 10:
                 continue
@@ -228,19 +268,30 @@ def fit(rels, markets, now, live_rows=()):
     # scenario map per report: above / near / below consensus
     for kind in tv.REPORTS:
         sc = {}
+        dec = {}
         for key in markets:
-            rows = [(z, m) for w, z, y, m, k in data[key] if k == kind]
+            rows = [(z, m, d) for w, z, y, m, k, d in data[key] if k == kind]
             if len(rows) < 8:
                 continue
             cells = {}
             for name, sel in (("hot", lambda z: z >= BIN), ("inline", lambda z: -BIN < z < BIN), ("cool", lambda z: z <= -BIN)):
-                ms = [m for z, m in rows if sel(z)]
+                ms = [m for z, m, _ in rows if sel(z)]
                 if ms:
                     cells[name] = {"n": len(ms), "up": round(sum(m > 0 for m in ms) / len(ms), 3),
                                    "med": round(statistics.median(ms), 3)}
             sc[key] = cells
+            if kind == "fomc":  # also by what the Fed did, since the decision itself rarely surprises
+                dc = {}
+                for name in ("hike", "hold", "cut"):
+                    ms = [m for _, m, d in rows if d == name]
+                    if ms:
+                        dc[name] = {"n": len(ms), "up": round(sum(m > 0 for m in ms) / len(ms), 3),
+                                    "med": round(statistics.median(ms), 3)}
+                dec[key] = dc
         if sc:
-            model["scenarios"][kind] = {"n": max(len([1 for *_, k in data[key] if k == kind]) for key in markets), "assets": sc}
+            model["scenarios"][kind] = {"n": max(len([1 for r in data[key] if r[4] == kind]) for key in markets), "assets": sc}
+            if dec:
+                model["scenarios"][kind]["decision"] = dec
     return model
 
 
@@ -264,6 +315,21 @@ def call(model, group, key, z):
             "n": s["n"]}
 
 
+HIST_MIN, HIST_RATE, HIST_Z = 15, 0.6, 1.65
+
+
+def hist_bias(model, kind, key, side):
+    """The 'not proven' side from the plain record of past releases (same rule the site shows)."""
+    x = model["scenarios"].get(kind, {}).get("assets", {}).get(key, {}).get(side)
+    if not x or x["n"] < HIST_MIN:
+        return None
+    n, up = x["n"], x["up"]
+    zs = abs(up - 0.5) * n / math.sqrt(n / 4)
+    if zs < HIST_Z or HIST_RATE > max(up, 1 - up):
+        return None
+    return {"dir": "up" if up > 0.5 else "down", "p": round(max(up, 1 - up), 3), "n": n}
+
+
 def score(log_rows, markets, now):
     """Score logged calls once their window has closed."""
     for r in log_rows:
@@ -275,11 +341,15 @@ def score(log_rows, markets, now):
             continue
         r["move"] = round(m, 3)
         r["hit"] = (m > 0) == (r["dir"] == "up")
-    done = [r for r in log_rows if "hit" in r]
-    by = {}
-    for r in done:
-        b = by.setdefault(r["asset"], [0, 0])
-        b[0] += r["hit"]
-        b[1] += 1
-    return {"calls": len(done), "hits": sum(r["hit"] for r in done), "open": len(log_rows) - len(done),
-            "byAsset": by, "recent": done[-12:][::-1]}
+    out = {}
+    for tier in ("tested", "hist"):
+        rows = [r for r in log_rows if r.get("tier", "tested") == tier]
+        done = [r for r in rows if "hit" in r]
+        by = {}
+        for r in done:
+            b = by.setdefault(r["asset"], [0, 0])
+            b[0] += r["hit"]
+            b[1] += 1
+        out[tier] = {"calls": len(done), "hits": sum(r["hit"] for r in done), "open": len(rows) - len(done),
+                     "byAsset": by, "recent": done[-12:][::-1]}
+    return {**out["tested"], "hist": out["hist"]}
