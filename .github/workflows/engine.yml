@@ -4,15 +4,15 @@ name: Engine
 # Times are UTC and chosen so each New York release window is covered in both winter and summer time.
 on:
   schedule:
-    - cron: "45 11 * * 1-5"  # daily brief (06:45/07:45 New York)
-    - cron: "45 12 * * 1-5"  # daily brief refresh
-    - cron: "50 13 * * 1-5"  # after 08:30 releases
-    - cron: "20 14 * * 1-5"  # after 08:30 / 10:00 releases
-    - cron: "20 15 * * 1-5"  # after 10:00 releases
-    - cron: "30 19 * * 1-5"  # after 14:00 (Fed) releases
-    - cron: "20 22 * * 1-5"  # late data and archived readings
-    - cron: "20 22 * * 0"    # Sunday: weekly outlook
-    - cron: "40 22 * * *"    # prepare the 07:00 SGT brief starting at 06:40 SGT
+    - cron: "47 11 * * 1-5"  # daily brief (06:45/07:45 New York)
+    - cron: "47 12 * * 1-5"  # daily brief refresh
+    - cron: "52 13 * * 1-5"  # after 08:30 releases
+    - cron: "22 14 * * 1-5"  # after 08:30 / 10:00 releases
+    - cron: "22 15 * * 1-5"  # after 10:00 releases
+    - cron: "32 19 * * 1-5"  # after 14:00 (Fed) releases
+    - cron: "22 22 * * 1-5"  # late data and archived readings
+    - cron: "22 22 * * 0"    # Sunday: weekly outlook
+    - cron: "42 22 * * *"    # prepare the 07:00 SGT brief starting at 06:40 SGT
   workflow_dispatch:
   pull_request:
     branches: [main]
