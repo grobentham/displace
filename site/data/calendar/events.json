@@ -3,6 +3,33 @@
  "through": "2027-03-31",
  "events": [
   {
+   "id": "20261104-adp-private-payrolls-oct",
+   "date": "2026-11-04",
+   "time": "08:15",
+   "title": "ADP private payrolls (Oct)",
+   "cur": "USD",
+   "impact": "medium",
+   "src": "ADP",
+   "note": "Scheduled 75 minutes before the U.S. stock market opens.",
+   "auto": "public",
+   "metric": "ADP private payrolls",
+   "previous": "86K",
+   "actual": "86K",
+   "provenance": {
+    "via": "ALFRED",
+    "series": "ADPMNUSNERSA",
+    "asof": "2026-11-05"
+   },
+   "components": [
+    {
+     "label": "ADP private payrolls",
+     "actual": "86K",
+     "previous": "86K"
+    }
+   ],
+   "facts": []
+  },
+  {
    "id": "20261104-ism-services-pmi-oct",
    "date": "2026-11-04",
    "time": "10:00",
@@ -12,6 +39,46 @@
    "src": "ISM",
    "note": "Usually the third business day of the month; confirm on ismworld.org.",
    "auto": "rule"
+  },
+  {
+   "id": "20261105-initial-jobless-claims",
+   "date": "2026-11-05",
+   "time": "08:30",
+   "title": "Initial jobless claims",
+   "cur": "USD",
+   "impact": "medium",
+   "src": "Dept. of Labor",
+   "note": "Scheduled one hour before the U.S. stock market opens.",
+   "auto": "public",
+   "metric": "Initial claims",
+   "previous": "195K",
+   "actual": "189K",
+   "provenance": {
+    "via": "ALFRED",
+    "series": "ICSA",
+    "asof": "2026-11-06"
+   },
+   "components": [
+    {
+     "label": "Initial claims",
+     "actual": "189K",
+     "previous": "195K"
+    },
+    {
+     "label": "4-week average",
+     "actual": "195K",
+     "previous": "197K"
+    },
+    {
+     "label": "Continuing claims",
+     "actual": "1.72M",
+     "previous": "1.70M"
+    }
+   ],
+   "facts": [
+    "The initial claims reading was the lowest since week to Jul 18."
+   ],
+   "recap": "Jobless claims came in at 189K. The previous reading was 195K. 4-week average 195K (previous 197K); Continuing claims 1.72M (previous 1.70M). The initial claims reading was the lowest since week to Jul 18."
   },
   {
    "date": "2026-11-06",
@@ -128,7 +195,21 @@
    "note": "Weekly initial claims for unemployment insurance.",
    "id": "20261119-initial-jobless-claims",
    "previous": "200K",
-   "metric": "initial claims"
+   "metric": "initial claims",
+   "components": [
+    {
+     "label": "Initial claims",
+     "previous": "200K"
+    },
+    {
+     "label": "4-week average",
+     "previous": "195K"
+    },
+    {
+     "label": "Continuing claims",
+     "previous": "1.70M"
+    }
+   ]
   },
   {
    "date": "2026-11-20",
@@ -142,7 +223,17 @@
    "forecast": "51.0",
    "fsrc": "AP preview",
    "previous": "48.0",
-   "metric": "UMich consumer sentiment index"
+   "metric": "UMich consumer sentiment index",
+   "components": [
+    {
+     "label": "Consumer sentiment",
+     "previous": "48.1"
+    },
+    {
+     "label": "1-yr inflation expectations",
+     "previous": "4.6%"
+    }
+   ]
   },
   {
    "date": "2026-11-24",
@@ -166,7 +257,17 @@
    "note": "Scheduled one hour before the U.S. stock market opens.",
    "id": "20261125-durable-goods-orders-oct",
    "previous": "1.8%",
-   "metric": "durable goods orders month-on-month"
+   "metric": "durable goods orders month-on-month",
+   "components": [
+    {
+     "label": "Durable goods m/m",
+     "previous": "1.9%"
+    },
+    {
+     "label": "Ex transportation m/m",
+     "previous": "0.5%"
+    }
+   ]
   },
   {
    "date": "2026-11-25",
@@ -182,7 +283,13 @@
     "asof": "2026-11-15",
     "context": "The advance estimate showed the economy grew at a 3.4% annualized rate in the third quarter, above the 3.2% economists had expected, led by consumer spending. This second estimate revises that figure with more complete data. It lands the same morning as the October PCE inflation report, two weeks before the Fed's December meeting."
    },
-   "metric": "real GDP growth, annualized"
+   "metric": "real GDP growth, annualized",
+   "components": [
+    {
+     "label": "Real GDP, annualized",
+     "previous": "2.2%"
+    }
+   ]
   },
   {
    "date": "2026-11-25",
@@ -209,7 +316,29 @@
     "asof": "2026-11-15",
     "context": "Core PCE prices rose 0.3% in September and 3.1% from a year earlier, up from 3.0% in August, while the headline index was up 3.6% on the year. PCE is the Fed's preferred inflation gauge, and markets are pricing a rate increase at the December 8-9 meeting. October CPI, released November 10, showed core consumer prices up 0.3% for a third straight month."
    },
-   "metric": "core PCE price index month-on-month"
+   "metric": "core PCE price index month-on-month",
+   "components": [
+    {
+     "label": "Core PCE m/m",
+     "previous": "0.3%"
+    },
+    {
+     "label": "PCE m/m",
+     "previous": "0.5%"
+    },
+    {
+     "label": "Core PCE y/y",
+     "previous": "3.1%"
+    },
+    {
+     "label": "Personal spending m/m",
+     "previous": "0.5%"
+    },
+    {
+     "label": "Personal income m/m",
+     "previous": "0.2%"
+    }
+   ]
   },
   {
    "date": "2026-11-25",
@@ -221,7 +350,13 @@
    "note": "",
    "previous": "676K",
    "id": "20261125-new-home-sales-oct",
-   "metric": "new home sales, annualized rate"
+   "metric": "new home sales, annualized rate",
+   "components": [
+    {
+     "label": "New home sales",
+     "previous": "676K"
+    }
+   ]
   },
   {
    "date": "2026-11-25",
@@ -297,7 +432,36 @@
    "note": "ADP uses private payroll data. The BLS publishes the official jobs report separately.",
    "id": "20261202-adp-private-payrolls-nov",
    "previous": "86K",
-   "metric": "change in ADP private payrolls"
+   "metric": "change in ADP private payrolls",
+   "components": [
+    {
+     "label": "ADP private payrolls",
+     "previous": "86K"
+    }
+   ]
+  },
+  {
+   "id": "20261203-durable-goods-orders-nov",
+   "date": "2026-12-03",
+   "time": "08:30",
+   "title": "Durable goods orders (Nov)",
+   "cur": "USD",
+   "impact": "medium",
+   "src": "Census Bureau",
+   "note": "Scheduled one hour before the U.S. stock market opens.",
+   "auto": "public",
+   "metric": "Durable goods m/m",
+   "previous": "1.9%",
+   "components": [
+    {
+     "label": "Durable goods m/m",
+     "previous": "1.9%"
+    },
+    {
+     "label": "Ex transportation m/m",
+     "previous": "0.5%"
+    }
+   ]
   },
   {
    "date": "2026-12-03",
@@ -361,7 +525,18 @@
    "src": "University of Michigan",
    "note": "",
    "id": "20261204-umich-consumer-sentiment-preliminary-dec",
-   "metric": "UMich consumer sentiment index"
+   "metric": "UMich consumer sentiment index",
+   "previous": "48.1",
+   "components": [
+    {
+     "label": "Consumer sentiment",
+     "previous": "48.1"
+    },
+    {
+     "label": "1-yr inflation expectations",
+     "previous": "4.6%"
+    }
+   ]
   },
   {
    "date": "2026-12-09",
@@ -400,6 +575,14 @@
     {
      "label": "CPI m/m",
      "previous": "0.4%"
+    },
+    {
+     "label": "Core CPI y/y",
+     "previous": "2.6%"
+    },
+    {
+     "label": "CPI y/y",
+     "previous": "3.7%"
     }
    ]
   },
@@ -431,6 +614,10 @@
      "previous": "0.3%"
     },
     {
+     "label": "PPI ex food & energy m/m",
+     "previous": "0.3%"
+    },
+    {
      "label": "PPI final demand y/y",
      "previous": "6.5%"
     }
@@ -451,6 +638,14 @@
     {
      "label": "Retail sales m/m",
      "previous": "0.2%"
+    },
+    {
+     "label": "Ex autos m/m",
+     "previous": "0.6%"
+    },
+    {
+     "label": "Retail sales y/y",
+     "previous": "6.8%"
     }
    ]
   },
@@ -498,7 +693,18 @@
    "src": "University of Michigan",
    "note": "",
    "id": "20261218-umich-consumer-sentiment-final-dec",
-   "metric": "UMich consumer sentiment index"
+   "metric": "UMich consumer sentiment index",
+   "previous": "48.1",
+   "components": [
+    {
+     "label": "Consumer sentiment",
+     "previous": "48.1"
+    },
+    {
+     "label": "1-yr inflation expectations",
+     "previous": "4.6%"
+    }
+   ]
   },
   {
    "date": "2026-12-23",
@@ -509,7 +715,18 @@
    "src": "Census Bureau",
    "note": "Scheduled one hour before the U.S. stock market opens.",
    "id": "20261223-durable-goods-orders-nov",
-   "metric": "durable goods orders month-on-month"
+   "metric": "durable goods orders month-on-month",
+   "previous": "1.9%",
+   "components": [
+    {
+     "label": "Durable goods m/m",
+     "previous": "1.9%"
+    },
+    {
+     "label": "Ex transportation m/m",
+     "previous": "0.5%"
+    }
+   ]
   },
   {
    "date": "2026-12-23",
@@ -520,7 +737,14 @@
    "src": "BEA",
    "note": "Scheduled one hour before the U.S. stock market opens.",
    "id": "20261223-gdp-third-estimate-q3",
-   "metric": "real GDP growth, annualized"
+   "metric": "real GDP growth, annualized",
+   "previous": "2.2%",
+   "components": [
+    {
+     "label": "Real GDP, annualized",
+     "previous": "2.2%"
+    }
+   ]
   },
   {
    "date": "2026-12-23",
@@ -531,7 +755,30 @@
    "src": "BEA",
    "note": "Scheduled one hour before the U.S. stock market opens.",
    "id": "20261223-pce-inflation-personal-income-and-outlay",
-   "metric": "core PCE price index month-on-month"
+   "metric": "core PCE price index month-on-month",
+   "previous": "0.3%",
+   "components": [
+    {
+     "label": "Core PCE m/m",
+     "previous": "0.3%"
+    },
+    {
+     "label": "PCE m/m",
+     "previous": "0.5%"
+    },
+    {
+     "label": "Core PCE y/y",
+     "previous": "3.1%"
+    },
+    {
+     "label": "Personal spending m/m",
+     "previous": "0.5%"
+    },
+    {
+     "label": "Personal income m/m",
+     "previous": "0.2%"
+    }
+   ]
   },
   {
    "date": "2026-12-23",
@@ -542,7 +789,14 @@
    "src": "Census Bureau",
    "note": "",
    "id": "20261223-new-home-sales-nov",
-   "metric": "new home sales, annualized rate"
+   "metric": "new home sales, annualized rate",
+   "previous": "676K",
+   "components": [
+    {
+     "label": "New home sales",
+     "previous": "676K"
+    }
+   ]
   },
   {
    "date": "2026-12-24",

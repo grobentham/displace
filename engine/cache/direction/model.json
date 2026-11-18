@@ -1,0 +1,1471 @@
+{
+ "fingerprint": "72b7d8e449a3d4b7",
+ "day": "2026-11-18",
+ "model": {
+  "asof": "2026-11-18",
+  "version": 2,
+  "method": "1. History since 2010 from first-published figures (FRED/ALFRED vintages, no hindsight revisions).\n  2. Surprise for the headline AND the key components (core and headline CPI; payrolls, unemployment and\n     wages; retail sales and the ex-autos measure...) against the consensus where recorded, otherwise the\n     recent trend. Each is scaled by the typical surprise size known at the time; together they form one\n     composite surprise score.\n  3. Market regime at the time of each release: Fed hiking, cutting or on hold (6-month change in the fed\n     funds rate), inflation above or below 3% (core CPI year on year), and each market's 5-day trend into it.\n     Days with another high-impact release are down-weighted.\n  4. Two models: (A) a tally of release-day closes by surprise bucket and (B) a ridge-regularised logistic\n     regression on the surprise, its interaction with the regime, and the trend. Both weight recent years more\n     (half-life 4 years). They are blended with a weight learned from which one predicted better out of sample.\n  5. Calibration: the raw probability is shrunk toward 50% by a factor learned from the model's own past\n     out-of-sample record, so that a stated 70% has historically meant about 70%.\n  6. Walk-forward test: every past release is replayed using only data available before it.\n     A rule (release x market) is proven only if:\n       - at least 30 out-of-sample calls with a hit rate of 55% or more,\n       - it survives a false-discovery-rate correction (Benjamini-Hochberg, 10%) across every rule tested,\n       - its probabilities beat a coin flip (Brier skill > 0),\n       - it worked in both the earlier and the later half of the test,\n       - its most recent 20 calls (tested and live) are still right at least half the time (circuit breaker),\n       - the market really responds to the surprise: higher and lower surprises led to clearly different outcomes.\n  7. Every live call is logged, scored at that day's close and fed back into the circuit breaker.",
+  "sources": {
+   "gold": "Yahoo COMEX gold",
+   "nq": "Yahoo Nasdaq-100",
+   "y2": "FRED DGS2",
+   "y10": "FRED DGS10"
+  },
+  "assets": {
+   "gold": "Gold",
+   "nq": "Nasdaq 100",
+   "y2": "2-year yield",
+   "y10": "10-year yield"
+  },
+  "kinds": {
+   "ppi": {
+    "metric": "PPI final demand m/m",
+    "n": 137,
+    "since": "2015-06-12",
+    "scale": 0.4966834170854073,
+    "mult": 1,
+    "window": 3,
+    "recent": [
+     [
+      "2026-04-14",
+      0.5123318605152027
+     ],
+     [
+      "2026-05-13",
+      1.3758971834270328
+     ],
+     [
+      "2026-06-11",
+      1.0563357711956156
+     ],
+     [
+      "2026-07-15",
+      -0.2770682989280293
+     ],
+     [
+      "2026-08-13",
+      -0.02809580670086742
+     ],
+     [
+      "2026-09-10",
+      0.3999132564547425
+     ],
+     [
+      "2026-10-15",
+      1.3433801423297753
+     ],
+     [
+      "2026-11-13",
+      0.3475287885334133
+     ]
+    ],
+    "assets": {
+     "gold": {
+      "k": 0.0,
+      "alpha": 0,
+      "beta": [
+       0.1512,
+       0.0195,
+       0.0,
+       0.0,
+       0.0,
+       -0.0575
+      ],
+      "cells": {
+       "hot": {
+        "n": 47,
+        "pUp": 0.526,
+        "med": 0.155,
+        "q1": -0.361,
+        "q3": 0.511
+       },
+       "cool": {
+        "n": 40,
+        "pUp": 0.479,
+        "med": -0.083,
+        "q1": -0.517,
+        "q3": 0.44
+       },
+       "inline": {
+        "n": 32,
+        "pUp": 0.616,
+        "med": 0.075,
+        "q1": -0.282,
+        "q3": 0.575
+       }
+      },
+      "bt": {
+       "calls": 13,
+       "hits": 3,
+       "rate": 0.231,
+       "pval": 0.98876953125,
+       "brierSkill": -0.049,
+       "halves": [
+        0.333,
+        0.143
+       ],
+       "recent": 0.231,
+       "reliability": [
+        {
+         "band": "50%+",
+         "n": 5,
+         "stated": 0.572,
+         "actual": 0.2
+        },
+        {
+         "band": "60%+",
+         "n": 4,
+         "stated": 0.628,
+         "actual": 0.0
+        },
+        {
+         "band": "70%+",
+         "n": 4,
+         "stated": 0.744,
+         "actual": 0.5
+        }
+       ],
+       "proven": false,
+       "why": "too few tested calls"
+      }
+     },
+     "nq": {
+      "k": 0.6,
+      "alpha": 0,
+      "beta": [
+       0.1238,
+       -0.1926,
+       0.0,
+       0.0,
+       0.0,
+       0.1907
+      ],
+      "cells": {
+       "hot": {
+        "n": 53,
+        "pUp": 0.456,
+        "med": -0.07,
+        "q1": -0.688,
+        "q3": 0.612
+       },
+       "cool": {
+        "n": 47,
+        "pUp": 0.583,
+        "med": 0.071,
+        "q1": -0.711,
+        "q3": 0.837
+       },
+       "inline": {
+        "n": 37,
+        "pUp": 0.626,
+        "med": 0.249,
+        "q1": -0.343,
+        "q3": 0.742
+       }
+      },
+      "bt": {
+       "calls": 54,
+       "hits": 29,
+       "rate": 0.537,
+       "pval": 0.34174461411766877,
+       "brierSkill": -0.009,
+       "halves": [
+        0.593,
+        0.481
+       ],
+       "recent": 0.5,
+       "reliability": [
+        {
+         "band": "50%+",
+         "n": 28,
+         "stated": 0.584,
+         "actual": 0.464
+        },
+        {
+         "band": "60%+",
+         "n": 15,
+         "stated": 0.636,
+         "actual": 0.667
+        },
+        {
+         "band": "70%+",
+         "n": 11,
+         "stated": 0.746,
+         "actual": 0.545
+        }
+       ],
+       "proven": false,
+       "why": "hit rate under 55%"
+      }
+     },
+     "y2": {
+      "k": 0.85,
+      "alpha": 0.25,
+      "beta": [
+       -0.559,
+       0.2939,
+       0.0,
+       0.0,
+       0.0,
+       0.1856
+      ],
+      "cells": {
+       "hot": {
+        "n": 43,
+        "pUp": 0.437,
+        "med": -1.0,
+        "q1": -4.0,
+        "q3": 3.0
+       },
+       "cool": {
+        "n": 37,
+        "pUp": 0.278,
+        "med": -3.0,
+        "q1": -7.0,
+        "q3": -0.0
+       },
+       "inline": {
+        "n": 32,
+        "pUp": 0.502,
+        "med": 1.0,
+        "q1": -3.0,
+        "q3": 3.0
+       }
+      },
+      "bt": {
+       "calls": 26,
+       "hits": 19,
+       "rate": 0.731,
+       "pval": 0.014479637145996094,
+       "brierSkill": 0.008,
+       "halves": [
+        0.692,
+        0.769
+       ],
+       "recent": 0.7,
+       "reliability": [
+        {
+         "band": "50%+",
+         "n": 6,
+         "stated": 0.575,
+         "actual": 0.833
+        },
+        {
+         "band": "60%+",
+         "n": 14,
+         "stated": 0.648,
+         "actual": 0.714
+        },
+        {
+         "band": "70%+",
+         "n": 6,
+         "stated": 0.73,
+         "actual": 0.667
+        }
+       ],
+       "proven": false,
+       "why": "too few tested calls"
+      }
+     },
+     "y10": {
+      "k": 0.9,
+      "alpha": 0.75,
+      "beta": [
+       -0.4184,
+       0.3208,
+       0.0,
+       0.0,
+       0.0,
+       0.0707
+      ],
+      "cells": {
+       "hot": {
+        "n": 50,
+        "pUp": 0.495,
+        "med": -1.0,
+        "q1": -4.0,
+        "q3": 5.0
+       },
+       "cool": {
+        "n": 45,
+        "pUp": 0.303,
+        "med": -3.0,
+        "q1": -5.0,
+        "q3": 1.0
+       },
+       "inline": {
+        "n": 35,
+        "pUp": 0.444,
+        "med": -1.0,
+        "q1": -3.0,
+        "q3": 2.0
+       }
+      },
+      "bt": {
+       "calls": 19,
+       "hits": 11,
+       "rate": 0.579,
+       "pval": 0.3238029479980469,
+       "brierSkill": 0.016,
+       "halves": [
+        0.556,
+        0.6
+       ],
+       "recent": 0.579,
+       "reliability": [
+        {
+         "band": "50%+",
+         "n": 10,
+         "stated": 0.584,
+         "actual": 0.5
+        },
+        {
+         "band": "60%+",
+         "n": 7,
+         "stated": 0.618,
+         "actual": 0.571
+        },
+        {
+         "band": "70%+",
+         "n": 2,
+         "stated": 0.738,
+         "actual": 1.0
+        }
+       ],
+       "proven": false,
+       "why": "too few tested calls"
+      }
+     }
+    },
+    "last": [
+     {
+      "date": "2026-09-10",
+      "period": "2026-08-01",
+      "z": 0.134,
+      "bin": "inline",
+      "basis": "trend",
+      "hike": 0,
+      "infl": 0,
+      "trend": {
+       "gold": -1,
+       "nq": 1,
+       "y2": 1,
+       "y10": 1
+      }
+     },
+     {
+      "date": "2026-10-15",
+      "period": "2026-09-01",
+      "z": 3.013,
+      "bin": "hot",
+      "basis": "trend",
+      "hike": 0,
+      "infl": 0,
+      "trend": {
+       "gold": 1,
+       "nq": -1,
+       "y2": 1,
+       "y10": -1
+      }
+     },
+     {
+      "date": "2026-11-13",
+      "period": "2026-10-01",
+      "z": -0.458,
+      "bin": "cool",
+      "basis": "trend",
+      "hike": 0,
+      "infl": 0,
+      "trend": {
+       "gold": -1,
+       "nq": 1,
+       "y2": 1,
+       "y10": 1
+      }
+     }
+    ]
+   },
+   "pce": {
+    "metric": "core PCE m/m",
+    "n": 200,
+    "since": "2010-02-01",
+    "scale": 0.22671490495472252,
+    "mult": 1,
+    "window": 3,
+    "recent": [
+     [
+      "2026-04-09",
+      0.36685671558089883
+     ],
+     [
+      "2026-04-30",
+      0.2932483068401437
+     ],
+     [
+      "2026-05-28",
+      0.23894031131834748
+     ],
+     [
+      "2026-06-25",
+      0.32005059112956147
+     ],
+     [
+      "2026-07-30",
+      0.13221209279445922
+     ],
+     [
+      "2026-08-26",
+      0.2455155058386671
+     ],
+     [
+      "2026-09-30",
+      0.24743915839948727
+     ],
+     [
+      "2026-10-29",
+      0.31650177409587865
+     ]
+    ],
+    "assets": {
+     "gold": {
+      "k": 0.6,
+      "alpha": 0.25,
+      "beta": [
+       0.0523,
+       -0.2826,
+       0.0,
+       0.0,
+       0.0,
+       -0.189
+      ],
+      "cells": {
+       "hot": {
+        "n": 45,
+        "pUp": 0.408,
+        "med": -0.155,
+        "q1": -0.494,
+        "q3": 0.519
+       },
+       "cool": {
+        "n": 43,
+        "pUp": 0.602,
+        "med": -0.153,
+        "q1": -0.44,
+        "q3": 0.639
+       },
+       "inline": {
+        "n": 34,
+        "pUp": 0.525,
+        "med": 0.047,
+        "q1": -0.505,
+        "q3": 0.354
+       }
+      },
+      "bt": {
+       "calls": 52,
+       "hits": 30,
+       "rate": 0.577,
+       "pval": 0.1658748816847453,
+       "brierSkill": -0.019,
+       "halves": [
+        0.731,
+        0.423
+       ],
+       "recent": 0.45,
+       "reliability": [
+        {
+         "band": "50%+",
+         "n": 17,
+         "stated": 0.58,
+         "actual": 0.647
+        },
+        {
+         "band": "60%+",
+         "n": 17,
+         "stated": 0.638,
+         "actual": 0.529
+        },
+        {
+         "band": "70%+",
+         "n": 18,
+         "stated": 0.792,
+         "actual": 0.556
+        }
+       ],
+       "proven": false,
+       "why": "not significant after correcting for the number of rules tested"
+      }
+     },
+     "nq": {
+      "k": 0.7,
+      "alpha": 0.25,
+      "beta": [
+       0.4553,
+       -0.1154,
+       0.0,
+       0.0,
+       0.0,
+       -0.2146
+      ],
+      "cells": {
+       "hot": {
+        "n": 68,
+        "pUp": 0.548,
+        "med": 0.205,
+        "q1": -0.743,
+        "q3": 0.778
+       },
+       "cool": {
+        "n": 70,
+        "pUp": 0.608,
+        "med": 0.109,
+        "q1": -0.51,
+        "q3": 0.804
+       },
+       "inline": {
+        "n": 59,
+        "pUp": 0.633,
+        "med": 0.052,
+        "q1": -0.33,
+        "q3": 0.918
+       }
+      },
+      "bt": {
+       "calls": 63,
+       "hits": 37,
+       "rate": 0.587,
+       "pval": 0.10368394992842711,
+       "brierSkill": -0.019,
+       "halves": [
+        0.677,
+        0.5
+       ],
+       "recent": 0.55,
+       "reliability": [
+        {
+         "band": "50%+",
+         "n": 26,
+         "stated": 0.578,
+         "actual": 0.615
+        },
+        {
+         "band": "60%+",
+         "n": 15,
+         "stated": 0.64,
+         "actual": 0.6
+        },
+        {
+         "band": "70%+",
+         "n": 22,
+         "stated": 0.776,
+         "actual": 0.545
+        }
+       ],
+       "proven": false,
+       "why": "not significant after correcting for the number of rules tested"
+      }
+     },
+     "y2": {
+      "k": 0.3,
+      "alpha": 0,
+      "beta": [
+       -0.3371,
+       -0.005,
+       0.0,
+       0.0,
+       0.0,
+       -0.1175
+      ],
+      "cells": {
+       "hot": {
+        "n": 48,
+        "pUp": 0.391,
+        "med": -1.0,
+        "q1": -3.0,
+        "q3": 2.0
+       },
+       "cool": {
+        "n": 58,
+        "pUp": 0.359,
+        "med": -1.5,
+        "q1": -3.0,
+        "q3": 1.25
+       },
+       "inline": {
+        "n": 42,
+        "pUp": 0.563,
+        "med": 1.5,
+        "q1": -2.0,
+        "q3": 3.25
+       }
+      },
+      "bt": {
+       "calls": 4,
+       "hits": 0,
+       "rate": 0.0,
+       "pval": 1.0,
+       "brierSkill": -0.009,
+       "halves": [
+        0.0,
+        0.0
+       ],
+       "recent": 0.0,
+       "reliability": [
+        {
+         "band": "50%+",
+         "n": 4,
+         "stated": 0.575,
+         "actual": 0.0
+        }
+       ],
+       "proven": false,
+       "why": "too few tested calls"
+      }
+     },
+     "y10": {
+      "k": 0.25,
+      "alpha": 0.25,
+      "beta": [
+       -0.294,
+       -0.1552,
+       0.0,
+       0.0,
+       0.0,
+       -0.0118
+      ],
+      "cells": {
+       "hot": {
+        "n": 59,
+        "pUp": 0.401,
+        "med": -1.0,
+        "q1": -5.0,
+        "q3": 3.0
+       },
+       "cool": {
+        "n": 61,
+        "pUp": 0.37,
+        "med": -1.0,
+        "q1": -4.5,
+        "q3": 3.0
+       },
+       "inline": {
+        "n": 55,
+        "pUp": 0.548,
+        "med": 2.0,
+        "q1": -3.0,
+        "q3": 4.0
+       }
+      },
+      "bt": {
+       "calls": 2,
+       "hits": 0,
+       "rate": 0.0,
+       "pval": 1.0,
+       "brierSkill": -0.01,
+       "halves": [
+        0.0,
+        0.0
+       ],
+       "recent": 0.0,
+       "reliability": [
+        {
+         "band": "50%+",
+         "n": 1,
+         "stated": 0.6,
+         "actual": 0.0
+        },
+        {
+         "band": "60%+",
+         "n": 1,
+         "stated": 0.613,
+         "actual": 0.0
+        }
+       ],
+       "proven": false,
+       "why": "too few tested calls"
+      }
+     }
+    },
+    "last": [
+     {
+      "date": "2026-08-26",
+      "period": "2026-07-01",
+      "z": -0.091,
+      "bin": "inline",
+      "basis": "trend",
+      "hike": 0,
+      "infl": 0,
+      "trend": {
+       "gold": 1,
+       "nq": -1,
+       "y2": -1,
+       "y10": -1
+      }
+     },
+     {
+      "date": "2026-09-30",
+      "period": "2026-08-01",
+      "z": 0.4,
+      "bin": "hot",
+      "basis": "trend",
+      "hike": 0,
+      "infl": 0,
+      "trend": {
+       "gold": -1,
+       "nq": -1,
+       "y2": 1,
+       "y10": 1
+      }
+     },
+     {
+      "date": "2026-10-29",
+      "period": "2026-09-01",
+      "z": 1.483,
+      "bin": "hot",
+      "basis": "trend",
+      "hike": 0,
+      "infl": 0,
+      "trend": {
+       "gold": -1,
+       "nq": -1,
+       "y2": -1,
+       "y10": -1
+      }
+     }
+    ]
+   },
+   "nfp": {
+    "metric": "payrolls change",
+    "n": 202,
+    "since": "2010-01-08",
+    "scale": 289.8483,
+    "mult": 0.001,
+    "window": 3,
+    "recent": [
+     [
+      "2026-04-03",
+      178.0
+     ],
+     [
+      "2026-05-08",
+      115.0
+     ],
+     [
+      "2026-06-05",
+      172.0
+     ],
+     [
+      "2026-07-02",
+      57.0
+     ],
+     [
+      "2026-08-07",
+      -23.0
+     ],
+     [
+      "2026-09-04",
+      162.0
+     ],
+     [
+      "2026-10-02",
+      29.0
+     ],
+     [
+      "2026-11-06",
+      165.0
+     ]
+    ],
+    "assets": {
+     "gold": {
+      "k": 0.6,
+      "alpha": 0,
+      "beta": [
+       0.1695,
+       -0.1815,
+       0.0,
+       0.0,
+       0.0,
+       -0.0282
+      ],
+      "cells": {
+       "hot": {
+        "n": 28,
+        "pUp": 0.408,
+        "med": -0.223,
+        "q1": -0.995,
+        "q3": 0.214
+       },
+       "cool": {
+        "n": 10,
+        "pUp": 0.524,
+        "med": 0.44,
+        "q1": -0.157,
+        "q3": 1.075
+       },
+       "inline": {
+        "n": 38,
+        "pUp": 0.6,
+        "med": 0.299,
+        "q1": -0.434,
+        "q3": 0.79
+       }
+      },
+      "bt": {
+       "calls": 33,
+       "hits": 19,
+       "rate": 0.576,
+       "pval": 0.24342512083239853,
+       "brierSkill": -0.018,
+       "halves": [
+        0.688,
+        0.471
+       ],
+       "recent": 0.5,
+       "reliability": [
+        {
+         "band": "50%+",
+         "n": 5,
+         "stated": 0.579,
+         "actual": 0.8
+        },
+        {
+         "band": "60%+",
+         "n": 20,
+         "stated": 0.648,
+         "actual": 0.5
+        },
+        {
+         "band": "70%+",
+         "n": 8,
+         "stated": 0.736,
+         "actual": 0.625
+        }
+       ],
+       "proven": false,
+       "why": "not significant after correcting for the number of rules tested"
+      }
+     },
+     "nq": {
+      "k": 0.4,
+      "alpha": 0,
+      "beta": [
+       0.3102,
+       0.0494,
+       0.0,
+       0.0,
+       0.0,
+       0.0475
+      ],
+      "cells": {
+       "hot": {
+        "n": 55,
+        "pUp": 0.649,
+        "med": 0.21,
+        "q1": -0.476,
+        "q3": 1.071
+       },
+       "cool": {
+        "n": 49,
+        "pUp": 0.568,
+        "med": -0.046,
+        "q1": -1.025,
+        "q3": 0.873
+       },
+       "inline": {
+        "n": 92,
+        "pUp": 0.532,
+        "med": 0.15,
+        "q1": -1.027,
+        "q3": 1.034
+       }
+      },
+      "bt": {
+       "calls": 39,
+       "hits": 20,
+       "rate": 0.513,
+       "pval": 0.5,
+       "brierSkill": -0.012,
+       "halves": [
+        0.579,
+        0.45
+       ],
+       "recent": 0.45,
+       "reliability": [
+        {
+         "band": "50%+",
+         "n": 27,
+         "stated": 0.574,
+         "actual": 0.519
+        },
+        {
+         "band": "60%+",
+         "n": 12,
+         "stated": 0.627,
+         "actual": 0.5
+        }
+       ],
+       "proven": false,
+       "why": "hit rate under 55%"
+      }
+     },
+     "y2": {
+      "k": 0.75,
+      "alpha": 0.5,
+      "beta": [
+       0.2345,
+       0.6094,
+       0.0,
+       0.0,
+       0.0,
+       -0.0971
+      ],
+      "cells": {
+       "hot": {
+        "n": 50,
+        "pUp": 0.747,
+        "med": 3.0,
+        "q1": -1.25,
+        "q3": 7.0
+       },
+       "cool": {
+        "n": 45,
+        "pUp": 0.433,
+        "med": -2.0,
+        "q1": -5.5,
+        "q3": 2.0
+       },
+       "inline": {
+        "n": 85,
+        "pUp": 0.528,
+        "med": -1.0,
+        "q1": -3.0,
+        "q3": 4.5
+       }
+      },
+      "bt": {
+       "calls": 64,
+       "hits": 39,
+       "rate": 0.609,
+       "pval": 0.051710939158040446,
+       "brierSkill": -0.003,
+       "halves": [
+        0.625,
+        0.594
+       ],
+       "recent": 0.6,
+       "reliability": [
+        {
+         "band": "50%+",
+         "n": 28,
+         "stated": 0.578,
+         "actual": 0.714
+        },
+        {
+         "band": "60%+",
+         "n": 25,
+         "stated": 0.64,
+         "actual": 0.48
+        },
+        {
+         "band": "70%+",
+         "n": 11,
+         "stated": 0.774,
+         "actual": 0.636
+        }
+       ],
+       "proven": false,
+       "why": "not significant after correcting for the number of rules tested"
+      }
+     },
+     "y10": {
+      "k": 0.65,
+      "alpha": 1,
+      "beta": [
+       0.4615,
+       0.3513,
+       0.0,
+       0.0,
+       0.0,
+       0.1618
+      ],
+      "cells": {
+       "hot": {
+        "n": 56,
+        "pUp": 0.733,
+        "med": 3.0,
+        "q1": -2.75,
+        "q3": 8.0
+       },
+       "cool": {
+        "n": 49,
+        "pUp": 0.565,
+        "med": 1.0,
+        "q1": -6.0,
+        "q3": 4.0
+       },
+       "inline": {
+        "n": 92,
+        "pUp": 0.543,
+        "med": 1.0,
+        "q1": -3.0,
+        "q3": 6.75
+       }
+      },
+      "bt": {
+       "calls": 55,
+       "hits": 33,
+       "rate": 0.6,
+       "pval": 0.08850068238517908,
+       "brierSkill": 0.001,
+       "halves": [
+        0.593,
+        0.607
+       ],
+       "recent": 0.7,
+       "reliability": [
+        {
+         "band": "50%+",
+         "n": 24,
+         "stated": 0.573,
+         "actual": 0.667
+        },
+        {
+         "band": "60%+",
+         "n": 24,
+         "stated": 0.634,
+         "actual": 0.583
+        },
+        {
+         "band": "70%+",
+         "n": 7,
+         "stated": 0.815,
+         "actual": 0.429
+        }
+       ],
+       "proven": false,
+       "why": "not significant after correcting for the number of rules tested"
+      }
+     }
+    },
+    "last": [
+     {
+      "date": "2026-09-04",
+      "period": "2026-08-01",
+      "z": 0.592,
+      "bin": "hot",
+      "basis": "trend",
+      "hike": 0,
+      "infl": 0,
+      "trend": {
+       "gold": -1,
+       "nq": -1,
+       "y2": 1,
+       "y10": 1
+      }
+     },
+     {
+      "date": "2026-10-02",
+      "period": "2026-09-01",
+      "z": -0.375,
+      "bin": "cool",
+      "basis": "trend",
+      "hike": 0,
+      "infl": 0,
+      "trend": {
+       "gold": -1,
+       "nq": 1,
+       "y2": -1,
+       "y10": 1
+      }
+     },
+     {
+      "date": "2026-11-06",
+      "period": "2026-10-01",
+      "z": 0.856,
+      "bin": "hot",
+      "basis": "trend",
+      "hike": 0,
+      "infl": 0,
+      "trend": {
+       "gold": 1,
+       "nq": -1,
+       "y2": -1,
+       "y10": -1
+      }
+     }
+    ]
+   },
+   "retail": {
+    "metric": "retail sales m/m",
+    "n": 203,
+    "since": "2010-01-14",
+    "scale": 0.667756861206223,
+    "mult": 1,
+    "window": 3,
+    "recent": [
+     [
+      "2026-04-21",
+      1.6614578545822267
+     ],
+     [
+      "2026-05-14",
+      0.49311759162162794
+     ],
+     [
+      "2026-06-17",
+      0.8809356490312226
+     ],
+     [
+      "2026-07-16",
+      0.2186794214449339
+     ],
+     [
+      "2026-08-14",
+      -0.5819766896853484
+     ],
+     [
+      "2026-09-16",
+      1.2407418550562266
+     ],
+     [
+      "2026-10-15",
+      0.7708413925190838
+     ],
+     [
+      "2026-11-17",
+      0.21201735247515785
+     ]
+    ],
+    "assets": {
+     "gold": {
+      "k": 0.25,
+      "alpha": 0.75,
+      "beta": [
+       0.0192,
+       0.1266,
+       0.0,
+       0.0,
+       0.0,
+       -0.2059
+      ],
+      "cells": {
+       "hot": {
+        "n": 45,
+        "pUp": 0.516,
+        "med": 0.025,
+        "q1": -0.384,
+        "q3": 0.397
+       },
+       "cool": {
+        "n": 61,
+        "pUp": 0.469,
+        "med": -0.067,
+        "q1": -0.412,
+        "q3": 0.512
+       },
+       "inline": {
+        "n": 59,
+        "pUp": 0.513,
+        "med": 0.05,
+        "q1": -0.456,
+        "q3": 0.637
+       }
+      },
+      "bt": {
+       "calls": 35,
+       "hits": 19,
+       "rate": 0.543,
+       "pval": 0.3679394004284404,
+       "brierSkill": -0.013,
+       "halves": [
+        0.588,
+        0.5
+       ],
+       "recent": 0.5,
+       "reliability": [
+        {
+         "band": "50%+",
+         "n": 11,
+         "stated": 0.573,
+         "actual": 0.455
+        },
+        {
+         "band": "60%+",
+         "n": 17,
+         "stated": 0.656,
+         "actual": 0.588
+        },
+        {
+         "band": "70%+",
+         "n": 7,
+         "stated": 0.77,
+         "actual": 0.571
+        }
+       ],
+       "proven": false,
+       "why": "hit rate under 55%"
+      }
+     },
+     "nq": {
+      "k": 0.2,
+      "alpha": 0.25,
+      "beta": [
+       0.0365,
+       0.0246,
+       0.0,
+       0.0,
+       0.0,
+       -0.182
+      ],
+      "cells": {
+       "hot": {
+        "n": 58,
+        "pUp": 0.549,
+        "med": 0.115,
+        "q1": -0.298,
+        "q3": 0.88
+       },
+       "cool": {
+        "n": 75,
+        "pUp": 0.432,
+        "med": -0.125,
+        "q1": -0.735,
+        "q3": 0.633
+       },
+       "inline": {
+        "n": 69,
+        "pUp": 0.521,
+        "med": 0.085,
+        "q1": -0.426,
+        "q3": 0.695
+       }
+      },
+      "bt": {
+       "calls": 36,
+       "hits": 17,
+       "rate": 0.472,
+       "pval": 0.691140341485152,
+       "brierSkill": -0.019,
+       "halves": [
+        0.611,
+        0.333
+       ],
+       "recent": 0.35,
+       "reliability": [
+        {
+         "band": "50%+",
+         "n": 24,
+         "stated": 0.581,
+         "actual": 0.5
+        },
+        {
+         "band": "60%+",
+         "n": 12,
+         "stated": 0.636,
+         "actual": 0.417
+        }
+       ],
+       "proven": false,
+       "why": "hit rate under 55%"
+      }
+     },
+     "y2": {
+      "k": 0.3,
+      "alpha": 0.5,
+      "beta": [
+       0.2181,
+       0.0683,
+       0.0,
+       0.0,
+       0.0,
+       -0.1799
+      ],
+      "cells": {
+       "hot": {
+        "n": 43,
+        "pUp": 0.614,
+        "med": 2.0,
+        "q1": -2.0,
+        "q3": 3.0
+       },
+       "cool": {
+        "n": 62,
+        "pUp": 0.51,
+        "med": -2.0,
+        "q1": -3.0,
+        "q3": 2.25
+       },
+       "inline": {
+        "n": 61,
+        "pUp": 0.526,
+        "med": -1.0,
+        "q1": -2.5,
+        "q3": 3.0
+       }
+      },
+      "bt": {
+       "calls": 47,
+       "hits": 27,
+       "rate": 0.574,
+       "pval": 0.19084669883160643,
+       "brierSkill": -0.022,
+       "halves": [
+        0.609,
+        0.542
+       ],
+       "recent": 0.55,
+       "reliability": [
+        {
+         "band": "50%+",
+         "n": 18,
+         "stated": 0.575,
+         "actual": 0.611
+        },
+        {
+         "band": "60%+",
+         "n": 19,
+         "stated": 0.646,
+         "actual": 0.526
+        },
+        {
+         "band": "70%+",
+         "n": 10,
+         "stated": 0.79,
+         "actual": 0.6
+        }
+       ],
+       "proven": false,
+       "why": "not significant after correcting for the number of rules tested"
+      }
+     },
+     "y10": {
+      "k": 0.1,
+      "alpha": 0.25,
+      "beta": [
+       0.1409,
+       0.0022,
+       0.0,
+       0.0,
+       0.0,
+       0.0616
+      ],
+      "cells": {
+       "hot": {
+        "n": 56,
+        "pUp": 0.572,
+        "med": 1.0,
+        "q1": -4.0,
+        "q3": 4.0
+       },
+       "cool": {
+        "n": 67,
+        "pUp": 0.491,
+        "med": -3.0,
+        "q1": -6.0,
+        "q3": 3.0
+       },
+       "inline": {
+        "n": 65,
+        "pUp": 0.533,
+        "med": -1.0,
+        "q1": -3.5,
+        "q3": 4.0
+       }
+      },
+      "bt": {
+       "calls": 31,
+       "hits": 19,
+       "rate": 0.613,
+       "pval": 0.14052075752988458,
+       "brierSkill": -0.026,
+       "halves": [
+        0.733,
+        0.5
+       ],
+       "recent": 0.5,
+       "reliability": [
+        {
+         "band": "50%+",
+         "n": 12,
+         "stated": 0.578,
+         "actual": 0.667
+        },
+        {
+         "band": "60%+",
+         "n": 9,
+         "stated": 0.636,
+         "actual": 0.667
+        },
+        {
+         "band": "70%+",
+         "n": 10,
+         "stated": 0.801,
+         "actual": 0.5
+        }
+       ],
+       "proven": false,
+       "why": "not significant after correcting for the number of rules tested"
+      }
+     }
+    },
+    "last": [
+     {
+      "date": "2026-09-16",
+      "period": "2026-08-01",
+      "z": 1.65,
+      "bin": "hot",
+      "basis": "trend",
+      "hike": 0,
+      "infl": 0,
+      "trend": {
+       "gold": -1,
+       "nq": -1,
+       "y2": 1,
+       "y10": 1
+      }
+     },
+     {
+      "date": "2026-10-15",
+      "period": "2026-09-01",
+      "z": 0.748,
+      "bin": "hot",
+      "basis": "trend",
+      "hike": 0,
+      "infl": 0,
+      "trend": {
+       "gold": 1,
+       "nq": -1,
+       "y2": 1,
+       "y10": -1
+      }
+     },
+     {
+      "date": "2026-11-17",
+      "period": "2026-10-01",
+      "z": -0.252,
+      "bin": "inline",
+      "basis": "trend",
+      "hike": 0,
+      "infl": 0,
+      "trend": {
+       "gold": -1,
+       "nq": -1,
+       "y2": 1,
+       "y10": 1
+      }
+     }
+    ]
+   }
+  },
+  "regime": {
+   "hike": 0,
+   "infl": 0
+  },
+  "trendNow": {
+   "gold": -1,
+   "nq": -1,
+   "y2": 1,
+   "y10": 1
+  }
+ }
+}

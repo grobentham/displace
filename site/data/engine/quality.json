@@ -1,10 +1,17 @@
 {
- "asof": "2026-11-18T08:07-05:00",
- "passed": 11,
- "total": 11,
+ "asof": "2026-11-18T08:40-05:00",
+ "passed": 38,
+ "total": 39,
  "critical": 0,
  "rejected": [],
  "held": [],
  "droppedText": [],
- "failures": []
+ "failures": [
+  {
+   "name": "source: release calendar for fomc",
+   "ok": false,
+   "detail": "no dates returned; keeping existing dates",
+   "critical": false
+  }
+ ]
 }
