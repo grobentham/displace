@@ -108,9 +108,28 @@ def consensus_feed():
     print("consensus feed ok")
 
 
+def tv_consensus():
+    raw = [{"t": "Initial Jobless Claims", "d": "2026-11-19T13:30:00Z", "a": None, "f": 197},
+           {"t": "CB Consumer Confidence", "d": "2026-11-24T15:00:00Z", "a": None, "f": 92},
+           {"t": "GDP Growth Rate QoQ 2nd Est", "d": "2026-11-25T13:30:00Z", "a": None, "f": 3.3},
+           {"t": "New Home Sales", "d": "2026-11-25T15:00:00Z", "a": None, "f": 0.67},
+           {"t": "Core Inflation Rate MoM", "d": "2026-10-14T12:30:00Z", "a": 0.3, "f": 0.2}]
+    events = [{"id": "c", "date": "2026-11-19", "time": "08:30", "title": "Initial jobless claims", "forecast": "198K"},
+              {"id": "b", "date": "2026-11-24", "time": "10:00", "title": "Consumer confidence (Nov)"},
+              {"id": "g", "date": "2026-11-25", "time": "08:30", "title": "GDP, second estimate (Q3)"},
+              {"id": "h", "date": "2026-11-25", "time": "10:00", "title": "New home sales (Oct)"}]
+    n = consensus.apply_tv(events, E.kind_of, raw=raw, log=lambda *a: None)
+    got = {e["id"]: e.get("forecast") for e in events}
+    assert got == {"c": "198K", "b": "92.0", "g": "3.3%", "h": "670K"} and n == 3, got  # existing forecast kept
+    hist = {"series": {"cpi": {"rows": [{"period": "Sep 2026", "date": "2026-10-14", "actual": "0.3%", "forecast": ""}]}}}
+    assert consensus.backfill_history(hist, raw=raw) == 1 and hist["series"]["cpi"]["rows"][0]["forecast"] == "0.2%"
+    print("tv consensus ok")
+
+
 if __name__ == "__main__":
     fed_decision()
     reactions_keyless()
     fred_fallback()
     consensus_feed()
+    tv_consensus()
     print("source tests passed")
