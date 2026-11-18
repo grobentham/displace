@@ -1,5 +1,5 @@
 {
- "lastRun": "2026-11-18T00:50-05:00",
+ "lastRun": "2026-11-18T01:00-05:00",
  "source": "direct public agencies",
  "fredCalls": 1,
  "fred": true,
@@ -18,7 +18,7 @@
  "log": [
   "Public FRED downloads unavailable; using direct agency sources",
   "ALFRED archive unavailable; using direct release data where available",
-  "engine run 2026-11-18T00:50-05:00 using direct public agencies",
+  "engine run 2026-11-18T01:00-05:00 using direct public agencies",
   "quality: 11/11 checks passed, 0 held, 0 rejected"
  ]
 }
