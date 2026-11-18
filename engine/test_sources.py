@@ -99,9 +99,10 @@ def nowcast_parse():
     nov_chart = chart("2026-11", [{"label": "11/16"}, {"label": "11/17"}], {"Core CPI Inflation": ["0.19", "0.18"]})
     dec_chart = chart("2026-12", [{"label": "12/30"}, {"label": "01/04"}, {"label": "CPI Dec", "vline": "true"}],
                       {"Core CPI Inflation": ["0.21", "0.22"]})
-    past, latest = nowcast.parse([oct_chart, nov_chart, dec_chart])
+    past, latest, daily = nowcast.parse([oct_chart, nov_chart, dec_chart])
+    assert nowcast.before(daily, "pce", "2026-10", "2026-11-26") == 0.23 and nowcast.before(daily, "pce", "2026-10", "2026-11-06") is None
     assert past[("cpi", "2026-11-10")] == 0.25, past  # the day before release, core, not the actual
-    assert ("cpi", "2026-09-10") not in past and ("pce", "2026-10") in latest, (past, latest)
+    assert ("cpi", "2026-09-10") not in past and ("pce", "2026-10") in latest and ("pce", "2026-10") in daily, (past, latest)
     assert latest[("cpi", "2026-11")] == 0.18 and past[("cpi", "2027-01-04")] == 0.21, (past, latest)
     print("nowcast parse ok")
 
