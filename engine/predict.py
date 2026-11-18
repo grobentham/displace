@@ -136,15 +136,26 @@ def scenarios(model):
 def expectations(events, kind_of, title_period, log=log):
     """Cleveland Fed nowcasts as the expected core CPI / core PCE: past releases for training, upcoming ones
     from the latest nowcast for that month. Kinds with too little nowcast history stay on the trend basis."""
-    past, latest = nowcast.load(log=log)
+    past, latest, daily = nowcast.load(log=log)
     records = dict(past)
+    # releases the charts don't mark (PCE after 2014): match each month to the date it was actually published
+    for k, cfg in (("cpi", D.MODELS["cpi"]), ("pce", D.MODELS["pce"])):
+        for period, _, rt in series_store.load(cfg["head"][0], True)["rows"]:
+            if rt and (k, rt) not in records:
+                v = nowcast.before(daily, k, period[:7], rt)
+                if v is not None:
+                    records[(k, rt)] = v
+                    past[(k, rt)] = v
     for e in events:
         k = kind_of(e)
         if k in ("cpi", "pce") and (k, e["date"]) not in records:
             # upcoming, or released before the Cleveland Fed marked it: the latest nowcast for that month
             per = title_period(e, k)
-            if per and (k, per.strftime("%Y-%m")) in latest:
-                records[(k, e["date"])] = latest[(k, per.strftime("%Y-%m"))]
+            v = nowcast.before(daily, k, per.strftime("%Y-%m"), e["date"]) if per else None
+            if v is None and per and not e.get("actual"):
+                v = latest.get((k, per.strftime("%Y-%m")))
+            if v is not None:
+                records[(k, e["date"])] = v
     log("nowcast: " + ", ".join(f"{sum(1 for kk, _ in past if kk == k)} past {k.upper()} nowcasts" for k in ("cpi", "pce")))
     D.BASIS.clear()
     for k in ("cpi", "pce"):

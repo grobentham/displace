@@ -91,7 +91,8 @@ def main():
         # a simulated nowcast for core CPI (the prior three months' average), so the nowcast basis is exercised
         core = P.D.transform([o for o in series["CPILFESL"]], "pct")
         past = {("cpi", core[i][2]): sum(v for _, v, _ in core[i - 3:i]) / 3 for i in range(3, len(core))}
-        P.nowcast.load = lambda log=None: (past, {("cpi", "2026-10"): 0.25, ("cpi", "2026-11"): 0.22})
+        P.nowcast.load = lambda log=None: (past, {("cpi", "2026-10"): 0.31, ("cpi", "2026-11"): 0.22},
+                                            {("cpi", "2026-10"): [("2026-11-11", 0.25), ("2026-11-12", 0.31)]})
 
         # 1. Release morning, 10:00 NY: first fit, post-release call for today, scenario map for the next CPI
         P.series_store.HISTORY_FROM = "2008-01-01"
