@@ -12,7 +12,7 @@
    "tier": "mega",
    "status": "confirmed",
    "session": "AMC",
-   "note": "Reports after the close. Futures react in the evening and the move carries into the next open. Date confirmed by the company.",
+   "note": "Results scheduled after the U.S. stock market closes. Date confirmed by the company.",
    "url": "https://investor.nvidia.com"
   },
   {
@@ -26,7 +26,7 @@
    "tier": "notable",
    "status": "scheduled",
    "session": "AMC",
-   "note": "Reports after the close. Futures react in the evening and the move carries into the next open. Date from the Nasdaq calendar. Companies sometimes move it; check their investor page."
+   "note": "Results scheduled after the U.S. stock market closes. Date from the Nasdaq calendar. Check the company's investor relations page for changes."
   },
   {
    "id": "20261119-earn-wmt",
@@ -39,7 +39,7 @@
    "tier": "notable",
    "status": "confirmed",
    "session": "BMO",
-   "note": "Reports before the open. The move lands in the same session's opening range. Date confirmed by the company.",
+   "note": "Results scheduled before the U.S. stock market opens. Date confirmed by the company.",
    "url": "https://corporate.walmart.com/news/events/fy2027-q3-earnings-release"
   },
   {
@@ -53,7 +53,7 @@
    "tier": "notable",
    "status": "confirmed",
    "session": "AMC",
-   "note": "Reports after the close. Futures react in the evening and the move carries into the next open. Date confirmed by the company.",
+   "note": "Results scheduled after the U.S. stock market closes. Date confirmed by the company.",
    "url": "https://investor.salesforce.com"
   },
   {
@@ -67,7 +67,7 @@
    "tier": "notable",
    "status": "scheduled",
    "session": "AMC",
-   "note": "Reports after the close. Futures react in the evening and the move carries into the next open. Date from the Nasdaq calendar. Companies sometimes move it; check their investor page."
+   "note": "Results scheduled after the U.S. stock market closes. Date from the Nasdaq calendar. Check the company's investor relations page for changes."
   },
   {
    "id": "20261209-earn-avgo",
@@ -80,7 +80,7 @@
    "tier": "mega",
    "status": "confirmed",
    "session": "AMC",
-   "note": "Reports after the close. Futures react in the evening and the move carries into the next open. Date confirmed by the company.",
+   "note": "Results scheduled after the U.S. stock market closes. Date confirmed by the company.",
    "url": "https://investors.broadcom.com"
   },
   {
@@ -94,7 +94,7 @@
    "tier": "notable",
    "status": "scheduled",
    "session": "",
-   "note": "Time not published yet. Date from the Nasdaq calendar. Companies sometimes move it; check their investor page."
+   "note": "Time not published yet. Date from the Nasdaq calendar. Check the company's investor relations page for changes."
   },
   {
    "id": "20261210-earn-cost",
@@ -107,7 +107,7 @@
    "tier": "notable",
    "status": "scheduled",
    "session": "AMC",
-   "note": "Reports after the close. Futures react in the evening and the move carries into the next open. Date from the Nasdaq calendar. Companies sometimes move it; check their investor page."
+   "note": "Results scheduled after the U.S. stock market closes. Date from the Nasdaq calendar. Check the company's investor relations page for changes."
   },
   {
    "id": "20261216-earn-mu",
@@ -120,7 +120,7 @@
    "tier": "notable",
    "status": "scheduled",
    "session": "",
-   "note": "Time not published yet. Date from the Nasdaq calendar. Companies sometimes move it; check their investor page."
+   "note": "Time not published yet. Date from the Nasdaq calendar. Check the company's investor relations page for changes."
   }
  ]
 }
