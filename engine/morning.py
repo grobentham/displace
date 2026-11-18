@@ -1,11 +1,11 @@
-"""Prepare the daily Singapore morning brief from the published engine data."""
+"""Prepare the 7 a.m. Singapore daily brief and refresh confirmed releases."""
 import datetime as dt
 from math import isfinite
 from pathlib import Path
 from zoneinfo import ZoneInfo
 
 from calendar_rules import nyse_holidays
-from engine import DATA, NY, NOW, WHY, clean, kind_of, load, save, when
+from engine import DATA, NY, NOW, WHY, clean, fomc_label, kind_of, load, market_line, save, when
 from earnings import WATCH, TIMES
 from earnings_news import FEEDS, get_reports
 
@@ -21,13 +21,14 @@ def edition_time(now):
 
 
 def recent_updates(news, start, cutoff):
-    items = []
+    items = {}
     for item in news.get("items", []):
         published = dt.datetime.fromisoformat(item["published"])
         if start <= published <= cutoff and item.get("title") and item.get("url", "").startswith("https://"):
-            items.append((published, {key: item[key] for key in ("title", "url", "analysis") if key in item}))
-    items.sort(key=lambda pair: pair[0], reverse=True)
-    return [item for _, item in items[:2]]
+            row = {key: item[key] for key in ("id", "title", "url", "analysis") if key in item}
+            row["published"] = published.astimezone(SGT).isoformat(timespec="seconds")
+            items[row.get("id") or (row["url"], row["title"], row["published"])] = row
+    return sorted(items.values(), key=lambda item: item["published"], reverse=True)[:2]
 
 
 def treasury_context(markets, cutoff):
@@ -58,7 +59,8 @@ def market_outlook(opens, markets):
            or not isfinite(tile["d1"]) for tile in (two, ten)):
         return {"label": "Data pending", "reason": "Waiting for both Treasury yields from the latest U.S. session.", "rates": None}
     short, long = two["d1"], ten["d1"]
-    rates = {"date": last_close.isoformat(), "twoYearBp": short, "tenYearBp": long}
+    rates = {"date": last_close.isoformat(), "twoYearBp": short, "tenYearBp": long,
+             "twoYearYield": two.get("value"), "tenYearYield": ten.get("value")}
     if short <= -RATE_THRESHOLD and long <= -RATE_THRESHOLD:
         return {"label": "Bullish tilt", "reason": "Yields fell across both maturities, easing pressure on tech valuations.", "rates": rates}
     if short >= RATE_THRESHOLD and long >= RATE_THRESHOLD:
@@ -94,8 +96,8 @@ def scheduled_earnings(opens, end, earnings):
     return [row for _, _, row in selected[:2]]
 
 
-def build_edition(opens, now, calendar, news, markets, earnings=None, reports=(), sources_read=0):
-    end, cutoff = opens + DAY, min(opens, now)
+def release_schedule(opens, cutoff, calendar):
+    end = opens + DAY
     scheduled = []
     for event in calendar.get("events", []):
         if event.get("cur") != "USD" or event.get("impact") not in ("high", "medium") or not event.get("time"):
@@ -106,19 +108,35 @@ def build_edition(opens, now, calendar, news, markets, earnings=None, reports=()
     scheduled.sort(key=lambda pair: (pair[1]["impact"] != "high", pair[0]))
     lead = scheduled[0][1] if scheduled else {}
     why = WHY.get(kind_of(lead))
-    next_releases = []
-    for at, event in sorted(scheduled[:3], key=lambda pair: pair[0]):
+    focus = {"title": clean(lead["title"]), "text": why} if why else None
+    rows = []
+    for at, event in scheduled:
         row = {"at": at.isoformat(timespec="minutes"), "title": event["title"]}
-        if event.get("forecast"):
-            row["forecast"] = event["forecast"]
-        next_releases.append(row)
+        for key in ("forecast", "previous"):
+            if event.get(key):
+                row[key] = event[key]
+        if at <= cutoff and event.get("actual"):
+            row["actual"] = event["actual"]
+        rows.append(row)
+    return sorted(rows[:3], key=lambda row: row["at"]), sorted(rows[3:], key=lambda row: row["at"]), focus
+
+
+def build_edition(opens, now, calendar, news, markets, earnings=None, reports=(), sources_read=0):
+    end, cutoff = opens + DAY, min(opens, now)
+    upcoming, more, focus = release_schedule(opens, cutoff, calendar)
+    fed = next((e for e in sorted(calendar.get("events", []), key=when)
+                if kind_of(e) == "fomc" and when(e) >= opens), None)
+    day = cutoff.astimezone(NY).date()
+    close = [market_line({key: tile}) for key, tile in markets.get("tiles", {}).items()
+             if key in ("usd", "oil") and day - dt.timedelta(days=4) <= dt.date.fromisoformat(tile["date"]) <= day]
 
     checked = dt.datetime.fromisoformat(news["checkedAt"]) if news.get("checkedAt") else None
     return {
         "date": opens.date().isoformat(), "opensAt": opens.isoformat(timespec="minutes"),
         "generatedAt": now.astimezone(SGT).isoformat(timespec="seconds"),
-        "updates": recent_updates(news, opens - DAY, cutoff), "upcoming": next_releases,
-        "focus": {"title": clean(lead["title"]), "text": why} if why else None,
+        "updates": recent_updates(news, opens - DAY, cutoff), "upcoming": upcoming, "moreReleases": more,
+        "focus": focus,
+        "nextFed": fomc_label(fed) if fed and when(fed) >= end else None, "otherCloses": close,
         "treasury": treasury_context(markets, cutoff),
         "outlook": {**market_outlook(opens, markets), "thresholdBp": RATE_THRESHOLD},
         "earnings": {"reports": list(reports), "upcoming": scheduled_earnings(opens, end, earnings or {}),
@@ -129,26 +147,40 @@ def build_edition(opens, now, calendar, news, markets, earnings=None, reports=()
     }
 
 
+def refresh_edition(edition, now, calendar, news):
+    opens = dt.datetime.fromisoformat(edition["opensAt"])
+    if not opens <= now < opens + DAY:
+        return
+    before = (edition["upcoming"], edition["moreReleases"], edition["focus"], edition["updates"])
+    upcoming, more, focus, _ = before
+    if "events" in calendar:
+        upcoming, more, focus = release_schedule(opens, now, calendar)
+    refreshed_news = {"items": [*edition["updates"], *news.get("items", [])]}
+    updates = recent_updates(refreshed_news, opens - DAY, now)
+    if (upcoming, more, focus, updates) != before:
+        edition.update(upcoming=upcoming, moreReleases=more, focus=focus, updates=updates,
+                       refreshedAt=now.astimezone(SGT).isoformat(timespec="seconds"))
+
+
 def publish(now, data, read_reports=get_reports):
     target = data / "brief" / "morning.json"
     editions = load(target, {}).get("editions", [])
     opens = edition_time(now)
     date = opens.date().isoformat()
-    if any(edition["date"] == date and "rates" in (edition.get("outlook") or {}) and "earnings" in edition
-           for edition in editions):
-        print(f"Morning brief for {date} SGT already prepared.")
-        return
-
-    reports, sources_read = read_reports(opens - DAY, min(opens, now))
-    edition = build_edition(opens, now,
-                            load(data / "calendar" / "events.json", {}),
-                            load(data / "news" / "latest.json", {}),
-                            load(data / "markets" / "latest.json", {}),
-                            load(data / "calendar" / "earnings.json", {}), reports, sources_read)
-    editions = [item for item in editions if item["date"] != date]
-    editions = sorted([*editions, edition], key=lambda item: item["date"], reverse=True)[:2]
+    calendar = load(data / "calendar" / "events.json", {})
+    news = load(data / "news" / "latest.json", {})
+    if not any(edition["date"] == date and "moreReleases" in edition for edition in editions):
+        reports, sources_read = read_reports(opens - DAY, min(opens, now))
+        edition = build_edition(opens, now, calendar, news,
+                                load(data / "markets" / "latest.json", {}),
+                                load(data / "calendar" / "earnings.json", {}), reports, sources_read)
+        editions = [item for item in editions if item["date"] != date] + [edition]
+        print(f"Prepared daily brief for {opens.isoformat(timespec='minutes')}.")
+    editions = sorted(editions, key=lambda item: item["date"], reverse=True)[:2]
+    for edition in editions:
+        if "moreReleases" in edition:
+            refresh_edition(edition, now, calendar, news)
     save(target, {"version": 2, "editions": editions})
-    print(f"Prepared morning brief for {opens.isoformat(timespec='minutes')}.")
 
 
 if __name__ == "__main__":

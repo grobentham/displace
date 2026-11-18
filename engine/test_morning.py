@@ -3,7 +3,7 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 import unittest
 
-from morning import SGT, build_edition, edition_time, market_outlook, publish, scheduled_earnings
+from morning import SGT, build_edition, edition_time, market_outlook, publish, refresh_edition, scheduled_earnings
 from engine import load
 from earnings_news import report_items, report_summary
 
@@ -51,6 +51,26 @@ class MorningTests(unittest.TestCase):
             publish(dt.datetime(2026, 11, 21, 10, tzinfo=SGT), data, no_reports)
             self.assertEqual(target.read_bytes(), first)
             self.assertEqual([item["date"] for item in load(target, {})["editions"]], ["2026-11-21", "2026-11-20"])
+
+    def test_combined_brief_keeps_schedule_and_refreshes_confirmed_results(self):
+        opens = time("2026-11-18T07:00+08:00")
+        events = [{"date": "2026-11-18", "time": hour, "title": title, "cur": "USD", "impact": impact}
+                  for hour, title, impact in [("08:30", "Retail sales", "high"), ("09:30", "Overview", "medium"),
+                                               ("10:00", "Activity", "medium"), ("14:00", "Minutes", "medium")]]
+        events[0].update(forecast="0.2%", previous="0.8%", actual="0.3%")
+        calendar = {"events": events, "through": "2026-11-30"}
+        edition = build_edition(opens, opens, calendar, {}, {})
+        self.assertEqual([row["title"] for row in edition["moreReleases"]], ["Minutes"])
+        self.assertEqual(edition["upcoming"][0]["previous"], "0.8%")
+        self.assertNotIn("actual", edition["upcoming"][0])
+        report = {"id": "retail", "title": "Retail sales", "analysis": "Retail sales rose 0.3%.",
+                  "url": "https://example.com/retail", "published": "2026-11-18T13:30:00+00:00"}
+        refresh_edition(edition, time("2026-11-18T21:40+08:00"), calendar, {"items": [report, report]})
+        self.assertEqual(edition["upcoming"][0]["actual"], "0.3%")
+        self.assertEqual(len(edition["updates"]), 1)
+        self.assertEqual(edition["updates"][0]["published"], "2026-11-18T21:30:00+08:00")
+        self.assertEqual(edition["generatedAt"], "2026-11-18T07:00:00+08:00")
+        self.assertEqual(edition["refreshedAt"], "2026-11-18T21:40:00+08:00")
 
     def test_outlook_requires_both_yields_from_the_expected_session(self):
         opens = time("2026-11-18T07:00+08:00")

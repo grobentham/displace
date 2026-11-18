@@ -1249,7 +1249,6 @@ html.static .pro-how{display:none}
 @media (max-width:800px){.plans,.pro-how ol{grid-template-columns:1fr}.pa-cfg{grid-template-columns:1fr}.pa-r{grid-template-columns:1fr 1fr}.pa-h{display:none}.propage{padding-top:28px}}
 /* ===== pro desk ===== */
 .dk-card{background:#fff;border:1px solid var(--line);border-radius:20px;padding:20px 22px;margin-bottom:14px}
-.dk-brief{border-color:#e6d3fb;box-shadow:0 10px 30px -18px rgba(120,60,200,.35)}
 .morning-brief{padding:clamp(15px,2.3vw,28px);border-color:#dee5ed;border-radius:26px;text-align:left;box-shadow:0 16px 36px -30px #263c53}
 .morning-heading{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:5px 20px;margin-bottom:16px}
 .morning-heading h2{margin:0;font-size:clamp(1.35rem,2vw,1.75rem);letter-spacing:-.04em}
@@ -1271,6 +1270,7 @@ html.static .pro-how{display:none}
 .outlook-yields dt{color:#cfdbe9;font-size:.78rem;line-height:1.25}
 .outlook-yields dd{margin:5px 0 0;font-size:clamp(1.25rem,2.5vw,1.75rem);font-weight:730;font-variant-numeric:tabular-nums;line-height:1.15}
 .outlook-yields dd span{font-size:.76rem;font-weight:600;color:#cfdbe9}
+.outlook-yields dd .outlook-level{display:block;margin-top:4px}
 .outlook-yields .outlook-date{margin-top:7px;color:#cfdbe9;font-size:.78rem}
 .morning-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
 .morning-topic{min-width:0;padding:14px 15px;border:1px solid #e7ebf1;border-radius:15px;background:#f6f8fb}
@@ -1281,6 +1281,9 @@ html.static .pro-how{display:none}
 .morning-grid time{display:block;margin-bottom:1px;color:#145f9d;font-size:.8rem;font-weight:700;font-variant-numeric:tabular-nums}
 .morning-grid a{color:#0758a1;font-weight:650;text-decoration:underline;text-underline-offset:2px}
 .morning-grid .morning-focus{margin-top:8px;color:#465366}
+.morning-grid .daily-more{margin-top:9px;font-size:.84rem}
+.daily-more summary{color:#0758a1;cursor:pointer;font-weight:650}
+.daily-more ul{margin-top:7px}
 .morning-topic .morning-coverage{margin-top:7px;font-size:.8rem;color:#566277}
 .morning-foot{margin:12px 0 0;font-size:.8rem;color:#566277}
 @media(max-width:740px){.morning-outlook,.morning-grid{grid-template-columns:minmax(0,1fr)}.morning-outlook{gap:13px}}
@@ -1298,9 +1301,7 @@ html.static .pro-how{display:none}
 .dk-card h3{font-size:1.25rem;margin:6px 0 12px;letter-spacing:-.01em}
 .morning-grid h3{font-size:1rem;margin:0 0 7px}
 .dk-sec{margin-top:12px}.dk-sec b{display:block;font-size:.78rem;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);margin-bottom:4px}.dk-sec p{margin:0;line-height:1.55;font-size:.95rem}
-.dk-tl{list-style:none;padding:0;margin:0;display:grid;gap:6px}.dk-tl li{display:grid;grid-template-columns:56px 1fr;gap:10px;font-size:.93rem;line-height:1.45}.dk-tl time{font-weight:700;font-variant-numeric:tabular-nums}
 .dk-dis{font-size:.78rem;color:var(--muted);margin:14px 0 0}
-.dk-tease{color:#424245;margin:0 0 12px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .dk-lock{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;background:var(--gray);border-radius:14px;padding:12px 14px;font-size:.9rem;color:#424245}
 .dk-row{display:grid;grid-template-columns:1.4fr 1fr;gap:14px;align-items:start}.dk-row .outlook{margin-bottom:14px}.dk-row>[hidden]{display:none}
 .dk-row:has(> .outlook[hidden]){grid-template-columns:1fr}
@@ -1604,7 +1605,7 @@ svg.cd line.wick{animation:fadein .5s ease-out both}
     <div class="ctas">
       <a class="pillbtn lg" href="#join">Join Displace free</a>
       <a class="more" href="#path">See the learning path</a>
-      <a class="more" href="#morning-brief">Read the morning brief</a>
+      <a class="more" href="#daily-brief">Read the daily brief</a>
     </div>
     <div class="chooser" role="group" aria-label="Where are you starting?">
       <span>Where are you starting?</span>
@@ -2424,8 +2425,8 @@ svg.cd line.wick{animation:fadein .5s ease-out both}
 <section class="toolpage newspage" id="calendar" style="--ac:#0071e3;--ac2:#30d158">
   <div class="wide">
     <header class="nhero"><div class="kick">News</div><h1 class="h-lg">Economic calendar</h1><p class="sub">Follow scheduled releases and official policy updates in New York time and yours. See reported figures and how they compare with earlier readings.</p><p class="ndis">For education only. Briefings describe reported data and historical reactions.</p></header>
-    <section class="dk-card morning-brief" id="morning-brief" aria-labelledby="morning-title">
-      <header class="morning-heading"><h2 id="morning-title">Morning brief</h2><p id="morning-status" role="status">Loading the latest edition…</p></header>
+    <section class="dk-card morning-brief" id="daily-brief" aria-labelledby="morning-title">
+      <header class="morning-heading"><h2 id="morning-title">Daily brief</h2><p id="morning-status" role="status">Loading the latest edition…</p></header>
       <div id="morning-content"></div>
     </section>
     <div class="tool on" id="econcal">
@@ -2438,7 +2439,6 @@ svg.cd line.wick{animation:fadein .5s ease-out both}
             <button type="button" class="pillbtn" id="nqi-remove" hidden>Remove study</button>
           </div>
         </section>
-        <div class="dk-card dk-brief" id="dk-brief" hidden></div>
         <section class="dk-card" id="displace-news" aria-labelledby="dn-title">
           <div class="dn-head"><h2 id="dn-title">Latest economic news</h2><p class="dn-status" id="dn-status" role="status">Loading official updates…</p></div>
           <div class="dn-grid" id="dn-grid"></div>
@@ -2579,18 +2579,17 @@ svg.cd line.wick{animation:fadein .5s ease-out both}
 
 <section class="propage" id="pro">
   <div class="wide">
-    <header class="nhero"><div class="kick">Displace Pro</div><h1 class="h-lg">Go deeper on every release.</h1><p class="sub">The direction engine, a daily brief, a Fed tracker and a year of release stats, so you walk into every New York open prepared. Every number tested, nothing hyped.</p></header>
+    <header class="nhero"><div class="kick">Displace Pro</div><h1 class="h-lg">Go deeper on every release.</h1><p class="sub">The direction engine, a Fed tracker and a year of release stats.</p></header>
     <div class="pro-status" id="pro-status" role="status"></div>
     <p class="pro-msg" id="pro-msg" aria-live="polite"></p>
     <div class="plans">
       <div class="plan"><div class="plan-h"><b>Free</b><span class="plan-p">US$0</span></div><ul><li><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="m5 12 5 5 9-10" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>Every lesson, model and tool</b> on the site</span></li><li><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="m5 12 5 5 9-10" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>Economic calendar</b> with reminders and calendar feeds</span></li><li><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="m5 12 5 5 9-10" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>Next-release countdown</b> with consensus and the last figure</span></li><li><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="m5 12 5 5 9-10" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>Latest releases</b> in the record</span></li></ul></div>
-      <div class="plan plan-pro"><div class="plan-h"><b>Pro</b><span class="plan-p" id="pro-price">Free during launch</span></div><ul><li><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="m5 12 5 5 9-10" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>Direction engine</b>: tested directions for gold, the dollar, EUR/USD, the Nasdaq and yields, with a public hit rate</span></li><li><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="m5 12 5 5 9-10" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>Daily brief</b> before every New York open</span></li><li><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="m5 12 5 5 9-10" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>Fed tracker</b>: rate, next decision and market pricing</span></li><li><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="m5 12 5 5 9-10" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>Release stats</b>: a year of actual vs forecast</span></li><li><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="m5 12 5 5 9-10" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>Weekly outlook</b> and the <b>full release record</b></span></li></ul><div id="pro-cta"><button type="button" class="pillbtn lg" data-pro-up>Upgrade to Pro</button><small>Secure checkout by Stripe. Cancel any time.</small></div></div>
+      <div class="plan plan-pro"><div class="plan-h"><b>Pro</b><span class="plan-p" id="pro-price">Free during launch</span></div><ul><li><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="m5 12 5 5 9-10" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>Direction engine</b>: tested directions for gold, the dollar, EUR/USD, the Nasdaq and yields, with a public hit rate</span></li><li><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="m5 12 5 5 9-10" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>Fed tracker</b>: rate, next decision and market pricing</span></li><li><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="m5 12 5 5 9-10" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>Release stats</b>: a year of actual vs forecast</span></li><li><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="m5 12 5 5 9-10" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>Weekly outlook</b> and the <b>full release record</b></span></li></ul><div id="pro-cta"><button type="button" class="pillbtn lg" data-pro-up>Upgrade to Pro</button><small>Secure checkout by Stripe. Cancel any time.</small></div></div>
     </div>
     <div class="pro-show">
       <h2>What you get with Pro</h2>
       <div class="ps-g">
         <div class="ps"><i>↕︎</i><b>Direction engine</b><p>For each big release, which way gold, the dollar, EUR/USD, the Nasdaq and Treasury yields have tended to close after a higher or lower number. Only patterns that held up on releases the model never saw are shown, with the hit rate in public.</p><div class="ps-mock"><em>Example</em><span>Gold</span>▼ 69% if CPI comes in higher<span>Dollar</span>▲ 63% if CPI comes in higher</div></div>
-        <div class="ps"><i>☀︎</i><b>Daily brief</b><p>Before every New York open: what happened overnight, every release on today's schedule with its time, and what the market is focused on.</p><div class="ps-mock"><em>Example</em><span>08:30</span>Retail sales · forecast · previous<span>14:00</span>FOMC minutes</div></div>
         <div class="ps"><i>⚖︎</i><b>Fed tracker</b><p>The policy rate, the next decision date, what futures markets are pricing, and what Fed officials have been saying, updated every weekday.</p><div class="ps-mock"><em>Example</em><span>Rate</span>Current target range<span>Next</span>Next decision date<span>Pricing</span>Hike / hold / cut odds, as reported</div></div>
         <div class="ps"><i>▥</i><b>Release stats</b><p>Twelve months of CPI, payrolls, retail sales, PCE, GDP and ISM: actual vs forecast, release by release, charted so you can see how each report tends to surprise.</p><div class="ps-bars"><i style="height:40%"></i><i style="height:70%"></i><i class="d" style="height:30%"></i><i style="height:55%"></i><i class="d" style="height:45%"></i><i style="height:80%"></i><i class="d" style="height:25%"></i><i style="height:60%"></i></div></div>
         <div class="ps"><i>✎</i><b>Release recaps</b><p>Shortly after each high-impact number lands: what it showed, how it compared with forecast, and how gold, the dollar and index futures took it.</p></div>
@@ -2656,7 +2655,7 @@ window.claude={use:function(n){return Promise.resolve(n==="db"?db:null);},isStat
   "use strict";
   var section=document.getElementById("displace-news");
   if(!section)return;
-  var morning=document.getElementById("morning-brief");
+  var morning=document.getElementById("daily-brief");
   if(!window.claude||!window.claude.isStatic){section.hidden=morning.hidden=true;return;}
   var grid=document.getElementById("dn-grid"),more=document.getElementById("dn-more");
   var older=document.getElementById("dn-older"),status=document.getElementById("dn-status");
@@ -2701,9 +2700,10 @@ window.claude={use:function(n){return Promise.resolve(n==="db"?db:null);},isStat
   var sgtDay=new Intl.DateTimeFormat("en-SG",{weekday:"short",timeZone:"Asia/Singapore"});
   var yieldDate=new Intl.DateTimeFormat("en-US",{month:"short",day:"numeric",timeZone:"UTC"});
   var editions=[],shown=null,wakeup;
-  function yieldChange(label,value){
+  function yieldChange(label,value,level){
     var item=node("div"),valueNode=node("dd",(value>0?"+":value<0?"−":"")+Math.abs(value));
     valueNode.append(node("span"," bp"));
+    if(Number.isFinite(level))valueNode.append(node("span",level.toFixed(2)+"% yield","outlook-level"));
     item.append(node("dt",label),valueNode);
     return item;
   }
@@ -2721,7 +2721,7 @@ window.claude={use:function(n){return Promise.resolve(n==="db"?db:null);},isStat
     box.append(summary);
     if(rates){
       var evidence=node("div",null,"outlook-yields"),list=node("dl");
-      list.append(yieldChange("2-year Treasury",rates.twoYearBp),yieldChange("10-year Treasury",rates.tenYearBp));
+      list.append(yieldChange("2-year Treasury",rates.twoYearBp,rates.twoYearYield),yieldChange("10-year Treasury",rates.tenYearBp,rates.tenYearYield));
       evidence.append(list,node("p","Yield changes · "+yieldDate.format(new Date(rates.date+"T00:00:00Z")),"outlook-date"));
       box.append(evidence);
     }
@@ -2747,6 +2747,21 @@ window.claude={use:function(n){return Promise.resolve(n==="db"?db:null);},isStat
     if(data.sourcesRead<data.sourcesTotal)box.append(node("p",data.sourcesRead+" of "+data.sourcesTotal+" company feeds checked.","morning-coverage"));
     return box;
   }
+  function releaseList(rows){
+    var list=node("ul");
+    rows.forEach(function(item){
+      var row=node("li"),at=node("time",sgtEvent.format(new Date(item.at)));
+      at.dateTime=item.at;
+      row.append(at,document.createTextNode(" "+item.title));
+      var figures=[];
+      if(item.actual)figures.push("Actual "+item.actual);
+      if(item.forecast)figures.push("Forecast "+item.forecast);
+      if(item.previous)figures.push("Previous "+item.previous);
+      if(figures.length)row.append(node("p",figures.join(" · ")));
+      list.append(row);
+    });
+    return list;
+  }
   function showMorning(){
     clearTimeout(wakeup);
     var now=Date.now(),edition=editions.find(function(item){return Date.parse(item.opensAt)<=now;});
@@ -2754,7 +2769,7 @@ window.claude={use:function(n){return Promise.resolve(n==="db"?db:null);},isStat
     editions.forEach(function(item){var at=Date.parse(item.opensAt);if(at>now&&(change<=now||at<change))change=at;});
     if(change>now&&Number.isFinite(change))wakeup=setTimeout(showMorning,change-now);
     if(!edition){
-      morningStatus.textContent=editions.length?"Next edition at 7:00 a.m. SGT.":"Morning brief is temporarily unavailable.";
+      morningStatus.textContent=editions.length?"Next edition at 7:00 a.m. SGT.":"Daily brief is temporarily unavailable.";
       return;
     }
     var stale=now>=Date.parse(edition.opensAt)+24*60*60*1000;
@@ -2765,26 +2780,37 @@ window.claude={use:function(n){return Promise.resolve(n==="db"?db:null);},isStat
     recent.append(node("h3","What changed"));
     if(edition.updates.length){
       var updates=node("ul");
-      edition.updates.forEach(function(item){var row=node("li");row.append(headline(item));if(item.analysis)row.append(node("p",item.analysis));updates.append(row);});
+      edition.updates.forEach(function(item){
+        var row=node("li");
+        if(Date.parse(item.published)>=Date.parse(edition.opensAt)){
+          var at=node("time",sgtEvent.format(new Date(item.published))+" SGT");at.dateTime=item.published;row.append(at);
+        }
+        row.append(headline(item));if(item.analysis)row.append(node("p",item.analysis));updates.append(row);
+      });
       recent.append(updates);
     }else recent.append(node("p",edition.feedsChecked&&!edition.feedIssues?"No major official updates in the last 24 hours.":"No recent updates available from the feeds checked."));
-    upcoming.append(node("h3","What to watch · SGT"));
-    if(edition.upcoming.length){
-      var releases=node("ul");
-      edition.upcoming.forEach(function(item){var row=node("li"),at=node("time",sgtEvent.format(new Date(item.at)));at.dateTime=item.at;row.append(at,document.createTextNode(" "+item.title+(item.forecast?" · Forecast "+item.forecast:"")));releases.append(row);});
-      upcoming.append(releases);
-    }else upcoming.append(node("p",edition.calendarCovered?"No major U.S. releases scheduled in the next 24 hours.":"Schedule coverage is limited for the next 24 hours."));
+    upcoming.append(node("h3","Release schedule · SGT"));
+    if(edition.upcoming.length)upcoming.append(releaseList(edition.upcoming));
+    else upcoming.append(node("p",edition.calendarCovered?"No major U.S. releases scheduled in this edition.":"Schedule coverage is limited for this edition."));
+    if(edition.moreReleases&&edition.moreReleases.length){
+      var moreReleases=node("details",null,"daily-more");
+      moreReleases.append(node("summary","More releases ("+edition.moreReleases.length+")"),releaseList(edition.moreReleases));
+      upcoming.append(moreReleases);
+    }
     if(edition.focus){var focus=node("p",null,"morning-focus");if(edition.upcoming.length>1)focus.append(node("strong",edition.focus.title+". "));focus.append(document.createTextNode(edition.focus.text));upcoming.append(focus);}
+    if(edition.nextFed)upcoming.append(node("p","Next Fed decision · "+edition.nextFed,"morning-focus"));
     grid.append(upcoming);
     if(edition.earnings)grid.append(earningsBlock(edition.earnings));
     grid.append(recent);
     var footer=[];
     var treasury=edition.treasury;
-    if(treasury&&!edition.outlook){
+    if(treasury&&(!edition.outlook||!edition.outlook.rates)){
       var delta=treasury.changeBp,move=Number.isFinite(delta)?(delta?" ("+(delta>0?"+":"−")+Math.abs(delta)+" bp)":" (unchanged)"):"";
       footer.push("U.S. 2-year yield "+treasury.yield.toFixed(2)+"%"+move+" as of "+treasury.date);
     }
+    if(edition.otherCloses)footer.push.apply(footer,edition.otherCloses);
     footer.push("Compiled "+sgtTime.format(new Date(edition.generatedAt))+" SGT");
+    if(edition.refreshedAt)footer.push("Release update "+sgtTime.format(new Date(edition.refreshedAt))+" SGT");
     if(!edition.feedsChecked)footer.push("News refresh pending");
     else if(edition.feedIssues)footer.push("Some news feeds were unavailable");
     var content=[grid,node("p",footer.join(" · "),"morning-foot")];
@@ -4195,7 +4221,7 @@ PAGES.forEach(function(pg){
   if(pg.next){var n=pg.next,sec=document.createElement("section");sec.className="pagenext "+(d.lastElementChild&&d.lastElementChild.classList.contains("gray")?"gray":d.lastElementChild&&d.lastElementChild.classList.contains("dark")?"dark":"");
     sec.innerHTML='<div class="wide stage-next"><a href="#'+n[0]+'"><span><small>'+n[1]+'</small><b>'+n[2]+'</b><em>'+n[3]+'</em></span><i aria-hidden="true">›</i></a></div>';d.appendChild(sec);}
   main.appendChild(d);els[pg.id]=d;});
-function pageOf(h){if(!h||h==="top")return{p:"home"};var el=document.getElementById(h);if(!el)return{p:"home"};var n=el.closest(".page");return n?{p:n.getAttribute("data-page"),el:el}:{p:"home"};}
+function pageOf(h){if(!h||h==="top")return{p:"home"};var el=document.getElementById(h==="morning-brief"?"daily-brief":h);if(!el)return{p:"home"};var n=el.closest(".page");return n?{p:n.getAttribute("data-page"),el:el}:{p:"home"};}
 var links=[].slice.call(document.querySelectorAll("#navlinks a"));
 function route(){
   var h=decodeURIComponent((location.hash||"").slice(1)),r=pageOf(h),pg=PAGES.filter(function(x){return x.id===r.p;})[0];
@@ -4267,7 +4293,7 @@ function status(){var el=$("pro-status");if(!el)return;var h="",price=esc(P.cfg.
   else if(P.pro){h='<b>Pro is active</b><span>'+(P.member&&P.member.until?"Paid through "+esc(P.member.until)+". ":"")+'Thanks for supporting Displace.</span>'+(P.cfg.portalLink?'<a class="pillbtn" href="'+esc(P.cfg.portalLink)+'" target="_blank" rel="noopener">Manage subscription</a>':'');}
   else if(!P.signed){h='<b>You\'re on the free plan</b><span>Sign in to Claude to upgrade, so your Pro access follows you.</span>';}
   else if(P.req){h='<b>Upgrade in progress</b><span>Pro ID '+esc(P.code)+'. Pro switches on once your payment is confirmed, usually within a few hours.</span><button type="button" class="pillbtn" data-pro-up>Open checkout again</button>';}
-  else{h='<b>You\'re on the free plan</b><span>Daily brief, Fed tracker, release stats and the full release record.</span><button type="button" class="pillbtn" data-pro-up>Upgrade · '+price+'</button>';}
+  else{h='<b>You\'re on the free plan</b><span>Fed tracker, release stats and the full release record.</span><button type="button" class="pillbtn" data-pro-up>Upgrade · '+price+'</button>';}
   el.innerHTML=h;var cta=$("pro-cta");if(cta){cta.hidden=P.isPro();}$$('[data-pro-up]').forEach(function(b){b.hidden=!!(P.cfg&&P.cfg.proOpen);});}
 function $$(q){return[].slice.call(document.querySelectorAll(q));}
 P.on(status);
@@ -4307,37 +4333,22 @@ function outlook(){var el=$("ec-outlook");if(!el)return;if(!OL||!OL.summary){el.
 P.on(outlook);
 })();
 
-/* ===== Pro desk: daily brief, Fed tracker, release stats ===== */
+/* ===== Pro desk: Fed tracker, release stats ===== */
 (function(){
 var $=function(i){return document.getElementById(i);};
 function esc(s){return String(s==null?"":s).replace(/[&<>"']/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];});}
 function data(s){if(!s||s.exists===false)return null;return typeof s.data==="function"?s.data():s;}
 function num(v){if(v==null||v==="")return NaN;var m=String(v).replace(/,/g,"").match(/-?\d+(\.\d+)?/);if(!m)return NaN;var n=+m[0],u=String(v).toUpperCase();if(/\dK/.test(u))n*=1e3;if(/\dM/.test(u))n*=1e6;return n;}
-var D={brief:null,fed:null,hist:null,subbed:false};
+var D={fed:null,hist:null,subbed:false};
 function pro(){return !!(window.PRO&&PRO.isPro());}
 function lock(t){return'<div class="dk-lock"><span>'+t+'</span><button type="button" class="pillbtn" data-pro-go>Unlock with Pro</button></div>';}
 function start(){if(D.subbed||!window.PRO||!PRO.db)return;D.subbed=true;
-  PRO.db.doc("brief/today").onSnapshot(function(s){D.brief=data(s);brief();},function(){});
   PRO.db.doc("fed/current").onSnapshot(function(s){D.fed=data(s);fed();},function(){});
   PRO.db.doc("history/main").onSnapshot(function(s){D.hist=data(s);stats();},function(){});
   PRO.db.doc("markets/latest").onSnapshot(function(s){D.mk=data(s);pulse();},function(){});
   PRO.db.doc("history/reactions").onSnapshot(function(s){D.rx=data(s);stats();},function(){});}
-function all(){start();brief();fed();stats();pulse();}
+function all(){start();fed();stats();pulse();}
 setTimeout(function(){if(window.PRO)PRO.on(all);},0);
-
-/* daily brief */
-function brief(){var el=$("dk-brief");if(!el)return;var b=D.brief;if(!b||!b.headline){el.hidden=true;return;}el.hidden=false;var p=pro();
-  var when=b.date?new Date(b.date+"T12:00:00Z").toLocaleDateString("en-US",{weekday:"long",month:"short",day:"numeric",timeZone:"UTC"}):"";
-  var h='<div class="dk-k"><span>Daily brief · Pro</span><small>'+esc(when)+'</small></div><h3>'+esc(b.headline)+'</h3>';
-  if(!p){el.className="dk-card dk-brief locked";el.innerHTML=h+'<p class="dk-tease">'+esc(b.overnight||"")+'</p>'+lock("Today's full brief: overnight recap, every release on the schedule and what's in focus.");return;}
-  el.className="dk-card dk-brief";
-  h+=(b.overnight?'<div class="dk-sec"><b>'+esc(b.overnightLabel||"Overnight")+'</b><p>'+esc(b.overnight)+'</p></div>':'');
-  if(b.today&&b.today.length)h+='<div class="dk-sec"><b>On the schedule</b><ul class="dk-tl">'+b.today.map(function(t){return'<li><time>'+esc(t.time||"")+'</time><span>'+esc(t.item||"")+'</span></li>';}).join("")+'</ul></div>';
-  else h+='<div class="dk-sec"><b>On the schedule</b><p>No major US releases today.</p></div>';
-  if(b.recent&&b.recent.length)h+='<div class="dk-sec"><b>Just released</b>'+b.recent.map(function(r){return'<p class="dk-rec">'+esc(r.line)+'</p>';}).join("")+'</div>';
-  if(b.focus)h+='<div class="dk-sec"><b>In focus</b><p>'+esc(b.focus)+'</p></div>';
-  h+='<p class="dk-dis">'+esc(b.note||"Written before the New York open from public schedules and news reports. Education only, not a forecast or financial advice.")+'</p>';
-  el.innerHTML=h;}
 
 /* fed tracker */
 function fed(){var el=$("dk-fed");if(!el)return;var f=D.fed;if(!f||!f.rate){el.hidden=true;return;}el.hidden=false;var p=pro();
@@ -4401,7 +4412,7 @@ var box=$i("srch"),q=$i("srch-q"),r=$i("srch-r");if(!box)return;
 var IX=[["Home","Start here","hero"],["Learning path","Six stages","path"],["Foundations","Structure, liquidity, displacement","foundations"],["PD arrays","FVG, order blocks, breakers","arrays"],["Time and price","Kill zones, macros, sessions","time"],["Models","19 trade models, daily bias","models"],["Markets","NQ, ES, gold, forex","markets"],["Prove it","Testing, backtest, playbook","prove"],
  ["News","Economic calendar, CPI, NFP, FOMC, direction engine","calendar"],["Tools","All eleven tools","tools"],["MNQ Replay backtester","Bar-by-bar replay, backtest, practice trading","backtest"],["Trade planner","Position size, risk, reward calculator","calc"],["Pre-trade checklist","Model checklists","checklist"],["Prop firm tracker","Evaluation, drawdown, target","prop"],["Levels","OTE, standard deviation projections","levels"],["Edge simulator","Win rate, streaks, expectancy","sim"],["Flashcards","Quiz, practice questions","cards"],["Chart replay drills","Practice setups candle by candle","replay"],["Daily bias builder","Bullish or bearish bias","biasbuilder"],["Kill zone alerts","Session notifications","alerts"],["Drawdown recovery","Gain needed to recover a loss","recovery"],["Kill zone clock","New York time, sessions","clock"],
  ["Journal","Trade journal, stats","journal"],["Mindset","Trading psychology, wellbeing, stress","mind"],["Calm mode","Breathing, relax, full screen","mind","md-calm-open"],["Peaceful sounds","Rain, waves, birdsong, sleep timer","mind","md-s-sound"],["One-minute check-in","Should I trade today","mind","md-s-check"],["Breathing reset","Box breathing, 4-7-8","mind","md-s-check"],["Decompress","Screen break, grounding, stretch","mind","md-s-relief"],["Mood log and debrief","Reflect, wind-down, my rules","mind","md-s-reflect"],["Trading traps","FOMO, revenge trading, tilt","mind","md-s-traps"],
- ["Displace Pro","Plans, direction engine, daily brief","pro"],["Glossary","Every ICT term","glossary"],["FAQ","Questions","faq"],["Join free","Sign up","join"]];
+ ["Daily brief","NQ market outlook, earnings, economic releases","daily-brief"],["Displace Pro","Plans, direction engine, Fed tracker","pro"],["Glossary","Every ICT term","glossary"],["FAQ","Questions","faq"],["Join free","Sign up","join"]];
 var res=[],sel=0;
 function terms(){var o=[];document.querySelectorAll("#gloss dt").forEach(function(d){var ps=[];d.childNodes.forEach(function(n){var x=(n.textContent||"").trim();if(x)ps.push(x);});if(ps.length)o.push([ps.join(" · "),"Glossary term","glossary",null,ps[ps.length-1]]);});return o;}
 function draw(){var v=q.value.trim().toLowerCase(),all=IX.concat(v?terms():[]);
