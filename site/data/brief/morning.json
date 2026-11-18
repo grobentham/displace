@@ -4,12 +4,14 @@
   {
    "date": "2026-11-18",
    "opensAt": "2026-11-18T07:00+08:00",
-   "generatedAt": "2026-11-18T13:50:34+08:00",
+   "generatedAt": "2026-11-18T14:00:50+08:00",
    "updates": [
     {
+     "id": "20261117-retail-sales-oct",
      "title": "Retail sales (Oct)",
      "url": "https://www.census.gov/retail/sales.html",
-     "analysis": "Retail sales came in at 0.2% against a 0.2% forecast, in line with expectations. The previous reading was 0.8%."
+     "analysis": "Retail sales came in at 0.2% against a 0.2% forecast, in line with expectations. The previous reading was 0.8%.",
+     "published": "2026-11-17T21:30:00+08:00"
     }
    ],
    "upcoming": [
@@ -18,10 +20,13 @@
      "title": "FOMC minutes (Oct 27–28 meeting)"
     }
    ],
+   "moreReleases": [],
    "focus": {
     "title": "FOMC minutes",
     "text": "The minutes show how officials weighed the last decision."
    },
+   "nextFed": "Dec 8–9",
+   "otherCloses": [],
    "treasury": {
     "date": "2026-11-17",
     "yield": 4.8,
@@ -33,7 +38,9 @@
     "rates": {
      "date": "2026-11-17",
      "twoYearBp": -3,
-     "tenYearBp": -2
+     "tenYearBp": -2,
+     "twoYearYield": 4.8,
+     "tenYearYield": 5.1
     },
     "thresholdBp": 3
    },
