@@ -2770,13 +2770,13 @@ window.claude={use:function(n){return Promise.resolve(n==="db"?db:null);},isStat
   function outlookBlock(outlook){
     var rates=outlook.rates,tone=outlook.label==="Bullish tilt"?" bullish":outlook.label==="Bearish tilt"?" bearish":"";
     var box=node("section",null,"morning-outlook"+tone+(rates?"":" single")),summary=node("div");
-    var title=node("h3","Market outlook · NQ","outlook-heading");
+    var title=node("h3","NQ rates outlook","outlook-heading");
     title.id="morning-outlook-title";
     box.setAttribute("aria-labelledby",title.id);
     var method=node("details");
     var treasury=node("a","U.S. Treasury yield data");
     treasury.href="https://home.treasury.gov/resource-center/data-chart-center/interest-rates";
-    method.append(node("summary","About this outlook"),node("p","The rates-based tilt requires both Treasury yields to move at least "+outlook.thresholdBp+" bp in the same direction. Earnings provide separate context. The rule has yet to be backtested."),treasury);
+    method.append(node("summary","About this outlook"),node("p","When both Treasury yields fall by at least "+outlook.thresholdBp+" bp, the rates outlook shows a bullish tilt. When both rise by that amount, it shows a bearish tilt. Smaller or mixed moves show Neutral."),treasury);
     summary.append(title,node("strong",outlook.label,"outlook-call"),node("p",outlook.reason),method);
     box.append(summary);
     if(rates){
@@ -4447,7 +4447,7 @@ var box=$i("srch"),q=$i("srch-q"),r=$i("srch-r");if(!box)return;
 var IX=[["Home","Start here","hero"],["Learning path","Six stages","path"],["Foundations","Structure, liquidity, displacement","foundations"],["PD arrays","FVG, order blocks, breakers","arrays"],["Time and price","Kill zones, macros, sessions","time"],["Models","19 trade models, daily bias","models"],["Markets","NQ, ES, gold, forex","markets"],["Prove it","Testing, backtest, playbook","prove"],
  ["News","Economic calendar, CPI, NFP, FOMC, direction engine","calendar"],["Tools","All eleven tools","tools"],["MNQ Replay backtester","Bar-by-bar replay, backtest, practice trading","backtest"],["Trade planner","Position size, risk, reward calculator","calc"],["Pre-trade checklist","Model checklists","checklist"],["Prop firm tracker","Evaluation, drawdown, target","prop"],["Levels","OTE, standard deviation projections","levels"],["Edge simulator","Win rate, streaks, expectancy","sim"],["Flashcards","Quiz, practice questions","cards"],["Chart replay drills","Practice setups candle by candle","replay"],["Daily bias builder","Bullish or bearish bias","biasbuilder"],["Kill zone alerts","Session notifications","alerts"],["Drawdown recovery","Gain needed to recover a loss","recovery"],["Kill zone clock","New York time, sessions","clock"],
  ["Journal","Trade journal, stats","journal"],["Mindset","Trading psychology, wellbeing, stress","mind"],["Calm mode","Breathing, relax, full screen","mind","md-calm-open"],["Peaceful sounds","Rain, waves, birdsong, sleep timer","mind","md-s-sound"],["One-minute check-in","Should I trade today","mind","md-s-check"],["Breathing reset","Box breathing, 4-7-8","mind","md-s-check"],["Decompress","Screen break, grounding, stretch","mind","md-s-relief"],["Mood log and debrief","Reflect, wind-down, my rules","mind","md-s-reflect"],["Trading traps","FOMO, revenge trading, tilt","mind","md-s-traps"],
- ["Daily brief","NQ market outlook, earnings, economic releases","daily-brief"],["Displace Pro","Plans, direction engine, Fed tracker","pro"],["Glossary","Every ICT term","glossary"],["FAQ","Questions","faq"],["Join free","Sign up","join"]];
+ ["Daily brief","NQ rates outlook, earnings, economic releases","daily-brief"],["Displace Pro","Plans, direction engine, Fed tracker","pro"],["Glossary","Every ICT term","glossary"],["FAQ","Questions","faq"],["Join free","Sign up","join"]];
 var res=[],sel=0;
 function terms(){var o=[];document.querySelectorAll("#gloss dt").forEach(function(d){var ps=[];d.childNodes.forEach(function(n){var x=(n.textContent||"").trim();if(x)ps.push(x);});if(ps.length)o.push([ps.join(" · "),"Glossary term","glossary",null,ps[ps.length-1]]);});return o;}
 function draw(){var v=q.value.trim().toLowerCase(),all=IX.concat(v?terms():[]);
