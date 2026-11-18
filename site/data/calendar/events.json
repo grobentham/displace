@@ -92,7 +92,21 @@
     "asof": "2026-11-15",
     "context": "Retail sales rose 0.8% in September after a revised 1.3% gain in August, with gas station receipts lifted by higher fuel prices. Inflation has stayed above 3% and markets are pricing a Fed rate increase in December, so policymakers are watching whether consumer spending is holding up. This is the main read on October spending before the Fed's December 8-9 meeting."
    },
-   "metric": "headline retail sales month-on-month"
+   "metric": "headline retail sales month-on-month",
+   "actual": "0.2%",
+   "provenance": {
+    "via": "Census Bureau",
+    "url": "https://www.census.gov/retail/sales.html",
+    "published": "2026-11-17"
+   },
+   "components": [
+    {
+     "label": "Retail sales m/m",
+     "actual": "0.2%"
+    }
+   ],
+   "facts": [],
+   "recap": "Retail sales came in at 0.2% against a 0.2% forecast, in line with expectations. The previous reading was 0.8%."
   },
   {
    "date": "2026-11-18",
@@ -261,7 +275,17 @@
    "note": "Lands inside the NY AM kill zone, right at the start of the 10–11 Silver Bullet hour. Expect a fast candle; let it settle before trusting a setup.",
    "id": "20261201-jolts-job-openings-oct",
    "previous": "7.52M",
-   "metric": "job openings"
+   "metric": "job openings",
+   "components": [
+    {
+     "label": "Job openings",
+     "previous": "7.52M"
+    },
+    {
+     "label": "Quits rate",
+     "previous": "2.1%"
+    }
+   ]
   },
   {
    "date": "2026-12-02",
@@ -308,7 +332,25 @@
    "note": "The biggest monthly release. Lands an hour before the 9:30 open. Let the release candle print; ICT traders often wait for the raid that follows and trade the NY AM kill zone after it.",
    "id": "20261204-non-farm-payrolls-employment-situation-n",
    "previous": "165K",
-   "metric": "change in non-farm payrolls"
+   "metric": "change in non-farm payrolls",
+   "components": [
+    {
+     "label": "Payrolls",
+     "previous": "165K"
+    },
+    {
+     "label": "Unemployment rate",
+     "previous": "4.1%"
+    },
+    {
+     "label": "Avg hourly earnings m/m",
+     "previous": "0.4%"
+    },
+    {
+     "label": "Avg hourly earnings y/y",
+     "previous": "3.1%"
+    }
+   ]
   },
   {
    "date": "2026-12-04",
@@ -343,7 +385,17 @@
    "note": "Lands an hour before the 9:30 open. Let the release candle print; ICT traders often wait for the raid that follows and trade the NY AM kill zone after it.",
    "id": "20261210-cpi-inflation-nov",
    "previous": "0.3%",
-   "metric": "core CPI month-on-month"
+   "metric": "core CPI month-on-month",
+   "components": [
+    {
+     "label": "Core CPI m/m",
+     "previous": "0.3%"
+    },
+    {
+     "label": "CPI m/m",
+     "previous": "0.4%"
+    }
+   ]
   },
   {
    "date": "2026-12-10",
@@ -366,7 +418,17 @@
    "note": "Lands an hour before the 9:30 open. Let the release candle print; ICT traders often wait for the raid that follows and trade the NY AM kill zone after it.",
    "id": "20261215-ppi-producer-prices-nov",
    "previous": "0.3%",
-   "metric": "final demand PPI month-on-month"
+   "metric": "final demand PPI month-on-month",
+   "components": [
+    {
+     "label": "PPI final demand m/m",
+     "previous": "0.3%"
+    },
+    {
+     "label": "PPI final demand y/y",
+     "previous": "6.5%"
+    }
+   ]
   },
   {
    "date": "2026-12-16",
@@ -377,7 +439,14 @@
    "src": "Census Bureau",
    "note": "Lands an hour before the 9:30 open. Let the release candle print; ICT traders often wait for the raid that follows and trade the NY AM kill zone after it.",
    "id": "20261216-retail-sales-nov",
-   "metric": "headline retail sales month-on-month"
+   "metric": "headline retail sales month-on-month",
+   "previous": "0.2%",
+   "components": [
+    {
+     "label": "Retail sales m/m",
+     "previous": "0.2%"
+    }
+   ]
   },
   {
    "date": "2026-12-17",
