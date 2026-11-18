@@ -5,7 +5,7 @@ import unittest
 
 from morning import SGT, build_edition, edition_time, market_outlook, publish, refresh_edition, scheduled_earnings
 from engine import load
-from earnings_news import report_items, report_summary
+from earnings_news import report_items, report_metrics, report_summary
 
 
 def time(value):
@@ -33,9 +33,11 @@ class MorningTests(unittest.TestCase):
             {"title": "Older than a day", "published": "2026-11-16T22:59:00+00:00", "url": "https://example.com/older"},
         ]}
         brief = build_edition(opens, now, calendar, news, {})
-        self.assertEqual(brief["upcoming"], [{"at": "2026-11-19T03:00+08:00", "title": "FOMC minutes"}])
+        self.assertEqual(brief["upcoming"][0]["at"], "2026-11-19T03:00+08:00")
+        self.assertIn("disagreement", brief["upcoming"][0]["watch"])
         self.assertEqual([item["title"] for item in brief["updates"]], ["Reported retail sales"])
         self.assertEqual(brief["focus"]["title"], "FOMC minutes")
+        self.assertEqual(brief["focus"]["at"], "2026-11-19T03:00+08:00")
         self.assertTrue(brief["calendarCovered"])
         self.assertTrue(brief["feedsChecked"])
 
@@ -57,20 +59,41 @@ class MorningTests(unittest.TestCase):
         events = [{"date": "2026-11-18", "time": hour, "title": title, "cur": "USD", "impact": impact}
                   for hour, title, impact in [("08:30", "Retail sales", "high"), ("09:30", "Overview", "medium"),
                                                ("10:00", "Activity", "medium"), ("14:00", "Minutes", "medium")]]
-        events[0].update(forecast="0.2%", previous="0.8%", actual="0.3%")
+        events[0].update(forecast="0.2%", fsrc="Survey", previous="0.8%", actual="0.3%", revised="0.7%",
+                         metric="Headline sales", provenance={"url": "https://example.com/census"},
+                         components=[{"label": "Headline sales", "actual": "0.3%"},
+                                     {"label": "Control group", "actual": "0.2%", "previous": "0.1%"}])
         calendar = {"events": events, "through": "2026-11-30"}
         edition = build_edition(opens, opens, calendar, {}, {})
         self.assertEqual([row["title"] for row in edition["moreReleases"]], ["Minutes"])
         self.assertEqual(edition["upcoming"][0]["previous"], "0.8%")
         self.assertNotIn("actual", edition["upcoming"][0])
+        self.assertNotIn("components", edition["upcoming"][0])
+        self.assertNotIn("url", edition["upcoming"][0])
+        self.assertEqual(edition["upcoming"][0]["forecastSource"], "Survey")
         report = {"id": "retail", "title": "Retail sales", "analysis": "Retail sales rose 0.3%.",
                   "url": "https://example.com/retail", "published": "2026-11-18T13:30:00+00:00"}
         refresh_edition(edition, time("2026-11-18T21:40+08:00"), calendar, {"items": [report, report]})
         self.assertEqual(edition["upcoming"][0]["actual"], "0.3%")
+        self.assertEqual(edition["upcoming"][0]["revised"], "0.7%")
+        self.assertEqual(edition["upcoming"][0]["components"], [{"label": "Control group", "actual": "0.2%", "previous": "0.1%"}])
+        self.assertEqual(edition["upcoming"][0]["url"], "https://example.com/census")
+        self.assertEqual(edition["focus"]["title"], "Overview")
         self.assertEqual(len(edition["updates"]), 1)
         self.assertEqual(edition["updates"][0]["published"], "2026-11-18T21:30:00+08:00")
         self.assertEqual(edition["generatedAt"], "2026-11-18T07:00:00+08:00")
         self.assertEqual(edition["refreshedAt"], "2026-11-18T21:40:00+08:00")
+
+    def test_intraday_updates_keep_the_overnight_recap(self):
+        opens = time("2026-11-18T07:00+08:00")
+        def news_item(hour):
+            return {"title": f"Update {hour}", "id": str(hour), "url": f"https://example.com/{hour}",
+                    "published": f"2026-11-18T{hour:02}:00:00+08:00", "source": "Official feed", "context": "Release details."}
+        edition = build_edition(opens, opens, {}, {"items": [news_item(hour) for hour in (2, 3, 4, 5)]}, {})
+        refresh_edition(edition, time("2026-11-18T11:00+08:00"), {}, {"items": [news_item(hour) for hour in (8, 9, 10)]})
+        self.assertEqual([item["id"] for item in edition["updates"]], ["10", "9", "5", "4", "3"])
+        self.assertEqual(edition["updates"][-1]["source"], "Official feed")
+        self.assertEqual(edition["updates"][-1]["context"], "Release details.")
 
     def test_outlook_requires_both_yields_from_the_expected_session(self):
         opens = time("2026-11-18T07:00+08:00")
@@ -79,7 +102,7 @@ class MorningTests(unittest.TestCase):
         self.assertEqual(market_outlook(opens, markets(-3, -5))["label"], "Bullish tilt")
         self.assertEqual(market_outlook(opens, markets(4, 3))["label"], "Bearish tilt")
         self.assertEqual(market_outlook(opens, markets(-3, 3))["label"], "Neutral")
-        self.assertEqual(market_outlook(opens, markets(-3, -2))["label"], "Neutral")
+        self.assertIn("10-year yield moved by less", market_outlook(opens, markets(-3, -2))["reason"])
         self.assertEqual(market_outlook(opens, markets(-3, -5, "2026-11-16"))["label"], "Data pending")
         self.assertEqual(market_outlook(time("2026-11-21T07:00+08:00"), {})["label"], "No U.S. session")
 
@@ -104,9 +127,11 @@ class MorningTests(unittest.TestCase):
         rows = list(report_items(feed, "https://example.com/feed", time("2026-11-17T00:00+00:00"), time("2026-11-17T23:00+00:00")))
         self.assertEqual([row[2] for row in rows], ["https://example.com/report"])
         self.assertEqual(list(report_items(feed, "https://example.com/feed", time("2026-11-17T00:00+00:00"), time("2026-11-17T21:00+00:00"))), [])
-        summary = report_summary(b"Issuer reported revenue for the third quarter of $12.3 billion, up 9% from a year ago. "
+        metrics = report_metrics(b"Issuer reported revenue for the third quarter of $12.3 billion, up 9% from a year ago. "
                                  b"GAAP and non-GAAP earnings per diluted share were $1.25 and $1.40, respectively. "
                                  b"The outlook for the fourth quarter is as follows: Revenue is expected to be $14 billion, plus or minus 2%.")
+        self.assertEqual(metrics[0], {"label": "Revenue", "value": "$12.3 billion (up 9% year over year)"})
+        summary = report_summary(metrics)
         self.assertEqual(summary, "Revenue $12.3 billion (up 9% year over year). GAAP diluted EPS $1.25. "
                                   "Next-quarter revenue guidance $14 billion \u00b12%.")
 
