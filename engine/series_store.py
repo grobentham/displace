@@ -38,7 +38,7 @@ INITIAL_REFRESH = dt.timedelta(days=6)
 DAILY_REFRESH = dt.timedelta(hours=4)
 RETRY_AFTER_FAILURE = dt.timedelta(hours=6)
 BUDGET_SECONDS = 9 * 60  # per run, shared by every series still loading
-WORKERS = 4
+WORKERS = 6
 BATCH = 24
 
 # catalog transform -> multiplier turning the published figure into the FRED series' own units
