@@ -1,0 +1,1145 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Displace//Economic calendar//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Displace
+X-WR-TIMEZONE:America/New_York
+REFRESH-INTERVAL;VALUE=DURATION:PT6H
+X-PUBLISHED-TTL:PT6H
+BEGIN:VEVENT
+UID:20261110-cpi-inflation-oct@displace
+DTSTAMP:20261115T104016Z
+DTSTART;TZID=America/New_York:20261110T083000
+DTEND;TZID=America/New_York:20261110T084500
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:CPI inflation (Oct)
+TRIGGER:-PT15M
+END:VALARM
+SUMMARY:🔴 CPI inflation (Oct)
+DESCRIPTION:Lands an hour before the 9:30 open. Let the release candle prin
+ t. Previous: 0.3% Forecast: 0.2% Actual: 0.3% Education only\, not financi
+ al advice.
+END:VEVENT
+BEGIN:VEVENT
+UID:20261112-initial-jobless-claims@displace
+DTSTAMP:20261115T104016Z
+DTSTART;TZID=America/New_York:20261112T083000
+DTEND;TZID=America/New_York:20261112T084500
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Initial jobless claims
+TRIGGER:-PT15M
+END:VALARM
+SUMMARY:🟠 Initial jobless claims
+DESCRIPTION:Lands an hour before the 9:30 open. Let the release candle prin
+ t. Previous: 189K Actual: 200K Education only\, not financial advice.
+END:VEVENT
+BEGIN:VEVENT
+UID:20261113-ppi-producer-prices-oct@displace
+DTSTAMP:20261115T104016Z
+DTSTART;TZID=America/New_York:20261113T083000
+DTEND;TZID=America/New_York:20261113T084500
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:PPI producer prices (Oct)
+TRIGGER:-PT15M
+END:VALARM
+SUMMARY:🟠 PPI producer prices (Oct)
+DESCRIPTION:Lands an hour before the 9:30 open. Let the release candle prin
+ t. Previous: 1.3% Actual: 0.3% Education only\, not financial advice.
+END:VEVENT
+BEGIN:VEVENT
+UID:20261117-retail-sales-oct@displace
+DTSTAMP:20261115T104016Z
+DTSTART;TZID=America/New_York:20261117T083000
+DTEND;TZID=America/New_York:20261117T084500
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Retail sales (Oct)
+TRIGGER:-PT15M
+END:VALARM
+SUMMARY:🔴 Retail sales (Oct)
+DESCRIPTION:Lands an hour before the 9:30 open. Let the release candle prin
+ t\; ICT traders often wait for the raid that follows and trade the NY AM k
+ ill zone after it. Previous: 0.8% Forecast: 0.2% Education only\, not fina
+ ncial advice.
+END:VEVENT
+BEGIN:VEVENT
+UID:20261118-fomc-minutes-oct-27-28-meeting@displace
+DTSTAMP:20261115T104016Z
+DTSTART;TZID=America/New_York:20261118T140000
+DTEND;TZID=America/New_York:20261118T141500
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:FOMC minutes (Oct 27–28 meeting)
+TRIGGER:-PT15M
+END:VALARM
+SUMMARY:🟠 FOMC minutes (Oct 27–28 meeting)
+DESCRIPTION:Released at 14:00 New York\, during the NY PM session. Can move
+  markets in the afternoon. Education only\, not financial advice.
+END:VEVENT
+BEGIN:VEVENT
+UID:20261119-initial-jobless-claims@displace
+DTSTAMP:20261115T104016Z
+DTSTART;TZID=America/New_York:20261119T083000
+DTEND;TZID=America/New_York:20261119T084500
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Initial jobless claims
+TRIGGER:-PT15M
+END:VALARM
+SUMMARY:🟠 Initial jobless claims
+DESCRIPTION:Weekly jobless claims. Usually a smaller move\, but the 8:30 ca
+ ndle can still spike. Previous: 200K Education only\, not financial advice
+ .
+END:VEVENT
+BEGIN:VEVENT
+UID:20261120-umich-consumer-sentiment-final-nov@displace
+DTSTAMP:20261115T104016Z
+DTSTART;TZID=America/New_York:20261120T100000
+DTEND;TZID=America/New_York:20261120T101500
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:UMich consumer sentiment\, final (Nov)
+TRIGGER:-PT15M
+END:VALARM
+SUMMARY:🟠 UMich consumer sentiment\, final (Nov)
+DESCRIPTION:Lands at 10:00\, inside the NY AM kill zone. Usually a smaller 
+ move than the 8:30 data\, but it can kick off the 10–11 Silver Bullet ho
+ ur. Previous: 48.0 Forecast: 51.0 Education only\, not financial advice.
+END:VEVENT
+BEGIN:VEVENT
+UID:20261124-consumer-confidence-nov@displace
+DTSTAMP:20261115T104016Z
+DTSTART;TZID=America/New_York:20261124T100000
+DTEND;TZID=America/New_York:20261124T101500
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Consumer confidence (Nov)
+TRIGGER:-PT15M
+END:VALARM
+SUMMARY:🟠 Consumer confidence (Nov)
+DESCRIPTION:Lands at 10:00\, inside the NY AM kill zone and the start of th
+ e Silver Bullet hour. Previous: 91.7 Education only\, not financial advice
+ .
+END:VEVENT
+BEGIN:VEVENT
+UID:20261125-durable-goods-orders-oct@displace
+DTSTAMP:20261115T104016Z
+DTSTART;TZID=America/New_York:20261125T083000
+DTEND;TZID=America/New_York:20261125T084500
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Durable goods orders (Oct)
+TRIGGER:-PT15M
+END:VALARM
+SUMMARY:🟠 Durable goods orders (Oct)
+DESCRIPTION:Lands an hour before the 9:30 open. Let the release candle prin
+ t\; ICT traders often wait for the raid that follows and trade the NY AM k
+ ill zone after it. Previous: 1.8% Education only\, not financial advice.
+END:VEVENT
+BEGIN:VEVENT
+UID:20261125-gdp-second-estimate-q3@displace
+DTSTAMP:20261115T104016Z
+DTSTART;TZID=America/New_York:20261125T083000
+DTEND;TZID=America/New_York:20261125T084500
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:GDP\, second estimate (Q3)
+TRIGGER:-PT15M
+END:VALARM
+SUMMARY:🔴 GDP\, second estimate (Q3)
+DESCRIPTION:Lands an hour before the 9:30 open. Let the release candle prin
+ t\; ICT traders often wait for the raid that follows and trade the NY AM k
+ ill zone after it. Previous: 3.4% Education only\, not financial advice.
+END:VEVENT
+BEGIN:VEVENT
+UID:20261125-initial-jobless-claims-moved-to-wednesda@displace
+DTSTAMP:20261115T104016Z
+DTSTART;TZID=America/New_York:20261125T083000
+DTEND;TZID=America/New_York:20261125T084500
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Initial jobless claims (moved to Wednesday for Thanksgiving)
+TRIGGER:-PT15M
+END:VALARM
+SUMMARY:🟠 Initial jobless claims (moved to Wednesday for Thanksgiving)
+DESCRIPTION:Weekly jobless claims. Usually a smaller move\, but the 8:30 ca
+ ndle can still spike. Education only\, not financial advice.
+END:VEVENT
+BEGIN:VEVENT
+UID:20261125-pce-inflation-personal-income-and-outlay@displace
+DTSTAMP:20261115T104016Z
+DTSTART;TZID=America/New_York:20261125T083000
+DTEND;TZID=America/New_York:20261125T084500
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:PCE inflation · Personal income and outlays (Oct)
+TRIGGER:-PT15M
+END:VALARM
+SUMMARY:🔴 PCE inflation · Personal income and outlays (Oct)
+DESCRIPTION:Lands an hour before the 9:30 open. Let the release candle prin
+ t\; ICT traders often wait for the raid that follows and trade the NY AM k
+ ill zone after it. Previous: 0.3% Education only\, not financial advice.
+END:VEVENT
+BEGIN:VEVENT
+UID:20261125-new-home-sales-oct@displace
+DTSTAMP:20261115T104016Z
+DTSTART;TZID=America/New_York:20261125T100000
+DTEND;TZID=America/New_York:20261125T101500
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:New home sales (Oct)
+TRIGGER:-PT15M
+END:VALARM
+SUMMARY:🟠 New home sales (Oct)
+DESCRIPTION:Lands at 10:00\, inside the NY AM kill zone and the start of th
+ e Silver Bullet hour. Previous: 676K Education only\, not financial advice
+ .
+END:VEVENT
+BEGIN:VEVENT
+UID:20261125-beige-book@displace
+DTSTAMP:20261115T104016Z
+DTSTART;TZID=America/New_York:20261125T140000
+DTEND;TZID=America/New_York:20261125T141500
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Beige Book
+TRIGGER:-PT15M
+END:VALARM
+SUMMARY:🟠 Beige Book
+DESCRIPTION:Released at 14:00 New York\, during the NY PM session. Can move
+  markets in the afternoon. Education only\, not financial advice.
+END:VEVENT
+BEGIN:VEVENT
+UID:20261126-thanksgiving-us-markets-closed@displace
+DTSTAMP:20261115T104016Z
+DTSTART;VALUE=DATE:20261126
+DTEND;VALUE=DATE:20261127
+SUMMARY:Thanksgiving: US markets closed
+DESCRIPTION:US stock market closed. Futures and forex liquidity is thin\; m
+ ost ICT traders take the day off. Education only\, not financial advice.
+END:VEVENT
+BEGIN:VEVENT
+UID:20261127-day-after-thanksgiving-shortened-session@displace
+DTSTAMP:20261115T104016Z
+DTSTART;VALUE=DATE:20261127
+DTEND;VALUE=DATE:20261128
+SUMMARY:Day after Thanksgiving: shortened session
+DESCRIPTION:Shortened US session: the stock market closes at 13:00 New York
+ . Thin\, holiday-affected trade. Education only\, not financial advice.
+END:VEVENT
+BEGIN:VEVENT
+UID:20261201-ism-manufacturing-pmi-nov@displace
+DTSTAMP:20261115T104016Z
+DTSTART;TZID=America/New_York:20261201T100000
+DTEND;TZID=America/New_York:20261201T101500
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:ISM Manufacturing PMI (Nov)
+TRIGGER:-PT15M
+END:VALARM
+SUMMARY:🔴 ISM Manufacturing PMI (Nov)
+DESCRIPTION:Lands inside the NY AM kill zone\, right at the start of the 10
+ –11 Silver Bullet hour. Expect a fast candle\; let it settle before trus
+ ting a setup. Previous: 55.5 Education only\, not financial advice.
+END:VEVENT
+BEGIN:VEVENT
+UID:20261201-jolts-job-openings-oct@displace
+DTSTAMP:20261115T104016Z
+DTSTART;TZID=America/New_York:20261201T100000
+DTEND;TZID=America/New_York:20261201T101500
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:JOLTS job openings (Oct)
+TRIGGER:-PT15M
+END:VALARM
+SUMMARY:🟠 JOLTS job openings (Oct)
+DESCRIPTION:Lands inside the NY AM kill zone\, right at the start of the 10
+ –11 Silver Bullet hour. Expect a fast candle\; let it settle before trus
+ ting a setup. Previous: 7.52M Education only\, not financial advice.
+END:VEVENT
+BEGIN:VEVENT
+UID:20261202-adp-private-payrolls-nov@displace
+DTSTAMP:20261115T104016Z
+DTSTART;TZID=America/New_York:20261202T081500
+DTEND;TZID=America/New_York:20261202T083000
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:ADP private payrolls (Nov)
+TRIGGER:-PT15M
+END:VALARM
+SUMMARY:🟠 ADP private payrolls (Nov)
+DESCRIPTION:Lands 15 minutes before the 8:30 slot. A preview of Friday's jo
+ bs report\; moves are usually smaller. Previous: 86K Education only\, not 
+ financial advice.
+END:VEVENT
+BEGIN:VEVENT
+UID:20261203-initial-jobless-claims@displace
+DTSTAMP:20261115T104016Z
+DTSTART;TZID=America/New_York:20261203T083000
+DTEND;TZID=America/New_York:20261203T084500
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Initial jobless claims
+TRIGGER:-PT15M
+END:VALARM
+SUMMARY:🟠 Initial jobless claims
+DESCRIPTION:Weekly jobless claims. Usually a smaller move\, but the 8:30 ca
+ ndle can still spike. Education only\, not financial advice.
+END:VEVENT
+BEGIN:VEVENT
+UID:20261203-ism-services-pmi-nov@displace
+DTSTAMP:20261115T104016Z
+DTSTART;TZID=America/New_York:20261203T100000
+DTEND;TZID=America/New_York:20261203T101500
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:ISM Services PMI (Nov)
+TRIGGER:-PT15M
+END:VALARM
+SUMMARY:🔴 ISM Services PMI (Nov)
+DESCRIPTION:Lands inside the NY AM kill zone\, right at the start of the 10
+ –11 Silver Bullet hour. Expect a fast candle\; let it settle before trus
+ ting a setup. Previous: 54.5 Education only\, not financial advice.
+END:VEVENT
+BEGIN:VEVENT
+UID:20261204-non-farm-payrolls-employment-situation-n@displace
+DTSTAMP:20261115T104016Z
+DTSTART;TZID=America/New_York:20261204T083000
+DTEND;TZID=America/New_York:20261204T084500
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Non-farm payrolls · Employment situation (Nov)
+TRIGGER:-PT15M
+END:VALARM
+SUMMARY:🔴 Non-farm payrolls · Employment situation (Nov)
+DESCRIPTION:The biggest monthly release. Lands an hour before the 9:30 open
+ . Let the release candle print\; ICT traders often wait for the raid that 
+ follows and trade the NY AM kill zone after it. Previous: 165K Education o
+ nly\, not financial advice.
+END:VEVENT
+BEGIN:VEVENT
+UID:20261204-umich-consumer-sentiment-preliminary-dec@displace
+DTSTAMP:20261115T104016Z
+DTSTART;TZID=America/New_York:20261204T100000
+DTEND;TZID=America/New_York:20261204T101500
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:UMich consumer sentiment\, preliminary (Dec)
+TRIGGER:-PT15M
+END:VALARM
+SUMMARY:🟠 UMich consumer sentiment\, preliminary (Dec)
+DESCRIPTION:Lands at 10:00\, inside the NY AM kill zone. Usually a smaller 
+ move than the 8:30 data\, but it can kick off the 10–11 Silver Bullet ho
+ ur. Education only\, not financial advice.
+END:VEVENT
+BEGIN:VEVENT
+UID:20261209-fomc-rate-decision-projections-dot-plot@displace
+DTSTAMP:20261115T104016Z
+DTSTART;TZID=America/New_York:20261209T140000
+DTEND;TZID=America/New_York:20261209T141500
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:FOMC rate decision + projections (dot plot)
+TRIGGER:-PT15M
+END:VALARM
+SUMMARY:🔴 FOMC rate decision + projections (dot plot)
+DESCRIPTION:Statement at 14:00\, press conference at 14:30 New York. Volati
+ lity often spills into the afternoon\; many ICT traders stay flat into the
+  release. Previous: 4.00% Education only\, not financial advice.
+END:VEVENT
+BEGIN:VEVENT
+UID:20261210-cpi-inflation-nov@displace
+DTSTAMP:20261115T104016Z
+DTSTART;TZID=America/New_York:20261210T083000
+DTEND;TZID=America/New_York:20261210T084500
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:CPI inflation (Nov)
+TRIGGER:-PT15M
+END:VALARM
+SUMMARY:🔴 CPI inflation (Nov)
+DESCRIPTION:Lands an hour before the 9:30 open. Let the release candle prin
+ t\; ICT traders often wait for the raid that follows and trade the NY AM k
+ ill zone after it. Previous: 0.3% Education only\, not financial advice.
+END:VEVENT
+BEGIN:VEVENT
+UID:20261210-initial-jobless-claims@displace
+DTSTAMP:20261115T104016Z
+DTSTART;TZID=America/New_York:20261210T083000
+DTEND;TZID=America/New_York:20261210T084500
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Initial jobless claims
+TRIGGER:-PT15M
+END:VALARM
+SUMMARY:🟠 Initial jobless claims
+DESCRIPTION:Weekly jobless claims. Usually a smaller move\, but the 8:30 ca
+ ndle can still spike. Education only\, not financial advice.
+END:VEVENT
+BEGIN:VEVENT
+UID:20261215-ppi-producer-prices-nov@displace
+DTSTAMP:20261115T104016Z
+DTSTART;TZID=America/New_York:20261215T083000
+DTEND;TZID=America/New_York:20261215T084500
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:PPI producer prices (Nov)
+TRIGGER:-PT15M
+END:VALARM
+SUMMARY:🟠 PPI producer prices (Nov)
+DESCRIPTION:Lands an hour before the 9:30 open. Let the release candle prin
+ t\; ICT traders often wait for the raid that follows and trade the NY AM k
+ ill zone after it. Previous: 0.3% Education only\, not financial advice.
+END:VEVENT
+BEGIN:VEVENT
+UID:20261216-retail-sales-nov@displace
+DTSTAMP:20261115T104016Z
+DTSTART;TZID=America/New_York:20261216T083000
+DTEND;TZID=America/New_York:20261216T084500
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Retail sales (Nov)
+TRIGGER:-PT15M
+END:VALARM
+SUMMARY:🔴 Retail sales (Nov)
+DESCRIPTION:Lands an hour before the 9:30 open. Let the release candle prin
+ t\; ICT traders often wait for the raid that follows and trade the NY AM k
+ ill zone after it. Education only\, not financial advice.
+END:VEVENT
+BEGIN:VEVENT
+UID:20261217-bank-of-england-rate-decision@displace
+DTSTAMP:20261115T104016Z
+DTSTART;TZID=America/New_York:20261217T070000
+DTEND;TZID=America/New_York:20261217T071500
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Bank of England rate decision
+TRIGGER:-PT15M
+END:VALARM
+SUMMARY:🔴 Bank of England rate decision
+DESCRIPTION:Decision at 12:00 London\, which is 07:00 New York. Moves GBPUS
+ D during the London session. Previous: 4.00% Education only\, not financia
+ l advice.
+END:VEVENT
+BEGIN:VEVENT
+UID:20261217-ecb-rate-decision@displace
+DTSTAMP:20261115T104016Z
+DTSTART;TZID=America/New_York:20261217T081500
+DTEND;TZID=America/New_York:20261217T083000
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:ECB rate decision
+TRIGGER:-PT15M
+END:VALARM
+SUMMARY:🔴 ECB rate decision
+DESCRIPTION:Decision at 14:15 Frankfurt\, press conference at 14:45. Moves 
+ EURUSD and the dollar during the London–NY overlap. Previous: 2.50% Educ
+ ation only\, not financial advice.
+END:VEVENT
+BEGIN:VEVENT
+UID:20261217-initial-jobless-claims@displace
+DTSTAMP:20261115T104016Z
+DTSTART;TZID=America/New_York:20261217T083000
+DTEND;TZID=America/New_York:20261217T084500
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Initial jobless claims
+TRIGGER:-PT15M
+END:VALARM
+SUMMARY:🟠 Initial jobless claims
+DESCRIPTION:Weekly jobless claims. Usually a smaller move\, but the 8:30 ca
+ ndle can still spike. Education only\, not financial advice.
+END:VEVENT
+BEGIN:VEVENT
+UID:20261218-umich-consumer-sentiment-final-dec@displace
+DTSTAMP:20261115T104016Z
+DTSTART;TZID=America/New_York:20261218T100000
+DTEND;TZID=America/New_York:20261218T101500
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:UMich consumer sentiment\, final (Dec)
+TRIGGER:-PT15M
+END:VALARM
+SUMMARY:🟠 UMich consumer sentiment\, final (Dec)
+DESCRIPTION:Lands at 10:00\, inside the NY AM kill zone. Usually a smaller 
+ move than the 8:30 data\, but it can kick off the 10–11 Silver Bullet ho
+ ur. Education only\, not financial advice.
+END:VEVENT
+BEGIN:VEVENT
+UID:20261223-durable-goods-orders-nov@displace
+DTSTAMP:20261115T104016Z
+DTSTART;TZID=America/New_York:20261223T083000
+DTEND;TZID=America/New_York:20261223T084500
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Durable goods orders (Nov)
+TRIGGER:-PT15M
+END:VALARM
+SUMMARY:🟠 Durable goods orders (Nov)
+DESCRIPTION:Lands an hour before the 9:30 open. Let the release candle prin
+ t\; ICT traders often wait for the raid that follows and trade the NY AM k
+ ill zone after it. Education only\, not financial advice.
+END:VEVENT
+BEGIN:VEVENT
+UID:20261223-gdp-third-estimate-q3@displace
+DTSTAMP:20261115T104016Z
+DTSTART;TZID=America/New_York:20261223T083000
+DTEND;TZID=America/New_York:20261223T084500
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:GDP\, third estimate (Q3)
+TRIGGER:-PT15M
+END:VALARM
+SUMMARY:🟠 GDP\, third estimate (Q3)
+DESCRIPTION:Lands an hour before the 9:30 open. Let the release candle prin
+ t\; ICT traders often wait for the raid that follows and trade the NY AM k
+ ill zone after it. Education only\, not financial advice.
+END:VEVENT
+BEGIN:VEVENT
+UID:20261223-pce-inflation-personal-income-and-outlay@displace
+DTSTAMP:20261115T104016Z
+DTSTART;TZID=America/New_York:20261223T083000
+DTEND;TZID=America/New_York:20261223T084500
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:PCE inflation · Personal income and outlays (Nov)
+TRIGGER:-PT15M
+END:VALARM
+SUMMARY:🔴 PCE inflation · Personal income and outlays (Nov)
+DESCRIPTION:Lands an hour before the 9:30 open. Let the release candle prin
+ t\; ICT traders often wait for the raid that follows and trade the NY AM k
+ ill zone after it. Education only\, not financial advice.
+END:VEVENT
+BEGIN:VEVENT
+UID:20261223-new-home-sales-nov@displace
+DTSTAMP:20261115T104016Z
+DTSTART;TZID=America/New_York:20261223T100000
+DTEND;TZID=America/New_York:20261223T101500
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:New home sales (Nov)
+TRIGGER:-PT15M
+END:VALARM
+SUMMARY:🟠 New home sales (Nov)
+DESCRIPTION:Lands at 10:00\, inside the NY AM kill zone and the start of th
+ e Silver Bullet hour. Education only\, not financial advice.
+END:VEVENT
+BEGIN:VEVENT
+UID:20261224-christmas-eve-shortened-session@displace
+DTSTAMP:20261115T104016Z
+DTSTART;VALUE=DATE:20261224
+DTEND;VALUE=DATE:20261225
+SUMMARY:Christmas Eve: shortened session
+DESCRIPTION:Shortened US session: the stock market closes at 13:00 New York
+ . Thin\, holiday-affected trade. Education only\, not financial advice.
+END:VEVENT
+BEGIN:VEVENT
+UID:20261224-initial-jobless-claims@displace
+DTSTAMP:20261115T104016Z
+DTSTART;TZID=America/New_York:20261224T083000
+DTEND;TZID=America/New_York:20261224T084500
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Initial jobless claims
+TRIGGER:-PT15M
+END:VALARM
+SUMMARY:🟠 Initial jobless claims
+DESCRIPTION:Weekly jobless claims. Usually a smaller move\, but the 8:30 ca
+ ndle can still spike. Education only\, not financial advice.
+END:VEVENT
+BEGIN:VEVENT
+UID:20261225-christmas-day-us-markets-closed@displace
+DTSTAMP:20261115T104016Z
+DTSTART;VALUE=DATE:20261225
+DTEND;VALUE=DATE:20261226
+SUMMARY:Christmas Day: US markets closed
+DESCRIPTION:US stock market closed. Futures and forex liquidity is thin\; m
+ ost ICT traders take the day off. Education only\, not financial advice.
+END:VEVENT
+BEGIN:VEVENT
+UID:20261229-consumer-confidence-dec@displace
+DTSTAMP:20261115T104016Z
+DTSTART;TZID=America/New_York:20261229T100000
+DTEND;TZID=America/New_York:20261229T101500
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Consumer confidence (Dec)
+TRIGGER:-PT15M
+END:VALARM
+SUMMARY:🟠 Consumer confidence (Dec)
+DESCRIPTION:Usually the last Tuesday of the month\; confirm on conference-b
+ oard.org. Education only\, not financial advice.
+END:VEVENT
+BEGIN:VEVENT
+UID:20261230-fomc-minutes-dec-8-9-meeting@displace
+DTSTAMP:20261115T104016Z
+DTSTART;TZID=America/New_York:20261230T140000
+DTEND;TZID=America/New_York:20261230T141500
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:FOMC minutes (Dec 8–9 meeting)
+TRIGGER:-PT15M
+END:VALARM
+SUMMARY:🟠 FOMC minutes (Dec 8–9 meeting)
+DESCRIPTION:Released at 14:00 New York\, during the NY PM session. Can move
+  markets in the afternoon. Education only\, not financial advice.
+END:VEVENT
+BEGIN:VEVENT
+UID:20261231-initial-jobless-claims@displace
+DTSTAMP:20261115T104016Z
+DTSTART;TZID=America/New_York:20261231T083000
+DTEND;TZID=America/New_York:20261231T084500
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Initial jobless claims
+TRIGGER:-PT15M
+END:VALARM
+SUMMARY:🟠 Initial jobless claims
+DESCRIPTION:Weekly jobless claims. Usually a smaller move\, but the 8:30 ca
+ ndle can still spike. Education only\, not financial advice.
+END:VEVENT
+BEGIN:VEVENT
+UID:20270101-new-year-s-day-us-markets-closed@displace
+DTSTAMP:20261115T104016Z
+DTSTART;VALUE=DATE:20270101
+DTEND;VALUE=DATE:20270102
+SUMMARY:New Year's Day: US markets closed
+DESCRIPTION:US stock market closed. Futures and forex liquidity is thin\; m
+ ost ICT traders take the day off. Education only\, not financial advice.
+END:VEVENT
+BEGIN:VEVENT
+UID:20270104-ism-manufacturing-pmi-dec@displace
+DTSTAMP:20261115T104016Z
+DTSTART;TZID=America/New_York:20270104T100000
+DTEND;TZID=America/New_York:20270104T101500
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:ISM Manufacturing PMI (Dec)
+TRIGGER:-PT15M
+END:VALARM
+SUMMARY:🔴 ISM Manufacturing PMI (Dec)
+DESCRIPTION:Usually the first business day of the month\; confirm on ismwor
+ ld.org. Education only\, not financial advice.
+END:VEVENT
+BEGIN:VEVENT
+UID:20270105-jolts-job-openings-nov@displace
+DTSTAMP:20261115T104016Z
+DTSTART;TZID=America/New_York:20270105T100000
+DTEND;TZID=America/New_York:20270105T101500
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:JOLTS job openings (Nov)
+TRIGGER:-PT15M
+END:VALARM
+SUMMARY:🟠 JOLTS job openings (Nov)
+DESCRIPTION:Lands at 10:00\, inside the NY AM kill zone and the start of th
+ e Silver Bullet hour. Education only\, not financial advice.
+END:VEVENT
+BEGIN:VEVENT
+UID:20270106-ism-services-pmi-dec@displace
+DTSTAMP:20261115T104016Z
+DTSTART;TZID=America/New_York:20270106T100000
+DTEND;TZID=America/New_York:20270106T101500
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:ISM Services PMI (Dec)
+TRIGGER:-PT15M
+END:VALARM
+SUMMARY:🟠 ISM Services PMI (Dec)
+DESCRIPTION:Usually the third business day of the month\; confirm on ismwor
+ ld.org. Education only\, not financial advice.
+END:VEVENT
+BEGIN:VEVENT
+UID:20270107-initial-jobless-claims@displace
+DTSTAMP:20261115T104016Z
+DTSTART;TZID=America/New_York:20270107T083000
+DTEND;TZID=America/New_York:20270107T084500
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Initial jobless claims
+TRIGGER:-PT15M
+END:VALARM
+SUMMARY:🟠 Initial jobless claims
+DESCRIPTION:Weekly jobless claims. Usually a smaller move\, but the 8:30 ca
+ ndle can still spike. Education only\, not financial advice.
+END:VEVENT
+BEGIN:VEVENT
+UID:20270108-non-farm-payrolls-employment-situation-d@displace
+DTSTAMP:20261115T104016Z
+DTSTART;TZID=America/New_York:20270108T083000
+DTEND;TZID=America/New_York:20270108T084500
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Non-farm payrolls · Employment situation (Dec)
+TRIGGER:-PT15M
+END:VALARM
+SUMMARY:🔴 Non-farm payrolls · Employment situation (Dec)
+DESCRIPTION:The biggest monthly release. Lands an hour before the 9:30 open
+ . Let the release candle print\; ICT traders often wait for the raid that 
+ follows and trade the NY AM kill zone after it. Education only\, not finan
+ cial advice.
+END:VEVENT
+BEGIN:VEVENT
+UID:20270108-umich-consumer-sentiment-preliminary-jan@displace
+DTSTAMP:20261115T104016Z
+DTSTART;TZID=America/New_York:20270108T100000
+DTEND;TZID=America/New_York:20270108T101500
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:UMich consumer sentiment\, preliminary (Jan)
+TRIGGER:-PT15M
+END:VALARM
+SUMMARY:🟠 UMich consumer sentiment\, preliminary (Jan)
+DESCRIPTION:Lands at 10:00\, inside the NY AM kill zone and the start of th
+ e Silver Bullet hour. Education only\, not financial advice.
+END:VEVENT
+BEGIN:VEVENT
+UID:20270113-cpi-inflation-dec@displace
+DTSTAMP:20261115T104016Z
+DTSTART;TZID=America/New_York:20270113T083000
+DTEND;TZID=America/New_York:20270113T084500
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:CPI inflation (Dec)
+TRIGGER:-PT15M
+END:VALARM
+SUMMARY:🔴 CPI inflation (Dec)
+DESCRIPTION:Lands an hour before the 9:30 open. Let the release candle prin
+ t\; ICT traders often wait for the raid that follows and trade the NY AM k
+ ill zone after it. Education only\, not financial advice.
+END:VEVENT
+BEGIN:VEVENT
+UID:20270113-beige-book@displace
+DTSTAMP:20261115T104016Z
+DTSTART;TZID=America/New_York:20270113T140000
+DTEND;TZID=America/New_York:20270113T141500
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Beige Book
+TRIGGER:-PT15M
+END:VALARM
+SUMMARY:🟠 Beige Book
+DESCRIPTION:Released at 14:00 New York\, during the NY PM session. Can move
+  markets in the afternoon. Education only\, not financial advice.
+END:VEVENT
+BEGIN:VEVENT
+UID:20270114-initial-jobless-claims@displace
+DTSTAMP:20261115T104016Z
+DTSTART;TZID=America/New_York:20270114T083000
+DTEND;TZID=America/New_York:20270114T084500
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Initial jobless claims
+TRIGGER:-PT15M
+END:VALARM
+SUMMARY:🟠 Initial jobless claims
+DESCRIPTION:Weekly jobless claims. Usually a smaller move\, but the 8:30 ca
+ ndle can still spike. Education only\, not financial advice.
+END:VEVENT
+BEGIN:VEVENT
+UID:20270114-ppi-producer-prices-dec@displace
+DTSTAMP:20261115T104016Z
+DTSTART;TZID=America/New_York:20270114T083000
+DTEND;TZID=America/New_York:20270114T084500
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:PPI producer prices (Dec)
+TRIGGER:-PT15M
+END:VALARM
+SUMMARY:🟠 PPI producer prices (Dec)
+DESCRIPTION:Lands an hour before the 9:30 open. Let the release candle prin
+ t\; ICT traders often wait for the raid that follows and trade the NY AM k
+ ill zone after it. Education only\, not financial advice.
+END:VEVENT
+BEGIN:VEVENT
+UID:20270115-retail-sales-dec@displace
+DTSTAMP:20261115T104016Z
+DTSTART;TZID=America/New_York:20270115T083000
+DTEND;TZID=America/New_York:20270115T084500
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Retail sales (Dec)
+TRIGGER:-PT15M
+END:VALARM
+SUMMARY:🔴 Retail sales (Dec)
+DESCRIPTION:Lands an hour before the 9:30 open. Let the release candle prin
+ t\; ICT traders often wait for the raid that follows and trade the NY AM k
+ ill zone after it. Education only\, not financial advice.
+END:VEVENT
+BEGIN:VEVENT
+UID:20270118-martin-luther-king-jr-day-us-markets-clo@displace
+DTSTAMP:20261115T104016Z
+DTSTART;VALUE=DATE:20270118
+DTEND;VALUE=DATE:20270119
+SUMMARY:Martin Luther King Jr. Day: US markets closed
+DESCRIPTION:US stock market closed. Futures and forex liquidity is thin\; m
+ ost ICT traders take the day off. Education only\, not financial advice.
+END:VEVENT
+BEGIN:VEVENT
+UID:20270121-initial-jobless-claims@displace
+DTSTAMP:20261115T104016Z
+DTSTART;TZID=America/New_York:20270121T083000
+DTEND;TZID=America/New_York:20270121T084500
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Initial jobless claims
+TRIGGER:-PT15M
+END:VALARM
+SUMMARY:🟠 Initial jobless claims
+DESCRIPTION:Weekly jobless claims. Usually a smaller move\, but the 8:30 ca
+ ndle can still spike. Education only\, not financial advice.
+END:VEVENT
+BEGIN:VEVENT
+UID:20270122-umich-consumer-sentiment-final-jan@displace
+DTSTAMP:20261115T104016Z
+DTSTART;TZID=America/New_York:20270122T100000
+DTEND;TZID=America/New_York:20270122T101500
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:UMich consumer sentiment\, final (Jan)
+TRIGGER:-PT15M
+END:VALARM
+SUMMARY:🟠 UMich consumer sentiment\, final (Jan)
+DESCRIPTION:Lands at 10:00\, inside the NY AM kill zone and the start of th
+ e Silver Bullet hour. Education only\, not financial advice.
+END:VEVENT
+BEGIN:VEVENT
+UID:20270126-consumer-confidence-jan@displace
+DTSTAMP:20261115T104016Z
+DTSTART;TZID=America/New_York:20270126T100000
+DTEND;TZID=America/New_York:20270126T101500
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Consumer confidence (Jan)
+TRIGGER:-PT15M
+END:VALARM
+SUMMARY:🟠 Consumer confidence (Jan)
+DESCRIPTION:Usually the last Tuesday of the month\; confirm on conference-b
+ oard.org. Education only\, not financial advice.
+END:VEVENT
+BEGIN:VEVENT
+UID:20270127-durable-goods-orders-dec@displace
+DTSTAMP:20261115T104016Z
+DTSTART;TZID=America/New_York:20270127T083000
+DTEND;TZID=America/New_York:20270127T084500
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Durable goods orders (Dec)
+TRIGGER:-PT15M
+END:VALARM
+SUMMARY:🟠 Durable goods orders (Dec)
+DESCRIPTION:Lands an hour before the 9:30 open. Let the release candle prin
+ t\; ICT traders often wait for the raid that follows and trade the NY AM k
+ ill zone after it. Education only\, not financial advice.
+END:VEVENT
+BEGIN:VEVENT
+UID:20270127-new-home-sales-dec@displace
+DTSTAMP:20261115T104016Z
+DTSTART;TZID=America/New_York:20270127T100000
+DTEND;TZID=America/New_York:20270127T101500
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:New home sales (Dec)
+TRIGGER:-PT15M
+END:VALARM
+SUMMARY:🟠 New home sales (Dec)
+DESCRIPTION:Lands at 10:00\, inside the NY AM kill zone and the start of th
+ e Silver Bullet hour. Education only\, not financial advice.
+END:VEVENT
+BEGIN:VEVENT
+UID:20270127-fomc-rate-decision@displace
+DTSTAMP:20261115T104016Z
+DTSTART;TZID=America/New_York:20270127T140000
+DTEND;TZID=America/New_York:20270127T141500
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:FOMC rate decision
+TRIGGER:-PT15M
+END:VALARM
+SUMMARY:🔴 FOMC rate decision
+DESCRIPTION:Statement at 14:00\, press conference at 14:30 New York. Volati
+ lity often spills into the afternoon\; many ICT traders stay flat into the
+  release. Date is the Fed's tentative schedule. Education only\, not finan
+ cial advice.
+END:VEVENT
+BEGIN:VEVENT
+UID:20270128-gdp-advance-estimate-q4@displace
+DTSTAMP:20261115T104016Z
+DTSTART;TZID=America/New_York:20270128T083000
+DTEND;TZID=America/New_York:20270128T084500
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:GDP\, advance estimate (Q4)
+TRIGGER:-PT15M
+END:VALARM
+SUMMARY:🔴 GDP\, advance estimate (Q4)
+DESCRIPTION:Lands an hour before the 9:30 open. Let the release candle prin
+ t. Education only\, not financial advice.
+END:VEVENT
+BEGIN:VEVENT
+UID:20270128-initial-jobless-claims@displace
+DTSTAMP:20261115T104016Z
+DTSTART;TZID=America/New_York:20270128T083000
+DTEND;TZID=America/New_York:20270128T084500
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Initial jobless claims
+TRIGGER:-PT15M
+END:VALARM
+SUMMARY:🟠 Initial jobless claims
+DESCRIPTION:Weekly jobless claims. Usually a smaller move\, but the 8:30 ca
+ ndle can still spike. Education only\, not financial advice.
+END:VEVENT
+BEGIN:VEVENT
+UID:20270128-pce-inflation-personal-income-and-outlay@displace
+DTSTAMP:20261115T104016Z
+DTSTART;TZID=America/New_York:20270128T083000
+DTEND;TZID=America/New_York:20270128T084500
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:PCE inflation · Personal income and outlays (Dec)
+TRIGGER:-PT15M
+END:VALARM
+SUMMARY:🔴 PCE inflation · Personal income and outlays (Dec)
+DESCRIPTION:Lands an hour before the 9:30 open. Let the release candle prin
+ t\; ICT traders often wait for the raid that follows and trade the NY AM k
+ ill zone after it. Education only\, not financial advice.
+END:VEVENT
+BEGIN:VEVENT
+UID:20270201-ism-manufacturing-pmi-jan@displace
+DTSTAMP:20261115T104016Z
+DTSTART;TZID=America/New_York:20270201T100000
+DTEND;TZID=America/New_York:20270201T101500
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:ISM Manufacturing PMI (Jan)
+TRIGGER:-PT15M
+END:VALARM
+SUMMARY:🔴 ISM Manufacturing PMI (Jan)
+DESCRIPTION:Usually the first business day of the month\; confirm on ismwor
+ ld.org. Education only\, not financial advice.
+END:VEVENT
+BEGIN:VEVENT
+UID:20270203-ism-services-pmi-jan@displace
+DTSTAMP:20261115T104016Z
+DTSTART;TZID=America/New_York:20270203T100000
+DTEND;TZID=America/New_York:20270203T101500
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:ISM Services PMI (Jan)
+TRIGGER:-PT15M
+END:VALARM
+SUMMARY:🟠 ISM Services PMI (Jan)
+DESCRIPTION:Usually the third business day of the month\; confirm on ismwor
+ ld.org. Education only\, not financial advice.
+END:VEVENT
+BEGIN:VEVENT
+UID:20270204-bank-of-england-rate-decision@displace
+DTSTAMP:20261115T104016Z
+DTSTART;TZID=America/New_York:20270204T070000
+DTEND;TZID=America/New_York:20270204T071500
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Bank of England rate decision
+TRIGGER:-PT15M
+END:VALARM
+SUMMARY:🔴 Bank of England rate decision
+DESCRIPTION:Decision at 12:00 London\, which is 07:00 New York. Moves GBPUS
+ D during the London session. Education only\, not financial advice.
+END:VEVENT
+BEGIN:VEVENT
+UID:20270204-initial-jobless-claims@displace
+DTSTAMP:20261115T104016Z
+DTSTART;TZID=America/New_York:20270204T083000
+DTEND;TZID=America/New_York:20270204T084500
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Initial jobless claims
+TRIGGER:-PT15M
+END:VALARM
+SUMMARY:🟠 Initial jobless claims
+DESCRIPTION:Weekly jobless claims. Usually a smaller move\, but the 8:30 ca
+ ndle can still spike. Education only\, not financial advice.
+END:VEVENT
+BEGIN:VEVENT
+UID:20270205-non-farm-payrolls-employment-situation-j@displace
+DTSTAMP:20261115T104016Z
+DTSTART;TZID=America/New_York:20270205T083000
+DTEND;TZID=America/New_York:20270205T084500
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Non-farm payrolls · Employment situation (Jan)
+TRIGGER:-PT15M
+END:VALARM
+SUMMARY:🔴 Non-farm payrolls · Employment situation (Jan)
+DESCRIPTION:The biggest monthly release. Lands an hour before the 9:30 open
+ . Let the release candle print\; ICT traders often wait for the raid that 
+ follows and trade the NY AM kill zone after it. Education only\, not finan
+ cial advice.
+END:VEVENT
+BEGIN:VEVENT
+UID:20270211-cpi-inflation-jan@displace
+DTSTAMP:20261115T104016Z
+DTSTART;TZID=America/New_York:20270211T083000
+DTEND;TZID=America/New_York:20270211T084500
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:CPI inflation (Jan)
+TRIGGER:-PT15M
+END:VALARM
+SUMMARY:🔴 CPI inflation (Jan)
+DESCRIPTION:Lands an hour before the 9:30 open. Let the release candle prin
+ t\; ICT traders often wait for the raid that follows and trade the NY AM k
+ ill zone after it. Education only\, not financial advice.
+END:VEVENT
+BEGIN:VEVENT
+UID:20270211-initial-jobless-claims@displace
+DTSTAMP:20261115T104016Z
+DTSTART;TZID=America/New_York:20270211T083000
+DTEND;TZID=America/New_York:20270211T084500
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Initial jobless claims
+TRIGGER:-PT15M
+END:VALARM
+SUMMARY:🟠 Initial jobless claims
+DESCRIPTION:Weekly jobless claims. Usually a smaller move\, but the 8:30 ca
+ ndle can still spike. Education only\, not financial advice.
+END:VEVENT
+BEGIN:VEVENT
+UID:20270212-ppi-producer-prices-jan@displace
+DTSTAMP:20261115T104016Z
+DTSTART;TZID=America/New_York:20270212T083000
+DTEND;TZID=America/New_York:20270212T084500
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:PPI producer prices (Jan)
+TRIGGER:-PT15M
+END:VALARM
+SUMMARY:🟠 PPI producer prices (Jan)
+DESCRIPTION:Lands an hour before the 9:30 open. Let the release candle prin
+ t\; ICT traders often wait for the raid that follows and trade the NY AM k
+ ill zone after it. Education only\, not financial advice.
+END:VEVENT
+BEGIN:VEVENT
+UID:20270215-presidents-day-us-markets-closed@displace
+DTSTAMP:20261115T104016Z
+DTSTART;VALUE=DATE:20270215
+DTEND;VALUE=DATE:20270216
+SUMMARY:Presidents' Day: US markets closed
+DESCRIPTION:US stock market closed. Futures and forex liquidity is thin\; m
+ ost ICT traders take the day off. Education only\, not financial advice.
+END:VEVENT
+BEGIN:VEVENT
+UID:20270218-initial-jobless-claims@displace
+DTSTAMP:20261115T104016Z
+DTSTART;TZID=America/New_York:20270218T083000
+DTEND;TZID=America/New_York:20270218T084500
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Initial jobless claims
+TRIGGER:-PT15M
+END:VALARM
+SUMMARY:🟠 Initial jobless claims
+DESCRIPTION:Weekly jobless claims. Usually a smaller move\, but the 8:30 ca
+ ndle can still spike. Education only\, not financial advice.
+END:VEVENT
+BEGIN:VEVENT
+UID:20270223-consumer-confidence-feb@displace
+DTSTAMP:20261115T104016Z
+DTSTART;TZID=America/New_York:20270223T100000
+DTEND;TZID=America/New_York:20270223T101500
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Consumer confidence (Feb)
+TRIGGER:-PT15M
+END:VALARM
+SUMMARY:🟠 Consumer confidence (Feb)
+DESCRIPTION:Usually the last Tuesday of the month\; confirm on conference-b
+ oard.org. Education only\, not financial advice.
+END:VEVENT
+BEGIN:VEVENT
+UID:20270225-gdp-second-estimate-q4@displace
+DTSTAMP:20261115T104016Z
+DTSTART;TZID=America/New_York:20270225T083000
+DTEND;TZID=America/New_York:20270225T084500
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:GDP\, second estimate (Q4)
+TRIGGER:-PT15M
+END:VALARM
+SUMMARY:🔴 GDP\, second estimate (Q4)
+DESCRIPTION:Lands an hour before the 9:30 open. Let the release candle prin
+ t\; ICT traders often wait for the raid that follows and trade the NY AM k
+ ill zone after it. Education only\, not financial advice.
+END:VEVENT
+BEGIN:VEVENT
+UID:20270225-initial-jobless-claims@displace
+DTSTAMP:20261115T104016Z
+DTSTART;TZID=America/New_York:20270225T083000
+DTEND;TZID=America/New_York:20270225T084500
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Initial jobless claims
+TRIGGER:-PT15M
+END:VALARM
+SUMMARY:🟠 Initial jobless claims
+DESCRIPTION:Weekly jobless claims. Usually a smaller move\, but the 8:30 ca
+ ndle can still spike. Education only\, not financial advice.
+END:VEVENT
+BEGIN:VEVENT
+UID:20270301-ism-manufacturing-pmi-feb@displace
+DTSTAMP:20261115T104016Z
+DTSTART;TZID=America/New_York:20270301T100000
+DTEND;TZID=America/New_York:20270301T101500
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:ISM Manufacturing PMI (Feb)
+TRIGGER:-PT15M
+END:VALARM
+SUMMARY:🔴 ISM Manufacturing PMI (Feb)
+DESCRIPTION:Usually the first business day of the month\; confirm on ismwor
+ ld.org. Education only\, not financial advice.
+END:VEVENT
+BEGIN:VEVENT
+UID:20270303-ism-services-pmi-feb@displace
+DTSTAMP:20261115T104016Z
+DTSTART;TZID=America/New_York:20270303T100000
+DTEND;TZID=America/New_York:20270303T101500
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:ISM Services PMI (Feb)
+TRIGGER:-PT15M
+END:VALARM
+SUMMARY:🟠 ISM Services PMI (Feb)
+DESCRIPTION:Usually the third business day of the month\; confirm on ismwor
+ ld.org. Education only\, not financial advice.
+END:VEVENT
+BEGIN:VEVENT
+UID:20270326-good-friday@displace
+DTSTAMP:20261115T104016Z
+DTSTART;VALUE=DATE:20270326
+DTEND;VALUE=DATE:20270327
+SUMMARY:Good Friday: US markets closed
+DESCRIPTION:US stock markets closed. Futures may trade shortened hours. Edu
+ cation only\, not financial advice.
+END:VEVENT
+BEGIN:VEVENT
+UID:20270330-consumer-confidence-mar@displace
+DTSTAMP:20261115T104016Z
+DTSTART;TZID=America/New_York:20270330T100000
+DTEND;TZID=America/New_York:20270330T101500
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Consumer confidence (Mar)
+TRIGGER:-PT15M
+END:VALARM
+SUMMARY:🟠 Consumer confidence (Mar)
+DESCRIPTION:Usually the last Tuesday of the month\; confirm on conference-b
+ oard.org. Education only\, not financial advice.
+END:VEVENT
+END:VCALENDAR

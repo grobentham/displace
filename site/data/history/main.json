@@ -1,0 +1,449 @@
+{
+ "asof": "2026-11-15",
+ "series": {
+  "cpi": {
+   "name": "Core CPI",
+   "metric": "core CPI month-on-month",
+   "rows": [
+    {
+     "period": "Sep 2025",
+     "date": "2025-10-24",
+     "actual": "0.2%",
+     "forecast": ""
+    },
+    {
+     "period": "Dec 2025",
+     "date": "2026-01-13",
+     "actual": "0.2%",
+     "forecast": "0.3%"
+    },
+    {
+     "period": "Jan 2026",
+     "date": "2026-02-13",
+     "actual": "0.3%",
+     "forecast": ""
+    },
+    {
+     "period": "Feb 2026",
+     "date": "2026-03-11",
+     "actual": "0.2%",
+     "forecast": ""
+    },
+    {
+     "period": "Mar 2026",
+     "date": "2026-04-10",
+     "actual": "0.2%",
+     "forecast": "0.3%"
+    },
+    {
+     "period": "Apr 2026",
+     "date": "2026-05-12",
+     "actual": "0.4%",
+     "forecast": ""
+    },
+    {
+     "period": "May 2026",
+     "date": "2026-06-10",
+     "actual": "0.2%",
+     "forecast": ""
+    },
+    {
+     "period": "Jun 2026",
+     "date": "2026-07-14",
+     "actual": "0.0%",
+     "forecast": ""
+    },
+    {
+     "period": "Jul 2026",
+     "date": "2026-08-12",
+     "actual": "0.2%",
+     "forecast": ""
+    },
+    {
+     "period": "Aug 2026",
+     "date": "2026-09-11",
+     "actual": "0.3%",
+     "forecast": ""
+    },
+    {
+     "period": "Sep 2026",
+     "date": "2026-10-14",
+     "actual": "0.3%",
+     "forecast": "0.2%"
+    },
+    {
+     "period": "Oct 2026",
+     "date": "2026-11-10",
+     "actual": "0.3%",
+     "forecast": "0.2%"
+    }
+   ]
+  },
+  "nfp": {
+   "name": "Payrolls",
+   "metric": "change in non-farm payrolls",
+   "rows": [
+    {
+     "period": "Nov 2025",
+     "date": "2025-12-16",
+     "actual": "64K",
+     "forecast": "50K"
+    },
+    {
+     "period": "Dec 2025",
+     "date": "2026-01-09",
+     "actual": "50K",
+     "forecast": "60K"
+    },
+    {
+     "period": "Jan 2026",
+     "date": "2026-02-11",
+     "actual": "130K",
+     "forecast": "70K"
+    },
+    {
+     "period": "Feb 2026",
+     "date": "2026-03-06",
+     "actual": "-92K",
+     "forecast": "59K"
+    },
+    {
+     "period": "Mar 2026",
+     "date": "2026-04-03",
+     "actual": "178K",
+     "forecast": "60K"
+    },
+    {
+     "period": "Apr 2026",
+     "date": "2026-05-08",
+     "actual": "115K",
+     "forecast": "62K"
+    },
+    {
+     "period": "May 2026",
+     "date": "2026-06-05",
+     "actual": "172K",
+     "forecast": "85K"
+    },
+    {
+     "period": "Jun 2026",
+     "date": "2026-07-02",
+     "actual": "57K",
+     "forecast": "110K"
+    },
+    {
+     "period": "Jul 2026",
+     "date": "2026-08-07",
+     "actual": "-23K",
+     "forecast": "80K"
+    },
+    {
+     "period": "Aug 2026",
+     "date": "2026-09-04",
+     "actual": "162K",
+     "forecast": "53K"
+    },
+    {
+     "period": "Sep 2026",
+     "date": "2026-10-02",
+     "actual": "29K",
+     "forecast": "90K"
+    },
+    {
+     "period": "Oct 2026",
+     "date": "2026-11-06",
+     "actual": "165K",
+     "forecast": "65K"
+    }
+   ]
+  },
+  "retail": {
+   "name": "Retail sales",
+   "metric": "headline retail sales month-on-month",
+   "rows": [
+    {
+     "period": "Oct 2025",
+     "date": "2025-12-16",
+     "actual": "0.0%",
+     "forecast": "0.1%"
+    },
+    {
+     "period": "Nov 2025",
+     "date": "2026-01-14",
+     "actual": "0.6%",
+     "forecast": "0.4%"
+    },
+    {
+     "period": "Dec 2025",
+     "date": "2026-02-10",
+     "actual": "0.0%",
+     "forecast": "0.4%"
+    },
+    {
+     "period": "Jan 2026",
+     "date": "2026-03-06",
+     "actual": "-0.2%",
+     "forecast": ""
+    },
+    {
+     "period": "Feb 2026",
+     "date": "2026-04-01",
+     "actual": "0.6%",
+     "forecast": "0.5%"
+    },
+    {
+     "period": "Mar 2026",
+     "date": "2026-04-21",
+     "actual": "1.7%",
+     "forecast": ""
+    },
+    {
+     "period": "Apr 2026",
+     "date": "2026-05-14",
+     "actual": "0.5%",
+     "forecast": ""
+    },
+    {
+     "period": "May 2026",
+     "date": "2026-06-17",
+     "actual": "0.9%",
+     "forecast": "0.5%"
+    },
+    {
+     "period": "Jun 2026",
+     "date": "2026-07-16",
+     "actual": "0.2%",
+     "forecast": "0.2%"
+    },
+    {
+     "period": "Jul 2026",
+     "date": "2026-08-14",
+     "actual": "-0.6%",
+     "forecast": "0.1%"
+    },
+    {
+     "period": "Aug 2026",
+     "date": "2026-09-16",
+     "actual": "1.2%",
+     "forecast": "0.7%"
+    },
+    {
+     "period": "Sep 2026",
+     "date": "2026-10-15",
+     "actual": "0.8%",
+     "forecast": "0.3%"
+    }
+   ]
+  },
+  "pce": {
+   "name": "Core PCE",
+   "metric": "core PCE price index month-on-month",
+   "rows": [
+    {
+     "period": "Oct 2025",
+     "date": "2026-01-22",
+     "actual": "0.2%",
+     "forecast": ""
+    },
+    {
+     "period": "Nov 2025",
+     "date": "2026-01-22",
+     "actual": "0.2%",
+     "forecast": "0.2%"
+    },
+    {
+     "period": "Dec 2025",
+     "date": "2026-02-20",
+     "actual": "0.4%",
+     "forecast": "0.3%"
+    },
+    {
+     "period": "Jan 2026",
+     "date": "2026-03-13",
+     "actual": "0.4%",
+     "forecast": "0.4%"
+    },
+    {
+     "period": "Feb 2026",
+     "date": "2026-04-09",
+     "actual": "0.4%",
+     "forecast": "0.4%"
+    },
+    {
+     "period": "Mar 2026",
+     "date": "2026-04-30",
+     "actual": "0.3%",
+     "forecast": ""
+    },
+    {
+     "period": "Apr 2026",
+     "date": "2026-05-28",
+     "actual": "0.2%",
+     "forecast": "0.3%"
+    },
+    {
+     "period": "May 2026",
+     "date": "2026-06-25",
+     "actual": "0.3%",
+     "forecast": "0.3%"
+    },
+    {
+     "period": "Jun 2026",
+     "date": "2026-07-30",
+     "actual": "0.1%",
+     "forecast": "0.2%"
+    },
+    {
+     "period": "Jul 2026",
+     "date": "2026-08-26",
+     "actual": "0.2%",
+     "forecast": "0.2%"
+    },
+    {
+     "period": "Aug 2026",
+     "date": "2026-09-30",
+     "actual": "0.2%",
+     "forecast": "0.3%"
+    },
+    {
+     "period": "Sep 2026",
+     "date": "2026-10-29",
+     "actual": "0.3%",
+     "forecast": "0.3%"
+    }
+   ]
+  },
+  "gdp": {
+   "name": "GDP",
+   "metric": "real GDP growth, annualized, advance estimate",
+   "rows": [
+    {
+     "period": "Q4 2024",
+     "date": "2025-01-30",
+     "actual": "2.3%",
+     "forecast": "2.6%"
+    },
+    {
+     "period": "Q1 2025",
+     "date": "2025-04-30",
+     "actual": "-0.3%",
+     "forecast": "0.3%"
+    },
+    {
+     "period": "Q2 2025",
+     "date": "2025-07-30",
+     "actual": "3.0%",
+     "forecast": "2.4%"
+    },
+    {
+     "period": "Q3 2025",
+     "date": "2025-12-23",
+     "actual": "4.3%",
+     "forecast": "3.3%"
+    },
+    {
+     "period": "Q4 2025",
+     "date": "2026-02-20",
+     "actual": "1.4%",
+     "forecast": "3.0%"
+    },
+    {
+     "period": "Q1 2026",
+     "date": "2026-04-30",
+     "actual": "2.0%",
+     "forecast": "2.3%"
+    },
+    {
+     "period": "Q2 2026",
+     "date": "2026-07-30",
+     "actual": "1.5%",
+     "forecast": "2.1%"
+    },
+    {
+     "period": "Q3 2026",
+     "date": "2026-10-29",
+     "actual": "3.4%",
+     "forecast": "3.1%"
+    }
+   ]
+  },
+  "ism": {
+   "name": "ISM manufacturing",
+   "metric": "ISM manufacturing index",
+   "rows": [
+    {
+     "period": "Nov 2025",
+     "date": "2025-12-01",
+     "actual": "48.2",
+     "forecast": "49.0"
+    },
+    {
+     "period": "Dec 2025",
+     "date": "2026-01-05",
+     "actual": "47.9",
+     "forecast": "48.4"
+    },
+    {
+     "period": "Jan 2026",
+     "date": "2026-02-02",
+     "actual": "52.6",
+     "forecast": "48.5"
+    },
+    {
+     "period": "Feb 2026",
+     "date": "2026-03-02",
+     "actual": "52.4",
+     "forecast": "51.8"
+    },
+    {
+     "period": "Mar 2026",
+     "date": "2026-04-01",
+     "actual": "52.7",
+     "forecast": "52.5"
+    },
+    {
+     "period": "Apr 2026",
+     "date": "2026-05-01",
+     "actual": "52.7",
+     "forecast": "53.0"
+    },
+    {
+     "period": "May 2026",
+     "date": "2026-06-01",
+     "actual": "54.0",
+     "forecast": "53.0"
+    },
+    {
+     "period": "Jun 2026",
+     "date": "2026-07-01",
+     "actual": "53.3",
+     "forecast": "54.0"
+    },
+    {
+     "period": "Jul 2026",
+     "date": "2026-08-03",
+     "actual": "55.6",
+     "forecast": ""
+    },
+    {
+     "period": "Aug 2026",
+     "date": "2026-09-01",
+     "actual": "54.6",
+     "forecast": ""
+    },
+    {
+     "period": "Sep 2026",
+     "date": "2026-10-01",
+     "actual": "54.5",
+     "forecast": ""
+    },
+    {
+     "period": "Oct 2026",
+     "date": "2026-11-02",
+     "actual": "55.5",
+     "forecast": "54.5"
+    }
+   ]
+  }
+ }
+}

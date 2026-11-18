@@ -1,0 +1,27 @@
+{
+ "week": "Nov 16–20",
+ "asof": "2026-11-15",
+ "summary": "1 high-impact release: Retail sales (Tue). The next Fed decision is Dec 8–9, 24 days from today.",
+ "days": [
+  {
+   "d": "Mon Nov 16",
+   "t": "No major US releases scheduled."
+  },
+  {
+   "d": "Tue Nov 17",
+   "t": "Retail sales (Oct) at 08:30 NY (previous 0.8%, forecast 0.2%). Consumer spending is the biggest part of the US economy, so strong spending can keep rates higher for longer."
+  },
+  {
+   "d": "Wed Nov 18",
+   "t": "FOMC minutes (Oct 27–28 meeting) at 14:00 NY."
+  },
+  {
+   "d": "Thu Nov 19",
+   "t": "Initial jobless claims at 08:30 NY (previous 200K)."
+  },
+  {
+   "d": "Fri Nov 20",
+   "t": "UMich consumer sentiment, final (Nov) at 10:00 NY (previous 48.0, forecast 51.0)."
+  }
+ ]
+}

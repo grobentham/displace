@@ -1,0 +1,23 @@
+{
+ "lastRun": "2026-11-15T05:40-05:00",
+ "fred": false,
+ "fredCalls": 0,
+ "quality": {
+  "passed": 5,
+  "total": 5,
+  "held": 0,
+  "rejected": 0,
+  "critical": 0
+ },
+ "fredErrors": 0,
+ "calendarThrough": "2027-03-30",
+ "events": 84,
+ "upcoming": 78,
+ "warnings": [
+  "FRED_API_KEY is not set: figures, markets and reactions are not updating"
+ ],
+ "log": [
+  "engine run 2026-11-15T05:40-05:00 without FRED key",
+  "quality: 5/5 checks passed, 0 held, 0 rejected"
+ ]
+}

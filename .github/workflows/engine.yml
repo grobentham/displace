@@ -1,0 +1,88 @@
+name: Engine
+
+# Runs the news engine, saves any new data, and publishes the site to GitHub Pages.
+# Times are UTC and chosen so each New York release window is covered in both winter and summer time.
+on:
+  schedule:
+    - cron: "45 11 * * 1-5"  # daily brief (06:45/07:45 New York)
+    - cron: "45 12 * * 1-5"  # daily brief refresh
+    - cron: "50 13 * * 1-5"  # after 08:30 releases
+    - cron: "20 14 * * 1-5"  # after 08:30 / 10:00 releases
+    - cron: "20 15 * * 1-5"  # after 10:00 releases
+    - cron: "30 19 * * 1-5"  # after 14:00 (Fed) releases
+    - cron: "0 22 * * 0"     # Sunday: weekly outlook
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["site/**", "engine/**", ".github/workflows/engine.yml"]
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+  issues: write
+
+concurrency:
+  group: engine
+  cancel-in-progress: false
+
+jobs:
+  run:
+    if: vars.DISPLACE_ENGINE_ENABLED == 'true'
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Test engine
+        run: python engine/test_engine.py && python engine/test_direction.py
+
+      - name: Run engine
+        env:
+          FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
+        run: python engine/engine.py
+
+      - name: Save new data
+        run: |
+          git config user.name "displace-engine"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add site/data engine
+          if ! git diff --cached --quiet; then
+            git commit -m "Engine update $(date -u +%Y-%m-%dT%H:%MZ)"
+            git push
+          fi
+
+      - name: Flag when the schedule needs more dates
+        if: hashFiles('engine/STALE') != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh label create schedule --color FBCA04 --description "Release schedule needs dates" 2>/dev/null || true
+          if [ "$(gh issue list --label schedule --state open --json number --jq length)" = "0" ]; then
+            gh issue create --title "Add more release dates" --label schedule --body "$(cat engine/STALE)"
+          fi
+
+      - name: Flag failed quality checks
+        if: hashFiles('engine/QUALITY_FAIL') != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh label create quality --color D93F0B --description "Engine quality checks failed" 2>/dev/null || true
+          if [ "$(gh issue list --label quality --state open --json number --jq length)" = "0" ]; then
+            gh issue create --title "Engine quality check failed" --label quality --body "$(cat engine/QUALITY_FAIL)
+
+          Full report: site/data/engine/quality.json"
+          fi
+
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+      - id: deploy
+        uses: actions/deploy-pages@v4

@@ -1,0 +1,2 @@
+# Preserve iCalendar line endings for calendar clients.
+*.ics -text
