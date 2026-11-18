@@ -1,5 +1,5 @@
 {
- "asof": "2026-11-18T10:08-05:00",
+ "asof": "2026-11-18T10:19-05:00",
  "modelAsof": "2026-11-18",
  "version": 2,
  "assets": {
@@ -295,140 +295,146 @@
    ]
   },
   "pce:gold": {
-   "calls": 62,
-   "hits": 38,
+   "calls": 22,
+   "hits": 11,
    "proven": false,
-   "why": "not significant after correcting for the number of rules tested",
-   "brierSkill": 0.015,
+   "why": "too few tested calls",
+   "brierSkill": -0.072,
    "reliability": [
     {
      "band": "50%+",
-     "n": 14,
-     "stated": 0.582,
-     "actual": 0.429
+     "n": 9,
+     "stated": 0.58,
+     "actual": 0.444
     },
     {
      "band": "60%+",
-     "n": 27,
-     "stated": 0.662,
-     "actual": 0.741
+     "n": 5,
+     "stated": 0.633,
+     "actual": 0.6
     },
     {
      "band": "70%+",
-     "n": 21,
-     "stated": 0.816,
-     "actual": 0.571
+     "n": 8,
+     "stated": 0.8,
+     "actual": 0.5
     }
    ]
   },
   "pce:usd": {
-   "calls": 5,
-   "hits": 1,
+   "calls": 18,
+   "hits": 8,
    "proven": false,
    "why": "too few tested calls",
-   "brierSkill": -0.009,
+   "brierSkill": -0.032,
    "reliability": [
     {
      "band": "50%+",
-     "n": 3,
-     "stated": 0.571,
-     "actual": 0.333
+     "n": 8,
+     "stated": 0.574,
+     "actual": 0.75
     },
     {
      "band": "60%+",
-     "n": 2,
-     "stated": 0.654,
-     "actual": 0.0
+     "n": 7,
+     "stated": 0.642,
+     "actual": 0.143
+    },
+    {
+     "band": "70%+",
+     "n": 3,
+     "stated": 0.739,
+     "actual": 0.333
     }
    ]
   },
   "pce:eur": {
-   "calls": 63,
-   "hits": 34,
+   "calls": 47,
+   "hits": 28,
    "proven": false,
-   "why": "hit rate under 55%",
-   "brierSkill": -0.01,
+   "why": "not significant after correcting for the number of rules tested",
+   "brierSkill": -0.001,
    "reliability": [
     {
      "band": "50%+",
-     "n": 26,
+     "n": 13,
      "stated": 0.58,
-     "actual": 0.577
+     "actual": 0.615
     },
     {
      "band": "60%+",
-     "n": 30,
-     "stated": 0.641,
-     "actual": 0.533
+     "n": 26,
+     "stated": 0.643,
+     "actual": 0.615
     },
     {
      "band": "70%+",
-     "n": 7,
-     "stated": 0.745,
-     "actual": 0.429
+     "n": 8,
+     "stated": 0.778,
+     "actual": 0.5
     }
    ]
   },
   "pce:nq": {
-   "calls": 39,
-   "hits": 17,
+   "calls": 16,
+   "hits": 5,
    "proven": false,
-   "why": "hit rate under 55%",
-   "brierSkill": -0.037,
+   "why": "too few tested calls",
+   "brierSkill": -0.025,
    "reliability": [
     {
      "band": "50%+",
-     "n": 15,
-     "stated": 0.576,
-     "actual": 0.333
+     "n": 10,
+     "stated": 0.573,
+     "actual": 0.3
     },
     {
      "band": "60%+",
-     "n": 8,
+     "n": 6,
      "stated": 0.661,
-     "actual": 0.625
-    },
-    {
-     "band": "70%+",
-     "n": 16,
-     "stated": 0.763,
-     "actual": 0.438
+     "actual": 0.333
     }
    ]
   },
   "pce:y2": {
-   "calls": 7,
-   "hits": 1,
+   "calls": 11,
+   "hits": 4,
    "proven": false,
    "why": "too few tested calls",
-   "brierSkill": -0.01,
+   "brierSkill": -0.018,
    "reliability": [
     {
      "band": "50%+",
      "n": 7,
-     "stated": 0.569,
-     "actual": 0.143
+     "stated": 0.571,
+     "actual": 0.429
+    },
+    {
+     "band": "60%+",
+     "n": 4,
+     "stated": 0.603,
+     "actual": 0.25
     }
    ]
   },
   "pce:y10": {
-   "calls": 5,
-   "hits": 2,
+   "calls": 14,
+   "hits": 6,
    "proven": false,
    "why": "too few tested calls",
-   "brierSkill": -0.009,
+   "brierSkill": -0.03,
    "reliability": [
     {
      "band": "50%+",
-     "n": 3,
-     "stated": 0.571,
-     "actual": 0.667
+     "n": 10,
+     "stated": 0.58,
+     "actual": 0.5
     },
     {
      "band": "60%+",
-     "n": 2,
-     "stated": 0.603,
-     "actual": 0.0
+     "n": 4,
+     "stated": 0.639,
+     "actual": 0.25
     }
    ]
   },
@@ -1675,146 +1681,146 @@
   "pce": {
    "name": "Core PCE",
    "metric": "core PCE m/m",
-   "n": 200,
-   "since": "2010-02-01",
-   "basis": "trend",
+   "n": 145,
+   "since": "2014-08-29",
+   "basis": "nowcast",
    "assets": {
     "gold": {
      "hot": {
-      "n": 44,
-      "up": 0.404,
-      "med": -0.162,
-      "q1": -0.513,
-      "q3": 0.477
+      "n": 33,
+      "up": 0.474,
+      "med": -0.155,
+      "q1": -0.544,
+      "q3": 0.519
      },
      "cool": {
-      "n": 42,
-      "up": 0.604,
-      "med": -0.099,
-      "q1": -0.448,
-      "q3": 0.659
+      "n": 38,
+      "up": 0.537,
+      "med": 0.013,
+      "q1": -0.439,
+      "q3": 0.525
      },
      "inline": {
-      "n": 36,
-      "up": 0.527,
-      "med": 0.047,
-      "q1": -0.499,
-      "q3": 0.404
+      "n": 15,
+      "up": 0.5,
+      "med": -0.252,
+      "q1": -0.847,
+      "q3": 0.061
      }
     },
     "usd": {
      "hot": {
-      "n": 68,
-      "up": 0.446,
-      "med": -0.01,
-      "q1": -0.196,
-      "q3": 0.216
+      "n": 50,
+      "up": 0.492,
+      "med": 0.014,
+      "q1": -0.195,
+      "q3": 0.266
      },
      "cool": {
-      "n": 69,
-      "up": 0.401,
-      "med": -0.056,
+      "n": 60,
+      "up": 0.364,
+      "med": -0.096,
       "q1": -0.218,
-      "q3": 0.168
+      "q3": 0.131
      },
      "inline": {
-      "n": 61,
-      "up": 0.522,
-      "med": -0.02,
-      "q1": -0.139,
-      "q3": 0.095
+      "n": 35,
+      "up": 0.524,
+      "med": 0.028,
+      "q1": -0.043,
+      "q3": 0.224
      }
     },
     "eur": {
      "hot": {
-      "n": 67,
-      "up": 0.573,
-      "med": 0.054,
-      "q1": -0.292,
-      "q3": 0.263
+      "n": 50,
+      "up": 0.649,
+      "med": 0.125,
+      "q1": -0.236,
+      "q3": 0.283
      },
      "cool": {
-      "n": 69,
-      "up": 0.613,
-      "med": 0.083,
-      "q1": -0.282,
-      "q3": 0.327
+      "n": 60,
+      "up": 0.591,
+      "med": 0.082,
+      "q1": -0.218,
+      "q3": 0.336
      },
      "inline": {
-      "n": 63,
-      "up": 0.413,
-      "med": -0.038,
-      "q1": -0.248,
-      "q3": 0.256
+      "n": 34,
+      "up": 0.347,
+      "med": -0.15,
+      "q1": -0.456,
+      "q3": 0.06
      }
     },
     "nq": {
      "hot": {
-      "n": 66,
-      "up": 0.544,
+      "n": 50,
+      "up": 0.558,
       "med": 0.205,
-      "q1": -0.786,
-      "q3": 0.779
+      "q1": -0.801,
+      "q3": 0.954
      },
      "cool": {
-      "n": 69,
-      "up": 0.607,
+      "n": 60,
+      "up": 0.594,
       "med": 0.099,
-      "q1": -0.513,
-      "q3": 0.811
+      "q1": -0.436,
+      "q3": 0.774
      },
      "inline": {
-      "n": 62,
-      "up": 0.639,
-      "med": 0.069,
-      "q1": -0.309,
-      "q3": 0.807
+      "n": 34,
+      "up": 0.662,
+      "med": 0.312,
+      "q1": -0.474,
+      "q3": 0.771
      }
     },
     "y2": {
      "hot": {
-      "n": 47,
-      "up": 0.393,
+      "n": 38,
+      "up": 0.372,
+      "med": -1.0,
+      "q1": -3.0,
+      "q3": 1.25
+     },
+     "cool": {
+      "n": 50,
+      "up": 0.422,
       "med": -1.0,
       "q1": -3.0,
       "q3": 2.0
      },
-     "cool": {
-      "n": 58,
-      "up": 0.359,
-      "med": -1.5,
-      "q1": -3.0,
-      "q3": 1.25
-     },
      "inline": {
-      "n": 43,
-      "up": 0.559,
+      "n": 27,
+      "up": 0.526,
       "med": 1.0,
       "q1": -2.0,
-      "q3": 3.0
+      "q3": 4.0
      }
     },
     "y10": {
      "hot": {
-      "n": 57,
-      "up": 0.4,
-      "med": -1.0,
-      "q1": -5.0,
-      "q3": 2.5
+      "n": 45,
+      "up": 0.351,
+      "med": -2.0,
+      "q1": -4.0,
+      "q3": 1.5
      },
      "cool": {
-      "n": 61,
-      "up": 0.37,
+      "n": 50,
+      "up": 0.413,
       "med": -1.0,
-      "q1": -4.5,
+      "q1": -4.0,
       "q3": 3.0
      },
      "inline": {
-      "n": 57,
-      "up": 0.548,
-      "med": 2.0,
+      "n": 32,
+      "up": 0.565,
+      "med": 1.0,
       "q1": -3.0,
-      "q3": 3.5
+      "q3": 3.0
      }
     }
    }
@@ -3230,69 +3236,69 @@
    "kind": "pce",
    "date": "2026-11-25",
    "stage": "pre",
-   "basis": "trend",
+   "basis": "nowcast",
    "expect": 0.267,
    "hot": {
     "gold": {
      "none": true,
-     "n": 62,
-     "why": "not significant after correcting for the number of rules tested"
+     "n": 22,
+     "why": "too few tested calls"
     },
     "usd": {
      "none": true,
-     "n": 5,
+     "n": 18,
      "why": "too few tested calls"
     },
     "eur": {
      "none": true,
-     "n": 63,
-     "why": "hit rate under 55%"
+     "n": 47,
+     "why": "not significant after correcting for the number of rules tested"
     },
     "nq": {
      "none": true,
-     "n": 39,
-     "why": "hit rate under 55%"
+     "n": 16,
+     "why": "too few tested calls"
     },
     "y2": {
      "none": true,
-     "n": 7,
+     "n": 11,
      "why": "too few tested calls"
     },
     "y10": {
      "none": true,
-     "n": 5,
+     "n": 14,
      "why": "too few tested calls"
     }
    },
    "cool": {
     "gold": {
      "none": true,
-     "n": 62,
-     "why": "not significant after correcting for the number of rules tested"
+     "n": 22,
+     "why": "too few tested calls"
     },
     "usd": {
      "none": true,
-     "n": 5,
+     "n": 18,
      "why": "too few tested calls"
     },
     "eur": {
      "none": true,
-     "n": 63,
-     "why": "hit rate under 55%"
+     "n": 47,
+     "why": "not significant after correcting for the number of rules tested"
     },
     "nq": {
      "none": true,
-     "n": 39,
-     "why": "hit rate under 55%"
+     "n": 16,
+     "why": "too few tested calls"
     },
     "y2": {
      "none": true,
-     "n": 7,
+     "n": 11,
      "why": "too few tested calls"
     },
     "y10": {
      "none": true,
-     "n": 5,
+     "n": 14,
      "why": "too few tested calls"
     }
    },
@@ -3948,6 +3954,10 @@
  },
  "loading": [],
  "log": [
-  "nowcast: 158 past CPI nowcasts, 157 past PCE nowcasts"
+  "nowcast: 158 past CPI nowcasts, 157 past PCE nowcasts",
+  "direction: fitting (inputs changed)",
+  "direction: not enough history for gdp",
+  "direction: fit took 9s",
+  "direction: history or prices updated this run"
  ]
 }
