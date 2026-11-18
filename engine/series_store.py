@@ -36,9 +36,10 @@ FETCH_FROM = "2007-01-01"
 HISTORY_FROM = "2008-06-01"  # first vintage to read; the model starts in 2010 and needs a warm-up
 INITIAL_REFRESH = dt.timedelta(days=6)
 DAILY_REFRESH = dt.timedelta(hours=4)
-RETRY_AFTER_FAILURE = dt.timedelta(hours=6)
+RETRY_AFTER_FAILURE = dt.timedelta(minutes=50)  # roughly the next scheduled run
 BUDGET_SECONDS = 9 * 60  # per run, shared by every series still loading
-WORKERS = 6
+WORKERS = 4
+SKIP_AFTER = 3  # a past vintage that fails on this many separate runs is skipped
 BATCH = 24
 
 # catalog transform -> multiplier turning the published figure into the FRED series' own units
@@ -172,9 +173,20 @@ class Store:
                 batch = vint[b:b + BATCH]
                 snaps = list(pool.map(lambda v: self._snap(sid, v, start(v)), batch))
                 for v, snap in zip(batch, snaps):
+                    for wait in (3, 8):  # brief hiccups are common: retry on the spot, one at a time
+                        if snap is not None:
+                            break
+                        time.sleep(wait)
+                        snap = self._snap(sid, v, start(v))
                     if snap is None:
-                        failed = True  # stop at the gap so the history stays in order; resume next run
-                        break
+                        fails = c.setdefault("fails", {})
+                        fails[v] = fails.get(v, 0) + 1
+                        if fails[v] < SKIP_AFTER:
+                            failed = True  # stop at the gap so the history stays in order; resume next run
+                            break
+                        self.log(f"history: {sid} vintage {v} failed on {fails[v]} runs; skipping it")
+                        c["through"] = v
+                        continue
                     chain(rows, v, snap, mode)
                     c["through"] = v
                 c["rows"] = rows
