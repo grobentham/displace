@@ -840,8 +840,8 @@ def reactions(events):
                     r[key] = m
             if len(r) > 1:
                 rows.append(r)
-        if not rows:
-            continue
+        if not rows or (keyless and len(rows) < 6):
+            continue  # without FRED, reports wait quietly until enough release days are cached
         avg = {key: round(statistics.mean(abs(r[key]) for r in rows if key in r), 2) for key in daily if any(key in r for r in rows)}
         out["series"][k] = {"name": NAMES.get(k, k), "avg": avg, "rows": rows[::-1]}
     one_year = (TODAY - dt.timedelta(days=365)).isoformat()
