@@ -280,17 +280,21 @@ def fit(rels, markets, now, live_rows=()):
                     cells[name] = {"n": len(ms), "up": round(sum(m > 0 for m in ms) / len(ms), 3),
                                    "med": round(statistics.median(ms), 3)}
             sc[key] = cells
-            if kind == "fomc":  # also by what the Fed did, since the decision itself rarely surprises
+        if kind == "fomc":  # by what the Fed did; needs no consensus, so every meeting counts
+            for key in markets:
                 dc = {}
-                for name in ("hike", "hold", "cut"):
-                    ms = [m for _, m, d in rows if d == name]
-                    if ms:
-                        dc[name] = {"n": len(ms), "up": round(sum(m > 0 for m in ms) / len(ms), 3),
-                                    "med": round(statistics.median(ms), 3)}
-                dec[key] = dc
-        if sc:
-            model["scenarios"][kind] = {"n": max(len([1 for r in data[key] if r[4] == kind]) for key in markets), "assets": sc}
-            if dec:
+                for r in rels:
+                    if r["kind"] != kind or not r.get("decision") or r["when"] >= now:
+                        continue
+                    m = reaction(markets, key, r["when"])
+                    if m is not None and m != 0:
+                        dc.setdefault(r["decision"], []).append(m)
+                dec[key] = {name: {"n": len(ms), "up": round(sum(m > 0 for m in ms) / len(ms), 3),
+                                   "med": round(statistics.median(ms), 3)} for name, ms in dc.items()}
+        if sc or any(dec.values()):
+            model["scenarios"][kind] = {"n": max([len([1 for r in data[key] if r[4] == kind]) for key in markets]
+                                                 + [sum(c["n"] for c in d.values()) for d in dec.values()]), "assets": sc}
+            if any(dec.values()):
                 model["scenarios"][kind]["decision"] = dec
     return model
 
