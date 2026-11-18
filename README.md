@@ -2,7 +2,7 @@
 
 ICT trading education site with an economic calendar and a news engine that keeps it up to date on its own. Free to run: the site is hosted on GitHub Pages, and the engine runs in GitHub Actions.
 
-Everything here is education. The engine never writes trade signals, entries, targets or predictions.
+Everything here is education. The engine never writes entries, targets or trade instructions. The news-outcome engine publishes historical statistics (how markets have closed after past releases) and, only where a rule passed out-of-sample tests, a probability lean with its full public track record.
 
 ## What's in here
 
@@ -16,6 +16,9 @@ Everything here is education. The engine never writes trade signals, entries, ta
 | `engine/news.py` | Latest economic news from confirmed releases and central-bank feeds. |
 | `engine/schedule.json` | Release dates the engine knows about. **You add new dates here.** |
 | `engine/earnings_seed.json` | Earnings dates a company has announced itself (optional). The engine also reads Nasdaq's public earnings calendar for 24 Nasdaq-100 names and merges both into `site/data/calendar/earnings.json`. A company's own date always wins. |
+| `engine/predict.py` | News-outcome engine: runs `engine/direction.py` and writes `site/data/direction/`. |
+| `engine/series_store.py`, `engine/prices.py` | Cached history (first-published release figures, rates) and daily gold / Nasdaq-100 closes, in `engine/cache/`. |
+| `engine/watch.py` | Opens an issue when a major release's figure hasn't arrived 3 hours after it came out. |
 | `engine/forecasts.json` | Economists' consensus forecasts you enter by hand (optional). |
 | `engine/manual.json` | Optional notes for the Fed tracker (market pricing, Fed commentary). |
 | `.github/workflows/engine.yml` | Runs the engine on a schedule and publishes the site. |
@@ -65,11 +68,17 @@ Each also gets a recap and goes into the 12-month release stats.
 Each available series shows changes and a sparkline. Treasury yields and the effective federal funds rate can refresh directly from Treasury and the New York Fed when FRED is unavailable.
 
 **Briefs.** The engine writes:
-- **Daily brief:** a 7 a.m. Singapore edition with the NQ outlook, earnings, market context, and the release schedule. Confirmed figures and news update in the same edition as the engine runs.
+- **Daily brief:** a 7 a.m. Singapore edition with the NQ rates outlook, the top upcoming release, issuer-reported earnings figures, and source-linked news. Release details include the figures to watch, recorded forecasts, and confirmed results and revisions. Intraday updates appear alongside the overnight recap.
 - **Weekly outlook**
 - **Fed tracker:** rate, last move, days to the next decision, and where the 2-year sits against the policy rate.
 
 **Calendar feeds.** `calendar.ics` (all releases) and `calendar-high.ics` (high impact), with 15-minute alerts, to subscribe to in Google, Apple or Outlook Calendar.
+
+**News-outcome engine (gold, NQ, dollar, yields).** `engine/predict.py` runs the tested model in `engine/direction.py` after every engine run and writes `site/data/direction/current.json`, which the News calendar shows:
+- **Scenario map, every release:** if the figure comes in hotter, in line or cooler than expected (consensus where recorded, otherwise the recent trend), how often gold, the Nasdaq-100 and the other markets closed higher that day and the typical move. History since 2010 from figures *as first published*, so no hindsight revisions.
+- **Lean, proven rules only:** before a release, "if hotter: gold ▼ 68%"; after it, the lean for that day's close. Shown only for release × market rules that were right 55%+ over 30+ unseen releases, survive a multiple-testing correction, beat a coin flip on calibration, worked in both halves of history and are still working on their latest 20 calls. Everything else shows "no proven edge".
+- **Public track record:** every post-release lean is logged in `site/data/direction/log.json` before the close and scored against the actual close. Leans are withdrawn at the close, today's unfinished price bar is never used, and the recent record feeds a circuit breaker that switches a rule off.
+- **Data:** the release history is loaded once from the official FRED/ALFRED API (needs the free `FRED_API_KEY` secret, see setup) and then kept current from the engine's own confirmed figures, so it keeps working when FRED is unreachable. Gold and Nasdaq-100 closes come from Stooq with Yahoo as fallback; yields from Treasury; fed funds from the New York Fed. All cached in `engine/cache/`.
 
 **Quality control.** Nothing is published without passing these checks.
 - **Plausibility:** every figure must fall inside a hard range for its series (core CPI m/m between −1.5% and 2%, jobless claims between 100K and 1.5M, and so on). Anything outside is rejected and never published.
@@ -86,7 +95,7 @@ Known limitation: percent changes (CPI, PCE, retail sales…) are calculated fro
 **Self-monitoring**
 - `site/data/engine/status.json` records every run, any FRED errors and how far ahead the calendar goes.
 - The site shows when the engine last ran.
-- A GitHub issue opens if the calendar runs short.
+- A GitHub issue opens if the calendar runs short, or if a major release's figure hasn't arrived 3 hours after it came out.
 
 Not covered automatically, because the data isn't free to republish:
 - consensus forecasts
@@ -98,7 +107,8 @@ Add forecasts by hand if you want them (see below).
 ## One-time setup
 
 1. **Turn on Pages:** repo **Settings → Pages → Build and deployment → Source: GitHub Actions**.
-2. **Publish the site:** **Actions → Engine → Run workflow**. Subsequent scheduled runs refresh the data and deploy the site at `https://<your-username>.github.io/displace/`.
+2. **News-outcome history (once):** get a free FRED API key at https://fred.stlouisfed.org/docs/api/api_key.html and add it as a repository secret named `FRED_API_KEY` (**Settings → Secrets and variables → Actions → New repository secret**). The first run loads 15+ years of first-release history into `engine/cache/`. If GitHub's runners can't reach FRED, run `FRED_API_KEY=yourkey python engine/predict.py` once on your own computer and commit `engine/cache/`.
+3. **Publish the site:** **Actions → Engine → Run workflow**. Subsequent scheduled runs refresh the data and deploy the site at `https://<your-username>.github.io/displace/`.
 
 ## Day-to-day
 
@@ -128,6 +138,7 @@ python engine/test_engine.py
 python engine/test_public_news.py
 python engine/test_earnings.py
 python engine/test_direction.py
+python engine/test_predict.py
 ```
 
-The historical research module in `engine/direction.py` has its own offline tests. The scheduled workflow publishes release facts and historical reaction statistics.
+`test_direction.py` checks the model on simulated markets where the truth is known (it must find real effects, find nothing in noise and state honest probabilities). `test_predict.py` runs the whole news-outcome pipeline offline.

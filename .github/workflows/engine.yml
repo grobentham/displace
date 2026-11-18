@@ -31,10 +31,10 @@ concurrency:
 jobs:
   test:
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 8
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
         with:
           python-version: "3.12"
       - name: Test engine
@@ -43,12 +43,14 @@ jobs:
           python engine/test_earnings.py
           python engine/test_public_news.py
           python engine/test_morning.py
+          python engine/test_predict.py
+          python engine/test_direction.py
 
   publish:
     if: github.ref == 'refs/heads/main'
     needs: test
     runs-on: ubuntu-latest
-    timeout-minutes: 18
+    timeout-minutes: 25
     permissions:
       contents: write
       pages: write
@@ -58,11 +60,11 @@ jobs:
       name: github-pages
       url: ${{ steps.deploy.outputs.page_url }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           ref: main
 
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v6
         with:
           python-version: "3.12"
 
@@ -72,14 +74,28 @@ jobs:
           python -u engine/news.py
           python -u engine/morning.py
 
+      - name: News-outcome engine (gold, NQ and rates by release)
+        env:
+          # Optional but recommended: a free key from https://fred.stlouisfed.org/docs/api/api_key.html.
+          # Needed once to load the release history; after that the engine keeps it current on its own.
+          FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
+        run: |
+          python -u engine/predict.py
+          python -u engine/watch.py
+
       - name: Save new data
         run: |
           git config user.name "displace-engine"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -- site/data site/calendar.ics site/calendar-high.ics engine/pending.json
+          git add -- site/data site/calendar.ics site/calendar-high.ics engine/pending.json engine/cache
           if ! git diff --cached --quiet; then
             git commit -m "Engine update $(date -u +%Y-%m-%dT%H:%MZ)"
-            git push
+            # another run or a code push may have landed meanwhile: rebase onto it and retry
+            for i in 1 2 3; do
+              git push && break
+              git pull --rebase -X theirs origin main
+              sleep $((i * 5))
+            done
           fi
 
       - name: Flag when the schedule needs more dates
@@ -102,6 +118,16 @@ jobs:
             gh issue create --title "Engine quality check failed" --label quality --body "$(cat engine/QUALITY_FAIL)
 
           Full report: site/data/engine/quality.json"
+          fi
+
+      - name: Flag releases with missing figures
+        if: hashFiles('engine/MISSING') != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh label create data --color 5319E7 --description "Release figures missing" 2>/dev/null || true
+          if [ "$(gh issue list --label data --state open --json number --jq length)" = "0" ]; then
+            gh issue create --title "Release figures missing" --label data --body "$(cat engine/MISSING)"
           fi
 
       - uses: actions/configure-pages@v5

@@ -5,14 +5,24 @@ from pathlib import Path
 from zoneinfo import ZoneInfo
 
 from calendar_rules import nyse_holidays
-from engine import DATA, NY, NOW, WHY, clean, fomc_label, kind_of, load, market_line, save, when
+from engine import DATA, NY, NOW, clean, fomc_label, kind_of, load, market_line, save, when
 from earnings import WATCH, TIMES
 from earnings_news import FEEDS, get_reports
+from news import CONTEXT
 
 SGT = ZoneInfo("Asia/Singapore")
 DAY = dt.timedelta(days=1)
 LEAD = dt.timedelta(minutes=20)
 RATE_THRESHOLD = 3
+WATCH_FOR = {
+    "cpi": "Compare monthly core and headline inflation. Broad price pressure matters for Fed expectations and Treasury yields.",
+    "nfp": "Read job growth alongside unemployment and hourly pay. Strong hiring and slower wages can point in different directions.",
+    "pce": "Watch monthly core inflation and whether consumer spending is strengthening or slowing.",
+    "ppi": "Watch the components that feed into PCE inflation, especially when headline and core prices diverge.",
+    "retail": "Compare headline sales with the control group, which feeds into estimates of consumer spending in GDP.",
+    "fomc": "Watch the policy decision, changes in the statement, and the chair’s explanation of what could move rates next.",
+    "minutes": "Look for disagreement over inflation and jobs, and what officials said would justify a change in rates.",
+}
 
 
 def edition_time(now):
@@ -20,15 +30,18 @@ def edition_time(now):
     return today if now >= today - LEAD else today - DAY
 
 
-def recent_updates(news, start, cutoff):
+def recent_updates(news, opens, cutoff):
     items = {}
     for item in news.get("items", []):
         published = dt.datetime.fromisoformat(item["published"])
-        if start <= published <= cutoff and item.get("title") and item.get("url", "").startswith("https://"):
-            row = {key: item[key] for key in ("id", "title", "url", "analysis") if key in item}
+        if opens - DAY <= published <= cutoff and item.get("title") and item.get("url", "").startswith("https://"):
+            row = {key: item[key] for key in ("id", "title", "url", "source", "analysis", "context") if item.get(key)}
             row["published"] = published.astimezone(SGT).isoformat(timespec="seconds")
             items[row.get("id") or (row["url"], row["title"], row["published"])] = row
-    return sorted(items.values(), key=lambda item: item["published"], reverse=True)[:2]
+    updates = sorted(items.values(), key=lambda item: item["published"], reverse=True)
+    boundary = opens.astimezone(SGT).isoformat(timespec="seconds")
+    return ([item for item in updates if item["published"] >= boundary][:2]
+            + [item for item in updates if item["published"] < boundary][:3])
 
 
 def treasury_context(markets, cutoff):
@@ -46,6 +59,19 @@ def cash_session(day):
     return day.weekday() < 5 and day not in nyse_holidays(day.year)
 
 
+def rates_summary(short, long):
+    if short <= -RATE_THRESHOLD and long <= -RATE_THRESHOLD:
+        return "Bullish tilt", f"Both yields fell by at least {RATE_THRESHOLD} bp, easing pressure on tech valuations."
+    if short >= RATE_THRESHOLD and long >= RATE_THRESHOLD:
+        return "Bearish tilt", f"Both yields rose by at least {RATE_THRESHOLD} bp, adding pressure on tech valuations."
+    if abs(short) < RATE_THRESHOLD and abs(long) < RATE_THRESHOLD:
+        return "Neutral", f"Neither yield moved by the {RATE_THRESHOLD} bp needed for a rates tilt."
+    if short * long < 0:
+        return "Neutral", "The 2-year and 10-year moved in opposite directions."
+    lagging = "2-year" if abs(short) < RATE_THRESHOLD else "10-year"
+    return "Neutral", f"The {lagging} yield moved by less than {RATE_THRESHOLD} bp. A tilt requires both yields to reach that threshold."
+
+
 def market_outlook(opens, markets):
     last_close = opens.astimezone(NY).date()
     session = last_close + DAY
@@ -61,11 +87,8 @@ def market_outlook(opens, markets):
     short, long = two["d1"], ten["d1"]
     rates = {"date": last_close.isoformat(), "twoYearBp": short, "tenYearBp": long,
              "twoYearYield": two.get("value"), "tenYearYield": ten.get("value")}
-    if short <= -RATE_THRESHOLD and long <= -RATE_THRESHOLD:
-        return {"label": "Bullish tilt", "reason": "Yields fell across both maturities, easing pressure on tech valuations.", "rates": rates}
-    if short >= RATE_THRESHOLD and long >= RATE_THRESHOLD:
-        return {"label": "Bearish tilt", "reason": "Yields rose across both maturities, adding pressure on tech valuations.", "rates": rates}
-    return {"label": "Neutral", "reason": "Treasury moves gave no clear directional signal for tech stocks.", "rates": rates}
+    label, reason = rates_summary(short, long)
+    return {"label": label, "reason": reason, "rates": rates}
 
 
 def scheduled_earnings(opens, end, earnings):
@@ -86,6 +109,8 @@ def scheduled_earnings(opens, end, earnings):
                 continue
         row = {"symbol": symbol, "title": WATCH[symbol][0], "session": session,
                "date": item["date"], "confirmed": item.get("status") == "confirmed"}
+        if item.get("src"):
+            row["source"] = item["src"]
         if clock:
             row["at"] = sort_at.astimezone(SGT).isoformat(timespec="minutes")
             row["timeConfirmed"] = clock != TIMES.get(session)
@@ -106,17 +131,35 @@ def release_schedule(opens, cutoff, calendar):
         if opens <= at < end:
             scheduled.append((at, event))
     scheduled.sort(key=lambda pair: (pair[1]["impact"] != "high", pair[0]))
-    lead = scheduled[0][1] if scheduled else {}
-    why = WHY.get(kind_of(lead))
-    focus = {"title": clean(lead["title"]), "text": why} if why else None
+    lead = next(((at, event) for at, event in scheduled if at > cutoff), None)
+    focus = {"title": clean(lead[1]["title"]), "at": lead[0].isoformat(timespec="minutes")} if lead else None
     rows = []
     for at, event in scheduled:
         row = {"at": at.isoformat(timespec="minutes"), "title": event["title"]}
-        for key in ("forecast", "previous"):
+        kind = kind_of(event)
+        watch = WATCH_FOR.get(kind) or CONTEXT.get(kind)
+        if watch:
+            row["watch"] = watch
+        if event.get("src"):
+            row["source"] = event["src"]
+        confirmed = at <= cutoff and event.get("actual")
+        source_url = (event.get("provenance") or {}).get("url") if confirmed else None
+        url = source_url or event.get("url") or ""
+        if url.startswith("https://"):
+            row["url"] = url
+        for key in ("metric", "forecast", "previous"):
             if event.get(key):
                 row[key] = event[key]
-        if at <= cutoff and event.get("actual"):
+        if row.get("forecast") and event.get("fsrc"):
+            row["forecastSource"] = event["fsrc"]
+        if confirmed:
             row["actual"] = event["actual"]
+            if event.get("revised") and event["revised"] != event.get("previous"):
+                row["revised"] = event["revised"]
+            components = [{key: component[key] for key in ("label", "actual", "previous") if component.get(key)}
+                          for component in event.get("components", [])[1:] if component.get("label") and component.get("actual")]
+            if components:
+                row["components"] = components[:3]
         rows.append(row)
     return sorted(rows[:3], key=lambda row: row["at"]), sorted(rows[3:], key=lambda row: row["at"]), focus
 
@@ -134,7 +177,7 @@ def build_edition(opens, now, calendar, news, markets, earnings=None, reports=()
     return {
         "date": opens.date().isoformat(), "opensAt": opens.isoformat(timespec="minutes"),
         "generatedAt": now.astimezone(SGT).isoformat(timespec="seconds"),
-        "updates": recent_updates(news, opens - DAY, cutoff), "upcoming": upcoming, "moreReleases": more,
+        "updates": recent_updates(news, opens, cutoff), "upcoming": upcoming, "moreReleases": more,
         "focus": focus,
         "nextFed": fomc_label(fed) if fed and when(fed) >= end else None, "otherCloses": close,
         "treasury": treasury_context(markets, cutoff),
@@ -147,7 +190,7 @@ def build_edition(opens, now, calendar, news, markets, earnings=None, reports=()
     }
 
 
-def refresh_edition(edition, now, calendar, news):
+def refresh_edition(edition, now, calendar, news, earnings=None):
     opens = dt.datetime.fromisoformat(edition["opensAt"])
     if not opens <= now < opens + DAY:
         return
@@ -156,10 +199,17 @@ def refresh_edition(edition, now, calendar, news):
     if "events" in calendar:
         upcoming, more, focus = release_schedule(opens, now, calendar)
     refreshed_news = {"items": [*edition["updates"], *news.get("items", [])]}
-    updates = recent_updates(refreshed_news, opens - DAY, now)
+    updates = recent_updates(refreshed_news, opens, now)
     if (upcoming, more, focus, updates) != before:
         edition.update(upcoming=upcoming, moreReleases=more, focus=focus, updates=updates,
                        refreshedAt=now.astimezone(SGT).isoformat(timespec="seconds"))
+    if earnings is not None and "events" in earnings and "earnings" in edition:
+        edition["earnings"]["upcoming"] = scheduled_earnings(opens, opens + DAY, earnings)
+    outlook = edition.get("outlook", {})
+    if rates := outlook.get("rates"):
+        short, long = rates.get("twoYearBp"), rates.get("tenYearBp")
+        if all(isinstance(move, (int, float)) and isfinite(move) for move in (short, long)):
+            _, outlook["reason"] = rates_summary(short, long)
 
 
 def publish(now, data, read_reports=get_reports):
@@ -169,17 +219,18 @@ def publish(now, data, read_reports=get_reports):
     date = opens.date().isoformat()
     calendar = load(data / "calendar" / "events.json", {})
     news = load(data / "news" / "latest.json", {})
+    earnings = load(data / "calendar" / "earnings.json", {})
     if not any(edition["date"] == date and "moreReleases" in edition for edition in editions):
         reports, sources_read = read_reports(opens - DAY, min(opens, now))
         edition = build_edition(opens, now, calendar, news,
                                 load(data / "markets" / "latest.json", {}),
-                                load(data / "calendar" / "earnings.json", {}), reports, sources_read)
+                                earnings, reports, sources_read)
         editions = [item for item in editions if item["date"] != date] + [edition]
         print(f"Prepared daily brief for {opens.isoformat(timespec='minutes')}.")
     editions = sorted(editions, key=lambda item: item["date"], reverse=True)[:2]
     for edition in editions:
         if "moreReleases" in edition:
-            refresh_edition(edition, now, calendar, news)
+            refresh_edition(edition, now, calendar, news, earnings)
     save(target, {"version": 2, "editions": editions})
 
 

@@ -57,23 +57,27 @@ def report_items(body, feed, start, cutoff):
             yield at, title, link
 
 
-def report_summary(body):
+def report_metrics(body):
     article = text(body.decode("utf-8-sig", "replace"))
     # The issuer's narrative can include per-segment sales and future guidance. Use only explicit total figures.
     match = REPORTED_SALES.search(article) or SALES.search(article)
-    parts = []
+    metrics = []
     if match:
         growth = YOY.search(match["tail"])
-        total = "Revenue " + match["sales"]
+        total = match["sales"]
         if growth:
             total += f" ({growth['direction'].lower()} {growth['percent']}% year over year)"
-        parts.append(total)
+        metrics.append({"label": "Revenue", "value": total})
     if match := DILUTED.search(article):
-        parts.append(f"GAAP diluted EPS {match['eps']}")
+        metrics.append({"label": "GAAP diluted EPS", "value": match["eps"]})
     if match := GUIDANCE.search(article):
         band = f" ±{match['range']}%" if match["range"] else ""
-        parts.append(f"Next-quarter revenue guidance {match['sales']}{band}")
-    return ". ".join(parts) + "." if parts else ""
+        metrics.append({"label": "Next-quarter revenue guidance", "value": match["sales"] + band})
+    return metrics
+
+
+def report_summary(metrics):
+    return " ".join(f"{item['label']} {item['value']}." for item in metrics)
 
 
 def release_page(ticker, url):
@@ -96,12 +100,13 @@ def get_reports(start, cutoff, fetch=download, log=print):
             return []
         at, title, url = items[0]
         page = release_page(ticker, url)
-        summary = ""
+        metrics = []
         try:
-            summary = report_summary(fetch(page, timeout=6))
+            metrics = report_metrics(fetch(page, timeout=6))
         except (OSError, ValueError) as error:
             log(f"Earnings figures unavailable for {ticker}: {error}")
-        return [(at, {"symbol": ticker, "title": title, "url": page if summary else url, "summary": summary})]
+        return [(at, {"symbol": ticker, "title": title, "url": page if metrics else url,
+                      "published": at.isoformat(timespec="seconds"), "metrics": metrics, "summary": report_summary(metrics)})]
 
     with ThreadPoolExecutor(max_workers=4) as pool:
         batches = list(pool.map(read, FEEDS.items()))
