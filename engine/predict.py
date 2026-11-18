@@ -1,20 +1,20 @@
-"""News-outcome engine: how gold, the Nasdaq-100 and other markets have closed after each US release.
+"""News-outcome engine v4: how gold, the Nasdaq-100, the dollar and the 2-year yield react to US data surprises.
 
-Runs after engine.py in GitHub Actions. Uses direction.py (the tested model) and publishes
-site/data/direction/current.json, which the News calendar reads.
+Runs after engine.py in GitHub Actions and publishes site/data/direction/current.json for the News calendar.
 
-For every upcoming high-impact release it publishes
-  - a scenario map: if the figure comes in hotter, in line or cooler than expected, how often each market
-    closed higher that day and the typical size of the move (the historical record, for every release);
-  - a lean, only for release x market rules that passed every out-of-sample test in direction.py.
-After a release, it publishes the lean for that day's close (before the close only), logs it in
-site/data/direction/log.json and scores it against the actual close, so the live record is public.
+  tv.py        consensus forecasts and first-reported figures since 2010 (TradingView, free)
+  bars.py      hourly gold and Nasdaq-100 futures bars, archived since mid-2024 (Yahoo, free)
+  prices.py    daily gold and Nasdaq-100 closes; series_store.py: dollar index and 2-year yield (FRED, free)
+  surprise.py  the tested model: per market and theme, first 2 hours and the close
+  moves.py     expected size of the day's move
 
-Everything is historical statistics, not advice. The engine never raises: if anything fails, the last good
-file stays live and the reason is written to the log.
+For every upcoming release it publishes the scenario map (above / near / below consensus) and, for rules that
+passed every out-of-sample test, a lean for each market. Once a figure is out, it publishes the lean for that
+release, logs it in site/data/direction/log.json and scores it when the window closes, so the live record is
+public. Everything is historical statistics, not advice. The engine never raises: on any failure the last good
+file stays live.
 """
 import datetime as dt
-import hashlib
 import json
 import os
 import sys
@@ -24,22 +24,22 @@ from zoneinfo import ZoneInfo
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 
-import direction as D  # noqa: E402
+import bars  # noqa: E402
 import moves as MV  # noqa: E402
-import nowcast  # noqa: E402
 import prices  # noqa: E402
-import quality as qa  # noqa: E402
 import series_store  # noqa: E402
-from catalog import NAMES, RELEASES  # noqa: E402
+import surprise as SP  # noqa: E402
+import tv  # noqa: E402
+from catalog import NAMES  # noqa: E402
 
 NY = ZoneInfo("America/New_York")
 ROOT = os.path.dirname(HERE)
 DATA = os.path.join(ROOT, "site", "data")
 OUT = os.path.join(DATA, "direction", "current.json")
 LOG_PATH = os.path.join(DATA, "direction", "log.json")
-MODEL_PATH = os.path.join(HERE, "cache", "direction", "model.json")
 CLOSE = dt.time(16, 0)
-SETTLED = dt.time(17, 15)  # gold settles at 17:00 NY, after the stock close
+SETTLED = dt.time(17, 15)  # gold settles at 17:00 New York, after the stock close
+HORIZON_DAYS = 14
 DISCLAIMER = ("Historical statistics for education. Past reactions do not guarantee future moves, and nothing "
               "here is a recommendation to buy or sell.")
 LOGLINES = []
@@ -63,7 +63,7 @@ def save(path, obj):
     os.makedirs(os.path.dirname(path), exist_ok=True)
     tmp = path + ".tmp"
     with open(tmp, "w") as fh:
-        json.dump(obj, fh, indent=1, ensure_ascii=False)
+        json.dump(obj, fh, indent=1, ensure_ascii=False, default=str)
         fh.write("\n")
     os.replace(tmp, path)
 
@@ -73,229 +73,181 @@ def now_ny():
     return dt.datetime.fromisoformat(v).astimezone(NY) if v else dt.datetime.now(NY)
 
 
-def kind_for(kind_of):
-    def k(e):
-        kind = kind_of(e)
-        if kind == "gdp" and series_store.event_period("gdp", e, lambda *_: dt.date(2000, 1, 1)) is None:
-            return None  # second and third GDP estimates are revisions; the model only knows first releases
-        return kind
-    return k
-
-
-def fingerprint(paths):
-    """Hash of the data itself (not fetch timestamps), so a refresh that brings nothing new doesn't refit."""
-    h = hashlib.sha256()
-    for p in sorted(paths):
-        c = load(p, {})
-        h.update(os.path.basename(p).encode())
-        h.update(json.dumps(c.get("rows", c.get("closes", c.get("past"))), sort_keys=True).encode())
-    return h.hexdigest()[:16]
-
-
-def input_files():
-    out = []
-    for base in (series_store.CACHE_DIR, prices.CACHE_DIR):
-        if os.path.isdir(base):
-            out += [os.path.join(base, f) for f in os.listdir(base) if f.endswith(".json")]
-    return out + [nowcast.CACHE]
-
-
-def release_close(e):
-    return dt.datetime.combine(dt.date.fromisoformat(e["date"]), CLOSE, NY)
-
-
-def release_time(e):
-    h, m = map(int, (e.get("time") or "00:00").split(":"))
-    return dt.datetime.combine(dt.date.fromisoformat(e["date"]), dt.time(h, m), NY)
-
-
-def live_window(live, events, now):
-    """Post-release leans are only meaningful between the release and that day's close."""
-    by_id = {e["id"]: e for e in events}
+# ----------------------------------------------------------------- inputs
+def markets_now(now, store=None, log=log):
+    """{market key: reaction source} with nothing that hasn't settled yet."""
+    today = now.date().isoformat()
+    cut = today if now.time() < SETTLED else "9999"
     out = {}
-    for eid, v in live.items():
-        e = by_id.get(eid)
-        if v["stage"] == "post" and (not e or not (release_time(e) <= now < release_close(e))):
-            continue
-        out[eid] = v
+    for a in ("gold", "nq"):
+        rows, _ = prices.closes(a, "2009-06-01", now=now.astimezone(dt.timezone.utc), log=log)
+        if rows:
+            out[a] = SP.Daily([r for r in rows if r[0] < cut], "pct")
+    store = store or series_store.Store(now, {}, log=log, cutoff=None if now.time() >= SETTLED else today)
+    for key, sid, unit in (("usd", "DTWEXBGS", "pct"), ("y2", "DGS2", "bp")):
+        rows = store(sid, "2009-06-01")
+        if rows:
+            out[key] = SP.Daily([(d, v) for d, v, _ in rows if d < cut], unit)
+    bars.sync(now.astimezone(dt.timezone.utc), log=log)
+    for a in ("gold", "nq"):
+        rows = bars.load(a)
+        fetched = bars._load(a).get("fetched")
+        done = dt.datetime.fromisoformat(fetched).astimezone(NY) if fetched else now
+        if rows:
+            out[a + "2h"] = SP.Hourly(rows, min(done, now))
     return out
 
 
-def scenarios(model):
-    """Historical record by surprise bucket for every release x market (proven or not)."""
+def headline(r):
+    """The report's main figure (highest weight) with its consensus, for display."""
+    comps = sorted(r["comps"], key=lambda c: -c.get("weight", 1))
+    c = comps[0] if comps else {}
+    return {"title": c.get("title"), "forecast": c.get("forecast"), "actual": c.get("actual"),
+            "unit": c.get("unit"), "scale": c.get("scale")}
+
+
+def match(events, rels, kind_of):
+    """{calendar event id: TradingView release} for the same report on the same New York day."""
+    by = {}
+    for r in rels:
+        by.setdefault((r["kind"], r["when"].date().isoformat()), []).append(r)
     out = {}
-    for k, km in model.get("kinds", {}).items():
-        out[k] = {"name": NAMES.get(k, k), "metric": km["metric"], "n": km["n"], "since": km["since"],
-                  "basis": km.get("basis", "trend"), "assets": {}}
-        for a, m in km["assets"].items():
-            out[k]["assets"][a] = {b: {"n": c["n"], "up": c["pUp"], "med": c["med"], "q1": c["q1"], "q3": c["q3"]}
-                                   for b, c in m["cells"].items() if c["n"]}
-    return out
-
-
-def expectations(events, kind_of, title_period, log=log):
-    """Cleveland Fed nowcasts as the expected core CPI / core PCE: past releases for training, upcoming ones
-    from the latest nowcast for that month. Kinds with too little nowcast history stay on the trend basis."""
-    past, latest, daily = nowcast.load(log=log)
-    records = dict(past)
-    # releases the charts don't mark (PCE after 2014): match each month to the date it was actually published
-    for k, cfg in (("cpi", D.MODELS["cpi"]), ("pce", D.MODELS["pce"])):
-        for period, _, rt in series_store.load(cfg["head"][0], True)["rows"]:
-            if rt and (k, rt) not in records:
-                v = nowcast.before(daily, k, period[:7], rt)
-                if v is not None:
-                    records[(k, rt)] = v
     for e in events:
         k = kind_of(e)
-        if k in ("cpi", "pce") and (k, e["date"]) not in records:
-            # upcoming, or released before the Cleveland Fed marked it: the latest nowcast for that month
-            per = title_period(e, k)
-            v = nowcast.before(daily, k, per.strftime("%Y-%m"), e["date"]) if per else None
-            if v is None and per and not e.get("actual"):
-                v = latest.get((k, per.strftime("%Y-%m")))
-            if v is not None:
-                records[(k, e["date"])] = v
-    done = {k: sum(1 for kk, d in records if kk == k and d < dt.date.today().isoformat()) for k in ("cpi", "pce")}
-    log("nowcast: " + ", ".join(f"{n} past {k.upper()} nowcasts" for k, n in done.items()))
-    D.BASIS.clear()
-    for k in ("cpi", "pce"):
-        if done[k] >= 60:
-            D.BASIS[k] = "nowcast"
-    return records
-
-
-def release_days():
-    """{kind: [release dates]} from the first-release history (the date each figure was published)."""
-    out = {}
-    for k, cfg in D.MODELS.items():
-        rows = series_store.load(cfg["head"][0], True)["rows"]
-        out[k] = sorted({r[2] for r in rows if r[2]})
+        cands = by.get((k, e["date"]))
+        if not cands:
+            continue
+        if e.get("time"):
+            h, m = map(int, e["time"].split(":"))
+            t = h * 60 + m
+            cands = sorted(cands, key=lambda r: abs(r["when"].hour * 60 + r["when"].minute - t))
+        out[e["id"]] = cands[0]
     return out
 
 
-def summary(model, live, log_rows, px, now):
+# ----------------------------------------------------------------- outputs
+def live_calls(model, events, rels, kind_of, now):
+    """Pre-release scenarios and post-release leans for calendar events in the window."""
+    m = match(events, rels, kind_of)
+    out = {}
+    for e in events:
+        r = m.get(e["id"])
+        if not r or r["kind"] not in tv.GROUP_OF:
+            continue
+        g = r["group"]
+        days = (dt.date.fromisoformat(e["date"]) - now.date()).days
+        if days < 0 or days > HORIZON_DAYS:
+            continue
+        head = headline(r)
+        base = {"kind": r["kind"], "group": g, "date": e["date"], "when": r["when"].isoformat(), "basis": "consensus",
+                "consensus": head}
+        if r["z"] is not None and r["when"] <= now:
+            if now >= dt.datetime.combine(r["when"].date(), CLOSE, NY):
+                continue  # the day's window has closed; the outcome is in the log
+            calls = {}
+            for key in model["markets"]:
+                c = SP.call(model, g, key, r["z"])
+                if c:
+                    if SP.MARKETS[key][2] == "2h" and now > r["when"] + dt.timedelta(hours=2):
+                        c = {"none": True, "why": "the first two hours have passed"}
+                    calls[key] = c
+            out[e["id"]] = {**base, "stage": "post", "z": round(r["z"], 2),
+                            "bin": "hot" if r["z"] >= SP.BIN else "cool" if r["z"] <= -SP.BIN else "inline", "calls": calls}
+        elif r["when"] > now:
+            out[e["id"]] = {**base, "stage": "pre",
+                            "hot": {k: c for k in model["markets"] if (c := SP.call(model, g, k, 1.0))},
+                            "cool": {k: c for k in model["markets"] if (c := SP.call(model, g, k, -1.0))}}
+    return out
+
+
+def log_calls(log_rows, live, now):
+    have = {(r["id"], r["asset"]) for r in log_rows}
+    for eid, v in live.items():
+        if v["stage"] != "post":
+            continue
+        when = dt.datetime.fromisoformat(v["when"])
+        for a, c in v["calls"].items():
+            if not c.get("dir") or (eid, a) in have:
+                continue
+            if SP.MARKETS[a][2] == "2h" and now > when + dt.timedelta(hours=2):
+                continue
+            log_rows.append({"id": eid, "date": v["date"], "when": v["when"], "kind": v["kind"], "group": v["group"],
+                             "asset": a, "dir": c["dir"], "p": c["p"], "z": v["z"], "logged": now.isoformat(timespec="minutes")})
+    return log_rows
+
+
+def summary(model, live, record):
     rules, bt_calls, bt_hits = {}, 0, 0
-    for k, km in model.get("kinds", {}).items():
-        for a, m in km["assets"].items():
-            bt = m["bt"]
-            rules[f"{k}:{a}"] = {"calls": bt["calls"], "hits": bt["hits"], "proven": bool(bt.get("proven")),
-                                 "why": bt.get("why", ""), "brierSkill": bt["brierSkill"], "reliability": bt["reliability"]}
-            if bt.get("proven"):
+    for g, gm in model["groups"].items():
+        for key, s in gm.items():
+            bt = s["bt"]
+            if s.get("proven"):
                 bt_calls += bt["calls"]
                 bt_hits += bt["hits"]
-    rec = D.score(log_rows, px)
-    return {"asof": now.isoformat(timespec="minutes"), "modelAsof": model.get("asof"), "version": 2,
-            "assets": model.get("assets", {}), "regime": model.get("regime", {}), "sources": model.get("sources", {}),
-            "proven": sum(1 for r in rules.values() if r["proven"]), "rules": rules,
-            "backtest": {"calls": bt_calls, "hits": bt_hits}, "live": rec, "scenarios": scenarios(model),
-            "events": live, "disclaimer": DISCLAIMER}
+            for kind in tv.GROUPS[g]:
+                rules[f"{kind}:{key}"] = {"calls": bt["calls"], "hits": bt["hits"], "proven": bool(s.get("proven")),
+                                          "why": s.get("why", ""), "brierSkill": bt["brierSkill"], "group": g}
+    scen = {}
+    for kind, sc in model["scenarios"].items():
+        title = next((t for t, _, _ in tv.REPORTS[kind]), kind)
+        scen[kind] = {"name": NAMES.get(kind, kind), "metric": title, "n": sc["n"], "since": "2010", "basis": "consensus",
+                      "assets": sc["assets"]}
+    return {"asof": model["asof"], "version": 4, "assets": model["markets"],
+            "proven": sum(1 for gm in model["groups"].values() for s in gm.values() if s.get("proven")),
+            "rules": rules, "groups": {g: {k: {kk: s[kk] for kk in ("b", "k", "n", "since", "bt", "proven", "why")}
+                                           for k, s in gm.items()} for g, gm in model["groups"].items()},
+            "backtest": {"calls": bt_calls, "hits": bt_hits}, "live": record, "scenarios": scen,
+            "events": live, "disclaimer": DISCLAIMER, "basis": "consensus"}
 
 
-def run(now=None, source=None, budget=series_store.BUDGET_SECONDS):
-    import engine as E  # calendar helpers (kind_of, title_period); importing does not run the engine
+def run(now=None, kind_of=None, events=None, store=None):
     now = now or now_ny()
-    today = now.date()
-    store = series_store.Store(now, series_store.model_modes(D.MODELS), log=log, source=source, budget=budget,
-                               cutoff=None if now.time() >= SETTLED else today.isoformat())
-    kind_of = kind_for(E.kind_of)
-    cal = load(os.path.join(DATA, "calendar", "events.json"), {"events": []})
-    events = cal.get("events", [])
-
-    settled = today.isoformat()
-
-    def closed_only(got):
-        """Drop today's bar until every market has closed, so a partial day never trains or scores a call."""
-        rows, src = got
-        if rows and now.time() < SETTLED:
-            rows = [r for r in rows if r[0] < settled]
-        return (rows, src) if rows else (None, "")
-    price_fns = {a: (lambda s, a=a: closed_only(prices.closes(a, s, now=now.astimezone(dt.timezone.utc), log=log)))
-                 for a in ("gold", "nq")}
-    log_rows = load(LOG_PATH, {"rows": []}).get("rows", [])
-    cached = load(MODEL_PATH, {})
-    # Touch every input once so caches refresh, then refit only when something changed or the model is a day old.
-    model, px = None, {}
-    fp_before = fingerprint(input_files())
-    # most-traded releases first, so they are ready first while the history loads over the first runs
-    store("DFF", "2008-01-01")
-    order = [k for k in ("cpi", "nfp", "pce", "retail", "ppi", "gdp", "claims") if k in D.MODELS]
-    order += [k for k in D.MODELS if k not in order]
-    for k in order:
-        cfg = D.MODELS[k]
-        for sid in [cfg["head"][0]] + [c[0] for c in cfg["comps"]]:
-            store(sid, "2008-01-01", initial=True)
-    added = series_store.extend_from_events(events, D.MODELS, RELEASES, kind_of, E.title_period, D.figure, log=log)
-    if added:
-        log(f"history: appended {added} confirmed figure(s) from the calendar")
-    records = expectations(events, kind_of, E.title_period)
-    expect_fp = hashlib.sha256(json.dumps(
-        sorted([k, d, v] for (k, d), v in records.items()) + sorted(D.BASIS.items())).encode()).hexdigest()[:8]
-    fp = fingerprint(input_files()) + expect_fp
-    refit = (not cached.get("model") or cached.get("fingerprint") != fp or cached.get("day") != today.isoformat())
-    if refit:
-        log("direction: fitting (inputs changed)" if cached.get("model") else "direction: first fit")
-        t0 = dt.datetime.now()
-        # Core CPI and core PCE surprises are measured against the Cleveland Fed nowcast (history since 2013),
-        # the other releases against their recent trend; the same basis is used live.
-        model, px = D.fit(store, None, records, today, log=log,
-                          live_rows=[r for r in log_rows if "hit" in r], price_fns=price_fns)
-        log(f"direction: fit took {(dt.datetime.now() - t0).seconds}s")
-        if model and model.get("kinds"):
-            save(MODEL_PATH, {"fingerprint": fingerprint(input_files()) + expect_fp, "day": today.isoformat(), "model": model})
-        else:
-            model = cached.get("model")
-            log("direction: fit produced no model; keeping the last good model")
-    else:
-        model = cached["model"]
-    if not px:
-        for a, (series, unit, name, _) in D.ASSETS.items():
-            rows = price_fns[a](D.START)[0] if a in price_fns else [(d, v) for d, v, _ in (store(series, D.START) or [])]
-            if rows and len(rows) > 250:
-                px[a] = D.Px(rows, unit)
-    if not model or not model.get("kinds"):
-        log("direction: no model yet; the release history is still loading from ALFRED (a few runs)")
-        return False
-    if fp_before != fp:
-        log("direction: history or prices updated this run")
-
-    live = live_window(D.apply(model, events, kind_of, today, records=records), events, now)
-    # expected move size for gold and the Nasdaq-100 on each release day
-    mv = {}
+    if kind_of is None:
+        import engine as E  # calendar helpers; importing does not run the engine
+        kind_of = E.kind_of
+    if events is None:
+        events = load(os.path.join(DATA, "calendar", "events.json"), {"events": []}).get("events", [])
+    got = tv.sync(now.date(), log=log)
+    rels = tv.releases()
+    log(f"tv: {got} month(s) refreshed, {sum(1 for r in rels if r['z'] is not None)} releases with a consensus surprise")
+    markets = markets_now(now, store=store)
+    log("markets: " + ", ".join(f"{k}" for k in markets))
+    log_doc = load(LOG_PATH, {"rows": []})
+    log_rows = [r for r in log_doc.get("rows", []) if "when" in r]  # rows from the old model are retired
+    t0 = dt.datetime.now()
+    model = SP.fit(rels, markets, now, live_rows=[r for r in log_rows if "hit" in r])
+    log(f"model: fit in {(dt.datetime.now() - t0).seconds}s; proven: "
+        + ", ".join(f"{g}:{k}" for g, gm in model["groups"].items() for k, s in gm.items() if s.get("proven")))
+    live = live_calls(model, events, rels, kind_of, now)
     try:
-        cut = today.isoformat() if now.time() < SETTLED else "9999"
+        days = {}
+        for r in rels:
+            if r["z"] is not None:
+                days.setdefault(r["kind"], []).append(r["when"].date().isoformat())
+        cut = now.date().isoformat() if now.time() < SETTLED else "9999"
         rows = {a: [r for r in prices.ranges(a, "2007-01-01") if r[0] < cut] for a in ("gold", "nq")}
-        mv = MV.fit({a: r for a, r in rows.items() if r}, release_days(), today)
+        mv = MV.fit({a: r for a, r in rows.items() if r}, days, now.date())
         for v in live.values():
             v["move"] = MV.for_event(mv, v["kind"])
     except Exception as ex:
+        mv = {}
         log(f"moves: failed ({ex!r}); expected moves omitted this run")
-    D.log_calls(log_rows, {k: v for k, v in live.items() if v["stage"] == "post"})
-    QA = qa.Report()
-    ok = D.check(QA, model, live)
-    if not ok:
-        log("direction: quality checks failed; keeping the last good file")
-        with open(os.path.join(HERE, "QUALITY_FAIL"), "a") as fh:
-            fh.write("\nDirection engine checks failed:\n")
-            for c in QA.critical_fail[:10]:
-                fh.write(f"- {c['name']}: {c['detail']}\n")
-        return False
-    out = summary(model, live, log_rows, px, now)
+    log_calls(log_rows, live, now)
+    record = SP.score(log_rows, markets, now)
+    out = summary(model, live, record)
     out["moves"] = mv
-    out["basis"] = dict(D.BASIS)
-    out["loading"] = sorted(store.loading)
     out["log"] = LOGLINES[-20:]
-    save(LOG_PATH, {"rows": log_rows[-2000:]})
+    save(LOG_PATH, {"version": 4, "rows": log_rows[-3000:]})
     save(OUT, out)
-    log(f"direction: published {len(live)} release(s), {out['proven']} proven rule(s), "
-        f"live record {out['live']['hits']}/{out['live']['calls']}")
-    return True
+    log(f"published {len(live)} release(s), {out['proven']} proven rule(s), live record {record['hits']}/{record['calls']}")
+    return out
 
 
 def main():
     try:
         run()
     except Exception:
-        log("direction: unexpected error; the last good file stays live")
+        log("model: unexpected error; the last good file stays live")
         traceback.print_exc()
     return 0
 
