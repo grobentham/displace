@@ -1179,6 +1179,10 @@ a:focus-visible,button:focus-visible{outline:2px solid #0071e3;outline-offset:2p
 .nqi-observed{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:4px 12px;border-top:1px solid var(--line);margin:12px 0 0;padding-top:10px;font-size:.87rem}
 .nqi-observed b{font-variant-numeric:tabular-nums;font-size:1rem}
 .nqi-note{margin:10px 0 0}.nqi-note a{color:var(--ac);text-decoration:underline;text-underline-offset:2px}
+.nqi-controls{display:flex;flex-wrap:wrap;align-items:center;gap:8px 16px;margin-top:8px}
+.nqi-controls input{max-width:100%;font:inherit;font-size:.85rem}
+#nqi-setup h2{font-size:1rem;margin:0}
+#nqi-setup[hidden],#nqi-remove[hidden]{display:none}
 .brief{background:#fff;border-radius:16px;padding:16px;margin-bottom:12px;border:1px solid var(--line)}
 .bh{display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin-bottom:8px}.bh b{font-size:1rem}.bh span{font-size:.78rem;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.04em}
 .bctx{margin:0 0 12px;font-size:.93rem;line-height:1.5}
@@ -2386,6 +2390,14 @@ svg.cd line.wick{animation:fadein .5s ease-out both}
     <header class="nhero"><div class="kick">News</div><h1 class="h-lg">Economic calendar</h1><p class="sub">Follow scheduled releases and official policy updates in New York time and yours. See reported figures and how they compare with earlier readings.</p><p class="ndis">For education only. Briefings describe reported data and historical reactions.</p></header>
     <div class="tool on" id="econcal">
         <div class="ec-next" id="ec-next"></div>
+        <section class="dk-card" id="nqi-setup" aria-labelledby="nqi-title" hidden>
+          <h2 id="nqi-title">Personal NQ study</h2>
+          <p class="nqi-note" id="nqi-status" role="status">Choose your study file to show historical NQ reactions on CPI and payrolls releases. The study stays in this browser.</p>
+          <div class="nqi-controls">
+            <input type="file" id="nqi-file" accept=".json,application/json" aria-label="Select NQ study file" aria-describedby="nqi-status">
+            <button type="button" class="pillbtn" id="nqi-remove" hidden>Remove study</button>
+          </div>
+        </section>
         <div class="dk-card dk-brief" id="dk-brief" hidden></div>
         <section class="dk-card" id="displace-news" aria-labelledby="dn-title">
           <div class="dn-head"><h2 id="dn-title">Latest economic news</h2><p class="dn-status" id="dn-status" role="status">Loading official updates…</p></div>
@@ -3623,20 +3635,36 @@ function compsHTML(e){var c=(e.components||[]).filter(function(x){return x.actua
   return'<div class="ecomp">'+(c.length>1?'<div class="ecomp-t"><div class="ecomp-r ecomp-h"><span>Detail</span><span>Actual</span><span>Previous</span></div>'+c.map(function(x){return'<div class="ecomp-r"><span>'+esc(x.label)+'</span><span><b>'+esc(x.actual||"–")+'</b></span><span>'+esc(x.previous||"–")+'</span></div>';}).join("")+'</div>':'')+
     (f.length?'<ul class="efacts">'+f.map(function(x){return'<li>'+esc(x)+'</li>';}).join("")+'</ul>':'')+'</div>';}
 /* NQ release reaction study */
-var NQ_IMPACT=null;
+var NQ_IMPACT=null, NQ_STORAGE="displace.personal-nq-study";
+function validImpactStat(stat){
+  return stat&&Number.isInteger(stat.count)&&stat.count>=2&&
+    [stat.lowerBps,stat.medianBps,stat.upperBps].every(Number.isFinite)&&
+    stat.lowerBps>=0&&stat.lowerBps<=stat.medianBps&&stat.medianBps<=stat.upperBps&&
+    (stat.controlBps===null||Number.isFinite(stat.controlBps)&&stat.controlBps>=0)&&
+    typeof stat.through==="string"&&/^\d{4}-\d{2}-\d{2}$/.test(stat.through);
+}
+function readImpact(raw){
+  var data=JSON.parse(raw), kinds=["cpi","payrolls"];
+  if(!data||data.version!==1||data.minutes!==15||!data.summaries||!data.observations||
+    typeof data.observations!=="object"||Array.isArray(data.observations)||
+    !kinds.some(function(kind){return validImpactStat(data.summaries[kind]);})||
+    !Object.keys(data.summaries).every(function(kind){return kinds.includes(kind)&&validImpactStat(data.summaries[kind]);})||
+    !Object.keys(data.observations).every(function(key){
+      return /^(cpi|payrolls):\d{4}-\d{2}-\d{2}T\d{2}:\d{2}$/.test(key)&&Number.isFinite(data.observations[key]);
+    }))throw new Error("Invalid NQ study");
+  return data;
+}
 function impactHTML(e,I){
   var kind=I&&I.k==="nfp"?"payrolls":I&&I.k==="cpi"?"cpi":null;
   if(!kind||e.cur!=="USD"||!e.time||e.impact==="holiday"||e.impact==="earnings"||!NQ_IMPACT)return"";
   var stat=NQ_IMPACT.summaries[kind];
-  if(!stat||!Number.isInteger(stat.count)||stat.count<2||
-    ![stat.lowerBps,stat.medianBps,stat.upperBps].every(Number.isFinite)||
-    stat.lowerBps<0||stat.lowerBps>stat.medianBps||stat.medianBps>stat.upperBps)return"";
+  if(!stat)return"";
   function percent(bps){return (Math.abs(bps)/100).toFixed(2)+"%";}
   function tile(name,value){return'<div><dt>'+name+'</dt><dd>'+value+'</dd></div>';}
   var through=/^\d{4}-\d{2}-\d{2}$/.test(stat.through||"")?new Date(stat.through+"T12:00:00Z"):null;
   var date=through&&!isNaN(through.getTime())?through.toLocaleDateString("en-US",{month:"short",day:"numeric",year:"numeric",timeZone:"UTC"}):"";
   var control=Number.isFinite(stat.controlBps)&&stat.controlBps>=0;
-  var observed=NQ_IMPACT.observations&&NQ_IMPACT.observations[kind+":"+e.date+"T"+e.time];
+  var observed=NQ_IMPACT.observations[kind+":"+e.date+"T"+e.time];
   var finished=instant(e.date,e.time)+NQ_IMPACT.minutes*60000<=Date.now();
   return '<section class="nqi" aria-label="Historical NQ reaction"><header><h4>Historical NQ reaction</h4><span>First '+NQ_IMPACT.minutes+' minutes after release</span></header>'+
     '<dl class="nqi-stats">'+tile("Median move",percent(stat.medianBps))+
@@ -3648,12 +3676,42 @@ function impactHTML(e,I){
     (control?" Comparable weekdays use the same time without either release.":"")+
     ' <a href="https://trading-commodity.com/download/nq/" target="_blank" rel="noopener noreferrer">NQ data source</a></p></section>';
 }
-function takeImpact(snapshot){
-  var data=snapshot.data();
-  if(data&&data.version===1&&data.minutes===15&&data.summaries&&typeof data.summaries==="object"){
-    NQ_IMPACT=data;
+function setupPersonalImpact(){
+  var panel=$("nqi-setup"),input=$("nqi-file"),status=$("nqi-status"),remove=$("nqi-remove");
+  var intro=status.textContent;
+  var ready="Study saved in this browser. Open a CPI or payrolls release to see its card.";
+  try{NQ_IMPACT=readImpact(localStorage.getItem(NQ_STORAGE));}catch(e){}
+  panel.hidden=!NQ_IMPACT&&new URLSearchParams(location.search).get("nq-study")!=="1";
+  remove.hidden=!NQ_IMPACT;
+  if(NQ_IMPACT)status.textContent=ready;
+  input.addEventListener("change",async function(){
+    var file=input.files[0];
+    if(!file)return;
+    input.disabled=remove.disabled=true;
+    try{
+      if(file.size>1024*1024)throw new Error("NQ study file too large");
+      var raw=await file.text(),data=readImpact(raw);
+      try{localStorage.setItem(NQ_STORAGE,raw);}catch(e){
+        status.textContent="This browser could not save the study. Enable site storage and try again.";
+        return;
+      }
+      NQ_IMPACT=data;
+      remove.hidden=false;
+      status.textContent=ready;
+      render();
+    }catch(e){status.textContent="Choose a valid Displace NQ study JSON file.";}
+    finally{input.value="";input.disabled=remove.disabled=false;}
+  });
+  remove.addEventListener("click",function(){
+    try{localStorage.removeItem(NQ_STORAGE);}catch(e){
+      status.textContent="This browser could not remove the saved study.";
+      return;
+    }
+    NQ_IMPACT=null;
+    remove.hidden=true;
+    status.textContent=intro;
     render();
-  }
+  });
 }
 function det(e){var I=info(e),impact=impactHTML(e,I);return'<div class="ecd">'+impact+briefHTML(e,!!impact)+compsHTML(e)+valsDetail(e)+(e.note?'<p class="ecd-n">'+esc(e.note)+'</p>':'')+(I?infoHTML(I):'')+'</div>';}
 function guide(){var g=$("ng-grid");if(!g||g._d===DATA)return;g._d=DATA;
@@ -3738,11 +3796,10 @@ document.addEventListener("click",function(e){var w=e.target.closest("#cw [data-
 /* clock card on the Time page */
 function clockCard(){var el=$("clk-news");if(!el)return;var td=todays(),nh=nextHigh();
   el.innerHTML='<div class="cnh"><b>News today</b><a href="#calendar">Full calendar ›</a></div>'+(td.length?td.map(function(e){return'<div class="cnr i-'+e.impact+'"><i></i><span>'+(e.time||"All day")+'</span><b>'+esc(e.title)+'</b></div>';}).join(""):'<p>No scheduled US releases today.</p>')+(nh?'<p class="cnx">Next high-impact: <b>'+esc(nh.title)+'</b>, '+dayLabel(nh.date)+' '+nh.time+' NY (in '+until(instant(nh.date,nh.time)-Date.now())+')</p>':'');}
-var live=false;ECON.on(render);ECON.on(clockCard);ECON.on(bar);setInterval(function(){render();clockCard();},60000);
+var live=false;setupPersonalImpact();ECON.on(render);ECON.on(clockCard);ECON.on(bar);setInterval(function(){render();clockCard();},60000);
 /* newer data from the site's database, when signed in */
 function take(s){var d=s&&(typeof s.data==="function"?s.data():s);if(!s||s.exists===false||!d)return;if(!(d.events&&d.events.length&&String(d.updated||"")>=String(BUNDLE.updated)))return;var th=String(d.through||d.events[d.events.length-1].date),ev=d.events.concat(BUNDLE.events.filter(function(e){return e.date>th;})).sort(function(x,y){return (x.date+(x.time||"00:00"))<(y.date+(y.time||"00:00"))?-1:1;}),nd={updated:d.updated,through:ev.length?ev[ev.length-1].date:th,events:ev};if(JSON.stringify(nd)!==JSON.stringify(DATA)){DATA=nd;emit();}}
 try{if(window.claude&&typeof window.claude.use==="function")window.claude.use("db").then(function(db){if(!db)return;var ref=db.doc("calendar/events");live=true;render();
-  if(window.claude.isStatic)db.doc("research/nq-impact").onSnapshot(takeImpact,function(){});
   var subbed=false;try{if(typeof ref.onSnapshot==="function"){ref.onSnapshot(take,function(){});subbed=true;}}catch(e){}
   function pull(){ref.get().then(take).catch(function(){});}
   if(!subbed){pull();setInterval(pull,15*60000);document.addEventListener("visibilitychange",function(){if(!document.hidden)pull();});}}).catch(function(){});}catch(e){}
