@@ -35,10 +35,13 @@ def fetch_day(day):
     """Rows of Nasdaq's calendar for one date, or None if it couldn't be read."""
     try:
         req = urllib.request.Request(URL.format(d=day.isoformat()), headers=HEAD)
-        with urllib.request.urlopen(req, timeout=20) as r:
+        with urllib.request.urlopen(req, timeout=8) as r:
             body = json.load(r)
-        rows = ((body or {}).get("data") or {}).get("rows")
-        return rows if isinstance(rows, list) else []
+        data = (body or {}).get("data")
+        if not isinstance(data, dict) or "rows" not in data:
+            return None
+        rows = data["rows"]
+        return [] if rows is None else rows if isinstance(rows, list) else None
     except Exception:
         return None
 
@@ -61,27 +64,34 @@ def event(tkr, day, sess, status, src, period="", url=""):
 
 def build(seed, today, days=35, fetch=fetch_day, pause=0.25, previous=()):
     """Return (events, ok). `previous` are the events from the last run, kept when the calendar is unreachable."""
-    out, got, tried = {}, 0, 0
+    out, fetched = {}, set()
+    failed_in_a_row = 0
+    incomplete = False
     d = today
     for _ in range(days):
         if d.weekday() < 5:
-            tried += 1
+            day = d.isoformat()
             rows = fetch(d)
-            if rows is not None:
-                got += 1
+            if rows is None:
+                incomplete = True
+                failed_in_a_row += 1
+                if failed_in_a_row >= 3:
+                    break
+            else:
+                failed_in_a_row = 0
+                fetched.add(day)
                 for r in rows:
                     t = (r.get("symbol") or "").upper()
                     if t in WATCH:
-                        out[(t, d.isoformat())] = event(t, d.isoformat(), session_of(r.get("time")), "scheduled", SRC_NQ, period=_period(r))
+                        out[(t, day)] = event(t, day, session_of(r.get("time")), "scheduled", SRC_NQ, period=_period(r))
             if pause:
                 time.sleep(pause)
         d += dt.timedelta(days=1)
-    ok = tried > 0 and got >= max(1, tried // 2)
-    if not ok:  # the calendar didn't answer: keep what we had for the same window
-        end = (today + dt.timedelta(days=days)).isoformat()
-        for e in previous:
-            if e.get("status") != "confirmed" and today.isoformat() <= e["date"] <= end:
-                out[(e["id"].split("-earn-")[1].upper(), e["date"])] = e
+    # Preserve prior dates on any day the provider could not refresh.
+    end = (today + dt.timedelta(days=days)).isoformat()
+    for e in previous:
+        if e.get("status") != "confirmed" and today.isoformat() <= e["date"] < end and e["date"] not in fetched:
+            out[(e["id"].split("-earn-")[1].upper(), e["date"])] = e
     for s in seed:
         t = s["t"].upper()
         if t not in WATCH:
@@ -92,6 +102,7 @@ def build(seed, today, days=35, fetch=fetch_day, pause=0.25, previous=()):
         if s.get("time"):
             out[(t, s["date"])]["time"] = s["time"]
     keep_from = (today - dt.timedelta(days=10)).isoformat()
+    ok = bool(fetched) and not incomplete
     return sorted((e for e in out.values() if e["date"] >= keep_from), key=lambda e: (e["date"], e["time"] or "99:99", e["title"])), ok
 
 
@@ -111,7 +122,7 @@ def run(root, today, log=print):
             prev = []
     events, ok = build(seed, today, previous=prev)
     if not ok:
-        log("earnings: Nasdaq calendar unreachable; kept earlier dates and company-confirmed dates")
+        log("earnings: Nasdaq calendar unavailable; kept earlier dates and company-confirmed dates")
     body = {"events": events}
     if prev != events or not os.path.exists(path):
         os.makedirs(os.path.dirname(path), exist_ok=True)

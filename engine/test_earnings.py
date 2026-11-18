@@ -30,6 +30,20 @@ def test_unreachable_keeps_previous_and_seed():
     ids = [e["id"] for e in ev]
     assert not ok and "20261210-earn-cost" in ids and "20261209-earn-avgo" in ids and "20260201-earn-aapl" not in ids
 
+def test_partial_outage_keeps_only_dates_that_could_not_be_refreshed():
+    previous = [
+        E.event("AAPL", "2026-11-18", "AMC", "scheduled", E.SRC_NQ),
+        E.event("COST", "2026-11-19", "AMC", "scheduled", E.SRC_NQ),
+        E.event("AMD", "2026-11-25", "AMC", "scheduled", E.SRC_NQ),
+    ]
+    seen = []
+    def fetch(day):
+        seen.append(day)
+        return [] if day == TODAY else None
+    events, ok = E.build([], TODAY, fetch=fetch, pause=0, previous=previous)
+    assert not ok and len(seen) == 4
+    assert {event["id"] for event in events} == {"20261119-earn-cost", "20261125-earn-amd"}
+
 def test_time_unknown_has_no_time():
     ev, _ = E.build([], TODAY, days=10, fetch=fake({"2026-11-19": [{"symbol": "AMD", "time": "time-not-supplied"}]}), pause=0)
     assert ev[0]["time"] == "" and ev[0]["session"] == ""

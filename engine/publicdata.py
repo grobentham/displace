@@ -15,15 +15,38 @@ ALFRED = "https://alfred.stlouisfed.org"
 BEA_CALENDAR = "https://www.bea.gov/news/schedule/ics/online-calendar-subscription.ics"
 STATS = {"calls": 0, "errors": 0, "failed": []}
 MAX_DOWNLOAD = 3 * 1024 * 1024
+FRED_AVAILABLE = True
+ALFRED_AVAILABLE = True
 
 
-def download(url):
-    request = Request(url, headers={"User-Agent": "Displace/1.0 (public economic data reader)"})
-    with urlopen(request, timeout=12) as response:
+def download(url, *, timeout=12, payload=None):
+    headers = {"User-Agent": "Displace/1.0 (public economic data reader)"}
+    if payload is not None:
+        headers["Content-Type"] = "application/json"
+    request = Request(url, data=payload, headers=headers)
+    with urlopen(request, timeout=timeout) as response:
         body = response.read(MAX_DOWNLOAD + 1)
     if len(body) > MAX_DOWNLOAD:
         raise ValueError("Download exceeded the size limit")
     return body
+
+
+def check_fred_access(today):
+    """Skip repeated requests to a host that timed out on this runner."""
+    global FRED_AVAILABLE, ALFRED_AVAILABLE
+    start = (today - dt.timedelta(days=90)).isoformat()
+    vintage = (today - dt.timedelta(days=1)).isoformat()
+    urls = (FRED + f"/graph/fredgraph.csv?id=DGS2&cosd={start}",
+            ALFRED + f"/graph/alfredgraph.csv?id=CPIAUCSL&cosd={start}&coed={vintage}&vintage_date={vintage}")
+
+    def reachable(url):
+        try:
+            return b"observation_date," in download(url, timeout=5)[:96].lower()
+        except (OSError, ValueError):
+            return False
+
+    with ThreadPoolExecutor(max_workers=2) as pool:
+        FRED_AVAILABLE, ALFRED_AVAILABLE = pool.map(reachable, urls)
 
 
 def read_csv(body, column, start, vintage=""):
@@ -53,6 +76,8 @@ def failed(label):
 @lru_cache(maxsize=256)
 def observations(series, start, vintage=""):
     """A current FRED series, or the series exactly as available on an ALFRED vintage date."""
+    if not (ALFRED_AVAILABLE if vintage else FRED_AVAILABLE):
+        return None
     params = {"id": series, "cosd": start}
     if vintage:
         params.update(vintage_date=vintage, coed=vintage)
@@ -113,6 +138,8 @@ class ReleaseCalendar(HTMLParser):
 
 @lru_cache(maxsize=64)
 def release_dates(release_id, start, end):
+    if not FRED_AVAILABLE:
+        return None
     query = urlencode({"rid": release_id, "vs": start, "ve": end, "view": "month"})
     STATS["calls"] += 1
     try:

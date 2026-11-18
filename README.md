@@ -12,6 +12,7 @@ Everything here is education. The engine never writes trade signals, entries, ta
 | `site/data/` | Data the site reads. **Written by the engine. Don't edit by hand**, except as noted below. |
 | `engine/engine.py` | Calendar, figures, and briefs (Python, no extra packages). |
 | `engine/publicdata.py` | Public FRED calendars and CSV downloads, plus dated ALFRED snapshots. |
+| `engine/agencies.py` | Keyless direct data from BLS, Census, BEA, Treasury, and the New York Fed. |
 | `engine/news.py` | Latest economic news from confirmed releases and central-bank feeds. |
 | `engine/schedule.json` | Release dates the engine knows about. **You add new dates here.** |
 | `engine/earnings_seed.json` | Earnings dates a company has announced itself (optional). The engine also reads Nasdaq's public earnings calendar for 24 Nasdaq-100 names and merges both into `site/data/calendar/earnings.json`. A company's own date always wins. |
@@ -44,7 +45,7 @@ GitHub Actions checks sources around the New York release windows on weekdays an
 - PCE: core and headline, spending and income
 - Jobless claims: initial claims, 4-week average and continuing claims
 
-The engine checks the reported period against ALFRED snapshots before and after the release. It publishes figures when the archived data confirms the update. Public archives can lag the issuing agency. The event details show the archive snapshot date.
+The engine checks the reported period against ALFRED snapshots when the archives are available. It can also check the direct BLS series and the dated Census or BEA releases. The event details show the source and the archive, publication, or verification date.
 
 **Analysis.** Each new number gets plain-English facts, for example:
 - "The core CPI m/m reading was the highest since Apr 2026."
@@ -61,7 +62,7 @@ Each also gets a recap and goes into the 12-month release stats.
 - the effective fed funds rate and the dollar
 - WTI oil, Chicago Fed financial conditions and mortgage rates
 
-Each shows 1-day, 1-week and 1-month moves and a sparkline chart. All are public-domain Fed, Treasury and EIA series.
+Each available series shows changes and a sparkline. Treasury yields and the effective federal funds rate can refresh directly from Treasury and the New York Fed when FRED is unavailable.
 
 **Briefs.** The engine writes:
 - **Daily brief:** latest close, today's releases with forecast and previous, anything just released, and what's in focus.
@@ -73,7 +74,7 @@ Each shows 1-day, 1-week and 1-month moves and a sparkline chart. All are public
 **Quality control.** Nothing is published without passing these checks.
 - **Plausibility:** every figure must fall inside a hard range for its series (core CPI m/m between −1.5% and 2%, jobless claims between 100K and 1.5M, and so on). Anything outside is rejected and never published.
 - **Confirmation:** a figure that's possible but extreme for its own history (more than 6 robust standard deviations from normal, for example −900K payrolls) is held until a later run sees the same number again. One bad data pull can't go live.
-- **Freshness:** a release figure must match the reported period and pass the before-and-after archive check.
+- **Freshness:** a figure must match the reported period and be available after the scheduled publication. Archived data also receives a before-and-after check.
 - **Text:** every generated sentence is checked for template errors and trade-call language ("buy", "you should", "will rise"). Failing text is dropped.
 - **Structure:** unique ids, valid dates and times, no weekend releases, no duplicates, no actuals on future dates, at least five weeks of calendar ahead, stats rows valid, market data in range and fresh (stale tiles are marked), reaction stats only shown with 6+ release days.
 - **Last good data:** if a critical check fails, the last good file stays live and a GitHub issue titled "Engine quality check failed" opens.
