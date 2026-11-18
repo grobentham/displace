@@ -1,72 +1,124 @@
-"""Daily gold closes (XAU/USD). FRED no longer carries a gold price, so this reads free public sources:
-Stooq's daily CSV first, Yahoo's chart API (COMEX gold futures) as a fallback. Results are cached in
-engine/cache/gold.json so each run only needs the latest days."""
+"""Daily closes for the markets the direction engine studies, from free public sources (no API keys).
+
+  gold  XAU/USD spot from Stooq; COMEX gold futures from Yahoo as a fallback
+  nq    Nasdaq-100 index (^NDX) from Stooq; Yahoo as a fallback
+
+Closes are cached in engine/cache/prices/<market>.json, which the workflow commits, so a run that cannot reach
+any source still has the full history and only the latest days are missing. Two different gold prices (spot vs
+futures) are never spliced together; the Nasdaq-100 index is the same number at both sources, so it is merged.
+"""
 import datetime as dt
 import json
 import os
 import urllib.request
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-CACHE = os.path.join(HERE, "cache", "gold.json")
+CACHE_DIR = os.path.join(HERE, "cache", "prices")
 UA = {"User-Agent": "Mozilla/5.0 (Displace data engine; +https://github.com/grobentham/displace)"}
+REFRESH_HOURS = 4
+_TRIED = set()  # markets already refreshed (or failed) in this run
 
 
 def _fetch(url, timeout=25):
     req = urllib.request.Request(url, headers=UA)
     with urllib.request.urlopen(req, timeout=timeout) as r:
-        return r.read().decode("utf-8", "replace")
+        return r.read(8 * 1024 * 1024).decode("utf-8", "replace")
 
 
-def stooq():
-    txt = _fetch("https://stooq.com/q/d/l/?s=xauusd&i=d")
+def parse_stooq(txt):
     out = {}
     for line in txt.splitlines()[1:]:
         p = line.split(",")
         if len(p) >= 5:
             try:
-                out[p[0]] = float(p[4])
+                dt.date.fromisoformat(p[0])
+                v = float(p[4])
             except ValueError:
-                pass
+                continue
+            if v > 0:
+                out[p[0]] = v
     return out
 
 
-def yahoo():
-    d = json.loads(_fetch("https://query1.finance.yahoo.com/v8/finance/chart/GC=F?range=15y&interval=1d"))
+def parse_yahoo(txt):
+    d = json.loads(txt)
     r = d["chart"]["result"][0]
+    tz = r.get("meta", {}).get("gmtoffset", 0)
     out = {}
     for t, c in zip(r["timestamp"], r["indicators"]["quote"][0]["close"]):
         if c:
-            out[dt.datetime.utcfromtimestamp(t).date().isoformat()] = float(c)
+            out[dt.datetime.utcfromtimestamp(t + tz).date().isoformat()] = float(c)
     return out
 
 
-SOURCES = [("Stooq XAU/USD", stooq), ("Yahoo COMEX gold", yahoo)]
+def stooq(symbol):
+    return lambda: parse_stooq(_fetch(f"https://stooq.com/q/d/l/?s={symbol}&i=d"))
+
+
+def yahoo(symbol):
+    return lambda: parse_yahoo(_fetch(f"https://query1.finance.yahoo.com/v8/finance/chart/{symbol}?range=20y&interval=1d"))
+
+
+MARKETS = {
+    # name: (sources [(label, fn)], splice: may different sources be merged into one history)
+    "gold": ([("Stooq XAU/USD", stooq("xauusd")), ("Yahoo COMEX gold", yahoo("GC=F"))], False),
+    "nq": ([("Stooq Nasdaq-100", stooq("^ndx")), ("Yahoo Nasdaq-100", yahoo("%5ENDX"))], True),
+}
+
+
+def _load(name):
+    try:
+        with open(os.path.join(CACHE_DIR, name + ".json")) as fh:
+            c = json.load(fh)
+        if isinstance(c.get("closes"), dict):
+            return c
+    except (OSError, ValueError):
+        pass
+    return {"source": "", "fetched": "", "closes": {}}
+
+
+def _save(name, cache):
+    os.makedirs(CACHE_DIR, exist_ok=True)
+    with open(os.path.join(CACHE_DIR, name + ".json"), "w") as fh:
+        json.dump(cache, fh, separators=(",", ":"), sort_keys=True)
+
+
+def closes(name, start, now=None, log=print, sources=None):
+    """([(date, close)] from `start`, source label), or (None, "") when there's no usable history. Never raises."""
+    srcs, splice = MARKETS[name]
+    srcs = sources or srcs
+    now = now or dt.datetime.now(dt.timezone.utc)
+    cache = _load(name)
+    fresh = False
+    try:
+        fresh = now - dt.datetime.fromisoformat(cache["fetched"]) < dt.timedelta(hours=REFRESH_HOURS)
+    except (TypeError, ValueError):
+        pass
+    if not fresh and name not in _TRIED:
+        _TRIED.add(name)
+        for label, fn in srcs:
+            try:
+                got = fn()
+            except Exception as e:  # network, format, rate limit
+                log(f"prices: {name} source {label} failed: {e}")
+                continue
+            if not got or len(got) < 50:
+                log(f"prices: {name} source {label} returned too little data")
+                continue
+            if cache["source"] and cache["source"] != label and not splice:
+                cache["closes"] = {}
+            cache["closes"].update(got)
+            cache["source"] = label
+            cache["fetched"] = now.isoformat(timespec="minutes")
+            _save(name, cache)
+            break
+    rows = sorted((d, v) for d, v in cache["closes"].items() if d >= start)
+    return (rows, cache["source"]) if len(rows) > 50 else (None, "")
 
 
 def gold(start, log=print):
-    """[(date, close)] from `start`, or None. Never raises."""
-    try:
-        cache = json.load(open(CACHE))
-    except Exception:
-        cache = {"source": "", "closes": {}}
-    got, src = None, ""
-    for name, fn in SOURCES:
-        try:
-            got = fn()
-            if got and len(got) > 50:
-                src = name
-                break
-        except Exception as e:  # network, format, rate limit
-            log(f"gold source {name} failed: {e}")
-            got = None
-    if got:
-        if cache.get("source") and cache["source"] != src:
-            cache["closes"] = {}  # don't splice two different gold prices together
-        cache["closes"].update(got)
-        cache["source"] = src
-        os.makedirs(os.path.dirname(CACHE), exist_ok=True)
-        with open(CACHE, "w") as fh:
-            json.dump(cache, fh, separators=(",", ":"), sort_keys=True)
-    closes = cache.get("closes") or {}
-    rows = sorted((d, v) for d, v in closes.items() if d >= start)
-    return (rows, cache.get("source", "")) if len(rows) > 50 else (None, "")
+    return closes("gold", start, log=log)
+
+
+def nq(start, log=print):
+    return closes("nq", start, log=log)
