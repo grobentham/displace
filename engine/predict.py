@@ -25,6 +25,8 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 
 import direction as D  # noqa: E402
+import moves as MV  # noqa: E402
+import nowcast  # noqa: E402
 import prices  # noqa: E402
 import quality as qa  # noqa: E402
 import series_store  # noqa: E402
@@ -86,7 +88,7 @@ def fingerprint(paths):
     for p in sorted(paths):
         c = load(p, {})
         h.update(os.path.basename(p).encode())
-        h.update(json.dumps(c.get("rows", c.get("closes")), sort_keys=True).encode())
+        h.update(json.dumps(c.get("rows", c.get("closes", c.get("past"))), sort_keys=True).encode())
     return h.hexdigest()[:16]
 
 
@@ -95,7 +97,7 @@ def input_files():
     for base in (series_store.CACHE_DIR, prices.CACHE_DIR):
         if os.path.isdir(base):
             out += [os.path.join(base, f) for f in os.listdir(base) if f.endswith(".json")]
-    return out
+    return out + [nowcast.CACHE]
 
 
 def release_close(e):
@@ -123,10 +125,39 @@ def scenarios(model):
     """Historical record by surprise bucket for every release x market (proven or not)."""
     out = {}
     for k, km in model.get("kinds", {}).items():
-        out[k] = {"name": NAMES.get(k, k), "metric": km["metric"], "n": km["n"], "since": km["since"], "assets": {}}
+        out[k] = {"name": NAMES.get(k, k), "metric": km["metric"], "n": km["n"], "since": km["since"],
+                  "basis": km.get("basis", "trend"), "assets": {}}
         for a, m in km["assets"].items():
             out[k]["assets"][a] = {b: {"n": c["n"], "up": c["pUp"], "med": c["med"], "q1": c["q1"], "q3": c["q3"]}
                                    for b, c in m["cells"].items() if c["n"]}
+    return out
+
+
+def expectations(events, kind_of, title_period, log=log):
+    """Cleveland Fed nowcasts as the expected core CPI / core PCE: past releases for training, upcoming ones
+    from the latest nowcast for that month. Kinds with too little nowcast history stay on the trend basis."""
+    past, latest = nowcast.load(log=log)
+    records = dict(past)
+    for e in events:
+        k = kind_of(e)
+        if k in ("cpi", "pce") and (k, e["date"]) not in records:
+            # upcoming, or released before the Cleveland Fed marked it: the latest nowcast for that month
+            per = title_period(e, k)
+            if per and (k, per.strftime("%Y-%m")) in latest:
+                records[(k, e["date"])] = latest[(k, per.strftime("%Y-%m"))]
+    D.BASIS.clear()
+    for k in ("cpi", "pce"):
+        if sum(1 for kk, _ in past if kk == k) >= 60:
+            D.BASIS[k] = "nowcast"
+    return records
+
+
+def release_days():
+    """{kind: [release dates]} from the first-release history (the date each figure was published)."""
+    out = {}
+    for k, cfg in D.MODELS.items():
+        rows = series_store.load(cfg["head"][0], True)["rows"]
+        out[k] = sorted({r[2] for r in rows if r[2]})
     return out
 
 
@@ -184,14 +215,15 @@ def run(now=None, source=None, budget=series_store.BUDGET_SECONDS):
     added = series_store.extend_from_events(events, D.MODELS, RELEASES, kind_of, E.title_period, D.figure, log=log)
     if added:
         log(f"history: appended {added} confirmed figure(s) from the calendar")
+    records = expectations(events, kind_of, E.title_period)
     fp = fingerprint(input_files())
     refit = (not cached.get("model") or cached.get("fingerprint") != fp or cached.get("day") != today.isoformat())
     if refit:
         log("direction: fitting (inputs changed)" if cached.get("model") else "direction: first fit")
         t0 = dt.datetime.now()
-        # Surprises are measured against each release's recent trend, both in training and live. Free consensus
-        # history only goes back about a year, so mixing it in would put live surprises on a different scale.
-        model, px = D.fit(store, None, {}, today, log=log,
+        # Core CPI and core PCE surprises are measured against the Cleveland Fed nowcast (history since 2013),
+        # the other releases against their recent trend; the same basis is used live.
+        model, px = D.fit(store, None, records, today, log=log,
                           live_rows=[r for r in log_rows if "hit" in r], price_fns=price_fns)
         log(f"direction: fit took {(dt.datetime.now() - t0).seconds}s")
         if model and model.get("kinds"):
@@ -212,7 +244,17 @@ def run(now=None, source=None, budget=series_store.BUDGET_SECONDS):
     if fp_before != fp:
         log("direction: history or prices updated this run")
 
-    live = live_window(D.apply(model, events, kind_of, today), events, now)
+    live = live_window(D.apply(model, events, kind_of, today, records=records), events, now)
+    # expected move size for gold and the Nasdaq-100 on each release day
+    mv = {}
+    try:
+        cut = today.isoformat() if now.time() < SETTLED else "9999"
+        rows = {a: [r for r in prices.ranges(a, "2007-01-01") if r[0] < cut] for a in ("gold", "nq")}
+        mv = MV.fit({a: r for a, r in rows.items() if r}, release_days(), today)
+        for v in live.values():
+            v["move"] = MV.for_event(mv, v["kind"])
+    except Exception as ex:
+        log(f"moves: failed ({ex!r}); expected moves omitted this run")
     D.log_calls(log_rows, {k: v for k, v in live.items() if v["stage"] == "post"})
     QA = qa.Report()
     ok = D.check(QA, model, live)
@@ -224,6 +266,8 @@ def run(now=None, source=None, budget=series_store.BUDGET_SECONDS):
                 fh.write(f"- {c['name']}: {c['detail']}\n")
         return False
     out = summary(model, live, log_rows, px, now)
+    out["moves"] = mv
+    out["basis"] = dict(D.BASIS)
     out["loading"] = sorted(store.loading)
     out["log"] = LOGLINES[-20:]
     save(LOG_PATH, {"rows": log_rows[-2000:]})
