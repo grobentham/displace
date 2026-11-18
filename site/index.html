@@ -1168,6 +1168,17 @@ a:focus-visible,button:focus-visible{outline:2px solid #0071e3;outline-offset:2p
 .ecd-v{margin:0 0 12px;font-size:.9rem;background:#fff;border-radius:12px;padding:10px 14px}
 @media (max-width:640px){.ecmain{grid-template-columns:62px 12px 1fr 14px}.ecv{grid-column:2/4;grid-row:2;grid-template-columns:repeat(3,1fr);text-align:left;margin-top:4px}.ecv:empty{display:none}}
 .ndis{font-size:.85rem;color:var(--muted);margin-top:10px}
+.nqi{background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px;margin:0 0 12px}
+.nqi header{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:4px 12px;margin-bottom:12px}
+.nqi h4{font-size:1rem;letter-spacing:-.01em;margin:0}
+.nqi header span,.nqi-note{color:var(--muted);font-size:.81rem;line-height:1.45}
+.nqi-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,144px),1fr));gap:8px;margin:0}
+.nqi-stats div{background:var(--gray);border-radius:12px;padding:10px 12px;min-width:0}
+.nqi-stats dt{font-size:.77rem;color:var(--muted);margin:0 0 3px}
+.nqi-stats dd{font-size:1.12rem;font-weight:680;font-variant-numeric:tabular-nums;letter-spacing:-.02em;margin:0}
+.nqi-observed{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:4px 12px;border-top:1px solid var(--line);margin:12px 0 0;padding-top:10px;font-size:.87rem}
+.nqi-observed b{font-variant-numeric:tabular-nums;font-size:1rem}
+.nqi-note{margin:10px 0 0}.nqi-note a{color:var(--ac);text-decoration:underline;text-underline-offset:2px}
 .brief{background:#fff;border-radius:16px;padding:16px;margin-bottom:12px;border:1px solid var(--line)}
 .bh{display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin-bottom:8px}.bh b{font-size:1rem}.bh span{font-size:.78rem;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.04em}
 .bctx{margin:0 0 12px;font-size:.93rem;line-height:1.5}
@@ -3611,7 +3622,40 @@ function infoHTML(I){return'<div class="ecd-g"><div><h5>What it is</h5><p>'+esc(
 function compsHTML(e){var c=(e.components||[]).filter(function(x){return x.actual||x.previous;});var f=e.facts||[];if(c.length<2&&!f.length)return"";
   return'<div class="ecomp">'+(c.length>1?'<div class="ecomp-t"><div class="ecomp-r ecomp-h"><span>Detail</span><span>Actual</span><span>Previous</span></div>'+c.map(function(x){return'<div class="ecomp-r"><span>'+esc(x.label)+'</span><span><b>'+esc(x.actual||"–")+'</b></span><span>'+esc(x.previous||"–")+'</span></div>';}).join("")+'</div>':'')+
     (f.length?'<ul class="efacts">'+f.map(function(x){return'<li>'+esc(x)+'</li>';}).join("")+'</ul>':'')+'</div>';}
-function det(e){var I=info(e);return'<div class="ecd">'+briefHTML(e)+compsHTML(e)+valsDetail(e)+(e.note?'<p class="ecd-n">'+esc(e.note)+'</p>':'')+(I?infoHTML(I):'')+'</div>';}
+/* NQ release reaction study */
+var NQ_IMPACT=null;
+function impactHTML(e,I){
+  var kind=I&&I.k==="nfp"?"payrolls":I&&I.k==="cpi"?"cpi":null;
+  if(!kind||e.cur!=="USD"||!e.time||e.impact==="holiday"||e.impact==="earnings"||!NQ_IMPACT)return"";
+  var stat=NQ_IMPACT.summaries[kind];
+  if(!stat||!Number.isInteger(stat.count)||stat.count<2||
+    ![stat.lowerBps,stat.medianBps,stat.upperBps].every(Number.isFinite)||
+    stat.lowerBps<0||stat.lowerBps>stat.medianBps||stat.medianBps>stat.upperBps)return"";
+  function percent(bps){return (Math.abs(bps)/100).toFixed(2)+"%";}
+  function tile(name,value){return'<div><dt>'+name+'</dt><dd>'+value+'</dd></div>';}
+  var through=/^\d{4}-\d{2}-\d{2}$/.test(stat.through||"")?new Date(stat.through+"T12:00:00Z"):null;
+  var date=through&&!isNaN(through.getTime())?through.toLocaleDateString("en-US",{month:"short",day:"numeric",year:"numeric",timeZone:"UTC"}):"";
+  var control=Number.isFinite(stat.controlBps)&&stat.controlBps>=0;
+  var observed=NQ_IMPACT.observations&&NQ_IMPACT.observations[kind+":"+e.date+"T"+e.time];
+  var finished=instant(e.date,e.time)+NQ_IMPACT.minutes*60000<=Date.now();
+  return '<section class="nqi" aria-label="Historical NQ reaction"><header><h4>Historical NQ reaction</h4><span>First '+NQ_IMPACT.minutes+' minutes after release</span></header>'+
+    '<dl class="nqi-stats">'+tile("Median move",percent(stat.medianBps))+
+    tile("Middle 50% of moves",percent(stat.lowerBps)+"–"+percent(stat.upperBps))+
+    (control?tile("Comparable weekdays",percent(stat.controlBps)):"")+'</dl>'+
+    (finished&&Number.isFinite(observed)?'<p class="nqi-observed"><span>Observed 15-minute move</span><b>'+
+      (observed<0?"−":observed>0?"+":"")+percent(observed)+'</b></p>':"")+
+    '<p class="nqi-note">'+stat.count+' releases'+(date?" through "+esc(date):"")+'. Move sizes include rises and falls.'+
+    (control?" Comparable weekdays use the same time without either release.":"")+
+    ' <a href="https://trading-commodity.com/download/nq/" target="_blank" rel="noopener noreferrer">NQ data source</a></p></section>';
+}
+function takeImpact(snapshot){
+  var data=snapshot.data();
+  if(data&&data.version===1&&data.minutes===15&&data.summaries&&typeof data.summaries==="object"){
+    NQ_IMPACT=data;
+    render();
+  }
+}
+function det(e){var I=info(e),impact=impactHTML(e,I);return'<div class="ecd">'+impact+briefHTML(e,!!impact)+compsHTML(e)+valsDetail(e)+(e.note?'<p class="ecd-n">'+esc(e.note)+'</p>':'')+(I?infoHTML(I):'')+'</div>';}
 function guide(){var g=$("ng-grid");if(!g||g._d===DATA)return;g._d=DATA;
   var nx={};list().forEach(function(e){var I=info(e);if(I&&!nx[I.k]&&e.date>=nyToday())nx[I.k]=e;});
   g.innerHTML=NI.filter(function(I){return I.k!=="half";}).map(function(I){var e=nx[I.k];return'<details class="ngc i-'+I.imp+'"><summary><span class="eci"><i></i></span><span class="ngt"><b>'+esc(I.n)+'</b><small>'+esc(I.when)+'</small></span><span class="ngn">'+(e?"Next: "+esc(dayLabel(e.date))+(e.time?" · "+e.time:""):"")+'</span><span class="ecx" aria-hidden="true">›</span></summary>'+infoHTML(I)+'</details>';}).join("");}
@@ -3629,8 +3673,8 @@ function scen(e){var I=info(e);if(!I||!SCK[I.k])return null;var b=SC[SCK[I.k]],x
   function m(d,o){o=o||{};return{usd:o.usd||d.usd,gold:o.gold||d.gold,nq:o.nq||d.nq,why:o.why||d.why};}
   return{hotL:(x.hot&&x.hot.label)||b.hot,coolL:(x.cool&&x.cool.label)||b.cool,h:m(b.h,x.hot),c:m(b.c,x.cool),ctx:x.context||"",asof:x.asof||"",cb:SCK[I.k]==="cb"};}
 function arr(v){return v==="up"?'<strong class="ar bu">▲ Up</strong>':v==="down"?'<strong class="ar bd">▼ Down</strong>':'<strong class="ar bmx">↕ Mixed</strong>';}
-function briefHTML(e){var S=scen(e);if(!S)return"";var f=e.forecast?" ("+esc(e.forecast)+")":"",past=e.time&&instant(e.date,e.time)<Date.now();
-  function col(L,o,cls){return'<div class="bs '+cls+'"><b>'+esc(L)+f+'</b><div class="bm3"><span>'+(S.cb?"USD index":"USD")+arr(o.usd)+'</span><span>Gold'+arr(o.gold)+'</span><span>NQ'+arr(o.nq)+'</span></div><p>'+esc(o.why)+'</p></div>';}
+function briefHTML(e,hasImpact){var S=scen(e);if(!S)return"";var f=e.forecast?" ("+esc(e.forecast)+")":"",past=e.time&&instant(e.date,e.time)<Date.now();
+  function col(L,o,cls){return'<div class="bs '+cls+'"><b>'+esc(L)+f+'</b><div class="bm3"><span>'+(S.cb?"USD index":"USD")+arr(o.usd)+'</span><span>Gold'+arr(o.gold)+'</span>'+(hasImpact?"":'<span>NQ'+arr(o.nq)+'</span>')+'</div><p>'+esc(o.why)+'</p></div>';}
   var out='<div class="brief"><div class="bh"><b>'+(past&&e.actual?"What happened":"Briefing")+'</b><span>'+(S.ctx?"AI briefing"+(S.asof?" · "+esc(dayLabel(S.asof)):""):"Typical first reaction")+'</span></div>';
   if(past&&e.actual){var c=cmp(e);out+='<p class="bwh"><b>'+esc(e.actual)+'</b> vs '+(e.forecast?esc(e.forecast)+" forecast":"no published forecast")+(c==="up"?" · above forecast":c==="dn"?" · below forecast":c==="eq"?" · in line":"")+'.'+(e.reaction?" "+esc(e.reaction):"")+(e.rsrc?' <small>Source: '+esc(e.rsrc)+'</small>':'')+'</p>'+(e.recap?(isPro()?'<div class="brecap"><b>Release recap · Pro</b><p>'+esc(e.recap)+'</p></div>':'<div class="bask lock"><span><b>Release recap</b>: what the number meant and how markets took it · Pro</span><button type="button" class="pillbtn" data-pro-go>See Pro</button></div>'):'');}
   if(S.ctx)out+='<p class="bctx">'+esc(S.ctx)+'</p>';
@@ -3698,6 +3742,7 @@ var live=false;ECON.on(render);ECON.on(clockCard);ECON.on(bar);setInterval(funct
 /* newer data from the site's database, when signed in */
 function take(s){var d=s&&(typeof s.data==="function"?s.data():s);if(!s||s.exists===false||!d)return;if(!(d.events&&d.events.length&&String(d.updated||"")>=String(BUNDLE.updated)))return;var th=String(d.through||d.events[d.events.length-1].date),ev=d.events.concat(BUNDLE.events.filter(function(e){return e.date>th;})).sort(function(x,y){return (x.date+(x.time||"00:00"))<(y.date+(y.time||"00:00"))?-1:1;}),nd={updated:d.updated,through:ev.length?ev[ev.length-1].date:th,events:ev};if(JSON.stringify(nd)!==JSON.stringify(DATA)){DATA=nd;emit();}}
 try{if(window.claude&&typeof window.claude.use==="function")window.claude.use("db").then(function(db){if(!db)return;var ref=db.doc("calendar/events");live=true;render();
+  if(window.claude.isStatic)db.doc("research/nq-impact").onSnapshot(takeImpact,function(){});
   var subbed=false;try{if(typeof ref.onSnapshot==="function"){ref.onSnapshot(take,function(){});subbed=true;}}catch(e){}
   function pull(){ref.get().then(take).catch(function(){});}
   if(!subbed){pull();setInterval(pull,15*60000);document.addEventListener("visibilitychange",function(){if(!document.hidden)pull();});}}).catch(function(){});}catch(e){}
