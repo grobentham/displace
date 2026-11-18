@@ -98,6 +98,8 @@ def run(tmp, now, upto):
     fredapi.release_dates = lambda rid, s, e="9999-12-31": [x for x in REL_DATES.get(rid, []) if s <= x <= e] if rid in REL_DATES else None
     earnings = importlib.import_module("earnings")
     earnings.run = lambda *args: None
+    consensus = importlib.import_module("consensus")
+    consensus.apply = lambda *args, **kw: 0  # keep the live ForexFactory feed out of the fake world
     eng = importlib.import_module("engine")
     eng.main()
     sys.path.pop(0)
@@ -214,6 +216,8 @@ def edge_tests():
     before = json.load(open(os.path.join(tmp, "site", "data", "calendar", "events.json")))["events"]
     earnings = importlib.import_module("earnings")
     earnings.run = lambda *args: None
+    consensus = importlib.import_module("consensus")
+    consensus.apply = lambda *args, **kw: 0  # keep the live ForexFactory feed out of the fake world
     eng = importlib.import_module("engine")
     eng.main()
     sys.path.pop(0)
