@@ -1,5 +1,5 @@
 {
- "asof": "2026-11-18T09:59-05:00",
+ "asof": "2026-11-18T10:08-05:00",
  "modelAsof": "2026-11-18",
  "version": 2,
  "assets": {
@@ -3943,14 +3943,11 @@
   }
  },
  "basis": {
-  "cpi": "nowcast"
+  "cpi": "nowcast",
+  "pce": "nowcast"
  },
  "loading": [],
  "log": [
-  "nowcast: 158 past CPI nowcasts, 10 past PCE nowcasts",
-  "direction: fitting (inputs changed)",
-  "direction: not enough history for gdp",
-  "direction: fit took 7s",
-  "direction: history or prices updated this run"
+  "nowcast: 158 past CPI nowcasts, 157 past PCE nowcasts"
  ]
 }
