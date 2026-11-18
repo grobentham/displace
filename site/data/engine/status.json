@@ -1,11 +1,11 @@
 {
- "lastRun": "2026-11-17T23:29-05:00",
+ "lastRun": "2026-11-18T00:09-05:00",
  "source": "direct public agencies",
  "fredCalls": 1,
  "fred": true,
  "quality": {
-  "passed": 18,
-  "total": 18,
+  "passed": 11,
+  "total": 11,
   "held": 0,
   "rejected": 0,
   "critical": 0
@@ -13,14 +13,12 @@
  "fredErrors": 0,
  "calendarThrough": "2027-03-31",
  "events": 86,
- "upcoming": 81,
+ "upcoming": 80,
  "warnings": [],
  "log": [
   "Public FRED downloads unavailable; using direct agency sources",
   "ALFRED archive unavailable; using direct release data where available",
-  "engine run 2026-11-17T23:29-05:00 using direct public agencies",
-  "actual 20261117-retail-sales-oct 0.2%",
-  "calendar saved",
-  "quality: 18/18 checks passed, 0 held, 0 rejected"
+  "engine run 2026-11-18T00:09-05:00 using direct public agencies",
+  "quality: 11/11 checks passed, 0 held, 0 rejected"
  ]
 }
