@@ -1,5 +1,5 @@
 {
- "asof": "2026-11-18T13:28-05:00",
+ "asof": "2026-11-18T13:34-05:00",
  "version": 4,
  "assets": {
   "gold": "Gold, close",
@@ -3343,7 +3343,7 @@
   "fomc": {
    "name": "The Fed's rate decision",
    "metric": "Interest Rate",
-   "n": 14,
+   "n": 135,
    "since": "2010",
    "basis": "consensus",
    "assets": {
@@ -3378,71 +3378,129 @@
    },
    "decision": {
     "gold": {
-     "hike": {
-      "n": 5,
-      "up": 0.6,
-      "med": 0.689
-     },
      "hold": {
-      "n": 8,
-      "up": 0.25,
-      "med": -0.896
+      "n": 103,
+      "up": 0.563,
+      "med": 0.085
+     },
+     "hike": {
+      "n": 21,
+      "up": 0.762,
+      "med": 0.447
      },
      "cut": {
-      "n": 1,
-      "up": 1.0,
-      "med": 1.102
+      "n": 11,
+      "up": 0.455,
+      "med": -0.271
      }
     },
     "nq": {
-     "hike": {
-      "n": 5,
-      "up": 0.2,
-      "med": -0.636
-     },
      "hold": {
-      "n": 8,
+      "n": 104,
       "up": 0.625,
-      "med": 0.249
+      "med": 0.286
+     },
+     "hike": {
+      "n": 21,
+      "up": 0.429,
+      "med": -0.054
      },
      "cut": {
-      "n": 1,
-      "up": 1.0,
-      "med": 1.541
+      "n": 10,
+      "up": 0.4,
+      "med": -0.106
      }
     },
     "usd": {
-     "hike": {
-      "n": 5,
-      "up": 0.0,
-      "med": -0.227
-     },
      "hold": {
-      "n": 8,
-      "up": 0.375,
-      "med": -0.121
+      "n": 104,
+      "up": 0.481,
+      "med": -0.008
+     },
+     "hike": {
+      "n": 20,
+      "up": 0.25,
+      "med": -0.075
      },
      "cut": {
-      "n": 1,
-      "up": 0.0,
-      "med": -0.739
+      "n": 10,
+      "up": 0.3,
+      "med": -0.02
      }
     },
     "y2": {
-     "hike": {
-      "n": 5,
-      "up": 0.2,
-      "med": -8.0
-     },
      "hold": {
-      "n": 8,
-      "up": 0.875,
-      "med": 3.5
+      "n": 87,
+      "up": 0.46,
+      "med": -1.0
+     },
+     "hike": {
+      "n": 20,
+      "up": 0.4,
+      "med": -3.0
      },
      "cut": {
+      "n": 10,
+      "up": 0.6,
+      "med": 1.5
+     }
+    },
+    "gold15m": {
+     "hike": {
       "n": 1,
       "up": 0.0,
-      "med": -6.0
+      "med": -1.068
+     },
+     "hold": {
+      "n": 1,
+      "up": 0.0,
+      "med": -0.168
+     }
+    },
+    "gold2h": {
+     "hold": {
+      "n": 12,
+      "up": 0.5,
+      "med": 0.02
+     },
+     "cut": {
+      "n": 6,
+      "up": 0.333,
+      "med": -0.726
+     },
+     "hike": {
+      "n": 1,
+      "up": 0.0,
+      "med": -1.994
+     }
+    },
+    "nq15m": {
+     "hike": {
+      "n": 1,
+      "up": 0.0,
+      "med": -0.032
+     },
+     "hold": {
+      "n": 1,
+      "up": 0.0,
+      "med": -0.154
+     }
+    },
+    "nq2h": {
+     "hold": {
+      "n": 12,
+      "up": 0.5,
+      "med": 0.117
+     },
+     "cut": {
+      "n": 6,
+      "up": 0.667,
+      "med": 0.087
+     },
+     "hike": {
+      "n": 1,
+      "up": 0.0,
+      "med": -0.749
      }
     }
    }
@@ -5302,6 +5360,6 @@
  "log": [
   "tv: 3 month(s) refreshed, 3589 releases with a consensus surprise",
   "markets: gold, nq, usd, y2, gold15m, gold2h, nq15m, nq2h",
-  "model: fit in 2s; proven: inflation:nq2h, labor:y2"
+  "model: fit in 4s; proven: inflation:nq2h, labor:y2"
  ]
 }
