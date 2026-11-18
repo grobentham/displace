@@ -1,0 +1,48 @@
+name: Scheduler
+
+# Backup for GitHub's cron schedule, which can be late or not fire at all on new repositories.
+# Waits for the next engine slot (taken from engine.yml), starts the Engine workflow, then restarts itself.
+# Uses only the built-in GITHUB_TOKEN; no keys.
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "17 */6 * * *"   # restarts the chain if it ever stops
+  push:
+    branches: [main]
+    paths: [".github/workflows/scheduler.yml", "engine/scheduler.py"]
+
+permissions:
+  actions: write
+  contents: read
+
+concurrency:
+  group: scheduler
+  cancel-in-progress: true
+
+jobs:
+  wait-and-dispatch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 340
+    steps:
+      - uses: actions/checkout@v5
+      - name: Work out the next slot
+        id: plan
+        run: |
+          python3 engine/scheduler.py .github/workflows/engine.yml | tee plan.txt
+          echo "wait=$(sed -n 's/.*wait=\([0-9]*\).*/\1/p' plan.txt)" >> "$GITHUB_OUTPUT"
+          echo "fire=$(sed -n 's/.*fire=\([a-z]*\).*/\1/p' plan.txt)" >> "$GITHUB_OUTPUT"
+      - name: Wait
+        run: sleep ${{ steps.plan.outputs.wait }}
+      - name: Start the engine (unless it ran in the last 20 minutes)
+        if: steps.plan.outputs.fire == 'yes'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          since=$(date -u -d '20 minutes ago' +%Y-%m-%dT%H:%M:%SZ)
+          recent=$(gh run list --workflow engine.yml --branch main --limit 5 --json createdAt,event --jq "[.[] | select(.createdAt > \"$since\" and .event != \"pull_request\")] | length")
+          if [ "$recent" = "0" ]; then gh workflow run engine.yml --ref main && echo "engine started"; else echo "engine already ran recently"; fi
+      - name: Wait for the next slot
+        if: ${{ !cancelled() }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run scheduler.yml --ref main

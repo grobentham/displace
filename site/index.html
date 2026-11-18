@@ -3768,8 +3768,10 @@ function biasOf(v,a,side){var c=v&&v[side==="inline"?"__":side]&&v[side][a];
   if(c&&c.dir)return{d:c.dir==="up"?"long":"short",p:c.p,t:"tested",n:c.bt?c.bt[1]:c.n};
   var S=DIR&&DIR.scenarios&&DIR.scenarios[v.kind],x=S&&S.assets&&S.assets[a]&&S.assets[a][side];
   if(!x||x.n<15)return{d:"flat",t:"none",why:"too few past releases"};
-  if(x.up>=0.6)return{d:"long",p:x.up,t:"hist",n:x.n};
-  if(x.up<=0.4)return{d:"short",p:1-x.up,t:"hist",n:x.n};
+  var zs=(Math.abs(x.up-0.5)*x.n)/Math.sqrt(x.n/4);  // how far from a coin flip, in standard errors
+  if(x.up>=0.6&&zs>=1.65)return{d:"long",p:x.up,t:"hist",n:x.n};
+  if(x.up<=0.4&&zs>=1.65)return{d:"short",p:1-x.up,t:"hist",n:x.n};
+  if(Math.abs(x.up-0.5)>=0.1)return{d:"flat",p:Math.max(x.up,1-x.up),t:"hist",n:x.n,why:"could be chance"};
   return{d:"flat",p:Math.max(x.up,1-x.up),t:"hist",n:x.n,why:"no clear side"};}
 function biasCell(b){var L={long:"LONG",short:"SHORT",flat:"FLAT"}[b.d];
   var sub=b.t==="tested"?pc(b.p)+' · tested on '+b.n+' unseen releases':b.t==="hist"?(b.d==="flat"?esc(b.why)+' ('+pc(b.p)+')':pc(b.p)+' of '+b.n+' past releases · not proven'):esc(b.why||"");
@@ -3777,7 +3779,7 @@ function biasCell(b){var L={long:"LONG",short:"SHORT",flat:"FLAT"}[b.d];
   return'<td><span class="bx '+b.d+(b.t==="tested"?" ok":"")+(b.same?" same":"")+'">'+L+'</span><small>'+sub+'</small></td>';}
 function biasBlock(v){if(!v)return"";var rows=v.stage==="post"?[[v.bin,v.bin==="hot"?"Released: hotter / stronger than expected":v.bin==="cool"?"Released: cooler / weaker than expected":"Released: in line with consensus"]]:[["hot","If hotter / stronger than expected"],["cool","If cooler / weaker than expected"]];
   var A=BIASM.filter(function(a){return DIR.assets&&DIR.assets[a];});if(!A.length)return"";
-  return'<div class="bias"><div class="sm-h"><b>Trade bias</b><span>LONG or SHORT for each outcome. Solid = passed the out-of-sample tests; outlined = the historical record only (60%+ of past releases one way), not proven. FLAT = no reliable side.</span></div><div class="sm-w"><table><tr><th></th>'+A.map(function(a){return'<th>'+BIASN[a]+'</th>';}).join("")+'</tr>'+
+  return'<div class="bias"><div class="sm-h"><b>Trade bias</b><span>LONG or SHORT for each outcome. Solid = passed the out-of-sample tests; outlined = the historical record only (60%+ of past releases one way, and unlikely to be chance), not proven. FLAT = no reliable side.</span></div><div class="sm-w"><table><tr><th></th>'+A.map(function(a){return'<th>'+BIASN[a]+'</th>';}).join("")+'</tr>'+
    rows.map(function(r){return'<tr><th>'+r[1]+'</th>'+A.map(function(a){var b=biasOf(v,a,r[0]);
      if(v.stage==="pre"&&b.t==="hist"&&b.d!=="flat"){var o=biasOf(v,a,r[0]==="hot"?"cool":"hot");if(o.d===b.d)b.same=true;}
      return biasCell(b);}).join("")+'</tr>';}).join("")+'</table></div></div>';}

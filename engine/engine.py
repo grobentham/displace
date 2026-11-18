@@ -185,7 +185,11 @@ def auto_events():
                 out.append(make_event(published.date(), key, {**cfg, "time": published.strftime("%H:%M")}, title, auto="public"))
             continue
         rid = next((i for n, i in names.items() if re.search(cfg["fred"], n)), None) or cfg["rid"]
-        dates = SOURCE.release_dates(rid, start, end)
+        if key == "fomc":  # the Fed's own meeting calendar first; FRED's release calendar as a fallback
+            fed = [d.isoformat() for d, _ in agencies.fomc_meetings() if start <= d.isoformat() <= end]
+            dates = fed or SOURCE.release_dates(rid, start, end)
+        else:
+            dates = SOURCE.release_dates(rid, start, end)
         if dates is None:
             continue
         answered.add(key)
@@ -732,7 +736,14 @@ def market_tiles():
     for key, label, series, kind in MARKETS:
         start = (TODAY - dt.timedelta(days=400)).isoformat()
         obs = SOURCE.observations(series, start)
-        if not obs and not fredapi.KEY:
+        if series in ("DGS2", "DGS10", "T10Y2Y", "DFF"):
+            # Treasury and the New York Fed publish a day before FRED; merge so every section shows the same latest value
+            direct = agencies.market_observations(series, start, TODAY)
+            if direct:
+                merged = {o[0]: o for o in (obs or [])}
+                merged.update({o[0]: (o[0], float(o[1]), o[2]) for o in direct})
+                obs = [merged[d] for d in sorted(merged)]
+        elif not obs and not fredapi.KEY:
             obs = agencies.market_observations(series, start, TODAY)
         if not obs or len(obs) < 2:
             continue
@@ -772,12 +783,11 @@ def keyless_daily(start):
 
 
 def keyless_dates(k, events):
-    """Past release days for a report: the calendar, plus release dates in the cached first-release history."""
-    import series_store
+    """Past release days for a report: the calendar, plus TradingView's release history."""
+    import tv
     dates = {e["date"] for e in events if kind_of(e) == k and e.get("actual") and e["date"] < TODAY.isoformat()
              and (k != "gdp" or "advance" in e["title"].lower())}
-    head = RELEASES[k]["comps"][0][1]
-    dates |= {r[2] for r in series_store.load(head, True)["rows"] if r[2]}
+    dates |= {r["when"].date().isoformat() for r in tv.releases() if r["kind"] == k and r["when"].date() < TODAY}
     return sorted(dates)
 
 
@@ -1107,6 +1117,11 @@ def main():
         import consensus
         manual = set(load(os.path.join(ENG, "forecasts.json"), {}).get("forecasts", {}))
         consensus.apply(events, kind_of, NY, manual_ids=manual, log=log, now=NOW)
+        try:  # latest months first, so this week's consensus is in hand
+            import tv
+            tv.sync(TODAY, log=log, budget=60)
+        except Exception as ex:
+            warn(f"TradingView refresh error: {ex!r}")
         consensus.apply_tv(events, kind_of, manual_ids=manual, log=log)
     except Exception as ex:
         warn(f"consensus feed error: {ex!r}")

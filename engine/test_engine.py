@@ -101,6 +101,8 @@ def run(tmp, now, upto):
     consensus = importlib.import_module("consensus")
     consensus.apply = lambda *args, **kw: 0  # keep the live ForexFactory feed out of the fake world
     consensus.apply_tv = lambda *args, **kw: 0
+    importlib.import_module("tv").sync = lambda *args, **kw: 0
+    importlib.import_module("agencies").fomc_meetings = lambda: []  # the fake world's FOMC dates come from FRED
     consensus.backfill_history = lambda *args, **kw: 0
     eng = importlib.import_module("engine")
     eng.main()
@@ -221,6 +223,8 @@ def edge_tests():
     consensus = importlib.import_module("consensus")
     consensus.apply = lambda *args, **kw: 0  # keep the live ForexFactory feed out of the fake world
     consensus.apply_tv = lambda *args, **kw: 0
+    importlib.import_module("tv").sync = lambda *args, **kw: 0
+    importlib.import_module("agencies").fomc_meetings = lambda: []  # the fake world's FOMC dates come from FRED
     consensus.backfill_history = lambda *args, **kw: 0
     eng = importlib.import_module("engine")
     eng.main()
