@@ -10,6 +10,7 @@ import os
 import shutil
 import sys
 import tempfile
+import time
 from zoneinfo import ZoneInfo
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -46,13 +47,29 @@ def load_modules(tmp):
     return T, P
 
 
-class Fred:
-    def __init__(self, fetch, key="test"):
-        self.KEY, self.fetch, self.calls = key, fetch, 0
+class Alfred:
+    """Fake ALFRED/FRED built from the simulated world: one vintage per release date, no revisions."""
 
-    def observations(self, sid, start, initial=False):
+    def __init__(self, series, down=False):
+        self.series, self.calls, self.down = series, 0, down
+
+    def vintages(self, sid):
         self.calls += 1
-        return self.fetch(sid, start, initial=initial)
+        if self.down or sid not in self.series:
+            raise OSError("unreachable")
+        return sorted({o[2] for o in self.series[sid]})
+
+    def snapshot(self, sid, v, start):
+        self.calls += 1
+        if self.down:
+            raise OSError("unreachable")
+        return [(p, x) for p, x, rt in self.series[sid] if rt <= v and p >= start]
+
+    def daily(self, sid, start):
+        self.calls += 1
+        if self.down or sid not in self.series:
+            raise OSError("unreachable")
+        return [(d, x) for d, x, _ in self.series[sid] if d >= start]
 
 
 def main():
@@ -66,8 +83,6 @@ def main():
         for s in ("CPILFESL", "CPIAUCSL"):
             series[s] = [o for o in series[s] if o[2] < "2026-11-12"]
 
-        def fred_fetch(s, start, initial=False):
-            return [o for o in series.get(s) or [] if o[0] >= start] or None
         gold_rows = {d: v for d, v in gold("2000-01-01")[0]}
         nq_rows = {d: v for d, v, _ in fetch("NASDAQ100", "2000-01-01")}
         P.prices.MARKETS["gold"] = ([("sim gold", lambda: gold_rows)], False)
@@ -75,8 +90,8 @@ def main():
         P.series_store.agencies.market_observations = lambda *a: []
 
         # 1. Release morning, 10:00 NY: first fit, post-release call for today, scenario map for the next CPI
-        fred = Fred(fred_fetch)
-        assert P.run(now=dt.datetime(2026, 11, 12, 10, 0, tzinfo=NY), fred=fred)
+        P.series_store.HISTORY_FROM = "2008-01-01"
+        assert P.run(now=dt.datetime(2026, 11, 12, 10, 0, tzinfo=NY), source=Alfred(series))
         out = json.load(open(os.path.join(tmp, "site", "data", "direction", "current.json")))
         for key in ("asof", "assets", "regime", "rules", "backtest", "live", "proven", "scenarios", "events", "disclaimer"):
             assert key in out, key
@@ -104,17 +119,17 @@ def main():
         headline = P.series_store.load("CPIAUCSL", True)["rows"][-1]
         assert headline[2] == "2026-11-12"
 
-        # 3. Same day, later run with nothing new: no refit, no FRED refresh, no duplicate log rows
+        # 3. Same day, later run with nothing new: no refit, no refetch of fresh history, no duplicate log rows
         P.LOGLINES.clear()
-        fred2 = Fred(fred_fetch)
-        assert P.run(now=dt.datetime(2026, 11, 12, 10, 20, tzinfo=NY), fred=fred2)
+        src2 = Alfred(series)
+        assert P.run(now=dt.datetime(2026, 11, 12, 10, 20, tzinfo=NY), source=src2)
         assert not any("fitting" in x or "first fit" in x for x in P.LOGLINES), P.LOGLINES
-        assert fred2.calls == 0, "refetched history that was fresh"
+        assert src2.calls == 0, "refetched history that was fresh"
         again = json.load(open(os.path.join(tmp, "site", "data", "direction", "log.json")))["rows"]
         assert len(again) == len(logged)
 
         # 4. After the close: the post-release lean is withdrawn, nothing new is logged, and the calls are scored
-        assert P.run(now=dt.datetime(2026, 11, 12, 17, 30, tzinfo=NY), fred=Fred(fred_fetch, key=""))
+        assert P.run(now=dt.datetime(2026, 11, 12, 17, 30, tzinfo=NY), source=Alfred(series, down=True))
         out = json.load(open(os.path.join(tmp, "site", "data", "direction", "current.json")))
         assert "cpi-oct" not in out["events"] and "cpi-nov" in out["events"]
         scored = json.load(open(os.path.join(tmp, "site", "data", "direction", "log.json")))["rows"]
@@ -127,6 +142,42 @@ def main():
             P.D.MODELS, P.RELEASES, P.kind_for(importlib.import_module("engine").kind_of),
             importlib.import_module("engine").title_period, P.D.figure, log=lambda *a: None)
         assert added == 0
+        # 6. Resumable load: when the time budget runs out a series is stored part-way, hidden from the model
+        #    until complete, and finished on later runs from where it stopped
+        st = P.series_store
+        for f in os.listdir(st.CACHE_DIR):
+            if f.startswith("ICSA"):
+                os.remove(os.path.join(st.CACHE_DIR, f))
+        when = dt.datetime(2026, 11, 13, 10, 0, tzinfo=NY)
+        runs = 0
+        while True:
+            runs += 1
+            src = Alfred(series)
+            store = st.Store(when, st.model_modes(P.D.MODELS), log=lambda *a: None, source=src)
+            orig = src.snapshot
+
+            def limited(*a, src=src, store=store, orig=orig):
+                if src.calls > 60:
+                    store.deadline = 0  # budget used up after ~60 downloads
+                return orig(*a)
+            src.snapshot = limited
+            got = store("ICSA", "2008-01-01", initial=True)
+            if got:
+                break
+            assert "ICSA" in store.loading and not st.load("ICSA", True).get("complete")
+            assert runs < 40, "load never finished"
+        full = st.load("ICSA", True)
+        assert runs > 3, "budget never interrupted the load"
+        assert len(full["rows"]) == len([o for o in series["ICSA"] if o[2] >= "2008-01-01"]), len(full["rows"])
+        assert [r[0] for r in full["rows"]] == sorted(r[0] for r in full["rows"]), "history out of order"
+
+        # 7. Chaining keeps the published change even when earlier months were revised in the same vintage
+        rows = [["2026-08-01", 100.0, "2026-09-10"]]
+        st.chain(rows, "2026-10-10", [("2026-08-01", 200.0), ("2026-09-01", 202.0)], "pct")  # Aug revised up a lot
+        assert abs(rows[-1][1] - 101.0) < 1e-9, rows  # +1.0% as published, not +102%
+        rows = [["2026-08-01", 150000.0, "x"]]
+        st.chain(rows, "v", [("2026-08-01", 150100.0), ("2026-09-01", 150250.0)], "diff")
+        assert rows[-1][1] == 150150.0
         print("predict tests passed")
     finally:
         sys.path.pop(0)

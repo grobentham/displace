@@ -51,7 +51,7 @@ jobs:
     if: github.ref == 'refs/heads/main'
     needs: test
     runs-on: ubuntu-latest
-    timeout-minutes: 25
+    timeout-minutes: 30
     permissions:
       contents: write
       pages: write
@@ -70,21 +70,12 @@ jobs:
           python-version: "3.12"
 
       - name: Refresh calendar and news
-        env:
-          # Optional. With a reachable key the engine reads FRED's API (claims, durables, UMich, home sales,
-          # the dollar, oil...); without one, or if FRED can't be reached, it uses the direct agency sources.
-          FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
-          BLS_API_KEY: ${{ secrets.BLS_API_KEY }}
         run: |
           python -u engine/engine.py
           python -u engine/news.py
           python -u engine/morning.py
 
       - name: News-outcome engine (gold, NQ and rates by release)
-        env:
-          # Optional but recommended: a free key from https://fred.stlouisfed.org/docs/api/api_key.html.
-          # Needed once to load the release history; after that the engine keeps it current on its own.
-          FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
         run: |
           python -u engine/predict.py
           python -u engine/watch.py
