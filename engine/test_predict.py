@@ -58,8 +58,8 @@ def build(tmp):
     P.prices.closes = lambda a, s, **k: ([r for r in daily[a] if r[0] >= s], "sim")
     P.prices.ranges = lambda a, s: [(d, v * 1.01, v * 0.99, v) for d, v in daily[a] if d >= s]
     P.bars.sync = lambda *a, **k: None
-    P.bars.load = lambda m: hourly if m == "gold" else []
-    P.bars._load = lambda m: {"fetched": "2026-11-12T20:00:00+00:00"}
+    P.bars.load = lambda m, interval="1h": hourly if m == "gold" and interval == "1h" else []
+    P.bars._load = lambda m, interval="1h": {"fetched": "2026-11-12T20:00:00+00:00"}
     store = lambda sid, start, initial=False: [(d, v, "") for d, v in daily["usd" if sid == "DTWEXBGS" else "y2"] if d >= start]
     P.OUT = os.path.join(tmp, "current.json")
     P.LOG_PATH = os.path.join(tmp, "log.json")
@@ -91,7 +91,7 @@ def main():
         sc = out["scenarios"]["cpi"]["assets"]["gold2h"]
         assert sc["hot"]["up"] < 0.4 < 0.6 < sc["cool"]["up"], sc
         # 2. after the close: no lean shown, the 2-hour call is scored (bars fetched after the window)
-        P.bars._load = lambda m: {"fetched": "2026-11-12T22:00:00+00:00"}
+        P.bars._load = lambda m, interval="1h": {"fetched": "2026-11-12T22:00:00+00:00"}
         out = P.run(now=dt.datetime(2026, 11, 12, 18, 0, tzinfo=NY), kind_of=kind_of, events=events, store=store)
         assert "cpi-oct" not in out["events"]
         rows = json.load(open(P.LOG_PATH))["rows"]

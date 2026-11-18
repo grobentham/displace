@@ -37,6 +37,7 @@ ROOT = os.path.dirname(HERE)
 DATA = os.path.join(ROOT, "site", "data")
 OUT = os.path.join(DATA, "direction", "current.json")
 LOG_PATH = os.path.join(DATA, "direction", "log.json")
+DUKA_PATH = os.path.join(HERE, "cache", "minutes", "dukascopy.json")
 CLOSE = dt.time(16, 0)
 SETTLED = dt.time(17, 15)  # gold settles at 17:00 New York, after the stock close
 HORIZON_DAYS = 14
@@ -89,12 +90,22 @@ def markets_now(now, store=None, log=log):
         if rows:
             out[key] = SP.Daily([(d, v) for d, v, _ in rows if d < cut], unit)
     bars.sync(now.astimezone(dt.timezone.utc), log=log)
+    duka = load(DUKA_PATH, {}).get("markets", {})
     for a in ("gold", "nq"):
+        hourly = None
         rows = bars.load(a)
-        fetched = bars._load(a).get("fetched")
-        done = dt.datetime.fromisoformat(fetched).astimezone(NY) if fetched else now
         if rows:
-            out[a + "2h"] = SP.Hourly(rows, min(done, now))
+            f = bars.fetched(a)
+            hourly = SP.Hourly(rows, min(f.astimezone(NY), now) if f else now)
+        f5 = bars.fetched(a, "5m")
+        done5 = min(f5.astimezone(NY), now) if f5 else now
+        rows5 = bars.load(a, "5m")
+        for key, mins in (("15m", 15), ("2h", 120)):
+            src = SP.Minutes(mins, duka=duka.get(a), bars5=rows5, complete_before=done5,
+                             fallback=hourly if key == "2h" else None)
+            out[a + key] = src
+    if duka:
+        log(f"minutes: Dukascopy history for {', '.join(f'{a} {len(v)}' for a, v in duka.items())} releases")
     return out
 
 
@@ -144,19 +155,25 @@ def live_calls(model, events, rels, kind_of, now):
         if r["z"] is not None and r["when"] <= now:
             if now >= dt.datetime.combine(r["when"].date(), CLOSE, NY):
                 continue  # the day's window has closed; the outcome is in the log
-            calls = {}
+            side = "hot" if r["z"] >= SP.BIN else "cool" if r["z"] <= -SP.BIN else "inline"
+            calls, hist = {}, {}
             for key in model["markets"]:
                 c = SP.call(model, g, key, r["z"])
+                h = None if c and c.get("dir") else SP.hist_bias(model, r["kind"], key, side)
+                mins = SP.MINUTES.get(SP.MARKETS[key][2])
+                if mins and now > r["when"] + dt.timedelta(minutes=mins):
+                    c, h = {"none": True, "why": f"the first {SP.MARKETS[key][2]} have passed"}, None
                 if c:
-                    if SP.MARKETS[key][2] == "2h" and now > r["when"] + dt.timedelta(hours=2):
-                        c = {"none": True, "why": "the first two hours have passed"}
                     calls[key] = c
-            out[e["id"]] = {**base, "stage": "post", "z": round(r["z"], 2),
-                            "bin": "hot" if r["z"] >= SP.BIN else "cool" if r["z"] <= -SP.BIN else "inline", "calls": calls}
+                if h:
+                    hist[key] = h
+            out[e["id"]] = {**base, "stage": "post", "z": round(r["z"], 2), "bin": side, "calls": calls, "hist": hist}
         elif r["when"] > now:
             out[e["id"]] = {**base, "stage": "pre",
                             "hot": {k: c for k in model["markets"] if (c := SP.call(model, g, k, 1.0))},
-                            "cool": {k: c for k in model["markets"] if (c := SP.call(model, g, k, -1.0))}}
+                            "cool": {k: c for k in model["markets"] if (c := SP.call(model, g, k, -1.0))},
+                            "hist": {side: {k: h for k in model["markets"] if (h := SP.hist_bias(model, r["kind"], k, side))}
+                                     for side in ("hot", "inline", "cool")}}
     return out
 
 
@@ -166,13 +183,17 @@ def log_calls(log_rows, live, now):
         if v["stage"] != "post":
             continue
         when = dt.datetime.fromisoformat(v["when"])
-        for a, c in v["calls"].items():
+        picks = [(a, c, "tested") for a, c in v["calls"].items()] + [(a, h, "hist") for a, h in v.get("hist", {}).items()]
+        for a, c, tier in picks:
             if not c.get("dir") or (eid, a) in have:
                 continue
-            if SP.MARKETS[a][2] == "2h" and now > when + dt.timedelta(hours=2):
+            mins = SP.MINUTES.get(SP.MARKETS[a][2])
+            if mins and now > when + dt.timedelta(minutes=mins):
                 continue
+            have.add((eid, a))
             log_rows.append({"id": eid, "date": v["date"], "when": v["when"], "kind": v["kind"], "group": v["group"],
-                             "asset": a, "dir": c["dir"], "p": c["p"], "z": v["z"], "logged": now.isoformat(timespec="minutes")})
+                             "asset": a, "dir": c["dir"], "p": c["p"], "z": v["z"], "tier": tier,
+                             "logged": now.isoformat(timespec="minutes")})
     return log_rows
 
 
@@ -191,7 +212,7 @@ def summary(model, live, record):
     for kind, sc in model["scenarios"].items():
         title = next((t for t, _, _ in tv.REPORTS[kind]), kind)
         scen[kind] = {"name": NAMES.get(kind, kind), "metric": title, "n": sc["n"], "since": "2010", "basis": "consensus",
-                      "assets": sc["assets"]}
+                      "assets": sc["assets"], **({"decision": sc["decision"]} if sc.get("decision") else {})}
     return {"asof": model["asof"], "version": 4, "assets": model["markets"],
             "proven": sum(1 for gm in model["groups"].values() for s in gm.values() if s.get("proven")),
             "rules": rules, "groups": {g: {k: {kk: s[kk] for kk in ("b", "k", "n", "since", "bt", "proven", "why")}
