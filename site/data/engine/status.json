@@ -1,52 +1,57 @@
 {
- "lastRun": "2026-11-18T07:38-05:00",
+ "lastRun": "2026-11-18T07:59-05:00",
  "source": "direct public agencies",
  "fredCalls": 1,
  "fred": false,
  "sources": {
   "fred": {
    "state": "unavailable",
-   "checkedAt": "2026-11-18T07:38-05:00",
+   "checkedAt": "2026-11-18T07:59-05:00",
    "lastSuccessAt": null
   },
   "alfred": {
    "state": "unavailable",
-   "checkedAt": "2026-11-18T07:38-05:00",
+   "checkedAt": "2026-11-18T07:59-05:00",
    "lastSuccessAt": null
   },
   "bls": {
    "state": "available",
-   "checkedAt": "2026-11-18T07:38-05:00",
-   "lastSuccessAt": "2026-11-18T07:38-05:00"
+   "checkedAt": "2026-11-18T07:59-05:00",
+   "lastSuccessAt": "2026-11-18T07:59-05:00"
   },
   "bea": {
    "state": "available",
-   "checkedAt": "2026-11-18T07:38-05:00",
-   "lastSuccessAt": "2026-11-18T07:38-05:00"
+   "checkedAt": "2026-11-18T07:59-05:00",
+   "lastSuccessAt": "2026-11-18T07:59-05:00"
   },
   "census": {
    "state": "available",
-   "checkedAt": "2026-11-18T07:38-05:00",
-   "lastSuccessAt": "2026-11-18T07:38-05:00"
+   "checkedAt": "2026-11-18T07:59-05:00",
+   "lastSuccessAt": "2026-11-18T07:59-05:00"
   },
   "treasury": {
    "state": "available",
-   "checkedAt": "2026-11-18T07:38-05:00",
-   "lastSuccessAt": "2026-11-18T07:38-05:00"
+   "checkedAt": "2026-11-18T07:59-05:00",
+   "lastSuccessAt": "2026-11-18T07:59-05:00"
   },
   "nyFed": {
    "state": "available",
-   "checkedAt": "2026-11-18T07:38-05:00",
-   "lastSuccessAt": "2026-11-18T07:38-05:00"
+   "checkedAt": "2026-11-18T07:59-05:00",
+   "lastSuccessAt": "2026-11-18T07:59-05:00"
+  },
+  "fedStatements": {
+   "state": "not_checked",
+   "checkedAt": null,
+   "lastSuccessAt": null
   },
   "nasdaqCalendar": {
    "state": "available",
-   "checkedAt": "2026-11-18T07:38-05:00",
-   "lastSuccessAt": "2026-11-18T07:38-05:00"
+   "checkedAt": "2026-11-18T07:59-05:00",
+   "lastSuccessAt": "2026-11-18T07:59-05:00"
   }
  },
  "freshness": {
-  "calendarUpdatedOn": "2026-11-17",
+  "calendarUpdatedOn": "2026-11-18",
   "latestActual": {
    "title": "Retail sales (Oct)",
    "date": "2026-11-17"
@@ -59,7 +64,7 @@
  },
  "quality": {
   "passed": 11,
-  "total": 11,
+  "total": 16,
   "held": 0,
   "rejected": 0,
   "critical": 0
@@ -72,7 +77,8 @@
  "log": [
   "Public FRED downloads unavailable; using direct agency sources",
   "ALFRED archive unavailable; using direct release data where available",
-  "engine run 2026-11-18T07:38-05:00 using direct public agencies",
-  "quality: 11/11 checks passed, 0 held, 0 rejected"
+  "engine run 2026-11-18T07:59-05:00 using direct public agencies",
+  "calendar saved",
+  "quality: 11/16 checks passed, 0 held, 0 rejected"
  ]
 }
