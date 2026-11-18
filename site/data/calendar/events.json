@@ -1,18 +1,7 @@
 {
- "updated": "2026-11-15",
- "through": "2027-03-30",
+ "updated": "2026-11-17",
+ "through": "2027-03-31",
  "events": [
-  {
-   "id": "20261102-ism-manufacturing-pmi-oct",
-   "date": "2026-11-02",
-   "time": "10:00",
-   "title": "ISM Manufacturing PMI (Oct)",
-   "cur": "USD",
-   "impact": "high",
-   "src": "ISM",
-   "note": "Usually the first business day of the month; confirm on ismworld.org.",
-   "auto": "rule"
-  },
   {
    "id": "20261104-ism-services-pmi-oct",
    "date": "2026-11-04",
@@ -925,6 +914,18 @@
    "metric": "initial claims"
   },
   {
+   "id": "20270225-pce-inflation-personal-income-and-outlay",
+   "date": "2027-02-25",
+   "time": "08:30",
+   "title": "PCE inflation · Personal income and outlays (Jan)",
+   "cur": "USD",
+   "impact": "high",
+   "src": "BEA",
+   "note": "Lands an hour before the 9:30 open. Let the release candle print.",
+   "auto": "public",
+   "metric": "Core PCE m/m"
+  },
+  {
    "id": "20270301-ism-manufacturing-pmi-feb",
    "date": "2027-03-01",
    "time": "10:00",
@@ -967,6 +968,30 @@
    "src": "Conference Board",
    "note": "Usually the last Tuesday of the month; confirm on conference-board.org.",
    "auto": "rule"
+  },
+  {
+   "id": "20270331-gdp-third-estimate-q4",
+   "date": "2027-03-31",
+   "time": "08:30",
+   "title": "GDP, third estimate (Q4)",
+   "cur": "USD",
+   "impact": "high",
+   "src": "BEA",
+   "note": "Lands an hour before the 9:30 open. Let the release candle print.",
+   "auto": "public",
+   "metric": "Real GDP, annualized"
+  },
+  {
+   "id": "20270331-pce-inflation-personal-income-and-outlay",
+   "date": "2027-03-31",
+   "time": "08:30",
+   "title": "PCE inflation · Personal income and outlays (Feb)",
+   "cur": "USD",
+   "impact": "high",
+   "src": "BEA",
+   "note": "Lands an hour before the 9:30 open. Let the release candle print.",
+   "auto": "public",
+   "metric": "Core PCE m/m"
   }
  ]
 }
