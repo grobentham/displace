@@ -1,33 +1,33 @@
 {
- "lastRun": "2026-11-18T08:40-05:00",
+ "lastRun": "2026-11-18T09:02-05:00",
  "source": "public FRED and agency data",
- "fredCalls": 107,
+ "fredCalls": 76,
  "fred": true,
  "sources": {
   "fred": {
    "state": "partial",
-   "checkedAt": "2026-11-18T08:40-05:00",
-   "lastSuccessAt": "2026-11-18T08:40-05:00"
+   "checkedAt": "2026-11-18T09:02-05:00",
+   "lastSuccessAt": "2026-11-18T09:02-05:00"
   },
   "alfred": {
    "state": "available",
-   "checkedAt": "2026-11-18T08:40-05:00",
-   "lastSuccessAt": "2026-11-18T08:40-05:00"
+   "checkedAt": "2026-11-18T09:02-05:00",
+   "lastSuccessAt": "2026-11-18T09:02-05:00"
   },
   "bls": {
    "state": "available",
-   "checkedAt": "2026-11-18T08:40-05:00",
-   "lastSuccessAt": "2026-11-18T08:40-05:00"
+   "checkedAt": "2026-11-18T09:02-05:00",
+   "lastSuccessAt": "2026-11-18T09:02-05:00"
   },
   "bea": {
    "state": "available",
-   "checkedAt": "2026-11-18T08:40-05:00",
-   "lastSuccessAt": "2026-11-18T08:40-05:00"
+   "checkedAt": "2026-11-18T09:02-05:00",
+   "lastSuccessAt": "2026-11-18T09:02-05:00"
   },
   "census": {
    "state": "available",
-   "checkedAt": "2026-11-18T08:40-05:00",
-   "lastSuccessAt": "2026-11-18T08:40-05:00"
+   "checkedAt": "2026-11-18T09:02-05:00",
+   "lastSuccessAt": "2026-11-18T09:02-05:00"
   },
   "treasury": {
    "state": "not_checked",
@@ -36,8 +36,8 @@
   },
   "nyFed": {
    "state": "available",
-   "checkedAt": "2026-11-18T08:40-05:00",
-   "lastSuccessAt": "2026-11-18T08:40-05:00"
+   "checkedAt": "2026-11-18T09:02-05:00",
+   "lastSuccessAt": "2026-11-18T09:02-05:00"
   },
   "fedStatements": {
    "state": "not_checked",
@@ -46,8 +46,8 @@
   },
   "nasdaqCalendar": {
    "state": "available",
-   "checkedAt": "2026-11-18T08:40-05:00",
-   "lastSuccessAt": "2026-11-18T08:40-05:00"
+   "checkedAt": "2026-11-18T09:02-05:00",
+   "lastSuccessAt": "2026-11-18T09:02-05:00"
   }
  },
  "freshness": {
@@ -63,25 +63,21 @@
   }
  },
  "quality": {
-  "passed": 38,
-  "total": 39,
+  "passed": 27,
+  "total": 28,
   "held": 0,
   "rejected": 0,
   "critical": 0
  },
- "fredErrors": 7,
+ "fredErrors": 1,
  "calendarThrough": "2027-03-31",
  "events": 89,
  "upcoming": 81,
  "warnings": [
-  "Data source errors on 7 request(s): release 101, release 101, release 101, release 101, release 101, release 101, release 101"
+  "Data source errors on 1 request(s): release 101"
  ],
  "log": [
-  "engine run 2026-11-18T08:40-05:00 using public FRED and agency data",
-  "calendar: 3 added, 0 removed",
-  "actual 20261104-adp-private-payrolls-oct 86K",
-  "actual 20261105-initial-jobless-claims 189K",
-  "calendar saved",
-  "quality: 38/39 checks passed, 0 held, 0 rejected"
+  "engine run 2026-11-18T09:02-05:00 using public FRED and agency data",
+  "quality: 27/28 checks passed, 0 held, 0 rejected"
  ]
 }
