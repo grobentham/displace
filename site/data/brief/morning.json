@@ -7,6 +7,13 @@
    "generatedAt": "2026-11-18T14:00:50+08:00",
    "updates": [
     {
+     "title": "Minutes of the Federal Open Market Committee, October 27-28, 2026",
+     "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20261118a.htm",
+     "source": "Federal Reserve",
+     "context": "Meeting minutes show which risks officials weighed when they made the decision.",
+     "published": "2026-11-19T03:00:00+08:00"
+    },
+    {
      "id": "20261117-retail-sales-oct",
      "title": "Retail sales (Oct)",
      "url": "https://www.census.gov/retail/sales.html",
@@ -25,10 +32,7 @@
     }
    ],
    "moreReleases": [],
-   "focus": {
-    "title": "FOMC minutes",
-    "at": "2026-11-19T03:00+08:00"
-   },
+   "focus": null,
    "nextFed": "Dec 8–9",
    "otherCloses": [],
    "treasury": {
@@ -75,7 +79,7 @@
    "calendarCovered": true,
    "feedsChecked": true,
    "feedIssues": false,
-   "refreshedAt": "2026-11-18T20:38:57+08:00"
+   "refreshedAt": "2026-11-19T03:34:38+08:00"
   }
  ]
 }
