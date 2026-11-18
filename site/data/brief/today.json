@@ -1,8 +1,8 @@
 {
  "date": "2026-11-18",
- "asof": "2026-11-17T23:08-05:00",
+ "asof": "2026-11-17T23:29-05:00",
  "headline": "Lighter data day: FOMC minutes at 14:00 NY",
- "overnight": "",
+ "overnight": "At the Tue Nov 17 close, the 10-year Treasury yield was 5.10% (down 2 bp) and the 2-year 4.80% (down 3 bp).",
  "overnightLabel": "Latest close",
  "today": [
   {
@@ -10,7 +10,12 @@
    "item": "FOMC minutes (Oct 27–28 meeting)"
   }
  ],
- "recent": [],
+ "recent": [
+  {
+   "title": "Retail sales (Oct)",
+   "line": "Retail sales came in at 0.2% against a 0.2% forecast, in line with expectations. The previous reading was 0.8%."
+  }
+ ],
  "focus": "FOMC minutes: The minutes show how officials weighed the last decision. The next Fed decision is Dec 8–9, 21 days away.",
  "note": "Built automatically from official release schedules and Federal Reserve data. Education only, not a forecast or financial advice."
 }

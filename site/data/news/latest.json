@@ -1,11 +1,20 @@
 {
- "checkedAt": "2026-11-18T04:20:31+00:00",
+ "checkedAt": "2026-11-18T04:29:52+00:00",
  "sources": {
   "Federal Reserve": true,
   "European Central Bank": true,
   "Bank of England": true
  },
  "items": [
+  {
+   "id": "20261117-retail-sales-oct",
+   "title": "Retail sales (Oct)",
+   "source": "Census Bureau",
+   "url": "https://www.census.gov/retail/sales.html",
+   "published": "2026-11-17T13:30:00+00:00",
+   "analysis": "Retail sales came in at 0.2% against a 0.2% forecast, in line with expectations. The previous reading was 0.8%.",
+   "context": "Retail sales are reported in dollars. Changes can reflect prices as well as the volume of goods sold."
+  },
   {
    "id": "20261113-ppi-producer-prices-oct",
    "title": "PPI producer prices (Oct)",

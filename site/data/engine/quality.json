@@ -1,77 +1,10 @@
 {
- "asof": "2026-11-17T23:08-05:00",
- "passed": 7,
+ "asof": "2026-11-17T23:29-05:00",
+ "passed": 18,
  "total": 18,
  "critical": 0,
  "rejected": [],
  "held": [],
  "droppedText": [],
- "failures": [
-  {
-   "name": "source: release calendar for nfp",
-   "ok": false,
-   "detail": "no dates returned; keeping existing dates",
-   "critical": false
-  },
-  {
-   "name": "source: release calendar for cpi",
-   "ok": false,
-   "detail": "no dates returned; keeping existing dates",
-   "critical": false
-  },
-  {
-   "name": "source: release calendar for ppi",
-   "ok": false,
-   "detail": "no dates returned; keeping existing dates",
-   "critical": false
-  },
-  {
-   "name": "source: release calendar for retail",
-   "ok": false,
-   "detail": "no dates returned; keeping existing dates",
-   "critical": false
-  },
-  {
-   "name": "source: release calendar for claims",
-   "ok": false,
-   "detail": "no dates returned; keeping existing dates",
-   "critical": false
-  },
-  {
-   "name": "source: release calendar for jolts",
-   "ok": false,
-   "detail": "no dates returned; keeping existing dates",
-   "critical": false
-  },
-  {
-   "name": "source: release calendar for umich",
-   "ok": false,
-   "detail": "no dates returned; keeping existing dates",
-   "critical": false
-  },
-  {
-   "name": "source: release calendar for durables",
-   "ok": false,
-   "detail": "no dates returned; keeping existing dates",
-   "critical": false
-  },
-  {
-   "name": "source: release calendar for homes",
-   "ok": false,
-   "detail": "no dates returned; keeping existing dates",
-   "critical": false
-  },
-  {
-   "name": "source: release calendar for adp",
-   "ok": false,
-   "detail": "no dates returned; keeping existing dates",
-   "critical": false
-  },
-  {
-   "name": "source: release calendar for fomc",
-   "ok": false,
-   "detail": "no dates returned; keeping existing dates",
-   "critical": false
-  }
- ]
+ "failures": []
 }
