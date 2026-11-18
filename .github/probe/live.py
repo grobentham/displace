@@ -1,14 +1,23 @@
-import sys, json, subprocess
-r = subprocess.run([sys.executable, "-u", "engine/predict.py"], capture_output=True, text=True)
-for l in r.stdout.splitlines(): print("RUN", l)
-print("RUN stderr", r.stderr[-2000:])
-d = json.load(open("site/data/direction/current.json"))
-for g, gm in d["groups"].items():
-    for k, s in gm.items():
-        bt = s["bt"]
-        print(f"LIVE {g:9} {k:6} n={s['n']:4} since {s['since']} b={s['b']:+.3f} k={s['k']:.2f} | OOS calls {bt['hits']}/{bt['calls']} = {bt['rate']:.3f} of {bt['tested']} tested, brier {bt['brierSkill']:+.3f}, halves {bt['halves']}, p={bt['pval']:.4f} -> {'PROVEN' if s['proven'] else s['why']}")
-for eid, v in d["events"].items():
-    calls = {k: (c.get('dir'), c.get('p')) for k, c in v.get('hot', {}).items() if c.get('dir')}
-    print("LIVE ev", eid, v["stage"], v["kind"], v["consensus"]["title"], v["consensus"]["forecast"], "hot leans:", calls)
-s = json.dumps(d)
-for i in range(0, len(s), 3000): print(f"JSON|{i//3000:04d}|{s[i:i+3000]}")
+import urllib.request, lzma, struct, time, datetime as dt
+UA = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/130 Safari/537.36"}
+def get(u):
+    for i in range(3):
+        try:
+            r = urllib.request.urlopen(urllib.request.Request(u, headers=UA), timeout=40); return r.status, r.read()
+        except urllib.error.HTTPError as e: return e.code, b""
+        except Exception as e: err = e; time.sleep(2)
+    return "ERR " + repr(err), b""
+for inst in ("XAUUSD", "USATECHIDXUSD", "USA100IDXUSD", "NAS100"):
+    for day in (dt.date(2015, 1, 16), dt.date(2026, 11, 12)):
+        u = f"https://datafeed.dukascopy.com/datafeed/{inst}/{day.year}/{day.month-1:02d}/{day.day:02d}/BID_candles_min_1.bi5"
+        t = time.time(); s, b = get(u)
+        print(f"LIVE {inst} {day} status {s} {len(b)}B {time.time()-t:.1f}s")
+        if s == 200 and b:
+            try:
+                raw = lzma.decompress(b)
+                n = len(raw) // 24
+                rows = [struct.unpack(">5if", raw[i*24:(i+1)*24]) for i in range(n)]
+                print(f"LIVE   {n} minute candles; first {rows[0]}")
+                for r in rows:
+                    if 13*3600 + 25*60 <= r[0] <= 13*3600 + 40*60: print("LIVE    ", dt.timedelta(seconds=r[0]), r)
+            except Exception as e: print("LIVE   decode", repr(e))
