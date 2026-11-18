@@ -145,7 +145,6 @@ def expectations(events, kind_of, title_period, log=log):
                 v = nowcast.before(daily, k, period[:7], rt)
                 if v is not None:
                     records[(k, rt)] = v
-                    past[(k, rt)] = v
     for e in events:
         k = kind_of(e)
         if k in ("cpi", "pce") and (k, e["date"]) not in records:
@@ -156,10 +155,11 @@ def expectations(events, kind_of, title_period, log=log):
                 v = latest.get((k, per.strftime("%Y-%m")))
             if v is not None:
                 records[(k, e["date"])] = v
-    log("nowcast: " + ", ".join(f"{sum(1 for kk, _ in past if kk == k)} past {k.upper()} nowcasts" for k in ("cpi", "pce")))
+    done = {k: sum(1 for kk, d in records if kk == k and d < dt.date.today().isoformat()) for k in ("cpi", "pce")}
+    log("nowcast: " + ", ".join(f"{n} past {k.upper()} nowcasts" for k, n in done.items()))
     D.BASIS.clear()
     for k in ("cpi", "pce"):
-        if sum(1 for kk, _ in past if kk == k) >= 60:
+        if done[k] >= 60:
             D.BASIS[k] = "nowcast"
     return records
 
@@ -228,7 +228,9 @@ def run(now=None, source=None, budget=series_store.BUDGET_SECONDS):
     if added:
         log(f"history: appended {added} confirmed figure(s) from the calendar")
     records = expectations(events, kind_of, E.title_period)
-    fp = fingerprint(input_files())
+    expect_fp = hashlib.sha256(json.dumps(
+        sorted([k, d, v] for (k, d), v in records.items()) + sorted(D.BASIS.items())).encode()).hexdigest()[:8]
+    fp = fingerprint(input_files()) + expect_fp
     refit = (not cached.get("model") or cached.get("fingerprint") != fp or cached.get("day") != today.isoformat())
     if refit:
         log("direction: fitting (inputs changed)" if cached.get("model") else "direction: first fit")
@@ -239,7 +241,7 @@ def run(now=None, source=None, budget=series_store.BUDGET_SECONDS):
                           live_rows=[r for r in log_rows if "hit" in r], price_fns=price_fns)
         log(f"direction: fit took {(dt.datetime.now() - t0).seconds}s")
         if model and model.get("kinds"):
-            save(MODEL_PATH, {"fingerprint": fingerprint(input_files()), "day": today.isoformat(), "model": model})
+            save(MODEL_PATH, {"fingerprint": fingerprint(input_files()) + expect_fp, "day": today.isoformat(), "model": model})
         else:
             model = cached.get("model")
             log("direction: fit produced no model; keeping the last good model")
