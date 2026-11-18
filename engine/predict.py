@@ -83,7 +83,7 @@ def markets_now(now, store=None, log=log):
         rows, _ = prices.closes(a, "2009-06-01", now=now.astimezone(dt.timezone.utc), log=log)
         if rows:
             out[a] = SP.Daily([r for r in rows if r[0] < cut], "pct")
-    store = store or series_store.Store(now, {}, log=log, cutoff=None if now.time() >= SETTLED else today)
+    store = store or series_store.Store(now, log=log, cutoff=None if now.time() >= SETTLED else today)
     for key, sid, unit in (("usd", "DTWEXBGS", "pct"), ("y2", "DGS2", "bp")):
         rows = store(sid, "2009-06-01")
         if rows:
@@ -200,6 +200,33 @@ def summary(model, live, record):
             "events": live, "disclaimer": DISCLAIMER, "basis": "consensus"}
 
 
+def check(out):
+    """Validate the file before publishing. Returns a list of problems (empty = fine)."""
+    bad = []
+    ok_dir = {"up", "down"}
+    for g, gm in out.get("groups", {}).items():
+        for k, s in gm.items():
+            if not (0 <= s.get("k", -1) <= 1.5) or not isinstance(s.get("b"), (int, float)) or s["b"] != s["b"]:
+                bad.append(f"model {g}/{k}: invalid coefficients")
+    for eid, v in out.get("events", {}).items():
+        calls = dict(v.get("calls") or {})
+        for side in ("hot", "cool"):
+            calls.update({f"{side}:{a}": c for a, c in (v.get(side) or {}).items()})
+        for a, c in calls.items():
+            if c.get("dir") and not (c["dir"] in ok_dir and 0.5 < c.get("p", 0) < 1):
+                bad.append(f"call {eid}/{a}: {c}")
+        if v.get("z") is not None and not (-10 < v["z"] < 10):
+            bad.append(f"surprise {eid}: z={v['z']}")
+    for kind, sc in out.get("scenarios", {}).items():
+        for a, cells in sc.get("assets", {}).items():
+            for b, c in cells.items():
+                if not (0 <= c.get("up", -1) <= 1) or c.get("n", 0) < 1:
+                    bad.append(f"scenario {kind}/{a}/{b}: {c}")
+    if not out.get("assets"):
+        bad.append("no markets")
+    return bad
+
+
 def run(now=None, kind_of=None, events=None, store=None):
     now = now or now_ny()
     if kind_of is None:
@@ -236,6 +263,13 @@ def run(now=None, kind_of=None, events=None, store=None):
     record = SP.score(log_rows, markets, now)
     out = summary(model, live, record)
     out["moves"] = mv
+    problems = check(out)
+    if problems:
+        log(f"quality: {len(problems)} problem(s); keeping the last good file: " + "; ".join(problems[:5]))
+        with open(os.path.join(HERE, "QUALITY_FAIL"), "a") as fh:
+            fh.write("\nNews-outcome model output failed its checks (last good file kept):\n")
+            fh.writelines(f"- {p}\n" for p in problems[:20])
+        return None
     out["log"] = LOGLINES[-20:]
     save(LOG_PATH, {"version": 4, "rows": log_rows[-3000:]})
     save(OUT, out)

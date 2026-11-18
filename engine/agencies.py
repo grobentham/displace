@@ -254,3 +254,39 @@ def fed_decision(day, tz):
         pass
     record("fedStatements", False)
     return None
+
+
+FED_CALENDAR = "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"
+MONTHS = {m: i for i, m in enumerate(["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"], 1)}
+
+
+def fomc_from_page(body):
+    """[(decision date, has projections)] from the Fed's meeting calendar page."""
+    text = body.decode("utf-8", "replace") if isinstance(body, bytes) else body
+    out = []
+    years = [(m.start(), int(m[1])) for m in re.finditer(r"(\d{4}) FOMC Meetings", text)]
+    for i, (pos, year) in enumerate(years):
+        end = years[i + 1][0] if i + 1 < len(years) else len(text)
+        section = text[pos:end]
+        for month, days in re.findall(r'fomc-meeting__month[^>]*>\s*<strong>([^<]+)</strong>.*?fomc-meeting__date[^>]*>([^<]+)<',
+                                      section, re.S):
+            m = re.fullmatch(r"\s*(\d{1,2})(?:-(\d{1,2}))?(\*?)\s*", days)
+            names = [x.strip()[:3].lower() for x in month.split("/")]
+            if not m or not all(n in MONTHS for n in names):
+                continue  # notation votes and unscheduled meetings
+            last = int(m[2] or m[1])
+            mon = MONTHS[names[-1]]  # the decision is on the last day, in the later month if it spans two
+            try:
+                out.append((dt.date(year, mon, last), bool(m[3])))
+            except ValueError:
+                continue
+    return sorted(set(out))
+
+
+def fomc_meetings():
+    try:
+        got = fomc_from_page(download(FED_CALENDAR))
+    except (OSError, ValueError):
+        got = []
+    record("fedStatements", bool(got))
+    return got

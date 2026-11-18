@@ -63,8 +63,10 @@ def reactions_keyless():
         day += dt.timedelta(days=1)
     json.dump({"rows": rows2}, open(os.path.join(tmp, "DGS2.json"), "w"))
     json.dump({"rows": rows10}, open(os.path.join(tmp, "DGS10.json"), "w"))
-    icsa = [[(dt.date.fromisoformat(d) - dt.timedelta(days=5)).isoformat(), 220000, d] for d in sorted(claims_rel)]
-    json.dump({"rows": icsa}, open(os.path.join(tmp, "ICSA.initial.json"), "w"))
+    import tv
+    from zoneinfo import ZoneInfo
+    tv.releases = lambda raw=None: [{"kind": "claims", "when": dt.datetime.combine(dt.date.fromisoformat(d), dt.time(8, 30), ZoneInfo("America/New_York")),
+                                     "z": 0.0, "group": "labor", "comps": []} for d in sorted(claims_rel)]
     fredapi.KEY, publicdata.FRED_AVAILABLE = "", False
     agencies.market_observations = lambda *a: []
     rx = E.reactions([])
@@ -126,10 +128,24 @@ def tv_consensus():
     print("tv consensus ok")
 
 
+def fed_calendar():
+    html = """<h4>2026 FOMC Meetings</a></h4><div class="row fomc-meeting"><div class="fomc-meeting__month c"><strong>January</strong></div>
+    <div class="fomc-meeting__date c">27-28</div></div><div class="row fomc-meeting"><div class="fomc-meeting__month c"><strong>March</strong></div>
+    <div class="fomc-meeting__date c">17-18*</div></div><div class="row fomc-meeting"><div class="fomc-meeting__month c"><strong>Apr/May</strong></div>
+    <div class="fomc-meeting__date c">30-1</div></div><div class="row fomc-meeting"><div class="fomc-meeting__month c"><strong>October</strong></div>
+    <div class="fomc-meeting__date c">21 (notation vote)</div></div><h4>2027 FOMC Meetings</a></h4><div class="row fomc-meeting">
+    <div class="fomc-meeting__month c"><strong>January</strong></div><div class="fomc-meeting__date c">26-27</div></div>"""
+    got = agencies.fomc_from_page(html)
+    assert got == [(dt.date(2026, 1, 28), False), (dt.date(2026, 3, 18), True), (dt.date(2026, 5, 1), False),
+                   (dt.date(2027, 1, 27), False)], got
+    print("fed calendar ok")
+
+
 if __name__ == "__main__":
     fed_decision()
     reactions_keyless()
     fred_fallback()
     consensus_feed()
     tv_consensus()
+    fed_calendar()
     print("source tests passed")
