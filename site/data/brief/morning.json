@@ -1,10 +1,10 @@
 {
- "version": 1,
+ "version": 2,
  "editions": [
   {
    "date": "2026-11-18",
    "opensAt": "2026-11-18T07:00+08:00",
-   "generatedAt": "2026-11-18T13:21:19+08:00",
+   "generatedAt": "2026-11-18T13:33:50+08:00",
    "updates": [
     {
      "title": "Retail sales (Oct)",
@@ -26,6 +26,34 @@
     "date": "2026-11-17",
     "yield": 4.8,
     "changeBp": -3
+   },
+   "outlook": {
+    "label": "Neutral",
+    "reason": "Treasury moves gave no clear rates signal. 2-year -3 bp and 10-year -2 bp on 2026-11-17.",
+    "thresholdBp": 3
+   },
+   "earnings": {
+    "reports": [
+     {
+      "symbol": "NVDA",
+      "title": "NVIDIA Announces Financial Results for Third Quarter Fiscal 2027",
+      "url": "https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-third-quarter-fiscal-2027",
+      "summary": "Revenue $115.8 billion (up 103% year over year). GAAP diluted EPS $2.70. Next-quarter revenue guidance $130.0 billion ±3%."
+     }
+    ],
+    "upcoming": [
+     {
+      "symbol": "PANW",
+      "title": "Palo Alto Networks",
+      "session": "AMC",
+      "date": "2026-11-18",
+      "confirmed": false,
+      "at": "2026-11-19T05:05+08:00",
+      "timeConfirmed": false
+     }
+    ],
+    "sourcesRead": 6,
+    "sourcesTotal": 6
    },
    "calendarCovered": true,
    "feedsChecked": true,
