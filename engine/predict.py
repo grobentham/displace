@@ -145,6 +145,7 @@ def expectations(events, kind_of, title_period, log=log):
             per = title_period(e, k)
             if per and (k, per.strftime("%Y-%m")) in latest:
                 records[(k, e["date"])] = latest[(k, per.strftime("%Y-%m"))]
+    log("nowcast: " + ", ".join(f"{sum(1 for kk, _ in past if kk == k)} past {k.upper()} nowcasts" for k in ("cpi", "pce")))
     D.BASIS.clear()
     for k in ("cpi", "pce"):
         if sum(1 for kk, _ in past if kk == k) >= 60:
