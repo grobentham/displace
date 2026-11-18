@@ -1,30 +1,19 @@
-import urllib.request, time, json
-def get(u, h=None):
-    hd = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130 Safari/537.36"}
-    hd.update(h or {})
-    for i in range(2):
-        try:
-            r = urllib.request.urlopen(urllib.request.Request(u, headers=hd), timeout=40); return r.status, r.read()
-        except urllib.error.HTTPError as e: return e.code, e.read()[:300]
-        except Exception as e: err = e; time.sleep(2)
-    return "ERR", repr(err).encode()
-tv = {"Origin": "https://www.tradingview.com", "Referer": "https://www.tradingview.com/"}
-for k, u, h in [
-  ("tv_2015", "https://economic-calendar.tradingview.com/events?from=2015-01-13T00:00:00.000Z&to=2015-01-17T00:00:00.000Z&countries=US", tv),
-  ("tv_2024", "https://economic-calendar.tradingview.com/events?from=2024-03-11T00:00:00.000Z&to=2024-03-16T00:00:00.000Z&countries=US", tv),
-  ("tv_2010", "https://economic-calendar.tradingview.com/events?from=2010-01-11T00:00:00.000Z&to=2010-01-16T00:00:00.000Z&countries=US", tv),
-  ("ff_lastweek", "https://nfs.faireconomy.media/ff_calendar_lastweek.json", None),
-  ("ff_html_2020", "https://www.forexfactory.com/calendar?week=jan12.2020", None),
-  ("fxstreet", "https://calendar-api.fxstreet.com/en/api/v1/eventDates/2024-03-11T00:00:00Z/2024-03-16T00:00:00Z?countries=US&volatilities=HIGH", None),
-  ("investing", "https://www.investing.com/economic-calendar/cpi-733", None),
-]:
-    s, b = get(u, h)
-    print(f"LIVE {k} {s} {len(b)}B :: {b[:200]!r}")
-    if k.startswith("tv") and s == 200:
-        try:
-            d = json.loads(b); r = d.get("result", d)
-            print(f"LIVE   {k} events {len(r)}")
-            for e in r:
-                if any(x in (e.get('title') or '') for x in ("CPI", "Nonfarm", "Non Farm", "Retail Sales", "Jobless", "PCE")):
-                    print("LIVE    ", e.get("date"), "|", e.get("title"), "| actual", e.get("actual"), "| forecast", e.get("forecast"), "| prev", e.get("previous"), "| unit", e.get("unit"), e.get("scale"))
-        except Exception as ex: print("LIVE   parse", repr(ex))
+import urllib.request, time, json, collections
+tv = {"Origin": "https://www.tradingview.com", "Referer": "https://www.tradingview.com/", "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/130 Safari/537.36"}
+def get(f, t):
+    u = f"https://economic-calendar.tradingview.com/events?from={f}T00:00:00.000Z&to={t}T00:00:00.000Z&countries=US"
+    for i in range(3):
+        try: return json.loads(urllib.request.urlopen(urllib.request.Request(u, headers=tv), timeout=40).read())["result"]
+        except Exception as e: err = e; time.sleep(3)
+    raise err
+cnt = collections.Counter(); ex = {}
+t0 = time.time()
+for f, t in (("2023-01-01", "2023-02-01"), ("2023-02-01", "2023-03-01"), ("2019-05-01", "2019-06-01"), ("2026-10-01", "2026-11-19")):
+    for e in get(f, t):
+        if e.get("forecast") is not None or e.get("importance", 0) >= 0:
+            key = e["title"]; cnt[key] += 1
+            ex.setdefault(key, (e["date"], e.get("actual"), e.get("forecast"), e.get("previous"), e.get("unit"), e.get("scale"), e.get("importance"), e.get("period"), e.get("referenceDate")))
+print("LIVE seconds", round(time.time() - t0, 1), "keys example", list(get("2026-11-10", "2026-11-11")[0].keys()))
+for k, v in sorted(ex.items()):
+    if v[2] is not None:
+        print("LIVE", repr(k), "x", cnt[k], "::", v)
