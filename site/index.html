@@ -1250,25 +1250,40 @@ html.static .pro-how{display:none}
 /* ===== pro desk ===== */
 .dk-card{background:#fff;border:1px solid var(--line);border-radius:20px;padding:20px 22px;margin-bottom:14px}
 .dk-brief{border-color:#e6d3fb;box-shadow:0 10px 30px -18px rgba(120,60,200,.35)}
-.morning-brief{border-color:#cce2ff;background:linear-gradient(135deg,#eef6ff,#fff 55%);text-align:left}
-.morning-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px 28px}
+.morning-brief{padding:clamp(15px,2.3vw,28px);border-color:#dee5ed;border-radius:26px;text-align:left;box-shadow:0 16px 36px -30px #263c53}
+.morning-heading{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:5px 20px;margin-bottom:16px}
+.morning-heading h2{margin:0;font-size:clamp(1.35rem,2vw,1.75rem);letter-spacing:-.04em}
+.morning-heading p{margin:0;color:#566277;font-size:.82rem;font-variant-numeric:tabular-nums}
+.morning-outlook{--outlook-accent:#abe0ff;--outlook-glow:#1a3d5f;display:grid;grid-template-columns:minmax(0,1fr) minmax(244px, .65fr);align-items:center;gap:20px clamp(24px,4vw,64px);padding:clamp(17px,2.8vw,34px);margin-bottom:15px;border:1px solid #25394e;border-radius:20px;background:radial-gradient(ellipse at 97% 0%,var(--outlook-glow),transparent 68%),#101e30;color:#f5f8ff}
+.morning-outlook.bullish{--outlook-accent:#94edc0;--outlook-glow:#174d42}
+.morning-outlook.bearish{--outlook-accent:#ffbbc1;--outlook-glow:#60303f}
+.morning-outlook.single{grid-template-columns:1fr}
+.morning-outlook .outlook-heading{margin:0 0 9px;color:#d0ddeb;font-size:.86rem;line-height:1.3;letter-spacing:.01em}
+.outlook-call{display:block;margin:0 0 10px;color:var(--outlook-accent);font-size:clamp(2.15rem,4.25vw,3.6rem);font-weight:750;letter-spacing:-.05em;line-height:1.03}
+.morning-outlook p{margin:0;color:#edf4ff;font-size:.96rem;line-height:1.45}
+.morning-outlook details{margin-top:10px;color:#cdd9e8;font-size:.81rem;line-height:1.5}
+.morning-outlook summary,.morning-outlook a{color:var(--outlook-accent);text-underline-offset:3px}
+.morning-outlook summary{cursor:pointer;width:fit-content}
+.morning-outlook :focus-visible{outline:2px solid var(--outlook-accent);outline-offset:3px}
+.morning-outlook details p{margin:5px 0 4px;font-size:inherit}
+.outlook-yields dl{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:0}
+.outlook-yields dl div{padding:11px 12px;background:#ffffff0f;border:1px solid #ffffff28;border-radius:13px}
+.outlook-yields dt{color:#cfdbe9;font-size:.78rem;line-height:1.25}
+.outlook-yields dd{margin:5px 0 0;font-size:clamp(1.25rem,2.5vw,1.75rem);font-weight:730;font-variant-numeric:tabular-nums;line-height:1.15}
+.outlook-yields dd span{font-size:.76rem;font-weight:600;color:#cfdbe9}
+.outlook-yields .outlook-date{margin-top:7px;color:#cfdbe9;font-size:.78rem}
+.morning-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.morning-topic{min-width:0;padding:14px 15px;border:1px solid #e7ebf1;border-radius:15px;background:#f6f8fb}
 .morning-grid ul{list-style:none;padding:0;margin:0;display:grid;gap:9px}
-.morning-grid p,.morning-grid li{margin:0;font-size:.94rem;line-height:1.45;overflow-wrap:anywhere}
-.morning-grid li p{margin-top:3px;color:#424245}
-.morning-grid time{display:inline-block;color:#005bb5;font-weight:700;font-variant-numeric:tabular-nums;margin-right:8px}
-.morning-grid a{color:#005bb5;text-decoration:underline;text-underline-offset:2px}
-.morning-grid .morning-focus{margin-top:9px;color:#424245}
-.morning-outlook{background:#fff;border:1px solid #d9e7f4;border-radius:14px;padding:12px 14px;margin-bottom:15px}
-.morning-outlook h3{margin:0 0 5px;font-size:1rem}
-.morning-outlook p,.morning-outlook details{margin:0;font-size:.89rem;line-height:1.45}
-.morning-outlook details{margin-top:5px;color:var(--muted);font-size:.8rem}
-.morning-outlook summary{cursor:pointer;color:#005bb5}
-.morning-outlook details p{margin-top:4px;font-size:inherit}
-.morning-outlook strong{color:#36546d}.morning-outlook .bullish{color:#137148}.morning-outlook .bearish{color:#a3263c}
-.morning-grid .morning-earnings{margin-top:12px}
-.morning-earnings .morning-coverage{margin-top:5px;font-size:.8rem;color:var(--muted)}
-.morning-foot{margin:12px 0 0;padding-top:10px;border-top:1px solid var(--line);font-size:.83rem;color:#424245}
-@media(max-width:640px){.morning-grid{grid-template-columns:1fr}}
+.morning-grid li+li{padding-top:9px;border-top:1px solid #e0e6ee}
+.morning-grid p,.morning-grid li{margin:0;font-size:.91rem;line-height:1.45;overflow-wrap:anywhere}
+.morning-grid li p{margin-top:4px;color:#465366}
+.morning-grid time{display:block;margin-bottom:1px;color:#145f9d;font-size:.8rem;font-weight:700;font-variant-numeric:tabular-nums}
+.morning-grid a{color:#0758a1;font-weight:650;text-decoration:underline;text-underline-offset:2px}
+.morning-grid .morning-focus{margin-top:8px;color:#465366}
+.morning-topic .morning-coverage{margin-top:7px;font-size:.8rem;color:#566277}
+.morning-foot{margin:12px 0 0;font-size:.8rem;color:#566277}
+@media(max-width:740px){.morning-outlook,.morning-grid{grid-template-columns:minmax(0,1fr)}.morning-outlook{gap:13px}}
 .dn-head{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:6px 18px;margin-bottom:12px}
 .dn-head h2{font-size:1.4rem;margin:0}.dn-status,.dn-meta{color:var(--muted);font-size:.82rem;margin:0}
 .dn-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 22px}
@@ -1281,7 +1296,7 @@ html.static .pro-how{display:none}
 @media(max-width:640px){.dn-grid{grid-template-columns:1fr}}
 .dk-k{display:flex;justify-content:space-between;gap:10px;align-items:baseline}.dk-k span{font-size:.75rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#8944ab}.dk-k small{color:var(--muted);font-size:.8rem}
 .dk-card h3{font-size:1.25rem;margin:6px 0 12px;letter-spacing:-.01em}
-.morning-grid h3{font-size:.95rem;margin:0 0 6px}
+.morning-grid h3{font-size:1rem;margin:0 0 7px}
 .dk-sec{margin-top:12px}.dk-sec b{display:block;font-size:.78rem;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);margin-bottom:4px}.dk-sec p{margin:0;line-height:1.55;font-size:.95rem}
 .dk-tl{list-style:none;padding:0;margin:0;display:grid;gap:6px}.dk-tl li{display:grid;grid-template-columns:56px 1fr;gap:10px;font-size:.93rem;line-height:1.45}.dk-tl time{font-weight:700;font-variant-numeric:tabular-nums}
 .dk-dis{font-size:.78rem;color:var(--muted);margin:14px 0 0}
@@ -2410,7 +2425,7 @@ svg.cd line.wick{animation:fadein .5s ease-out both}
   <div class="wide">
     <header class="nhero"><div class="kick">News</div><h1 class="h-lg">Economic calendar</h1><p class="sub">Follow scheduled releases and official policy updates in New York time and yours. See reported figures and how they compare with earlier readings.</p><p class="ndis">For education only. Briefings describe reported data and historical reactions.</p></header>
     <section class="dk-card morning-brief" id="morning-brief" aria-labelledby="morning-title">
-      <div class="dn-head"><h2 id="morning-title">Morning brief</h2><p class="dn-status" id="morning-status" role="status">Loading the latest edition…</p></div>
+      <header class="morning-heading"><h2 id="morning-title">Morning brief</h2><p id="morning-status" role="status">Loading the latest edition…</p></header>
       <div id="morning-content"></div>
     </section>
     <div class="tool on" id="econcal">
@@ -2684,20 +2699,36 @@ window.claude={use:function(n){return Promise.resolve(n==="db"?db:null);},isStat
   var sgtEvent=new Intl.DateTimeFormat("en-SG",{weekday:"short",hour:"2-digit",minute:"2-digit",hourCycle:"h23",timeZone:"Asia/Singapore"});
   var sgtTime=new Intl.DateTimeFormat("en-SG",{hour:"2-digit",minute:"2-digit",hourCycle:"h23",timeZone:"Asia/Singapore"});
   var sgtDay=new Intl.DateTimeFormat("en-SG",{weekday:"short",timeZone:"Asia/Singapore"});
+  var yieldDate=new Intl.DateTimeFormat("en-US",{month:"short",day:"numeric",timeZone:"UTC"});
   var editions=[],shown=null,wakeup;
+  function yieldChange(label,value){
+    var item=node("div"),valueNode=node("dd",(value>0?"+":value<0?"−":"")+Math.abs(value));
+    valueNode.append(node("span"," bp"));
+    item.append(node("dt",label),valueNode);
+    return item;
+  }
   function outlookBlock(outlook){
-    var box=node("section",null,"morning-outlook"),title=node("h3","Market outlook · NQ"),reason=node("p");
-    var color=outlook.label==="Bullish tilt"?"bullish":outlook.label==="Bearish tilt"?"bearish":"";
-    reason.append(node("strong",outlook.label+". ",color),document.createTextNode(outlook.reason));
+    var rates=outlook.rates,tone=outlook.label==="Bullish tilt"?" bullish":outlook.label==="Bearish tilt"?" bearish":"";
+    var box=node("section",null,"morning-outlook"+tone+(rates?"":" single")),summary=node("div");
+    var title=node("h3","Market outlook · NQ","outlook-heading");
+    title.id="morning-outlook-title";
+    box.setAttribute("aria-labelledby",title.id);
     var method=node("details");
     var treasury=node("a","U.S. Treasury yield data");
     treasury.href="https://home.treasury.gov/resource-center/data-chart-center/interest-rates";
     method.append(node("summary","About this outlook"),node("p","The rates-based tilt requires both Treasury yields to move at least "+outlook.thresholdBp+" bp in the same direction. Earnings provide separate context. The rule has yet to be backtested."),treasury);
-    box.append(title,reason,method);
+    summary.append(title,node("strong",outlook.label,"outlook-call"),node("p",outlook.reason),method);
+    box.append(summary);
+    if(rates){
+      var evidence=node("div",null,"outlook-yields"),list=node("dl");
+      list.append(yieldChange("2-year Treasury",rates.twoYearBp),yieldChange("10-year Treasury",rates.tenYearBp));
+      evidence.append(list,node("p","Yield changes · "+yieldDate.format(new Date(rates.date+"T00:00:00Z")),"outlook-date"));
+      box.append(evidence);
+    }
     return box;
   }
   function earningsBlock(data){
-    var box=node("div",null,"morning-earnings"),rows=node("ul");
+    var box=node("div",null,"morning-topic"),rows=node("ul");
     box.append(node("h3","Earnings"));
     data.reports.forEach(function(item){
       var row=node("li");row.append(headline({title:item.symbol+" results",url:item.url}));
@@ -2730,7 +2761,7 @@ window.claude={use:function(n){return Promise.resolve(n==="db"?db:null);},isStat
     morningStatus.textContent=sgtDate.format(new Date(edition.opensAt))+" · 7:00 a.m. SGT"+(stale?" · Next edition pending":"");
     if(shown===edition)return;
     shown=edition;
-    var grid=node("div",null,"morning-grid"),recent=node("div"),upcoming=node("div");
+    var grid=node("div",null,"morning-grid"),recent=node("div",null,"morning-topic"),upcoming=node("div",null,"morning-topic");
     recent.append(node("h3","What changed"));
     if(edition.updates.length){
       var updates=node("ul");
@@ -2744,8 +2775,9 @@ window.claude={use:function(n){return Promise.resolve(n==="db"?db:null);},isStat
       upcoming.append(releases);
     }else upcoming.append(node("p",edition.calendarCovered?"No major U.S. releases scheduled in the next 24 hours.":"Schedule coverage is limited for the next 24 hours."));
     if(edition.focus){var focus=node("p",null,"morning-focus");if(edition.upcoming.length>1)focus.append(node("strong",edition.focus.title+". "));focus.append(document.createTextNode(edition.focus.text));upcoming.append(focus);}
-    if(edition.earnings)recent.append(earningsBlock(edition.earnings));
-    grid.append(recent,upcoming);
+    grid.append(upcoming);
+    if(edition.earnings)grid.append(earningsBlock(edition.earnings));
+    grid.append(recent);
     var footer=[];
     var treasury=edition.treasury;
     if(treasury&&!edition.outlook){
