@@ -81,7 +81,7 @@ def parse(charts):
 def load(log=print):
     """Fetch and parse, falling back to the last good copy in engine/cache/nowcast.json."""
     try:
-        charts = json.loads(publicdata.download(URL))
+        charts = json.loads(publicdata.download(URL, max_bytes=40 * 1024 * 1024))
         past, latest = parse(charts)
         if len(past) < 50:
             raise ValueError(f"only {len(past)} past nowcasts parsed")
