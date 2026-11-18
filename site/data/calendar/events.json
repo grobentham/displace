@@ -27,7 +27,9 @@
      "previous": "86K"
     }
    ],
-   "facts": []
+   "facts": [],
+   "forecast": "69K",
+   "fsrc": "TradingView consensus"
   },
   {
    "id": "20261104-ism-services-pmi-oct",
@@ -38,7 +40,9 @@
    "impact": "medium",
    "src": "ISM",
    "note": "Usually the third business day of the month; confirm on ismworld.org.",
-   "auto": "rule"
+   "auto": "rule",
+   "forecast": "54.8",
+   "fsrc": "TradingView consensus"
   },
   {
    "id": "20261105-initial-jobless-claims",
@@ -78,7 +82,9 @@
    "facts": [
     "The initial claims reading was the lowest since week to Jul 18."
    ],
-   "recap": "Jobless claims came in at 189K. The previous reading was 195K. 4-week average 195K (previous 197K); Continuing claims 1.72M (previous 1.70M). The initial claims reading was the lowest since week to Jul 18."
+   "recap": "Jobless claims came in at 189K. The previous reading was 195K. 4-week average 195K (previous 197K); Continuing claims 1.72M (previous 1.70M). The initial claims reading was the lowest since week to Jul 18.",
+   "forecast": "196K",
+   "fsrc": "TradingView consensus"
   },
   {
    "date": "2026-11-06",
@@ -127,7 +133,9 @@
    "previous": "189K",
    "revised": "191K",
    "id": "20261112-initial-jobless-claims",
-   "metric": "initial claims"
+   "metric": "initial claims",
+   "forecast": "195K",
+   "fsrc": "TradingView consensus"
   },
   {
    "date": "2026-11-13",
@@ -141,7 +149,9 @@
    "previous": "1.3%",
    "revised": "1.4%",
    "id": "20261113-ppi-producer-prices-oct",
-   "metric": "final demand PPI month-on-month"
+   "metric": "final demand PPI month-on-month",
+   "forecast": "0.4%",
+   "fsrc": "TradingView consensus"
   },
   {
    "date": "2026-11-17",
@@ -247,7 +257,9 @@
    "note": "",
    "previous": "91.7",
    "id": "20261124-consumer-confidence-nov",
-   "metric": "Conference Board consumer confidence index"
+   "metric": "Conference Board consumer confidence index",
+   "forecast": "92.0",
+   "fsrc": "TradingView consensus"
   },
   {
    "date": "2026-11-25",
@@ -269,7 +281,9 @@
      "label": "Ex transportation m/m",
      "previous": "0.5%"
     }
-   ]
+   ],
+   "forecast": "0.0%",
+   "fsrc": "TradingView consensus"
   },
   {
    "date": "2026-11-25",
@@ -340,7 +354,9 @@
      "label": "Personal income m/m",
      "previous": "0.2%"
     }
-   ]
+   ],
+   "forecast": "0.3%",
+   "fsrc": "TradingView consensus"
   },
   {
    "date": "2026-11-25",
@@ -358,7 +374,9 @@
      "label": "New home sales",
      "previous": "676K"
     }
-   ]
+   ],
+   "forecast": "670K",
+   "fsrc": "TradingView consensus"
   },
   {
    "date": "2026-11-25",
