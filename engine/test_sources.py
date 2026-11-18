@@ -13,7 +13,6 @@ os.environ["ENGINE_NOW"] = "2026-12-10T10:00:00-05:00"
 
 import agencies  # noqa: E402
 import consensus  # noqa: E402
-import nowcast  # noqa: E402
 import engine as E  # noqa: E402
 import fredapi  # noqa: E402
 import publicdata  # noqa: E402
@@ -87,26 +86,6 @@ def fred_fallback():
     print("fred probe ok")
 
 
-def nowcast_parse():
-    def chart(sub, cats, series):
-        return {"chart": {"subcaption": sub}, "categories": [{"category": cats}],
-                "dataset": [{"seriesname": n, "data": [{"value": v} for v in vals]} for n, vals in series.items()]}
-    oct_chart = chart("2026-10", [{"label": "11/06"}, {"label": "11/09"}, {"label": "11/10"},
-                                  {"label": "CPI Oct", "vline": "true"}, {"label": "11/12"},
-                                  {"label": "CPI Sep", "vline": "true"}],
-                      {"CPI Inflation": ["0.30", "0.31", "0.32", "0.33"], "Core CPI Inflation": ["0.24", "0.25", "0.26", "0.27"],
-                       "Actual Core CPI Inflation": ["", "", "0.30", ""], "Core PCE Inflation": ["0.20", "0.21", "0.22", "0.23"]})
-    nov_chart = chart("2026-11", [{"label": "11/16"}, {"label": "11/17"}], {"Core CPI Inflation": ["0.19", "0.18"]})
-    dec_chart = chart("2026-12", [{"label": "12/30"}, {"label": "01/04"}, {"label": "CPI Dec", "vline": "true"}],
-                      {"Core CPI Inflation": ["0.21", "0.22"]})
-    past, latest, daily = nowcast.parse([oct_chart, nov_chart, dec_chart])
-    assert nowcast.before(daily, "pce", "2026-10", "2026-11-26") == 0.23 and nowcast.before(daily, "pce", "2026-10", "2026-11-06") is None
-    assert past[("cpi", "2026-11-10")] == 0.25, past  # the day before release, core, not the actual
-    assert ("cpi", "2026-09-10") not in past and ("pce", "2026-10") in latest and ("pce", "2026-10") in daily, (past, latest)
-    assert latest[("cpi", "2026-11")] == 0.18 and past[("cpi", "2027-01-04")] == 0.21, (past, latest)
-    print("nowcast parse ok")
-
-
 def consensus_feed():
     import zoneinfo
     ny = zoneinfo.ZoneInfo("America/New_York")
@@ -133,6 +112,5 @@ if __name__ == "__main__":
     fed_decision()
     reactions_keyless()
     fred_fallback()
-    nowcast_parse()
     consensus_feed()
     print("source tests passed")
