@@ -1,23 +1,27 @@
 {
- "lastRun": "2026-11-15T05:40-05:00",
- "fred": false,
- "fredCalls": 0,
+ "lastRun": "2026-11-17T23:08-05:00",
+ "source": "public FRED and ALFRED",
+ "fredCalls": 83,
+ "fred": true,
  "quality": {
-  "passed": 5,
-  "total": 5,
+  "passed": 7,
+  "total": 18,
   "held": 0,
   "rejected": 0,
   "critical": 0
  },
- "fredErrors": 0,
- "calendarThrough": "2027-03-30",
- "events": 84,
- "upcoming": 78,
+ "fredErrors": 82,
+ "calendarThrough": "2027-03-31",
+ "events": 86,
+ "upcoming": 81,
  "warnings": [
-  "FRED_API_KEY is not set: figures, markets and reactions are not updating"
+  "Data source errors on 82 request(s): release 50, release 10, release 46, release 9, release 180, release 192, release 91, release 95"
  ],
  "log": [
-  "engine run 2026-11-15T05:40-05:00 without FRED key",
-  "quality: 5/5 checks passed, 0 held, 0 rejected"
+  "engine run 2026-11-17T23:08-05:00 using public FRED and ALFRED",
+  "calendar: 3 added, 0 removed",
+  "calendar saved",
+  "earnings: 9 dates saved",
+  "quality: 7/18 checks passed, 0 held, 0 rejected"
  ]
 }

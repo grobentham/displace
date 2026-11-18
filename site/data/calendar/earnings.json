@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-18",
+ "updated": "2026-11-17",
  "events": [
   {
    "id": "20261117-earn-nvda",
@@ -14,6 +14,19 @@
    "session": "AMC",
    "note": "Reports after the close. Futures react in the evening and the move carries into the next open. Date confirmed by the company.",
    "url": "https://investor.nvidia.com"
+  },
+  {
+   "id": "20261118-earn-panw",
+   "date": "2026-11-18",
+   "time": "16:05",
+   "title": "Palo Alto Networks (PANW) earnings · quarter ending Oct 2026",
+   "cur": "USD",
+   "impact": "earnings",
+   "src": "Nasdaq earnings calendar",
+   "tier": "notable",
+   "status": "scheduled",
+   "session": "AMC",
+   "note": "Reports after the close. Futures react in the evening and the move carries into the next open. Date from the Nasdaq calendar. Companies sometimes move it; check their investor page."
   },
   {
    "id": "20261119-earn-wmt",
@@ -44,6 +57,19 @@
    "url": "https://investor.salesforce.com"
   },
   {
+   "id": "20261209-earn-adbe",
+   "date": "2026-12-09",
+   "time": "16:05",
+   "title": "Adobe (ADBE) earnings · quarter ending Nov 2026",
+   "cur": "USD",
+   "impact": "earnings",
+   "src": "Nasdaq earnings calendar",
+   "tier": "notable",
+   "status": "scheduled",
+   "session": "AMC",
+   "note": "Reports after the close. Futures react in the evening and the move carries into the next open. Date from the Nasdaq calendar. Companies sometimes move it; check their investor page."
+  },
+  {
    "id": "20261209-earn-avgo",
    "date": "2026-12-09",
    "time": "16:05",
@@ -56,6 +82,45 @@
    "session": "AMC",
    "note": "Reports after the close. Futures react in the evening and the move carries into the next open. Date confirmed by the company.",
    "url": "https://investors.broadcom.com"
+  },
+  {
+   "id": "20261209-earn-orcl",
+   "date": "2026-12-09",
+   "time": "",
+   "title": "Oracle (ORCL) earnings · quarter ending Nov 2026",
+   "cur": "USD",
+   "impact": "earnings",
+   "src": "Nasdaq earnings calendar",
+   "tier": "notable",
+   "status": "scheduled",
+   "session": "",
+   "note": "Time not published yet. Date from the Nasdaq calendar. Companies sometimes move it; check their investor page."
+  },
+  {
+   "id": "20261210-earn-cost",
+   "date": "2026-12-10",
+   "time": "16:05",
+   "title": "Costco (COST) earnings · quarter ending Nov 2026",
+   "cur": "USD",
+   "impact": "earnings",
+   "src": "Nasdaq earnings calendar",
+   "tier": "notable",
+   "status": "scheduled",
+   "session": "AMC",
+   "note": "Reports after the close. Futures react in the evening and the move carries into the next open. Date from the Nasdaq calendar. Companies sometimes move it; check their investor page."
+  },
+  {
+   "id": "20261216-earn-mu",
+   "date": "2026-12-16",
+   "time": "",
+   "title": "Micron (MU) earnings · quarter ending Nov 2026",
+   "cur": "USD",
+   "impact": "earnings",
+   "src": "Nasdaq earnings calendar",
+   "tier": "notable",
+   "status": "scheduled",
+   "session": "",
+   "note": "Time not published yet. Date from the Nasdaq calendar. Companies sometimes move it; check their investor page."
   }
  ]
 }

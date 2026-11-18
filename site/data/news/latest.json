@@ -1,0 +1,86 @@
+{
+ "checkedAt": "2026-11-18T04:20:31+00:00",
+ "sources": {
+  "Federal Reserve": true,
+  "European Central Bank": true,
+  "Bank of England": true
+ },
+ "items": [
+  {
+   "id": "20261113-ppi-producer-prices-oct",
+   "title": "PPI producer prices (Oct)",
+   "source": "BLS",
+   "url": "https://fred.stlouisfed.org/series/PPIFIS",
+   "published": "2026-11-13T13:30:00+00:00",
+   "analysis": "PPI came in at 0.3%. The previous reading was 1.3%, revised to 1.4%.",
+   "context": "PPI tracks prices received by producers. Some components feed into the PCE inflation calculation."
+  },
+  {
+   "title": "Federal Reserve announces revised tentative schedule of Federal Open Market Committee meetings in 2027",
+   "source": "Federal Reserve",
+   "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20261112a.htm",
+   "published": "2026-11-12T17:45:00+00:00",
+   "context": "The published meeting calendar gives the timing of policy decisions and minutes.",
+   "analysis": ""
+  },
+  {
+   "id": "20261112-initial-jobless-claims",
+   "title": "Initial jobless claims",
+   "source": "Dept. of Labor",
+   "url": "https://fred.stlouisfed.org/series/ICSA",
+   "published": "2026-11-12T13:30:00+00:00",
+   "analysis": "Jobless claims came in at 200K. The previous reading was 189K, revised to 191K.",
+   "context": "Initial claims count new unemployment insurance applications. The four-week average smooths weekly swings."
+  },
+  {
+   "id": "20261110-cpi-inflation-oct",
+   "title": "CPI inflation (Oct)",
+   "source": "BLS",
+   "url": "https://fred.stlouisfed.org/series/CPILFESL",
+   "published": "2026-11-10T13:30:00+00:00",
+   "analysis": "Core CPI came in at 0.3% against a 0.2% forecast, above expectations. The previous reading was 0.3%.",
+   "context": "Core CPI excludes food and energy. Comparing it with headline CPI helps identify where prices changed."
+  },
+  {
+   "id": "20261106-non-farm-payrolls-employment-situation-o",
+   "title": "Non-farm payrolls · Employment situation (Oct)",
+   "source": "BLS",
+   "url": "https://fred.stlouisfed.org/series/PAYEMS",
+   "published": "2026-11-06T13:30:00+00:00",
+   "analysis": "Payrolls came in at 165K against a 65K forecast, above expectations. The previous reading was 29K, revised to 60K.",
+   "context": "Payrolls count jobs, while the unemployment rate comes from a separate household survey. The two measures can diverge."
+  },
+  {
+   "title": "Bank rate increased to 4% - November 2026 Monetary Policy Summary and Minutes",
+   "source": "Bank of England",
+   "url": "https://www.bankofengland.co.uk/monetary-policy-summary-and-minutes/2026/november-2026",
+   "published": "2026-11-05T12:00:00+00:00",
+   "context": "Bank Rate is the UK policy rate. The vote split shows how much agreement there was on the decision.",
+   "analysis": "Bank Rate was increased to 4%."
+  },
+  {
+   "title": "ECB wage tracker suggests slightly higher wage growth in first three quarters of 2027 compared with the full year of 2026",
+   "source": "European Central Bank",
+   "url": "https://www.ecb.europa.eu//press/pr/date/2026/html/ecb.pr261104~caf181d7ac.en.html",
+   "published": "2026-11-04T00:00:00+00:00",
+   "context": "The ECB wage tracker follows negotiated pay, which can move differently from average earnings across the economy.",
+   "analysis": ""
+  },
+  {
+   "title": "Federal Reserve issues FOMC statement",
+   "source": "Federal Reserve",
+   "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20261028a.htm",
+   "published": "2026-10-28T18:00:00+00:00",
+   "context": "The Fed sets a target range for overnight interest rates. The statement explains the committee's reasoning and any dissent.",
+   "analysis": "The Fed decided to maintain its target range at 3-3/4% to 4%."
+  },
+  {
+   "title": "Minutes of the Federal Open Market Committee, September 15-16, 2026",
+   "source": "Federal Reserve",
+   "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20261007a.htm",
+   "published": "2026-10-07T18:00:00+00:00",
+   "context": "Meeting minutes show which risks officials weighed when they made the decision.",
+   "analysis": ""
+  }
+ ]
+}
