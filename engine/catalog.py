@@ -1,7 +1,8 @@
 """Every release the engine tracks: where its dates come from, when it lands, and which figures it reports.
 
 components: (label, FRED series, transform)
-  transforms: pct = % change on the prior period, yoy = % change on a year earlier, diff = change in level (thousands -> K),
+  transforms: pct = % change on the prior period, yoy = % change on a year earlier, diff = change in thousands,
+              diffPersons = change in persons (displayed in thousands),
               level1 = level with one decimal, pctlevel = level shown as %, rate = 2-decimal %, claims = persons -> K,
               claimsM = persons -> M, thousands = thousands -> K, millions = thousands -> M
 The first component is the headline shown in the calendar row.
@@ -46,7 +47,7 @@ RELEASES = {
     "homes": dict(fred=r"^New Residential Sales$", rid=97, time="10:00", impact="medium", src="Census Bureau", lag=1,
                   title="New home sales ({per})", comps=[("New home sales", "HSN1F", "thousands")]),
     "adp": dict(fred=r"^ADP National Employment Report$", rid=194, time="08:15", impact="medium", src="ADP", lag=1,
-                title="ADP private payrolls ({per})", comps=[("ADP private payrolls", "ADPMNUSNERSA", "diff")]),
+                title="ADP private payrolls ({per})", comps=[("ADP private payrolls", "ADPMNUSNERSA", "diffPersons")]),
     "fomc": dict(fred=r"^FOMC Press Release$", rid=101, time="14:00", impact="high", src="Federal Reserve", lag=None,
                  title="FOMC rate decision", comps=[("Fed funds target, upper bound", "DFEDTARU", "rate")]),
 }

@@ -1235,6 +1235,16 @@ html.static .pro-how{display:none}
 /* ===== pro desk ===== */
 .dk-card{background:#fff;border:1px solid var(--line);border-radius:20px;padding:20px 22px;margin-bottom:14px}
 .dk-brief{border-color:#e6d3fb;box-shadow:0 10px 30px -18px rgba(120,60,200,.35)}
+.dn-head{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:6px 18px;margin-bottom:12px}
+.dn-head h2{font-size:1.4rem;margin:0}.dn-status,.dn-meta{color:var(--muted);font-size:.82rem;margin:0}
+.dn-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 22px}
+.dn-item{border-top:1px solid var(--line);padding:14px 0;overflow-wrap:anywhere}
+.dk-card .dn-item h3{font-size:1rem;line-height:1.35;margin:5px 0 7px}
+.dn-item h3 a{color:var(--ac);text-decoration:underline;text-underline-offset:3px}
+.dn-item p:not(.dn-meta){font-size:.91rem;line-height:1.5;margin:5px 0 0}
+.dn-context{color:var(--muted)}
+.dn-more summary{color:var(--ac);cursor:pointer;font-size:.9rem;font-weight:650}
+@media(max-width:640px){.dn-grid{grid-template-columns:1fr}}
 .dk-k{display:flex;justify-content:space-between;gap:10px;align-items:baseline}.dk-k span{font-size:.75rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#8944ab}.dk-k small{color:var(--muted);font-size:.8rem}
 .dk-card h3{font-size:1.25rem;margin:6px 0 12px;letter-spacing:-.01em}
 .dk-sec{margin-top:12px}.dk-sec b{display:block;font-size:.78rem;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);margin-bottom:4px}.dk-sec p{margin:0;line-height:1.55;font-size:.95rem}
@@ -2362,10 +2372,15 @@ svg.cd line.wick{animation:fadein .5s ease-out both}
 
 <section class="toolpage newspage" id="calendar" style="--ac:#0071e3;--ac2:#30d158">
   <div class="wide">
-    <header class="nhero"><div class="kick">News</div><h1 class="h-lg">Economic calendar</h1><p class="sub">Every release that moves NQ and ES, in New York time and yours. Tap any event for its briefing: what a hot or cool number usually means for the dollar, gold and NQ.</p><p class="ndis">Education only. Briefings describe how markets have often reacted. They are not predictions, signals or financial advice.</p></header>
+    <header class="nhero"><div class="kick">News</div><h1 class="h-lg">Economic calendar</h1><p class="sub">Follow scheduled releases and official policy updates in New York time and yours. See reported figures and how they compare with earlier readings.</p><p class="ndis">For education only. Briefings describe reported data and historical reactions.</p></header>
     <div class="tool on" id="econcal">
         <div class="ec-next" id="ec-next"></div>
         <div class="dk-card dk-brief" id="dk-brief" hidden></div>
+        <section class="dk-card" id="displace-news" aria-labelledby="dn-title">
+          <div class="dn-head"><h2 id="dn-title">Latest economic news</h2><p class="dn-status" id="dn-status" role="status">Loading official updates…</p></div>
+          <div class="dn-grid" id="dn-grid"></div>
+          <details class="dn-more" id="dn-more" hidden><summary>More updates</summary><div class="dn-grid" id="dn-older"></div></details>
+        </section>
         <div class="dk-row"><div class="outlook" id="ec-outlook" hidden></div><div class="dk-card dk-fed" id="dk-fed" hidden></div></div>
         <div class="dk-card dk-pulse" id="dk-pulse" hidden></div>
         <div class="ec-rem" id="ec-rem"></div>
@@ -2377,11 +2392,11 @@ svg.cd line.wick{animation:fadein .5s ease-out both}
       </div>
     <div class="howto">
       <div><h4>How to use it</h4><ol><li><b>Check it before the session</b><span>Look at today's events each morning. Anything at 08:30 lands an hour before the New York open.</span></li><li><b>Mind the red folders</b><span>High-impact releases move fastest. Let the release candle print before you trust a setup.</span></li><li><b>Plan around the Fed</b><span>FOMC days often chop until 14:00, then move fast. Many traders stay flat into the decision.</span></li></ol></div>
-      <div><h4>Good to know</h4><ul><li>Dates come from each agency's own published schedule. The calendar re-checks them twice a week and updates itself while the page is open. Agencies occasionally reschedule, so confirm on the source if a date matters to you.</li><li>Times are New York. Your local time sits beside each one and follows daylight saving automatically.</li></ul></div>
+      <div><h4>Good to know</h4><ul><li>The engine checks published schedules and data throughout the week. Each news item links to its source.</li><li>Times are New York. Your local time sits beside each one and follows daylight saving automatically.</li></ul></div>
     </div>
     <div class="nstats" id="dk-stats" hidden></div>
     <div class="nrec">
-      <div class="ng-h"><h2>Release record</h2><p>Every number since the calendar started tracking: actual against forecast, and how markets reacted in the first hour.</p></div>
+      <div class="ng-h"><h2>Release record</h2><p>Past readings, recorded forecasts, and historical market reactions.</p></div>
       <div id="ec-rec"></div>
     </div>
     <div class="nguide">
@@ -2572,6 +2587,50 @@ function ro(){return Promise.reject({code:"read_only"});}
 document.documentElement.classList.add("static");var db={doc:function(p){return{get:function(){return get(p);},onSnapshot:function(cb){var last=null;function pull(){get(p).then(function(s){var k=JSON.stringify(s.data());if(k!==last){last=k;cb(s);}});}pull();var t=setInterval(pull,5*60000);document.addEventListener("visibilitychange",function(){if(!document.hidden)pull();});return function(){clearInterval(t);};},set:ro,update:ro,delete:ro};},
   collection:function(){var q={limit:function(){return q;},orderBy:function(){return q;},where:function(){return q;},get:function(){return Promise.resolve({docs:[],metadata:{}});},onSnapshot:function(cb){cb({docs:[],metadata:{}});return function(){};}};return q;}};
 window.claude={use:function(n){return Promise.resolve(n==="db"?db:null);},isStatic:true};})();
+</script>
+<script>
+(function(){
+  "use strict";
+  var section=document.getElementById("displace-news");
+  if(!section)return;
+  if(!window.claude||!window.claude.isStatic){section.hidden=true;return;}
+  var grid=document.getElementById("dn-grid"),more=document.getElementById("dn-more");
+  var older=document.getElementById("dn-older"),status=document.getElementById("dn-status");
+  var dateFormat=new Intl.DateTimeFormat(undefined,{month:"short",day:"numeric",year:"numeric",hour:"numeric",minute:"2-digit",timeZone:"America/New_York"});
+  function format(date){var value=new Date(date);return isNaN(value.getTime())?"":dateFormat.format(value)+" NY";}
+  function node(tag,value,cls){
+    var el=document.createElement(tag);el.textContent=value||"";if(cls)el.className=cls;return el;
+  }
+  function card(item){
+    var el=node("article",null,"dn-item");
+    var title=node("h3",item.title);
+    try{
+      var url=new URL(item.url);
+      if(url.protocol==="https:"){
+        var link=node("a",item.title);link.href=url.href;link.target="_blank";link.rel="noopener noreferrer";
+        title.replaceChildren(link);
+      }
+    }catch(error){}
+    el.append(node("p",[item.source,format(item.published)].filter(Boolean).join(" · "),"dn-meta"),title);
+    if(item.analysis)el.append(node("p",item.analysis));
+    if(item.context)el.append(node("p",item.context,"dn-context"));
+    return el;
+  }
+  function render(doc){
+    if(!doc||!Array.isArray(doc.items)){status.textContent="Official updates are temporarily unavailable.";return;}
+    var date=format(doc.checkedAt);
+    var delayed=Object.entries(doc.sources||{}).filter(function(source){return source[1]===false;}).map(function(source){return source[0];});
+    var title=doc.items.length&&date?"Checked "+date:"No recent official updates";
+    var old=date&&Date.now()-Date.parse(doc.checkedAt)>26*60*60*1000;
+    status.textContent=title+(old?" · awaiting refresh":"")+(delayed.length?" · temporarily unavailable: "+delayed.join(", "):"");
+    grid.replaceChildren.apply(grid,doc.items.slice(0,6).map(card));
+    older.replaceChildren.apply(older,doc.items.slice(6).map(card));
+    more.hidden=doc.items.length<=6;
+  }
+  window.claude.use("db").then(function(db){
+    db.doc("news/latest").onSnapshot(function(snapshot){render(snapshot.data());});
+  }).catch(function(){render(null);});
+})();
 </script>
 <script>
 (function(){
@@ -3431,7 +3490,7 @@ function valsDetail(e){if(e.impact==="holiday"||e.impact==="earnings"||!e.time)r
   if(c)bits.push(c==="up"?"Came in above forecast.":c==="dn"?"Came in below forecast.":"Came in line with forecast.");
   if(e.revised)bits.push("Previous revised to "+esc(e.revised)+".");
   if(e.fsrc)bits.push("Forecast: "+esc(e.fsrc)+".");
-  if(e.provenance&&e.provenance.series)bits.push("Actual: "+esc(e.src||"agency")+" data via FRED ("+esc(e.provenance.series)+")"+(e.provenance.published?", published "+esc(e.provenance.published):"")+". Percent changes are calculated from published levels and can occasionally differ by 0.1 from the agency's own rounding.");
+  if(e.provenance&&e.provenance.series){var p=e.provenance;bits.push("Actual: "+esc(e.src||"agency")+" data via "+esc(p.via||"FRED")+" ("+esc(p.series)+")"+(p.asof?", archive snapshot "+esc(p.asof):p.published?", published "+esc(p.published):"")+". Percent changes calculated from published levels may differ slightly from official rounding.");}
   if(!e.actual&&!e.forecast&&!(instant(e.date,e.time)<Date.now()))bits.push("The forecast is added once economists' consensus is published, usually in the week of the release. The actual number is added shortly after it comes out.");
   return bits.length?'<p class="ecd-v">'+bits.join(" ")+'</p>':"";}
 /* news details */
