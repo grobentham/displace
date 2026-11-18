@@ -25,7 +25,7 @@ Everything here is education. The engine never writes entries, targets or trade 
 
 ## What the engine does
 
-GitHub Actions checks sources around the New York release windows on weekdays and refreshes the weekly outlook on Sunday. Public downloads and RSS feeds require zero API keys. Text is generated with fixed templates.
+GitHub Actions checks sources around the New York release windows on weekdays and refreshes the weekly outlook on Sunday. Public downloads and RSS feeds require zero API keys; nothing in this repo needs an account or a secret. Every download retries, because GitHub's runners sometimes take several seconds to look up a host name. Text is generated with fixed templates.
 
 **Latest economic news.** The News page shows source-linked policy announcements from the Federal Reserve, European Central Bank, and Bank of England, plus confirmed economic releases. The digest explains what each release measures and compares reported figures with previous readings and any recorded consensus. The page shows when the feeds were checked and identifies temporarily unavailable feeds.
 
@@ -78,7 +78,7 @@ Each available series shows changes and a sparkline. Treasury yields and the eff
 - **Scenario map, every release:** if the figure lands above, near or below the average of its previous readings (the same measure in training and live; free consensus history is too short to train on), how often gold, the Nasdaq-100 and the other markets closed higher that day and the typical move. History since 2010 from figures *as first published*, so no hindsight revisions.
 - **Lean, proven rules only:** before a release, "if above its recent trend: gold ▼ 68%"; after it, the lean for that day's close. Shown only for release × market rules that were right 55%+ over 30+ unseen releases, survive a multiple-testing correction, beat a coin flip on calibration, worked in both halves of history and are still working on their latest 20 calls. Everything else shows "no proven edge".
 - **Public track record:** every post-release lean is logged in `site/data/direction/log.json` before the close and scored against the actual close. Leans are withdrawn at the close, today's unfinished price bar is never used, and the recent record feeds a circuit breaker that switches a rule off.
-- **Data:** the release history is loaded once from the official FRED/ALFRED API (needs the free `FRED_API_KEY` secret, see setup) and then kept current from the engine's own confirmed figures, so it keeps working when FRED is unreachable. Gold and Nasdaq-100 closes come from Stooq with Yahoo as fallback; yields from Treasury; fed funds from the New York Fed. All cached in `engine/cache/`.
+- **Data, no API keys:** the release history comes from ALFRED, the St. Louis Fed's public archive of every past edition of each series. For each past release date the engine reads the series as it stood that morning and keeps the newly published figure, so the model sees exactly what traders saw, with no later revisions. The first runs load 15+ years in the background (about nine minutes per run, resumable); after that it refreshes weekly and adds each new figure from the calendar. Gold (COMEX futures) and Nasdaq-100 closes come from Yahoo, with FRED's public Nasdaq-100 series as a backup; daily rates and the dollar from FRED's public downloads, with the Treasury and the New York Fed as backups. All cached in `engine/cache/`.
 
 **Quality control.** Nothing is published without passing these checks.
 - **Plausibility:** every figure must fall inside a hard range for its series (core CPI m/m between −1.5% and 2%, jobless claims between 100K and 1.5M, and so on). Anything outside is rejected and never published.
@@ -107,10 +107,7 @@ Add forecasts by hand if you want them (see below).
 ## One-time setup
 
 1. **Turn on Pages:** repo **Settings → Pages → Build and deployment → Source: GitHub Actions**.
-2. **News-outcome history (once):** get a free FRED API key at https://fred.stlouisfed.org/docs/api/api_key.html and add it as a repository secret named `FRED_API_KEY` (**Settings → Secrets and variables → Actions → New repository secret**). The first run loads 15+ years of first-release history into `engine/cache/`. If GitHub's runners can't reach FRED, run `FRED_API_KEY=yourkey python engine/predict.py` once on your own computer and commit `engine/cache/`.
-   The same key also lets the main engine read FRED's API for figures the agencies don't publish in a free, machine-readable form (jobless claims, durable goods, UMich, new home sales, ADP) and for the dollar, oil, breakevens and mortgage rates. Each run first checks the key can reach FRED; if it can't, it switches to the keyless agency sources for that run.
-   Optional: a free BLS key (https://data.bls.gov/registrationEngine/) as the `BLS_API_KEY` secret raises the BLS limit from 25 to 500 requests a day.
-3. **Publish the site:** **Actions → Engine → Run workflow**. Subsequent scheduled runs refresh the data and deploy the site at `https://<your-username>.github.io/displace/`.
+2. **Publish the site:** **Actions → Engine → Run workflow**. Subsequent scheduled runs refresh the data and deploy the site at `https://<your-username>.github.io/displace/`.
 
 ## Day-to-day
 

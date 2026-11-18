@@ -1,7 +1,7 @@
 """Daily closes for the markets the direction engine studies, from free public sources (no API keys).
 
-  gold  XAU/USD spot from Stooq; COMEX gold futures from Yahoo as a fallback
-  nq    Nasdaq-100 index (^NDX) from Stooq; Yahoo as a fallback
+  gold  COMEX gold futures (GC=F) from Yahoo
+  nq    Nasdaq-100 index (^NDX) from Yahoo; FRED's public NASDAQ100 series as a fallback
 
 Closes are cached in engine/cache/prices/<market>.json, which the workflow commits, so a run that cannot reach
 any source still has the full history and only the latest days are missing. Two different gold prices (spot vs
@@ -10,6 +10,7 @@ futures) are never spliced together; the Nasdaq-100 index is the same number at 
 import datetime as dt
 import json
 import os
+import time
 import urllib.request
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -19,10 +20,16 @@ REFRESH_HOURS = 4
 _TRIED = set()  # markets already refreshed (or failed) in this run
 
 
-def _fetch(url, timeout=25):
-    req = urllib.request.Request(url, headers=UA)
-    with urllib.request.urlopen(req, timeout=timeout) as r:
-        return r.read(8 * 1024 * 1024).decode("utf-8", "replace")
+def _fetch(url, timeout=25, tries=3):
+    for attempt in range(tries):
+        try:
+            req = urllib.request.Request(url, headers=UA)
+            with urllib.request.urlopen(req, timeout=timeout) as r:
+                return r.read(8 * 1024 * 1024).decode("utf-8", "replace")
+        except Exception:
+            if attempt == tries - 1:
+                raise
+            time.sleep(2 * (attempt + 1))
 
 
 def parse_stooq(txt):
@@ -59,10 +66,25 @@ def yahoo(symbol):
     return lambda: parse_yahoo(_fetch(f"https://query1.finance.yahoo.com/v8/finance/chart/{symbol}?range=20y&interval=1d"))
 
 
+def fred_csv(series):
+    def get():
+        out = {}
+        for line in _fetch(f"https://fred.stlouisfed.org/graph/fredgraph.csv?id={series}&cosd=2006-01-01").splitlines()[1:]:
+            d, _, v = line.partition(",")
+            try:
+                if float(v) > 0:
+                    out[d] = float(v)
+            except ValueError:
+                pass
+        return out
+    return get
+
+
 MARKETS = {
     # name: (sources [(label, fn)], splice: may different sources be merged into one history)
-    "gold": ([("Stooq XAU/USD", stooq("xauusd")), ("Yahoo COMEX gold", yahoo("GC=F"))], False),
-    "nq": ([("Stooq Nasdaq-100", stooq("^ndx")), ("Yahoo Nasdaq-100", yahoo("%5ENDX"))], True),
+    # Stooq now answers automated requests with a browser check, so it is no longer used.
+    "gold": ([("Yahoo COMEX gold", yahoo("GC=F"))], False),
+    "nq": ([("Yahoo Nasdaq-100", yahoo("%5ENDX")), ("FRED Nasdaq-100", fred_csv("NASDAQ100"))], True),
 }
 
 

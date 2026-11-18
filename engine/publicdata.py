@@ -7,7 +7,9 @@ from html.parser import HTMLParser
 from io import StringIO
 import math
 import re
+import time
 from urllib.parse import urlencode
+from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
 
 from source_health import record
@@ -21,13 +23,25 @@ FRED_AVAILABLE = True
 ALFRED_AVAILABLE = True
 
 
-def download(url, *, timeout=12, payload=None):
-    headers = {"User-Agent": "Displace/1.0 (public economic data reader)"}
+def download(url, *, timeout=25, payload=None, tries=3):
+    """GET (or POST JSON) with retries. GitHub's runners sometimes take ~5 s to resolve a host name or fail a
+    lookup outright, so a short timeout or a single try makes healthy sources look down."""
+    # St. Louis Fed servers stall requests whose User-Agent does not look like a browser; this one is answered.
+    headers = {"User-Agent": "Mozilla/5.0 (Displace data engine; +https://github.com/grobentham/displace)"}
     if payload is not None:
         headers["Content-Type"] = "application/json"
-    request = Request(url, data=payload, headers=headers)
-    with urlopen(request, timeout=timeout) as response:
-        body = response.read(MAX_DOWNLOAD + 1)
+    for attempt in range(tries):
+        try:
+            with urlopen(Request(url, data=payload, headers=headers), timeout=timeout) as response:
+                body = response.read(MAX_DOWNLOAD + 1)
+            break
+        except HTTPError as e:
+            if e.code not in (429, 500, 502, 503, 504) or attempt == tries - 1:
+                raise
+        except (URLError, TimeoutError, ConnectionError):
+            if attempt == tries - 1:
+                raise
+        time.sleep(2 * (attempt + 1))
     if len(body) > MAX_DOWNLOAD:
         raise ValueError("Download exceeded the size limit")
     return body
@@ -43,7 +57,7 @@ def check_fred_access(today):
 
     def reachable(url):
         try:
-            return b"observation_date," in download(url, timeout=5)[:96].lower()
+            return b"observation_date," in download(url, timeout=25)[:96].lower()
         except (OSError, ValueError):
             return False
 
