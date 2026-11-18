@@ -1,5 +1,5 @@
 {
- "asof": "2026-11-18T09:02-05:00",
+ "asof": "2026-11-18T09:17-05:00",
  "modelAsof": "2026-11-18",
  "version": 2,
  "assets": {
@@ -24,6 +24,168 @@
  },
  "proven": 3,
  "rules": {
+  "cpi:gold": {
+   "calls": 22,
+   "hits": 13,
+   "proven": false,
+   "why": "too few tested calls",
+   "brierSkill": -0.021,
+   "reliability": [
+    {
+     "band": "50%+",
+     "n": 16,
+     "stated": 0.573,
+     "actual": 0.625
+    },
+    {
+     "band": "60%+",
+     "n": 4,
+     "stated": 0.63,
+     "actual": 0.75
+    },
+    {
+     "band": "70%+",
+     "n": 2,
+     "stated": 0.879,
+     "actual": 0.0
+    }
+   ]
+  },
+  "cpi:usd": {
+   "calls": 57,
+   "hits": 35,
+   "proven": false,
+   "why": "not significant after correcting for the number of rules tested",
+   "brierSkill": 0.017,
+   "reliability": [
+    {
+     "band": "50%+",
+     "n": 14,
+     "stated": 0.58,
+     "actual": 0.643
+    },
+    {
+     "band": "60%+",
+     "n": 25,
+     "stated": 0.65,
+     "actual": 0.6
+    },
+    {
+     "band": "70%+",
+     "n": 18,
+     "stated": 0.73,
+     "actual": 0.611
+    }
+   ]
+  },
+  "cpi:eur": {
+   "calls": 28,
+   "hits": 15,
+   "proven": false,
+   "why": "too few tested calls",
+   "brierSkill": 0.002,
+   "reliability": [
+    {
+     "band": "50%+",
+     "n": 15,
+     "stated": 0.575,
+     "actual": 0.533
+    },
+    {
+     "band": "60%+",
+     "n": 10,
+     "stated": 0.637,
+     "actual": 0.4
+    },
+    {
+     "band": "70%+",
+     "n": 3,
+     "stated": 0.738,
+     "actual": 1.0
+    }
+   ]
+  },
+  "cpi:nq": {
+   "calls": 35,
+   "hits": 16,
+   "proven": false,
+   "why": "hit rate under 55%",
+   "brierSkill": -0.023,
+   "reliability": [
+    {
+     "band": "50%+",
+     "n": 24,
+     "stated": 0.574,
+     "actual": 0.542
+    },
+    {
+     "band": "60%+",
+     "n": 8,
+     "stated": 0.64,
+     "actual": 0.25
+    },
+    {
+     "band": "70%+",
+     "n": 3,
+     "stated": 0.764,
+     "actual": 0.333
+    }
+   ]
+  },
+  "cpi:y2": {
+   "calls": 53,
+   "hits": 31,
+   "proven": false,
+   "why": "not significant after correcting for the number of rules tested",
+   "brierSkill": 0.01,
+   "reliability": [
+    {
+     "band": "50%+",
+     "n": 31,
+     "stated": 0.577,
+     "actual": 0.548
+    },
+    {
+     "band": "60%+",
+     "n": 14,
+     "stated": 0.63,
+     "actual": 0.643
+    },
+    {
+     "band": "70%+",
+     "n": 8,
+     "stated": 0.732,
+     "actual": 0.625
+    }
+   ]
+  },
+  "cpi:y10": {
+   "calls": 39,
+   "hits": 23,
+   "proven": false,
+   "why": "not significant after correcting for the number of rules tested",
+   "brierSkill": 0.011,
+   "reliability": [
+    {
+     "band": "50%+",
+     "n": 18,
+     "stated": 0.579,
+     "actual": 0.5
+    },
+    {
+     "band": "60%+",
+     "n": 7,
+     "stated": 0.64,
+     "actual": 0.571
+    },
+    {
+     "band": "70%+",
+     "n": 14,
+     "stated": 0.767,
+     "actual": 0.714
+    }
+   ]
+  },
   "ppi:gold": {
    "calls": 13,
    "hits": 3,
@@ -86,19 +248,19 @@
    "hits": 29,
    "proven": false,
    "why": "hit rate under 55%",
-   "brierSkill": -0.009,
+   "brierSkill": -0.008,
    "reliability": [
     {
      "band": "50%+",
-     "n": 28,
-     "stated": 0.584,
-     "actual": 0.464
+     "n": 27,
+     "stated": 0.583,
+     "actual": 0.444
     },
     {
      "band": "60%+",
-     "n": 15,
-     "stated": 0.636,
-     "actual": 0.667
+     "n": 16,
+     "stated": 0.634,
+     "actual": 0.688
     },
     {
      "band": "70%+",
@@ -109,83 +271,77 @@
    ]
   },
   "ppi:y2": {
-   "calls": 26,
-   "hits": 19,
+   "calls": 29,
+   "hits": 20,
    "proven": false,
    "why": "too few tested calls",
-   "brierSkill": 0.008,
+   "brierSkill": 0.01,
    "reliability": [
     {
      "band": "50%+",
-     "n": 6,
-     "stated": 0.575,
-     "actual": 0.833
+     "n": 9,
+     "stated": 0.572,
+     "actual": 0.667
     },
     {
      "band": "60%+",
-     "n": 14,
-     "stated": 0.648,
-     "actual": 0.714
+     "n": 15,
+     "stated": 0.649,
+     "actual": 0.733
     },
     {
      "band": "70%+",
-     "n": 6,
-     "stated": 0.73,
-     "actual": 0.667
+     "n": 5,
+     "stated": 0.736,
+     "actual": 0.6
     }
    ]
   },
   "ppi:y10": {
-   "calls": 19,
-   "hits": 11,
+   "calls": 21,
+   "hits": 13,
    "proven": false,
    "why": "too few tested calls",
-   "brierSkill": 0.016,
+   "brierSkill": 0.018,
    "reliability": [
     {
      "band": "50%+",
-     "n": 10,
-     "stated": 0.584,
-     "actual": 0.5
+     "n": 12,
+     "stated": 0.579,
+     "actual": 0.583
     },
     {
      "band": "60%+",
-     "n": 7,
-     "stated": 0.618,
-     "actual": 0.571
-    },
-    {
-     "band": "70%+",
-     "n": 2,
-     "stated": 0.738,
-     "actual": 1.0
+     "n": 9,
+     "stated": 0.636,
+     "actual": 0.667
     }
    ]
   },
   "pce:gold": {
-   "calls": 52,
+   "calls": 53,
    "hits": 30,
    "proven": false,
    "why": "not significant after correcting for the number of rules tested",
-   "brierSkill": -0.019,
+   "brierSkill": -0.022,
    "reliability": [
     {
      "band": "50%+",
-     "n": 17,
-     "stated": 0.58,
-     "actual": 0.647
+     "n": 18,
+     "stated": 0.581,
+     "actual": 0.667
     },
     {
      "band": "60%+",
-     "n": 17,
-     "stated": 0.638,
-     "actual": 0.529
+     "n": 16,
+     "stated": 0.634,
+     "actual": 0.5
     },
     {
      "band": "70%+",
-     "n": 18,
-     "stated": 0.792,
-     "actual": 0.556
+     "n": 19,
+     "stated": 0.788,
+     "actual": 0.526
     }
    ]
   },
@@ -205,29 +361,29 @@
    ]
   },
   "pce:eur": {
-   "calls": 69,
-   "hits": 40,
+   "calls": 62,
+   "hits": 34,
    "proven": false,
-   "why": "not significant after correcting for the number of rules tested",
-   "brierSkill": -0.008,
+   "why": "hit rate under 55%",
+   "brierSkill": -0.014,
    "reliability": [
     {
      "band": "50%+",
-     "n": 28,
-     "stated": 0.582,
-     "actual": 0.714
+     "n": 22,
+     "stated": 0.575,
+     "actual": 0.636
     },
     {
      "band": "60%+",
-     "n": 31,
-     "stated": 0.641,
-     "actual": 0.484
+     "n": 33,
+     "stated": 0.638,
+     "actual": 0.515
     },
     {
      "band": "70%+",
-     "n": 10,
-     "stated": 0.74,
-     "actual": 0.5
+     "n": 7,
+     "stated": 0.743,
+     "actual": 0.429
     }
    ]
   },
@@ -278,18 +434,12 @@
    "hits": 0,
    "proven": false,
    "why": "too few tested calls",
-   "brierSkill": -0.01,
+   "brierSkill": -0.009,
    "reliability": [
     {
-     "band": "50%+",
-     "n": 1,
-     "stated": 0.6,
-     "actual": 0.0
-    },
-    {
      "band": "60%+",
-     "n": 1,
-     "stated": 0.613,
+     "n": 2,
+     "stated": 0.601,
      "actual": 0.0
     }
    ]
@@ -299,19 +449,19 @@
    "hits": 19,
    "proven": false,
    "why": "not significant after correcting for the number of rules tested",
-   "brierSkill": -0.018,
+   "brierSkill": -0.017,
    "reliability": [
     {
      "band": "50%+",
-     "n": 5,
-     "stated": 0.579,
-     "actual": 0.8
+     "n": 6,
+     "stated": 0.58,
+     "actual": 0.667
     },
     {
      "band": "60%+",
-     "n": 20,
-     "stated": 0.648,
-     "actual": 0.5
+     "n": 19,
+     "stated": 0.65,
+     "actual": 0.526
     },
     {
      "band": "70%+",
@@ -322,23 +472,23 @@
    ]
   },
   "nfp:usd": {
-   "calls": 85,
-   "hits": 56,
+   "calls": 88,
+   "hits": 59,
    "proven": true,
    "why": "",
-   "brierSkill": 0.027,
+   "brierSkill": 0.03,
    "reliability": [
     {
      "band": "50%+",
-     "n": 34,
-     "stated": 0.581,
-     "actual": 0.676
+     "n": 35,
+     "stated": 0.583,
+     "actual": 0.686
     },
     {
      "band": "60%+",
-     "n": 41,
-     "stated": 0.634,
-     "actual": 0.659
+     "n": 43,
+     "stated": 0.635,
+     "actual": 0.674
     },
     {
      "band": "70%+",
@@ -349,23 +499,23 @@
    ]
   },
   "nfp:eur": {
-   "calls": 72,
-   "hits": 51,
+   "calls": 70,
+   "hits": 49,
    "proven": true,
    "why": "",
-   "brierSkill": 0.035,
+   "brierSkill": 0.033,
    "reliability": [
     {
      "band": "50%+",
-     "n": 37,
-     "stated": 0.576,
-     "actual": 0.784
+     "n": 33,
+     "stated": 0.575,
+     "actual": 0.758
     },
     {
      "band": "60%+",
-     "n": 27,
-     "stated": 0.629,
-     "actual": 0.704
+     "n": 29,
+     "stated": 0.628,
+     "actual": 0.724
     },
     {
      "band": "70%+",
@@ -397,8 +547,8 @@
    ]
   },
   "nfp:y2": {
-   "calls": 64,
-   "hits": 39,
+   "calls": 63,
+   "hits": 38,
    "proven": false,
    "why": "not significant after correcting for the number of rules tested",
    "brierSkill": -0.003,
@@ -407,13 +557,13 @@
      "band": "50%+",
      "n": 28,
      "stated": 0.578,
-     "actual": 0.714
+     "actual": 0.679
     },
     {
      "band": "60%+",
-     "n": 25,
+     "n": 24,
      "stated": 0.64,
-     "actual": 0.48
+     "actual": 0.5
     },
     {
      "band": "70%+",
@@ -424,23 +574,23 @@
    ]
   },
   "nfp:y10": {
-   "calls": 55,
+   "calls": 57,
    "hits": 33,
    "proven": false,
    "why": "not significant after correcting for the number of rules tested",
-   "brierSkill": 0.001,
+   "brierSkill": 0.003,
    "reliability": [
     {
      "band": "50%+",
-     "n": 24,
-     "stated": 0.573,
-     "actual": 0.667
+     "n": 23,
+     "stated": 0.575,
+     "actual": 0.609
     },
     {
      "band": "60%+",
-     "n": 24,
-     "stated": 0.634,
-     "actual": 0.583
+     "n": 27,
+     "stated": 0.63,
+     "actual": 0.593
     },
     {
      "band": "70%+",
@@ -451,139 +601,145 @@
    ]
   },
   "retail:gold": {
-   "calls": 35,
+   "calls": 37,
    "hits": 19,
    "proven": false,
    "why": "hit rate under 55%",
-   "brierSkill": -0.013,
+   "brierSkill": -0.017,
    "reliability": [
     {
      "band": "50%+",
-     "n": 11,
-     "stated": 0.573,
-     "actual": 0.455
+     "n": 14,
+     "stated": 0.575,
+     "actual": 0.429
     },
     {
      "band": "60%+",
-     "n": 17,
-     "stated": 0.656,
-     "actual": 0.588
+     "n": 11,
+     "stated": 0.65,
+     "actual": 0.545
     },
     {
      "band": "70%+",
-     "n": 7,
-     "stated": 0.77,
-     "actual": 0.571
+     "n": 12,
+     "stated": 0.756,
+     "actual": 0.583
     }
    ]
   },
   "retail:usd": {
-   "calls": 3,
-   "hits": 1,
+   "calls": 5,
+   "hits": 2,
    "proven": false,
    "why": "too few tested calls",
-   "brierSkill": -0.007,
+   "brierSkill": -0.008,
    "reliability": [
     {
      "band": "50%+",
      "n": 3,
-     "stated": 0.575,
+     "stated": 0.57,
      "actual": 0.333
+    },
+    {
+     "band": "60%+",
+     "n": 2,
+     "stated": 0.646,
+     "actual": 0.5
     }
    ]
   },
   "retail:eur": {
-   "calls": 6,
+   "calls": 8,
    "hits": 2,
    "proven": false,
    "why": "too few tested calls",
-   "brierSkill": -0.01,
+   "brierSkill": -0.012,
    "reliability": [
     {
      "band": "50%+",
-     "n": 5,
-     "stated": 0.57,
-     "actual": 0.4
+     "n": 7,
+     "stated": 0.573,
+     "actual": 0.286
     },
     {
      "band": "60%+",
      "n": 1,
-     "stated": 0.605,
+     "stated": 0.62,
      "actual": 0.0
     }
    ]
   },
   "retail:nq": {
    "calls": 36,
-   "hits": 17,
+   "hits": 16,
    "proven": false,
    "why": "hit rate under 55%",
-   "brierSkill": -0.019,
+   "brierSkill": -0.021,
    "reliability": [
     {
      "band": "50%+",
      "n": 24,
-     "stated": 0.581,
-     "actual": 0.5
+     "stated": 0.578,
+     "actual": 0.458
     },
     {
      "band": "60%+",
      "n": 12,
-     "stated": 0.636,
+     "stated": 0.633,
      "actual": 0.417
     }
    ]
   },
   "retail:y2": {
-   "calls": 47,
-   "hits": 27,
+   "calls": 51,
+   "hits": 28,
    "proven": false,
-   "why": "not significant after correcting for the number of rules tested",
-   "brierSkill": -0.022,
+   "why": "hit rate under 55%",
+   "brierSkill": -0.026,
    "reliability": [
     {
      "band": "50%+",
-     "n": 18,
+     "n": 20,
      "stated": 0.575,
-     "actual": 0.611
+     "actual": 0.6
     },
     {
      "band": "60%+",
-     "n": 19,
-     "stated": 0.646,
-     "actual": 0.526
+     "n": 21,
+     "stated": 0.641,
+     "actual": 0.476
     },
     {
      "band": "70%+",
      "n": 10,
-     "stated": 0.79,
+     "stated": 0.786,
      "actual": 0.6
     }
    ]
   },
   "retail:y10": {
-   "calls": 31,
-   "hits": 19,
+   "calls": 38,
+   "hits": 22,
    "proven": false,
    "why": "not significant after correcting for the number of rules tested",
-   "brierSkill": -0.026,
+   "brierSkill": -0.024,
    "reliability": [
     {
      "band": "50%+",
-     "n": 12,
-     "stated": 0.578,
-     "actual": 0.667
+     "n": 19,
+     "stated": 0.583,
+     "actual": 0.579
     },
     {
      "band": "60%+",
      "n": 9,
-     "stated": 0.636,
+     "stated": 0.634,
      "actual": 0.667
     },
     {
      "band": "70%+",
      "n": 10,
-     "stated": 0.801,
+     "stated": 0.794,
      "actual": 0.5
     }
    ]
@@ -593,39 +749,39 @@
    "hits": 8,
    "proven": false,
    "why": "too few tested calls",
-   "brierSkill": -0.01,
+   "brierSkill": -0.011,
    "reliability": [
     {
      "band": "50%+",
-     "n": 10,
-     "stated": 0.579,
-     "actual": 0.5
+     "n": 8,
+     "stated": 0.583,
+     "actual": 0.625
     },
     {
      "band": "60%+",
-     "n": 6,
-     "stated": 0.622,
-     "actual": 0.5
+     "n": 8,
+     "stated": 0.621,
+     "actual": 0.375
     }
    ]
   },
   "durables:usd": {
-   "calls": 23,
-   "hits": 13,
+   "calls": 20,
+   "hits": 12,
    "proven": false,
    "why": "too few tested calls",
    "brierSkill": -0.007,
    "reliability": [
     {
      "band": "50%+",
-     "n": 17,
-     "stated": 0.582,
-     "actual": 0.588
+     "n": 12,
+     "stated": 0.59,
+     "actual": 0.667
     },
     {
      "band": "60%+",
-     "n": 6,
-     "stated": 0.644,
+     "n": 8,
+     "stated": 0.642,
      "actual": 0.5
     }
    ]
@@ -646,50 +802,50 @@
    ]
   },
   "durables:nq": {
-   "calls": 110,
-   "hits": 69,
+   "calls": 109,
+   "hits": 68,
    "proven": false,
    "why": "market moves don't depend on the surprise",
-   "brierSkill": 0.057,
+   "brierSkill": 0.059,
    "reliability": [
     {
      "band": "50%+",
-     "n": 43,
+     "n": 47,
      "stated": 0.58,
-     "actual": 0.605
+     "actual": 0.596
     },
     {
      "band": "60%+",
-     "n": 49,
-     "stated": 0.639,
-     "actual": 0.653
+     "n": 44,
+     "stated": 0.644,
+     "actual": 0.636
     },
     {
      "band": "70%+",
      "n": 18,
-     "stated": 0.727,
-     "actual": 0.611
+     "stated": 0.729,
+     "actual": 0.667
     }
    ]
   },
   "durables:y2": {
-   "calls": 66,
-   "hits": 38,
+   "calls": 64,
+   "hits": 35,
    "proven": false,
-   "why": "not significant after correcting for the number of rules tested",
-   "brierSkill": 0.013,
+   "why": "hit rate under 55%",
+   "brierSkill": 0.01,
    "reliability": [
     {
      "band": "50%+",
-     "n": 44,
-     "stated": 0.577,
-     "actual": 0.659
+     "n": 47,
+     "stated": 0.578,
+     "actual": 0.617
     },
     {
      "band": "60%+",
-     "n": 22,
-     "stated": 0.621,
-     "actual": 0.409
+     "n": 17,
+     "stated": 0.625,
+     "actual": 0.353
     }
    ]
   },
@@ -714,23 +870,167 @@
     }
    ]
   },
-  "jolts:gold": {
-   "calls": 31,
-   "hits": 14,
+  "claims:gold": {
+   "calls": 39,
+   "hits": 19,
    "proven": false,
    "why": "hit rate under 55%",
-   "brierSkill": -0.0,
+   "brierSkill": -0.007,
    "reliability": [
     {
      "band": "50%+",
-     "n": 24,
-     "stated": 0.573,
-     "actual": 0.458
+     "n": 21,
+     "stated": 0.577,
+     "actual": 0.524
+    },
+    {
+     "band": "60%+",
+     "n": 8,
+     "stated": 0.646,
+     "actual": 0.5
+    },
+    {
+     "band": "70%+",
+     "n": 10,
+     "stated": 0.788,
+     "actual": 0.4
+    }
+   ]
+  },
+  "claims:usd": {
+   "calls": 36,
+   "hits": 18,
+   "proven": false,
+   "why": "hit rate under 55%",
+   "brierSkill": -0.003,
+   "reliability": [
+    {
+     "band": "50%+",
+     "n": 23,
+     "stated": 0.581,
+     "actual": 0.478
+    },
+    {
+     "band": "60%+",
+     "n": 13,
+     "stated": 0.62,
+     "actual": 0.538
+    }
+   ]
+  },
+  "claims:eur": {
+   "calls": 1,
+   "hits": 0,
+   "proven": false,
+   "why": "too few tested calls",
+   "brierSkill": -0.002,
+   "reliability": [
+    {
+     "band": "50%+",
+     "n": 1,
+     "stated": 0.568,
+     "actual": 0.0
+    }
+   ]
+  },
+  "claims:nq": {
+   "calls": 146,
+   "hits": 83,
+   "proven": false,
+   "why": "not significant after correcting for the number of rules tested",
+   "brierSkill": -0.004,
+   "reliability": [
+    {
+     "band": "50%+",
+     "n": 81,
+     "stated": 0.576,
+     "actual": 0.506
+    },
+    {
+     "band": "60%+",
+     "n": 42,
+     "stated": 0.65,
+     "actual": 0.643
+    },
+    {
+     "band": "70%+",
+     "n": 23,
+     "stated": 0.788,
+     "actual": 0.652
+    }
+   ]
+  },
+  "claims:y2": {
+   "calls": 192,
+   "hits": 111,
+   "proven": false,
+   "why": "not significant after correcting for the number of rules tested",
+   "brierSkill": 0.001,
+   "reliability": [
+    {
+     "band": "50%+",
+     "n": 92,
+     "stated": 0.578,
+     "actual": 0.543
+    },
+    {
+     "band": "60%+",
+     "n": 68,
+     "stated": 0.648,
+     "actual": 0.588
+    },
+    {
+     "band": "70%+",
+     "n": 32,
+     "stated": 0.783,
+     "actual": 0.656
+    }
+   ]
+  },
+  "claims:y10": {
+   "calls": 82,
+   "hits": 41,
+   "proven": false,
+   "why": "hit rate under 55%",
+   "brierSkill": -0.01,
+   "reliability": [
+    {
+     "band": "50%+",
+     "n": 51,
+     "stated": 0.575,
+     "actual": 0.51
+    },
+    {
+     "band": "60%+",
+     "n": 17,
+     "stated": 0.642,
+     "actual": 0.471
+    },
+    {
+     "band": "70%+",
+     "n": 14,
+     "stated": 0.818,
+     "actual": 0.5
+    }
+   ]
+  },
+  "jolts:gold": {
+   "calls": 34,
+   "hits": 17,
+   "proven": false,
+   "why": "hit rate under 55%",
+   "brierSkill": -0.001,
+   "reliability": [
+    {
+     "band": "50%+",
+     "n": 27,
+     "stated": 0.575,
+     "actual": 0.519
     },
     {
      "band": "60%+",
      "n": 7,
-     "stated": 0.628,
+     "stated": 0.638,
      "actual": 0.429
     }
    ]
@@ -759,23 +1059,23 @@
    ]
   },
   "jolts:nq": {
-   "calls": 58,
-   "hits": 29,
+   "calls": 60,
+   "hits": 33,
    "proven": false,
-   "why": "hit rate under 55%",
-   "brierSkill": -0.01,
+   "why": "not significant after correcting for the number of rules tested",
+   "brierSkill": -0.007,
    "reliability": [
     {
      "band": "50%+",
-     "n": 22,
-     "stated": 0.574,
-     "actual": 0.364
+     "n": 18,
+     "stated": 0.579,
+     "actual": 0.556
     },
     {
      "band": "60%+",
-     "n": 25,
+     "n": 31,
      "stated": 0.635,
-     "actual": 0.56
+     "actual": 0.516
     },
     {
      "band": "70%+",
@@ -840,7 +1140,7 @@
    "hits": 1,
    "proven": false,
    "why": "too few tested calls",
-   "brierSkill": -0.011,
+   "brierSkill": -0.01,
    "reliability": [
     {
      "band": "50%+",
@@ -863,7 +1163,7 @@
    "hits": 65,
    "proven": false,
    "why": "market moves don't depend on the surprise",
-   "brierSkill": 0.037,
+   "brierSkill": 0.041,
    "reliability": [
     {
      "band": "50%+",
@@ -874,19 +1174,19 @@
     {
      "band": "60%+",
      "n": 36,
-     "stated": 0.638,
+     "stated": 0.639,
      "actual": 0.667
     },
     {
      "band": "70%+",
      "n": 11,
-     "stated": 0.72,
+     "stated": 0.723,
      "actual": 0.545
     }
    ]
   },
   "umich:y2": {
-   "calls": 25,
+   "calls": 26,
    "hits": 12,
    "proven": false,
    "why": "too few tested calls",
@@ -895,14 +1195,14 @@
     {
      "band": "50%+",
      "n": 18,
-     "stated": 0.576,
+     "stated": 0.577,
      "actual": 0.5
     },
     {
      "band": "60%+",
-     "n": 5,
-     "stated": 0.628,
-     "actual": 0.6
+     "n": 6,
+     "stated": 0.624,
+     "actual": 0.5
     },
     {
      "band": "70%+",
@@ -938,18 +1238,18 @@
    "hits": 7,
    "proven": false,
    "why": "too few tested calls",
-   "brierSkill": -0.021,
+   "brierSkill": -0.023,
    "reliability": [
     {
      "band": "50%+",
-     "n": 7,
-     "stated": 0.582,
-     "actual": 0.714
+     "n": 6,
+     "stated": 0.58,
+     "actual": 0.833
     },
     {
      "band": "60%+",
-     "n": 4,
-     "stated": 0.63,
+     "n": 5,
+     "stated": 0.633,
      "actual": 0.0
     },
     {
@@ -976,34 +1276,34 @@
    ]
   },
   "homes:eur": {
-   "calls": 28,
-   "hits": 14,
+   "calls": 31,
+   "hits": 16,
    "proven": false,
-   "why": "too few tested calls",
-   "brierSkill": -0.031,
+   "why": "hit rate under 55%",
+   "brierSkill": -0.028,
    "reliability": [
     {
      "band": "50%+",
-     "n": 15,
+     "n": 17,
      "stated": 0.578,
-     "actual": 0.533
+     "actual": 0.529
     },
     {
      "band": "60%+",
      "n": 10,
-     "stated": 0.653,
-     "actual": 0.5
+     "stated": 0.643,
+     "actual": 0.6
     },
     {
      "band": "70%+",
-     "n": 3,
-     "stated": 0.775,
-     "actual": 0.333
+     "n": 4,
+     "stated": 0.753,
+     "actual": 0.25
     }
    ]
   },
   "homes:nq": {
-   "calls": 10,
+   "calls": 11,
    "hits": 5,
    "proven": false,
    "why": "too few tested calls",
@@ -1011,15 +1311,21 @@
    "reliability": [
     {
      "band": "50%+",
-     "n": 4,
-     "stated": 0.576,
-     "actual": 0.5
+     "n": 5,
+     "stated": 0.575,
+     "actual": 0.4
     },
     {
      "band": "60%+",
-     "n": 6,
-     "stated": 0.661,
-     "actual": 0.5
+     "n": 2,
+     "stated": 0.608,
+     "actual": 1.0
+    },
+    {
+     "band": "70%+",
+     "n": 4,
+     "stated": 0.702,
+     "actual": 0.25
     }
    ]
   },
@@ -1028,53 +1334,53 @@
    "hits": 7,
    "proven": false,
    "why": "too few tested calls",
-   "brierSkill": -0.022,
+   "brierSkill": -0.02,
    "reliability": [
     {
      "band": "50%+",
-     "n": 8,
-     "stated": 0.582,
-     "actual": 0.5
+     "n": 7,
+     "stated": 0.578,
+     "actual": 0.571
     },
     {
      "band": "60%+",
-     "n": 3,
-     "stated": 0.629,
-     "actual": 0.667
+     "n": 4,
+     "stated": 0.622,
+     "actual": 0.5
     },
     {
      "band": "70%+",
      "n": 3,
-     "stated": 0.77,
+     "stated": 0.803,
      "actual": 0.333
     }
    ]
   },
   "homes:y10": {
-   "calls": 7,
-   "hits": 2,
+   "calls": 3,
+   "hits": 1,
    "proven": false,
    "why": "too few tested calls",
-   "brierSkill": -0.012,
+   "brierSkill": -0.01,
    "reliability": [
     {
      "band": "50%+",
-     "n": 5,
-     "stated": 0.57,
-     "actual": 0.2
+     "n": 1,
+     "stated": 0.561,
+     "actual": 0.0
     },
     {
      "band": "60%+",
      "n": 2,
-     "stated": 0.641,
+     "stated": 0.642,
      "actual": 0.5
     }
    ]
   }
  },
  "backtest": {
-  "calls": 234,
-  "hits": 157
+  "calls": 235,
+  "hits": 158
  },
  "live": {
   "calls": 0,
@@ -1084,6 +1390,152 @@
   "recent": []
  },
  "scenarios": {
+  "cpi": {
+   "name": "Core CPI",
+   "metric": "core CPI m/m",
+   "n": 202,
+   "since": "2010-01-15",
+   "assets": {
+    "gold": {
+     "hot": {
+      "n": 54,
+      "up": 0.76,
+      "med": 0.394,
+      "q1": -0.133,
+      "q3": 0.923
+     },
+     "cool": {
+      "n": 56,
+      "up": 0.464,
+      "med": -0.068,
+      "q1": -0.428,
+      "q3": 0.653
+     },
+     "inline": {
+      "n": 62,
+      "up": 0.451,
+      "med": -0.271,
+      "q1": -1.108,
+      "q3": 0.516
+     }
+    },
+    "usd": {
+     "hot": {
+      "n": 67,
+      "up": 0.515,
+      "med": 0.058,
+      "q1": -0.126,
+      "q3": 0.241
+     },
+     "cool": {
+      "n": 62,
+      "up": 0.184,
+      "med": -0.142,
+      "q1": -0.279,
+      "q3": 0.026
+     },
+     "inline": {
+      "n": 73,
+      "up": 0.413,
+      "med": -0.029,
+      "q1": -0.307,
+      "q3": 0.198
+     }
+    },
+    "eur": {
+     "hot": {
+      "n": 66,
+      "up": 0.426,
+      "med": -0.096,
+      "q1": -0.466,
+      "q3": 0.267
+     },
+     "cool": {
+      "n": 62,
+      "up": 0.685,
+      "med": 0.211,
+      "q1": -0.141,
+      "q3": 0.427
+     },
+     "inline": {
+      "n": 73,
+      "up": 0.426,
+      "med": -0.074,
+      "q1": -0.432,
+      "q3": 0.409
+     }
+    },
+    "nq": {
+     "hot": {
+      "n": 67,
+      "up": 0.59,
+      "med": 0.037,
+      "q1": -0.598,
+      "q3": 0.824
+     },
+     "cool": {
+      "n": 60,
+      "up": 0.583,
+      "med": 0.293,
+      "q1": -0.47,
+      "q3": 1.078
+     },
+     "inline": {
+      "n": 73,
+      "up": 0.595,
+      "med": 0.28,
+      "q1": -0.311,
+      "q3": 0.742
+     }
+    },
+    "y2": {
+     "hot": {
+      "n": 59,
+      "up": 0.615,
+      "med": 2.0,
+      "q1": -2.0,
+      "q3": 5.0
+     },
+     "cool": {
+      "n": 45,
+      "up": 0.285,
+      "med": -2.0,
+      "q1": -7.0,
+      "q3": 2.0
+     },
+     "inline": {
+      "n": 59,
+      "up": 0.545,
+      "med": 1.0,
+      "q1": -2.0,
+      "q3": 3.0
+     }
+    },
+    "y10": {
+     "hot": {
+      "n": 65,
+      "up": 0.594,
+      "med": 1.0,
+      "q1": -3.0,
+      "q3": 4.5
+     },
+     "cool": {
+      "n": 59,
+      "up": 0.333,
+      "med": -3.0,
+      "q1": -6.0,
+      "q3": 2.0
+     },
+     "inline": {
+      "n": 71,
+      "up": 0.467,
+      "med": -1.0,
+      "q1": -4.0,
+      "q3": 5.0
+     }
+    }
+   }
+  },
   "ppi": {
    "name": "PPI",
    "metric": "PPI final demand m/m",
@@ -1538,14 +1990,14 @@
      },
      "cool": {
       "n": 61,
-      "up": 0.469,
+      "up": 0.466,
       "med": -0.067,
       "q1": -0.412,
       "q3": 0.512
      },
      "inline": {
       "n": 59,
-      "up": 0.513,
+      "up": 0.522,
       "med": 0.05,
       "q1": -0.456,
       "q3": 0.637
@@ -1554,21 +2006,21 @@
     "usd": {
      "hot": {
       "n": 58,
-      "up": 0.509,
+      "up": 0.515,
       "med": 0.037,
       "q1": -0.221,
       "q3": 0.2
      },
      "cool": {
       "n": 75,
-      "up": 0.419,
+      "up": 0.425,
       "med": -0.042,
       "q1": -0.189,
       "q3": 0.157
      },
      "inline": {
       "n": 68,
-      "up": 0.599,
+      "up": 0.611,
       "med": 0.052,
       "q1": -0.164,
       "q3": 0.184
@@ -1577,21 +2029,21 @@
     "eur": {
      "hot": {
       "n": 58,
-      "up": 0.461,
+      "up": 0.46,
       "med": -0.091,
       "q1": -0.436,
       "q3": 0.281
      },
      "cool": {
       "n": 74,
-      "up": 0.556,
+      "up": 0.554,
       "med": 0.071,
       "q1": -0.224,
       "q3": 0.289
      },
      "inline": {
       "n": 68,
-      "up": 0.389,
+      "up": 0.377,
       "med": -0.078,
       "q1": -0.342,
       "q3": 0.203
@@ -1600,21 +2052,21 @@
     "nq": {
      "hot": {
       "n": 58,
-      "up": 0.549,
+      "up": 0.544,
       "med": 0.115,
       "q1": -0.298,
       "q3": 0.88
      },
      "cool": {
       "n": 75,
-      "up": 0.432,
+      "up": 0.429,
       "med": -0.125,
       "q1": -0.735,
       "q3": 0.633
      },
      "inline": {
       "n": 69,
-      "up": 0.521,
+      "up": 0.511,
       "med": 0.085,
       "q1": -0.426,
       "q3": 0.695
@@ -1623,21 +2075,21 @@
     "y2": {
      "hot": {
       "n": 43,
-      "up": 0.614,
+      "up": 0.618,
       "med": 2.0,
       "q1": -2.0,
       "q3": 3.0
      },
      "cool": {
       "n": 62,
-      "up": 0.51,
+      "up": 0.509,
       "med": -2.0,
       "q1": -3.0,
       "q3": 2.25
      },
      "inline": {
       "n": 61,
-      "up": 0.526,
+      "up": 0.535,
       "med": -1.0,
       "q1": -2.5,
       "q3": 3.0
@@ -1646,21 +2098,21 @@
     "y10": {
      "hot": {
       "n": 56,
-      "up": 0.572,
+      "up": 0.577,
       "med": 1.0,
       "q1": -4.0,
       "q3": 4.0
      },
      "cool": {
       "n": 67,
-      "up": 0.491,
+      "up": 0.494,
       "med": -3.0,
       "q1": -6.0,
       "q3": 3.0
      },
      "inline": {
       "n": 65,
-      "up": 0.533,
+      "up": 0.538,
       "med": -1.0,
       "q1": -3.5,
       "q3": 4.0
@@ -1677,7 +2129,7 @@
     "gold": {
      "hot": {
       "n": 66,
-      "up": 0.561,
+      "up": 0.56,
       "med": 0.12,
       "q1": -0.491,
       "q3": 0.714
@@ -1700,7 +2152,7 @@
     "usd": {
      "hot": {
       "n": 73,
-      "up": 0.427,
+      "up": 0.425,
       "med": -0.05,
       "q1": -0.209,
       "q3": 0.185
@@ -1723,7 +2175,7 @@
     "eur": {
      "hot": {
       "n": 73,
-      "up": 0.525,
+      "up": 0.526,
       "med": -0.038,
       "q1": -0.33,
       "q3": 0.232
@@ -1746,7 +2198,7 @@
     "nq": {
      "hot": {
       "n": 73,
-      "up": 0.648,
+      "up": 0.647,
       "med": 0.421,
       "q1": -0.412,
       "q3": 0.876
@@ -1769,7 +2221,7 @@
     "y2": {
      "hot": {
       "n": 60,
-      "up": 0.655,
+      "up": 0.654,
       "med": 1.0,
       "q1": -1.0,
       "q3": 2.75
@@ -1792,7 +2244,7 @@
     "y10": {
      "hot": {
       "n": 65,
-      "up": 0.541,
+      "up": 0.539,
       "med": 2.0,
       "q1": -2.5,
       "q3": 4.5
@@ -1809,6 +2261,152 @@
       "up": 0.553,
       "med": 2.0,
       "q1": -2.0,
+      "q3": 4.0
+     }
+    }
+   }
+  },
+  "claims": {
+   "name": "Jobless claims",
+   "metric": "initial jobless claims",
+   "n": 872,
+   "since": "2010-01-07",
+   "assets": {
+    "gold": {
+     "hot": {
+      "n": 242,
+      "up": 0.512,
+      "med": 0.044,
+      "q1": -0.59,
+      "q3": 0.544
+     },
+     "cool": {
+      "n": 347,
+      "up": 0.561,
+      "med": 0.032,
+      "q1": -0.556,
+      "q3": 0.643
+     },
+     "inline": {
+      "n": 259,
+      "up": 0.546,
+      "med": 0.106,
+      "q1": -0.49,
+      "q3": 0.729
+     }
+    },
+    "usd": {
+     "hot": {
+      "n": 247,
+      "up": 0.489,
+      "med": -0.02,
+      "q1": -0.183,
+      "q3": 0.188
+     },
+     "cool": {
+      "n": 359,
+      "up": 0.545,
+      "med": 0.017,
+      "q1": -0.168,
+      "q3": 0.202
+     },
+     "inline": {
+      "n": 263,
+      "up": 0.522,
+      "med": 0.008,
+      "q1": -0.205,
+      "q3": 0.231
+     }
+    },
+    "eur": {
+     "hot": {
+      "n": 246,
+      "up": 0.491,
+      "med": 0.017,
+      "q1": -0.346,
+      "q3": 0.366
+     },
+     "cool": {
+      "n": 356,
+      "up": 0.454,
+      "med": -0.029,
+      "q1": -0.341,
+      "q3": 0.281
+     },
+     "inline": {
+      "n": 261,
+      "up": 0.492,
+      "med": -0.007,
+      "q1": -0.334,
+      "q3": 0.355
+     }
+    },
+    "nq": {
+     "hot": {
+      "n": 249,
+      "up": 0.516,
+      "med": 0.101,
+      "q1": -0.516,
+      "q3": 0.66
+     },
+     "cool": {
+      "n": 360,
+      "up": 0.536,
+      "med": 0.085,
+      "q1": -0.435,
+      "q3": 0.811
+     },
+     "inline": {
+      "n": 263,
+      "up": 0.506,
+      "med": 0.067,
+      "q1": -0.507,
+      "q3": 0.792
+     }
+    },
+    "y2": {
+     "hot": {
+      "n": 210,
+      "up": 0.425,
+      "med": -1.0,
+      "q1": -3.0,
+      "q3": 2.0
+     },
+     "cool": {
+      "n": 259,
+      "up": 0.573,
+      "med": 1.0,
+      "q1": -2.0,
+      "q3": 3.0
+     },
+     "inline": {
+      "n": 215,
+      "up": 0.541,
+      "med": 1.0,
+      "q1": -3.0,
+      "q3": 3.0
+     }
+    },
+    "y10": {
+     "hot": {
+      "n": 229,
+      "up": 0.438,
+      "med": -2.0,
+      "q1": -5.0,
+      "q3": 2.5
+     },
+     "cool": {
+      "n": 337,
+      "up": 0.518,
+      "med": -1.0,
+      "q1": -3.0,
+      "q3": 4.0
+     },
+     "inline": {
+      "n": 243,
+      "up": 0.515,
+      "med": 1.0,
+      "q1": -3.0,
       "q3": 4.0
      }
     }
@@ -1999,7 +2597,7 @@
      },
      "cool": {
       "n": 52,
-      "up": 0.43,
+      "up": 0.441,
       "med": -0.077,
       "q1": -0.216,
       "q3": 0.09
@@ -2022,7 +2620,7 @@
      },
      "cool": {
       "n": 52,
-      "up": 0.519,
+      "up": 0.506,
       "med": 0.141,
       "q1": -0.182,
       "q3": 0.373
@@ -2045,7 +2643,7 @@
      },
      "cool": {
       "n": 52,
-      "up": 0.653,
+      "up": 0.644,
       "med": 0.537,
       "q1": -0.435,
       "q3": 1.302
@@ -2091,7 +2689,7 @@
      },
      "cool": {
       "n": 48,
-      "up": 0.584,
+      "up": 0.572,
       "med": 1.0,
       "q1": -4.0,
       "q3": 4.0
@@ -2115,7 +2713,7 @@
     "gold": {
      "hot": {
       "n": 71,
-      "up": 0.582,
+      "up": 0.581,
       "med": 0.08,
       "q1": -0.443,
       "q3": 0.552
@@ -2129,7 +2727,7 @@
      },
      "inline": {
       "n": 50,
-      "up": 0.449,
+      "up": 0.462,
       "med": -0.047,
       "q1": -0.413,
       "q3": 0.564
@@ -2138,7 +2736,7 @@
     "usd": {
      "hot": {
       "n": 80,
-      "up": 0.535,
+      "up": 0.537,
       "med": 0.016,
       "q1": -0.15,
       "q3": 0.229
@@ -2152,7 +2750,7 @@
      },
      "inline": {
       "n": 56,
-      "up": 0.368,
+      "up": 0.351,
       "med": -0.057,
       "q1": -0.222,
       "q3": 0.085
@@ -2161,7 +2759,7 @@
     "eur": {
      "hot": {
       "n": 80,
-      "up": 0.444,
+      "up": 0.445,
       "med": -0.072,
       "q1": -0.319,
       "q3": 0.301
@@ -2175,7 +2773,7 @@
      },
      "inline": {
       "n": 55,
-      "up": 0.654,
+      "up": 0.671,
       "med": 0.135,
       "q1": -0.191,
       "q3": 0.523
@@ -2184,7 +2782,7 @@
     "nq": {
      "hot": {
       "n": 80,
-      "up": 0.642,
+      "up": 0.643,
       "med": 0.161,
       "q1": -0.38,
       "q3": 0.826
@@ -2198,7 +2796,7 @@
      },
      "inline": {
       "n": 56,
-      "up": 0.554,
+      "up": 0.568,
       "med": 0.218,
       "q1": -0.294,
       "q3": 0.77
@@ -2207,7 +2805,7 @@
     "y2": {
      "hot": {
       "n": 62,
-      "up": 0.517,
+      "up": 0.519,
       "med": 1.0,
       "q1": -2.0,
       "q3": 2.0
@@ -2221,7 +2819,7 @@
      },
      "inline": {
       "n": 41,
-      "up": 0.346,
+      "up": 0.355,
       "med": -1.0,
       "q1": -4.0,
       "q3": 2.0
@@ -2230,7 +2828,7 @@
     "y10": {
      "hot": {
       "n": 69,
-      "up": 0.443,
+      "up": 0.445,
       "med": -1.0,
       "q1": -3.0,
       "q3": 4.0
@@ -2244,7 +2842,7 @@
      },
      "inline": {
       "n": 53,
-      "up": 0.337,
+      "up": 0.346,
       "med": -1.0,
       "q1": -4.0,
       "q3": 3.5
@@ -2254,6 +2852,75 @@
   }
  },
  "events": {
+  "20261119-initial-jobless-claims": {
+   "kind": "claims",
+   "date": "2026-11-19",
+   "stage": "pre",
+   "hot": {
+    "gold": {
+     "none": true,
+     "n": 39,
+     "why": "hit rate under 55%"
+    },
+    "usd": {
+     "none": true,
+     "n": 36,
+     "why": "hit rate under 55%"
+    },
+    "eur": {
+     "none": true,
+     "n": 1,
+     "why": "too few tested calls"
+    },
+    "nq": {
+     "none": true,
+     "n": 146,
+     "why": "not significant after correcting for the number of rules tested"
+    },
+    "y2": {
+     "none": true,
+     "n": 192,
+     "why": "not significant after correcting for the number of rules tested"
+    },
+    "y10": {
+     "none": true,
+     "n": 82,
+     "why": "hit rate under 55%"
+    }
+   },
+   "cool": {
+    "gold": {
+     "none": true,
+     "n": 39,
+     "why": "hit rate under 55%"
+    },
+    "usd": {
+     "none": true,
+     "n": 36,
+     "why": "hit rate under 55%"
+    },
+    "eur": {
+     "none": true,
+     "n": 1,
+     "why": "too few tested calls"
+    },
+    "nq": {
+     "none": true,
+     "n": 146,
+     "why": "not significant after correcting for the number of rules tested"
+    },
+    "y2": {
+     "none": true,
+     "n": 192,
+     "why": "not significant after correcting for the number of rules tested"
+    },
+    "y10": {
+     "none": true,
+     "n": 82,
+     "why": "hit rate under 55%"
+    }
+   }
+  },
   "20261120-umich-consumer-sentiment-final-nov": {
    "kind": "umich",
    "date": "2026-11-20",
@@ -2281,7 +2948,7 @@
     },
     "y2": {
      "none": true,
-     "n": 25,
+     "n": 26,
      "why": "too few tested calls"
     },
     "y10": {
@@ -2313,7 +2980,7 @@
     },
     "y2": {
      "none": true,
-     "n": 25,
+     "n": 26,
      "why": "too few tested calls"
     },
     "y10": {
@@ -2335,7 +3002,7 @@
     },
     "usd": {
      "none": true,
-     "n": 23,
+     "n": 20,
      "why": "too few tested calls"
     },
     "eur": {
@@ -2345,13 +3012,13 @@
     },
     "nq": {
      "none": true,
-     "n": 110,
+     "n": 109,
      "why": "market moves don't depend on the surprise"
     },
     "y2": {
      "none": true,
-     "n": 66,
-     "why": "not significant after correcting for the number of rules tested"
+     "n": 64,
+     "why": "hit rate under 55%"
     },
     "y10": {
      "none": true,
@@ -2367,7 +3034,7 @@
     },
     "usd": {
      "none": true,
-     "n": 23,
+     "n": 20,
      "why": "too few tested calls"
     },
     "eur": {
@@ -2377,18 +3044,87 @@
     },
     "nq": {
      "none": true,
-     "n": 110,
+     "n": 109,
      "why": "market moves don't depend on the surprise"
     },
     "y2": {
      "none": true,
-     "n": 66,
-     "why": "not significant after correcting for the number of rules tested"
+     "n": 64,
+     "why": "hit rate under 55%"
     },
     "y10": {
      "none": true,
      "n": 9,
      "why": "too few tested calls"
+    }
+   }
+  },
+  "20261125-initial-jobless-claims-moved-to-wednesda": {
+   "kind": "claims",
+   "date": "2026-11-25",
+   "stage": "pre",
+   "hot": {
+    "gold": {
+     "none": true,
+     "n": 39,
+     "why": "hit rate under 55%"
+    },
+    "usd": {
+     "none": true,
+     "n": 36,
+     "why": "hit rate under 55%"
+    },
+    "eur": {
+     "none": true,
+     "n": 1,
+     "why": "too few tested calls"
+    },
+    "nq": {
+     "none": true,
+     "n": 146,
+     "why": "not significant after correcting for the number of rules tested"
+    },
+    "y2": {
+     "none": true,
+     "n": 192,
+     "why": "not significant after correcting for the number of rules tested"
+    },
+    "y10": {
+     "none": true,
+     "n": 82,
+     "why": "hit rate under 55%"
+    }
+   },
+   "cool": {
+    "gold": {
+     "none": true,
+     "n": 39,
+     "why": "hit rate under 55%"
+    },
+    "usd": {
+     "none": true,
+     "n": 36,
+     "why": "hit rate under 55%"
+    },
+    "eur": {
+     "none": true,
+     "n": 1,
+     "why": "too few tested calls"
+    },
+    "nq": {
+     "none": true,
+     "n": 146,
+     "why": "not significant after correcting for the number of rules tested"
+    },
+    "y2": {
+     "none": true,
+     "n": 192,
+     "why": "not significant after correcting for the number of rules tested"
+    },
+    "y10": {
+     "none": true,
+     "n": 82,
+     "why": "hit rate under 55%"
     }
    }
   },
@@ -2399,7 +3135,7 @@
    "hot": {
     "gold": {
      "none": true,
-     "n": 52,
+     "n": 53,
      "why": "not significant after correcting for the number of rules tested"
     },
     "usd": {
@@ -2409,8 +3145,8 @@
     },
     "eur": {
      "none": true,
-     "n": 69,
-     "why": "not significant after correcting for the number of rules tested"
+     "n": 62,
+     "why": "hit rate under 55%"
     },
     "nq": {
      "none": true,
@@ -2431,7 +3167,7 @@
    "cool": {
     "gold": {
      "none": true,
-     "n": 52,
+     "n": 53,
      "why": "not significant after correcting for the number of rules tested"
     },
     "usd": {
@@ -2441,8 +3177,8 @@
     },
     "eur": {
      "none": true,
-     "n": 69,
-     "why": "not significant after correcting for the number of rules tested"
+     "n": 62,
+     "why": "hit rate under 55%"
     },
     "nq": {
      "none": true,
@@ -2478,12 +3214,12 @@
     },
     "eur": {
      "none": true,
-     "n": 28,
-     "why": "too few tested calls"
+     "n": 31,
+     "why": "hit rate under 55%"
     },
     "nq": {
      "none": true,
-     "n": 10,
+     "n": 11,
      "why": "too few tested calls"
     },
     "y2": {
@@ -2493,7 +3229,7 @@
     },
     "y10": {
      "none": true,
-     "n": 7,
+     "n": 3,
      "why": "too few tested calls"
     }
    },
@@ -2510,12 +3246,12 @@
     },
     "eur": {
      "none": true,
-     "n": 28,
-     "why": "too few tested calls"
+     "n": 31,
+     "why": "hit rate under 55%"
     },
     "nq": {
      "none": true,
-     "n": 10,
+     "n": 11,
      "why": "too few tested calls"
     },
     "y2": {
@@ -2525,7 +3261,7 @@
     },
     "y10": {
      "none": true,
-     "n": 7,
+     "n": 3,
      "why": "too few tested calls"
     }
    }
@@ -2537,7 +3273,7 @@
    "hot": {
     "gold": {
      "none": true,
-     "n": 31,
+     "n": 34,
      "why": "hit rate under 55%"
     },
     "usd": {
@@ -2552,8 +3288,8 @@
     },
     "nq": {
      "none": true,
-     "n": 58,
-     "why": "hit rate under 55%"
+     "n": 60,
+     "why": "not significant after correcting for the number of rules tested"
     },
     "y2": {
      "dir": "up",
@@ -2578,7 +3314,7 @@
    "cool": {
     "gold": {
      "none": true,
-     "n": 31,
+     "n": 34,
      "why": "hit rate under 55%"
     },
     "usd": {
@@ -2593,8 +3329,8 @@
     },
     "nq": {
      "none": true,
-     "n": 58,
-     "why": "hit rate under 55%"
+     "n": 60,
+     "why": "not significant after correcting for the number of rules tested"
     },
     "y2": {
      "dir": "down",
@@ -2622,10 +3358,8 @@
  "loading": [],
  "log": [
   "direction: fitting (inputs changed)",
-  "direction: not enough history for cpi",
-  "direction: not enough history for claims",
   "direction: not enough history for gdp",
-  "direction: fit took 4s",
+  "direction: fit took 6s",
   "direction: history or prices updated this run"
  ]
 }
