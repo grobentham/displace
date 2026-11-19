@@ -23,6 +23,7 @@ jobs:
   wait-and-dispatch:
     runs-on: ubuntu-latest
     timeout-minutes: 340
+    # slots can be 20 minutes apart (22:22 and 22:42 UTC), so 'ran recently' must be shorter than that
     steps:
       - uses: actions/checkout@v5
       - name: Work out the next slot
@@ -33,12 +34,12 @@ jobs:
           echo "fire=$(sed -n 's/.*fire=\([a-z]*\).*/\1/p' plan.txt)" >> "$GITHUB_OUTPUT"
       - name: Wait
         run: sleep ${{ steps.plan.outputs.wait }}
-      - name: Start the engine (unless it ran in the last 20 minutes)
+      - name: Start the engine (unless it ran in the last 10 minutes)
         if: steps.plan.outputs.fire == 'yes'
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          since=$(date -u -d '20 minutes ago' +%Y-%m-%dT%H:%M:%SZ)
+          since=$(date -u -d '10 minutes ago' +%Y-%m-%dT%H:%M:%SZ)
           recent=$(gh run list --workflow engine.yml --branch main --limit 5 --json createdAt,event --jq "[.[] | select(.createdAt > \"$since\" and .event != \"pull_request\")] | length")
           if [ "$recent" = "0" ]; then gh workflow run engine.yml --ref main && echo "engine started"; else echo "engine already ran recently"; fi
       - name: Wait for the next slot
