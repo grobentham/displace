@@ -975,12 +975,12 @@ def write_outlook(events):
             line = f"{e['title']} at {e['time']} NY"
             if e.get("previous"):
                 line += f" (previous {e['previous']}" + (f", forecast {e['forecast']}" if e.get("forecast") else "") + ")"
-            parts.append(line + ".")
+            top = e.get("impact") == "high" and not any(x.get("impact") == "high" for x in evs[:evs.index(e)])
+            if top and kind_of(e) in WHY:  # the day's first high-impact release gets its one-line why, right after it
+                line += f". {WHY[kind_of(e)]}"
+            parts.append(line + ("" if line.endswith(".") else "."))
             if e.get("impact") == "high":
                 highs.append((day, e))
-        top = next((e for e in evs if e.get("impact") == "high"), None)
-        if top and kind_of(top) in WHY:
-            parts.append(WHY[kind_of(top)])
         out.append({"d": fmt_day(day), "t": " ".join(parts)})
     week = f"{MON[days[0].month - 1]} {days[0].day}–" + (f"{days[-1].day}" if days[-1].month == days[0].month else f"{MON[days[-1].month - 1]} {days[-1].day}")
     if highs:
