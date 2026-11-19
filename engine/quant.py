@@ -74,9 +74,10 @@ def judge(w, t_req):
     s3 = brier_skill(w[w[:, 0] >= last - 2])
     d = (w[:, 2] - w[:, 3]) ** 2 - (w[:, 1] - w[:, 3]) ** 2
     t = float(d.mean() / (d.std() / math.sqrt(len(d)))) if d.std() > 0 else 0.0
-    ok = t >= t_req and all(x is not None and x > 0 for x in (s1, s2, s3))
+    stable = all(x is not None and x > 0 for x in (s1, s2, s3))
     r = lambda x: round(x, 4) if x is not None else None
-    return {"skill": r(s), "t": round(t, 2), "halves": [r(s1), r(s2)], "recent": r(s3), "tested": bool(ok)}
+    return {"skill": r(s), "t": round(t, 2), "halves": [r(s1), r(s2)], "recent": r(s3), "stable": bool(stable),
+            "tested": bool(stable and t >= t_req)}
 
 
 def reliability(p, y, bins=10, min_n=25):
@@ -94,7 +95,7 @@ def ols(A, y):
     return np.linalg.lstsq(A, y, rcond=None)[0]
 
 
-def har_walk_forward(years, F, y, base, first, train_from):
+def har_walk_forward(years, F, y, base, first, train_from, r_next=None):
     """Walk-forward OLS on log range. base: the old forecast (log of the 20-day average range) for comparison.
     Returns dict of out-of-sample arrays: pred, lo, hi (80% band), y, base, oldlo, oldhi, year, idx."""
     rows = {k: [] for k in ("idx", "pred", "lo", "hi", "y", "base", "oldlo", "oldhi", "c")}
@@ -114,6 +115,11 @@ def har_walk_forward(years, F, y, base, first, train_from):
         o10, o50, o90 = np.quantile(ro, [0.1, 0.5, 0.9])
         pe = np.c_[np.ones(te.sum()), F[te]] @ b
         idx = np.where(te)[0]
+        if r_next is not None:
+            fit_tr = np.exp(A @ b)
+            rn = r_next[tr]
+            scale = float(np.sqrt(np.nanmean(rn ** 2) / np.mean(fit_tr ** 2)))
+            rows["c"] += [scale] * int(te.sum())
         rows["idx"] += list(idx)
         rows["pred"] += list(pe)
         rows["lo"] += list(pe + q10)
@@ -130,3 +136,8 @@ def har_fit(F, y, mask):
     b = ols(A, y[mask])
     res = y[mask] - A @ b
     return b, np.quantile(res, [0.1, 0.5, 0.9])
+
+
+def z_needed(k, alpha=0.05):
+    """Two-sided z for alpha split across k tests (Bonferroni)."""
+    return NormalDist().inv_cdf(1 - alpha / (2 * max(1, k)))

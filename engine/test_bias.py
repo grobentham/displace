@@ -91,8 +91,58 @@ def test_run_end_to_end():
     assert json.load(open(B.OUT))["live"]["nq"]["days"] == 1
 
 
+def test_fixes():
+    # bad candles and gold's pre-2013 history are dropped
+    rows = [("2012-06-01", [1, 2, 0.5, 1.5]), ("2013-01-02", [1, 1, 1, 1]), ("2013-01-03", [1, 2, 0.5, 1.5]),
+            ("2013-01-04", [-1, 2, -3, -2])]
+    assert [d for d, _ in B.clean("gold", rows)] == ["2013-01-03"]
+    assert [d for d, _ in B.clean("nq", rows)] == ["2012-06-01", "2013-01-03"]
+    # a weekly-published series is only used once public
+    keys = ["2026-01-12", "2026-01-16"]
+    v = B.lagged(keys, {"2026-01-05": 1.0, "2026-01-09": 2.0}, lag_days=7)
+    assert v[0] == 1.0 and v[1] == 2.0
+    # one bar across markets; equity indices must agree
+    T = {m: {"signals": {"mom20": {"stable": True, "t": 4.0, "skill": 0.002}}, "events": {}} for m in ("nq", "es", "ym")}
+    T["es"]["signals"]["mom20"]["skill"] = -0.001
+    T["ym"]["signals"]["mom20"]["skill"] = -0.001
+    B.decide(T, 3.0, 3.0)
+    assert not T["nq"]["signals"]["mom20"]["tested"], "an index edge the other indices do not share is not trusted"
+    T["es"]["signals"]["mom20"]["skill"] = 0.001
+    B.decide(T, 3.0, 3.0)
+    assert not T["nq"]["signals"]["mom20"]["tested"], "one of two other indices is not a majority"
+    T["ym"]["signals"]["mom20"]["skill"] = 0.001
+    B.decide(T, 3.0, 3.0)
+    assert T["nq"]["signals"]["mom20"]["tested"]
+    B.decide(T, 5.0, 3.0)
+    assert not T["nq"]["signals"]["mom20"]["tested"]
+    assert Q.z_needed(40) > 3.2
+
+
+def test_sessions_keep_mondays():
+    import bars
+    rows, d = [], dt.datetime(2025, 1, 6, tzinfo=B.NY)  # a Monday
+    rnd = random.Random(1)
+    px = 100.0
+    while len(rows) < 24 * 260:
+        if not (d.weekday() == 5 or (d.weekday() == 4 and d.hour >= 17) or (d.weekday() == 6 and d.hour < 18)):
+            o = px
+            px *= 1 + rnd.gauss(0, 0.002)
+            rows.append((d, o, max(o, px), min(o, px), px))
+        d += dt.timedelta(hours=1)
+    old = bars.load
+    bars.load = lambda m, interval="1h": rows
+    try:
+        S = B.sessions("nq")
+    finally:
+        bars.load = old
+    assert S and S["mondays"] > 40, S and S["mondays"]
+    assert not S["overnight"]["passed"] and not S["momentum"]["passed"]
+
+
 if __name__ == "__main__":
     test_quant_basics()
     test_random_walk_finds_no_direction_but_real_volatility()
     test_run_end_to_end()
+    test_fixes()
+    test_sessions_keep_mondays()
     print("bias tests passed")
