@@ -95,22 +95,14 @@ def policy_summary(topic, title, url, fetch):
     return f"The ECB reported a deposit facility rate of {match[1]}%." if match else ""
 
 
-SENTENCE = re.compile(r"(?<=[.;])\s+(?=[A-Z])")
+SENTENCE = re.compile(r"(?<!\s[A-Z]\.)(?<!\.[A-Z]\.)(?<=[.;])\s+(?=[A-Z])")  # not after initials or U.S.
 OUTLOOK = re.compile(r"^(In (discussing|their discussion of|considering|their consideration of|regard to|light of)|With regard to)"
                      r"[^.]{0,80}(outlook for (monetary )?policy|policy outlook|monetary policy outlook|policy path)", re.I)
 RISKS = re.compile(r"\b(participants|members)\b[^.]{0,200}\b(risks?)\b", re.I)
 
 
-def _sentences(body, start, stop=None):
-    i = body.find(start)
-    if i < 0:
-        return []
-    j = body.find(stop, i + len(start)) if stop else -1
-    return [x.strip() for x in SENTENCE.split(body[i:j if j > 0 else len(body)]) if x.strip()]
-
-
-def _short(sentence, limit=320):
-    sentence = sentence.strip()
+def _short(sentence, limit=360):
+    sentence = re.sub(r"\s*\u2014[^\u2014]{0,200}\u2014\s*", " ", sentence).strip()  # drop dashed asides
     if len(sentence) <= limit:
         return sentence
     cut = sentence[:limit].rsplit(" ", 1)[0].rstrip(",;:")
@@ -128,8 +120,8 @@ def minutes_summary(url, fetch):
     except (OSError, ValueError):
         return ""
     lines = []
-    views = _sentences(body, "Participants' Views on Current Conditions", "Committee Policy Action") or \
-        _sentences(body, "Participants\u2019 Views on Current Conditions", "Committee Policy Action")
+    end = body.find("Committee Policy Action")
+    views = [x.strip() for x in SENTENCE.split(body[:end if end > 0 else len(body)])]
     risk = next((x for x in views if RISKS.search(x) and ("inflation" in x or "employment" in x or "labor" in x)), None)
     allsent = [x.strip() for x in SENTENCE.split(body)]
     k = next((i for i, x in enumerate(allsent) if OUTLOOK.search(x)), None)
@@ -137,13 +129,13 @@ def minutes_summary(url, fetch):
         lines.append(_short(allsent[k]))
     if risk and risk not in lines:
         lines.append(_short(risk))
-    vote = re.search(r"Voting against (?:this|the) action:\s*([^.]*)\.", body)
+    vote = re.search(r"Voting against (?:this|the) action:\s*(.+?)(?<!\s[A-Z])\.(?:\s|$)", body)
     if vote:
         who = vote[1].strip()
         if who.lower().startswith("none"):
             lines.append("The decision was unanimous.")
         else:
-            lines.append(f"Dissent: {_short(who, 160)}.")
+            lines.append(f"Dissent: {_short(who, 220)}.")
     return " ".join(lines)
 
 

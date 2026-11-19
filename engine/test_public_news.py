@@ -145,5 +145,21 @@ class NewsDigestTests(unittest.TestCase):
         })
 
 
+    def test_fomc_minutes_key_points(self):
+        body = ("Staff saw risks. Participants noted that upside risks to inflation had increased. "
+                "With regard to the outlook for monetary policy in the months ahead, almost all participants judged that "
+                "further action\u2014broadly consistent with the projections\u2014would likely be appropriate. A couple disagreed. "
+                "Committee Policy Actions Members agreed. Voting against this action: Lisa D. Cook and Beth M. Hammack, "
+                "who preferred to raise the target range. Consistent with")
+        pages = {"https://www.federalreserve.gov/m.htm": b'<a href="/monetarypolicy/fomcminutes20261028.htm">',
+                 "https://www.federalreserve.gov/monetarypolicy/fomcminutes20261028.htm": body.encode()}
+        out = news.policy_summary("minutes", "Minutes", "https://www.federalreserve.gov/m.htm", pages.__getitem__)
+        self.assertIn("further action would likely be appropriate", out)
+        self.assertIn("upside risks to inflation", out)
+        self.assertIn("Dissent: Lisa D. Cook and Beth M. Hammack, who preferred to raise the target range.", out)
+        unanimous = body.replace("Lisa D. Cook and Beth M. Hammack, who preferred to raise the target range", "None")
+        pages["https://www.federalreserve.gov/monetarypolicy/fomcminutes20261028.htm"] = unanimous.encode()
+        self.assertIn("unanimous", news.policy_summary("minutes", "M", "https://www.federalreserve.gov/m.htm", pages.__getitem__))
+
 if __name__ == "__main__":
     unittest.main()
