@@ -320,7 +320,21 @@
    "note": "Weekly initial claims for unemployment insurance.",
    "id": "20261125-initial-jobless-claims-moved-to-wednesda",
    "metric": "initial claims",
-   "previous": "203K"
+   "previous": "203K",
+   "components": [
+    {
+     "label": "Initial claims",
+     "previous": "203K"
+    },
+    {
+     "label": "4-week average",
+     "previous": "198K"
+    },
+    {
+     "label": "Continuing claims",
+     "previous": "1.76M"
+    }
+   ]
   },
   {
    "date": "2026-11-25",
