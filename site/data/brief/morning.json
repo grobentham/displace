@@ -10,6 +10,7 @@
      "title": "Minutes of the Federal Open Market Committee, October 27-28, 2026",
      "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20261118a.htm",
      "source": "Federal Reserve",
+     "analysis": "With regard to the outlook for monetary policy in the months ahead, almost all participants judged that, under their baseline outlooks for inflation and the labor market, further action to raise the target range for the federal funds rate would likely be appropriate, in order to ensure a timely return of inflation to the 2 percent objective. Some participants expressed concern that more widespread price pressures in the context of a prolonged period of above-target inflation could increase the risk of elevated inflation becoming entrenched in the inflation expectations of households and businesses. Dissent: Lisa D. Cook and Beth M. Hammack, who preferred to raise the target range for the federal funds rate by 1/4 percentage point at this meeting.",
      "context": "Meeting minutes show which risks officials weighed when they made the decision.",
      "published": "2026-11-19T03:00:00+08:00"
     }
@@ -72,7 +73,8 @@
    },
    "calendarCovered": true,
    "feedsChecked": true,
-   "feedIssues": false
+   "feedIssues": false,
+   "refreshedAt": "2026-11-19T12:25:30+08:00"
   },
   {
    "date": "2026-11-18",

@@ -1,5 +1,5 @@
 {
- "checkedAt": "2026-11-19T03:52:39+00:00",
+ "checkedAt": "2026-11-19T04:25:28+00:00",
  "sources": {
   "Federal Reserve": true,
   "European Central Bank": true,
@@ -8,18 +8,18 @@
  "sourceHealth": {
   "Federal Reserve": {
    "state": "available",
-   "checkedAt": "2026-11-19T03:52:39+00:00",
-   "lastSuccessAt": "2026-11-19T03:52:39+00:00"
+   "checkedAt": "2026-11-19T04:25:28+00:00",
+   "lastSuccessAt": "2026-11-19T04:25:28+00:00"
   },
   "European Central Bank": {
    "state": "available",
-   "checkedAt": "2026-11-19T03:52:39+00:00",
-   "lastSuccessAt": "2026-11-19T03:52:39+00:00"
+   "checkedAt": "2026-11-19T04:25:28+00:00",
+   "lastSuccessAt": "2026-11-19T04:25:28+00:00"
   },
   "Bank of England": {
    "state": "available",
-   "checkedAt": "2026-11-19T03:52:39+00:00",
-   "lastSuccessAt": "2026-11-19T03:52:39+00:00"
+   "checkedAt": "2026-11-19T04:25:28+00:00",
+   "lastSuccessAt": "2026-11-19T04:25:28+00:00"
   }
  },
  "items": [
@@ -29,7 +29,7 @@
    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20261118a.htm",
    "published": "2026-11-18T19:00:00+00:00",
    "context": "Meeting minutes show which risks officials weighed when they made the decision.",
-   "analysis": ""
+   "analysis": "With regard to the outlook for monetary policy in the months ahead, almost all participants judged that, under their baseline outlooks for inflation and the labor market, further action to raise the target range for the federal funds rate would likely be appropriate, in order to ensure a timely return of inflation to the 2 percent objective. Some participants expressed concern that more widespread price pressures in the context of a prolonged period of above-target inflation could increase the risk of elevated inflation becoming entrenched in the inflation expectations of households and businesses. Dissent: Lisa D. Cook and Beth M. Hammack, who preferred to raise the target range for the federal funds rate by 1/4 percentage point at this meeting."
   },
   {
    "id": "20261117-retail-sales-oct",
@@ -123,7 +123,7 @@
    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20261007a.htm",
    "published": "2026-10-07T18:00:00+00:00",
    "context": "Meeting minutes show which risks officials weighed when they made the decision.",
-   "analysis": ""
+   "analysis": "With regard to the outlook for monetary policy beyond the current meeting, most participants assessed that another increase in the target range for the federal funds rate would likely be appropriate by year end. Participants generally assessed inflation risk as skewed to the upside; some participants remarked that those risks had become more skewed to the upside in recent months. The decision was unanimous."
   }
  ]
 }
