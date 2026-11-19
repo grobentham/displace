@@ -1,6 +1,6 @@
 # Displace
 
-ICT trading education site with an economic calendar and a news engine that keeps it up to date on its own. Free to run: the site is hosted on GitHub Pages, and the engine runs in GitHub Actions.
+Quant research site for NQ and gold futures: a tested daily bias, an economic calendar with release-surprise models, and a backtester on real bars, kept up to date by an engine that runs on its own. Free to run: the site is hosted on GitHub Pages, and the engine runs in GitHub Actions.
 
 Everything here is education. The engine never writes entries, targets or trade instructions. The news-outcome engine publishes historical statistics (how markets have closed after past releases) and, only where a rule passed out-of-sample tests, a probability lean with its full public track record.
 
@@ -145,16 +145,22 @@ python engine/test_sources.py
 
 `test_surprise.py` checks the model on simulated markets where the truth is known (it must find real effects, find nothing in noise and state honest probabilities). `test_predict.py` runs the whole news-outcome pipeline offline.
 
-### Bias of the day (`engine/bias.py`)
+### Daily bias (`engine/bias.py`)
 
-Every run after the New York futures close (17:00 NY), the last finished daily candle of NQ and gold futures is
-read the ICT way: closed above or below the prior day's high or low, or swept it and closed back inside (a failed
-breakout), or an inside day (no bias). The result is a LONG / SHORT / NO BIAS call with its draw on liquidity
-(the candle's high or low), the other side, and the 20-day premium/discount zone.
+Every run after the New York futures close (17:00 NY) the engine re-tests a fixed set of signals on every day since
+2000 (free Yahoo daily futures candles for NQ and gold, cached in `engine/cache/daily/`) and publishes for the next
+session:
 
-Each rule is tested on every day since 2000 (free Yahoo daily futures candles, cached in `engine/cache/daily/`):
-how often the next day reached the draw and closed in the bias direction (close to close, because Yahoo's daily
-futures opens are unreliable), next to the same rates on all days. On NQ the candle rules give no edge on the
-close, but the next day reaches the draw far more often than on an ordinary day (for example 77% vs 55% after a
-close above the prior high). The site shows both numbers. Live calls are logged in `site/data/bias/log.json`
-and scored the day after.
+- **Direction:** P(next close above today's close). It starts at the long-run base rate (about 54% for NQ, 53% for
+  gold) and moves only for signals that pass walk-forward testing: refit every year on the years before it,
+  out-of-sample Brier skill over the base rate with a Diebold–Mariano t ≥ 2.64 (5% after a Bonferroni split over six
+  signals), and positive skill in both halves and the last three years. Calendar effects (turn of the month, Fed days,
+  after 2-sigma days) need |z| ≥ 1.96 on the same side in both halves and since 2019. As of November 2026 none
+  pass for either market, which is the usual result for liquid futures, so the published lean is the base rate.
+- **Range:** expected high-low range from the 20-day average range, with the 10th–90th percentile band.
+- **Levels:** P(trading above today's high / below today's low) from the close's distance to each, which has strong
+  out-of-sample skill (about 26% Brier skill for NQ).
+
+Signals that fail are published on the signal board with their scores. Calls are logged in `site/data/bias/log.json`
+and scored the next day: direction, Brier score, levels taken and whether the range landed in its band.
+`test_bias.py` checks that random walks pass none of the direction tests.
