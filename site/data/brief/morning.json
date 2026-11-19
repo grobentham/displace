@@ -2,6 +2,79 @@
  "version": 2,
  "editions": [
   {
+   "date": "2026-11-19",
+   "opensAt": "2026-11-19T07:00+08:00",
+   "generatedAt": "2026-11-19T09:23:04+08:00",
+   "updates": [
+    {
+     "title": "Minutes of the Federal Open Market Committee, October 27-28, 2026",
+     "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20261118a.htm",
+     "source": "Federal Reserve",
+     "context": "Meeting minutes show which risks officials weighed when they made the decision.",
+     "published": "2026-11-19T03:00:00+08:00"
+    }
+   ],
+   "upcoming": [
+    {
+     "at": "2026-11-19T21:30+08:00",
+     "title": "Initial jobless claims",
+     "watch": "Initial claims count new unemployment insurance applications. The four-week average smooths weekly swings.",
+     "source": "Dept. of Labor",
+     "metric": "initial claims",
+     "forecast": "198K",
+     "previous": "200K",
+     "forecastSource": "ForexFactory consensus"
+    }
+   ],
+   "moreReleases": [],
+   "focus": {
+    "title": "Initial jobless claims",
+    "at": "2026-11-19T21:30+08:00"
+   },
+   "nextFed": "Dec 8–9",
+   "otherCloses": [
+    "At the Tue Nov 17 close, WTI crude $89.53 (up 0.3%)."
+   ],
+   "treasury": {
+    "date": "2026-11-18",
+    "yield": 4.8,
+    "changeBp": 0
+   },
+   "outlook": {
+    "label": "Neutral",
+    "reason": "The 2-year yield moved by less than 3 bp. A tilt requires both yields to reach that threshold.",
+    "rates": {
+     "date": "2026-11-18",
+     "twoYearBp": 0,
+     "tenYearBp": -3,
+     "twoYearYield": 4.8,
+     "tenYearYield": 5.07
+    },
+    "thresholdBp": 3
+   },
+   "earnings": {
+    "reports": [],
+    "upcoming": [
+     {
+      "symbol": "WMT",
+      "title": "Walmart",
+      "session": "BMO",
+      "date": "2026-11-19",
+      "confirmed": true,
+      "source": "Company announcement",
+      "at": "2026-11-19T20:00+08:00",
+      "timeConfirmed": false,
+      "url": "https://corporate.walmart.com/news/events/fy2027-q3-earnings-release"
+     }
+    ],
+    "sourcesRead": 6,
+    "sourcesTotal": 6
+   },
+   "calendarCovered": true,
+   "feedsChecked": true,
+   "feedIssues": false
+  },
+  {
    "date": "2026-11-18",
    "opensAt": "2026-11-18T07:00+08:00",
    "generatedAt": "2026-11-18T14:00:50+08:00",
