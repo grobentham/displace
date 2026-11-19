@@ -184,11 +184,12 @@ def study(rows):
         base["low"] += nxt[2] < day[2]
         k = classify(prev, day)
         bias = CASES[k][0]
+        z = zone(rows, i)[0] if i >= RANGE_DAYS else None
         if bias == "neutral":
-            per[k].append((i, None, None))
+            per[k].append((i, None, None, z))
         else:
             d, w = outcome(day, nxt, bias)
-            per[k].append((i, d, w))
+            per[k].append((i, d, w, z))
     up, hi, lo = base["up"] / n_all, base["high"] / n_all, base["low"] / n_all
     out = {"days": n_all, "since": rows[0][0][:4], "base": {"up": round(up, 3), "high": round(hi, 3), "low": round(lo, 3)},
            "cases": {}}
@@ -199,17 +200,22 @@ def study(rows):
         if bias != "neutral" and items:
             pd = up if bias == "long" else 1 - up        # the direction rate on all days
             pw = hi if bias == "long" else lo            # the draw rate on all days
-            dk = sum(1 for _, d, _ in items if d)
-            wk = sum(1 for _, _, w in items if w)
+            n = len(items)
+            dk = sum(1 for x in items if x[1])
+            wk = sum(1 for x in items if x[2])
             late = [x for x in items if x[0] >= cut]
-            ldk = sum(1 for _, d, _ in late if d)
-            rec.update({"dir": _rate(dk, len(items)), "draw": _rate(wk, len(items)),
-                        "base_dir": round(pd, 3), "base_draw": round(pw, 3),
-                        "late": {"n": len(late), "dir": _rate(ldk, len(late)),
-                                 "draw": _rate(sum(1 for _, _, w in late if w), len(late))}})
-            edge = (dk / len(items) - pd >= EDGE and _z(dk, len(items), pd) >= 1.96
-                    and late and ldk / len(late) - pd >= EDGE / 2)
-            rec["tested"] = bool(edge)
+            ldk, lwk = sum(1 for x in late if x[1]), sum(1 for x in late if x[2])
+            rec.update({"dir": _rate(dk, n), "draw": _rate(wk, n), "base_dir": round(pd, 3), "base_draw": round(pw, 3),
+                        "late": {"n": len(late), "dir": _rate(ldk, len(late)), "draw": _rate(lwk, len(late))}})
+            rec["tested"] = bool(dk / n - pd >= EDGE and _z(dk, n, pd) >= 1.96 and late and ldk / len(late) - pd >= EDGE / 2)
+            rec["draw_tested"] = bool(wk / n - pw >= EDGE and _z(wk, n, pw) >= 1.96 and late and lwk / len(late) - pw >= EDGE / 2)
+            zs = {}
+            for zn in ("premium", "discount"):
+                sub = [x for x in items if x[3] == zn]
+                if sub:
+                    zs[zn] = {"n": len(sub), "dir": _rate(sum(1 for x in sub if x[1]), len(sub)),
+                              "draw": _rate(sum(1 for x in sub if x[2]), len(sub))}
+            rec["zones"] = zs
         out["cases"][k] = rec
     return out
 

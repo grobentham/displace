@@ -1630,6 +1630,33 @@ svg.cd line.wick{animation:fadein .5s ease-out both}
   .ol-d>div{grid-template-columns:minmax(0,1fr);gap:4px}
   .pl-t small{white-space:normal}
 }
+
+/* ===== bias of the day ===== */
+.bias{background:#fff;border-radius:22px;padding:22px 24px}
+.bias-h{display:flex;justify-content:space-between;align-items:baseline;gap:6px 14px;flex-wrap:wrap}
+.bias-h h2{font-size:1.4rem;letter-spacing:-.02em;margin:0}
+.bias-h small{color:var(--muted);font-size:.86rem}
+.bias-g{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:16px}
+.bias-m{border:1px solid var(--line);border-radius:18px;padding:16px 18px;display:grid;gap:12px;align-content:start}
+.bias-top{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.bias-top b{font-size:1.08rem}
+.bias-top small{display:block;color:var(--muted);font-size:.78rem;font-weight:400}
+.bias-tag{font-weight:800;letter-spacing:.07em;font-size:.92rem;padding:7px 15px;border-radius:99px;white-space:nowrap}
+.bias-tag.long{background:#e2f6e7;color:#127a37}.bias-tag.short{background:#fde7e6;color:#c21f17}.bias-tag.neutral{background:#efeff4;color:#6e6e73}
+.bias-read{font-weight:600;font-size:.98rem;line-height:1.4;margin:0}
+.bias-lv{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.bias-lv div{background:var(--gray);border-radius:12px;padding:8px 10px;min-width:0}
+.bias-lv small{display:block;font-size:.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;font-weight:700}
+.bias-lv b{font-variant-numeric:tabular-nums;font-size:.98rem}
+.bias-lv .is-draw{background:#eef5ff;box-shadow:inset 0 0 0 1px #b9d6ff}
+.bias-stat{font-size:.9rem;color:#3a3a3c;line-height:1.5;margin:0}
+.bias-stat strong{font-weight:700;color:var(--ink,#1d1d1f)}
+.bias-zone{font-size:.84rem;color:#515154;line-height:1.45;margin:0}
+.bias-f{margin-top:14px;font-size:.84rem;color:var(--muted);display:grid;gap:6px;line-height:1.45}
+.bias-f b{color:#c93400;font-weight:600}
+.hx-bias{display:block;margin:10px 0 0;font-size:.95rem;color:#f5f5f7}.hx-bias i{font-style:normal;font-weight:800;letter-spacing:.04em}
+.hx-bias .long{color:#30d158}.hx-bias .short{color:#ff6961}.hx-bias .neutral{color:#aeaeb2}
+@media (max-width:760px){.bias-g{grid-template-columns:minmax(0,1fr)}.bias{padding:16px}.bias-lv{grid-template-columns:repeat(3,minmax(0,1fr))}}
 </style>
 </head>
 <body>
@@ -1688,7 +1715,7 @@ svg.cd line.wick{animation:fadein .5s ease-out both}
 <section id="pillars" class="gray" style="padding:70px 0 10px">
   <div class="wide hx hx2">
     <a class="hx-c hx-course" href="#foundations"><small>The course · 6 stages</small><b>Learn ICT, from zero to a trade plan.</b><p>Structure and liquidity first, then PD arrays, time, 19 models, your market, and how to test it honestly before you risk money.</p><em>Start Stage 1 ›</em></a>
-    <a class="hx-c hx-news" href="#calendar"><small>News · live</small><b>Next: <span id="hx-rel">the next big release</span></b><div class="hx-cd" id="hx-cd">Countdown loading</div><p>Every US release in your time, with the consensus, a plain-English daily brief, a Fed tracker and how gold and NQ have reacted.</p><em>Open News ›</em></a>
+    <a class="hx-c hx-news" href="#calendar"><small>News · live</small><b>Next: <span id="hx-rel">the next big release</span></b><div class="hx-cd" id="hx-cd">Countdown loading</div><p>Every US release in your time, with the consensus, a plain-English daily brief, a Fed tracker and how gold and NQ have reacted.</p><span class="hx-bias" id="hx-bias" hidden></span><em>Open News ›</em></a>
   </div>
 </section>
 
@@ -2495,6 +2522,7 @@ svg.cd line.wick{animation:fadein .5s ease-out both}
   <div class="wide">
     <header class="nhero"><div class="kick">News</div><h1 class="h-lg">Economic calendar</h1><p class="sub">Follow scheduled releases and official policy updates in New York time and yours. See reported figures and how they compare with earlier readings.</p><p class="ndis">For education only. Briefings describe reported data and historical reactions.</p></header>
     <div class="tool on" id="econcal">
+        <section class="bias" id="bias-day" aria-labelledby="bias-title" hidden></section>
         <div class="ec-next" id="ec-next"></div>
         <section class="dk-card morning-brief" id="daily-brief" aria-labelledby="morning-title">
       <header class="morning-heading"><h2 id="morning-title">Daily brief</h2><p id="morning-status" role="status">Loading the latest edition…</p></header>
@@ -4815,6 +4843,53 @@ window.addEventListener("hashchange",function(){if(B1.on())B1.stop();calmOff();a
   }
   var t=null;new MutationObserver(function(){clearTimeout(t);t=setTimeout(fold,60);}).observe(root,{childList:true,subtree:true});
   fold();
+})();
+
+/* bias of the day (engine/bias.py) */
+(function(){
+  var box=document.getElementById("bias-day"),hx=document.getElementById("hx-bias");
+  var WD=["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],MO=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+  function esc(t){return String(t==null?"":t).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];});}
+  function day(iso){var d=new Date(iso+"T12:00:00Z");return WD[d.getUTCDay()]+", "+MO[d.getUTCMonth()]+" "+d.getUTCDate();}
+  function px(m,v){return v==null?"–":Number(v).toLocaleString("en-US",{minimumFractionDigits:m==="gold"?1:2,maximumFractionDigits:m==="gold"?1:2});}
+  function pc(x){return Math.round(x*100)+"%";}
+  function n(x){return Number(x).toLocaleString("en-US");}
+  var TAG={long:"LONG",short:"SHORT",neutral:"NO BIAS"};
+  function market(k,v,since){
+    var r=v.record||{},L=v.levels||{},side=v.bias==="long"?"high":"low",yd=v.day_name;
+    var lv=v.bias==="neutral"
+      ?'<div><small>'+esc(yd)+' high</small><b>'+px(k,L.pdh)+'</b></div><div><small>'+esc(yd)+' low</small><b>'+px(k,L.pdl)+'</b></div><div><small>20-day midpoint</small><b>'+px(k,L.eq)+'</b></div>'
+      :'<div class="is-draw"><small>Draw · '+esc(String(yd).slice(0,3))+' '+side+'</small><b>'+px(k,v.draw.level)+'</b></div><div><small>Other side</small><b>'+px(k,v.against.level)+'</b></div><div><small>20-day midpoint</small><b>'+px(k,L.eq)+'</b></div>';
+    var stat;
+    if(v.bias==="neutral"){
+      stat='<p class="bias-stat">No call today. Wait for one side to be taken: a move through '+px(k,L.pdh)+' or '+px(k,L.pdl)+' shows which way the day is leaning. This happened on '+n(r.n||0)+' days since '+esc(since)+'.</p>';
+    } else {
+      var up=v.bias==="long",dirW=up?"higher":"lower";
+      var dirEdge=r.dir-r.base_dir;
+      stat='<p class="bias-stat">Since '+esc(since)+', after this candle the next day reached '+esc(yd)+'’s '+side+' <strong>'+pc(r.draw)+'</strong> of '+n(r.n)+' days ('+pc(r.base_draw)+' on any day). '+
+        'It closed '+dirW+' '+pc(r.dir)+' of the time ('+pc(r.base_dir)+' on any day)'+(r.tested?', a tested edge.':(Math.abs(dirEdge)<0.03?': no real edge on the close.':(dirEdge<0?': worse than any day, so don’t read it as a close call.':': a small edge that didn’t pass the test.')))+'</p>';
+      var zr=(r.zones||{})[v.zone];
+      var fit=v.fits_zone?"which suits a "+v.bias:"which ICT treats as a weaker spot for a "+v.bias;
+      stat+='<p class="bias-zone">Price closed in the <b>'+esc(v.zone)+'</b> of the 20-day range, '+fit+'.'+(zr&&zr.n>=30?' After this candle in '+esc(v.zone)+': draw reached '+pc(zr.draw)+', closed '+dirW+' '+pc(zr.dir)+' ('+n(zr.n)+' days).':'')+'</p>';
+    }
+    return'<div class="bias-m"><div class="bias-top"><b>'+esc(v.name)+'<small>'+esc(v.full)+'</small></b><span class="bias-tag '+v.bias+'">'+TAG[v.bias]+'</span></div>'+
+      '<p class="bias-read">'+esc(v.named)+'.</p><div class="bias-lv">'+lv+'</div>'+stat+'</div>';
+  }
+  fetch("data/bias/current.json",{cache:"no-cache"}).then(function(r){return r.ok?r.json():null;}).then(function(d){
+    if(!d||!d.markets)return;
+    var keys=["nq","gold"].filter(function(k){return d.markets[k];});if(!keys.length)return;
+    var any=d.markets[keys[0]],since=(any.history||{}).since||"2000";
+    var news=(d.news||[]).map(function(e){return esc(e.time)+' NY '+esc(e.title);}).join(" · ");
+    var L=d.live||{},rec=L.calls?'Live record since launch: reached the draw '+L.draws+' of '+L.calls+', closed the bias way '+L.hits+' of '+L.calls+'.':'Live record starts with today’s calls; each one is scored after the day closes.';
+    if(box){
+      box.innerHTML='<div class="bias-h"><h2 id="bias-title">Bias of the day</h2><small>For '+esc(day(d["for"]))+' · from '+esc(any.day_name)+'’s daily candle · updated '+esc(new Date(d.asof).toLocaleString([], {weekday:"short",hour:"2-digit",minute:"2-digit"}))+'</small></div>'+
+        '<div class="bias-g">'+keys.map(function(k){return market(k,d.markets[k],since);}).join("")+'</div>'+
+        '<div class="bias-f">'+(news?'<span><b>High-impact today:</b> '+news+'. A release can override the bias, so let it print first.</span>':'')+
+        '<span>'+rec+'</span><span>An ICT read of the previous daily candle (close beyond, or sweep of, the prior day’s high or low), tested on every day since '+esc(since)+'. The draw is a level price often reaches, not a target or a trade signal. Not financial advice.</span></div>';
+      box.hidden=false;
+    }
+    if(hx){hx.innerHTML='Bias for '+esc(day(d["for"]).split(",")[0])+': '+keys.map(function(k){var v=d.markets[k];return esc(v.name)+' <i class="'+v.bias+'">'+TAG[v.bias]+'</i>';}).join(" · ");hx.hidden=false;}
+  }).catch(function(){});
 })();
 </script>
 <div class="al-toast" id="al-toast" role="alert"></div>
