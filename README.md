@@ -153,18 +153,27 @@ FRED volatility indices, credit spreads, real yields, the dollar and the 2-year 
 release dates from the calendar cache) and publishes for the next session, per market:
 
 - **Direction:** P(next close above today's close), starting at the long-run base rate. Up to twelve price and
-  cross-asset signals are each walk-forward tested (refit yearly, scored out of sample); a signal moves the probability
-  only with a Diebold–Mariano t above a Bonferroni bar for the number tried (about 2.6) and positive Brier skill in
-  both halves and the last three years. Calendar effects need |z| ≥ 2.58 (5% split across five). FRED inputs are used
-  one day late, as published. As of November 2026 nothing passes in any market, so leans are base rates.
+  cross-asset signals per market (82 in all) are each walk-forward tested (refit yearly, scored out of sample). A
+  signal moves the probability only with a Diebold–Mariano t above one Bonferroni bar for every signal tried across
+  all markets (about 3.2), positive Brier skill in both halves and the last three years, and, for the four stock
+  indices, positive skill in most of the other indices too. Calendar effects need |z| above the same kind of global
+  bar (about 3.2 over 40 tests). FRED inputs are lagged by their publication delay (a week for the dollar index).
+  As of November 2026 nothing passes in any market, so the page labels every lean "base rate", not long or short.
 - **Volatility:** a HAR model of the log daily range (yesterday, last week, last month, implied volatility, release
   days, Mondays), walk-forward tested against a 20-day average: 19–23% lower error for the equity indices, 12% crude,
-  11% bitcoin, 4% gold, 2.5% euro, with 80% bands that hold about 80% of days.
-- **Touch ladder:** how often the next day reached the close ± 0.5/1/1.5/2 forecast standard deviations.
+  11% bitcoin, about 3% gold, 2.5% euro, with 80% bands that hold about 80% of days.
+- **Touch ladder:** the chance the next session reaches the close ± 0.5/1/1.5/2 forecast standard deviations, using
+  the σ scale fitted on earlier years only. Where today's close position in its range improved those odds out of
+  sample, the conditional figure is used and the any-day rate shown beside it. The position sizer shows the touch
+  odds for the chosen stop.
 - **Levels:** P(trading above today's high / below today's low), about 20–26% Brier skill out of sample, with
   reliability data for the calibration chart.
-- **Sessions (NQ, gold):** overnight vs New York session and an intraday momentum test, from the hourly archive.
-- **Live record:** every call is logged and scored the next day.
+- **Sessions (NQ, gold):** overnight vs New York session (Mondays measured from Friday's close) and an intraday
+  momentum test, from the hourly archive. Passing needs both the up rate and the average move past |z|, |t| ≥ 2.64
+  (six tests) in both halves. Only about two years of hourly bars exist, so these are marked provisional.
+- **Data cleaning:** candles with high ≤ low or non-positive prices are dropped (crude's negative print on
+  2020-04-20); gold starts in 2013 because earlier Yahoo candles are placeholders.
+- **Live record:** every call is logged and scored the next day; direction hits count only tested calls.
 
 numpy is installed in the workflow for these models. `test_bias.py` checks that random walks pass no direction test
 while the volatility and level models find their (real) skill.
