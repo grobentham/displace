@@ -1,5 +1,5 @@
 {
- "asof": "2026-11-18T20:23-05:00",
+ "asof": "2026-11-18T22:44-05:00",
  "version": 4,
  "assets": {
   "gold": "Gold, close",
@@ -286,35 +286,35 @@
    "group": "labor"
   },
   "nfp:gold2h": {
-   "calls": 24,
-   "hits": 12,
+   "calls": 18,
+   "hits": 6,
    "proven": false,
-   "why": "right less than 55% of the time on unseen releases",
-   "brierSkill": 0.012,
+   "why": "too few tested calls",
+   "brierSkill": 0.003,
    "group": "labor"
   },
   "claims:gold2h": {
-   "calls": 24,
-   "hits": 12,
+   "calls": 18,
+   "hits": 6,
    "proven": false,
-   "why": "right less than 55% of the time on unseen releases",
-   "brierSkill": 0.012,
+   "why": "too few tested calls",
+   "brierSkill": 0.003,
    "group": "labor"
   },
   "jolts:gold2h": {
-   "calls": 24,
-   "hits": 12,
+   "calls": 18,
+   "hits": 6,
    "proven": false,
-   "why": "right less than 55% of the time on unseen releases",
-   "brierSkill": 0.012,
+   "why": "too few tested calls",
+   "brierSkill": 0.003,
    "group": "labor"
   },
   "adp:gold2h": {
-   "calls": 24,
-   "hits": 12,
+   "calls": 18,
+   "hits": 6,
    "proven": false,
-   "why": "right less than 55% of the time on unseen releases",
-   "brierSkill": 0.012,
+   "why": "too few tested calls",
+   "brierSkill": 0.003,
    "group": "labor"
   },
   "nfp:nq2h": {
@@ -1029,25 +1029,25 @@
     "why": ""
    },
    "gold2h": {
-    "b": -0.4831,
-    "k": 1.25,
+    "b": -0.4282,
+    "k": 1.0,
     "n": 204,
     "since": "2024-07-02",
     "bt": {
-     "calls": 24,
-     "hits": 12,
-     "rate": 0.5,
-     "pval": 0.5805901288986206,
-     "brierSkill": 0.012,
+     "calls": 18,
+     "hits": 6,
+     "rate": 0.333,
+     "pval": 0.951873779296875,
+     "brierSkill": 0.003,
      "halves": [
-      0.25,
-      0.75
+      0.222,
+      0.444
      ],
-     "recent": 0.55,
+     "recent": 0.333,
      "tested": 179
     },
     "proven": false,
-    "why": "right less than 55% of the time on unseen releases"
+    "why": "too few tested calls"
    },
    "nq2h": {
     "b": -0.2458,
@@ -1629,7 +1629,7 @@
      "inline": {
       "n": 8,
       "up": 0.375,
-      "med": -0.043
+      "med": -0.039
      },
      "cool": {
       "n": 8,
@@ -1651,7 +1651,7 @@
      "cool": {
       "n": 8,
       "up": 0.625,
-      "med": 0.022
+      "med": 0.023
      }
     }
    }
@@ -1745,7 +1745,7 @@
      "cool": {
       "n": 8,
       "up": 0.75,
-      "med": 0.542
+      "med": 0.539
      }
     },
     "nq2h": {
@@ -1846,7 +1846,7 @@
      "hot": {
       "n": 4,
       "up": 0.25,
-      "med": -0.348
+      "med": -0.377
      },
      "inline": {
       "n": 11,
@@ -1856,7 +1856,7 @@
      "cool": {
       "n": 12,
       "up": 0.75,
-      "med": 0.551
+      "med": 0.547
      }
     },
     "nq2h": {
@@ -1873,7 +1873,7 @@
      "cool": {
       "n": 12,
       "up": 0.667,
-      "med": 0.197
+      "med": 0.195
      }
     }
    }
@@ -1957,7 +1957,7 @@
      "hot": {
       "n": 12,
       "up": 0.5,
-      "med": 0.011
+      "med": 0.006
      },
      "inline": {
       "n": 10,
@@ -1984,7 +1984,7 @@
      "cool": {
       "n": 7,
       "up": 0.429,
-      "med": -0.126
+      "med": -0.121
      }
     }
    }
@@ -2090,7 +2090,7 @@
      "cool": {
       "n": 21,
       "up": 0.524,
-      "med": 0.083
+      "med": 0.08
      }
     },
     "nq15m": {
@@ -2102,7 +2102,7 @@
      "inline": {
       "n": 9,
       "up": 0.333,
-      "med": -0.039
+      "med": -0.038
      }
     },
     "nq2h": {
@@ -2202,8 +2202,8 @@
     "gold2h": {
      "hot": {
       "n": 3,
-      "up": 0.0,
-      "med": -0.422
+      "up": 0.333,
+      "med": -0.417
      },
      "inline": {
       "n": 16,
@@ -2220,7 +2220,7 @@
      "hot": {
       "n": 3,
       "up": 0.667,
-      "med": 0.265
+      "med": 0.252
      },
      "inline": {
       "n": 16,
@@ -2647,7 +2647,7 @@
      "inline": {
       "n": 13,
       "up": 0.538,
-      "med": 0.093
+      "med": 0.098
      },
      "cool": {
       "n": 8,
@@ -2775,7 +2775,7 @@
      "inline": {
       "n": 13,
       "up": 0.615,
-      "med": 0.138
+      "med": 0.142
      },
      "cool": {
       "n": 8,
@@ -3096,7 +3096,7 @@
      "cool": {
       "n": 20,
       "up": 0.65,
-      "med": 0.152
+      "med": 0.156
      }
     },
     "nq2h": {
@@ -3224,7 +3224,7 @@
      "cool": {
       "n": 5,
       "up": 0.8,
-      "med": 0.306
+      "med": 0.308
      }
     }
    }
@@ -3308,7 +3308,7 @@
      "hot": {
       "n": 8,
       "up": 0.625,
-      "med": 0.185
+      "med": 0.172
      },
      "inline": {
       "n": 11,
@@ -3325,7 +3325,7 @@
      "hot": {
       "n": 8,
       "up": 0.25,
-      "med": -0.177
+      "med": -0.183
      },
      "inline": {
       "n": 11,
@@ -3454,14 +3454,14 @@
      "hold": {
       "n": 1,
       "up": 0.0,
-      "med": -0.168
+      "med": -0.16
      }
     },
     "gold2h": {
      "hold": {
       "n": 12,
       "up": 0.5,
-      "med": 0.02
+      "med": 0.021
      },
      "cut": {
       "n": 6,
@@ -3478,7 +3478,7 @@
      "hike": {
       "n": 1,
       "up": 0.0,
-      "med": -0.032
+      "med": -0.04
      },
      "hold": {
       "n": 1,
@@ -3500,7 +3500,7 @@
      "hike": {
       "n": 1,
       "up": 0.0,
-      "med": -0.749
+      "med": -0.757
      }
     }
    }
@@ -3544,8 +3544,8 @@
     },
     "gold2h": {
      "none": true,
-     "n": 24,
-     "why": "right less than 55% of the time on unseen releases"
+     "n": 18,
+     "why": "too few tested calls"
     },
     "nq2h": {
      "none": true,
@@ -3576,8 +3576,8 @@
     },
     "gold2h": {
      "none": true,
-     "n": 24,
-     "why": "right less than 55% of the time on unseen releases"
+     "n": 18,
+     "why": "too few tested calls"
     },
     "nq2h": {
      "none": true,
@@ -4040,8 +4040,8 @@
     },
     "gold2h": {
      "none": true,
-     "n": 24,
-     "why": "right less than 55% of the time on unseen releases"
+     "n": 18,
+     "why": "too few tested calls"
     },
     "nq2h": {
      "none": true,
@@ -4072,8 +4072,8 @@
     },
     "gold2h": {
      "none": true,
-     "n": 24,
-     "why": "right less than 55% of the time on unseen releases"
+     "n": 18,
+     "why": "too few tested calls"
     },
     "nq2h": {
      "none": true,
@@ -4511,8 +4511,8 @@
     },
     "gold2h": {
      "none": true,
-     "n": 24,
-     "why": "right less than 55% of the time on unseen releases"
+     "n": 18,
+     "why": "too few tested calls"
     },
     "nq2h": {
      "none": true,
@@ -4543,8 +4543,8 @@
     },
     "gold2h": {
      "none": true,
-     "n": 24,
-     "why": "right less than 55% of the time on unseen releases"
+     "n": 18,
+     "why": "too few tested calls"
     },
     "nq2h": {
      "none": true,
@@ -4637,8 +4637,8 @@
     },
     "gold2h": {
      "none": true,
-     "n": 24,
-     "why": "right less than 55% of the time on unseen releases"
+     "n": 18,
+     "why": "too few tested calls"
     },
     "nq2h": {
      "none": true,
@@ -4669,8 +4669,8 @@
     },
     "gold2h": {
      "none": true,
-     "n": 24,
-     "why": "right less than 55% of the time on unseen releases"
+     "n": 18,
+     "why": "too few tested calls"
     },
     "nq2h": {
      "none": true,
@@ -5360,6 +5360,6 @@
  "log": [
   "tv: 3 month(s) refreshed, 3589 releases with a consensus surprise",
   "markets: gold, nq, usd, y2, gold15m, gold2h, nq15m, nq2h",
-  "model: fit in 1s; proven: inflation:nq2h, labor:y2"
+  "model: fit in 4s; proven: inflation:nq2h, labor:y2"
  ]
 }
