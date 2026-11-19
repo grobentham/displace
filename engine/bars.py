@@ -40,9 +40,10 @@ def _download(symbol, interval="1h", tries=3):
                 res = json.load(r)["chart"]["result"][0]
             q = res["indicators"]["quote"][0]
             out = {}
-            for t, o, h, lo, c in zip(res["timestamp"], q["open"], q["high"], q["low"], q["close"]):
+            vols = q.get("volume") or [None] * len(res["timestamp"])
+            for t, o, h, lo, c, v in zip(res["timestamp"], q["open"], q["high"], q["low"], q["close"], vols):
                 if o and h and lo and c:
-                    out[dt.datetime.fromtimestamp(t, dt.timezone.utc).isoformat(timespec="minutes")] = [o, h, lo, c]
+                    out[dt.datetime.fromtimestamp(t, dt.timezone.utc).isoformat(timespec="minutes")] = [o, h, lo, c, v or 0]
             return out
         except Exception:
             if i == tries - 1:
@@ -77,7 +78,25 @@ def sync(now, log=print, download=_download):
 
 def load(m, interval="1h"):
     """[(start time NY, open, high, low, close)] oldest first."""
-    return [(dt.datetime.fromisoformat(t).astimezone(NY), *v) for t, v in sorted(_load(m, interval)["bars"].items())]
+    return [(dt.datetime.fromisoformat(t).astimezone(NY), *v[:4]) for t, v in sorted(_load(m, interval)["bars"].items())]
+
+
+def export(site_data, markets=("nq",), log=print):
+    """Publish the archive for the site's MNQ backtester: site/data/bars/<market>-<interval>.json."""
+    out_dir = os.path.join(site_data, "bars")
+    os.makedirs(out_dir, exist_ok=True)
+    for m in markets:
+        for interval in INTERVALS:
+            c = _load(m, interval)
+            rows = [[int(dt.datetime.fromisoformat(t).timestamp()), *[round(x, 2) for x in v[:4]], int(v[4]) if len(v) > 4 else 0]
+                    for t, v in sorted(c["bars"].items())]
+            if len(rows) < 100:
+                continue
+            doc = {"market": m, "symbol": "NQ=F" if m == "nq" else m, "interval": interval, "source": "Yahoo Finance",
+                   "updated": c.get("fetched", ""), "rows": rows}
+            with open(os.path.join(out_dir, f"{m}-{interval}.json"), "w") as fh:
+                json.dump(doc, fh, separators=(",", ":"))
+        log(f"bars: published {m} bars for the backtester")
 
 
 def fetched(m, interval="1h"):

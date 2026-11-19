@@ -1156,6 +1156,18 @@ function genDemo() {
   return rows;
 }
 function loadDemo(session) { useDataset(finalizeDataset('Synthetic demo (1m)', genDemo(), 'demo'), session); }
+/* Real NQ futures bars, published by the Displace engine every run (Yahoo Finance NQ=F; MNQ trades the same price). */
+async function loadArchive(iv, session) {
+  const r = await fetch('data/bars/nq-' + iv + '.json', { cache: 'no-cache' });
+  if (!r.ok) throw new Error('The bar archive answered with error ' + r.status);
+  const d = await r.json();
+  if (!d.rows || d.rows.length < 100) throw new Error('The bar archive is empty');
+  // a bar without recorded volume counts as 1, so session VWAP falls back to a time-weighted average there
+  const rows = d.rows.map(x => [x[0], x[1], x[2], x[3], x[4], x[5] || 1]);
+  useDataset(finalizeDataset('NQ futures ' + iv + ' · real bars', rows, 'archive'), session);
+  return D;
+}
+const archiveIv = name => /\b1h\b/.test(name || '') ? '1h' : '5m';
 
 /* ---------- data modal ---------- */
 $('#bData').onclick = () => {
@@ -1170,8 +1182,8 @@ $('#bData').onclick = () => {
       <li>ISO / plain: <code>2026-09-15 09:30:00,21500.25,…</code> or <code>datetime,open,high,low,close,volume</code></li>
       <li>Split date/time: <code>Date,Time,Open,High,Low,Close,Volume</code> (MM/DD/YYYY ok)</li>
       <li>NinjaTrader export: <code>20260915 093000;o;h;l;c;v</code></li></ul>
-    <p class="hint">The file stays in your browser; the last dataset and session are kept on this device. Synthetic demo data is loaded by default so you can try the tool right away.</p>`,
-    [['Use demo data', () => { loadDemo(); toast('Demo data loaded'); }], ['Close']]);
+    <p class="hint">The file stays in your browser; the last dataset and session are kept on this device. Real NQ futures bars from the Displace engine load by default: 5-minute bars since September 2026 and hourly bars for about two years, updated through the day. For 1-minute bars, load your own CSV.</p>`,
+    [['Real NQ · 5m', () => { loadArchive('5m').then(() => toast('Real NQ 5-minute bars loaded')).catch(e => toast(e.message)); }], ['Real NQ · 1h', () => { loadArchive('1h').then(() => toast('Real NQ hourly bars loaded (about two years)')).catch(e => toast(e.message)); }], ['Use demo data', () => { loadDemo(); toast('Demo data loaded'); }], ['Close']]);
   const drop = $('#drop');
   $('#browse').onclick = e => { e.preventDefault(); $('#fileIn').click(); };
   drop.onclick = e => { if (e.target.id !== 'browse') $('#fileIn').click(); };
@@ -2353,8 +2365,15 @@ window.addEventListener('resize', () => { if ($('#statsPane').classList.contains
   let ds = null;
   if (sess && sess.kind === 'csv') ds = await idbGet();
   if (ds && sess && ds.name + '|' + ds.n === sess.ds) { useDataset(ds, sess); toast('Session restored'); }
-  else if (sess && sess.kind === 'demo') { loadDemo(sess); toast('Session restored'); }
-  else { loadDemo(); setTimeout(() => toast('Synthetic demo data loaded — use Data to load real MNQ bars'), 400); }
+  else if (sess && sess.kind === 'archive') {
+    try { await loadArchive(archiveIv(sess.ds), sess); toast('Session restored'); }
+    catch (_) { loadDemo(); toast('Real bars unavailable right now, so demo data is loaded'); }
+  }
+  else if (sess && sess.kind === 'demo' && ((sess.trades || []).length || (sess.closed || []).length)) { loadDemo(sess); toast('Session restored'); }
+  else {
+    try { const d = await loadArchive('5m'); setTimeout(() => toast('Real NQ futures bars loaded: 5-minute, ' + fmtET(d.dt[0], false, true).slice(0, 10) + ' onward. Data has hourly bars too.'), 400); }
+    catch (_) { loadDemo(); setTimeout(() => toast('Synthetic demo data loaded — use Data to load real MNQ bars'), 400); }
+  }
 })();
 
 (function(){const mb=document.getElementById('bMore'),mm=document.getElementById('moreMenu');

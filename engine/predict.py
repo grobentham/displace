@@ -304,6 +304,10 @@ def main():
     except Exception:
         log("model: unexpected error; the last good file stays live")
         traceback.print_exc()
+    try:
+        bars.export(DATA, log=log)  # real NQ bars for the site's MNQ backtester
+    except Exception as e:
+        log(f"bars: could not publish bars for the backtester ({e!r})")
     return 0
 
 

@@ -325,6 +325,7 @@ footer .legal{padding-top:16px;display:flex;justify-content:space-between;gap:10
 .statement p span{display:block;color:#424245}
 
 /* join */
+.jf-l{display:flex;flex-direction:column;gap:2px;padding:14px 0;border-top:1px solid rgba(255,255,255,.1);color:#f5f5f7;text-decoration:none}.jf-l:first-of-type{margin-top:18px}.jf-l b{font-weight:600}.jf-l span{color:#64d2ff;font-size:.92rem}.jf-l:hover{text-decoration:none}.jf-l:hover span{text-decoration:underline}
 .join{background:radial-gradient(50% 60% at 15% 20%,rgba(41,151,255,.2),transparent 70%),radial-gradient(40% 50% at 90% 90%,rgba(48,209,88,.14),transparent 70%),#000}
 .joingrid{display:grid;grid-template-columns:1.05fr .95fr;gap:60px;align-items:center}
 .perks{list-style:none;margin:40px 0 0;padding:0;display:grid;gap:22px}
@@ -884,6 +885,11 @@ footer .legal{padding-top:16px;display:flex;justify-content:space-between;gap:10
 /* home feature row, search, mindset extras */
 a:focus-visible,button:focus-visible{outline:2px solid #0071e3;outline-offset:2px}
 .hx{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;margin-top:20px}
+.hx2{grid-template-columns:repeat(2,minmax(0,1fr));margin-top:0}.hx2 .hx-c{min-height:260px}
+.hx-h{font-size:1.25rem;letter-spacing:-.02em;margin:56px 0 0;color:var(--ink,#1d1d1f)}
+.hx-course{background:radial-gradient(120% 140% at 0% 0%,rgba(48,209,88,.32),transparent 55%),#0b0d12}
+.hx-journal{background:radial-gradient(120% 140% at 100% 100%,rgba(191,90,242,.32),transparent 60%),#111}
+@media (max-width:1000px){.hx2{grid-template-columns:minmax(0,1fr)}.hx2 .hx-c{min-height:0}}
 .hx-c{position:relative;overflow:hidden;border-radius:28px;padding:30px 28px;display:flex;flex-direction:column;gap:8px;color:#f5f5f7;text-decoration:none;min-height:230px;transition:transform .25s}
 @media (hover:hover) and (pointer:fine){.hx-c:hover{transform:translateY(-4px)}}
 .hx-news{background:radial-gradient(120% 140% at 100% 0%,rgba(10,132,255,.4),transparent 55%),#0b0d12}
@@ -1613,7 +1619,7 @@ svg.cd line.wick{animation:fadein .5s ease-out both}
       <li><a href="#glossary" data-p="glossary">Glossary</a></li>
       <li><a href="#pro" data-p="pro" class="navpro">Pro</a></li>
     </ul>
-    <div class="navr"><button type="button" class="srch-btn" id="srch-btn" aria-label="Search the site"><svg width="17" height="17" viewBox="0 0 16 16" aria-hidden="true"><circle cx="7" cy="7" r="5" fill="none" stroke="currentColor" stroke-width="1.6"/><line x1="11" y1="11" x2="15" y2="15" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></button><a class="pillbtn" href="#join">Join free</a><button type="button" class="menu-btn" id="menu-btn" aria-expanded="false" aria-controls="navlinks" aria-label="Open menu"><span></span><span></span></button></div>
+    <div class="navr"><button type="button" class="srch-btn" id="srch-btn" aria-label="Search the site"><svg width="17" height="17" viewBox="0 0 16 16" aria-hidden="true"><circle cx="7" cy="7" r="5" fill="none" stroke="currentColor" stroke-width="1.6"/><line x1="11" y1="11" x2="15" y2="15" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></button><a class="pillbtn" href="#foundations">Start free</a><button type="button" class="menu-btn" id="menu-btn" aria-expanded="false" aria-controls="navlinks" aria-label="Open menu"><span></span><span></span></button></div>
   </div>
 </nav>
 <div class="srch" id="srch" hidden role="dialog" aria-modal="true" aria-label="Search"><div class="srch-box"><div class="srch-in"><svg width="18" height="18" viewBox="0 0 16 16" aria-hidden="true"><circle cx="7" cy="7" r="5" fill="none" stroke="#6e6e73" stroke-width="1.6"/><line x1="11" y1="11" x2="15" y2="15" stroke="#6e6e73" stroke-width="1.6" stroke-linecap="round"/></svg><input type="search" id="srch-q" placeholder="Search pages, tools and terms" autocomplete="off" aria-label="Search"><button type="button" id="srch-x">Close</button></div><ul id="srch-r" role="listbox"></ul><p class="srch-hint">Try "FVG", "planner", "CPI" or "breathing"</p></div></div>
@@ -1624,20 +1630,20 @@ svg.cd line.wick{animation:fadein .5s ease-out both}
 <!-- HERO -->
 <section class="hero dark" id="hero">
   <div class="wrap">
-    <a class="badge" href="#join">Free to join. Tested data, no hype. <b>Join</b></a>
+    <a class="badge" href="#path">Free. No sign-up. Tested data, no hype. <b>Start</b></a>
     <div class="name">Displace</div>
     <h1 class="h-xl silver">Price, decoded.</h1>
     <p class="sub">Learn to see what smart money sees. Liquidity, imbalances and time: the core ICT method, explained clearly.</p>
     <div class="ctas">
-      <a class="pillbtn lg" href="#join">Join Displace free</a>
+      <a class="pillbtn lg" href="#foundations">Start learning free</a>
       <a class="more" href="#path">See the learning path</a>
-      <a class="more" href="#daily-brief">Read the daily brief</a>
+      <a class="more" href="#calendar">Open News</a>
     </div>
     <div class="chooser" role="group" aria-label="Where are you starting?">
       <span>Where are you starting?</span>
       <a href="#foundations"><b>New to ICT</b><small>Start at Stage 1</small></a>
       <a href="#models"><b>I know the basics</b><small>Jump to the models</small></a>
-      <a href="#tools"><b>Just the tools</b><small>Checklists, prop tracker, journal</small></a>
+      <a href="#calendar"><b>I trade the news</b><small>Calendar, daily brief, Fed tracker</small></a>
     </div>
   </div>
   <div class="shot">
@@ -1647,6 +1653,14 @@ svg.cd line.wick{animation:fadein .5s ease-out both}
       <div class="call c2" aria-hidden="true"><i class="dot-r"></i><b>Sellside swept</b><small>Raid confirmed</small></div>
       <div class="call c3" aria-hidden="true"><i class="dot-o"></i><b id="call-kz">Kill zone</b><small id="call-t">New York time</small></div>
     </div>
+  </div>
+</section>
+
+<!-- PILLARS -->
+<section id="pillars" class="gray" style="padding:70px 0 10px">
+  <div class="wide hx hx2">
+    <a class="hx-c hx-course" href="#foundations"><small>The course · 6 stages</small><b>Learn ICT, from zero to a trade plan.</b><p>Structure and liquidity first, then PD arrays, time, 19 models, your market, and how to test it honestly before you risk money.</p><em>Start Stage 1 ›</em></a>
+    <a class="hx-c hx-news" href="#calendar"><small>News · live</small><b>Next: <span id="hx-rel">the next big release</span></b><div class="hx-cd" id="hx-cd">Countdown loading</div><p>Every US release in your time, with the consensus, a plain-English daily brief, a Fed tracker and how gold and NQ have reacted.</p><em>Open News ›</em></a>
   </div>
 </section>
 
@@ -1669,10 +1683,11 @@ svg.cd line.wick{animation:fadein .5s ease-out both}
     </div>
     <div class="tile k t2"><p class="muted">Right now in New York</p><div class="big grad2" id="hl-ny">--:--</div><p class="muted" id="hl-st">Live session status.</p><a class="more" href="#clock">Open the clock</a></div>
   </div>
+  <div class="wide"><h3 class="hx-h">Also free on Displace</h3></div>
   <div class="wide hx">
-    <a class="hx-c hx-news" href="#calendar"><small>News · live</small><b>Next: <span id="hx-rel">the next big release</span></b><div class="hx-cd" id="hx-cd">Countdown loading</div><p>Consensus, the last figure, and how markets have tended to close after it.</p><em>Open News ›</em></a>
     <a class="hx-c hx-mind" href="#mind"><small>Mindset</small><b>Trade with a clear head.</b><p>A one-minute check-in, guided breathing, peaceful sounds and a calm mode for after a rough session.</p><em>Open Mindset ›</em></a>
-    <a class="hx-c hx-tools" href="#tools"><small>Toolkit</small><b>Eleven free tools.</b><p>Trade planner, MNQ backtester, model checklists, prop firm tracker and kill zone alerts.</p><em>Open Tools ›</em></a>
+    <a class="hx-c hx-tools" href="#tools"><small>Toolkit</small><b><span class="n-tools">Eleven</span> free tools.</b><p>Trade planner, MNQ backtester on real bars, model checklists, prop firm tracker and kill zone alerts.</p><em>Open Tools ›</em></a>
+    <a class="hx-c hx-journal" href="https://claude.ai/artifact/KgdEL9qZyEyS156kYRs3ej"><small>Journal</small><b>Every trade. Every lesson.</b><p>P&amp;L calendar, Displace Score and reports by model and session. Opens in Claude with a free account.</p><em>Open the journal ›</em></a>
   </div>
 </section>
 
@@ -1681,7 +1696,7 @@ svg.cd line.wick{animation:fadein .5s ease-out both}
   <div class="wrap center">
     <div class="kick">Learning path</div>
     <h2 class="h-lg">From zero to a trade plan.</h2>
-    <p class="sub">Six stages, in the order that makes each one click. The page follows the same order, so just keep scrolling. Move on when a stage feels automatic.</p>
+    <p class="sub">Six stages, in the order that makes each one click. Each stage builds on the last. Move on when a stage feels automatic.</p>
   </div>
   <div class="wide">
     <ol class="path">
@@ -1754,8 +1769,8 @@ svg.cd line.wick{animation:fadein .5s ease-out both}
     <div class="tile k">
       <p class="muted">Checkpoint · Stage 1 complete</p>
       <h3>You can read structure and spot liquidity. <span class="grad">That's most of the edge.</span></h3>
-      <p class="muted">Join free to save your place in the course and get new models and tools first.</p>
-      <div style="display:flex;gap:22px;align-items:center;flex-wrap:wrap;margin-top:6px"><a class="pillbtn lg" href="#join">Join Displace free</a></div>
+      <p class="muted">Your progress saves in this browser. Move on when reading structure feels automatic.</p>
+      <div style="display:flex;gap:22px;align-items:center;flex-wrap:wrap;margin-top:6px"><a class="pillbtn lg" href="#arrays">Continue to Stage 2</a></div>
     </div>
     <div class="stage-next in"><a href="#arrays"><span><small>Next · Stage 2 of 6</small><b>PD Arrays</b><em>Where price reacts: gaps, blocks and breakers.</em></span><i aria-hidden="true">›</i></a></div>
   </div>
@@ -2175,9 +2190,9 @@ svg.cd line.wick{animation:fadein .5s ease-out both}
   <div class="wrap center">
     <div class="kick">Toolkit</div>
     <h2 class="h-lg">Your trading desk.</h2>
-    <p class="sub">Eleven free tools for before, during and after the trade. Everything saves on this device.</p>
+    <p class="sub"><span class="n-tools">Eleven</span> free tools for before, during and after the trade. Everything saves on this device.</p>
   </div>
-  <div class="wide"><a class="bt-card" href="#backtest"><div><small>New</small><b>MNQ Replay</b><p>A bar-by-bar backtester. Replay MNQ one candle at a time, place orders with a stop and target, and track win rate, expectancy and drawdown.</p><em>Open the backtester ›</em></div><div class="bt-mini" aria-hidden="true"><i style="height:38%"></i><i style="height:54%"></i><i style="height:46%"></i><i style="height:70%"></i><i style="height:62%"></i><i class="dn" style="height:48%"></i><i style="height:66%"></i><i style="height:84%"></i><i class="dn" style="height:72%"></i><i style="height:92%"></i></div></a></div>
+  <div class="wide"><a class="bt-card" href="#backtest"><div><small>New</small><b>MNQ Replay</b><p>A bar-by-bar backtester. Replay real NQ futures bars one candle at a time, place orders with a stop and target, and track win rate, expectancy and drawdown.</p><em>Open the backtester ›</em></div><div class="bt-mini" aria-hidden="true"><i style="height:38%"></i><i style="height:54%"></i><i style="height:46%"></i><i style="height:70%"></i><i style="height:62%"></i><i class="dn" style="height:48%"></i><i style="height:66%"></i><i style="height:84%"></i><i class="dn" style="height:72%"></i><i style="height:92%"></i></div></a></div>
   <div class="wide">
     <div class="livebar" id="livebar" aria-live="polite">
       <div><small>New York</small><b id="lb-ny">--:--</b></div>
@@ -2420,7 +2435,7 @@ svg.cd line.wick{animation:fadein .5s ease-out both}
 
 <section class="btpage" id="tp-backtest">
   <div class="bt-full" id="backtest">
-    <div class="bt-top"><nav class="crumb" aria-label="Breadcrumb"><a href="#tools">Tools</a><span aria-hidden="true">›</span><b>MNQ Replay</b></nav><span class="bt-tip">Demo data to start. Use <b>Data</b> to load your own MNQ bars. Practice only, not a prediction of live results.</span><span class="bt-acts"><button type="button" id="bt-fs">Full screen</button><a href="backtest.html" target="_blank" rel="noopener" id="bt-full">New tab</a></span></div>
+    <div class="bt-top"><nav class="crumb" aria-label="Breadcrumb"><a href="#tools">Tools</a><span aria-hidden="true">›</span><b>MNQ Replay</b></nav><span class="bt-tip">Real NQ futures bars to start (5-minute, plus hourly under <b>Data</b>). Load your own CSV for 1-minute bars. Practice only, not a prediction of live results.</span><span class="bt-acts"><button type="button" id="bt-fs">Full screen</button><a href="backtest.html" target="_blank" rel="noopener" id="bt-full">New tab</a></span></div>
     <div class="bt-wrap" id="bt-wrap"><iframe id="bt-frame" title="MNQ Replay bar-by-bar backtester" loading="lazy" allow="clipboard-write; fullscreen" allowfullscreen></iframe><div class="bt-load" id="bt-load">Loading the backtester…</div></div>
   </div>
 </section>
@@ -2451,25 +2466,17 @@ svg.cd line.wick{animation:fadein .5s ease-out both}
 <section class="toolpage newspage" id="calendar" style="--ac:#0071e3;--ac2:#30d158">
   <div class="wide">
     <header class="nhero"><div class="kick">News</div><h1 class="h-lg">Economic calendar</h1><p class="sub">Follow scheduled releases and official policy updates in New York time and yours. See reported figures and how they compare with earlier readings.</p><p class="ndis">For education only. Briefings describe reported data and historical reactions.</p></header>
-    <section class="dk-card morning-brief" id="daily-brief" aria-labelledby="morning-title">
+    <div class="tool on" id="econcal">
+        <div class="ec-next" id="ec-next"></div>
+        <section class="dk-card morning-brief" id="daily-brief" aria-labelledby="morning-title">
       <header class="morning-heading"><h2 id="morning-title">Daily brief</h2><p id="morning-status" role="status">Loading the latest edition…</p></header>
       <div id="morning-content"></div>
     </section>
-    <section class="dk-card data-health" id="news-data-health" aria-labelledby="health-title">
-      <div class="dn-head"><h2 id="health-title">Data status</h2><p class="health-mode" id="health-mode" role="status">Loading source checks…</p></div>
-      <dl class="health-metrics" id="health-metrics"></dl>
-      <details class="health-details" id="health-details" hidden><summary>Source checks and last successes</summary><ul class="health-sources" id="health-sources"></ul></details>
-    </section>
-    <div class="tool on" id="econcal">
-        <div class="ec-next" id="ec-next"></div>
-        <section class="dk-card" id="nqi-setup" aria-labelledby="nqi-title" hidden>
-          <h2 id="nqi-title">Personal NQ study</h2>
-          <p class="nqi-note" id="nqi-status" role="status">Choose your study file to show historical NQ reactions on CPI and payrolls releases. The study stays in this browser.</p>
-          <div class="nqi-controls">
-            <input type="file" id="nqi-file" accept=".json,application/json" aria-label="Select NQ study file" aria-describedby="nqi-status">
-            <button type="button" class="pillbtn" id="nqi-remove" hidden>Remove study</button>
-          </div>
-        </section>
+        <div class="cw" id="cw"></div>
+      <div class="ct" id="ct"></div>
+      <div class="ec-f"><div class="seg" id="ec-range" role="group" aria-label="Range"><button type="button" data-v="past">Past week</button><button type="button" data-v="7">7 days</button><button type="button" data-v="30">30 days</button><button type="button" data-v="all">All</button></div><div class="seg" id="ec-tz" role="group" aria-label="Time shown first"><button type="button" data-tz="ny">New York time</button><button type="button" data-tz="me">My time</button></div><input type="search" id="ec-q" class="ec-q" placeholder="Search releases" aria-label="Search releases" autocomplete="off"><div class="ec-chips" id="ec-imp" role="group" aria-label="Impact"></div><div class="ec-chips" id="ec-cur" role="group" aria-label="Currency"></div></div>
+        <div class="ec-list" id="ec-list"></div>
+        <p class="muted ec-src" id="ec-src"></p>
         <section class="dk-card" id="displace-news" aria-labelledby="dn-title">
           <div class="dn-head"><h2 id="dn-title">Latest economic news</h2><p class="dn-status" id="dn-status" role="status">Loading official updates…</p></div>
           <div class="dn-grid" id="dn-grid"></div>
@@ -2478,11 +2485,19 @@ svg.cd line.wick{animation:fadein .5s ease-out both}
         <div class="dk-row"><div class="outlook" id="ec-outlook" hidden></div><div class="dk-card dk-fed" id="dk-fed" hidden></div></div>
         <div class="dk-card dk-pulse" id="dk-pulse" hidden></div>
         <div class="ec-rem" id="ec-rem"></div>
-        <div class="cw" id="cw"></div>
-      <div class="ct" id="ct"></div>
-      <div class="ec-f"><div class="seg" id="ec-range" role="group" aria-label="Range"><button type="button" data-v="past">Past week</button><button type="button" data-v="7">7 days</button><button type="button" data-v="30">30 days</button><button type="button" data-v="all">All</button></div><div class="seg" id="ec-tz" role="group" aria-label="Time shown first"><button type="button" data-tz="ny">New York time</button><button type="button" data-tz="me">My time</button></div><input type="search" id="ec-q" class="ec-q" placeholder="Search releases" aria-label="Search releases" autocomplete="off"><div class="ec-chips" id="ec-imp" role="group" aria-label="Impact"></div><div class="ec-chips" id="ec-cur" role="group" aria-label="Currency"></div></div>
-        <div class="ec-list" id="ec-list"></div>
-        <p class="muted ec-src" id="ec-src"></p>
+        <section class="dk-card" id="nqi-setup" aria-labelledby="nqi-title" hidden>
+          <h2 id="nqi-title">Personal NQ study</h2>
+          <p class="nqi-note" id="nqi-status" role="status">Choose your study file to show historical NQ reactions on CPI and payrolls releases. The study stays in this browser.</p>
+          <div class="nqi-controls">
+            <input type="file" id="nqi-file" accept=".json,application/json" aria-label="Select NQ study file" aria-describedby="nqi-status">
+            <button type="button" class="pillbtn" id="nqi-remove" hidden>Remove study</button>
+          </div>
+        </section>
+        <section class="dk-card data-health" id="news-data-health" aria-labelledby="health-title">
+      <div class="dn-head"><h2 id="health-title">Data status</h2><p class="health-mode" id="health-mode" role="status">Loading source checks…</p></div>
+      <dl class="health-metrics" id="health-metrics"></dl>
+      <details class="health-details" id="health-details" hidden><summary>Source checks and last successes</summary><ul class="health-sources" id="health-sources"></ul></details>
+    </section>
       </div>
     <div class="howto">
       <div><h4>Find a release</h4><ul><li>Filter by date, currency or impact.</li><li>Open a release to see its figures, revisions and source.</li></ul></div>
@@ -2513,7 +2528,8 @@ svg.cd line.wick{animation:fadein .5s ease-out both}
     <div class="kick">The last step · Displace Journal</div>
     <h2 class="h-lg">Every trade. <span class="grad">Every lesson.</span></h2>
     <p class="sub">A free trade journal built for ICT traders. Log trades or import a CSV, tag your mistakes and grade your setups, then see playbooks for every model, what your mistakes cost, a daily notebook and an AI review of your trading.</p>
-    <div class="ctas" style="display:flex;gap:28px;justify-content:center;align-items:center;margin-top:32px;flex-wrap:wrap"><a class="pillbtn lg" href="https://claude.ai/artifact/KgdEL9qZyEyS156kYRs3ej">Open the journal</a><a class="more" href="https://claude.ai/artifact/KgdEL9qZyEyS156kYRs3ej#reports">See the reports</a></div>
+    <div class="ctas" style="display:flex;gap:28px;justify-content:center;align-items:center;margin-top:32px;flex-wrap:wrap"><a class="pillbtn lg" href="https://claude.ai/artifact/KgdEL9qZyEyS156kYRs3ej">Open the journal in Claude</a><a class="more" href="https://claude.ai/artifact/KgdEL9qZyEyS156kYRs3ej#reports">See the reports</a></div>
+    <p class="muted jt-note" style="margin-top:14px;font-size:.9rem">The journal runs inside Claude, so you need a free Claude account to save trades. Everything else on Displace works without one.</p>
   </div>
   <div class="wide">
     <div class="jt-scene">
@@ -2526,7 +2542,7 @@ svg.cd line.wick{animation:fadein .5s ease-out both}
       <div><b>P&amp;L calendar</b><span>Every day coloured by result, with weekly totals.</span></div>
       <div><b>Displace Score</b><span>Win rate, profit factor, size, discipline and consistency in one number.</span></div>
       <div><b>Reports</b><span>Net R by model, session, weekday and market.</span></div>
-      <div><b>Private</b><span>Saved to your account. Nobody else can see it.</span></div>
+      <div><b>Private</b><span>Saved to your Claude account. Nobody else can see it.</span></div>
     </div>
   </div>
 </section>
@@ -2535,18 +2551,27 @@ svg.cd line.wick{animation:fadein .5s ease-out both}
 <section id="join" class="dark join">
   <div class="wide joingrid">
     <div class="jcopy">
-      <div class="kick">Join Displace</div>
+      <div class="kick">Free. No sign-up.</div>
       <h2 class="h-lg">Stop guessing. <span class="grad">Start seeing.</span></h2>
-      <p class="sub" style="margin-left:0">Join free and be first in line for every new model, tool and chart study we release.</p>
+      <p class="sub" style="margin-left:0">Everything on Displace is free, and none of it needs an account. Your tools and course progress save in this browser.</p>
       <ul class="perks">
         <li><i>✓</i><div><b>Every concept, every model</b><span>The core ICT framework in one place, free.</span></div></li>
+        <li><i>✓</i><div><b>News that explains the number</b><span>Every US release with the consensus, a daily brief and a Fed tracker.</span></div></li>
         <li><i>✓</i><div><b>Live kill zone clock</b><span>Always in your time zone, daylight saving handled.</span></div></li>
-        <li><i>✓</i><div><b>Free trade journal</b><span>P&amp;L calendar, equity curve and reports, private to your account.</span></div></li>
-        <li><i>✓</i><div><b>Practice tools</b><span>Flashcards and a pre-trade plan for every entry.</span></div></li>
-        <li><i>✓</i><div><b>Early access</b><span>First look at new models and tools as they launch.</span></div></li>
+        <li><i>✓</i><div><b>Practice tools</b><span>Flashcards, model checklists and an MNQ backtester on real bars.</span></div></li>
+        <li><i>✓</i><div><b>Releases in your calendar</b><span>Subscribe once in Google, Apple or Outlook and every release appears.</span></div></li>
       </ul>
     </div>
-    <form class="jform" id="jform" novalidate>
+    <div class="jform jfree" id="jfree">
+      <h3>Start now</h3>
+      <p class="muted">Pick where you are. Nothing to fill in.</p>
+      <a class="pillbtn lg" href="#foundations" style="width:100%;text-align:center;display:block;margin-top:14px">New to ICT · Stage 1</a>
+      <a class="jf-l" href="#models"><b>I know the basics</b><span>Go to the 19 models ›</span></a>
+      <a class="jf-l" href="#calendar"><b>I trade the news</b><span>Open the calendar and daily brief ›</span></a>
+      <a class="jf-l" href="calendar-high.ics"><b>Add releases to my calendar</b><span>High-impact releases, updated automatically ›</span></a>
+      <p class="fine">No accounts and no email list. Displace doesn't collect your details.</p>
+    </div>
+    <form class="jform" id="jform" novalidate hidden>
       <h3>Claim your free spot</h3>
       <p class="muted">Takes ten seconds.</p>
       <label for="j-name">First name</label>
@@ -2580,7 +2605,7 @@ svg.cd line.wick{animation:fadein .5s ease-out both}
   <div class="wrap">
     <h2 class="h-lg center">Questions? Answers.</h2>
     <div class="faq">
-      <details open><summary>Is Displace free?</summary><p>Yes. Every concept, model, chart and tool on this site is free to use. Joining gets you early access to what comes next.</p></details>
+      <details open><summary>Is Displace free?</summary><p>Yes. Every concept, model, chart and tool on this site is free, and none of it needs an account. Tools and course progress save in your browser.</p></details>
       <details><summary>Is this the official ICT course?</summary><p>No. Displace is an independent study guide. ICT concepts were created and taught by Michael J. Huddleston; we explain them in our own words with original diagrams.</p></details>
       <details><summary>Do you sell signals or trade calls?</summary><p>No. Displace teaches you to read price yourself. The News page has a direction engine that shows how markets have tended to close after a release, but only where the pattern held up on releases it had never seen, and its hit rate is public. It never gives entries, stops, targets or position sizes, and nothing here guarantees returns.</p></details>
       <details><summary>I'm brand new. Is this for me?</summary><p>Yes. Pick "New to ICT" at the top and follow the six stages in order. Tap any underlined term for a quick definition, and use the flashcards to check what's stuck.</p></details>
@@ -2618,23 +2643,23 @@ svg.cd line.wick{animation:fadein .5s ease-out both}
     <div class="pro-show">
       <h2>What you get with Pro</h2>
       <div class="ps-g">
-        <div class="ps"><i>↕︎</i><b>Direction engine</b><p>For each big release, which way gold, the Nasdaq, the dollar and the 2-year yield have tended to close after a higher or lower number. Only patterns that held up on releases the model never saw are shown, with the hit rate in public.</p><div class="ps-mock"><em>Example</em><span>Gold</span>▼ 69% if CPI comes in higher<span>Dollar</span>▲ 63% if CPI comes in higher</div></div>
-        <div class="ps"><i>⚖︎</i><b>Fed tracker</b><p>The policy rate, the next decision date, what futures markets are pricing, and what Fed officials have been saying, updated every weekday.</p><div class="ps-mock"><em>Example</em><span>Rate</span>Current target range<span>Next</span>Next decision date<span>Pricing</span>Hike / hold / cut odds, as reported</div></div>
+        <div class="ps"><i>↕︎</i><b>Direction engine</b><p>For each big release and Fed decision, which way gold, the Nasdaq, the dollar and the 2-year yield have tended to move after a number above or below the consensus: in the first 15 minutes, the first 2 hours and by the close. Solid labels only for patterns that held up on releases the model never saw, with the hit rate in public.</p><div class="ps-mock"><em>Example</em><span>Gold</span>▼ 69% if CPI comes in higher<span>Dollar</span>▲ 63% if CPI comes in higher</div></div>
+        <div class="ps"><i>⚖︎</i><b>Fed tracker</b><p>The policy rate, the next decision date, what the 2-year yield says about where rates are heading, and the key points of the latest statement and minutes.</p><div class="ps-mock"><em>Example</em><span>Rate</span>Current target range<span>Next</span>Next decision date<span>Pricing</span>Hike / hold / cut odds, as reported</div></div>
         <div class="ps"><i>▥</i><b>Release stats</b><p>Twelve months of CPI, payrolls, retail sales, PCE, GDP and ISM: actual vs forecast, release by release, charted so you can see how each report tends to surprise.</p><div class="ps-bars"><i style="height:40%"></i><i style="height:70%"></i><i class="d" style="height:30%"></i><i style="height:55%"></i><i class="d" style="height:45%"></i><i style="height:80%"></i><i class="d" style="height:25%"></i><i style="height:60%"></i></div></div>
-        <div class="ps"><i>✎</i><b>Release recaps</b><p>Shortly after each high-impact number lands: what it showed, how it compared with forecast, and how gold, the dollar and index futures took it.</p></div>
-        <div class="ps"><i>☰</i><b>Weekly outlook and full record</b><p>The week ahead, day by day, every Sunday. Plus every release the calendar has tracked, with its market reaction.</p></div>
+        <div class="ps"><i>✎</i><b>Release recaps</b><p>Shortly after each high-impact number lands: what it showed and how it compared with the consensus and the last reading.</p></div>
+        <div class="ps"><i>☰</i><b>Weekly outlook and full record</b><p>The week ahead, day by day. Plus every release the calendar has tracked, with its market reaction.</p></div>
       </div>
     </div>
-    <div class="pro-how">
+    <div class="pro-how" data-paid-only>
       <h2>How it works</h2>
       <ol><li><b>Sign in to Claude</b><span>Displace runs on Claude, so your account is how Pro knows it's you.</span></li><li><b>Pay on Stripe</b><span>Checkout opens on Stripe's own page. Displace never sees your card.</span></li><li><b>Pro switches on</b><span>Once the payment is confirmed, usually within a few hours. Your plan shows at the top of this page.</span></li></ol>
     </div>
     <div class="pro-faq">
       <h2>Questions</h2>
-      <details><summary>Does Pro give trading signals?</summary><p>No. The direction engine shows how markets have tended to close after a release, as a tested statistic with its hit rate in public, not an instruction. Displace never tells you to buy or sell, where to enter, where to put a stop or how much to risk. Past patterns can stop working.</p></details>
+      <details><summary>Does Pro give trading signals?</summary><p>No. The LONG / SHORT labels say which way gold and the Nasdaq have tended to move after similar releases, as a tested statistic with its hit rate in public, not an instruction. Displace never tells you where to enter, where to put a stop or how much to risk. Past patterns can stop working.</p></details>
       <details><summary>Is this financial advice?</summary><p>No. Everything on Displace, free and Pro, is general education. Trading futures and forex carries a high risk of loss. Make your own decisions, or speak to a licensed adviser.</p></details>
-      <details><summary>How do I cancel?</summary><p>Use "Manage subscription" at the top of this page once Pro is active, or the link in your Stripe receipt. Pro stays on until the end of the period you paid for.</p></details>
-      <details><summary>Where does the data come from?</summary><p>Release dates and figures come from the agencies' own publications (BLS, BEA, Census Bureau, Federal Reserve and others). Forecasts are economists' consensus as reported by major news outlets. Market reactions are as reported by news outlets after each release.</p></details>
+      <details data-paid-only><summary>How do I cancel?</summary><p>Use "Manage subscription" at the top of this page once Pro is active, or the link in your Stripe receipt. Pro stays on until the end of the period you paid for.</p></details>
+      <details><summary>Where does the data come from?</summary><p>Release dates and figures come from the agencies' own publications (BLS, BEA, Census Bureau, Federal Reserve and others). Consensus forecasts come from the free TradingView and ForexFactory economic calendars. Market reactions are measured by Displace itself from public price data (Yahoo Finance futures bars, Federal Reserve and Treasury data).</p></details>
     </div>
     <div class="pro-admin" id="pro-admin" hidden>
       <h2>Admin <small>Only you can see this</small></h2>
@@ -2652,7 +2677,7 @@ svg.cd line.wick{animation:fadein .5s ease-out both}
 
 </main>
 
-<a class="floatjoin hide" id="floatjoin" href="#join">Join Displace free</a>
+<a class="floatjoin hide" id="floatjoin" href="#foundations">Start learning free</a>
 
 <footer>
   <div class="wide">
@@ -2664,7 +2689,7 @@ svg.cd line.wick{animation:fadein .5s ease-out both}
       <div><h5>Learn</h5><ul><li><a href="#path">Learning Path</a></li><li><a href="#foundations">Foundations</a></li><li><a href="#arrays">PD Arrays</a></li><li><a href="#time">Time and Price</a></li><li><a href="#calendar">News Calendar</a></li><li><a href="#markets">Markets</a></li></ul></div>
       <div><h5>Trade</h5><ul><li><a href="#models">Daily Bias</a></li><li><a href="#models">Models</a></li><li><a href="#anatomy">Anatomy of a Trade</a></li><li><a href="#playbook">Playbook</a></li><li><a href="#mind">Mindset</a></li></ul></div>
       <div><h5>Tools</h5><ul><li><a href="#calc">Trade Planner</a></li><li><a href="#checklist">Model Checklists</a></li><li><a href="#prop">Prop Firm Tracker</a></li><li><a href="#levels">OTE and SD Levels</a></li><li><a href="#sim">Edge Simulator</a></li><li><a href="#calendar">Economic Calendar</a></li><li><a href="#cards">Flashcards</a></li><li><a href="#replay">Chart Replay Drills</a></li><li><a href="#biasbuilder">Daily Bias Builder</a></li><li><a href="#alerts">Kill Zone Alerts</a></li><li><a href="#recovery">Drawdown Recovery</a></li><li><a href="#time">Kill Zone Clock</a></li><li><a href="https://claude.ai/artifact/KgdEL9qZyEyS156kYRs3ej">Trade Journal</a></li></ul></div>
-      <div><h5>Displace</h5><ul><li><a href="#join">Join free</a></li><li><a href="#faq">FAQ</a></li><li><a href="#glossary">Glossary</a></li><li><a href="#testing">Testing</a></li></ul></div>
+      <div><h5>Displace</h5><ul><li><a href="#join">Free, no sign-up</a></li><li><a href="#faq">FAQ</a></li><li><a href="#glossary">Glossary</a></li><li><a href="#testing">Testing</a></li></ul></div>
     </div>
     <div class="legal"><span>Displace.<span class="course-footer"> Independent and not affiliated with Inner Circle Trader or Michael J. Huddleston.</span></span><span>Times shown in New York and your local time.</span></div>
   </div>
@@ -3406,31 +3431,33 @@ var gl=document.getElementById("gloss");G.forEach(function(r){var d=document.cre
 document.getElementById("f-gloss").textContent=G.length;
 document.getElementById("gq").addEventListener("input",function(e){var q=e.target.value.trim().toLowerCase(),shown=0;gl.querySelectorAll("div").forEach(function(d){var ok=!q||d.dataset.s.indexOf(q)>-1;d.hidden=!ok;if(ok)shown++;});document.getElementById("gempty").hidden=shown>0;});
 
-/* join */
+/* join: the form only shows where a sign-up can really be saved (inside Claude, or a form endpoint set in data/config/site.json) */
 (function(){
-  var form=document.getElementById("jform"),msg=document.getElementById("j-msg"),btn=document.getElementById("j-btn"),db=null,user=null,ready=false;
+  var form=document.getElementById("jform"),free=document.getElementById("jfree"),msg=document.getElementById("j-msg"),btn=document.getElementById("j-btn"),db=null,user=null,endpoint=null;
   function say(t,c){msg.textContent=t;msg.className="jmsg"+(c?" "+c:"");}
   function done(){btn.textContent="You're in";btn.disabled=true;form.querySelectorAll("input").forEach(function(i){i.disabled=true;});}
+  function showForm(){form.hidden=false;free.hidden=true;}
   var api=window.claude&&typeof window.claude.use==="function"?window.claude:null;
-  var timer=setTimeout(function(){ready=true;},10000);
-  if(api){
-    Promise.all([api.use("db"),api.use("user")]).then(function(r){clearTimeout(timer);db=r[0];user=r[1];ready=true;
-      if(db&&user){user.id().then(function(id){return db.doc("waitlist/"+id).get();}).then(function(snap){
+  if(api&&!api.isStatic){
+    Promise.all([api.use("db"),api.use("user")]).then(function(r){db=r[0];user=r[1];
+      if(db&&user){showForm();user.id().then(function(id){return db.doc("waitlist/"+id).get();}).then(function(snap){
         var d=snap&&(typeof snap.data==="function"?snap.data():snap);if(d&&d.email){say("You're already on the list as "+d.email+".","ok");done();}}).catch(function(){});}
-    }).catch(function(){clearTimeout(timer);ready=true;});
-  } else {clearTimeout(timer);ready=true;}
+    }).catch(function(){});
+  } else {
+    fetch("data/config/site.json",{cache:"no-cache"}).then(function(r){return r.ok?r.json():{};}).then(function(c){
+      if(c&&/^https:\/\//.test(c.joinEndpoint||"")){endpoint=c.joinEndpoint;showForm();}}).catch(function(){});
+  }
   form.addEventListener("submit",function(e){
     e.preventDefault();
     var email=document.getElementById("j-email").value.trim(),name=document.getElementById("j-name").value.trim();
     if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){say("Enter a valid email address, like you@example.com.","err");document.getElementById("j-email").focus();return;}
-    if(!ready){say("Still connecting. Try again in a moment.","err");return;}
-    if(window.claude&&window.claude.isStatic){say("Accounts are coming soon. Until then, everything on Displace is free to use, no sign-up needed.","ok");return;}
-    if(!db||!user){say("Sign-ups can't be saved in this view. Open the shared Displace link while signed in to claude.ai to join.","err");return;}
     var level=(form.querySelector("input[name=level]:checked")||{}).value||"new",mk=[].map.call(form.querySelectorAll("input[name=mk]:checked"),function(i){return i.value;});
+    var rec={name:name,email:email,level:level,markets:mk,joinedAt:new Date().toISOString()};
     btn.disabled=true;btn.textContent="Joining…";
-    user.id().then(function(id){return db.doc("waitlist/"+id).set({name:name,email:email,level:level,markets:mk,joinedAt:new Date().toISOString()});})
-      .then(function(){say("Welcome to Displace"+(name?", "+name:"")+". You're on the list.","ok");done();})
-      .catch(function(){btn.disabled=false;btn.textContent="Join free";say("We couldn't save your sign-up. Your access to this page may be view-only; ask whoever shared it for Contributor access, then try again.","err");});
+    var save=endpoint?fetch(endpoint,{method:"POST",headers:{"Content-Type":"application/json","Accept":"application/json"},body:JSON.stringify(rec)}).then(function(r){if(!r.ok)throw 0;})
+      :user.id().then(function(id){return db.doc("waitlist/"+id).set(rec);});
+    save.then(function(){say("Welcome to Displace"+(name?", "+name:"")+". You're on the list.","ok");done();})
+      .catch(function(){btn.disabled=false;btn.textContent="Join free";say("We couldn't save your sign-up just now. Please try again in a minute.","err");});
   });
 })();
 
@@ -4333,7 +4360,7 @@ window.addEventListener("displace:route",function(){if(window.__page==="tools")u
 /* pages + router */
 (function(){
 var PAGES=[
- {id:"home",t:"Displace",secs:["hero","gallery","path","join","faq"]},
+ {id:"home",t:"Displace",secs:["hero","pillars","path","gallery","join","faq"]},
  {id:"foundations",t:"Foundations",st:1,secs:["foundations","statement","checkpoint"]},
  {id:"arrays",t:"PD Arrays",st:2,secs:["arrays"]},
  {id:"time",t:"Time and Price",st:3,secs:["time"]},
@@ -4353,12 +4380,13 @@ var PAGES=[
  {id:"alerts",t:"Kill zone alerts",tool:1,secs:["tp-alerts"]},
  {id:"recovery",t:"Drawdown recovery",tool:1,secs:["tp-recovery"]},
  {id:"backtest",t:"MNQ Replay · Backtester",tool:1,secs:["tp-backtest"]},
- {id:"journal",t:"Journal",secs:["journal"],next:["join","Free","Join Displace","Save your place and get new models and tools first."]},
+ {id:"journal",t:"Journal",secs:["journal"],next:["calendar","Up next","News","Every US release with the consensus, a daily brief and the Fed tracker."]},
  {id:"mind",t:"Mindset · Trading psychology",secs:["mind"],next:["journal","Up next","Displace Journal","Log every trade and see your stats by model, session and day."]},
  {id:"pro",t:"Displace Pro",secs:["pro"]},
  {id:"glossary",t:"Glossary",secs:["glossary"],next:["foundations","Start learning","Foundations","Structure, liquidity and displacement, the base of every model."]}
 ];
 var STAGES=PAGES.filter(function(p){return p.st;});
+(function(){var n=PAGES.filter(function(p){return p.tool;}).length,W=["Zero","One","Two","Three","Four","Five","Six","Seven","Eight","Nine","Ten","Eleven","Twelve","Thirteen","Fourteen","Fifteen"];document.querySelectorAll(".n-tools").forEach(function(e){e.textContent=W[n]||n;});})();
 var main=document.getElementById("top"),els={},cur=null;
 PAGES.forEach(function(pg){
   var d=document.createElement("div");d.className="page";d.setAttribute("data-page",pg.id);
@@ -4441,7 +4469,7 @@ function status(){var el=$("pro-status");if(!el)return;var h="",price=esc(P.cfg.
   else if(!P.signed){h='<b>You\'re on the free plan</b><span>Sign in to Claude to upgrade, so your Pro access follows you.</span>';}
   else if(P.req){h='<b>Upgrade in progress</b><span>Pro ID '+esc(P.code)+'. Pro switches on once your payment is confirmed, usually within a few hours.</span><button type="button" class="pillbtn" data-pro-up>Open checkout again</button>';}
   else{h='<b>You\'re on the free plan</b><span>Fed tracker, release stats and the full release record.</span><button type="button" class="pillbtn" data-pro-up>Upgrade · '+price+'</button>';}
-  el.innerHTML=h;var cta=$("pro-cta");if(cta){cta.hidden=P.isPro();}$$('[data-pro-up]').forEach(function(b){b.hidden=!!(P.cfg&&P.cfg.proOpen);});}
+  el.innerHTML=h;var cta=$("pro-cta");if(cta){cta.hidden=P.isPro();}$$('[data-pro-up]').forEach(function(b){b.hidden=!!(P.cfg&&P.cfg.proOpen);});$$('[data-paid-only]').forEach(function(b){b.hidden=!!(P.cfg&&P.cfg.proOpen);});}
 function $$(q){return[].slice.call(document.querySelectorAll(q));}
 P.on(status);
 
@@ -4557,7 +4585,7 @@ setInterval(function(){var n=window.__nextRel,c=$i("hx-cd");if(!c||!n)return;$i(
   c.textContent=s?Math.floor(s/86400)+"d "+p2(Math.floor(s%86400/3600))+"h "+p2(Math.floor(s%3600/60))+"m "+p2(s%60)+"s":"Out now";},1000);
 var box=$i("srch"),q=$i("srch-q"),r=$i("srch-r");if(!box)return;
 var IX=[["Home","Start here","hero"],["Learning path","Six stages","path"],["Foundations","Structure, liquidity, displacement","foundations"],["PD arrays","FVG, order blocks, breakers","arrays"],["Time and price","Kill zones, macros, sessions","time"],["Models","19 trade models, daily bias","models"],["Markets","NQ, ES, gold, forex","markets"],["Prove it","Testing, backtest, playbook","prove"],
- ["News","Economic calendar, CPI, NFP, FOMC, direction engine","calendar"],["Tools","All eleven tools","tools"],["MNQ Replay backtester","Bar-by-bar replay, backtest, practice trading","backtest"],["Trade planner","Position size, risk, reward calculator","calc"],["Pre-trade checklist","Model checklists","checklist"],["Prop firm tracker","Evaluation, drawdown, target","prop"],["Levels","OTE, standard deviation projections","levels"],["Edge simulator","Win rate, streaks, expectancy","sim"],["Flashcards","Quiz, practice questions","cards"],["Chart replay drills","Practice setups candle by candle","replay"],["Daily bias builder","Bullish or bearish bias","biasbuilder"],["Kill zone alerts","Session notifications","alerts"],["Drawdown recovery","Gain needed to recover a loss","recovery"],["Kill zone clock","New York time, sessions","clock"],
+ ["News","Economic calendar, CPI, NFP, FOMC, direction engine","calendar"],["Tools","Every free tool","tools"],["MNQ Replay backtester","Bar-by-bar replay, backtest, practice trading","backtest"],["Trade planner","Position size, risk, reward calculator","calc"],["Pre-trade checklist","Model checklists","checklist"],["Prop firm tracker","Evaluation, drawdown, target","prop"],["Levels","OTE, standard deviation projections","levels"],["Edge simulator","Win rate, streaks, expectancy","sim"],["Flashcards","Quiz, practice questions","cards"],["Chart replay drills","Practice setups candle by candle","replay"],["Daily bias builder","Bullish or bearish bias","biasbuilder"],["Kill zone alerts","Session notifications","alerts"],["Drawdown recovery","Gain needed to recover a loss","recovery"],["Kill zone clock","New York time, sessions","clock"],
  ["Journal","Trade journal, stats","journal"],["Mindset","Trading psychology, wellbeing, stress","mind"],["Calm mode","Breathing, relax, full screen","mind","md-calm-open"],["Peaceful sounds","Rain, waves, birdsong, sleep timer","mind","md-s-sound"],["One-minute check-in","Should I trade today","mind","md-s-check"],["Breathing reset","Box breathing, 4-7-8","mind","md-s-check"],["Decompress","Screen break, grounding, stretch","mind","md-s-relief"],["Mood log and debrief","Reflect, wind-down, my rules","mind","md-s-reflect"],["Trading traps","FOMO, revenge trading, tilt","mind","md-s-traps"],
  ["Daily brief","NQ rates outlook, earnings, economic releases","daily-brief"],["Displace Pro","Plans, direction engine, Fed tracker","pro"],["Glossary","Every ICT term","glossary"],["FAQ","Questions","faq"],["Join free","Sign up","join"]];
 var res=[],sel=0;
