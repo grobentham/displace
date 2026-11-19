@@ -145,22 +145,32 @@ python engine/test_sources.py
 
 `test_surprise.py` checks the model on simulated markets where the truth is known (it must find real effects, find nothing in noise and state honest probabilities). `test_predict.py` runs the whole news-outcome pipeline offline.
 
-### Daily bias (`engine/bias.py`)
+### Daily bias (`engine/bias.py`, `engine/quant.py`)
 
-Every run after the New York futures close (17:00 NY) the engine re-tests a fixed set of signals on every day since
-2000 (free Yahoo daily futures candles for NQ and gold, cached in `engine/cache/daily/`) and publishes for the next
-session:
+Every run after the New York futures close (17:00 NY) the engine re-tests everything on free data (Yahoo daily
+futures candles since 2000 for NQ, ES, YM, RTY, gold, crude, the euro and bitcoin, cached in `engine/cache/daily/`;
+FRED volatility indices, credit spreads, real yields, the dollar and the 2-year yield in `engine/cache/series/`;
+release dates from the calendar cache) and publishes for the next session, per market:
 
-- **Direction:** P(next close above today's close). It starts at the long-run base rate (about 54% for NQ, 53% for
-  gold) and moves only for signals that pass walk-forward testing: refit every year on the years before it,
-  out-of-sample Brier skill over the base rate with a Diebold–Mariano t ≥ 2.64 (5% after a Bonferroni split over six
-  signals), and positive skill in both halves and the last three years. Calendar effects (turn of the month, Fed days,
-  after 2-sigma days) need |z| ≥ 1.96 on the same side in both halves and since 2019. As of November 2026 none
-  pass for either market, which is the usual result for liquid futures, so the published lean is the base rate.
-- **Range:** expected high-low range from the 20-day average range, with the 10th–90th percentile band.
-- **Levels:** P(trading above today's high / below today's low) from the close's distance to each, which has strong
-  out-of-sample skill (about 26% Brier skill for NQ).
+- **Direction:** P(next close above today's close), starting at the long-run base rate. Up to twelve price and
+  cross-asset signals are each walk-forward tested (refit yearly, scored out of sample); a signal moves the probability
+  only with a Diebold–Mariano t above a Bonferroni bar for the number tried (about 2.6) and positive Brier skill in
+  both halves and the last three years. Calendar effects need |z| ≥ 2.58 (5% split across five). FRED inputs are used
+  one day late, as published. As of November 2026 nothing passes in any market, so leans are base rates.
+- **Volatility:** a HAR model of the log daily range (yesterday, last week, last month, implied volatility, release
+  days, Mondays), walk-forward tested against a 20-day average: 19–23% lower error for the equity indices, 12% crude,
+  11% bitcoin, 4% gold, 2.5% euro, with 80% bands that hold about 80% of days.
+- **Touch ladder:** how often the next day reached the close ± 0.5/1/1.5/2 forecast standard deviations.
+- **Levels:** P(trading above today's high / below today's low), about 20–26% Brier skill out of sample, with
+  reliability data for the calibration chart.
+- **Sessions (NQ, gold):** overnight vs New York session and an intraday momentum test, from the hourly archive.
+- **Live record:** every call is logged and scored the next day.
 
-Signals that fail are published on the signal board with their scores. Calls are logged in `site/data/bias/log.json`
-and scored the next day: direction, Brier score, levels taken and whether the range landed in its band.
-`test_bias.py` checks that random walks pass none of the direction tests.
+numpy is installed in the workflow for these models. `test_bias.py` checks that random walks pass no direction test
+while the volatility and level models find their (real) skill.
+
+### Strategy lab (backtester)
+
+After a rule test, MNQ Replay checks whether the result is better than luck: 100 runs of random entries at the same
+rate with the same exits and costs, 1,000 Monte Carlo reshuffles of the trades (90% net range, 95th-percentile
+drawdown), and a deflated Sharpe ratio that corrects for the number of distinct rule sets tried on the device.
