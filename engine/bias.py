@@ -7,7 +7,7 @@ Runs after the New York futures close (17:00 NY). Free data only: Yahoo daily fu
   direction   P(next close > today's close). Starts at the long-run base rate and moves only for signals that pass
               walk-forward testing: out-of-sample Brier skill with a Diebold-Mariano t above a Bonferroni bar for
               the number of signals tried, and positive skill in both halves and the last three years. Calendar
-              effects need |z| >= 1.96 on the same side in both halves and since 2019.
+              effects need |z| >= 2.58 (5% split across five) on the same side in both halves and since 2019.
   range       a HAR model of the log daily range (yesterday, last week, last month, implied volatility, a news-day
               flag for the next session, Mondays), refit every year and compared with a 20-day average.
   touch       how often the next day reached the close +/- 0.5, 1, 1.5 and 2 forecast standard deviations.
@@ -80,6 +80,7 @@ CROSS_FOR = {
     "fx": ["usd5", "y2_5", "ry5"],
     "crypto": ["hy5", "usd5", "y2_5", "term"],
 }
+Z_EVENTS = 2.58  # two-sided 5% split across the five calendar effects
 EVENTS = {"tom": "Turn of the month", "prefomc": "Day before a Fed decision", "fomc": "Fed decision day",
           "bigdown": "After a 2-sigma down day", "bigup": "After a 2-sigma up day"}
 TIER1 = re.compile(r"\bCPI\b|Non-farm|FOMC rate decision", re.I)
@@ -350,7 +351,7 @@ def direction(F, S, signals):
         rr = lambda a: round(float(a.mean()), 3) if len(a) else None
         ev[k] = {"n": int(sel.sum()), "up": round(rate, 3), "base": round(b, 3), "z": round(z, 2),
                  "halves": [rr(parts[0]), rr(parts[1])], "recent": rr(parts[2]),
-                 "tested": bool(abs(z) >= 1.96 and same and sel.sum() >= 60)}
+                 "tested": bool(abs(z) >= Z_EVENTS and same and sel.sum() >= 60)}
     i = n - 1
     used = [k for k in signals if out[k].get("tested") and np.isfinite(F[k][i])]
     p = base

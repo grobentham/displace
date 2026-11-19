@@ -14,6 +14,7 @@ jobs:
           B.run()
           d = json.load(open(B.OUT))
           print("inputs", d["inputs"])
+          print("JSONDUMP " + json.dumps(d, separators=(",", ":")))
           for m, v in d["markets"].items():
               print("==", m, v["history"], "P(up)", v["p_up"], v["bias"], "t_req", v["t_req"])
               print("   vol", v["vol"]["stats"], v["vol"]["inputs"], v["vol"]["multipliers"])
