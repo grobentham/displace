@@ -152,11 +152,12 @@ def zone(rows, i):
 
 
 def outcome(day, nxt, bias):
-    """(closed in the bias direction, reached the draw) for the day after `day`."""
-    o, h, l, c = nxt
+    """(closed in the bias direction, reached the draw) for the day after `day`.
+    Direction is close-to-close: Yahoo's daily open for futures is unreliable (it often repeats the prior open)."""
+    _, h, l, c = nxt
     if bias == "long":
-        return c > o, h > day[1]
-    return c < o, l < day[2]
+        return c > day[3], h > day[1]
+    return c < day[3], l < day[2]
 
 
 def _rate(k, n):
@@ -178,7 +179,7 @@ def study(rows):
     per = {k: [] for k in CASES}
     for i in range(1, len(rows) - 1):
         prev, day, nxt = rows[i - 1][1], rows[i][1], rows[i + 1][1]
-        base["up"] += nxt[3] > nxt[0]
+        base["up"] += nxt[3] > day[3]
         base["high"] += nxt[1] > day[1]
         base["low"] += nxt[2] < day[2]
         k = classify(prev, day)
