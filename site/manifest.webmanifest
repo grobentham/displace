@@ -1,7 +1,7 @@
 {
  "name": "Displace",
  "short_name": "Displace",
- "description": "Learn ICT trading: lessons, tools, an economic calendar and a mindset toolkit.",
+ "description": "Quant research for NQ and gold futures: a tested daily bias, an economic calendar with surprise models and a backtester on real bars.",
  "start_url": "./",
  "scope": "./",
  "display": "standalone",

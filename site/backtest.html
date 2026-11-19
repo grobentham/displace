@@ -254,7 +254,7 @@ th{white-space:nowrap}
     <button class="btn icon" id="bStep" title="Step 1 bar (→) · Shift+→ = finish candle">⏭</button>
     <select class="inp" id="speed" title="Replay speed (base bars per second)"></select>
     <label class="chk" title="Auto-pause when an order fills or a stop/target is hit"><input type="checkbox" id="stopOnFill" checked>Auto-pause</label>
-    <select class="inp" id="skipSel" title="Skip forward to a time of day (New York time)"><option value="">Skip to…</option><option value="120">London open 02:00</option><option value="510">08:30 news</option><option value="570">NY open 09:30</option><option value="600">Silver Bullet 10:00</option><option value="810">NY PM 13:30</option><option value="900">PM Silver Bullet 15:00</option><option value="day">Next session (18:00)</option></select>
+    <select class="inp" id="skipSel" title="Skip forward to a time of day (New York time)"><option value="">Skip to…</option><option value="120">London open 02:00</option><option value="510">08:30 news</option><option value="570">NY open 09:30</option><option value="600">10:00</option><option value="810">NY PM 13:30</option><option value="900">15:00</option><option value="day">Next session (18:00)</option></select>
     <span class="clock" id="clock">—</span>
     <div class="spacer"></div>
     <button class="btn" id="bFocus" title="Hide the side and bottom panels so the chart fills the screen (V)">Focus</button>
@@ -283,7 +283,7 @@ th{white-space:nowrap}
       <button data-tool="h" title="Horizontal line (H)"><svg viewBox="0 0 16 16"><path d="M1.5 8h13"/></svg></button>
       <button data-tool="t" title="Trend line (T)"><svg viewBox="0 0 16 16"><path d="M2.5 12.5l11-9"/><circle cx="2.5" cy="12.5" r="1.2"/><circle cx="13.5" cy="3.5" r="1.2"/></svg></button>
       <button data-tool="r" title="Zone / rectangle (R)"><svg viewBox="0 0 16 16"><rect x="2.5" y="4" width="11" height="8" rx="1"/></svg></button>
-      <button data-tool="f" title="Fib retracement with OTE (G)"><svg viewBox="0 0 16 16"><path d="M2 3h12M2 6.5h12M2 9.5h12M2 13h12"/></svg></button>
+      <button data-tool="f" title="Fib retracement (G)"><svg viewBox="0 0 16 16"><path d="M2 3h12M2 6.5h12M2 9.5h12M2 13h12"/></svg></button>
       <button data-tool="m" title="Measure points, bars and dollars (M)"><svg viewBox="0 0 16 16"><path d="M3 13L13 3M3 13v-3M3 13h3M13 3v3M13 3h-3"/></svg></button>
       <hr>
       <button id="tDel" title="Delete selected drawing (Del)"><svg viewBox="0 0 16 16"><path d="M3 4.5h10M6.5 4.5V3h3v1.5M4.5 4.5l.6 8.5h5.8l.6-8.5"/></svg></button>
@@ -999,7 +999,7 @@ $('#bHelp').onclick = () => modal('Shortcuts & how fills work', `
   <span class="kbd">Shift + →</span><span>Step until the current candle closes</span><span class="kbd">B</span> <span>Buy (uses ticket settings)</span>
   <span class="kbd">S</span><span>Sell</span><span class="kbd">F</span><span>Flatten all positions</span><span class="kbd">Esc</span><span>Cancel price picking or drawing</span>
   <span class="kbd">H</span><span>Horizontal line</span><span class="kbd">T</span><span>Trend line</span>
-  <span class="kbd">R</span><span>Zone</span><span class="kbd">G</span><span>Fib with OTE</span>
+  <span class="kbd">R</span><span>Zone</span><span class="kbd">G</span><span>Fib retracement</span>
   <span class="kbd">←</span><span>Back one bar. Shift + ← goes back one candle</span><span class="kbd">+ / −</span><span>Faster or slower replay</span><span class="kbd">1 – 8</span><span>Switch timeframe</span><span class="kbd">Right-click</span><span>On the chart: place a limit or stop order at that price</span><span class="kbd">V</span><span>Focus: chart fills the screen</span><span class="kbd">M</span><span>Measure</span><span class="kbd">Del</span><span>Delete selected drawing</span></div>
   <p class="mut" style="font-size:12.5px;line-height:1.55">Drawing tools need two clicks: one to start, one to finish. Click a drawing to select it, drag it to move it, drag a corner handle to resize it.</p><p class='mut' style='font-size:12.5px;line-height:1.55'><b>Practice</b> jumps to random windows where a model is normally traded and reviews your trades when the window ends. In Settings you can turn on a checklist before each tagged entry, tilt warnings, auto breakeven, a trailing stop, news-time slippage and stricter limit fills. Overlays adds Asia and London ranges, previous week high and low, the opening range and equal highs and lows.</p>
   <p class="mut" style="font-size:12.5px;line-height:1.55">Market orders fill at the close of the current bar (± slippage). Limit orders fill when price trades through them, or at the open if the bar gaps past. Stops fill at the stop price or the open on a gap, plus slippage. When one bar touches both the stop and the target, <b>conservative</b> mode assumes the stop hit first. On the bar an order fills, the target only counts if that bar <i>closed</i> beyond it. Going back in time reopens trades that had closed after that point, removes trades entered after it, and restores orders that had not filled yet. All times are New York time; daily candles and VWAP roll at 18:00 ET like CME.</p>`, [['Got it', null, 'primary']]);
@@ -1026,7 +1026,7 @@ $('#bSettings').onclick = () => {
     <label class="full">Same-bar SL &amp; TP<select class="inp" data-k="intrabar"><option value="conservative" ${S.intrabar === 'conservative' ? 'selected' : ''}>Conservative — assume stop hit first</option><option value="optimistic" ${S.intrabar === 'optimistic' ? 'selected' : ''}>Optimistic — assume target hit first</option></select></label>
     <div class="full hint" style="margin-top:4px;text-transform:uppercase;letter-spacing:.6px;font-weight:600">Your own trading rules</div>
     ${f('maxTrades', 'Max trades per day (0 = no limit)', 'number', 'step="1" min="0"')}${f('dayLoss', 'Stop for the day after losing ($, 0 = off)', 'number', 'step="50" min="0"')}
-    <div class="full">${c('kzOnly', 'Only allow new orders inside the kill zones')}</div>
+    <div class="full">${c('kzOnly', 'Only allow new orders inside the main sessions')}</div>
     <div class="full hint" style="margin-top:4px;text-transform:uppercase;letter-spacing:.6px;font-weight:600">Fills and stops</div>
     ${f('newsSlip', 'Extra slippage at 08:30 and 09:30 (ticks)', 'number', 'step="1" min="0"')}${f('beR', 'Move stop to breakeven at (R, 0 = off)', 'number', 'step="0.25" min="0"')}
     ${f('trailPts', 'Trailing stop distance (points, 0 = off)', 'number', 'step="0.25" min="0"')}<div></div>
@@ -1220,8 +1220,8 @@ function idb() { return new Promise((res, rej) => { try { const q = indexedDB.op
 async function idbPut(ds) { try { const db = await idb(); db.transaction('ds', 'readwrite').objectStore('ds').put(ds, 'last'); } catch (_) {} }
 async function idbGet() { try { const db = await idb(); return await new Promise(res => { const q = db.transaction('ds').objectStore('ds').get('last'); q.onsuccess = () => res(q.result); q.onerror = () => res(null); }); } catch (_) { return null; } }
 
-/* ============================== v2: drawings, ICT overlays, tags, analytics, challenge, sessions ============================== */
-const MODELS = ['2022 Mentorship', 'Silver Bullet', 'Unicorn', 'OTE', 'Turtle Soup', 'Judas Swing', 'London Open', 'Power of 3', 'One Shot One Kill', 'Opening Range Gap', 'IOFED', 'Bread and Butter', 'Inversion FVG', 'Market Maker Model', 'London Close', 'Breaker', 'New Week Opening Gap', 'First Presented FVG', 'CISD', 'Other'];
+/* ============================== v2: drawings, overlays, tags, analytics, challenge, sessions ============================== */
+const MODELS = ['Breakout', 'Failed breakout', 'Pullback in trend', 'Mean reversion', 'Opening range', 'Gap fill', 'News release', 'Range fade', 'Momentum', 'Other'];
 const CH_DEF = { chOn: false, chTarget: 3000, chMaxDD: 2000, chType: 'trailing', chDaily: 0, chMinDays: 0 };
 Object.assign(DEF, CH_DEF); for (const k in CH_DEF) if (!(k in S)) S[k] = CH_DEF[k];
 const X = { draws: [], nid: 1, setup: '', ict: { kz: true, lv: true, fvg: false }, ch: { state: 'off', reason: '', peak: 0 }, tool: 'cursor', pend: null, sel: null, drag: null, busy: false, an: -1 };
@@ -1439,13 +1439,13 @@ $('#oSetup').onchange = e => { X.setup = e.target.value; scheduleSave(); };
 /* ---------- ICT overlays ---------- */
 $('#bICT').onclick = () => {
   const c = (k, l, h) => `<label class="chk" style="flex-direction:row;align-items:flex-start;gap:8px;margin-bottom:10px"><input type="checkbox" data-i="${k}" ${X.ict[k] ? 'checked' : ''}><span><b>${l}</b><br><span class="hint">${h}</span></span></label>`;
-  modal('ICT overlays', c('kz', 'Kill zones', 'Shades London 02:00–05:00, New York AM 08:30–11:00 and New York PM 13:30–16:00 (New York time) on the 1-hour chart and below.') +
+  modal('Overlays', c('kz', 'Sessions', 'Shades London 02:00–05:00, New York morning 08:30–11:00 and afternoon 13:30–16:00 (New York time) on the 1-hour chart and below.') +
     c('lv', 'Key levels', 'Previous day high and low, using the 18:00 session roll, and the midnight opening price.') +
-    c('fvg', 'Fair value gaps', 'Marks the most recent three-candle gaps in view that price has not fully filled yet, with the midpoint as a dashed line. A gap disappears once it is filled.') +
+    c('fvg', 'Three-bar gaps', 'Marks the most recent three-candle gaps in view that price has not fully filled yet, with the midpoint as a dashed line. A gap disappears once it is filled.') +
     c('rng', 'Asia and London ranges', 'High and low of the 20:00 to 24:00 Asia range and the 02:00 to 05:00 London range, using only bars that have already played.') +
     c('pw', 'Previous week high and low', 'The full range of the previous trading week.') +
     c('orb', 'Opening range', 'High and low of 09:30 to 09:45, shown once that window has started.') +
-    c('eq', 'Equal highs and lows', 'Marks pairs of swing highs or lows within a few points of each other that price has not run through yet, the liquidity pools.'),
+    c('eq', 'Equal highs and lows', 'Marks pairs of swing highs or lows within a few points of each other that price has not run through yet, where resting orders tend to cluster.'),
     [['Cancel'], ['Apply', () => { document.querySelectorAll('#mBody [data-i]').forEach(i => { X.ict[i.dataset.i] = i.checked; }); scheduleSave(); }, 'primary']]);
 };
 
@@ -1564,7 +1564,7 @@ const sessList = () => { try { return JSON.parse(localStorage.getItem(LSS) || '[
 function snap(name) { return { id: Date.now(), name, saved: Date.now(), ds: D.name + '|' + D.n, dsName: D.name, kind: D.kind, curT: D.t[cur], tf, trades, orders, closed, nextId, S: { ...S }, X: X.dump() }; }
 function openSessions() {
   const L = sessList(), net = closed.reduce((s, c) => s + c.pnl, 0);
-  modal('Sessions', `<div class="row"><input class="inp" id="ssName" placeholder="Name this session, e.g. Silver Bullet · August" style="flex:1" maxlength="60"><button class="btn primary" id="ssSave">Save current</button></div>
+  modal('Sessions', `<div class="row"><input class="inp" id="ssName" placeholder="Name this session, e.g. Opening range · August" style="flex:1" maxlength="60"><button class="btn primary" id="ssSave">Save current</button></div>
     <p class="hint" style="margin:0 0 12px">Current session: ${closed.length} closed trade(s), ${money(net)} net, on ${esc(D.name)}. The current session also autosaves.</p>
     ${L.length ? `<table><tr><th>Name</th><th>Trades</th><th>Net</th><th>Dataset</th><th></th></tr>${L.map(s => { const n = (s.closed || []).reduce((a, c) => a + c.pnl, 0); return `<tr data-id="${s.id}"><td class="txt">${esc(s.name)}</td><td>${(s.closed || []).length}</td><td class="${cls(n)}">${money(n)}</td><td class="txt mut" style="max-width:140px;overflow:hidden;text-overflow:ellipsis">${esc(s.dsName || '')}</td><td><button class="xs" data-a="load">Load</button><button class="xs" data-a="del">Delete</button></td></tr>`; }).join('')}</table>` : '<div class="empty" style="padding:16px">No saved sessions yet.</div>'}`, [['Close']]);
   $('#ssSave').onclick = () => { const name = $('#ssName').value.trim() || `Session ${fmtET(D.dt[cur], false, true)}`; const L2 = sessList(); L2.unshift(snap(name)); try { localStorage.setItem(LSS, JSON.stringify(L2.slice(0, 25))); toast('Session saved'); } catch (_) { toast('Could not save: browser storage is full', 'var(--warn)'); } openSessions(); };
@@ -1625,7 +1625,7 @@ function rpStop(i) {
   if (X.drillEnd && i >= X.drillEnd) { X.drillEnd = 0; setTimeout(drillReview, 60); return 'practice window finished'; }
   if (i < 1 || D.baseSec >= 3600) return null; const a = todMin(D.dt[i - 1]), b = todMin(D.dt[i]);
   const cross = m => (a < m && b >= m) || (b < a && (m > a || m <= b));
-  if (X.rp.kz) for (const z of KZ) if (cross(z[0])) return z[2] + ' kill zone';
+  if (X.rp.kz) for (const z of KZ) if (cross(z[0])) return z[2] + ' session';
   if (X.rp.news && cross(510)) return '08:30 news time';
   if (X.rp.open && cross(570)) return '09:30 New York open';
   if (X.rp.day && cross(1080)) return 'New session (18:00)';
@@ -1633,7 +1633,7 @@ function rpStop(i) {
 }
 $('#rOpts').onclick = () => {
   const c = (k, l) => `<label class="chk" style="flex-direction:row;gap:8px;margin-bottom:10px"><input type="checkbox" data-r="${k}" ${X.rp[k] ? 'checked' : ''}>${l}</label>`;
-  modal('Pause rules', '<p class="hint" style="margin:0 0 12px">While the replay is playing, pause automatically when the clock reaches (New York time):</p>' + c('kz', 'The start of each kill zone (02:00, 08:30, 13:30)') + c('news', '08:30, when most US data is released') + c('open', '09:30, the New York stock open') + c('day', '18:00, the start of a new session') + '<p class="hint">Pausing on fills, stops and targets is the Auto-pause box in the top bar.</p>',
+  modal('Pause rules', '<p class="hint" style="margin:0 0 12px">While the replay is playing, pause automatically when the clock reaches (New York time):</p>' + c('kz', 'The start of each session window (02:00, 08:30, 13:30)') + c('news', '08:30, when most US data is released') + c('open', '09:30, the New York stock open') + c('day', '18:00, the start of a new session') + '<p class="hint">Pausing on fills, stops and targets is the Auto-pause box in the top bar.</p>',
     [['Cancel'], ['Save', () => { document.querySelectorAll('#mBody [data-r]').forEach(i => { X.rp[i.dataset.r] = i.checked; }); $('#rOpts').classList.toggle('primary', Object.values(X.rp).some(Boolean)); scheduleSave(); }, 'primary']]);
 };
 /* ---------- second chart ---------- */
@@ -1697,15 +1697,8 @@ function manageStop(tr, i) {
 const revFlag = (q, t) => { const l = closed[closed.length - 1]; return !!(l && l.pnl < 0 && t - l.exitT <= 300 && q > l.qty); };
 
 /* ---------- checklist gate, cooldown, tilt ---------- */
-const CHK_DEF = ['Higher-timeframe bias is clear', 'I am inside a kill zone', 'Liquidity was swept or price displaced', 'My stop sits beyond structure', 'The risk is the amount I planned'];
-const CHK = {
-  'Silver Bullet': ['It is inside the 10:00 to 11:00 window', 'A liquidity sweep happened first', 'Displacement left a fair value gap', 'I am not chasing, the gap is where I would enter', 'The risk is the amount I planned'],
-  'Unicorn': ['Higher-timeframe bias is clear', 'A breaker block formed after the sweep', 'A fair value gap overlaps the breaker', 'I am inside a kill zone', 'The risk is the amount I planned'],
-  'OTE': ['There is a clear impulse leg with displacement', 'Price retraced into the 0.62 to 0.79 zone', 'It is inside a kill zone', 'Bias agrees with the impulse direction', 'The risk is the amount I planned'],
-  'Turtle Soup': ['A clear old high or low was taken out', 'Price closed back inside the range', 'There was displacement after the sweep', 'Bias supports the reversal', 'The risk is the amount I planned'],
-  'Judas Swing': ['The midnight open is marked', 'Price made a fake move away from it first', 'It reversed with displacement', 'It is inside a London or New York kill zone', 'The risk is the amount I planned'],
-  'London Open': ['The Asia range is marked', 'London swept one side of that range', 'Price displaced back through the range', 'Daily bias agrees', 'The risk is the amount I planned']
-};
+const CHK_DEF = ['The setup matches my written rules', 'Stop and target are set before entry', 'No high-impact release in the next 15 minutes', 'I am trading my planned session', 'The risk is the amount I planned'];
+const CHK = {};
 const _submit = submit;
 submit = function (side) {
   if (!D) return;
@@ -1733,7 +1726,7 @@ function tiltCheck() {
 }
 
 /* ---------- practice drills ---------- */
-const DRILLS = { 'Silver Bullet': [595, 75, 'the New York AM Silver Bullet hour, 10:00 to 11:00'], 'London Open': [115, 185, 'the London open, 02:00 to 05:00'], 'Judas Swing': [0, 180, 'the midnight open into London, 00:00 to 03:00'], 'Power of 3': [0, 600, 'a full day from midnight to 10:00'], 'Opening Range Gap': [565, 60, 'the New York open, 09:25 to 10:25'], 'First Presented FVG': [565, 60, 'the New York open, 09:25 to 10:25'], 'Turtle Soup': [505, 120, 'the 08:25 to 10:25 window'], 'London Close': [655, 120, 'the London close, 10:55 to 12:55'], 'Bread and Butter': [120, 240, 'London into the early New York morning'], 'Market Maker Model': [0, 600, 'a full day from midnight to 10:00'] };
+const DRILLS = { 'New York open': [565, 60, 'the New York open, 09:25 to 10:25'], 'US data release': [505, 120, 'the 08:25 to 10:25 window'], 'London open': [115, 185, 'the London open, 02:00 to 05:00'], 'London close': [655, 120, 'the London close, 10:55 to 12:55'], 'Overnight into London': [0, 180, 'midnight into London, 00:00 to 03:00'], 'Full morning': [0, 600, 'a full day from midnight to 10:00'] };
 const drillOf = m => DRILLS[m] || [505, 180, 'a New York morning, 08:25 to 11:25'];
 let drCache = { key: '', list: [] };
 function drillList(start) {
@@ -1763,8 +1756,8 @@ function drillReview() {
     [['Close'], ['Next random window', () => startDrill(di.model), 'primary']]);
 }
 function openDrill() {
-  const opts = MODELS.map(m => `<option ${m === (X.setup || 'Silver Bullet') ? 'selected' : ''}>${m}</option>`).join('');
-  modal('Practice a model', `<p class="hint" style="margin:0 0 12px">Jumps to a random weekday window from your data where the model is normally traded. The replay pauses when the window ends and shows a short review. Open trades are closed when a new window starts, and your history stays.</p>
+  const opts = Object.keys(DRILLS).map(m => `<option ${m === (DRILLS[X.setup] ? X.setup : 'New York open') ? 'selected' : ''}>${m}</option>`).join('');
+  modal('Practice a session', `<p class="hint" style="margin:0 0 12px">Jumps to a random weekday window from your data for that session. The replay pauses when the window ends and shows a short review. Open trades are closed when a new window starts, and your history stays.</p>
     <label class="form" style="display:block"><span class="hint">Model</span><select class="inp" id="drM" style="width:100%;margin:4px 0 8px">${opts}</select></label><div class="hint" id="drDesc"></div>`,
     [['Cancel'], ['End window now', () => { if (X.drillInfo) drillReview(); }], ['Start random window', () => startDrill($('#drM').value), 'primary']]);
   const upd = () => { const d = drillOf($('#drM').value); $('#drDesc').textContent = 'Window: ' + d[2] + '. About ' + d[1] + ' minutes of replay.'; }; $('#drM').onchange = upd; upd();
@@ -2021,11 +2014,11 @@ const SKEY = 'mnqreplay.strats', SCUR = 'mnqreplay.stratcur';
 const LV = [['pd', 'Prior session high / low'], ['asia', 'Asia range high / low'], ['lon', 'London range high / low'], ['or', 'Opening range (09:30-09:45) high / low'], ['mid', 'Midnight open']];
 const CS = {
   time: { l: 'Time window (ET)', f: [['a', 'time', 'from'], ['b', 'time', 'to']], d: { a: '09:30', b: '11:00' } },
-  kz: { l: 'Inside a kill zone', f: [], d: {} },
+  kz: { l: 'Inside a main session', f: [], d: {} },
   trend: { l: 'Trend agrees: close and fast EMA beyond slow EMA', f: [['f', 'num', 'fast'], ['s', 'num', 'slow']], d: { f: 9, s: 21 } },
   vwap: { l: 'Close on the trade side of VWAP', f: [], d: {} },
-  disp: { l: 'Displacement candle: large body, closes near its extreme', f: [['k', 'num', 'x avg body']], d: { k: 1.5 } },
-  fvg: { l: 'Fair value gap formed in the last few bars', f: [['n', 'num', 'bars']], d: { n: 3 } },
+  disp: { l: 'Wide-range candle: large body, closes near its extreme', f: [['k', 'num', 'x avg body']], d: { k: 1.5 } },
+  fvg: { l: 'Three-bar gap formed in the last few bars', f: [['n', 'num', 'bars']], d: { n: 3 } },
   sweep: { l: 'Swept a recent extreme, then closed back inside', f: [['n', 'num', 'lookback'], ['w', 'num', 'within bars']], d: { n: 20, w: 3 } },
   brk: { l: 'Closed beyond the prior N-bar extreme', f: [['n', 'num', 'bars']], d: { n: 20 } },
   lvl: { l: 'Closed across a session level', f: [['lv', 'sel', 'level', LV]], d: { lv: 'pd' } },
@@ -2034,7 +2027,7 @@ const CS = {
 };
 const STPRE = {
   'Blank': { conds: [] },
-  'Sweep + displacement in a kill zone': { conds: [{ t: 'kz' }, { t: 'sweep', n: 20, w: 3 }, { t: 'disp', k: 1.5 }], stop: { t: 'pts', v: 20 }, tgt: { t: 'r', v: 2 }, tf: 300 },
+  'Failed breakout + wide-range bar, in session': { conds: [{ t: 'kz' }, { t: 'sweep', n: 20, w: 3 }, { t: 'disp', k: 1.5 }], stop: { t: 'pts', v: 20 }, tgt: { t: 'r', v: 2 }, tf: 300 },
   'Opening range break': { conds: [{ t: 'time', a: '09:45', b: '11:30' }, { t: 'lvl', lv: 'or' }, { t: 'vwap' }], stop: { t: 'swing', v: 0 }, tgt: { t: 'r', v: 2 }, tf: 300 },
   'Trend pullback after a gap': { conds: [{ t: 'trend', f: 9, s: 21 }, { t: 'fvg', n: 5 }, { t: 'pull', f: 9, n: 3 }], stop: { t: 'atr', v: 1.5 }, tgt: { t: 'r', v: 2 }, tf: 300 }
 };
@@ -2272,7 +2265,7 @@ function riskBlock() {
   const sk = Math.floor((D.dt[cur] + 21600) / 86400);
   if (S.maxTrades > 0) { const seen = new Set(); for (const c of closed.concat(trades)) if (dayKey(c.entryT) === sk) seen.add(c.entryT + '|' + c.entry + '|' + c.side); if (seen.size >= S.maxTrades) return `Your rule: at most ${S.maxTrades} trade${S.maxTrades > 1 ? 's' : ''} per day. That limit is reached.`; }
   if (S.dayLoss > 0 && acct().day <= -S.dayLoss) return `Your rule: stop after losing ${money(S.dayLoss, false)} in a day. That limit is reached.`;
-  if (S.kzOnly && D.baseSec < 3600) { const m = todMin(D.dt[cur]); if (!KZ.some(z => m >= z[0] && m < z[1])) return 'Your rule: new orders only inside the kill zones. It is outside them now.'; }
+  if (S.kzOnly && D.baseSec < 3600) { const m = todMin(D.dt[cur]); if (!KZ.some(z => m >= z[0] && m < z[1])) return 'Your rule: new orders only inside the main sessions. It is outside them now.'; }
   return '';
 }
 
