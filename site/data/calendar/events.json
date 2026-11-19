@@ -196,19 +196,33 @@
    "components": [
     {
      "label": "Initial claims",
-     "previous": "200K"
+     "actual": "203K",
+     "previous": "202K"
     },
     {
      "label": "4-week average",
-     "previous": "195K"
+     "actual": "198K",
+     "previous": "196K"
     },
     {
      "label": "Continuing claims",
-     "previous": "1.70M"
+     "actual": "1.76M",
+     "previous": "1.69M"
     }
    ],
    "forecast": "198K",
-   "fsrc": "ForexFactory consensus"
+   "fsrc": "ForexFactory consensus",
+   "revised": "202K",
+   "actual": "203K",
+   "provenance": {
+    "via": "ALFRED",
+    "series": "ICSA",
+    "asof": "2026-11-19"
+   },
+   "facts": [
+    "The initial claims reading was the highest since week to Sep 5."
+   ],
+   "recap": "Jobless claims came in at 203K against a 198K forecast, above expectations. The previous reading was 200K, revised to 202K. 4-week average 198K (previous 196K); Continuing claims 1.76M (previous 1.69M). The initial claims reading was the highest since week to Sep 5."
   },
   {
    "date": "2026-11-20",
@@ -305,7 +319,8 @@
    "src": "Dept. of Labor",
    "note": "Weekly initial claims for unemployment insurance.",
    "id": "20261125-initial-jobless-claims-moved-to-wednesda",
-   "metric": "initial claims"
+   "metric": "initial claims",
+   "previous": "203K"
   },
   {
    "date": "2026-11-25",

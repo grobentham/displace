@@ -7,6 +7,15 @@
    "generatedAt": "2026-11-19T09:23:04+08:00",
    "updates": [
     {
+     "id": "20261119-initial-jobless-claims",
+     "title": "Initial jobless claims",
+     "url": "https://alfred.stlouisfed.org/series?seid=ICSA&vintage_date=2026-11-19",
+     "source": "Dept. of Labor",
+     "analysis": "Jobless claims came in at 203K against a 198K forecast, above expectations. The previous reading was 200K, revised to 202K. 4-week average 198K (previous 196K); Continuing claims 1.76M (previous 1.69M). The initial claims reading was the highest since week to Sep 5.",
+     "context": "Initial claims count new unemployment insurance applications. The four-week average smooths weekly swings.",
+     "published": "2026-11-19T21:30:00+08:00"
+    },
+    {
      "title": "Minutes of the Federal Open Market Committee, October 27-28, 2026",
      "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20261118a.htm",
      "source": "Federal Reserve",
@@ -24,14 +33,25 @@
      "metric": "initial claims",
      "forecast": "198K",
      "previous": "200K",
-     "forecastSource": "ForexFactory consensus"
+     "forecastSource": "ForexFactory consensus",
+     "actual": "203K",
+     "revised": "202K",
+     "components": [
+      {
+       "label": "4-week average",
+       "actual": "198K",
+       "previous": "196K"
+      },
+      {
+       "label": "Continuing claims",
+       "actual": "1.76M",
+       "previous": "1.69M"
+      }
+     ]
     }
    ],
    "moreReleases": [],
-   "focus": {
-    "title": "Initial jobless claims",
-    "at": "2026-11-19T21:30+08:00"
-   },
+   "focus": null,
    "nextFed": "Dec 8–9",
    "otherCloses": [
     "At the Tue Nov 17 close, WTI crude $89.53 (up 0.3%)."
@@ -74,7 +94,7 @@
    "calendarCovered": true,
    "feedsChecked": true,
    "feedIssues": false,
-   "refreshedAt": "2026-11-19T12:25:30+08:00"
+   "refreshedAt": "2026-11-19T21:55:03+08:00"
   },
   {
    "date": "2026-11-18",
