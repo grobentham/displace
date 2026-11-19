@@ -144,3 +144,17 @@ python engine/test_sources.py
 ```
 
 `test_surprise.py` checks the model on simulated markets where the truth is known (it must find real effects, find nothing in noise and state honest probabilities). `test_predict.py` runs the whole news-outcome pipeline offline.
+
+### Bias of the day (`engine/bias.py`)
+
+Every run after the New York futures close (17:00 NY), the last finished daily candle of NQ and gold futures is
+read the ICT way: closed above or below the prior day's high or low, or swept it and closed back inside (a failed
+breakout), or an inside day (no bias). The result is a LONG / SHORT / NO BIAS call with its draw on liquidity
+(the candle's high or low), the other side, and the 20-day premium/discount zone.
+
+Each rule is tested on every day since 2000 (free Yahoo daily futures candles, cached in `engine/cache/daily/`):
+how often the next day reached the draw and closed in the bias direction (close to close, because Yahoo's daily
+futures opens are unreliable), next to the same rates on all days. On NQ the candle rules give no edge on the
+close, but the next day reaches the draw far more often than on an ordinary day (for example 77% vs 55% after a
+close above the prior high). The site shows both numbers. Live calls are logged in `site/data/bias/log.json`
+and scored the day after.

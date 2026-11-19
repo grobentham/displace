@@ -47,6 +47,7 @@ jobs:
           python engine/test_sources.py
           python engine/test_moves.py
           python engine/test_surprise.py
+          python engine/test_bias.py
 
   publish:
     if: github.ref == 'refs/heads/main'
@@ -81,6 +82,7 @@ jobs:
         run: |
           python -u engine/predict.py
           python -u engine/watch.py
+          python -u engine/bias.py
 
       - name: Save new data
         run: |
