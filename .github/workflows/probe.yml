@@ -1,0 +1,24 @@
+name: Probe minutes (temporary)
+on: pull_request
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.12"}
+      - run: |
+          cd engine && python - <<'PY'
+          import news
+          from publicdata import download
+          for u in ["https://www.federalreserve.gov/newsevents/pressreleases/monetary20261118a.htm",
+                    "https://www.federalreserve.gov/newsevents/pressreleases/monetary20261007a.htm"]:
+              print("==", u); print(news.minutes_summary(u, download))
+          import re
+          page = download("https://www.federalreserve.gov/newsevents/pressreleases/monetary20261118a.htm").decode()
+          link = re.search(r'href="(/monetarypolicy/fomcminutes\d{8}\.htm)"', page); print("link", link and link[1])
+          if link:
+              body = news.text(download("https://www.federalreserve.gov" + link[1]).decode("utf-8-sig","replace"))
+              for key in ("Views on Current", "Committee Policy Action", "Voting against", "outlook for monetary policy", "policy outlook", "In discussing"):
+                  i = body.find(key); print("--", key, i, body[i:i+400] if i >= 0 else "")
+          PY
