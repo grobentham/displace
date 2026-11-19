@@ -37,6 +37,8 @@ jobs:
       - uses: actions/setup-python@v6
         with:
           python-version: "3.12"
+      - name: Install numpy (the quant models)
+        run: python -m pip install --quiet "numpy>=2,<3"
       - name: Test engine
         run: |
           python engine/test_engine.py
@@ -71,6 +73,9 @@ jobs:
       - uses: actions/setup-python@v6
         with:
           python-version: "3.12"
+
+      - name: Install numpy (the quant models)
+        run: python -m pip install --quiet "numpy>=2,<3"
 
       - name: Refresh calendar and news
         run: |

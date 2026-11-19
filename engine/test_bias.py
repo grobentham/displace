@@ -1,76 +1,98 @@
-"""Offline checks for the daily bias (quant version)."""
+"""Offline checks for the daily bias (quant v2)."""
 import datetime as dt
 import json
 import os
 import random
 import sys
 import tempfile
+import warnings
 
+warnings.filterwarnings("ignore")
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import numpy as np
+
 import bias as B
+import quant as Q
 
 
-def synthetic(n=1800, seed=3, start=dt.date(2015, 1, 1)):
+def synthetic(n=2600, seed=3, start=dt.date(2008, 1, 1), drift=0.0004, vol=0.012):
     rnd = random.Random(seed)
-    d, px, out = start, 100.0, {}
+    d, px, out, v = start, 100.0, {}, vol
     while len(out) < n:
         d += dt.timedelta(days=1)
         if d.weekday() >= 5:
             continue
+        v = max(0.004, 0.97 * v + 0.03 * vol + rnd.gauss(0, 0.0008))  # clustered volatility, like real markets
         o = px
-        c = o * (1 + rnd.gauss(0.0004, 0.012))
-        h, l = max(o, c) * (1 + abs(rnd.gauss(0, 0.005))), min(o, c) * (1 - abs(rnd.gauss(0, 0.005)))
+        c = o * (1 + rnd.gauss(drift, v))
+        h, l = max(o, c) * (1 + abs(rnd.gauss(0, v / 2))), min(o, c) * (1 - abs(rnd.gauss(0, v / 2)))
         out[d.isoformat()] = [round(o, 4), round(h, 4), round(l, 4), round(c, 4)]
         px = c
     return out
 
 
-def test_basics():
-    days = {"2026-11-18": [1, 2, 0.5, 1.5], "2026-11-19": [1, 2, 0.5, 1.5]}
-    at = lambda h: dt.datetime(2026, 11, 19, h, 0, tzinfo=B.NY)
-    assert [d for d, _ in B.finished(days, at(16))] == ["2026-11-18"]
-    assert [d for d, _ in B.finished(days, at(18))] == ["2026-11-18", "2026-11-19"]
+def series_fake(sid, start="1999-01-01"):
+    rnd = random.Random(hash(sid) % 1000)
+    d, v, out = dt.date(2005, 1, 3), 20.0, []
+    while d < dt.date(2026, 12, 1):
+        if d.weekday() < 5:
+            v = max(5.0, v + rnd.gauss(0, 0.6))
+            out.append((d.isoformat(), round(v, 3)))
+        d += dt.timedelta(days=1)
+    return out
+
+
+def test_quant_basics():
+    x = np.linspace(-2, 2, 400)[:, None]
+    y = (x[:, 0] > 0).astype(float)
+    assert Q.logit_fit(x, y)[1] > 0
+    assert abs(Q.t_needed(6) - 2.394) < 0.01 and Q.t_needed(13) > 2.6
+    keys = ["2026-01-05", "2026-01-06", "2026-01-07"]
+    v = B.lagged(keys, {"2026-01-05": 1.0, "2026-01-06": 2.0})
+    assert np.isnan(v[0]) and v[1] == 1.0 and v[2] == 2.0  # never the same day's value
     assert B.next_session("2026-11-20") == "2026-11-23"
-    b = B.logit_fit([[x / 10] for x in range(-20, 21)], [1 if x > 0 else 0 for x in range(-20, 21)])
-    assert b[1] > 0  # a logistic fit finds the obvious slope
 
 
-def test_random_walk_has_no_direction_edge():
+def test_random_walk_finds_no_direction_but_real_volatility():
     rows = sorted(synthetic().items())
-    r = B.read("nq", rows, set())
-    assert not [s for s in r["signals"] if s["tested"]], "a random walk should not pass the direction tests"
-    assert r["tier"] == "base" and abs(r["p_up"] - r["base_up"]) < 1e-9
-    # but the levels model has real skill: a close near the high makes taking the high likelier
+    series = {sid: dict(series_fake(sid)) for sid in B.SERIES}
+    r = B.read("nq", rows, series, {}, set())
+    assert not [s for s in r["signals"] if s["tested"]], "noise must not pass the direction tests"
+    assert r["tier"] == "base" and r["p_up"] == r["base_up"]
     assert r["takes"]["high"]["tested"] and r["takes"]["low"]["tested"]
-    assert r["range"]["lo"] < r["range"]["points"] < r["range"]["hi"]
-    assert r["band"]["lo"] < r["levels"]["close"] < r["band"]["hi"]
+    assert 0 < r["range"]["lo"] < r["range"]["points"] < r["range"]["hi"]
+    assert r["vol"]["stats"]["gain"] > 0, "HAR should beat a 20-day average when volatility clusters"
+    assert 0.7 < r["vol"]["stats"]["coverage"] < 0.9
+    ks = [t["k"] for t in r["touch"]]
+    assert ks == list(B.TOUCH_K) and r["touch"][0]["up_p"] > r["touch"][-1]["up_p"]
+    assert r["touch"][1]["dn"] < r["levels"]["close"] < r["touch"][1]["up"]
 
 
 def test_run_end_to_end():
     tmp = tempfile.mkdtemp()
-    B.OUT, B.LOG, B.CACHE_DIR, B.DATA, B.TV_DIR = (os.path.join(tmp, "bias", "current.json"), os.path.join(tmp, "bias", "log.json"),
-                                                   os.path.join(tmp, "cache"), tmp, os.path.join(tmp, "tv"))
+    B.OUT, B.LOG, B.CACHE_DIR, B.DATA, B.TV_DIR, B.SERIES_DIR = (
+        os.path.join(tmp, "bias", "current.json"), os.path.join(tmp, "bias", "log.json"), os.path.join(tmp, "cache"),
+        tmp, os.path.join(tmp, "tv"), os.path.join(tmp, "series"))
     data = synthetic()
     last = max(data)
     now = dt.datetime.combine(dt.date.fromisoformat(last), dt.time(18, 30), B.NY).astimezone(dt.timezone.utc)
-    assert B.run(now, fetch=lambda sym, rng="max": dict(data)) == 0
+    assert B.run(now, fetch=lambda sym, rng="max": dict(data), fetch_series=series_fake, markets=["nq", "es"]) == 0
     doc = json.load(open(B.OUT))
+    assert doc["order"] == ["nq", "es"] and doc["for"] == B.next_session(last)
     nq = doc["markets"]["nq"]
-    assert nq["candle"] == last and doc["for"] == B.next_session(last)
-    assert 0.1 <= nq["p_up"] <= 0.9 and nq["bias"] in ("long", "short", "neutral")
-    assert len(nq["signals"]) == len(B.SIGNALS) and len(nq["calendar"]) == len(B.EVENTS)
+    assert nq["pv"] == 20 and nq["micro"] == 2 and len(nq["calendar"]) == len(B.EVENTS)
     nd = B.next_session(last)
     data[nd] = [1, data[last][1] * 2, data[last][2] / 2, data[last][3] * 1.01]
     now2 = dt.datetime.combine(dt.date.fromisoformat(nd), dt.time(18, 30), B.NY).astimezone(dt.timezone.utc)
-    B.run(now2, fetch=lambda sym, rng="max": dict(data))
+    B.run(now2, fetch=lambda sym, rng="max": dict(data), fetch_series=series_fake, markets=["nq", "es"])
     log = json.load(open(B.LOG))["entries"]
     done = [e for e in log if e["candle"] == last]
-    assert done and all(e["scored"] and e["up"] == 1 and e["highTaken"] == 1 and e["lowTaken"] == 1 for e in done)
+    assert len(done) == 2 and all(e["scored"] and e["up"] == 1 and e["highTaken"] and e["up1Hit"] for e in done)
     assert json.load(open(B.OUT))["live"]["nq"]["days"] == 1
 
 
 if __name__ == "__main__":
-    test_basics()
-    test_random_walk_has_no_direction_edge()
+    test_quant_basics()
+    test_random_walk_finds_no_direction_but_real_volatility()
     test_run_end_to_end()
     print("bias tests passed")
