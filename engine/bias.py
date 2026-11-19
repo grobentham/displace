@@ -1,31 +1,37 @@
-"""Daily bias for NQ and gold futures: a tested probability of an up day, the expected range and the key levels.
+"""Daily bias for eight futures markets: a tested probability of an up day, a volatility-model range, touch
+probabilities, level odds, session statistics and calibration, each with its out-of-sample record.
 
-Every run after the New York futures close (17:00 NY) the engine re-tests a fixed set of signals on every day since
-2000 (Yahoo daily futures candles, free) and publishes, for the next session:
+Runs after the New York futures close (17:00 NY). Free data only: Yahoo daily futures candles since 2000, FRED
+(implied volatility indices, credit spreads, real yields, the dollar, the 2-year yield) and the release calendar.
 
-  direction   P(next close > today's close). It starts at the long-run base rate and only moves for signals that
-              passed walk-forward testing (refit every year on the years before it, scored on the year itself):
-              Brier skill above the base rate overall, in both halves of the history and in the last three years.
-              Calendar effects (turn of the month, Fed days, after a 2-sigma day) must differ from the base rate
-              with z >= 1.96, on the same side in both halves and since 2019. Signals that fail are shown, not used.
-  range       expected high-low range from the 20-day average range, with the 10th-90th percentile band of what
-              followed similar readings
-  levels      P(trading above today's high) and P(below today's low), from how far the close sits from each
-              (in units of the average range); a one-sigma close band from 20-day volatility
+  direction   P(next close > today's close). Starts at the long-run base rate and moves only for signals that pass
+              walk-forward testing: out-of-sample Brier skill with a Diebold-Mariano t above a Bonferroni bar for
+              the number of signals tried, and positive skill in both halves and the last three years. Calendar
+              effects need |z| >= 2.58 (5% split across five) on the same side in both halves and since 2019.
+  range       a HAR model of the log daily range (yesterday, last week, last month, implied volatility, a news-day
+              flag for the next session, Mondays), refit every year and compared with a 20-day average.
+  touch       how often the next day reached the close +/- 0.5, 1, 1.5 and 2 forecast standard deviations.
+  levels      P(trading above today's high / below today's low) from the close's distance to each.
+  sessions    overnight vs New York session behaviour and an intraday momentum test (NQ and gold, hourly bars).
 
-Direction is close to close because Yahoo's daily futures opens are unreliable. Calls are logged in
-site/data/bias/log.json and scored the next day (direction, Brier score, levels, range band).
+FRED values are used one day late in both the tests and the live read, because FRED publishes a day's close the
+next morning. Direction is close to close: Yahoo's daily futures opens are unreliable.
+Writes site/data/bias/current.json and log.json.
 """
 import datetime as dt
 import glob
 import json
 import math
 import os
-import statistics
+import re
 import sys
 import time
 import urllib.request
 from zoneinfo import ZoneInfo
+
+import numpy as np
+
+import quant as Q
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
@@ -33,16 +39,52 @@ DATA = os.path.join(ROOT, "site", "data")
 OUT = os.path.join(DATA, "bias", "current.json")
 LOG = os.path.join(DATA, "bias", "log.json")
 CACHE_DIR = os.path.join(HERE, "cache", "daily")
+SERIES_DIR = os.path.join(HERE, "cache", "series")
 TV_DIR = os.path.join(HERE, "cache", "tv")
 NY = ZoneInfo("America/New_York")
 UA = {"User-Agent": "Mozilla/5.0 (Displace data engine; +https://github.com/grobentham/displace)"}
-MARKETS = {"nq": ("NQ%3DF", "NQ", "Nasdaq-100 futures"), "gold": ("GC%3DF", "Gold", "COMEX gold futures")}
-SESSION_END = 17   # the futures day ends 17:00 New York
+SESSION_END = 17
 FIRST_TEST_YEAR = 2006
-LEAN = 0.02        # a probability within 2 points of 50% is no lean
-RANGE_LOOKBACK = 1500
-FOMC_KNOWN_FROM = 2010  # the calendar cache has Fed dates from 2010
+LEAN = 0.02
+FOMC_KNOWN_FROM = 2010
+EVENTS_FROM = 2010
+TOUCH_K = (0.5, 1.0, 1.5, 2.0)
 WD = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+
+# key: (Yahoo symbol, short name, full name, $ per point, micro $ per point, implied-vol series, decimals, group)
+MARKETS = {
+    "nq": ("NQ%3DF", "NQ", "Nasdaq-100 futures", 20, 2, "VXNCLS", 2, "equity"),
+    "es": ("ES%3DF", "ES", "S&P 500 futures", 50, 5, "VIXCLS", 2, "equity"),
+    "ym": ("YM%3DF", "YM", "Dow futures", 5, 0.5, "VIXCLS", 0, "equity"),
+    "rty": ("RTY%3DF", "RTY", "Russell 2000 futures", 50, 5, "RVXCLS", 1, "equity"),
+    "gold": ("GC%3DF", "Gold", "COMEX gold futures", 100, 10, "GVZCLS", 1, "gold"),
+    "cl": ("CL%3DF", "Crude", "WTI crude oil futures", 1000, 100, "OVXCLS", 2, "oil"),
+    "6e": ("6E%3DF", "Euro", "Euro FX futures", 125000, 12500, None, 5, "fx"),
+    "btc": ("BTC%3DF", "Bitcoin", "CME bitcoin futures", 5, 0.1, None, 0, "crypto"),
+}
+SERIES = ["VIXCLS", "VXNCLS", "RVXCLS", "GVZCLS", "OVXCLS", "VXVCLS", "BAMLH0A0HYM2", "DFII10", "DTWEXBGS", "DGS2"]
+
+PRICE_SIGNALS = {
+    "mom20": "20-day momentum", "mom120": "6-month momentum", "trend200": "Distance from the 200-day average",
+    "rev1": "Yesterday's move (reversal)", "clv": "Where the day closed in its range", "volreg": "Volatility regime",
+}
+CROSS_SIGNALS = {
+    "iv_level": "Implied volatility vs its 1-year median", "iv_chg5": "5-day change in implied volatility",
+    "term": "VIX vs 3-month VIX (term structure)", "hy5": "5-day change in high-yield credit spreads",
+    "ry5": "5-day change in the 10-year real yield", "usd5": "5-day change in the dollar", "y2_5": "5-day change in the 2-year yield",
+}
+CROSS_FOR = {
+    "equity": ["iv_level", "iv_chg5", "term", "hy5", "usd5", "y2_5"],
+    "gold": ["iv_level", "iv_chg5", "ry5", "usd5", "y2_5"],
+    "oil": ["iv_level", "iv_chg5", "hy5", "usd5"],
+    "fx": ["usd5", "y2_5", "ry5"],
+    "crypto": ["hy5", "usd5", "y2_5", "term"],
+}
+Z_EVENTS = 2.58  # two-sided 5% split across the five calendar effects
+EVENTS = {"tom": "Turn of the month", "prefomc": "Day before a Fed decision", "fomc": "Fed decision day",
+          "bigdown": "After a 2-sigma down day", "bigup": "After a 2-sigma up day"}
+TIER1 = re.compile(r"\bCPI\b|Non-farm|FOMC rate decision", re.I)
+TIER2 = re.compile(r"Retail sales|\bPCE\b|\bGDP\b|\bISM\b|\bPPI\b", re.I)
 
 
 def log(msg):
@@ -89,7 +131,7 @@ def parse(doc):
         d = dt.datetime.fromtimestamp(t + off, dt.timezone.utc).date()
         if d.weekday() >= 5:
             continue
-        out[d.isoformat()] = [round(o, 2), round(max(h, o, c), 2), round(min(lo, o, c), 2), round(c, 2)]
+        out[d.isoformat()] = [round(o, 6), round(max(h, o, c), 6), round(min(lo, o, c), 6), round(c, 6)]
     return out
 
 
@@ -113,8 +155,40 @@ def sync(m, now, fetch=download):
     return c
 
 
+def fred_download(sid, start="1999-01-01"):
+    import publicdata
+    url = f"{publicdata.FRED}/graph/fredgraph.csv?id={sid}&cosd={start}"
+    return [(d, v) for d, v, _ in publicdata.read_csv(publicdata.download(url), sid, start)]
+
+
+def sync_series(sid, now, fetch=fred_download):
+    """A FRED series cached in engine/cache/series/<id>.json (same format as series_store)."""
+    path = os.path.join(SERIES_DIR, f"{sid}.json")
+    try:
+        c = json.load(open(path))
+    except (OSError, ValueError):
+        c = {"source": "", "fetched": "", "rows": []}
+    try:
+        stale = now - dt.datetime.fromisoformat(c.get("fetched") or "2000-01-01T00:00+00:00") > dt.timedelta(hours=4)
+    except ValueError:
+        stale = True
+    early = not c["rows"] or c["rows"][0][0] > "2001-01-01"
+    if stale or early:
+        try:
+            got = fetch(sid, "1999-01-01" if early else (now - dt.timedelta(days=120)).date().isoformat())
+            if got and len(got) > 5:
+                merged = {r[0]: [r[0], r[1], ""] for r in c["rows"]}
+                merged.update({d: [d, v, ""] for d, v in got})
+                c = {"source": f"FRED {sid}", "fetched": now.isoformat(timespec="minutes"), "rows": [merged[d] for d in sorted(merged)]}
+                os.makedirs(SERIES_DIR, exist_ok=True)
+                with open(path, "w") as fh:
+                    json.dump(c, fh, separators=(",", ":"))
+        except Exception as e:
+            log(f"bias: {sid} unavailable ({e!r}); using the archive")
+    return {r[0]: float(r[1]) for r in c["rows"] if r[1] is not None}
+
+
 def finished(days, now_ny):
-    """Candles whose session has ended (a day's candle is final at 17:00 New York)."""
     cut = now_ny.date() if now_ny.hour >= SESSION_END else now_ny.date() - dt.timedelta(days=1)
     return [(d, v) for d, v in sorted(days.items()) if dt.date.fromisoformat(d) <= cut]
 
@@ -126,302 +200,322 @@ def next_session(last_iso):
     return d.isoformat()
 
 
-def fomc_dates():
-    """Fed decision days (New York dates) from the TradingView calendar cache."""
-    out = set()
+def lagged(keys, series):
+    """Value of a daily series from the last date strictly before each key (published by the next morning)."""
+    if not series:
+        return np.full(len(keys), np.nan)
+    sd = sorted(series)
+    out, j, last = np.full(len(keys), np.nan), 0, np.nan
+    for i, k in enumerate(keys):
+        while j < len(sd) and sd[j] < k:
+            last = series[sd[j]]
+            j += 1
+        out[i] = last
+    return out
+
+
+def calendar_tiers():
+    """{NY date: 2 for CPI / payrolls / Fed, 1 for other big releases} and Fed days, from the release calendar."""
+    tiers, fomc = {}, set()
     for f in glob.glob(os.path.join(TV_DIR, "*.json")):
         try:
             c = json.load(open(f))
         except (OSError, ValueError):
             continue
         for r in c.get("rows", []) if isinstance(c, dict) else c:
-            if r.get("t") == "Interest Rate" and r.get("d"):
-                out.add(dt.datetime.fromisoformat(r["d"].replace("Z", "+00:00")).astimezone(NY).date().isoformat())
-    return out
+            t, d = r.get("t") or "", r.get("d")
+            if not d:
+                continue
+            day = dt.datetime.fromisoformat(d.replace("Z", "+00:00")).astimezone(NY).date().isoformat()
+            if t == "Interest Rate":
+                fomc.add(day)
+                tiers[day] = 2
+            elif re.search(r"Inflation Rate MoM|Core Inflation Rate MoM|Non Farm Payrolls", t):
+                tiers[day] = 2
+            elif re.search(r"Retail Sales MoM|Core PCE|GDP Growth|ISM (Manufacturing|Services)|PPI MoM", t):
+                tiers[day] = max(tiers.get(day, 0), 1)
+    try:
+        for e in json.load(open(os.path.join(DATA, "calendar", "events.json")))["events"]:
+            title, day = e.get("title") or "", e.get("date")
+            if TIER1.search(title):
+                tiers[day] = 2
+                if "FOMC" in title:
+                    fomc.add(day)
+            elif TIER2.search(title):
+                tiers[day] = max(tiers.get(day, 0), 1)
+    except (OSError, ValueError, KeyError):
+        pass
+    return tiers, fomc
 
 
 # ---------------------------------------------------------------- features
 
-SIGNALS = {  # continuous signals, each tested on its own
-    "mom20": "20-day momentum",
-    "mom120": "6-month momentum",
-    "trend200": "Distance from the 200-day average",
-    "rev1": "Yesterday's move (reversal)",
-    "clv": "Where the day closed in its range",
-    "volreg": "Volatility regime",
-}
-EVENTS = {  # calendar effects about the next session
-    "tom": "Turn of the month",
-    "prefomc": "Day before a Fed decision",
-    "fomc": "Fed decision day",
-    "bigdown": "After a 2-sigma down day",
-    "bigup": "After a 2-sigma up day",
-}
+def _roll(a, w, f):
+    n = len(a)
+    return np.array([f(a[i - w + 1:i + 1]) if i >= w - 1 else np.nan for i in range(n)])
 
 
-def features(rows, fomc):
-    """Per day i (known at its close): signal values and calendar flags about day i+1."""
-    n = len(rows)
-    c = [v[3] for _, v in rows]
-    h = [v[1] for _, v in rows]
-    l = [v[2] for _, v in rows]
-    r = [0.0] + [math.log(c[i] / c[i - 1]) for i in range(1, n)]
-    lr = [math.log(h[i] / l[i]) if l[i] > 0 and h[i] > l[i] else 0.0 for i in range(n)]
-    vol, atr = [None] * n, [None] * n
-    for i in range(21, n):
-        vol[i] = statistics.pstdev(r[i - 19:i + 1]) or None
-        atr[i] = sum(lr[i - 19:i + 1]) / 20 or None
-    lvol = [math.log(v) if v else None for v in vol]
-    dates = [dt.date.fromisoformat(d) for d, _ in rows]
-    F = []
-    for i in range(n):
-        f = {}
-        if vol[i]:
-            v = vol[i]
-            f["rev1"] = r[i] / v
-            f["mom20"] = math.log(c[i] / c[i - 20]) / (v * math.sqrt(20))
-            if i >= 120:
-                f["mom120"] = math.log(c[i] / c[i - 120]) / (v * math.sqrt(120))
-            if i >= 199:
-                f["trend200"] = math.log(c[i] / (sum(c[i - 199:i + 1]) / 200)) / (v * math.sqrt(50))
-            if i >= 271:
-                past = [x for x in lvol[i - 250:i + 1] if x is not None]
-                f["volreg"] = lvol[i] - statistics.median(past)
-        f["clv"] = ((c[i] - l[i]) / (h[i] - l[i]) - 0.5) if h[i] > l[i] else 0.0
-        nd = dt.date.fromisoformat(next_session(rows[i][0]))
-        after = dt.date.fromisoformat(next_session(nd.isoformat()))
-        k = sum(1 for x in range(1, nd.day + 1) if dt.date(nd.year, nd.month, x).weekday() < 5)
-        f["tom"] = 1.0 if (after.month != nd.month or k <= 3) else 0.0
-        f["prefomc"] = 1.0 if after.isoformat() in fomc else 0.0
-        f["fomc"] = 1.0 if nd.isoformat() in fomc else 0.0
-        f["bigdown"] = 1.0 if f.get("rev1", 0) < -2 else 0.0
-        f["bigup"] = 1.0 if f.get("rev1", 0) > 2 else 0.0
-        if atr[i]:
-            f["dist_h"] = math.log(h[i] / c[i]) / atr[i]
-            f["dist_l"] = math.log(c[i] / l[i]) / atr[i]
-        F.append(f)
-    return F, {"c": c, "h": h, "l": l, "r": r, "vol": vol, "atr": atr, "lr": lr, "dates": dates}
+def _turn_of_month(d):
+    """The session is the last trading day of its month or one of the first three."""
+    day = dt.date.fromisoformat(d)
+    after = dt.date.fromisoformat(next_session(d))
+    k = sum(1 for x in range(1, day.day + 1) if dt.date(day.year, day.month, x).weekday() < 5)
+    return after.month != day.month or k <= 3
 
 
-# ---------------------------------------------------------------- small models (pure python)
-
-def _sig(x):
-    return 1 / (1 + math.exp(-max(-30, min(30, x))))
-
-
-def logit_fit(X, y, lam=2.0, iters=25):
-    """Ridge logistic regression with an intercept; X is a list of feature lists."""
-    k = len(X[0]) + 1
-    b = [0.0] * k
-    for _ in range(iters):
-        g = [0.0] * k
-        H = [[0.0] * k for _ in range(k)]
-        for x, t in zip(X, y):
-            a = [1.0] + x
-            p = _sig(sum(bi * ai for bi, ai in zip(b, a)))
-            w = p * (1 - p)
-            for u in range(k):
-                g[u] += (p - t) * a[u]
-                for v in range(k):
-                    H[u][v] += w * a[u] * a[v]
-        for u in range(1, k):
-            g[u] += lam * b[u]
-            H[u][u] += lam
-        step = _solve(H, g)
-        b = [bi - si for bi, si in zip(b, step)]
-        if max(abs(s) for s in step) < 1e-8:
-            break
-    return b
-
-
-def _solve(A, g):
-    n = len(g)
-    M = [row[:] + [g[i]] for i, row in enumerate(A)]
-    for col in range(n):
-        piv = max(range(col, n), key=lambda r: abs(M[r][col]))
-        M[col], M[piv] = M[piv], M[col]
-        if abs(M[col][col]) < 1e-12:
-            continue
-        for r in range(n):
-            if r != col:
-                f = M[r][col] / M[col][col]
-                for k in range(col, n + 1):
-                    M[r][k] -= f * M[col][k]
-    return [M[i][n] / M[i][i] if abs(M[i][i]) > 1e-12 else 0.0 for i in range(n)]
+def build(rows, tiers, fomc):
+    keys = [d for d, _ in rows]
+    X = np.array([v for _, v in rows], float)
+    o, h, l, c = X.T
+    n = len(c)
+    r = np.r_[0.0, np.log(c[1:] / c[:-1])]
+    rg = np.log(np.maximum(h, c) / np.minimum(l, c))
+    rg[rg <= 0] = np.nan
+    vol = _roll(r, 20, np.std)
+    vol[:21] = np.nan
+    vol[vol == 0] = np.nan
+    atr = _roll(rg, 20, np.nanmean)
+    F = {}
+    F["rev1"] = r / vol
+    F["mom20"] = np.r_[np.full(20, np.nan), np.log(c[20:] / c[:-20])] / (vol * math.sqrt(20))
+    F["mom120"] = np.r_[np.full(120, np.nan), np.log(c[120:] / c[:-120])] / (vol * math.sqrt(120))
+    F["trend200"] = np.log(c / _roll(c, 200, np.mean)) / (vol * math.sqrt(50))
+    lv = np.log(vol)
+    F["volreg"] = lv - np.array([np.nanmedian(lv[i - 250:i + 1]) if i >= 271 else np.nan for i in range(n)])
+    F["clv"] = np.where(h > l, (c - l) / np.where(h > l, h - l, 1) - 0.5, 0.0)
+    nxt = [next_session(k) for k in keys]
+    F["tom"] = np.array([1.0 if _turn_of_month(d) else 0.0 for d in nxt])
+    F["prefomc"] = np.array([1.0 if next_session(d) in fomc else 0.0 for d in nxt])
+    F["fomc"] = np.array([1.0 if d in fomc else 0.0 for d in nxt])
+    F["bigdown"] = (np.nan_to_num(F["rev1"]) < -2).astype(float)
+    F["bigup"] = (np.nan_to_num(F["rev1"]) > 2).astype(float)
+    F["ev1"] = np.array([1.0 if tiers.get(d) == 2 else 0.0 for d in nxt])
+    F["ev2"] = np.array([1.0 if tiers.get(d) == 1 else 0.0 for d in nxt])
+    F["mon"] = np.array([1.0 if dt.date.fromisoformat(d).weekday() == 0 else 0.0 for d in nxt])
+    F["dist_h"] = np.log(h / c) / atr
+    F["dist_l"] = np.log(c / l) / atr
+    dates = [dt.date.fromisoformat(k) for k in keys]
+    S = {"keys": keys, "o": o, "h": h, "l": l, "c": c, "r": r, "rg": rg, "vol": vol, "atr": atr,
+         "years": np.array([d.year for d in dates])}
+    return F, S
 
 
-def _std(vals):
-    mu = sum(vals) / len(vals)
-    return mu, (math.sqrt(sum((v - mu) ** 2 for v in vals) / len(vals)) or 1.0)
+def cross_features(F, S, series, iv_sid):
+    keys = S["keys"]
+    n = len(keys)
+    with np.errstate(divide="ignore", invalid="ignore"):
+        if iv_sid:
+            liv = np.log(lagged(keys, series.get(iv_sid)))
+            med = np.array([np.nanmedian(liv[i - 250:i + 1]) if i >= 250 and np.isfinite(liv[i - 250:i + 1]).sum() > 100 else np.nan for i in range(n)])
+            F["iv_level"] = liv - med
+            F["iv_chg5"] = np.r_[np.full(5, np.nan), liv[5:] - liv[:-5]]
+            F["iv"] = liv
+        vix, vxv = lagged(keys, series.get("VIXCLS")), lagged(keys, series.get("VXVCLS"))
+        F["term"] = np.log(vix / vxv)
+        for name, sid, how in (("hy5", "BAMLH0A0HYM2", "diff"), ("ry5", "DFII10", "diff"), ("usd5", "DTWEXBGS", "log"),
+                               ("y2_5", "DGS2", "diff")):
+            v = lagged(keys, series.get(sid))
+            F[name] = np.r_[np.full(5, np.nan), (np.log(v[5:] / v[:-5]) if how == "log" else v[5:] - v[:-5])]
 
 
-def walk_forward(points, cols):
-    """points: [(year, [features], y)]; refit each year on the years before it. Returns [(year, p, p0, y)]."""
-    out = []
-    for yr in sorted({p[0] for p in points}):
-        if yr < FIRST_TEST_YEAR:
-            continue
-        tr = [p for p in points if p[0] < yr]
-        te = [p for p in points if p[0] == yr]
-        if len(tr) < 500 or not te:
-            continue
-        stats = [_std([p[1][j] for p in tr]) for j in range(cols)]
-        z = lambda x: [(x[j] - stats[j][0]) / stats[j][1] for j in range(cols)]
-        b = logit_fit([z(p[1]) for p in tr], [p[2] for p in tr])
-        p0 = sum(p[2] for p in tr) / len(tr)
-        for p in te:
-            out.append((yr, _sig(b[0] + sum(bi * xi for bi, xi in zip(b[1:], z(p[1])))), p0, p[2]))
-    return out
+# ---------------------------------------------------------------- models
 
-
-def skill(rows):
-    if not rows:
-        return None
-    bs = sum((p - y) ** 2 for _, p, _, y in rows)
-    b0 = sum((p0 - y) ** 2 for _, _, p0, y in rows)
-    return 1 - bs / b0 if b0 else None
-
-
-T_NEEDED = 2.64  # one-sided 5% after a Bonferroni split over the six direction signals
-
-
-def judge(wf, t_needed=T_NEEDED):
-    """Out-of-sample Brier skill over the base rate, with a Diebold-Mariano t-test on the score differences.
-    Passing needs t >= t_needed and positive skill in both halves and in the last three years."""
-    if len(wf) < 400:
-        return {"skill": None, "tested": False}
-    half = len(wf) // 2
-    last = max(r[0] for r in wf)
-    s, s1, s2 = skill(wf), skill(wf[:half]), skill(wf[half:])
-    s3 = skill([r for r in wf if r[0] >= last - 2])
-    d = [(p0 - y) ** 2 - (p - y) ** 2 for _, p, p0, y in wf]
-    mu, sd = _std(d)
-    t = mu / (sd / math.sqrt(len(d))) if sd else 0.0
-    ok = t >= t_needed and all(x is not None and x > 0 for x in (s1, s2, s3))
-    return {"skill": round(s, 4), "t": round(t, 2), "halves": [round(s1, 4), round(s2, 4)], "recent": round(s3, 4),
-            "tested": bool(ok)}
-
-
-def _z(k, n, p):
-    return (k / n - p) / math.sqrt(p * (1 - p) / n) if n and 0 < p < 1 else 0.0
-
-
-# ---------------------------------------------------------------- the daily read
-
-def study(rows, F, S):
-    n = len(rows)
-    y = [None] * n
-    for i in range(n - 1):
-        y[i] = 1 if S["c"][i + 1] > S["c"][i] else 0
-    known = [t for t in y if t is not None]
-    base = sum(known) / max(1, len(known))
-    years = [d.year for d in S["dates"]]
-    out = {"base_up": round(base, 3), "days": len(known), "since": rows[0][0][:4], "signals": {}, "events": {}}
-    for key in SIGNALS:
-        pts = [(years[i], [F[i][key]], y[i]) for i in range(n) if y[i] is not None and key in F[i]]
-        res = judge(walk_forward(pts, 1))
-        res["n"] = len(pts)
-        out["signals"][key] = res
+def direction(F, S, signals):
+    c, years = S["c"], S["years"]
+    n = len(c)
+    y = np.r_[(c[1:] > c[:-1]).astype(float), np.nan]
+    known = ~np.isnan(y)
+    base = float(y[known].mean())
+    t_req = Q.t_needed(len(signals))
+    out = {}
+    for k in signals:
+        x = F[k]
+        m = known & np.isfinite(x)
+        w = Q.walk_forward_logit(years[m], x[m][:, None], y[m], first=FIRST_TEST_YEAR)
+        res = Q.judge(w, t_req)
+        res["n"] = int(m.sum())
+        out[k] = res
+    ev = {}
     half_year = years[n // 2]
-    for key in EVENTS:
-        lo_year = FOMC_KNOWN_FROM if key in ("prefomc", "fomc") else 0
-        allow = [i for i in range(n) if y[i] is not None and years[i] >= lo_year]
-        sel = [i for i in allow if F[i].get(key)]
-        if len(sel) < 20:
-            out["events"][key] = {"n": len(sel), "tested": False}
+    for k in EVENTS:
+        lo = FOMC_KNOWN_FROM if k in ("prefomc", "fomc") else 0
+        allow = known & (years >= lo)
+        sel = allow & (F[k] == 1)
+        if sel.sum() < 20:
+            ev[k] = {"n": int(sel.sum()), "tested": False}
             continue
-        b = sum(y[i] for i in allow) / len(allow)
-        k = sum(y[i] for i in sel)
-        rate = lambda ix: sum(y[i] for i in ix) / len(ix) if ix else None
-        ra = rate([i for i in sel if years[i] < half_year])
-        rb = rate([i for i in sel if years[i] >= half_year])
-        rr = rate([i for i in sel if years[i] >= 2019])
-        z = _z(k, len(sel), b)
-        same = all(x is not None and (x - b) * (k / len(sel) - b) > 0 for x in (ra, rb, rr))
-        r3 = lambda x: round(x, 3) if x is not None else None
-        out["events"][key] = {"n": len(sel), "up": round(k / len(sel), 3), "base": round(b, 3), "z": round(z, 2),
-                              "halves": [r3(ra), r3(rb)], "recent": r3(rr),
-                              "tested": bool(abs(z) >= 1.96 and same and len(sel) >= 60)}
-    return out, y
-
-
-def direction_today(F, y, st, i_last):
-    """P(up) for the next session: the base rate, moved only by tested signals and tested calendar effects."""
-    used = [k for k, v in st["signals"].items() if v.get("tested") and k in F[i_last]]
-    p, why = st["base_up"], []
+        b, rate = float(y[allow].mean()), float(y[sel].mean())
+        z = (rate - b) / math.sqrt(b * (1 - b) / sel.sum())
+        parts = [y[sel & (years < half_year)], y[sel & (years >= half_year)], y[sel & (years >= 2019)]]
+        same = all(len(p) and (p.mean() - b) * (rate - b) > 0 for p in parts)
+        rr = lambda a: round(float(a.mean()), 3) if len(a) else None
+        ev[k] = {"n": int(sel.sum()), "up": round(rate, 3), "base": round(b, 3), "z": round(z, 2),
+                 "halves": [rr(parts[0]), rr(parts[1])], "recent": rr(parts[2]),
+                 "tested": bool(abs(z) >= Z_EVENTS and same and sel.sum() >= 60)}
+    i = n - 1
+    used = [k for k in signals if out[k].get("tested") and np.isfinite(F[k][i])]
+    p = base
     if used:
-        pts = [([F[i][k] for k in used], y[i]) for i in range(len(y)) if y[i] is not None and all(k in F[i] for k in used)]
-        stats = [_std([x[j] for x, _ in pts]) for j in range(len(used))]
-        z = lambda x: [(x[j] - stats[j][0]) / stats[j][1] for j in range(len(used))]
-        b = logit_fit([z(x) for x, _ in pts], [t for _, t in pts])
-        p = _sig(b[0] + sum(bi * xi for bi, xi in zip(b[1:], z([F[i_last][k] for k in used]))))
-        why += used
-    for k, v in st["events"].items():
-        if v.get("tested") and F[i_last].get(k):
-            p += v["up"] - v["base"]  # shift by the effect's measured difference from its base rate
+        Xa = np.column_stack([F[k] for k in used])
+        m = known & np.isfinite(Xa).all(1)
+        (Xt, Xe), _ = Q.standardize(Xa[m], Xa[i:i + 1])
+        b = Q.logit_fit(Xt, y[m])
+        p = float(Q.sig(np.r_[1.0, Xe[0]] @ b))
+    why = list(used)
+    for k, v in ev.items():
+        if v.get("tested") and F[k][i] == 1:
+            p += v["up"] - v["base"]
             why.append(k)
     p = min(0.9, max(0.1, p))
     bias = "long" if p >= 0.5 + LEAN else "short" if p <= 0.5 - LEAN else "neutral"
-    return round(p, 3), bias, why
+    return {"p_up": round(p, 3), "base_up": round(base, 3), "bias": bias, "drivers": why, "tier": "tested" if why else "base",
+            "signals": out, "events": ev, "t_req": round(t_req, 2), "days": int(known.sum())}
 
 
-def levels_model(F, S, n):
-    """P(next day trades above today's high / below today's low), from the close's distance to each."""
+def levels(F, S):
+    """P(next day above today's high / below today's low), with out-of-sample skill and reliability."""
+    h, l, years = S["h"], S["l"], S["years"]
+    n = len(h)
     out = {}
-    years = [d.year for d in S["dates"]]
     for side, key in (("high", "dist_h"), ("low", "dist_l")):
-        pts = []
-        for i in range(n - 1):
-            if key in F[i]:
-                hit = S["h"][i + 1] > S["h"][i] if side == "high" else S["l"][i + 1] < S["l"][i]
-                pts.append((years[i], [F[i][key]], 1 if hit else 0))
-        res = judge(walk_forward(pts, 1), t_needed=1.65)
-        mu, sd = _std([p[1][0] for p in pts])
-        b = logit_fit([[(p[1][0] - mu) / sd] for p in pts], [p[2] for p in pts])
-        out[side] = {"fit": (b, mu, sd), "skill": res.get("skill"), "tested": res.get("tested"),
-                     "base": round(sum(p[2] for p in pts) / len(pts), 3)}
+        y = np.r_[((h[1:] > h[:-1]) if side == "high" else (l[1:] < l[:-1])).astype(float), np.nan]
+        x = F[key]
+        m = np.isfinite(y) & np.isfinite(x)
+        w = Q.walk_forward_logit(years[m], x[m][:, None], y[m], first=FIRST_TEST_YEAR)
+        res = Q.judge(w, 1.65)
+        (Xt, Xe), _ = Q.standardize(x[m][:, None], x[n - 1:n][:, None])
+        b = Q.logit_fit(Xt, y[m])
+        out[side] = {"p": round(float(Q.sig(np.r_[1.0, Xe[0]] @ b)), 3), "base": round(float(y[m].mean()), 3),
+                     "skill": res.get("skill"), "tested": res.get("tested"),
+                     "calib": Q.reliability(w[:, 1], w[:, 3]) if len(w) else []}
     return out
 
 
-def range_model(S, n):
-    """Quantiles of next-day range / 20-day average range, over the recent past."""
-    ratios = sorted(S["lr"][i + 1] / S["atr"][i] for i in range(max(0, n - 1 - RANGE_LOOKBACK), n - 1) if S["atr"][i])
-    q = lambda f: ratios[min(len(ratios) - 1, int(f * len(ratios)))]
-    return {"p10": q(0.1), "p50": q(0.5), "p90": q(0.9), "n": len(ratios)}
+def volatility(F, S, iv_ok):
+    """HAR on the log daily range, compared out of sample with the 20-day average; touch ladder from it."""
+    rg, years, r = S["rg"], S["years"], S["r"]
+    n = len(rg)
+    d1, d5, d22 = np.log(rg), np.log(_roll(rg, 5, np.nanmean)), np.log(_roll(rg, 22, np.nanmean))
+    cols = [d1, d5, d22, F["ev1"], F["ev2"], F["mon"]]
+    names = ["yesterday", "last week", "last month", "big release", "other major release", "Monday"]
+    if iv_ok and "iv" in F and np.isfinite(F["iv"][-1]) and np.isfinite(F["iv"]).sum() > 1500:
+        cols.insert(3, F["iv"])
+        names.insert(3, "implied volatility")
+    Fm = np.column_stack(cols)
+    y = np.r_[np.log(rg[1:]), np.nan]
+    base = np.log(_roll(rg, 20, np.nanmean))
+    good = np.where(np.isfinite(Fm).all(1))[0]
+    train_from = max(EVENTS_FROM, int(years[good[0]]) + 1) if len(good) else EVENTS_FROM
+    wf = Q.har_walk_forward(years, Fm, y, base, first=train_from + 2, train_from=train_from)
+    stats = {}
+    if len(wf["y"]):
+        mse, mse0 = float(np.mean((wf["y"] - wf["pred"]) ** 2)), float(np.mean((wf["y"] - wf["base"]) ** 2))
+        stats = {"gain": round(1 - mse / mse0, 3),
+                 "coverage": round(float(np.mean((wf["y"] >= wf["lo"]) & (wf["y"] <= wf["hi"]))), 3),
+                 "coverage_old": round(float(np.mean((wf["y"] >= wf["oldlo"]) & (wf["y"] <= wf["oldhi"]))), 3),
+                 "width": round(float(np.mean(wf["hi"] - wf["lo"])), 3),
+                 "width_old": round(float(np.mean(wf["oldhi"] - wf["oldlo"])), 3), "n": int(len(wf["y"])), "since": int(train_from + 2)}
+    ok = np.isfinite(Fm).all(1) & np.isfinite(y) & (years >= train_from)
+    b, q = Q.har_fit(Fm, y, ok)
+    pred = float(np.r_[1.0, Fm[-1]] @ b)
+    fitted = np.exp(np.c_[np.ones(ok.sum()), Fm[ok]] @ b)
+    r_next = np.r_[r[1:], np.nan][ok]
+    scale = float(math.sqrt(np.nanmean(r_next ** 2) / np.mean(fitted ** 2)))
+    sigma = scale * math.exp(pred)
+    touch = []
+    if len(wf["y"]):
+        idx = wf["idx"].astype(int)
+        keep = idx + 1 < n
+        idx, sig_hist = idx[keep], scale * np.exp(wf["pred"][keep])
+        c, h, l = S["c"], S["h"], S["l"]
+        for k in TOUCH_K:
+            touch.append({"k": k, "up_p": round(float(np.mean(np.log(h[idx + 1] / c[idx]) >= k * sig_hist)), 3),
+                          "dn_p": round(float(np.mean(np.log(c[idx] / l[idx + 1]) >= k * sig_hist)), 3)})
+    mult = {nm: round(float(math.exp(bb)), 3) for nm, bb in zip(names, b[1:]) if nm in ("big release", "other major release", "Monday")}
+    return {"pred": pred, "q": [float(x) for x in q], "sigma": sigma, "stats": stats, "touch": touch, "inputs": names,
+            "multipliers": mult}
 
 
-def read(m, rows, fomc):
-    F, S = features(rows, fomc)
-    n = len(rows)
-    st, y = study(rows, F, S)
-    i = n - 1
-    p, bias, why = direction_today(F, y, st, i)
-    lv = levels_model(F, S, n)
-    rg = range_model(S, n)
-    c, h, l, atr, vol = S["c"][i], S["h"][i], S["l"][i], S["atr"][i], S["vol"][i]
-    takes = {}
-    for side, key in (("high", "dist_h"), ("low", "dist_l")):
-        b, mu, sd = lv[side]["fit"]
-        takes[side] = {"p": round(_sig(b[0] + b[1] * (F[i][key] - mu) / sd), 3), "base": lv[side]["base"],
-                       "skill": lv[side]["skill"], "tested": lv[side]["tested"]}
-    pts = lambda frac: round(c * (math.exp(frac * atr) - 1), 2)
-    board = []
-    for k, label in SIGNALS.items():
-        v, s = F[i].get(k), st["signals"][k]
-        board.append({"key": k, "label": label, "value": round(v, 2) if v is not None else None,
-                      "skill": s.get("skill"), "t": s.get("t"), "tested": s.get("tested"), "used": k in why})
-    cal = []
-    for k, label in EVENTS.items():
-        e = st["events"][k]
-        cal.append({"key": k, "label": label, "active": bool(F[i].get(k)), "n": e.get("n"), "up": e.get("up"),
-                    "base": e.get("base"), "z": e.get("z"), "tested": e.get("tested"), "used": k in why})
+def sessions(m):
+    """Overnight vs New York session and an intraday momentum test, from the hourly archive (NQ and gold)."""
+    try:
+        import bars
+        rows = bars.load(m, "1h")
+    except Exception:
+        return None
+    if len(rows) < 300:
+        return None
+    by = {}
+    for t, o, h, l, c in rows:
+        by.setdefault(t.date(), {})[t.hour] = (o, c)
+    days = sorted(by)
+    ov, dy, mx, my = [], [], [], []
+    for a, b in zip(days, days[1:]):
+        A, B = by[a], by[b]
+        if 15 not in A or not all(k in B for k in (8, 9, 14, 15)):
+            continue
+        prev = A[15][1]  # the 16:00 close
+        c9, c10, c15, c16 = B[8][1], B[9][1], B[14][1], B[15][1]
+        ov.append(math.log(c9 / prev))
+        dy.append(math.log(c16 / c9))
+        mx.append(math.log(c10 / prev))
+        my.append(math.log(c16 / c15))
+    if len(ov) < 120:
+        return None
+    ov, dy, mx, my = map(np.array, (ov, dy, mx, my))
+    n = len(ov)
+    agree = (np.sign(mx) == np.sign(my)) & (mx != 0) & (my != 0)
+    k = int(agree.sum())
+    z = (k / n - 0.5) / math.sqrt(0.25 / n)
+    h1, h2 = float(agree[: n // 2].mean()), float(agree[n // 2:].mean())
+    up = ov > 0
+    rate = lambda a: round(float((a > 0).mean()), 3)
+    tstat = lambda a: round(float(a.mean() / (a.std() / math.sqrt(len(a)))), 2)
+    zrate = lambda a: round(float(((a > 0).mean() - 0.5) / math.sqrt(0.25 / len(a))), 2)
+    halves = lambda a: [round(float((a[: len(a) // 2] > 0).mean()), 3), round(float((a[len(a) // 2:] > 0).mean()), 3)]
+    return {"days": n, "overnight_up": rate(ov), "day_up": rate(dy),
+            "overnight_t": tstat(ov), "day_t": tstat(dy), "overnight_z": zrate(ov), "day_z": zrate(dy),
+            "overnight_halves": halves(ov), "day_halves": halves(dy),
+            "overnight_bp": round(float(ov.mean() * 1e4), 1), "day_bp": round(float(dy.mean() * 1e4), 1),
+            "day_up_after_up": round(float((dy[up] > 0).mean()), 3), "day_up_after_down": round(float((dy[~up] > 0).mean()), 3),
+            "momentum": {"agree": round(k / n, 3), "z": round(z, 2), "corr": round(float(np.corrcoef(mx, my)[0, 1]), 3),
+                         "halves": [round(h1, 3), round(h2, 3)], "tested": bool(z >= 1.96 and h1 > 0.5 and h2 > 0.5)}}
+
+
+def read(m, rows, series, tiers, fomc):
+    sym, short, full, pv, micro, iv_sid, dp, group = MARKETS[m]
+    F, S = build(rows, tiers, fomc)
+    cross_features(F, S, series, iv_sid)
+    sigs = list(PRICE_SIGNALS) + [k for k in CROSS_FOR[group] if k in F and np.isfinite(F[k]).sum() > 1500]
+    D = direction(F, S, sigs)
+    L = levels(F, S)
+    V = volatility(F, S, iv_ok=bool(iv_sid))
+    i = len(rows) - 1
+    c, h, l = float(S["c"][i]), float(S["h"][i]), float(S["l"][i])
+    pts = lambda x: round(c * (math.exp(math.exp(x)) - 1), 6)  # x is the log of the log-range
     yd = rows[-1][0]
-    return {"candle": yd, "day_name": WD[dt.date.fromisoformat(yd).weekday()],
-            "p_up": p, "base_up": st["base_up"], "bias": bias, "drivers": why, "tier": "tested" if why else "base",
-            "levels": {"high": h, "low": l, "close": c}, "takes": takes,
-            "range": {"points": pts(rg["p50"]), "lo": pts(rg["p10"]), "hi": pts(rg["p90"]), "n": rg["n"]},
-            "band": {"lo": round(c * math.exp(-vol), 2), "hi": round(c * math.exp(vol), 2), "sigma": round(c * (math.exp(vol) - 1), 2)},
-            "signals": board, "calendar": cal, "history": {"days": st["days"], "since": st["since"]}}
+    nxt = next_session(yd)
+    labels = {**PRICE_SIGNALS, **CROSS_SIGNALS}
+    val = lambda a: None if not np.isfinite(a) else round(float(a), 2)
+    board = [{"key": k, "label": labels[k], "value": val(F[k][i]), "skill": D["signals"][k].get("skill"),
+              "t": D["signals"][k].get("t"), "tested": D["signals"][k].get("tested"), "used": k in D["drivers"],
+              "kind": "price" if k in PRICE_SIGNALS else "cross"} for k in sigs]
+    cal = [{"key": k, "label": lab, "active": bool(F[k][i] == 1), "n": D["events"][k].get("n"), "up": D["events"][k].get("up"),
+            "base": D["events"][k].get("base"), "z": D["events"][k].get("z"), "tested": D["events"][k].get("tested"),
+            "used": k in D["drivers"]} for k, lab in EVENTS.items()]
+    return {"name": short, "full": full, "pv": pv, "micro": micro, "dp": dp, "group": group,
+            "candle": yd, "day_name": WD[dt.date.fromisoformat(yd).weekday()],
+            "p_up": D["p_up"], "base_up": D["base_up"], "bias": D["bias"], "drivers": D["drivers"], "tier": D["tier"], "t_req": D["t_req"],
+            "levels": {"high": h, "low": l, "close": c},
+            "takes": {s: {k: v for k, v in L[s].items() if k != "calib"} for s in L},
+            "range": {"points": pts(V["pred"] + V["q"][1]), "lo": pts(V["pred"] + V["q"][0]), "hi": pts(V["pred"] + V["q"][2])},
+            "band": {"lo": round(c * math.exp(-V["sigma"]), 6), "hi": round(c * math.exp(V["sigma"]), 6), "sigma": round(c * (math.exp(V["sigma"]) - 1), 6)},
+            "touch": [{**t, "up": round(c * math.exp(t["k"] * V["sigma"]), 6), "dn": round(c * math.exp(-t["k"] * V["sigma"]), 6)} for t in V["touch"]],
+            "vol": {"stats": V["stats"], "inputs": V["inputs"], "multipliers": V["multipliers"],
+                    "news": "big" if tiers.get(nxt) == 2 else "major" if tiers.get(nxt) == 1 else None},
+            "calib": {"high": L["high"]["calib"], "low": L["low"]["calib"]},
+            "signals": board, "calendar": cal, "sessions": sessions(m) if m in ("nq", "gold") else None,
+            "history": {"days": D["days"], "since": rows[0][0][:4]}}
 
 
 # ---------------------------------------------------------------- live record
@@ -440,6 +534,8 @@ def score_log(rows_by, entries):
         e.update({"day": nxt, "scored": 1, "up": up, "brier": round((e["p_up"] - up) ** 2, 4),
                   "highTaken": int(b[1] > a[1]), "lowTaken": int(b[2] < a[2]),
                   "inRange": int(e["range_lo"] <= b[1] - b[2] <= e["range_hi"])})
+        if e.get("up1") is not None:
+            e["up1Hit"], e["dn1Hit"] = int(b[1] >= e["up1"]), int(b[2] <= e["dn1"])
         if e["bias"] != "neutral":
             e["hit"] = int((up == 1) == (e["bias"] == "long"))
     return entries
@@ -453,6 +549,8 @@ def summary(entries):
     if done:
         out["brier"] = round(sum(e["brier"] for e in done) / len(done), 4)
         out["baseBrier"] = round(sum((e["base_up"] - e["up"]) ** 2 for e in done) / len(done), 4)
+        lv = [(e["p_high"], e["highTaken"]) for e in done] + [(e["p_low"], e["lowTaken"]) for e in done]
+        out["levelBrier"] = round(sum((p - y) ** 2 for p, y in lv) / len(lv), 4)
     return out
 
 
@@ -465,49 +563,72 @@ def news_today(day_iso):
             for e in ev if e.get("date") == day_iso and e.get("impact") == "high"]
 
 
-def run(now=None, fetch=download):
+def _clean(o):
+    if isinstance(o, dict):
+        return {k: _clean(v) for k, v in o.items()}
+    if isinstance(o, (list, tuple)):
+        return [_clean(v) for v in o]
+    if isinstance(o, (float, np.floating)):
+        return None if not math.isfinite(o) else float(o)
+    if isinstance(o, np.integer):
+        return int(o)
+    if isinstance(o, np.bool_):
+        return bool(o)
+    return o
+
+
+def run(now=None, fetch=download, fetch_series=fred_download, markets=None):
     now = now or dt.datetime.now(dt.timezone.utc)
     now_ny = now.astimezone(NY)
+    t0 = time.time()
     try:
         entries = json.load(open(LOG)).get("entries", [])
     except (OSError, ValueError):
         entries = []
-    entries = [e for e in entries if "p_up" in e]  # calls from the retired candle-pattern version are dropped
-    fomc = fomc_dates()
-    markets, rows_by = {}, {}
-    for m, (_, short, name) in MARKETS.items():
-        c = sync(m, now, fetch)
-        rows = finished(c["days"], now_ny)
-        rows_by[m] = rows
-        if len(rows) < 800:
-            log(f"bias: not enough {m} history yet")
+    entries = [e for e in entries if "p_up" in e]
+    series = {sid: sync_series(sid, now, fetch_series) for sid in SERIES}
+    tiers, fomc = calendar_tiers()
+    out, rows_by = {}, {}
+    for m in markets or MARKETS:
+        try:
+            c = sync(m, now, fetch)
+            rows = finished(c["days"], now_ny)
+            rows_by[m] = rows
+            if len(rows) < 800:
+                log(f"bias: not enough {m} history yet ({len(rows)} days)")
+                continue
+            r = read(m, rows, series, tiers, fomc)
+        except Exception as e:  # one market failing never blocks the others
+            log(f"bias: {m} failed ({e!r})")
             continue
-        r = read(m, rows, fomc)
-        r.update({"name": short, "full": name})
-        markets[m] = r
+        out[m] = r
         if not any(e["market"] == m and e["candle"] == r["candle"] for e in entries):
+            t1 = next((t for t in r["touch"] if t["k"] == 1.0), None)
             entries.append({"market": m, "candle": r["candle"], "for": next_session(r["candle"]), "bias": r["bias"],
                             "p_up": r["p_up"], "base_up": r["base_up"], "tier": r["tier"],
                             "p_high": r["takes"]["high"]["p"], "p_low": r["takes"]["low"]["p"],
                             "range_lo": r["range"]["lo"], "range_hi": r["range"]["hi"],
+                            "up1": t1["up"] if t1 else None, "dn1": t1["dn"] if t1 else None,
                             "logged": now.isoformat(timespec="minutes")})
-    if not markets:
+    if not out:
         log("bias: nothing to publish; the last file stays live")
         return 1
     score_log(rows_by, entries)
-    day = max(next_session(v["candle"]) for v in markets.values())
-    live = {m: summary([e for e in entries if e["market"] == m]) for m in markets}
-    doc = {"asof": now.isoformat(timespec="minutes"), "for": day, "markets": markets, "news": news_today(day),
-           "live": live, "method": {"first_test_year": FIRST_TEST_YEAR, "lean": LEAN}}
+    day = max(next_session(v["candle"]) for v in out.values())
+    live = {m: summary([e for e in entries if e["market"] == m]) for m in out}
+    doc = {"asof": now.isoformat(timespec="minutes"), "for": day, "markets": out, "order": [m for m in MARKETS if m in out],
+           "news": news_today(day), "live": live, "method": {"first_test_year": FIRST_TEST_YEAR, "lean": LEAN},
+           "inputs": {sid: (max(v) if v else None) for sid, v in series.items()}}
     os.makedirs(os.path.dirname(OUT), exist_ok=True)
     with open(OUT, "w") as fh:
-        json.dump(doc, fh, separators=(",", ":"))
+        json.dump(_clean(doc), fh, separators=(",", ":"), allow_nan=False)
     with open(LOG, "w") as fh:
-        json.dump({"entries": entries[-3000:]}, fh, separators=(",", ":"))
-    for m, v in markets.items():
+        json.dump({"entries": _clean(entries[-6000:])}, fh, separators=(",", ":"))
+    for m, v in out.items():
         tested = [s["key"] for s in v["signals"] if s["tested"]] + [e["key"] for e in v["calendar"] if e["tested"]]
-        log(f"bias: {m} P(up) {v['p_up']} ({v['bias']}, {v['tier']}) for {day}; tested: {tested or 'none'}; "
-            f"P(high) {v['takes']['high']['p']} P(low) {v['takes']['low']['p']}")
+        log(f"bias: {m} P(up) {v['p_up']} ({v['bias']}, {v['tier']}); tested: {tested or 'none'}; "
+            f"range model gain {v['vol']['stats'].get('gain')}; P(high) {v['takes']['high']['p']}")
+    log(f"bias: {len(out)} markets in {time.time() - t0:.1f}s")
     return 0
 
 

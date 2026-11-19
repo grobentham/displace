@@ -1697,6 +1697,55 @@ svg.cd line.wick{animation:fadein .5s ease-out both}
 .tgrid{grid-template-areas:none!important;grid-template-columns:repeat(2,minmax(0,1fr))!important}
 .tgrid>.tcard{grid-area:auto!important}
 @media (max-width:640px){.tgrid{grid-template-columns:minmax(0,1fr)!important}}
+
+/* ===== quant v2 ===== */
+.bo{overflow-x:auto;margin-top:14px}
+.bo-t{width:100%;border-collapse:collapse;font-size:.9rem;min-width:560px}
+.bo-t th{font-size:.68rem;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);text-align:left;font-weight:700;padding:6px 8px;border-bottom:1px solid var(--line)}
+.bo-t td{padding:8px;border-bottom:1px solid #f0f0f2;cursor:pointer}.bo-t td small{display:block;color:var(--muted);font-size:.74rem}
+.bo-t .n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.bo-t tr:hover td{background:#f5f5f7}.bo-t tr.on td{background:#eef5ff}
+.bias-tag.sm{font-size:.7rem;padding:3px 9px}
+.bt-tabs{display:flex;gap:6px;flex-wrap:wrap;margin:18px 0 12px}
+.bt-tabs button{font:inherit;font-size:.9rem;font-weight:600;border:1px solid var(--line);background:#fff;border-radius:99px;padding:7px 15px;cursor:pointer;color:#3a3a3c}
+.bt-tabs button[aria-selected="true"]{background:#1d1d1f;color:#fff;border-color:#1d1d1f}
+.bm{border:1px solid var(--line);border-radius:20px;padding:18px 20px}
+.bm-h{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}.bm-h b{font-size:1.3rem}.bm-h span{color:var(--muted);font-size:.88rem}
+.bm-g{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:12px}
+.bm-c{background:var(--gray);border-radius:16px;padding:16px 18px;display:grid;gap:10px;align-content:start}
+.bq-top{display:flex;align-items:center;gap:10px}.bq-top small{color:var(--muted);font-size:.78rem;text-transform:uppercase;letter-spacing:.05em;font-weight:700}
+.bm-c .bq-bar{background:#fff}
+.bv{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.bv div{background:#fff;border-radius:12px;padding:10px 12px;display:grid;gap:2px}.bv small{font-size:.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;font-weight:700}
+.bv b{font-size:1.35rem;font-variant-numeric:tabular-nums}.bv span{font-size:.78rem;color:var(--muted)}
+.bv-news{margin:0;font-size:.86rem;background:#fff4e5;color:#8a4b00;border-radius:10px;padding:8px 10px}
+.bs-ses{font-size:.86rem;color:#3a3a3c;background:#fff;border-radius:10px;padding:8px 10px;line-height:1.45}
+.bl2{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:18px;margin-top:16px}
+.bl2 h3{font-size:1rem;margin:0 0 4px}
+.bt-l{width:100%;border-collapse:collapse;font-size:.88rem;margin-top:8px}
+.bt-l td{padding:5px 6px;border-bottom:1px solid #f0f0f2}.bt-l .n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap;width:1%}
+.bt-l td:first-child{width:52px;color:var(--muted);font-weight:600}
+.bt-l tr.cl td{font-weight:700;background:#f5f5f7}
+.bt-l .lb{position:relative;min-width:120px}.bt-l .lb i{position:absolute;left:6px;top:7px;bottom:7px;max-width:calc(100% - 12px);background:#d7f5df;border-radius:4px}.bt-l .lb.dn i{background:#fde3e1}
+.bt-l .lb span{position:relative;font-weight:700;font-variant-numeric:tabular-nums;padding-left:6px}
+.bz{margin-top:14px;background:var(--gray);border-radius:14px;padding:12px 14px}.bz h3{font-size:.95rem;margin:0 0 8px}
+.bz-in{display:flex;gap:10px;flex-wrap:wrap}.bz-in label{display:grid;gap:3px;font-size:.74rem;color:var(--muted);font-weight:600}
+.bz-in input,.bz-in select{font:inherit;font-size:.95rem;border:1px solid var(--line);border-radius:10px;padding:7px 10px;background:#fff;width:130px}
+.bz-out{display:flex;gap:6px 16px;flex-wrap:wrap;margin-top:10px;font-size:.88rem}.bz-out b{font-size:1.15rem}.bz-w{color:#c93400}
+.bb-x{font-size:.66rem;font-weight:700;color:#5e5ce6;background:#efeefe;border-radius:99px;padding:1px 7px;margin-left:4px;white-space:nowrap}
+.bb-s{font-size:1rem;margin:18px 0 6px}
+.bk-g{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:14px}
+.bk-c{background:var(--gray);border-radius:16px;padding:14px 16px}.bk-c h3{font-size:.95rem;margin:0 0 8px}
+.bk-svg{width:100%;max-width:320px;display:block;margin:0 auto}.bk-svg text{font-size:10px;fill:#8e8e93;font-family:Inter,system-ui,sans-serif}
+.bk-n{display:grid;gap:10px}.bk-n div{background:#fff;border-radius:12px;padding:10px 12px}.bk-n b{font-size:1.4rem;display:block}.bk-n span{font-size:.82rem;color:var(--muted)}
+@media (max-width:900px){.bm-g,.bl2,.bk-g{grid-template-columns:minmax(0,1fr)}.bm{padding:14px}.bm-c{padding:14px}}
+
+#bias .tool,#bias .bias,#bias .bias-board,#bias .bias-live,.bm,.bm-c,.bm-g>*,.bl2>*,.bb-g>*,.bk-g>*{min-width:0}
+.bb-g>div,.bl2>div:first-child{overflow-x:auto}
+@media (max-width:640px){#bias .newspage .tool,#bias .tool{padding:8px}.bias,.bias-board,.bias-live{padding:14px}.bm{padding:12px;border-radius:16px}
+.bz-in input,.bz-in select{width:120px}.bt-l .lb{min-width:70px}.bv b{font-size:1.15rem}.bq-n b{font-size:1.9rem}}
+
+.bias-live{overflow-x:auto}
 </style>
 </head>
 <body>
@@ -1759,7 +1808,7 @@ svg.cd line.wick{animation:fadein .5s ease-out both}
   </div>
   <div class="wide"><h3 class="hx-h">Also on Displace</h3></div>
   <div class="wide hx">
-    <a class="hx-c hx-tools" href="#backtest"><small>Backtester</small><b>Replay real NQ bars.</b><p>Bar by bar on 5-minute and hourly futures data, with orders, stops and full stats: win rate, expectancy, drawdown.</p><em>Open the backtester ›</em></a>
+    <a class="hx-c hx-tools" href="#backtest"><small>Backtester</small><b>Replay real NQ bars.</b><p>Bar by bar on real futures data, plus a strategy lab that checks your rules against random entries, Monte Carlo and a deflated Sharpe.</p><em>Open the backtester ›</em></a>
     <a class="hx-c hx-mind" href="#method"><small>Method</small><b>How every number is tested.</b><p>Base rates, walk-forward fits, Brier scores and live records. What passes, what fails, and why most daily signals fail.</p><em>Read the method ›</em></a>
     <a class="hx-c hx-journal" href="#tools"><small>Tools</small><b><span class="n-tools">Five</span> risk tools.</b><p>Trade planner, prop firm tracker, edge simulator and drawdown recovery, plus the backtester. Everything saves on this device.</p><em>Open Tools ›</em></a>
   </div>
@@ -1970,7 +2019,7 @@ svg.cd line.wick{animation:fadein .5s ease-out both}
     <h2 class="h-lg">Your trading desk.</h2>
     <p class="sub"><span class="n-tools">Five</span> free tools for sizing, risk and testing. Everything saves on this device.</p>
   </div>
-  <div class="wide"><a class="bt-card" href="#backtest"><div><small>New</small><b>MNQ Replay</b><p>A bar-by-bar backtester. Replay real NQ futures bars one candle at a time, place orders with a stop and target, and track win rate, expectancy and drawdown.</p><em>Open the backtester ›</em></div><div class="bt-mini" aria-hidden="true"><i style="height:38%"></i><i style="height:54%"></i><i style="height:46%"></i><i style="height:70%"></i><i style="height:62%"></i><i class="dn" style="height:48%"></i><i style="height:66%"></i><i style="height:84%"></i><i class="dn" style="height:72%"></i><i style="height:92%"></i></div></a></div>
+  <div class="wide"><a class="bt-card" href="#backtest"><div><small>New</small><b>MNQ Replay</b><p>A bar-by-bar backtester with a strategy lab. Replay real NQ futures bars one candle at a time, place orders with a stop and target, and track win rate, expectancy and drawdown.</p><em>Open the backtester ›</em></div><div class="bt-mini" aria-hidden="true"><i style="height:38%"></i><i style="height:54%"></i><i style="height:46%"></i><i style="height:70%"></i><i style="height:62%"></i><i class="dn" style="height:48%"></i><i style="height:66%"></i><i style="height:84%"></i><i class="dn" style="height:72%"></i><i style="height:92%"></i></div></a></div>
   <div class="wide">
     <div class="livebar" id="livebar" aria-live="polite">
       <div><small>New York</small><b id="lb-ny">--:--</b></div>
@@ -2217,7 +2266,7 @@ svg.cd line.wick{animation:fadein .5s ease-out both}
 <!-- DAILY BIAS -->
 <section class="toolpage newspage biaspg" id="bias" style="--ac:#0071e3;--ac2:#30d158">
   <div class="wide">
-    <header class="nhero"><div class="kick">Daily bias</div><h1 class="h-lg">NQ and gold, measured.</h1><p class="sub">The probability of an up day, the expected range and the odds of taking yesterday's high or low, re-tested on every day since 2000 before each session.</p><p class="ndis">Statistics, not trade signals. A signal only moves the probability after it passes out-of-sample testing.</p></header>
+    <header class="nhero"><div class="kick">Daily bias</div><h1 class="h-lg">Eight markets, measured.</h1><p class="sub">The probability of an up day, a volatility-model range, touch odds for every level and a position size, re-tested on every day since 2000 before each session.</p><p class="ndis">Statistics, not trade signals. A signal only moves the probability after it passes out-of-sample testing.</p></header>
     <div class="tool on">
       <section class="bias" id="bias-day" aria-labelledby="bias-title" hidden></section>
       <section class="dk-card bias-board" id="bias-board" hidden></section>
@@ -2234,15 +2283,24 @@ svg.cd line.wick{animation:fadein .5s ease-out both}
       <div class="mt-c"><b>Base rates first</b><p>NQ closes higher on about 54% of days and gold on about 53%. A signal has to beat those numbers, not 50%, because "always long" already gets that far.</p></div>
       <div class="mt-c"><b>Walk-forward testing</b><p>Models are refit every year using only the years before it, then scored on that year. Nothing is judged on the data it was fitted to.</p></div>
       <div class="mt-c"><b>Proper scoring</b><p>Probabilities are scored with the Brier score against the base rate. Hit rates alone reward overconfidence; Brier skill doesn't.</p></div>
-      <div class="mt-c"><b>Significance and stability</b><p>A signal must be significant after accounting for how many were tried (a Diebold–Mariano test with a Bonferroni split), and must hold in both halves of the history and in the last three years.</p></div>
+      <div class="mt-c"><b>Significance and stability</b><p>A signal must be significant after accounting for how many were tried for that market (a Diebold–Mariano test with a Bonferroni split, about t ≥ 2.6 for twelve signals), and must hold in both halves of the history and in the last three years.</p></div>
       <div class="mt-c"><b>Shown, not hidden</b><p>Signals that fail stay on the board with their scores, so you can see what was tried. Most daily direction signals fail; that's the normal result for liquid futures.</p></div>
       <div class="mt-c"><b>Live records</b><p>Every published call is logged before the session and scored after it closes: direction, Brier score, levels taken and whether the range landed inside its band.</p></div>
     </div>
+    <div class="mt-h"><h2>What gets forecast</h2><p>Direction is usually close to unpredictable. Size and reach are not, so most of the useful numbers are about those.</p></div>
+    <div class="mt-g">
+      <div class="mt-c"><b>Volatility (HAR)</b><p>The next day's range from yesterday's, last week's and last month's ranges, implied volatility, release days and Mondays. Refit every year; scored against a plain 20-day average.</p></div>
+      <div class="mt-c"><b>Touch ladder</b><p>How often price reached the close plus or minus 0.5, 1, 1.5 and 2 forecast standard deviations, measured only with forecasts made before each day.</p></div>
+      <div class="mt-c"><b>Highs and lows</b><p>The chance of trading through today's high or low, from how far the close sits from each. Shown with its calibration: when it says 70%, how often that happened.</p></div>
+      <div class="mt-c"><b>Sessions</b><p>Overnight against New York hours, and whether the first hour predicts the last, from hourly futures bars that are archived every run.</p></div>
+      <div class="mt-c"><b>Cross-asset inputs</b><p>Implied volatility indices, the VIX term structure, credit spreads, real yields, the dollar and the 2-year yield, used one day late because that is when FRED publishes them.</p></div>
+      <div class="mt-c"><b>Position size</b><p>Contracts for a given dollar risk with a stop at a multiple of the forecast standard deviation, so size shrinks automatically when the market is wild.</p></div>
+    </div>
     <div class="mt-h"><h2>Data</h2><p>All free, public and keyless. Nothing on the site needs a paid feed.</p></div>
     <div class="mt-t">
-      <div><b>Prices</b><span>Yahoo Finance futures: daily candles since 2000, hourly bars for two years and 5-minute bars, archived every run.</span></div>
+      <div><b>Prices</b><span>Yahoo Finance futures for NQ, ES, YM, RTY, gold, crude, the euro and bitcoin: daily candles since 2000 (bitcoin since 2017), plus hourly and 5-minute NQ and gold bars archived every run.</span></div>
       <div><b>Releases</b><span>BLS, BEA, Census, the Federal Reserve and Treasury, with consensus forecasts from the TradingView and ForexFactory calendars.</span></div>
-      <div><b>Rates and macro</b><span>FRED and ALFRED (first-release vintages), Treasury yield curves and the New York Fed's effective fed funds rate.</span></div>
+      <div><b>Rates and macro</b><span>FRED and ALFRED (first-release vintages), the CBOE volatility indices (VIX, VXN, RVX, GVZ, OVX, 3-month VIX), high-yield credit spreads, Treasury yield curves and the New York Fed's effective fed funds rate.</span></div>
     </div>
     <div class="mt-h"><h2>Terms</h2></div>
     <dl class="mt-d">
@@ -3870,69 +3928,127 @@ window.addEventListener("hashchange",function(){if(B1.on())B1.stop();calmOff();a
   fold();
 })();
 
-/* daily bias (engine/bias.py): probability, range, levels, signal board, live record */
+/* daily bias v2 (engine/bias.py): eight markets, direction, volatility, touch ladder, sizing, signals, sessions, scorecard */
 (function(){
   var box=document.getElementById("bias-day"),board=document.getElementById("bias-board"),liveEl=document.getElementById("bias-live"),strip=document.getElementById("bias-strip"),hx=document.getElementById("hx-bias");
   var WD=["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],MO=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+  var TAG={long:"LONG",short:"SHORT",neutral:"NO LEAN"},D=null,cur="nq";
+  try{cur=localStorage.getItem("displace-bias-m")||"nq";}catch(e){}
   function esc(t){return String(t==null?"":t).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];});}
   function day(iso){var d=new Date(iso+"T12:00:00Z");return WD[d.getUTCDay()]+", "+MO[d.getUTCMonth()]+" "+d.getUTCDate();}
-  function px(m,v){return v==null?"–":Number(v).toLocaleString("en-US",{minimumFractionDigits:m==="gold"?1:2,maximumFractionDigits:m==="gold"?1:2});}
-  function pts(m,v){return v==null?"–":Number(v).toLocaleString("en-US",{maximumFractionDigits:m==="gold"?1:0});}
+  function px(v,m){if(v==null)return"–";var dp=m.dp==null?2:m.dp;return Number(v).toLocaleString("en-US",{minimumFractionDigits:dp,maximumFractionDigits:dp});}
+  function pts(v,m){if(v==null)return"–";if(m.group==="fx")return Math.round(v*1e4).toLocaleString("en-US")+" pips";var dp=m.dp>=2?(m.dp===2&&m.name==="Crude"?2:0):m.dp;return Number(v).toLocaleString("en-US",{maximumFractionDigits:dp,minimumFractionDigits:0})+" pts";}
   function pc(x){return x==null?"–":Math.round(x*100)+"%";}
   function sk(x){return x==null?"–":(x>=0?"+":"")+(x*100).toFixed(2)+"%";}
-  var TAG={long:"LONG",short:"SHORT",neutral:"NO LEAN"};
-  function card(k,v){
-    var tk=v.takes||{},H=tk.high||{},L=tk.low||{},R=v.range||{},B=v.band||{},yd=String(v.day_name||"").slice(0,3);
-    var LAB={};(v.signals||[]).concat(v.calendar||[]).forEach(function(s){LAB[s.key]=s.label;});
-    var why=v.tier==="tested"?'Moved from the '+pc(v.base_up)+' base rate by: '+(v.drivers||[]).map(function(x){return esc(LAB[x]||x);}).join(", ")+'.':'Base rate. No direction signal passed testing today, so this is how often '+esc(v.name)+' has closed higher on any day since '+esc((v.history||{}).since||"2000")+'.';
-    var p=Math.round((v.p_up||0)*100),b=Math.round((v.base_up||0)*100);
-    return'<div class="bias-m"><div class="bias-top"><b>'+esc(v.name)+'<small>'+esc(v.full)+'</small></b><span class="bias-tag '+v.bias+'">'+TAG[v.bias]+'</span></div>'+
-      '<div class="bq"><div class="bq-n"><b>'+p+'%</b><span>chance of closing above '+px(k,(v.levels||{}).close)+'</span></div>'+
+  function money(x){return"$"+Math.round(x).toLocaleString("en-US");}
+  var LAB={};
+  function dirCard(k,v){
+    (v.signals||[]).concat(v.calendar||[]).forEach(function(s){LAB[s.key]=s.label;});
+    var why=v.tier==="tested"?'Moved from the '+pc(v.base_up)+' base rate by: '+(v.drivers||[]).map(function(x){return esc(LAB[x]||x);}).join(", ")+'.':'Base rate: no direction signal passed testing, so this is how often '+esc(v.name)+' has closed higher on any day since '+esc((v.history||{}).since)+'.';
+    var p=Math.round(v.p_up*100),b=Math.round(v.base_up*100),S=v.sessions,ses="";
+    if(S){var ovOk=Math.abs(S.overnight_z)>=1.96&&S.overnight_halves.every(function(h){return(h-0.5)*(S.overnight_up-0.5)>0;});
+      ses='<div class="bs-ses"><b>By session</b> (last '+S.days+' days): overnight 16:00→09:00 closed higher '+pc(S.overnight_up)+(ovOk?' <span class="bb-pass">tested</span>':'')+'; New York 09:00→16:00 '+pc(S.day_up)+'.</div>';}
+    return'<div class="bq-top"><span class="bias-tag '+v.bias+'">'+TAG[v.bias]+'</span><small>Direction · next session</small></div>'+
+      '<div class="bq"><div class="bq-n"><b>'+p+'%</b><span>chance of closing above '+px(v.levels.close,v)+'</span></div>'+
       '<div class="bq-bar" role="img" aria-label="Probability of an up day '+p+'%, base rate '+b+'%"><i style="width:'+p+'%"></i><em style="left:'+b+'%"></em><span>0</span><span>50</span><span>100</span></div></div>'+
-      '<p class="bias-why">'+why+'</p>'+
-      '<div class="bias-lv">'+
-        '<div><small>Above '+yd+' high '+px(k,(v.levels||{}).high)+'</small><b>'+pc(H.p)+'</b><span>any day '+pc(H.base)+'</span></div>'+
-        '<div><small>Below '+yd+' low '+px(k,(v.levels||{}).low)+'</small><b>'+pc(L.p)+'</b><span>any day '+pc(L.base)+'</span></div>'+
-        '<div><small>Expected range</small><b>'+pts(k,R.points)+' pts</b><span>80%: '+pts(k,R.lo)+'–'+pts(k,R.hi)+'</span></div>'+
-        '<div><small>1σ close band</small><b>±'+pts(k,B.sigma)+'</b><span>'+px(k,B.lo)+'–'+px(k,B.hi)+'</span></div>'+
-      '</div></div>';
+      '<p class="bias-why">'+why+'</p>'+ses;
   }
-  function boardHtml(d,keys){
-    return'<div class="bb-h"><h2>Signal board</h2><p>Every signal is re-tested each run with walk-forward fits since 2006. It moves the probability only if it passes. Skill is the out-of-sample improvement in Brier score over the base rate.</p></div>'+
-      '<div class="bb-g">'+keys.map(function(k){var v=d.markets[k];
-        var sig=(v.signals||[]).map(function(s){return'<tr class="'+(s.tested?"ok":"")+'"><td>'+esc(s.label)+'</td><td class="n">'+(s.value==null?"–":(s.value>0?"+":"")+s.value.toFixed(2))+'</td><td class="n">'+sk(s.skill)+'</td><td class="n">'+(s.t==null?"–":s.t.toFixed(1))+'</td><td>'+(s.tested?'<span class="bb-pass">Passed</span>':'<span class="bb-fail">Failed</span>')+'</td></tr>';}).join("");
-        var cal=(v.calendar||[]).map(function(e){return'<tr class="'+(e.tested?"ok":"")+(e.active?" act":"")+'"><td>'+esc(e.label)+(e.active?' <span class="bb-today">today</span>':'')+'</td><td class="n">'+pc(e.up)+'</td><td class="n">'+pc(e.base)+'</td><td class="n">'+(e.z==null?"–":e.z.toFixed(1))+'</td><td>'+(e.tested?'<span class="bb-pass">Passed</span>':'<span class="bb-fail">Failed</span>')+'</td></tr>';}).join("");
-        return'<div class="bb-m"><h3>'+esc(v.name)+'</h3><table class="bb-t"><thead><tr><th>Signal</th><th class="n">Today</th><th class="n">Skill</th><th class="n">t</th><th>Test</th></tr></thead><tbody>'+sig+'</tbody></table>'+
-          '<table class="bb-t"><thead><tr><th>Calendar effect</th><th class="n">Up days</th><th class="n">Base</th><th class="n">z</th><th>Test</th></tr></thead><tbody>'+cal+'</tbody></table></div>';}).join("")+'</div>'+
-      '<p class="bb-note">Passing needs t ≥ 2.64 (5% after splitting across six signals) and positive skill in both halves of the history and the last three years. Calendar effects need |z| ≥ 1.96, on the same side in both halves and since 2019. <a href="#method">How the tests work ›</a></p>';
+  function volCard(k,v){
+    var V=v.vol||{},st=V.stats||{},R=v.range,B=v.band,M=V.multipliers||{};
+    var news=V.news==="big"?'<p class="bv-news">Big release next session (CPI, payrolls or the Fed): ranges have run '+((M["big release"]||1)>1?'about '+Math.round(((M["big release"]||1)-1)*100)+'% wider':'no wider')+' on those days.</p>':V.news==="major"?'<p class="bv-news">Major release next session: ranges have run about '+Math.round(((M["other major release"]||1)-1)*100)+'% wider.</p>':"";
+    return'<div class="bq-top"><small>Volatility · next session</small></div>'+
+      '<div class="bv"><div><small>Expected range</small><b>'+pts(R.points,v)+'</b><span>80% of days: '+pts(R.lo,v).replace(/ (pts|pips)$/,"")+'–'+pts(R.hi,v)+'</span></div>'+
+      '<div><small>1σ close band</small><b>±'+pts(B.sigma,v)+'</b><span>'+px(B.lo,v)+'–'+px(B.hi,v)+'</span></div></div>'+news+
+      (st.gain!=null?'<p class="bias-why">Forecast by a HAR model (recent, weekly and monthly ranges'+(V.inputs&&V.inputs.indexOf("implied volatility")>=0?', implied volatility':'')+', release days). Since '+st.since+' its error is '+Math.round(st.gain*100)+'% lower than a 20-day average, and '+pc(st.coverage)+' of days landed in its 80% band.</p>':"");
   }
-  function liveHtml(d,keys){
-    return'<div class="bb-h"><h2>Live record</h2><p>Every call is logged before the session and scored after it closes.</p></div><div class="bl-g">'+keys.map(function(k){var L=(d.live||{})[k]||{},v=d.markets[k];
-      if(!L.days)return'<div class="bl-m"><b>'+esc(v.name)+'</b><p>Starts with today’s call.</p></div>';
-      return'<div class="bl-m"><b>'+esc(v.name)+'</b><div class="bl-s"><span><small>Days scored</small>'+L.days+'</span><span><small>Direction right</small>'+(L.calls?L.hits+' of '+L.calls:'–')+'</span><span><small>Brier (base)</small>'+(L.brier!=null?L.brier.toFixed(3)+' ('+L.baseBrier.toFixed(3)+')':'–')+'</span><span><small>Range in 80% band</small>'+L.inRange+' of '+L.days+'</span></div></div>';}).join("")+'</div>';
+  function ladder(k,v){
+    var T=v.touch||[];if(!T.length)return"";
+    var up=T.slice().reverse().map(function(t){return'<tr><td>+'+t.k+'σ</td><td class="n">'+px(t.up,v)+'</td><td class="lb"><i style="width:'+Math.round(t.up_p*100)+'%"></i><span>'+pc(t.up_p)+'</span></td></tr>';}).join("");
+    var dn=T.map(function(t){return'<tr><td>−'+t.k+'σ</td><td class="n">'+px(t.dn,v)+'</td><td class="lb dn"><i style="width:'+Math.round(t.dn_p*100)+'%"></i><span>'+pc(t.dn_p)+'</span></td></tr>';}).join("");
+    var H=v.takes.high,L=v.takes.low,yd=String(v.day_name).slice(0,3);
+    return'<div class="bl2"><div><h3>Touch ladder</h3><p class="bias-why">How often the next session traded through each level, measured from today’s close in forecast standard deviations (tested since '+((v.vol||{}).stats||{}).since+').</p>'+
+      '<table class="bt-l"><tbody>'+up+'<tr class="cl"><td>Close</td><td class="n">'+px(v.levels.close,v)+'</td><td></td></tr>'+dn+'</tbody></table></div>'+
+      '<div><h3>Today’s high and low</h3><div class="bias-lv"><div><small>Above '+yd+' high '+px(v.levels.high,v)+'</small><b>'+pc(H.p)+'</b><span>any day '+pc(H.base)+(H.skill!=null?' · skill '+Math.round(H.skill*100)+'%':'')+'</span></div>'+
+      '<div><small>Below '+yd+' low '+px(v.levels.low,v)+'</small><b>'+pc(L.p)+'</b><span>any day '+pc(L.base)+(L.skill!=null?' · skill '+Math.round(L.skill*100)+'%':'')+'</span></div></div>'+sizing(k,v)+'</div></div>';
   }
+  function sizing(k,v){
+    var risk=500;try{risk=+localStorage.getItem("displace-risk")||500;}catch(e){}
+    return'<div class="bz" data-m="'+k+'"><h3>Position size</h3><div class="bz-in"><label>Risk per trade<input type="number" min="10" step="10" value="'+risk+'" data-z="risk"></label>'+
+      '<label>Stop<select data-z="stop"><option value="0.5">0.5σ</option><option value="1" selected>1σ</option><option value="1.5">1.5σ</option><option value="2">2σ</option></select></label></div><div class="bz-out" data-z="out"></div></div>';
+  }
+  function sizeCalc(el){
+    var k=el.getAttribute("data-m"),v=D.markets[k];if(!v)return;
+    var risk=+el.querySelector('[data-z="risk"]').value||0,s=+el.querySelector('[data-z="stop"]').value,stop=v.band.sigma*s;
+    try{localStorage.setItem("displace-risk",String(risk));}catch(e){}
+    var full=stop*v.pv,micro=stop*v.micro,nf=Math.floor(risk/full),nm=Math.floor(risk/micro);
+    el.querySelector('[data-z="out"]').innerHTML='<span>Stop '+pts(stop,v)+' away</span><span><b>'+nf+'</b> '+esc(v.name)+' ('+money(full)+' each)</span><span><b>'+nm+'</b> micro ('+money(micro)+' each)</span>'+(nm===0?'<span class="bz-w">Risk is too small for a 1-lot at this stop.</span>':'');
+  }
+  function overview(){
+    return'<div class="bo"><table class="bo-t"><thead><tr><th>Market</th><th class="n">P(up)</th><th></th><th class="n">Range</th><th class="n">Above high</th><th class="n">Below low</th></tr></thead><tbody>'+
+      D.order.map(function(k){var v=D.markets[k];return'<tr data-go="'+k+'" class="'+(k===cur?"on":"")+'"><td><b>'+esc(v.name)+'</b><small>'+esc(v.full)+'</small></td><td class="n">'+pc(v.p_up)+'</td><td><span class="bias-tag sm '+v.bias+'">'+TAG[v.bias]+'</span></td><td class="n">'+pts(v.range.points,v)+'</td><td class="n">'+pc(v.takes.high.p)+'</td><td class="n">'+pc(v.takes.low.p)+'</td></tr>';}).join("")+'</tbody></table></div>';
+  }
+  function tabs(){return'<div class="bt-tabs" role="tablist">'+D.order.map(function(k){return'<button type="button" role="tab" data-go="'+k+'" aria-selected="'+(k===cur)+'">'+esc(D.markets[k].name)+'</button>';}).join("")+'</div>';}
+  function boardHtml(k,v){
+    var sig=(v.signals||[]).map(function(s){return'<tr class="'+(s.tested?"ok":"")+'"><td>'+esc(s.label)+(s.kind==="cross"?' <span class="bb-x">cross-asset</span>':'')+'</td><td class="n">'+(s.value==null?"–":(s.value>0?"+":"")+s.value.toFixed(2))+'</td><td class="n">'+sk(s.skill)+'</td><td class="n">'+(s.t==null?"–":s.t.toFixed(1))+'</td><td>'+(s.tested?'<span class="bb-pass">Passed</span>':'<span class="bb-fail">Failed</span>')+'</td></tr>';}).join("");
+    var cal=(v.calendar||[]).map(function(e){return'<tr class="'+(e.tested?"ok":"")+(e.active?" act":"")+'"><td>'+esc(e.label)+(e.active?' <span class="bb-today">next session</span>':'')+'</td><td class="n">'+pc(e.up)+'</td><td class="n">'+pc(e.base)+'</td><td class="n">'+(e.z==null?"–":e.z.toFixed(1))+'</td><td>'+(e.tested?'<span class="bb-pass">Passed</span>':'<span class="bb-fail">Failed</span>')+'</td></tr>';}).join("");
+    var S=v.sessions,ses="";
+    if(S){var M=S.momentum;ses='<h3 class="bb-s">Sessions and intraday · '+esc(v.name)+'</h3><table class="bb-t"><thead><tr><th>Test</th><th class="n">Result</th><th class="n">z / t</th><th>Test</th></tr></thead><tbody>'+
+      '<tr class="'+(Math.abs(S.overnight_z)>=1.96?"ok":"")+'"><td>Overnight 16:00→09:00 closed higher</td><td class="n">'+pc(S.overnight_up)+'</td><td class="n">'+S.overnight_z.toFixed(1)+'</td><td>'+(Math.abs(S.overnight_z)>=1.96?'<span class="bb-pass">Passed</span>':'<span class="bb-fail">Failed</span>')+'</td></tr>'+
+      '<tr class="'+(Math.abs(S.day_z)>=1.96?"ok":"")+'"><td>New York 09:00→16:00 closed higher</td><td class="n">'+pc(S.day_up)+'</td><td class="n">'+S.day_z.toFixed(1)+'</td><td>'+(Math.abs(S.day_z)>=1.96?'<span class="bb-pass">Passed</span>':'<span class="bb-fail">Failed</span>')+'</td></tr>'+
+      '<tr class="'+(M.tested?"ok":"")+'"><td>Intraday momentum: first hour predicts the last</td><td class="n">'+pc(M.agree)+' agree</td><td class="n">'+M.z.toFixed(1)+'</td><td>'+(M.tested?'<span class="bb-pass">Passed</span>':'<span class="bb-fail">Failed</span>')+'</td></tr>'+
+      '</tbody></table><p class="bb-note">From '+S.days+' days of hourly futures bars. The hourly archive grows every run, so these get sharper over time.</p>';}
+    return'<div class="bb-h"><h2>Signal board · '+esc(v.name)+'</h2><p>Every signal is re-tested each run with walk-forward fits since 2006 and moves the probability only if it passes. Skill is the out-of-sample improvement in Brier score over the base rate. Cross-asset inputs are used one day late, as published.</p></div>'+
+      '<div class="bb-g"><div><table class="bb-t"><thead><tr><th>Signal</th><th class="n">Today</th><th class="n">Skill</th><th class="n">t</th><th>Test</th></tr></thead><tbody>'+sig+'</tbody></table></div>'+
+      '<div><table class="bb-t"><thead><tr><th>Calendar effect</th><th class="n">Up days</th><th class="n">Base</th><th class="n">z</th><th>Test</th></tr></thead><tbody>'+cal+'</tbody></table>'+ses+'</div></div>'+
+      '<p class="bb-note">Passing needs t ≥ '+(v.t_req||2.6).toFixed(2)+' (5% split across the '+(v.signals||[]).length+' signals tried for '+esc(v.name)+') and positive skill in both halves of the history and the last three years. Calendar effects need |z| ≥ 2.58 (5% split across five) and session effects |z| ≥ 1.96, on the same side in both halves. <a href="#method">How the tests work ›</a></p>';
+  }
+  function calibSvg(v){
+    var pts2=[].concat((v.calib||{}).high||[],(v.calib||{}).low||[]);if(pts2.length<3)return"";
+    var W=280,H=210,P=38,X=function(p){return P+p*(W-P-14);},Y=function(p){return H-P+8-p*(H-P-4);};
+    var g='<line x1="'+X(0)+'" y1="'+Y(0)+'" x2="'+X(1)+'" y2="'+Y(1)+'" stroke="#c7c7cc" stroke-dasharray="4 4"/>';
+    [0,0.5,1].forEach(function(t){g+='<text x="'+X(t)+'" y="'+(H-6)+'" text-anchor="'+(t===1?"end":t===0?"start":"middle")+'">'+t*100+'%</text><text x="'+(P-6)+'" y="'+(Y(t)+4)+'" text-anchor="end">'+t*100+'%</text>';});g+='<text x="'+((P+W)/2)+'" y="'+(H-20)+'" text-anchor="middle" style="fill:#3a3a3c">forecast</text>';
+    pts2.forEach(function(q){var r=Math.max(3,Math.min(9,Math.sqrt(q[2])/3));g+='<circle cx="'+X(q[0])+'" cy="'+Y(q[1])+'" r="'+r+'" fill="#0071e3" fill-opacity=".55"/>';});
+    return'<svg viewBox="0 0 '+W+' '+H+'" class="bk-svg" role="img" aria-label="Calibration of the high and low probabilities">'+g+'</svg>';
+  }
+  function scorecard(k,v){
+    var st=(v.vol||{}).stats||{},L=(D.live||{});
+    var rows=D.order.map(function(m){var x=L[m]||{},mm=D.markets[m];return'<tr><td>'+esc(mm.name)+'</td><td class="n">'+(x.days||0)+'</td><td class="n">'+(x.calls?x.hits+'/'+x.calls:'–')+'</td><td class="n">'+(x.brier!=null?x.brier.toFixed(3)+' <small>('+x.baseBrier.toFixed(3)+')</small>':'–')+'</td><td class="n">'+(x.days?x.inRange+'/'+x.days:'–')+'</td><td class="n">'+(x.levelBrier!=null?x.levelBrier.toFixed(3):'–')+'</td></tr>';}).join("");
+    return'<div class="bb-h"><h2>Scorecard</h2><p>How well the forecasts have matched reality, on history the models never saw and live since launch.</p></div>'+
+      '<div class="bk-g"><div class="bk-c"><h3>Calibration · '+esc(v.name)+' high/low odds</h3>'+calibSvg(v)+'<p class="bb-note">Each dot is a group of past forecasts: when the model said X%, how often it happened. On the dashed line means honest probabilities.</p></div>'+
+      '<div class="bk-c"><h3>Range model · '+esc(v.name)+'</h3><div class="bk-n"><div><b>'+(st.gain!=null?Math.round(st.gain*100)+'%':'–')+'</b><span>lower error than a 20-day average</span></div><div><b>'+pc(st.coverage)+'</b><span>of days inside the 80% band (target 80%)</span></div><div><b>'+(st.n||0).toLocaleString("en-US")+'</b><span>days tested since '+(st.since||"–")+'</span></div></div></div></div>'+
+      '<h3 class="bb-s">Live record</h3><table class="bb-t"><thead><tr><th>Market</th><th class="n">Days</th><th class="n">Direction</th><th class="n">Brier (base)</th><th class="n">In range band</th><th class="n">Level Brier</th></tr></thead><tbody>'+rows+'</tbody></table>'+
+      '<p class="bb-note">Every call is logged before the session and scored after it closes. Lower Brier is better; the base-rate forecast is in brackets.</p>';
+  }
+  function render(){
+    if(!D)return;if(!D.markets[cur])cur=D.order[0];var v=D.markets[cur];
+    var news=(D.news||[]).map(function(e){return esc(e.time)+' NY '+esc(e.title);}).join(" · ");
+    box.innerHTML='<div class="bias-h"><h2 id="bias-title">Bias for '+esc(day(D["for"]))+'</h2><small>From '+esc(v.day_name)+'’s close · updated '+esc(new Date(D.asof).toLocaleString([], {weekday:"short",hour:"2-digit",minute:"2-digit"}))+'</small></div>'+
+      overview()+tabs()+
+      '<div class="bm"><div class="bm-h"><b>'+esc(v.name)+'</b><span>'+esc(v.full)+' · close '+px(v.levels.close,v)+'</span></div><div class="bm-g"><div class="bm-c">'+dirCard(cur,v)+'</div><div class="bm-c">'+volCard(cur,v)+'</div></div>'+ladder(cur,v)+'</div>'+
+      '<div class="bias-f">'+(news?'<span><b>High-impact next session:</b> '+news+'.</span>':'')+'<span>Free Yahoo futures and FRED data since 2000, re-tested before every session. Statistics, not trade signals. Not financial advice.</span></div>';
+    box.hidden=false;
+    board.innerHTML=boardHtml(cur,v);board.hidden=false;
+    liveEl.innerHTML=scorecard(cur,v);liveEl.hidden=false;
+    box.querySelectorAll(".bz").forEach(sizeCalc);
+  }
+  if(box)box.addEventListener("click",function(e){var g=e.target.closest("[data-go]");if(!g)return;cur=g.getAttribute("data-go");try{localStorage.setItem("displace-bias-m",cur);}catch(_){}render();});
+  if(box)box.addEventListener("input",function(e){var z=e.target.closest(".bz");if(z)sizeCalc(z);});
+  if(box)box.addEventListener("change",function(e){var z=e.target.closest(".bz");if(z)sizeCalc(z);});
   fetch("data/bias/current.json",{cache:"no-cache"}).then(function(r){return r.ok?r.json():null;}).then(function(d){
     if(!d||!d.markets)return;
-    var keys=["nq","gold"].filter(function(k){return d.markets[k]&&d.markets[k].p_up!=null;});if(!keys.length)return;
-    var any=d.markets[keys[0]];
-    var news=(d.news||[]).map(function(e){return esc(e.time)+' NY '+esc(e.title);}).join(" · ");
-    if(box){
-      box.innerHTML='<div class="bias-h"><h2 id="bias-title">Bias for '+esc(day(d["for"]))+'</h2><small>From '+esc(any.day_name)+'’s close · updated '+esc(new Date(d.asof).toLocaleString([], {weekday:"short",hour:"2-digit",minute:"2-digit"}))+'</small></div>'+
-        '<div class="bias-g">'+keys.map(function(k){return card(k,d.markets[k]);}).join("")+'</div>'+
-        '<div class="bias-f">'+(news?'<span><b>High-impact today:</b> '+news+'. Ranges widen on release days.</span>':'')+
-        '<span>Probabilities from free Yahoo futures data since 2000, re-tested before every session. Statistics, not trade signals. Not financial advice.</span></div>';
-      box.hidden=false;
-    }
-    if(board){board.innerHTML=boardHtml(d,keys);board.hidden=false;}
-    if(liveEl){liveEl.innerHTML=liveHtml(d,keys);liveEl.hidden=false;}
-    var short=keys.map(function(k){var v=d.markets[k];return esc(v.name)+' <i class="'+v.bias+'">'+TAG[v.bias]+' '+pc(v.p_up)+'</i>';}).join(" · ");
-    if(strip){strip.innerHTML='<span>Bias for '+esc(day(d["for"]).split(",")[0])+'</span><b>'+short+'</b><em>Probabilities, range and levels ›</em>';strip.hidden=false;}
+    if(!d.order)d.order=Object.keys(d.markets);
+    d.order=d.order.filter(function(k){return d.markets[k]&&d.markets[k].p_up!=null&&d.markets[k].range;});
+    if(!d.order.length)return;D=d;
+    if(box)render();
+    var two=["nq","gold"].filter(function(k){return d.markets[k];});
+    var short=two.map(function(k){var v=d.markets[k];return esc(v.name)+' <i class="'+v.bias+'">'+TAG[v.bias]+' '+pc(v.p_up)+'</i>';}).join(" · ");
+    if(strip){strip.innerHTML='<span>Bias for '+esc(day(d["for"]).split(",")[0])+'</span><b>'+short+'</b><em>'+d.order.length+' markets · probabilities, ranges, levels ›</em>';strip.hidden=false;}
     if(hx){hx.innerHTML='Today: '+short;hx.hidden=false;}
     var nq=d.markets.nq;
-    if(nq){var h1=document.getElementById("hc1"),h1s=document.getElementById("hc1s"),h2=document.getElementById("hc2"),h2s=document.getElementById("hc2s"),h3=document.getElementById("hc3"),h3s=document.getElementById("hc3s");
-      if(h1){h1.textContent="NQ up "+pc(nq.p_up);h1s.textContent=nq.tier==="tested"?"Tested signals":"Base rate · since "+((nq.history||{}).since||"2000");}
-      if(h2&&nq.range){h2.textContent="Range "+pts("nq",nq.range.points)+" pts";h2s.textContent="80%: "+pts("nq",nq.range.lo)+"–"+pts("nq",nq.range.hi);}
-      if(h3&&nq.takes){h3.textContent="Takes "+String(nq.day_name).slice(0,3)+" high "+pc(nq.takes.high.p);h3s.textContent="Any day "+pc(nq.takes.high.base);}}
+    if(nq){var $=function(i){return document.getElementById(i);};
+      if($("hc1")){$("hc1").textContent="NQ up "+pc(nq.p_up);$("hc1s").textContent=nq.tier==="tested"?"Tested signals":"Base rate · since "+((nq.history||{}).since||"2000");}
+      if($("hc2")){$("hc2").textContent="Range "+pts(nq.range.points,nq);$("hc2s").textContent="80%: "+pts(nq.range.lo,nq).replace(/ pts$/,"")+"–"+pts(nq.range.hi,nq);}
+      if($("hc3")){$("hc3").textContent="Takes "+String(nq.day_name).slice(0,3)+" high "+pc(nq.takes.high.p);$("hc3s").textContent="Any day "+pc(nq.takes.high.base);}}
   }).catch(function(){});
 })();
 </script>

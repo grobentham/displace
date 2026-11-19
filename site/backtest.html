@@ -237,6 +237,7 @@ th{white-space:nowrap}
 .row2 .inp{width:100%;min-width:0}
 #side .card .row{margin-bottom:6px}
 #side .card>.hint[style*='margin-top:10px']{display:none}
+.labx{margin-top:12px;border-top:1px solid var(--line);padding-top:10px}.labx h4{border:0;padding:0 0 6px}.hint.pos{color:var(--up,#22c38e)}.hint.neg{color:var(--dn,#f0516a)}
 </style>
 </head>
 <body>
@@ -2095,14 +2096,14 @@ function sRange(st) {
   if (/^s\d+$/.test(st.range)) { const N = +st.range.slice(1); let cnt = 0, last = null; for (let i = D.n - 1; i >= 0; i--) { const k = Math.floor((D.dt[i] + 21600) / 86400); if (k !== last) { last = k; cnt++; if (cnt > N) return [i + 1, D.n - 1]; } } return [0, D.n - 1]; }
   return [0, D.n - 1];
 }
-function sRun(st) {
+function sRun(st, rnd, q) {
   const tf = Math.max(D.baseSec, st.tf), B = sBars(tf), I = sInd(B), [r0, r1] = sRange(st), dirs = st.dir === 'both' ? [1, -1] : [st.dir === 'short' ? -1 : 1];
   const exitMin = hmMin(st.exitAt), pvv = S.pv, slip = S.slipTicks * TICK, sigs = [], out = [];
   let busy = -1, dayK = null, dayN = 0, dayPnl = 0;
   for (let j = 30; j < B.length - 1; j++) {
     const b = B[j], nb = B[j + 1]; if (b.i0 < r0 || nb.i0 > r1) continue;
     for (const d of dirs) {
-      if (!st.conds.every(c => sChk(c, j, d, B, I))) continue;
+      if (rnd ? rnd() >= q : !st.conds.every(c => sChk(c, j, d, B, I))) continue;
       sigs.push({ i: b.i1, d });
       const e = nb.i0; if (e <= busy || (tf < 86400 && nb.dt - b.dt > 2 * tf)) continue;
       const dk = Math.floor(b.dt / 86400); if (dk !== dayK) { dayK = dk; dayN = 0; dayPnl = 0; }
@@ -2192,6 +2193,58 @@ function stHtml() {
   <div class="hint" style="margin:8px 0">This runs your own rules on the data you loaded. Fills use the same costs as the replay (commission, slippage, conservative stop-first). It tests a hypothesis about the past. It does not predict anything, and the more you adjust rules to fit one dataset, the less the result means.</div>
   <div id="stRes"></div></div>`;
 }
+
+/* ---------- strategy lab: is the result better than luck? ---------- */
+function labRng(seed) { let x = seed >>> 0 || 1; return () => { x ^= x << 13; x >>>= 0; x ^= x >> 17; x ^= x << 5; x >>>= 0; return x / 4294967296; }; }
+function labInvN(p) { // Acklam's inverse normal
+  const a = [-39.69683028665376, 220.9460984245205, -275.9285104469687, 138.357751867269, -30.66479806614716, 2.506628277459239], b = [-54.47609879822406, 161.5858368580409, -155.6989798598866, 66.80131188771972, -13.28068155288572], c = [-0.007784894002430293, -0.3223964580411365, -2.400758277161838, -2.549732539343734, 4.374664141464968, 2.938163982698783], d = [0.007784695709041462, 0.3224671290700398, 2.445134137142996, 3.754408661907416];
+  const pl = 0.02425; let q, r;
+  if (p < pl) { q = Math.sqrt(-2 * Math.log(p)); return (((((c[0] * q + c[1]) * q + c[2]) * q + c[3]) * q + c[4]) * q + c[5]) / ((((d[0] * q + d[1]) * q + d[2]) * q + d[3]) * q + 1); }
+  if (p > 1 - pl) { q = Math.sqrt(-2 * Math.log(1 - p)); return -(((((c[0] * q + c[1]) * q + c[2]) * q + c[3]) * q + c[4]) * q + c[5]) / ((((d[0] * q + d[1]) * q + d[2]) * q + d[3]) * q + 1); }
+  q = p - 0.5; r = q * q; return (((((a[0] * r + a[1]) * r + a[2]) * r + a[3]) * r + a[4]) * r + a[5]) * q / (((((b[0] * r + b[1]) * r + b[2]) * r + b[3]) * r + b[4]) * r + 1);
+}
+function labN(x) { const t = 1 / (1 + 0.2316419 * Math.abs(x)), y = 1 - 0.3989423 * Math.exp(-x * x / 2) * t * (0.3193815 + t * (-0.3565638 + t * (1.781478 + t * (-1.821256 + t * 1.330274)))); return x >= 0 ? y : 1 - y; }
+function labTrials() { // distinct rule sets run on this device: the number of tries behind the best result
+  const key = JSON.stringify({ c: ST.conds, s: ST.stop, t: ST.tgt, d: ST.dir, tf: ST.tf, be: ST.be, x: ST.exitAt, h: ST.maxHold });
+  let l = []; try { l = JSON.parse(localStorage.getItem('mnqreplay.trials') || '[]'); } catch (_) { }
+  if (!l.includes(key)) { l.push(key); try { localStorage.setItem('mnqreplay.trials', JSON.stringify(l.slice(-500))); } catch (_) { } }
+  return l.length;
+}
+function labRun(r) {
+  const tr = r.trades, n = tr.length; if (n < 10) return null;
+  const R = tr.map(t => t.r), mean = R.reduce((a, b) => a + b, 0) / n, sd = Math.sqrt(R.reduce((a, b) => a + (b - mean) ** 2, 0) / (n - 1)) || 1e-9;
+  const tstat = mean / (sd / Math.sqrt(n));
+  // random entries at the same rate, same exits and costs
+  const dirs = ST.dir === 'both' ? 2 : 1, [r0, r1] = sRange(ST), tfv = Math.max(D.baseSec, ST.tf), B = sBars(tfv);
+  let elig = 0; for (let j = 30; j < B.length - 1; j++) if (B[j].i0 >= r0 && B[j + 1].i0 <= r1) elig++;
+  const q = Math.min(0.9, r.sigs.length / Math.max(1, elig * dirs)), runs = [], rng = labRng(20261119 + n);
+  const t0 = performance.now();
+  for (let k = 0; k < 100 && performance.now() - t0 < 6000; k++) { const x = sRun(ST, rng, q).trades; if (x.length) runs.push(x.reduce((a, t) => a + t.r, 0) / x.length); }
+  runs.sort((a, b) => a - b);
+  const beat = runs.length ? runs.filter(v => v < mean).length / runs.length : null, med = runs.length ? runs[Math.floor(runs.length / 2)] : null;
+  // Monte Carlo: reshuffle the trades with replacement
+  const mc = [], dds = [], rng2 = labRng(7 + n), P = tr.map(t => t.pnl);
+  for (let k = 0; k < 1000; k++) { let eq = 0, pk = 0, dd = 0; for (let i = 0; i < n; i++) { eq += P[Math.floor(rng2() * n)]; pk = Math.max(pk, eq); dd = Math.max(dd, pk - eq); } mc.push(eq); dds.push(dd); }
+  mc.sort((a, b) => a - b); dds.sort((a, b) => a - b);
+  const pct = (a, p) => a[Math.min(a.length - 1, Math.floor(p * a.length))];
+  // deflated Sharpe (Bailey and Lopez de Prado): per-trade Sharpe against the best of N tries under no edge
+  const N = labTrials(), sr = mean / sd, sk = R.reduce((a, b) => a + ((b - mean) / sd) ** 3, 0) / n, ku = R.reduce((a, b) => a + ((b - mean) / sd) ** 4, 0) / n;
+  const g = 0.5772156649, v = 1 / n, sr0 = N > 1 ? Math.sqrt(v) * ((1 - g) * labInvN(1 - 1 / N) + g * labInvN(1 - 1 / (N * Math.E))) : 0;
+  const dsr = labN((sr - sr0) * Math.sqrt(n - 1) / Math.sqrt(Math.max(1e-9, 1 - sk * sr + (ku - 1) / 4 * sr * sr)));
+  return { n, mean, tstat, beat, med, runs: runs.length, mc5: pct(mc, 0.05), mc50: pct(mc, 0.5), mc95: pct(mc, 0.95), lossP: mc.filter(x => x < 0).length / mc.length, dd95: pct(dds, 0.95), N, dsr };
+}
+function labHtml(L) {
+  if (!L) return '<div class="hint" style="margin-top:10px">The "is it real?" checks need at least 10 trades.</div>';
+  const verdict = L.dsr >= 0.95 && L.beat >= 0.95 ? ['pos', 'Holds up: it beat random entries and survives the number of rule sets you tried.'] : L.beat >= 0.95 ? ['', 'Beat random entries, but the deflated Sharpe says it may not survive the search. Test it on data you haven’t looked at.'] : ['neg', 'Not distinguishable from luck: random entries with the same exits did about as well.'];
+  return `<div class="labx"><h4>Is it real?</h4><div class="stgrid">
+    <div class="sttile"><div class="hint">Beats random entries</div><div class="mono ${L.beat >= 0.95 ? 'pos' : ''}">${L.beat == null ? 'n/a' : Math.round(L.beat * 100) + '%'}</div><div class="hint">of ${L.runs} runs · random median ${L.med == null ? '-' : L.med.toFixed(2) + 'R'}</div></div>
+    <div class="sttile"><div class="hint">Avg R and t</div><div class="mono">${L.mean.toFixed(2)}R · t ${L.tstat.toFixed(1)}</div><div class="hint">t above 2 is the usual bar</div></div>
+    <div class="sttile"><div class="hint">Deflated Sharpe</div><div class="mono ${L.dsr >= 0.95 ? 'pos' : ''}">${(L.dsr * 100).toFixed(0)}%</div><div class="hint">after ${L.N} rule set${L.N === 1 ? '' : 's'} tried here</div></div>
+    <div class="sttile"><div class="hint">Monte Carlo net (90%)</div><div class="mono">${money(L.mc5)} to ${money(L.mc95)}</div><div class="hint">${Math.round(L.lossP * 100)}% of reshuffles lost money</div></div>
+    <div class="sttile"><div class="hint">Drawdown to plan for</div><div class="mono neg">${money(-L.dd95)}</div><div class="hint">95th percentile of 1,000 reshuffles</div></div>
+  </div><div class="hint ${verdict[0]}" style="margin-top:8px">${verdict[1]}</div>
+  <div class="hint" style="margin-top:4px">Random entries fire at the same rate as your rules, in the same test range, with the same stop, target, costs and limits. The deflated Sharpe corrects for every distinct rule set you have run on this device; trying many and keeping the best one finds luck.</div></div>`;
+}
 function stResHtml() {
   const r = SRES; if (!r) return '';
   const s = sStats(r.trades);
@@ -2205,6 +2258,7 @@ function stResHtml() {
   return `<div class="an"><h4>Result · ${s.n} trades on ${r.bars.toLocaleString()} bars</h4>${demo}
   <div class="stgrid">${tile('Net', money(s.net), s.net >= 0 ? 'pos' : 'neg')}${tile('Win rate', (s.wr * 100).toFixed(0) + '%')}${tile('Profit factor', s.pf == null ? 'n/a' : s.pf.toFixed(2))}${tile('Avg R', s.avgR.toFixed(2) + 'R')}${tile('Max drawdown', money(-s.dd, false))}${tile('Avg win / loss', money(s.avgW, false) + ' / ' + money(s.avgL, false))}${tile('Longest loss streak', s.mls)}${tile('Best / worst', money(s.best, false) + ' / ' + money(s.worst, false))}</div>
   <svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="none" style="width:100%;height:90px;margin-top:10px"><polyline fill="none" stroke="#7aa2ff" stroke-width="1.6" points="${pts}"/></svg>${half}
+  ${labHtml(r.lab)}
   <div class="strow" style="margin-top:8px"><label class="chk"><input type="checkbox" id="stSigOn" ${X.sigOn ? 'checked' : ''}>Show where the rules were met on the chart while replaying</label></div>
   <div style="max-height:230px;overflow:auto;margin-top:8px"><table><tr><th>Entry (ET)</th><th>Side</th><th>Qty</th><th>Entry</th><th>Exit</th><th>Exit by</th><th>P&amp;L</th><th>R</th><th></th></tr>${rows}</table></div></div>`;
 }
@@ -2219,7 +2273,7 @@ function stSet(path, v) {
 function stRender() { $('#mBody').innerHTML = stHtml(); $('#stRes').innerHTML = stResHtml(); }
 function stRun() {
   if (!D) return; stSave(); const t0 = performance.now();
-  try { SRES = sRun(ST); } catch (e) { toast('Could not run these rules: ' + e.message, 'var(--warn)'); return; }
+  try { SRES = sRun(ST); SRES.lab = labRun(SRES); } catch (e) { toast('Could not run these rules: ' + e.message, 'var(--warn)'); return; }
   X.sig = SRES.sigs; $('#stRes').innerHTML = stResHtml(); $('#stRes').scrollIntoView({ block: 'nearest' }); if (X.sigOn) dirty.markers = true; drawOv();
   const ms = Math.round(performance.now() - t0); if (ms > 4000) toast(`That took ${(ms / 1000).toFixed(1)} s. A larger timeframe runs faster.`);
 }
