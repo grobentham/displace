@@ -1,5 +1,5 @@
 {
- "asof": "2026-11-19T14:41-05:00",
+ "asof": "2026-11-19T16:02-05:00",
  "version": 4,
  "assets": {
   "gold": "Gold, close",
@@ -3507,86 +3507,6 @@
   }
  },
  "events": {
-  "20261119-initial-jobless-claims": {
-   "kind": "claims",
-   "group": "labor",
-   "date": "2026-11-19",
-   "when": "2026-11-19T08:30:00-05:00",
-   "basis": "consensus",
-   "consensus": {
-    "title": "Initial Jobless Claims",
-    "forecast": 197.0,
-    "actual": 203.0,
-    "unit": null,
-    "scale": "K"
-   },
-   "stage": "post",
-   "z": -0.45,
-   "bin": "inline",
-   "calls": {
-    "gold": {
-     "none": true,
-     "n": 115,
-     "why": "right less than 55% of the time on unseen releases"
-    },
-    "nq": {
-     "none": true,
-     "n": 20,
-     "why": "too few tested calls"
-    },
-    "usd": {
-     "none": true,
-     "n": 179,
-     "why": "probabilities no better than a coin flip"
-    },
-    "y2": {
-     "none": true,
-     "n": 384,
-     "why": "the surprise is too small for a lean"
-    },
-    "gold15m": {
-     "none": true,
-     "why": "the first 15m have passed"
-    },
-    "gold2h": {
-     "none": true,
-     "why": "the first 2h have passed"
-    },
-    "nq15m": {
-     "none": true,
-     "why": "the first 15m have passed"
-    },
-    "nq2h": {
-     "none": true,
-     "why": "the first 2h have passed"
-    }
-   },
-   "hist": {},
-   "move": {
-    "gold": {
-     "pct": 1.94,
-     "lo": 1.06,
-     "hi": 3.63,
-     "normal": 1.9,
-     "mult": 1.021,
-     "pts": 72.5,
-     "n": 835,
-     "proven": false,
-     "why": "no better than treating it as a normal day"
-    },
-    "nq": {
-     "pct": 1.53,
-     "lo": 0.99,
-     "hi": 2.93,
-     "normal": 1.46,
-     "mult": 1.05,
-     "pts": 415.7,
-     "n": 857,
-     "proven": false,
-     "why": "no better than treating it as a normal day"
-    }
-   }
-  },
   "20261120-umich-consumer-sentiment-final-nov": {
    "kind": "umich",
    "group": "sentiment",
@@ -5560,6 +5480,6 @@
  "log": [
   "tv: 3 month(s) refreshed, 3591 releases with a consensus surprise",
   "markets: gold, nq, usd, y2, gold15m, gold2h, nq15m, nq2h",
-  "model: fit in 2s; proven: inflation:nq2h, labor:y2"
+  "model: fit in 3s; proven: inflation:nq2h, labor:y2"
  ]
 }

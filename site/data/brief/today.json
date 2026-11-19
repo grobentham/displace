@@ -1,13 +1,13 @@
 {
- "date": "2026-11-19",
- "asof": "2026-11-19T14:40-05:00",
- "headline": "Lighter data day: Initial jobless claims at 08:30 NY",
- "overnight": "At the Wed Nov 18 close, the 10-year Treasury yield was 5.07% (down 3 bp), the 2-year 4.80%, the Fed's broad dollar index 122.7 (up 0.1%) and WTI crude $89.53 (up 0.3%).",
+ "date": "2026-11-20",
+ "asof": "2026-11-19T16:01-05:00",
+ "headline": "Lighter data day: UMich consumer sentiment, final at 10:00 NY",
+ "overnight": "At the Thu Nov 19 close, the 10-year Treasury yield was 5.04% (down 3 bp), the 2-year 4.76% (down 4 bp), the Fed's broad dollar index 122.7 (up 0.1%) and WTI crude $89.53 (up 0.3%).",
  "overnightLabel": "Latest close",
  "today": [
   {
-   "time": "08:30",
-   "item": "Initial jobless claims · actual 203K · forecast 198K · previous 200K"
+   "time": "10:00",
+   "item": "UMich consumer sentiment, final (Nov) · forecast 51.7 · previous 48.0"
   }
  ],
  "recent": [
@@ -16,6 +16,6 @@
    "line": "Jobless claims came in at 203K against a 198K forecast, above expectations. The previous reading was 200K, revised to 202K. 4-week average 198K (previous 196K); Continuing claims 1.76M (previous 1.69M). The initial claims reading was the highest since week to Sep 5."
   }
  ],
- "focus": "Initial jobless claims: Claims are the most frequent check on layoffs. The next Fed decision is Dec 8–9, 20 days away.",
+ "focus": "UMich consumer sentiment, final: The survey's inflation expectations are watched by the Fed. The next Fed decision is Dec 8–9, 19 days away.",
  "note": "Built automatically from official release schedules and Federal Reserve data. Education only, not a forecast or financial advice."
 }
