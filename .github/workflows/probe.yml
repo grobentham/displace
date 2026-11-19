@@ -1,0 +1,23 @@
+name: Probe daily bars (temporary)
+on: pull_request
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          python3 - <<'PY'
+          import json, urllib.request, datetime as dt
+          for sym in ("NQ%3DF","GC%3DF"):
+              u=f"https://query1.finance.yahoo.com/v8/finance/chart/{sym}?range=max&interval=1d"
+              r=json.load(urllib.request.urlopen(urllib.request.Request(u,headers={"User-Agent":"Mozilla/5.0"}),timeout=40))["chart"]["result"][0]
+              m=r["meta"]; q=r["indicators"]["quote"][0]; ts=r["timestamp"]
+              print(sym, "n", len(ts), "tz", m.get("exchangeTimezoneName"), m.get("gmtoffset"), "first", dt.datetime.utcfromtimestamp(ts[0]))
+              nulls=sum(1 for x in q["close"] if x is None); print("null closes", nulls)
+              for i in range(-6,0):
+                  print(dt.datetime.utcfromtimestamp(ts[i]).isoformat(), q["open"][i], q["high"][i], q["low"][i], q["close"][i])
+              u2=f"https://query1.finance.yahoo.com/v8/finance/chart/{sym}?range=5d&interval=1h"
+              r2=json.load(urllib.request.urlopen(urllib.request.Request(u2,headers={"User-Agent":"Mozilla/5.0"}),timeout=40))["chart"]["result"][0]
+              q2=r2["indicators"]["quote"][0]
+              for t,o,h,l,c in list(zip(r2["timestamp"],q2["open"],q2["high"],q2["low"],q2["close"]))[-30:]:
+                  print("  1h", dt.datetime.utcfromtimestamp(t).isoformat(), o, h, l, c)
+          PY
