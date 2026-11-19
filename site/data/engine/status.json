@@ -1,57 +1,57 @@
 {
- "lastRun": "2026-11-18T23:26-05:00",
+ "lastRun": "2026-11-19T00:47-05:00",
  "source": "public FRED and agency data",
  "fredCalls": 75,
  "fred": true,
  "sources": {
   "fred": {
    "state": "available",
-   "checkedAt": "2026-11-18T23:26-05:00",
-   "lastSuccessAt": "2026-11-18T23:26-05:00"
+   "checkedAt": "2026-11-19T00:47-05:00",
+   "lastSuccessAt": "2026-11-19T00:47-05:00"
   },
   "alfred": {
    "state": "available",
-   "checkedAt": "2026-11-18T23:26-05:00",
-   "lastSuccessAt": "2026-11-18T23:26-05:00"
+   "checkedAt": "2026-11-19T00:47-05:00",
+   "lastSuccessAt": "2026-11-19T00:47-05:00"
   },
   "bls": {
    "state": "available",
-   "checkedAt": "2026-11-18T23:26-05:00",
-   "lastSuccessAt": "2026-11-18T23:26-05:00"
+   "checkedAt": "2026-11-19T00:47-05:00",
+   "lastSuccessAt": "2026-11-19T00:47-05:00"
   },
   "bea": {
    "state": "available",
-   "checkedAt": "2026-11-18T23:26-05:00",
-   "lastSuccessAt": "2026-11-18T23:26-05:00"
+   "checkedAt": "2026-11-19T00:47-05:00",
+   "lastSuccessAt": "2026-11-19T00:47-05:00"
   },
   "census": {
    "state": "available",
-   "checkedAt": "2026-11-18T23:26-05:00",
-   "lastSuccessAt": "2026-11-18T23:26-05:00"
+   "checkedAt": "2026-11-19T00:47-05:00",
+   "lastSuccessAt": "2026-11-19T00:47-05:00"
   },
   "treasury": {
    "state": "available",
-   "checkedAt": "2026-11-18T23:26-05:00",
-   "lastSuccessAt": "2026-11-18T23:26-05:00"
+   "checkedAt": "2026-11-19T00:47-05:00",
+   "lastSuccessAt": "2026-11-19T00:47-05:00"
   },
   "nyFed": {
    "state": "available",
-   "checkedAt": "2026-11-18T23:26-05:00",
-   "lastSuccessAt": "2026-11-18T23:26-05:00"
+   "checkedAt": "2026-11-19T00:47-05:00",
+   "lastSuccessAt": "2026-11-19T00:47-05:00"
   },
   "fedStatements": {
    "state": "available",
-   "checkedAt": "2026-11-18T23:26-05:00",
-   "lastSuccessAt": "2026-11-18T23:26-05:00"
+   "checkedAt": "2026-11-19T00:47-05:00",
+   "lastSuccessAt": "2026-11-19T00:47-05:00"
   },
   "nasdaqCalendar": {
    "state": "available",
-   "checkedAt": "2026-11-18T23:26-05:00",
-   "lastSuccessAt": "2026-11-18T23:26-05:00"
+   "checkedAt": "2026-11-19T00:47-05:00",
+   "lastSuccessAt": "2026-11-19T00:47-05:00"
   }
  },
  "freshness": {
-  "calendarUpdatedOn": "2026-11-18",
+  "calendarUpdatedOn": "2026-11-19",
   "latestActual": {
    "title": "Retail sales (Oct)",
    "date": "2026-11-17"
@@ -71,11 +71,13 @@
  },
  "fredErrors": 0,
  "calendarThrough": "2027-04-07",
- "events": 93,
- "upcoming": 85,
+ "events": 92,
+ "upcoming": 84,
  "warnings": [],
  "log": [
-  "engine run 2026-11-18T23:26-05:00 using public FRED and agency data",
+  "engine run 2026-11-19T00:47-05:00 using public FRED and agency data",
+  "calendar saved",
+  "earnings: 8 dates saved",
   "quality: 28/28 checks passed, 0 held, 0 rejected"
  ]
 }

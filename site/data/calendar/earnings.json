@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-17",
+ "updated": "2026-11-19",
  "events": [
   {
    "id": "20261117-earn-nvda",
@@ -14,19 +14,6 @@
    "session": "AMC",
    "note": "Results scheduled after the U.S. stock market closes. Date confirmed by the company.",
    "url": "https://investor.nvidia.com"
-  },
-  {
-   "id": "20261118-earn-panw",
-   "date": "2026-11-18",
-   "time": "16:05",
-   "title": "Palo Alto Networks (PANW) earnings · quarter ending Oct 2026",
-   "cur": "USD",
-   "impact": "earnings",
-   "src": "Nasdaq earnings calendar",
-   "tier": "notable",
-   "status": "scheduled",
-   "session": "AMC",
-   "note": "Results scheduled after the U.S. stock market closes. Date from the Nasdaq calendar. Check the company's investor relations page for changes."
   },
   {
    "id": "20261119-earn-wmt",

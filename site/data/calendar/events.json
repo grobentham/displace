@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-18",
+ "updated": "2026-11-19",
  "through": "2027-04-07",
  "events": [
   {
@@ -29,19 +29,6 @@
    ],
    "facts": [],
    "forecast": "69K",
-   "fsrc": "TradingView consensus"
-  },
-  {
-   "id": "20261104-ism-services-pmi-oct",
-   "date": "2026-11-04",
-   "time": "10:00",
-   "title": "ISM Services PMI (Oct)",
-   "cur": "USD",
-   "impact": "medium",
-   "src": "ISM",
-   "note": "Usually the third business day of the month; confirm on ismworld.org.",
-   "auto": "rule",
-   "forecast": "54.8",
    "fsrc": "TradingView consensus"
   },
   {

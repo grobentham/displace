@@ -1,5 +1,5 @@
 {
- "asof": "2026-11-18T23:27-05:00",
+ "asof": "2026-11-19T00:48-05:00",
  "version": 4,
  "assets": {
   "gold": "Gold, close",
@@ -3603,7 +3603,7 @@
      "hi": 3.63,
      "normal": 1.9,
      "mult": 1.021,
-     "pts": 72.7,
+     "pts": 72.5,
      "n": 835,
      "proven": false,
      "why": "no better than treating it as a normal day"
@@ -3729,7 +3729,7 @@
      "hi": 3.91,
      "normal": 1.9,
      "mult": 1.006,
-     "pts": 71.6,
+     "pts": 71.4,
      "n": 90,
      "proven": false,
      "why": "no better than treating it as a normal day"
@@ -3860,7 +3860,7 @@
      "hi": 3.0,
      "normal": 1.9,
      "mult": 0.954,
-     "pts": 67.9,
+     "pts": 67.7,
      "n": 189,
      "proven": false,
      "why": "no better than treating it as a normal day"
@@ -3985,7 +3985,7 @@
      "hi": 2.85,
      "normal": 1.9,
      "mult": 0.943,
-     "pts": 67.1,
+     "pts": 66.9,
      "n": 165,
      "proven": false,
      "why": "no better than treating it as a normal day"
@@ -4099,7 +4099,7 @@
      "hi": 3.63,
      "normal": 1.9,
      "mult": 1.021,
-     "pts": 72.7,
+     "pts": 72.5,
      "n": 835,
      "proven": false,
      "why": "no better than treating it as a normal day"
@@ -4215,7 +4215,7 @@
      "hi": 3.84,
      "normal": 1.9,
      "mult": 1.101,
-     "pts": 78.4,
+     "pts": 78.2,
      "n": 18,
      "proven": false,
      "why": "too few tested releases"
@@ -4315,7 +4315,7 @@
      "hi": 3.48,
      "normal": 1.9,
      "mult": 0.972,
-     "pts": 69.2,
+     "pts": 69.0,
      "n": 170,
      "proven": false,
      "why": "no better than treating it as a normal day"
@@ -4456,7 +4456,7 @@
      "hi": 3.66,
      "normal": 1.9,
      "mult": 1.17,
-     "pts": 83.3,
+     "pts": 83.1,
      "n": 169,
      "proven": false,
      "why": "not significant after correcting for the number of rules tested"
@@ -4582,7 +4582,7 @@
      "hi": 3.04,
      "normal": 1.9,
      "mult": 1.02,
-     "pts": 72.6,
+     "pts": 72.4,
      "n": 119,
      "proven": false,
      "why": "no better than treating it as a normal day"
@@ -4707,7 +4707,7 @@
      "hi": 3.4,
      "normal": 1.9,
      "mult": 1.02,
-     "pts": 72.6,
+     "pts": 72.4,
      "n": 187,
      "proven": false,
      "why": "no better than treating it as a normal day"
@@ -4724,21 +4724,255 @@
      "why": "no better than treating it as a normal day"
     }
    }
+  },
+  "20261203-initial-jobless-claims": {
+   "kind": "claims",
+   "group": "labor",
+   "date": "2026-12-03",
+   "when": "2026-12-03T08:30:00-05:00",
+   "basis": "consensus",
+   "consensus": {
+    "title": "Initial Jobless Claims",
+    "forecast": null,
+    "actual": null,
+    "unit": null,
+    "scale": "K"
+   },
+   "stage": "pre",
+   "hot": {
+    "gold": {
+     "none": true,
+     "n": 115,
+     "why": "right less than 55% of the time on unseen releases"
+    },
+    "nq": {
+     "none": true,
+     "n": 20,
+     "why": "too few tested calls"
+    },
+    "usd": {
+     "none": true,
+     "n": 179,
+     "why": "probabilities no better than a coin flip"
+    },
+    "y2": {
+     "none": true,
+     "n": 384,
+     "why": "the surprise is too small for a lean"
+    },
+    "gold2h": {
+     "none": true,
+     "n": 18,
+     "why": "too few tested calls"
+    },
+    "nq2h": {
+     "none": true,
+     "n": 3,
+     "why": "too few tested calls"
+    }
+   },
+   "cool": {
+    "gold": {
+     "none": true,
+     "n": 115,
+     "why": "right less than 55% of the time on unseen releases"
+    },
+    "nq": {
+     "none": true,
+     "n": 20,
+     "why": "too few tested calls"
+    },
+    "usd": {
+     "none": true,
+     "n": 179,
+     "why": "probabilities no better than a coin flip"
+    },
+    "y2": {
+     "none": true,
+     "n": 384,
+     "why": "the surprise is too small for a lean"
+    },
+    "gold2h": {
+     "none": true,
+     "n": 18,
+     "why": "too few tested calls"
+    },
+    "nq2h": {
+     "none": true,
+     "n": 3,
+     "why": "too few tested calls"
+    }
+   },
+   "hist": {
+    "hot": {
+     "nq2h": {
+      "dir": "down",
+      "p": 0.727,
+      "n": 33
+     }
+    },
+    "inline": {},
+    "cool": {}
+   },
+   "move": {
+    "gold": {
+     "pct": 1.94,
+     "lo": 1.06,
+     "hi": 3.63,
+     "normal": 1.9,
+     "mult": 1.021,
+     "pts": 72.5,
+     "n": 835,
+     "proven": false,
+     "why": "no better than treating it as a normal day"
+    },
+    "nq": {
+     "pct": 1.53,
+     "lo": 0.99,
+     "hi": 2.93,
+     "normal": 1.46,
+     "mult": 1.05,
+     "pts": 415.7,
+     "n": 857,
+     "proven": false,
+     "why": "no better than treating it as a normal day"
+    }
+   }
+  },
+  "20261203-ism-services-pmi-nov": {
+   "kind": "ism-s",
+   "group": "activity",
+   "date": "2026-12-03",
+   "when": "2026-12-03T10:00:00-05:00",
+   "basis": "consensus",
+   "consensus": {
+    "title": "ISM Services PMI",
+    "forecast": null,
+    "actual": null,
+    "unit": null,
+    "scale": null
+   },
+   "stage": "pre",
+   "hot": {
+    "gold": {
+     "none": true,
+     "n": 2,
+     "why": "too few tested calls"
+    },
+    "nq": {
+     "none": true,
+     "n": 67,
+     "why": "not significant after correcting for the number of rules tested"
+    },
+    "usd": {
+     "none": true,
+     "n": 122,
+     "why": "not significant after correcting for the number of rules tested"
+    },
+    "y2": {
+     "none": true,
+     "n": 159,
+     "why": "not significant after correcting for the number of rules tested"
+    },
+    "gold2h": {
+     "none": true,
+     "n": 44,
+     "why": "right less than 55% of the time on unseen releases"
+    },
+    "nq2h": {
+     "none": true,
+     "n": 22,
+     "why": "right less than 55% of the time on unseen releases"
+    }
+   },
+   "cool": {
+    "gold": {
+     "none": true,
+     "n": 2,
+     "why": "too few tested calls"
+    },
+    "nq": {
+     "none": true,
+     "n": 67,
+     "why": "not significant after correcting for the number of rules tested"
+    },
+    "usd": {
+     "none": true,
+     "n": 122,
+     "why": "not significant after correcting for the number of rules tested"
+    },
+    "y2": {
+     "none": true,
+     "n": 159,
+     "why": "not significant after correcting for the number of rules tested"
+    },
+    "gold2h": {
+     "none": true,
+     "n": 44,
+     "why": "right less than 55% of the time on unseen releases"
+    },
+    "nq2h": {
+     "none": true,
+     "n": 22,
+     "why": "right less than 55% of the time on unseen releases"
+    }
+   },
+   "hist": {
+    "hot": {
+     "y2": {
+      "dir": "up",
+      "p": 0.686,
+      "n": 51
+     }
+    },
+    "inline": {},
+    "cool": {
+     "usd": {
+      "dir": "down",
+      "p": 0.679,
+      "n": 53
+     }
+    }
+   },
+   "move": {
+    "gold": {
+     "pct": 1.97,
+     "lo": 1.15,
+     "hi": 3.83,
+     "normal": 1.9,
+     "mult": 1.04,
+     "pts": 73.8,
+     "n": 177,
+     "proven": false,
+     "why": "no better than treating it as a normal day"
+    },
+    "nq": {
+     "pct": 1.6,
+     "lo": 1.0,
+     "hi": 2.97,
+     "normal": 1.46,
+     "mult": 1.093,
+     "pts": 432.7,
+     "n": 191,
+     "proven": false,
+     "why": "no better than treating it as a normal day"
+    }
+   }
   }
  },
  "disclaimer": "Historical statistics for education. Past reactions do not guarantee future moves, and nothing here is a recommendation to buy or sell.",
  "basis": "consensus",
  "moves": {
-  "asof": "2026-11-18",
+  "asof": "2026-11-19",
   "markets": {
    "gold": {
     "baseline": 1.897,
-    "close": 3752.5,
+    "close": 3741.89990234375,
     "asof": "2026-11-18"
    },
    "nq": {
     "baseline": 1.46,
-    "close": 27116.2578125,
+    "close": 27116.259765625,
     "asof": "2026-11-18"
    }
   },
@@ -5360,6 +5594,6 @@
  "log": [
   "tv: 3 month(s) refreshed, 3589 releases with a consensus surprise",
   "markets: gold, nq, usd, y2, gold15m, gold2h, nq15m, nq2h",
-  "model: fit in 3s; proven: inflation:nq2h, labor:y2"
+  "model: fit in 2s; proven: inflation:nq2h, labor:y2"
  ]
 }
