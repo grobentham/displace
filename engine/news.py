@@ -76,6 +76,8 @@ def policy_summary(topic, title, url, fetch):
     if topic == "boe":
         match = re.search(r"Bank Rate (increased to|reduced to|maintained at|held at) (\d+(?:\.\d+)?)%", title, re.I)
         return f"Bank Rate was {match[1].lower()} {match[2]}%." if match else ""
+    if topic == "minutes" and "federalreserve.gov" in url:
+        return minutes_summary(url, fetch)
     if topic not in ("fomc", "ecb"):
         return ""
     try:
@@ -91,6 +93,50 @@ def policy_summary(topic, title, url, fetch):
         return ""
     match = re.search(r"deposit facility, the main refinancing operations and the marginal lending facility.{0,100}?\b(?:at|to) (\d+(?:\.\d+)?)\s*%", body, re.I)
     return f"The ECB reported a deposit facility rate of {match[1]}%." if match else ""
+
+
+SENTENCE = re.compile(r"(?<!\s[A-Z]\.)(?<!\.[A-Z]\.)(?<=[.;])\s+(?=[A-Z])")  # not after initials or U.S.
+OUTLOOK = re.compile(r"^(In (discussing|their discussion of|considering|their consideration of|regard to|light of)|With regard to)"
+                     r"[^.]{0,80}(outlook for (monetary )?policy|policy outlook|monetary policy outlook|policy path)", re.I)
+RISKS = re.compile(r"\b(participants|members)\b[^.]{0,200}\b(risks?)\b", re.I)
+
+
+def _short(sentence, limit=360):
+    sentence = re.sub(r"\s*\u2014[^\u2014]{0,200}\u2014\s*", " ", sentence).strip()  # drop dashed asides
+    if len(sentence) <= limit:
+        return sentence
+    cut = sentence[:limit].rsplit(" ", 1)[0].rstrip(",;:")
+    return cut + "..."
+
+
+def minutes_summary(url, fetch):
+    """Key lines from FOMC minutes: the policy outlook, the risks officials flagged, and any dissent."""
+    try:
+        page = fetch(url).decode("utf-8-sig", "replace")
+        link = re.search(r'href="(/monetarypolicy/fomcminutes\d{8}\.htm)"', page)
+        if not link:
+            return ""
+        body = text(fetch("https://www.federalreserve.gov" + link[1]).decode("utf-8-sig", "replace"))
+    except (OSError, ValueError):
+        return ""
+    lines = []
+    end = body.find("Committee Policy Action")
+    views = [x.strip() for x in SENTENCE.split(body[:end if end > 0 else len(body)])]
+    risk = next((x for x in views if RISKS.search(x) and ("inflation" in x or "employment" in x or "labor" in x)), None)
+    allsent = [x.strip() for x in SENTENCE.split(body)]
+    k = next((i for i, x in enumerate(allsent) if OUTLOOK.search(x)), None)
+    if k is not None:
+        lines.append(_short(allsent[k]))
+    if risk and risk not in lines:
+        lines.append(_short(risk))
+    vote = re.search(r"Voting against (?:this|the) action:\s*(.+?)(?<!\s[A-Z])\.(?:\s|$)", body)
+    if vote:
+        who = vote[1].strip()
+        if who.lower().startswith("none"):
+            lines.append("The decision was unanimous.")
+        else:
+            lines.append(f"Dissent: {_short(who, 220)}.")
+    return " ".join(lines)
 
 
 def feed_items(body, source, feed_url, now):
