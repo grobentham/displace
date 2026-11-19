@@ -1602,6 +1602,34 @@ svg.cd line.wick{animation:fadein .5s ease-out both}
 .moretools a{background:var(--gray);color:var(--ink)}
 .moretools a:hover{background:#e8e8ed}
 .moretools a i{background:#fff;color:#0071e3}
+
+.dk-side{display:grid;gap:14px;align-content:start;min-width:0}
+/* ===== news page polish ===== */
+.morning-grid{align-items:start}
+.nx-clamp{display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden}
+.nx-more{font:inherit;font-size:.84rem;font-weight:600;color:var(--ac,#0071e3);background:none;border:0;padding:4px 0 0;cursor:pointer}
+.nx-more:hover{text-decoration:underline}
+.ol-d{grid-template-columns:minmax(0,1fr);gap:0;margin-top:6px}
+.ol-d>div{background:none;border-radius:0;padding:11px 0;border-top:1px solid rgba(255,255,255,.09);display:grid;grid-template-columns:96px minmax(0,1fr);gap:14px}
+.ol-d>div:first-child{border-top:0}
+.ol-d b{padding-top:1px}
+.ol-d p{margin:0}
+.ol-d p+p{margin-top:5px}
+.dn-grid{align-items:start}
+@media (min-width:1001px){.pl-g{grid-template-columns:repeat(5,minmax(0,1fr))}}
+.nr-g{grid-template-columns:repeat(auto-fit,minmax(220px,1fr))!important}
+@media (max-width:640px){
+  .newspage .tool{padding:8px;border-radius:18px}
+  .ecmain{grid-template-columns:12px minmax(0,1fr) 14px!important;column-gap:10px!important;row-gap:3px!important;padding:12px 6px 12px 12px!important}
+  .ecmain .ect{grid-column:2;grid-row:1;display:flex;gap:8px;align-items:baseline}
+  .ecmain .ect b{display:inline}
+  .ecmain .eci{grid-column:1;grid-row:2;padding-top:7px}
+  .ecmain .ecn{grid-column:2;grid-row:2;min-width:0}
+  .ecmain .ecv{grid-column:2!important;grid-row:3!important;grid-template-columns:repeat(3,auto)!important;justify-content:start;column-gap:22px!important;margin-top:8px}
+  .ecmain .ecx{grid-column:3;grid-row:1/3;align-self:center}
+  .ol-d>div{grid-template-columns:minmax(0,1fr);gap:4px}
+  .pl-t small{white-space:normal}
+}
 </style>
 </head>
 <body>
@@ -2482,9 +2510,8 @@ svg.cd line.wick{animation:fadein .5s ease-out both}
           <div class="dn-grid" id="dn-grid"></div>
           <details class="dn-more" id="dn-more" hidden><summary>More updates</summary><div class="dn-grid" id="dn-older"></div></details>
         </section>
-        <div class="dk-row"><div class="outlook" id="ec-outlook" hidden></div><div class="dk-card dk-fed" id="dk-fed" hidden></div></div>
+        <div class="dk-row"><div class="outlook" id="ec-outlook" hidden></div><div class="dk-side"><div class="dk-card dk-fed" id="dk-fed" hidden></div><div class="ec-rem" id="ec-rem"></div></div></div>
         <div class="dk-card dk-pulse" id="dk-pulse" hidden></div>
-        <div class="ec-rem" id="ec-rem"></div>
         <section class="dk-card" id="nqi-setup" aria-labelledby="nqi-title" hidden>
           <h2 id="nqi-title">Personal NQ study</h2>
           <p class="nqi-note" id="nqi-status" role="status">Choose your study file to show historical NQ reactions on CPI and payrolls releases. The study stays in this browser.</p>
@@ -2517,6 +2544,8 @@ svg.cd line.wick{animation:fadein .5s ease-out both}
       <div class="nr-g">
         <div><b>Actual vs forecast</b><p>The actual is the figure published by the agency. When a consensus forecast is available, the difference is the surprise.</p></div>
         <div><b>Revisions</b><p>Agencies may revise earlier figures as more information becomes available. A release can contain both a new reading and revisions to previous periods.</p></div>
+        <div><b>Why the surprise matters</b><p>Markets price the consensus in advance. What moves them is the gap between the actual and what was expected, not whether the number is high or low.</p></div>
+        <div><b>The first minutes</b><p>Figures land at the exact minute shown. Spreads widen and price can whip both ways first, so many traders wait for the first 15 minutes to settle.</p></div>
       </div>
     </div>
   </div>
@@ -4503,7 +4532,7 @@ olBoot();
 function outlook(){var el=$("ec-outlook");if(!el)return;if(!OL||!OL.summary){el.hidden=true;return;}el.hidden=false;var pro=P.isPro();
   el.className="outlook"+(pro?"":" locked");
   el.innerHTML='<div class="ol-h"><span class="ol-k">Weekly outlook · Pro</span><b>'+esc(OL.week||"This week")+'</b>'+(OL.asof?'<small>Written '+esc(OL.asof)+'</small>':'')+'</div><p class="ol-s">'+esc(OL.summary)+'</p>'+
-    (pro?'<div class="ol-d">'+(OL.days||[]).map(function(d){return'<div><b>'+esc(d.d)+'</b><p>'+esc(d.t)+'</p></div>';}).join("")+'</div><p class="ol-dis">Background for the week ahead, from public release schedules. Education only, not a forecast or financial advice.</p>'
+    (pro?'<div class="ol-d">'+(OL.days||[]).map(function(d){return'<div><b>'+esc(d.d)+'</b><span>'+String(d.t||"").split(/(?<=[.)])\s+(?=[A-Z])/).map(function(x){return'<p>'+esc(x)+'</p>';}).join("")+'</span></div>';}).join("")+'</div><p class="ol-dis">Background for the week ahead, from public release schedules. Education only, not a forecast or financial advice.</p>'
       :'<div class="ol-lock"><span>Day-by-day breakdown of what\'s on and why it matters.</span><button type="button" class="pillbtn" data-pro-go>See Pro</button></div>');}
 P.on(outlook);
 })();
@@ -4769,6 +4798,23 @@ seg("mc-snd","data-c",function(v){setMix(v?v.split(","):[]);});
 /* section chips */
 document.querySelectorAll("[data-md-go]").forEach(function(b){b.addEventListener("click",function(){var t=$i(b.getAttribute("data-md-go"));if(t)window.scrollTo({top:t.getBoundingClientRect().top+window.scrollY-70,behavior:"smooth"});});});
 window.addEventListener("hashchange",function(){if(B1.on())B1.stop();calmOff();allOff();tstop();});
+})();
+
+/* news page: fold long texts behind "Read more" */
+(function(){
+  var root=document.getElementById("calendar");if(!root)return;
+  var SEL="#daily-brief .morning-grid li > p:not(.morning-meta), #displace-news .dn-item > p:not(.dn-meta):not(.dn-context)";
+  function fold(){
+    root.querySelectorAll(SEL).forEach(function(p){
+      if(p.dataset.fold||p.textContent.length<300)return;
+      p.dataset.fold="1";p.classList.add("nx-clamp");
+      var b=document.createElement("button");b.type="button";b.className="nx-more";b.textContent="Read more";b.setAttribute("aria-expanded","false");
+      b.onclick=function(){var open=p.classList.toggle("nx-clamp");b.textContent=open?"Read more":"Show less";b.setAttribute("aria-expanded",open?"false":"true");};
+      p.after(b);
+    });
+  }
+  var t=null;new MutationObserver(function(){clearTimeout(t);t=setTimeout(fold,60);}).observe(root,{childList:true,subtree:true});
+  fold();
 })();
 </script>
 <div class="al-toast" id="al-toast" role="alert"></div>
