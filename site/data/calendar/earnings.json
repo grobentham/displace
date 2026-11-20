@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-19",
+ "updated": "2026-11-20",
  "events": [
   {
    "id": "20261117-earn-nvda",
@@ -71,23 +71,23 @@
    "url": "https://investors.broadcom.com"
   },
   {
-   "id": "20261209-earn-orcl",
-   "date": "2026-12-09",
-   "time": "",
-   "title": "Oracle (ORCL) earnings · quarter ending Nov 2026",
+   "id": "20261210-earn-cost",
+   "date": "2026-12-10",
+   "time": "16:05",
+   "title": "Costco (COST) earnings · quarter ending Nov 2026",
    "cur": "USD",
    "impact": "earnings",
    "src": "Nasdaq earnings calendar",
    "tier": "notable",
    "status": "scheduled",
-   "session": "",
-   "note": "Time not published yet. Date from the Nasdaq calendar. Check the company's investor relations page for changes."
+   "session": "AMC",
+   "note": "Results scheduled after the U.S. stock market closes. Date from the Nasdaq calendar. Check the company's investor relations page for changes."
   },
   {
-   "id": "20261210-earn-cost",
-   "date": "2026-12-10",
+   "id": "20261214-earn-orcl",
+   "date": "2026-12-14",
    "time": "16:05",
-   "title": "Costco (COST) earnings · quarter ending Nov 2026",
+   "title": "Oracle (ORCL) earnings · quarter ending Nov 2026",
    "cur": "USD",
    "impact": "earnings",
    "src": "Nasdaq earnings calendar",
