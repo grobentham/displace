@@ -1,5 +1,5 @@
 {
- "asof": "2026-11-20T16:54-05:00",
+ "asof": "2026-11-20T17:18-05:00",
  "version": 4,
  "assets": {
   "gold": "Gold, close",
@@ -1203,7 +1203,7 @@
    "gold": {
     "b": -0.2783,
     "k": 0.6,
-    "n": 275,
+    "n": 276,
     "since": "2011-01-25",
     "bt": {
      "calls": 65,
@@ -1216,7 +1216,7 @@
       0.545
      ],
      "recent": 0.5,
-     "tested": 215
+     "tested": 216
     },
     "proven": false,
     "why": "not significant after correcting for the number of rules tested"
@@ -1224,7 +1224,7 @@
    "nq": {
     "b": -0.0405,
     "k": 0.0,
-    "n": 465,
+    "n": 466,
     "since": "2011-01-25",
     "bt": {
      "calls": 12,
@@ -1237,7 +1237,7 @@
       0.167
      ],
      "recent": 0.25,
-     "tested": 405
+     "tested": 406
     },
     "proven": false,
     "why": "too few tested calls"
@@ -3041,7 +3041,7 @@
   "umich": {
    "name": "UMich sentiment",
    "metric": "Michigan Consumer Sentiment Prel",
-   "n": 276,
+   "n": 277,
    "since": "2010",
    "basis": "consensus",
    "assets": {
@@ -3052,9 +3052,9 @@
       "med": -0.1
      },
      "inline": {
-      "n": 36,
-      "up": 0.556,
-      "med": 0.162
+      "n": 37,
+      "up": 0.541,
+      "med": 0.05
      },
      "cool": {
       "n": 25,
@@ -3069,9 +3069,9 @@
       "med": 0.104
      },
      "inline": {
-      "n": 107,
-      "up": 0.579,
-      "med": 0.183
+      "n": 108,
+      "up": 0.574,
+      "med": 0.178
      },
      "cool": {
       "n": 90,
@@ -3651,18 +3651,18 @@
      "hi": 3.0,
      "normal": 1.9,
      "mult": 0.954,
-     "pts": 66.7,
+     "pts": 63.8,
      "n": 189,
      "proven": false,
      "why": "no better than treating it as a normal day"
     },
     "nq": {
-     "pct": 1.51,
-     "lo": 0.87,
-     "hi": 2.43,
-     "normal": 1.5,
+     "pct": 1.54,
+     "lo": 0.89,
+     "hi": 2.48,
+     "normal": 1.53,
      "mult": 1.006,
-     "pts": 401.5,
+     "pts": 391.6,
      "n": 189,
      "proven": false,
      "why": "no better than treating it as a normal day"
@@ -3776,18 +3776,18 @@
      "hi": 2.85,
      "normal": 1.9,
      "mult": 0.943,
-     "pts": 65.9,
+     "pts": 63.1,
      "n": 165,
      "proven": false,
      "why": "no better than treating it as a normal day"
     },
     "nq": {
-     "pct": 1.66,
-     "lo": 0.86,
-     "hi": 2.78,
-     "normal": 1.5,
+     "pct": 1.69,
+     "lo": 0.88,
+     "hi": 2.83,
+     "normal": 1.53,
      "mult": 1.1,
-     "pts": 439.0,
+     "pts": 428.2,
      "n": 190,
      "proven": false,
      "why": "no better than treating it as a normal day"
@@ -3890,18 +3890,18 @@
      "hi": 3.65,
      "normal": 1.9,
      "mult": 1.029,
-     "pts": 71.9,
+     "pts": 68.9,
      "n": 836,
      "proven": false,
      "why": "no better than treating it as a normal day"
     },
     "nq": {
-     "pct": 1.61,
-     "lo": 1.04,
-     "hi": 3.23,
-     "normal": 1.5,
+     "pct": 1.64,
+     "lo": 1.06,
+     "hi": 3.3,
+     "normal": 1.53,
      "mult": 1.067,
-     "pts": 425.8,
+     "pts": 415.3,
      "n": 858,
      "proven": false,
      "why": "no better than treating it as a normal day"
@@ -4006,18 +4006,18 @@
      "hi": 3.84,
      "normal": 1.9,
      "mult": 1.101,
-     "pts": 77.0,
+     "pts": 73.7,
      "n": 18,
      "proven": false,
      "why": "too few tested releases"
     },
     "nq": {
-     "pct": 1.99,
-     "lo": 0.97,
-     "hi": 2.88,
-     "normal": 1.5,
+     "pct": 2.03,
+     "lo": 0.98,
+     "hi": 2.93,
+     "normal": 1.53,
      "mult": 1.322,
-     "pts": 527.6,
+     "pts": 514.6,
      "n": 29,
      "proven": false,
      "why": "too few tested releases"
@@ -4106,18 +4106,18 @@
      "hi": 3.48,
      "normal": 1.9,
      "mult": 0.972,
-     "pts": 68.0,
+     "pts": 65.0,
      "n": 170,
      "proven": false,
      "why": "no better than treating it as a normal day"
     },
     "nq": {
-     "pct": 1.53,
-     "lo": 0.73,
-     "hi": 2.56,
-     "normal": 1.5,
+     "pct": 1.56,
+     "lo": 0.75,
+     "hi": 2.61,
+     "normal": 1.53,
      "mult": 1.015,
-     "pts": 405.1,
+     "pts": 395.1,
      "n": 186,
      "proven": false,
      "why": "no better than treating it as a normal day"
@@ -4247,18 +4247,18 @@
      "hi": 3.66,
      "normal": 1.9,
      "mult": 1.17,
-     "pts": 81.8,
+     "pts": 78.3,
      "n": 169,
      "proven": false,
      "why": "not significant after correcting for the number of rules tested"
     },
     "nq": {
-     "pct": 1.62,
-     "lo": 0.96,
-     "hi": 3.18,
-     "normal": 1.5,
+     "pct": 1.65,
+     "lo": 0.98,
+     "hi": 3.24,
+     "normal": 1.53,
      "mult": 1.074,
-     "pts": 428.6,
+     "pts": 418.0,
      "n": 191,
      "proven": false,
      "why": "no better than treating it as a normal day"
@@ -4373,18 +4373,18 @@
      "hi": 3.04,
      "normal": 1.9,
      "mult": 1.02,
-     "pts": 71.3,
+     "pts": 68.3,
      "n": 119,
      "proven": false,
      "why": "no better than treating it as a normal day"
     },
     "nq": {
-     "pct": 1.52,
-     "lo": 0.93,
-     "hi": 2.73,
-     "normal": 1.5,
+     "pct": 1.55,
+     "lo": 0.95,
+     "hi": 2.78,
+     "normal": 1.53,
      "mult": 1.01,
-     "pts": 403.1,
+     "pts": 393.1,
      "n": 124,
      "proven": false,
      "why": "no better than treating it as a normal day"
@@ -4498,18 +4498,18 @@
      "hi": 3.4,
      "normal": 1.9,
      "mult": 1.02,
-     "pts": 71.3,
+     "pts": 68.3,
      "n": 187,
      "proven": false,
      "why": "no better than treating it as a normal day"
     },
     "nq": {
-     "pct": 1.7,
-     "lo": 1.01,
-     "hi": 3.08,
-     "normal": 1.5,
+     "pct": 1.73,
+     "lo": 1.02,
+     "hi": 3.14,
+     "normal": 1.53,
      "mult": 1.129,
-     "pts": 450.6,
+     "pts": 439.4,
      "n": 189,
      "proven": false,
      "why": "no better than treating it as a normal day"
@@ -4612,18 +4612,18 @@
      "hi": 3.65,
      "normal": 1.9,
      "mult": 1.029,
-     "pts": 71.9,
+     "pts": 68.9,
      "n": 836,
      "proven": false,
      "why": "no better than treating it as a normal day"
     },
     "nq": {
-     "pct": 1.61,
-     "lo": 1.04,
-     "hi": 3.23,
-     "normal": 1.5,
+     "pct": 1.64,
+     "lo": 1.06,
+     "hi": 3.3,
+     "normal": 1.53,
      "mult": 1.067,
-     "pts": 425.8,
+     "pts": 415.3,
      "n": 858,
      "proven": false,
      "why": "no better than treating it as a normal day"
@@ -4732,18 +4732,18 @@
      "hi": 3.83,
      "normal": 1.9,
      "mult": 1.04,
-     "pts": 72.7,
+     "pts": 69.6,
      "n": 177,
      "proven": false,
      "why": "no better than treating it as a normal day"
     },
     "nq": {
-     "pct": 1.64,
-     "lo": 1.03,
-     "hi": 3.06,
-     "normal": 1.5,
+     "pct": 1.68,
+     "lo": 1.05,
+     "hi": 3.12,
+     "normal": 1.53,
      "mult": 1.093,
-     "pts": 436.2,
+     "pts": 425.4,
      "n": 191,
      "proven": false,
      "why": "no better than treating it as a normal day"
@@ -4851,18 +4851,18 @@
      "hi": 4.44,
      "normal": 1.9,
      "mult": 1.325,
-     "pts": 92.6,
+     "pts": 88.7,
      "n": 72,
      "proven": false,
      "why": "no better than treating it as a normal day"
     },
     "nq": {
-     "pct": 1.89,
-     "lo": 1.08,
-     "hi": 3.29,
-     "normal": 1.5,
+     "pct": 1.92,
+     "lo": 1.1,
+     "hi": 3.35,
+     "normal": 1.53,
      "mult": 1.253,
-     "pts": 500.0,
+     "pts": 487.7,
      "n": 185,
      "proven": false,
      "why": "no better than treating it as a normal day"
@@ -4971,19 +4971,19 @@
      "hi": 3.91,
      "normal": 1.9,
      "mult": 1.006,
-     "pts": 70.3,
-     "n": 90,
+     "pts": 67.3,
+     "n": 91,
      "proven": false,
      "why": "no better than treating it as a normal day"
     },
     "nq": {
-     "pct": 1.64,
-     "lo": 0.85,
-     "hi": 2.81,
-     "normal": 1.5,
+     "pct": 1.67,
+     "lo": 0.87,
+     "hi": 3.09,
+     "normal": 1.53,
      "mult": 1.087,
-     "pts": 433.8,
-     "n": 276,
+     "pts": 423.1,
+     "n": 277,
      "proven": false,
      "why": "no better than treating it as a normal day"
     }
@@ -4997,13 +4997,13 @@
   "markets": {
    "gold": {
     "baseline": 1.897,
-    "close": 3685.5,
-    "asof": "2026-11-19"
+    "close": 3527.800048828125,
+    "asof": "2026-11-20"
    },
    "nq": {
-    "baseline": 1.505,
-    "close": 26517.05078125,
-    "asof": "2026-11-19"
+    "baseline": 1.534,
+    "close": 25374.0,
+    "asof": "2026-11-20"
    }
   },
   "kinds": {
@@ -5477,35 +5477,35 @@
    },
    "umich": {
     "gold": {
-     "n": 90,
+     "n": 91,
      "since": "2015-11-13",
      "mult": 1.006,
      "lo": 0.668,
      "hi": 2.061,
      "medRange": 1.274,
      "bt": {
-      "tests": 78,
-      "skill": -0.024,
-      "beatNaive": 0.423,
-      "pval": 0.9297308568652388,
-      "coverage": 0.833
+      "tests": 79,
+      "skill": -0.023,
+      "beatNaive": 0.43,
+      "pval": 0.911694723469918,
+      "coverage": 0.823
      },
      "proven": false,
      "why": "no better than treating it as a normal day"
     },
     "nq": {
-     "n": 276,
+     "n": 277,
      "since": "2015-05-15",
      "mult": 1.087,
      "lo": 0.566,
-     "hi": 1.868,
-     "medRange": 1.432,
+     "hi": 2.015,
+     "medRange": 1.472,
      "bt": {
-      "tests": 264,
+      "tests": 265,
       "skill": -0.001,
-      "beatNaive": 0.489,
-      "pval": 0.666659910764978,
-      "coverage": 0.784
+      "beatNaive": 0.491,
+      "pval": 0.6437409347032522,
+      "coverage": 0.781
      },
      "proven": false,
      "why": "no better than treating it as a normal day"
@@ -5624,6 +5624,6 @@
  "log": [
   "tv: 3 month(s) refreshed, 3592 releases with a consensus surprise",
   "markets: gold, nq, usd, y2, gold15m, gold2h, nq15m, nq2h",
-  "model: fit in 3s; proven: inflation:nq2h, labor:y2"
+  "model: fit in 2s; proven: inflation:nq2h, labor:y2"
  ]
 }
