@@ -2,6 +2,39 @@
  "version": 2,
  "editions": [
   {
+   "date": "2026-11-21",
+   "opensAt": "2026-11-21T07:00+08:00",
+   "generatedAt": "2026-11-21T06:44:40+08:00",
+   "updates": [],
+   "upcoming": [],
+   "moreReleases": [],
+   "focus": null,
+   "nextFed": "Dec 8–9",
+   "otherCloses": [
+    "At the Tue Nov 17 close, WTI crude $89.53 (up 0.3%)."
+   ],
+   "treasury": {
+    "date": "2026-11-20",
+    "yield": 4.63,
+    "changeBp": -13
+   },
+   "outlook": {
+    "label": "No U.S. session",
+    "reason": "U.S. cash equities are closed during this edition’s window.",
+    "rates": null,
+    "thresholdBp": 3
+   },
+   "earnings": {
+    "reports": [],
+    "upcoming": [],
+    "sourcesRead": 6,
+    "sourcesTotal": 6
+   },
+   "calendarCovered": true,
+   "feedsChecked": true,
+   "feedIssues": false
+  },
+  {
    "date": "2026-11-20",
    "opensAt": "2026-11-20T07:00+08:00",
    "generatedAt": "2026-11-20T06:43:52+08:00",
@@ -60,101 +93,6 @@
    "feedsChecked": true,
    "feedIssues": false,
    "refreshedAt": "2026-11-20T23:24:47+08:00"
-  },
-  {
-   "date": "2026-11-19",
-   "opensAt": "2026-11-19T07:00+08:00",
-   "generatedAt": "2026-11-19T09:23:04+08:00",
-   "updates": [
-    {
-     "id": "20261119-initial-jobless-claims",
-     "title": "Initial jobless claims",
-     "url": "https://alfred.stlouisfed.org/series?seid=ICSA&vintage_date=2026-11-19",
-     "source": "Dept. of Labor",
-     "analysis": "Jobless claims came in at 203K against a 198K forecast, above expectations. The previous reading was 200K, revised to 202K. 4-week average 198K (previous 196K); Continuing claims 1.76M (previous 1.69M). The initial claims reading was the highest since week to Sep 5.",
-     "context": "Initial claims count new unemployment insurance applications. The four-week average smooths weekly swings.",
-     "published": "2026-11-19T21:30:00+08:00"
-    },
-    {
-     "title": "Minutes of the Federal Open Market Committee, October 27-28, 2026",
-     "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20261118a.htm",
-     "source": "Federal Reserve",
-     "analysis": "With regard to the outlook for monetary policy in the months ahead, almost all participants judged that, under their baseline outlooks for inflation and the labor market, further action to raise the target range for the federal funds rate would likely be appropriate, in order to ensure a timely return of inflation to the 2 percent objective. Some participants expressed concern that more widespread price pressures in the context of a prolonged period of above-target inflation could increase the risk of elevated inflation becoming entrenched in the inflation expectations of households and businesses. Dissent: Lisa D. Cook and Beth M. Hammack, who preferred to raise the target range for the federal funds rate by 1/4 percentage point at this meeting.",
-     "context": "Meeting minutes show which risks officials weighed when they made the decision.",
-     "published": "2026-11-19T03:00:00+08:00"
-    }
-   ],
-   "upcoming": [
-    {
-     "at": "2026-11-19T21:30+08:00",
-     "title": "Initial jobless claims",
-     "watch": "Initial claims count new unemployment insurance applications. The four-week average smooths weekly swings.",
-     "source": "Dept. of Labor",
-     "metric": "initial claims",
-     "forecast": "198K",
-     "previous": "200K",
-     "forecastSource": "ForexFactory consensus",
-     "actual": "203K",
-     "revised": "202K",
-     "components": [
-      {
-       "label": "4-week average",
-       "actual": "198K",
-       "previous": "196K"
-      },
-      {
-       "label": "Continuing claims",
-       "actual": "1.76M",
-       "previous": "1.69M"
-      }
-     ]
-    }
-   ],
-   "moreReleases": [],
-   "focus": null,
-   "nextFed": "Dec 8–9",
-   "otherCloses": [
-    "At the Tue Nov 17 close, WTI crude $89.53 (up 0.3%)."
-   ],
-   "treasury": {
-    "date": "2026-11-18",
-    "yield": 4.8,
-    "changeBp": 0
-   },
-   "outlook": {
-    "label": "Neutral",
-    "reason": "The 2-year yield moved by less than 3 bp. A tilt requires both yields to reach that threshold.",
-    "rates": {
-     "date": "2026-11-18",
-     "twoYearBp": 0,
-     "tenYearBp": -3,
-     "twoYearYield": 4.8,
-     "tenYearYield": 5.07
-    },
-    "thresholdBp": 3
-   },
-   "earnings": {
-    "reports": [],
-    "upcoming": [
-     {
-      "symbol": "WMT",
-      "title": "Walmart",
-      "session": "BMO",
-      "date": "2026-11-19",
-      "confirmed": true,
-      "source": "Company announcement",
-      "at": "2026-11-19T20:00+08:00",
-      "timeConfirmed": false,
-      "url": "https://corporate.walmart.com/news/events/fy2027-q3-earnings-release"
-     }
-    ],
-    "sourcesRead": 6,
-    "sourcesTotal": 6
-   },
-   "calendarCovered": true,
-   "feedsChecked": true,
-   "feedIssues": false,
-   "refreshedAt": "2026-11-19T21:55:03+08:00"
   }
  ]
 }
