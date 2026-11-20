@@ -1,5 +1,5 @@
 {
- "asof": "2026-11-19T22:45-05:00",
+ "asof": "2026-11-20T06:50-05:00",
  "version": 4,
  "assets": {
   "gold": "Gold, close",
@@ -286,35 +286,35 @@
    "group": "labor"
   },
   "nfp:gold2h": {
-   "calls": 25,
-   "hits": 12,
+   "calls": 18,
+   "hits": 6,
    "proven": false,
-   "why": "right less than 55% of the time on unseen releases",
-   "brierSkill": 0.01,
+   "why": "too few tested calls",
+   "brierSkill": 0.002,
    "group": "labor"
   },
   "claims:gold2h": {
-   "calls": 25,
-   "hits": 12,
+   "calls": 18,
+   "hits": 6,
    "proven": false,
-   "why": "right less than 55% of the time on unseen releases",
-   "brierSkill": 0.01,
+   "why": "too few tested calls",
+   "brierSkill": 0.002,
    "group": "labor"
   },
   "jolts:gold2h": {
-   "calls": 25,
-   "hits": 12,
+   "calls": 18,
+   "hits": 6,
    "proven": false,
-   "why": "right less than 55% of the time on unseen releases",
-   "brierSkill": 0.01,
+   "why": "too few tested calls",
+   "brierSkill": 0.002,
    "group": "labor"
   },
   "adp:gold2h": {
-   "calls": 25,
-   "hits": 12,
+   "calls": 18,
+   "hits": 6,
    "proven": false,
-   "why": "right less than 55% of the time on unseen releases",
-   "brierSkill": 0.01,
+   "why": "too few tested calls",
+   "brierSkill": 0.002,
    "group": "labor"
   },
   "nfp:nq2h": {
@@ -1029,25 +1029,25 @@
     "why": ""
    },
    "gold2h": {
-    "b": -0.4677,
-    "k": 1.2,
+    "b": -0.4133,
+    "k": 0.95,
     "n": 205,
     "since": "2024-07-02",
     "bt": {
-     "calls": 25,
-     "hits": 12,
-     "rate": 0.48,
-     "pval": 0.6549810171127319,
-     "brierSkill": 0.01,
+     "calls": 18,
+     "hits": 6,
+     "rate": 0.333,
+     "pval": 0.951873779296875,
+     "brierSkill": 0.002,
      "halves": [
-      0.25,
-      0.692
+      0.222,
+      0.444
      ],
-     "recent": 0.55,
+     "recent": 0.333,
      "tested": 180
     },
     "proven": false,
-    "why": "right less than 55% of the time on unseen releases"
+    "why": "too few tested calls"
    },
    "nq2h": {
     "b": -0.2387,
@@ -1629,7 +1629,7 @@
      "inline": {
       "n": 8,
       "up": 0.375,
-      "med": -0.043
+      "med": -0.039
      },
      "cool": {
       "n": 8,
@@ -1651,7 +1651,7 @@
      "cool": {
       "n": 8,
       "up": 0.625,
-      "med": 0.022
+      "med": 0.023
      }
     }
    }
@@ -1745,7 +1745,7 @@
      "cool": {
       "n": 8,
       "up": 0.75,
-      "med": 0.542
+      "med": 0.539
      }
     },
     "nq2h": {
@@ -1846,7 +1846,7 @@
      "hot": {
       "n": 4,
       "up": 0.25,
-      "med": -0.348
+      "med": -0.377
      },
      "inline": {
       "n": 11,
@@ -1856,7 +1856,7 @@
      "cool": {
       "n": 12,
       "up": 0.75,
-      "med": 0.551
+      "med": 0.547
      }
     },
     "nq2h": {
@@ -1873,7 +1873,7 @@
      "cool": {
       "n": 12,
       "up": 0.667,
-      "med": 0.197
+      "med": 0.195
      }
     }
    }
@@ -1957,7 +1957,7 @@
      "hot": {
       "n": 12,
       "up": 0.5,
-      "med": 0.011
+      "med": 0.006
      },
      "inline": {
       "n": 10,
@@ -1984,7 +1984,7 @@
      "cool": {
       "n": 7,
       "up": 0.429,
-      "med": -0.126
+      "med": -0.121
      }
     }
    }
@@ -2095,7 +2095,7 @@
      "cool": {
       "n": 22,
       "up": 0.5,
-      "med": 0.031
+      "med": 0.03
      }
     },
     "nq15m": {
@@ -2112,7 +2112,7 @@
      "cool": {
       "n": 1,
       "up": 1.0,
-      "med": 0.218
+      "med": 0.221
      }
     },
     "nq2h": {
@@ -2129,7 +2129,7 @@
      "cool": {
       "n": 22,
       "up": 0.364,
-      "med": -0.112
+      "med": -0.114
      }
     }
    }
@@ -2212,8 +2212,8 @@
     "gold2h": {
      "hot": {
       "n": 3,
-      "up": 0.0,
-      "med": -0.422
+      "up": 0.333,
+      "med": -0.417
      },
      "inline": {
       "n": 16,
@@ -2230,7 +2230,7 @@
      "hot": {
       "n": 3,
       "up": 0.667,
-      "med": 0.265
+      "med": 0.252
      },
      "inline": {
       "n": 16,
@@ -2657,7 +2657,7 @@
      "inline": {
       "n": 13,
       "up": 0.538,
-      "med": 0.093
+      "med": 0.098
      },
      "cool": {
       "n": 8,
@@ -2785,7 +2785,7 @@
      "inline": {
       "n": 13,
       "up": 0.615,
-      "med": 0.138
+      "med": 0.142
      },
      "cool": {
       "n": 8,
@@ -3106,7 +3106,7 @@
      "cool": {
       "n": 20,
       "up": 0.65,
-      "med": 0.152
+      "med": 0.156
      }
     },
     "nq2h": {
@@ -3234,7 +3234,7 @@
      "cool": {
       "n": 5,
       "up": 0.8,
-      "med": 0.306
+      "med": 0.308
      }
     }
    }
@@ -3318,7 +3318,7 @@
      "hot": {
       "n": 8,
       "up": 0.625,
-      "med": 0.185
+      "med": 0.172
      },
      "inline": {
       "n": 11,
@@ -3335,7 +3335,7 @@
      "hot": {
       "n": 8,
       "up": 0.25,
-      "med": -0.177
+      "med": -0.183
      },
      "inline": {
       "n": 11,
@@ -3464,14 +3464,14 @@
      "hold": {
       "n": 1,
       "up": 0.0,
-      "med": -0.168
+      "med": -0.16
      }
     },
     "gold2h": {
      "hold": {
       "n": 12,
       "up": 0.5,
-      "med": 0.02
+      "med": 0.021
      },
      "cut": {
       "n": 6,
@@ -3488,7 +3488,7 @@
      "hike": {
       "n": 1,
       "up": 0.0,
-      "med": -0.032
+      "med": -0.04
      },
      "hold": {
       "n": 1,
@@ -3510,7 +3510,7 @@
      "hike": {
       "n": 1,
       "up": 0.0,
-      "med": -0.749
+      "med": -0.757
      }
     }
    }
@@ -3625,7 +3625,7 @@
      "hi": 3.91,
      "normal": 1.9,
      "mult": 1.006,
-     "pts": 68.6,
+     "pts": 70.3,
      "n": 90,
      "proven": false,
      "why": "no better than treating it as a normal day"
@@ -3756,7 +3756,7 @@
      "hi": 3.0,
      "normal": 1.9,
      "mult": 0.954,
-     "pts": 65.1,
+     "pts": 66.7,
      "n": 189,
      "proven": false,
      "why": "no better than treating it as a normal day"
@@ -3881,7 +3881,7 @@
      "hi": 2.85,
      "normal": 1.9,
      "mult": 0.943,
-     "pts": 64.3,
+     "pts": 65.9,
      "n": 165,
      "proven": false,
      "why": "no better than treating it as a normal day"
@@ -3936,8 +3936,8 @@
     },
     "gold2h": {
      "none": true,
-     "n": 25,
-     "why": "right less than 55% of the time on unseen releases"
+     "n": 18,
+     "why": "too few tested calls"
     },
     "nq2h": {
      "none": true,
@@ -3968,8 +3968,8 @@
     },
     "gold2h": {
      "none": true,
-     "n": 25,
-     "why": "right less than 55% of the time on unseen releases"
+     "n": 18,
+     "why": "too few tested calls"
     },
     "nq2h": {
      "none": true,
@@ -3992,10 +3992,10 @@
     "gold": {
      "pct": 1.95,
      "lo": 1.06,
-     "hi": 3.67,
+     "hi": 3.65,
      "normal": 1.9,
      "mult": 1.029,
-     "pts": 70.2,
+     "pts": 71.9,
      "n": 836,
      "proven": false,
      "why": "no better than treating it as a normal day"
@@ -4111,7 +4111,7 @@
      "hi": 3.84,
      "normal": 1.9,
      "mult": 1.101,
-     "pts": 75.1,
+     "pts": 77.0,
      "n": 18,
      "proven": false,
      "why": "too few tested releases"
@@ -4211,7 +4211,7 @@
      "hi": 3.48,
      "normal": 1.9,
      "mult": 0.972,
-     "pts": 66.3,
+     "pts": 68.0,
      "n": 170,
      "proven": false,
      "why": "no better than treating it as a normal day"
@@ -4352,7 +4352,7 @@
      "hi": 3.66,
      "normal": 1.9,
      "mult": 1.17,
-     "pts": 79.8,
+     "pts": 81.8,
      "n": 169,
      "proven": false,
      "why": "not significant after correcting for the number of rules tested"
@@ -4407,8 +4407,8 @@
     },
     "gold2h": {
      "none": true,
-     "n": 25,
-     "why": "right less than 55% of the time on unseen releases"
+     "n": 18,
+     "why": "too few tested calls"
     },
     "nq2h": {
      "none": true,
@@ -4439,8 +4439,8 @@
     },
     "gold2h": {
      "none": true,
-     "n": 25,
-     "why": "right less than 55% of the time on unseen releases"
+     "n": 18,
+     "why": "too few tested calls"
     },
     "nq2h": {
      "none": true,
@@ -4478,7 +4478,7 @@
      "hi": 3.04,
      "normal": 1.9,
      "mult": 1.02,
-     "pts": 69.6,
+     "pts": 71.3,
      "n": 119,
      "proven": false,
      "why": "no better than treating it as a normal day"
@@ -4533,8 +4533,8 @@
     },
     "gold2h": {
      "none": true,
-     "n": 25,
-     "why": "right less than 55% of the time on unseen releases"
+     "n": 18,
+     "why": "too few tested calls"
     },
     "nq2h": {
      "none": true,
@@ -4565,8 +4565,8 @@
     },
     "gold2h": {
      "none": true,
-     "n": 25,
-     "why": "right less than 55% of the time on unseen releases"
+     "n": 18,
+     "why": "too few tested calls"
     },
     "nq2h": {
      "none": true,
@@ -4603,7 +4603,7 @@
      "hi": 3.4,
      "normal": 1.9,
      "mult": 1.02,
-     "pts": 69.6,
+     "pts": 71.3,
      "n": 187,
      "proven": false,
      "why": "no better than treating it as a normal day"
@@ -4658,8 +4658,8 @@
     },
     "gold2h": {
      "none": true,
-     "n": 25,
-     "why": "right less than 55% of the time on unseen releases"
+     "n": 18,
+     "why": "too few tested calls"
     },
     "nq2h": {
      "none": true,
@@ -4690,8 +4690,8 @@
     },
     "gold2h": {
      "none": true,
-     "n": 25,
-     "why": "right less than 55% of the time on unseen releases"
+     "n": 18,
+     "why": "too few tested calls"
     },
     "nq2h": {
      "none": true,
@@ -4714,10 +4714,10 @@
     "gold": {
      "pct": 1.95,
      "lo": 1.06,
-     "hi": 3.67,
+     "hi": 3.65,
      "normal": 1.9,
      "mult": 1.029,
-     "pts": 70.2,
+     "pts": 71.9,
      "n": 836,
      "proven": false,
      "why": "no better than treating it as a normal day"
@@ -4837,7 +4837,7 @@
      "hi": 3.83,
      "normal": 1.9,
      "mult": 1.04,
-     "pts": 70.9,
+     "pts": 72.7,
      "n": 177,
      "proven": false,
      "why": "no better than treating it as a normal day"
@@ -4854,16 +4854,261 @@
      "why": "no better than treating it as a normal day"
     }
    }
+  },
+  "20261204-non-farm-payrolls-employment-situation-n": {
+   "kind": "nfp",
+   "group": "labor",
+   "date": "2026-12-04",
+   "when": "2026-12-04T08:30:00-05:00",
+   "basis": "consensus",
+   "consensus": {
+    "title": "Non Farm Payrolls",
+    "forecast": null,
+    "actual": null,
+    "unit": null,
+    "scale": "K"
+   },
+   "stage": "pre",
+   "hot": {
+    "gold": {
+     "none": true,
+     "n": 115,
+     "why": "right less than 55% of the time on unseen releases"
+    },
+    "nq": {
+     "none": true,
+     "n": 20,
+     "why": "too few tested calls"
+    },
+    "usd": {
+     "none": true,
+     "n": 179,
+     "why": "probabilities no better than a coin flip"
+    },
+    "y2": {
+     "none": true,
+     "n": 384,
+     "why": "the surprise is too small for a lean"
+    },
+    "gold2h": {
+     "none": true,
+     "n": 18,
+     "why": "too few tested calls"
+    },
+    "nq2h": {
+     "none": true,
+     "n": 3,
+     "why": "too few tested calls"
+    }
+   },
+   "cool": {
+    "gold": {
+     "none": true,
+     "n": 115,
+     "why": "right less than 55% of the time on unseen releases"
+    },
+    "nq": {
+     "none": true,
+     "n": 20,
+     "why": "too few tested calls"
+    },
+    "usd": {
+     "none": true,
+     "n": 179,
+     "why": "probabilities no better than a coin flip"
+    },
+    "y2": {
+     "none": true,
+     "n": 384,
+     "why": "the surprise is too small for a lean"
+    },
+    "gold2h": {
+     "none": true,
+     "n": 18,
+     "why": "too few tested calls"
+    },
+    "nq2h": {
+     "none": true,
+     "n": 3,
+     "why": "too few tested calls"
+    }
+   },
+   "hist": {
+    "hot": {},
+    "inline": {},
+    "cool": {
+     "usd": {
+      "dir": "down",
+      "p": 0.722,
+      "n": 36
+     },
+     "y2": {
+      "dir": "down",
+      "p": 0.647,
+      "n": 34
+     }
+    }
+   },
+   "move": {
+    "gold": {
+     "pct": 2.51,
+     "lo": 1.42,
+     "hi": 4.44,
+     "normal": 1.9,
+     "mult": 1.325,
+     "pts": 92.6,
+     "n": 72,
+     "proven": false,
+     "why": "no better than treating it as a normal day"
+    },
+    "nq": {
+     "pct": 1.89,
+     "lo": 1.08,
+     "hi": 3.29,
+     "normal": 1.5,
+     "mult": 1.253,
+     "pts": 500.0,
+     "n": 185,
+     "proven": false,
+     "why": "no better than treating it as a normal day"
+    }
+   }
+  },
+  "20261204-umich-consumer-sentiment-preliminary-dec": {
+   "kind": "umich",
+   "group": "sentiment",
+   "date": "2026-12-04",
+   "when": "2026-12-04T10:00:00-05:00",
+   "basis": "consensus",
+   "consensus": {
+    "title": "Michigan Consumer Sentiment Prel",
+    "forecast": null,
+    "actual": null,
+    "unit": null,
+    "scale": null
+   },
+   "stage": "pre",
+   "hot": {
+    "gold": {
+     "none": true,
+     "n": 65,
+     "why": "not significant after correcting for the number of rules tested"
+    },
+    "nq": {
+     "none": true,
+     "n": 12,
+     "why": "too few tested calls"
+    },
+    "usd": {
+     "none": true,
+     "n": 43,
+     "why": "right less than 55% of the time on unseen releases"
+    },
+    "y2": {
+     "none": true,
+     "n": 98,
+     "why": "not significant after correcting for the number of rules tested"
+    },
+    "gold2h": {
+     "none": true,
+     "n": 0,
+     "why": "too few tested calls"
+    },
+    "nq2h": {
+     "none": true,
+     "n": 19,
+     "why": "too few tested calls"
+    }
+   },
+   "cool": {
+    "gold": {
+     "none": true,
+     "n": 65,
+     "why": "not significant after correcting for the number of rules tested"
+    },
+    "nq": {
+     "none": true,
+     "n": 12,
+     "why": "too few tested calls"
+    },
+    "usd": {
+     "none": true,
+     "n": 43,
+     "why": "right less than 55% of the time on unseen releases"
+    },
+    "y2": {
+     "none": true,
+     "n": 98,
+     "why": "not significant after correcting for the number of rules tested"
+    },
+    "gold2h": {
+     "none": true,
+     "n": 0,
+     "why": "too few tested calls"
+    },
+    "nq2h": {
+     "none": true,
+     "n": 19,
+     "why": "too few tested calls"
+    }
+   },
+   "hist": {
+    "hot": {
+     "y2": {
+      "dir": "up",
+      "p": 0.677,
+      "n": 65
+     }
+    },
+    "inline": {
+     "gold2h": {
+      "dir": "up",
+      "p": 0.682,
+      "n": 22
+     }
+    },
+    "cool": {
+     "nq": {
+      "dir": "up",
+      "p": 0.611,
+      "n": 90
+     }
+    }
+   },
+   "move": {
+    "gold": {
+     "pct": 1.91,
+     "lo": 1.27,
+     "hi": 3.91,
+     "normal": 1.9,
+     "mult": 1.006,
+     "pts": 70.3,
+     "n": 90,
+     "proven": false,
+     "why": "no better than treating it as a normal day"
+    },
+    "nq": {
+     "pct": 1.64,
+     "lo": 0.85,
+     "hi": 2.81,
+     "normal": 1.5,
+     "mult": 1.087,
+     "pts": 433.8,
+     "n": 276,
+     "proven": false,
+     "why": "no better than treating it as a normal day"
+    }
+   }
   }
  },
  "disclaimer": "Historical statistics for education. Past reactions do not guarantee future moves, and nothing here is a recommendation to buy or sell.",
  "basis": "consensus",
  "moves": {
-  "asof": "2026-11-19",
+  "asof": "2026-11-20",
   "markets": {
    "gold": {
     "baseline": 1.897,
-    "close": 3595.89990234375,
+    "close": 3685.5,
     "asof": "2026-11-19"
    },
    "nq": {
@@ -4879,7 +5124,7 @@
      "since": "2010-04-08",
      "mult": 1.029,
      "lo": 0.561,
-     "hi": 1.937,
+     "hi": 1.925,
      "medRange": 2.149,
      "bt": {
       "tests": 824,
@@ -5490,6 +5735,6 @@
  "log": [
   "tv: 3 month(s) refreshed, 3591 releases with a consensus surprise",
   "markets: gold, nq, usd, y2, gold15m, gold2h, nq15m, nq2h",
-  "model: fit in 3s; proven: inflation:nq2h, labor:y2"
+  "model: fit in 2s; proven: inflation:nq2h, labor:y2"
  ]
 }
