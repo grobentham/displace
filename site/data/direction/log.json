@@ -1,4 +1,18 @@
 {
  "version": 4,
- "rows": []
+ "rows": [
+  {
+   "id": "20261120-umich-consumer-sentiment-final-nov",
+   "date": "2026-11-20",
+   "when": "2026-11-20T10:00:00-05:00",
+   "kind": "umich",
+   "group": "sentiment",
+   "asset": "gold2h",
+   "dir": "up",
+   "p": 0.682,
+   "z": 0.0,
+   "tier": "hist",
+   "logged": "2026-11-20T10:24-05:00"
+  }
+ ]
 }

@@ -28,10 +28,7 @@
     }
    ],
    "moreReleases": [],
-   "focus": {
-    "title": "UMich consumer sentiment, final",
-    "at": "2026-11-20T23:00+08:00"
-   },
+   "focus": null,
    "nextFed": "Dec 8–9",
    "otherCloses": [
     "At the Tue Nov 17 close, WTI crude $89.53 (up 0.3%)."
@@ -61,7 +58,8 @@
    },
    "calendarCovered": true,
    "feedsChecked": true,
-   "feedIssues": false
+   "feedIssues": false,
+   "refreshedAt": "2026-11-20T23:24:47+08:00"
   },
   {
    "date": "2026-11-19",
