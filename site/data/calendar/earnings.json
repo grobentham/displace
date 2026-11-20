@@ -71,19 +71,6 @@
    "url": "https://investors.broadcom.com"
   },
   {
-   "id": "20261209-earn-orcl",
-   "date": "2026-12-09",
-   "time": "",
-   "title": "Oracle (ORCL) earnings · quarter ending Nov 2026",
-   "cur": "USD",
-   "impact": "earnings",
-   "src": "Nasdaq earnings calendar",
-   "tier": "notable",
-   "status": "scheduled",
-   "session": "",
-   "note": "Time not published yet. Date from the Nasdaq calendar. Check the company's investor relations page for changes."
-  },
-  {
    "id": "20261210-earn-cost",
    "date": "2026-12-10",
    "time": "16:05",

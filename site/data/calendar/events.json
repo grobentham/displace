@@ -240,11 +240,11 @@
    "components": [
     {
      "label": "Consumer sentiment",
-     "previous": "48.1"
+     "previous": "48.0"
     },
     {
      "label": "1-yr inflation expectations",
-     "previous": "4.6%"
+     "previous": "4.7%"
     }
    ]
   },
@@ -554,7 +554,9 @@
      "label": "Avg hourly earnings y/y",
      "previous": "3.1%"
     }
-   ]
+   ],
+   "forecast": "93K",
+   "fsrc": "TradingView consensus"
   },
   {
    "date": "2026-12-04",
@@ -570,11 +572,11 @@
    "components": [
     {
      "label": "Consumer sentiment",
-     "previous": "48.1"
+     "previous": "48.0"
     },
     {
      "label": "1-yr inflation expectations",
-     "previous": "4.6%"
+     "previous": "4.7%"
     }
    ]
   },
@@ -738,11 +740,11 @@
    "components": [
     {
      "label": "Consumer sentiment",
-     "previous": "48.1"
+     "previous": "48.0"
     },
     {
      "label": "1-yr inflation expectations",
-     "previous": "4.6%"
+     "previous": "4.7%"
     }
    ]
   },

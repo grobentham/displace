@@ -1,5 +1,5 @@
 {
- "asof": "2026-11-20T10:24-05:00",
+ "asof": "2026-11-20T14:18-05:00",
  "version": 4,
  "assets": {
   "gold": "Gold, close",
@@ -1287,7 +1287,7 @@
    "gold2h": {
     "b": 0.0148,
     "k": 0.0,
-    "n": 86,
+    "n": 87,
     "since": "2024-06-28",
     "bt": {
      "calls": 0,
@@ -1300,7 +1300,7 @@
       0
      ],
      "recent": 0,
-     "tested": 61
+     "tested": 62
     },
     "proven": false,
     "why": "too few tested calls"
@@ -1308,7 +1308,7 @@
    "nq2h": {
     "b": 0.2668,
     "k": 0.65,
-    "n": 85,
+    "n": 86,
     "since": "2024-06-28",
     "bt": {
      "calls": 19,
@@ -1321,7 +1321,7 @@
       0.4
      ],
      "recent": 0.579,
-     "tested": 60
+     "tested": 61
     },
     "proven": false,
     "why": "too few tested calls"
@@ -1426,11 +1426,32 @@
   "byAsset": {},
   "recent": [],
   "hist": {
-   "calls": 0,
+   "calls": 1,
    "hits": 0,
-   "open": 1,
-   "byAsset": {},
-   "recent": []
+   "open": 0,
+   "byAsset": {
+    "gold2h": [
+     0,
+     1
+    ]
+   },
+   "recent": [
+    {
+     "id": "20261120-umich-consumer-sentiment-final-nov",
+     "date": "2026-11-20",
+     "when": "2026-11-20T10:00:00-05:00",
+     "kind": "umich",
+     "group": "sentiment",
+     "asset": "gold2h",
+     "dir": "up",
+     "p": 0.682,
+     "z": 0.0,
+     "tier": "hist",
+     "logged": "2026-11-20T10:24-05:00",
+     "move": -0.877,
+     "hit": false
+    }
+   ]
   }
  },
  "scenarios": {
@@ -3099,9 +3120,9 @@
       "med": 0.213
      },
      "inline": {
-      "n": 22,
-      "up": 0.682,
-      "med": 0.177
+      "n": 23,
+      "up": 0.652,
+      "med": 0.174
      },
      "cool": {
       "n": 20,
@@ -3116,9 +3137,9 @@
       "med": 0.302
      },
      "inline": {
-      "n": 21,
-      "up": 0.524,
-      "med": 0.032
+      "n": 22,
+      "up": 0.5,
+      "med": -0.005
      },
      "cool": {
       "n": 20,
@@ -3560,8 +3581,7 @@
     },
     "gold2h": {
      "none": true,
-     "n": 0,
-     "why": "too few tested calls"
+     "why": "the first 2h have passed"
     },
     "nq15m": {
      "none": true,
@@ -3569,17 +3589,10 @@
     },
     "nq2h": {
      "none": true,
-     "n": 19,
-     "why": "too few tested calls"
+     "why": "the first 2h have passed"
     }
    },
-   "hist": {
-    "gold2h": {
-     "dir": "up",
-     "p": 0.682,
-     "n": 22
-    }
-   },
+   "hist": {},
    "move": {
     "gold": {
      "pct": 1.91,
@@ -4825,7 +4838,7 @@
    "basis": "consensus",
    "consensus": {
     "title": "Non Farm Payrolls",
-    "forecast": null,
+    "forecast": 93.0,
     "actual": null,
     "unit": null,
     "scale": "K"
@@ -5022,13 +5035,7 @@
       "n": 65
      }
     },
-    "inline": {
-     "gold2h": {
-      "dir": "up",
-      "p": 0.682,
-      "n": 22
-     }
-    },
+    "inline": {},
     "cool": {
      "nq": {
       "dir": "up",
