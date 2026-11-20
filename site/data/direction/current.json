@@ -1,5 +1,5 @@
 {
- "asof": "2026-11-20T14:18-05:00",
+ "asof": "2026-11-20T14:34-05:00",
  "version": 4,
  "assets": {
   "gold": "Gold, close",
@@ -1299,7 +1299,7 @@
       0,
       0
      ],
-     "recent": 0,
+     "recent": 0.0,
      "tested": 62
     },
     "proven": false,
