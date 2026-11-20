@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-19",
+ "updated": "2026-11-20",
  "through": "2027-04-07",
  "events": [
   {
@@ -334,7 +334,9 @@
      "label": "Continuing claims",
      "previous": "1.76M"
     }
-   ]
+   ],
+   "forecast": "200K",
+   "fsrc": "TradingView consensus"
   },
   {
    "date": "2026-11-25",
