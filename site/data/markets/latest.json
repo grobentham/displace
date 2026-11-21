@@ -1,5 +1,5 @@
 {
- "asof": "2026-11-20",
+ "asof": "2026-11-21",
  "tiles": {
   "y2": {
    "label": "2-year Treasury",
@@ -503,7 +503,8 @@
     121.662,
     122.543,
     122.65
-   ]
+   ],
+   "stale": true
   },
   "oil": {
    "label": "WTI crude oil",

@@ -2,6 +2,39 @@
  "version": 2,
  "editions": [
   {
+   "date": "2026-11-22",
+   "opensAt": "2026-11-22T07:00+08:00",
+   "generatedAt": "2026-11-22T06:45:52+08:00",
+   "updates": [],
+   "upcoming": [],
+   "moreReleases": [],
+   "focus": null,
+   "nextFed": "Dec 8–9",
+   "otherCloses": [
+    "At the Tue Nov 17 close, WTI crude $89.53 (up 0.3%)."
+   ],
+   "treasury": {
+    "date": "2026-11-20",
+    "yield": 4.63,
+    "changeBp": -13
+   },
+   "outlook": {
+    "label": "No U.S. session",
+    "reason": "U.S. cash equities are closed during this edition’s window.",
+    "rates": null,
+    "thresholdBp": 3
+   },
+   "earnings": {
+    "reports": [],
+    "upcoming": [],
+    "sourcesRead": 6,
+    "sourcesTotal": 6
+   },
+   "calendarCovered": true,
+   "feedsChecked": true,
+   "feedIssues": false
+  },
+  {
    "date": "2026-11-21",
    "opensAt": "2026-11-21T07:00+08:00",
    "generatedAt": "2026-11-21T06:44:40+08:00",
@@ -33,66 +66,6 @@
    "calendarCovered": true,
    "feedsChecked": true,
    "feedIssues": false
-  },
-  {
-   "date": "2026-11-20",
-   "opensAt": "2026-11-20T07:00+08:00",
-   "generatedAt": "2026-11-20T06:43:52+08:00",
-   "updates": [
-    {
-     "id": "20261119-initial-jobless-claims",
-     "title": "Initial jobless claims",
-     "url": "https://alfred.stlouisfed.org/series?seid=ICSA&vintage_date=2026-11-19",
-     "source": "Dept. of Labor",
-     "analysis": "Jobless claims came in at 203K against a 198K forecast, above expectations. The previous reading was 200K, revised to 202K. 4-week average 198K (previous 196K); Continuing claims 1.76M (previous 1.69M). The initial claims reading was the highest since week to Sep 5.",
-     "context": "Initial claims count new unemployment insurance applications. The four-week average smooths weekly swings.",
-     "published": "2026-11-19T21:30:00+08:00"
-    }
-   ],
-   "upcoming": [
-    {
-     "at": "2026-11-20T23:00+08:00",
-     "title": "UMich consumer sentiment, final (Nov)",
-     "source": "University of Michigan",
-     "metric": "UMich consumer sentiment index",
-     "forecast": "51.7",
-     "previous": "48.0",
-     "forecastSource": "ForexFactory consensus"
-    }
-   ],
-   "moreReleases": [],
-   "focus": null,
-   "nextFed": "Dec 8–9",
-   "otherCloses": [
-    "At the Tue Nov 17 close, WTI crude $89.53 (up 0.3%)."
-   ],
-   "treasury": {
-    "date": "2026-11-19",
-    "yield": 4.76,
-    "changeBp": -4
-   },
-   "outlook": {
-    "label": "Bullish tilt",
-    "reason": "Both yields fell by at least 3 bp, easing pressure on tech valuations.",
-    "rates": {
-     "date": "2026-11-19",
-     "twoYearBp": -4,
-     "tenYearBp": -3,
-     "twoYearYield": 4.76,
-     "tenYearYield": 5.04
-    },
-    "thresholdBp": 3
-   },
-   "earnings": {
-    "reports": [],
-    "upcoming": [],
-    "sourcesRead": 6,
-    "sourcesTotal": 6
-   },
-   "calendarCovered": true,
-   "feedsChecked": true,
-   "feedIssues": false,
-   "refreshedAt": "2026-11-20T23:24:47+08:00"
   }
  ]
 }

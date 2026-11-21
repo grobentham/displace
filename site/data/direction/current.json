@@ -1,5 +1,5 @@
 {
- "asof": "2026-11-20T22:29-05:00",
+ "asof": "2026-11-21T17:45-05:00",
  "version": 4,
  "assets": {
   "gold": "Gold, close",
@@ -3651,7 +3651,7 @@
      "hi": 3.0,
      "normal": 1.9,
      "mult": 0.954,
-     "pts": 64.0,
+     "pts": 63.6,
      "n": 189,
      "proven": false,
      "why": "no better than treating it as a normal day"
@@ -3776,7 +3776,7 @@
      "hi": 2.85,
      "normal": 1.9,
      "mult": 0.943,
-     "pts": 63.3,
+     "pts": 62.9,
      "n": 165,
      "proven": false,
      "why": "no better than treating it as a normal day"
@@ -3890,7 +3890,7 @@
      "hi": 3.65,
      "normal": 1.9,
      "mult": 1.029,
-     "pts": 69.1,
+     "pts": 68.6,
      "n": 836,
      "proven": false,
      "why": "no better than treating it as a normal day"
@@ -4006,7 +4006,7 @@
      "hi": 3.84,
      "normal": 1.9,
      "mult": 1.101,
-     "pts": 73.9,
+     "pts": 73.4,
      "n": 18,
      "proven": false,
      "why": "too few tested releases"
@@ -4106,7 +4106,7 @@
      "hi": 3.48,
      "normal": 1.9,
      "mult": 0.972,
-     "pts": 65.3,
+     "pts": 64.8,
      "n": 170,
      "proven": false,
      "why": "no better than treating it as a normal day"
@@ -4247,7 +4247,7 @@
      "hi": 3.66,
      "normal": 1.9,
      "mult": 1.17,
-     "pts": 78.5,
+     "pts": 78.0,
      "n": 169,
      "proven": false,
      "why": "not significant after correcting for the number of rules tested"
@@ -4373,7 +4373,7 @@
      "hi": 3.04,
      "normal": 1.9,
      "mult": 1.02,
-     "pts": 68.5,
+     "pts": 68.0,
      "n": 119,
      "proven": false,
      "why": "no better than treating it as a normal day"
@@ -4498,7 +4498,7 @@
      "hi": 3.4,
      "normal": 1.9,
      "mult": 1.02,
-     "pts": 68.5,
+     "pts": 68.0,
      "n": 187,
      "proven": false,
      "why": "no better than treating it as a normal day"
@@ -4612,7 +4612,7 @@
      "hi": 3.65,
      "normal": 1.9,
      "mult": 1.029,
-     "pts": 69.1,
+     "pts": 68.6,
      "n": 836,
      "proven": false,
      "why": "no better than treating it as a normal day"
@@ -4732,7 +4732,7 @@
      "hi": 3.83,
      "normal": 1.9,
      "mult": 1.04,
-     "pts": 69.8,
+     "pts": 69.4,
      "n": 177,
      "proven": false,
      "why": "no better than treating it as a normal day"
@@ -4851,7 +4851,7 @@
      "hi": 4.44,
      "normal": 1.9,
      "mult": 1.325,
-     "pts": 89.0,
+     "pts": 88.4,
      "n": 72,
      "proven": false,
      "why": "no better than treating it as a normal day"
@@ -4971,7 +4971,7 @@
      "hi": 3.91,
      "normal": 1.9,
      "mult": 1.006,
-     "pts": 67.5,
+     "pts": 67.1,
      "n": 91,
      "proven": false,
      "why": "no better than treating it as a normal day"
@@ -4993,16 +4993,16 @@
  "disclaimer": "Historical statistics for education. Past reactions do not guarantee future moves, and nothing here is a recommendation to buy or sell.",
  "basis": "consensus",
  "moves": {
-  "asof": "2026-11-20",
+  "asof": "2026-11-21",
   "markets": {
    "gold": {
     "baseline": 1.897,
-    "close": 3539.0,
+    "close": 3515.39990234375,
     "asof": "2026-11-20"
    },
    "nq": {
     "baseline": 1.534,
-    "close": 25028.982421875,
+    "close": 25028.98046875,
     "asof": "2026-11-20"
    }
   },
@@ -5624,6 +5624,6 @@
  "log": [
   "tv: 3 month(s) refreshed, 3592 releases with a consensus surprise",
   "markets: gold, nq, usd, y2, gold15m, gold2h, nq15m, nq2h",
-  "model: fit in 1s; proven: inflation:nq2h, labor:y2"
+  "model: fit in 3s; proven: inflation:nq2h, labor:y2"
  ]
 }

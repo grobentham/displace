@@ -1,12 +1,8 @@
 {
- "week": "Nov 20–27",
- "asof": "2026-11-20",
- "summary": "2 high-impact releases: GDP, second estimate (Wed), PCE inflation (Wed). The next Fed decision is Dec 8–9, 19 days from today.",
+ "week": "Nov 23–27",
+ "asof": "2026-11-21",
+ "summary": "2 high-impact releases: GDP, second estimate (Wed), PCE inflation (Wed). The next Fed decision is Dec 8–9, 18 days from today.",
  "days": [
-  {
-   "d": "Fri Nov 20",
-   "t": "UMich consumer sentiment, final (Nov) at 10:00 NY (previous 48.0, forecast 51.7)."
-  },
   {
    "d": "Mon Nov 23",
    "t": "No major US releases scheduled."

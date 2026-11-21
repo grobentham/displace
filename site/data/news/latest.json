@@ -1,5 +1,5 @@
 {
- "checkedAt": "2026-11-21T03:29:55+00:00",
+ "checkedAt": "2026-11-21T22:45:50+00:00",
  "sources": {
   "Federal Reserve": true,
   "European Central Bank": true,
@@ -8,18 +8,18 @@
  "sourceHealth": {
   "Federal Reserve": {
    "state": "available",
-   "checkedAt": "2026-11-21T03:29:55+00:00",
-   "lastSuccessAt": "2026-11-21T03:29:55+00:00"
+   "checkedAt": "2026-11-21T22:45:50+00:00",
+   "lastSuccessAt": "2026-11-21T22:45:50+00:00"
   },
   "European Central Bank": {
    "state": "available",
-   "checkedAt": "2026-11-21T03:29:55+00:00",
-   "lastSuccessAt": "2026-11-21T03:29:55+00:00"
+   "checkedAt": "2026-11-21T22:45:50+00:00",
+   "lastSuccessAt": "2026-11-21T22:45:50+00:00"
   },
   "Bank of England": {
    "state": "available",
-   "checkedAt": "2026-11-21T03:29:55+00:00",
-   "lastSuccessAt": "2026-11-21T03:29:55+00:00"
+   "checkedAt": "2026-11-21T22:45:50+00:00",
+   "lastSuccessAt": "2026-11-21T22:45:50+00:00"
   }
  },
  "items": [
@@ -125,14 +125,6 @@
    "published": "2026-10-28T18:00:00+00:00",
    "context": "The Fed sets a target range for overnight interest rates. The statement explains the committee's reasoning and any dissent.",
    "analysis": "The Fed decided to maintain its target range at 3-3/4% to 4%."
-  },
-  {
-   "title": "Minutes of the Federal Open Market Committee, September 15-16, 2026",
-   "source": "Federal Reserve",
-   "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20261007a.htm",
-   "published": "2026-10-07T18:00:00+00:00",
-   "context": "Meeting minutes show which risks officials weighed when they made the decision.",
-   "analysis": "With regard to the outlook for monetary policy beyond the current meeting, most participants assessed that another increase in the target range for the federal funds rate would likely be appropriate by year end. Participants generally assessed inflation risk as skewed to the upside; some participants remarked that those risks had become more skewed to the upside in recent months. The decision was unanimous."
   }
  ]
 }
