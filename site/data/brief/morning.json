@@ -2,26 +2,30 @@
  "version": 2,
  "editions": [
   {
-   "date": "2026-11-22",
-   "opensAt": "2026-11-22T07:00+08:00",
-   "generatedAt": "2026-11-22T06:45:52+08:00",
+   "date": "2026-11-23",
+   "opensAt": "2026-11-23T07:00+08:00",
+   "generatedAt": "2026-11-23T06:44:53+08:00",
    "updates": [],
    "upcoming": [],
    "moreReleases": [],
    "focus": null,
    "nextFed": "Dec 8–9",
-   "otherCloses": [
-    "At the Tue Nov 17 close, WTI crude $89.53 (up 0.3%)."
-   ],
+   "otherCloses": [],
    "treasury": {
     "date": "2026-11-20",
     "yield": 4.63,
     "changeBp": -13
    },
    "outlook": {
-    "label": "No U.S. session",
-    "reason": "U.S. cash equities are closed during this edition’s window.",
-    "rates": null,
+    "label": "Bullish tilt",
+    "reason": "Both yields fell by at least 3 bp, easing pressure on tech valuations.",
+    "rates": {
+     "date": "2026-11-20",
+     "twoYearBp": -13,
+     "tenYearBp": -12,
+     "twoYearYield": 4.63,
+     "tenYearYield": 4.92
+    },
     "thresholdBp": 3
    },
    "earnings": {
@@ -35,9 +39,9 @@
    "feedIssues": false
   },
   {
-   "date": "2026-11-21",
-   "opensAt": "2026-11-21T07:00+08:00",
-   "generatedAt": "2026-11-21T06:44:40+08:00",
+   "date": "2026-11-22",
+   "opensAt": "2026-11-22T07:00+08:00",
+   "generatedAt": "2026-11-22T06:45:52+08:00",
    "updates": [],
    "upcoming": [],
    "moreReleases": [],
