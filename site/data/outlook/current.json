@@ -1,7 +1,7 @@
 {
  "week": "Nov 23–27",
- "asof": "2026-11-21",
- "summary": "2 high-impact releases: GDP, second estimate (Wed), PCE inflation (Wed). The next Fed decision is Dec 8–9, 18 days from today.",
+ "asof": "2026-11-22",
+ "summary": "2 high-impact releases: GDP, second estimate (Wed), PCE inflation (Wed). The next Fed decision is Dec 8–9, 17 days from today.",
  "days": [
   {
    "d": "Mon Nov 23",
@@ -9,11 +9,11 @@
   },
   {
    "d": "Tue Nov 24",
-   "t": "Consumer confidence (Nov) at 10:00 NY (previous 91.7, forecast 92.0)."
+   "t": "Consumer confidence (Nov) at 10:00 NY (previous 91.7, forecast 92.1)."
   },
   {
    "d": "Wed Nov 25",
-   "t": "Durable goods orders (Oct) at 08:30 NY (previous 1.8%, forecast 0.0%). GDP, second estimate (Q3) at 08:30 NY (previous 3.4%, forecast 3.4%). It's the broadest read on how fast the economy is growing. Initial jobless claims (moved to Wednesday for Thanksgiving) at 08:30 NY (previous 203K, forecast 200K). PCE inflation · Personal income and outlays (Oct) at 08:30 NY (previous 0.3%, forecast 0.3%). New home sales (Oct) at 10:00 NY (previous 676K, forecast 670K). Beige Book at 14:00 NY."
+   "t": "Durable goods orders (Oct) at 08:30 NY (previous 1.8%, forecast 0.5%). GDP, second estimate (Q3) at 08:30 NY (previous 3.4%, forecast 3.5%). It's the broadest read on how fast the economy is growing. Initial jobless claims (moved to Wednesday for Thanksgiving) at 08:30 NY (previous 203K, forecast 201K). PCE inflation · Personal income and outlays (Oct) at 08:30 NY (previous 0.3%, forecast 0.3%). New home sales (Oct) at 10:00 NY (previous 676K, forecast 649K). Beige Book at 14:00 NY."
   },
   {
    "d": "Thu Nov 26",

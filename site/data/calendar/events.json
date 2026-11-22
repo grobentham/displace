@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-21",
+ "updated": "2026-11-22",
  "through": "2027-04-07",
  "events": [
   {
@@ -259,8 +259,8 @@
    "previous": "91.7",
    "id": "20261124-consumer-confidence-nov",
    "metric": "Conference Board consumer confidence index",
-   "forecast": "92.0",
-   "fsrc": "TradingView consensus"
+   "forecast": "92.1",
+   "fsrc": "ForexFactory consensus"
   },
   {
    "date": "2026-11-25",
@@ -283,8 +283,8 @@
      "previous": "0.5%"
     }
    ],
-   "forecast": "0.0%",
-   "fsrc": "TradingView consensus"
+   "forecast": "0.5%",
+   "fsrc": "ForexFactory consensus"
   },
   {
    "date": "2026-11-25",
@@ -307,8 +307,8 @@
      "previous": "2.2%"
     }
    ],
-   "forecast": "3.4%",
-   "fsrc": "TradingView consensus"
+   "forecast": "3.5%",
+   "fsrc": "ForexFactory consensus"
   },
   {
    "date": "2026-11-25",
@@ -335,8 +335,8 @@
      "previous": "1.76M"
     }
    ],
-   "forecast": "200K",
-   "fsrc": "TradingView consensus"
+   "forecast": "201K",
+   "fsrc": "ForexFactory consensus"
   },
   {
    "date": "2026-11-25",
@@ -376,7 +376,7 @@
     }
    ],
    "forecast": "0.3%",
-   "fsrc": "TradingView consensus"
+   "fsrc": "ForexFactory consensus"
   },
   {
    "date": "2026-11-25",
@@ -395,8 +395,8 @@
      "previous": "676K"
     }
    ],
-   "forecast": "670K",
-   "fsrc": "TradingView consensus"
+   "forecast": "649K",
+   "fsrc": "ForexFactory consensus"
   },
   {
    "date": "2026-11-25",

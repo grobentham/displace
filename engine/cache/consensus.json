@@ -25,5 +25,59 @@
   "seen": "2026-11-18T09:58-05:00",
   "forecast": "51.7",
   "last": "2026-11-21T21:39-05:00"
+ },
+ "20261124-consumer-confidence-nov": {
+  "kind": "conf",
+  "date": "2026-11-24",
+  "title": "CB Consumer Confidence",
+  "first": "92.1",
+  "seen": "2026-11-22T17:23-05:00",
+  "forecast": "92.1",
+  "last": "2026-11-22T17:23-05:00"
+ },
+ "20261125-durable-goods-orders-oct": {
+  "kind": "durables",
+  "date": "2026-11-25",
+  "title": "Durable Goods Orders m/m",
+  "first": "0.5%",
+  "seen": "2026-11-22T17:23-05:00",
+  "forecast": "0.5%",
+  "last": "2026-11-22T17:23-05:00"
+ },
+ "20261125-gdp-second-estimate-q3": {
+  "kind": "gdp",
+  "date": "2026-11-25",
+  "title": "Prelim GDP q/q",
+  "first": "3.5%",
+  "seen": "2026-11-22T17:23-05:00",
+  "forecast": "3.5%",
+  "last": "2026-11-22T17:23-05:00"
+ },
+ "20261125-initial-jobless-claims-moved-to-wednesda": {
+  "kind": "claims",
+  "date": "2026-11-25",
+  "title": "Unemployment Claims",
+  "first": "201K",
+  "seen": "2026-11-22T17:23-05:00",
+  "forecast": "201K",
+  "last": "2026-11-22T17:23-05:00"
+ },
+ "20261125-new-home-sales-oct": {
+  "kind": "homes",
+  "date": "2026-11-25",
+  "title": "New Home Sales",
+  "first": "649K",
+  "seen": "2026-11-22T17:23-05:00",
+  "forecast": "649K",
+  "last": "2026-11-22T17:23-05:00"
+ },
+ "20261125-pce-inflation-personal-income-and-outlay": {
+  "kind": "pce",
+  "date": "2026-11-25",
+  "title": "Core PCE Price Index m/m",
+  "first": "0.3%",
+  "seen": "2026-11-22T17:23-05:00",
+  "forecast": "0.3%",
+  "last": "2026-11-22T17:23-05:00"
  }
 }

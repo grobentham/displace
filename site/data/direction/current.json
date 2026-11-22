@@ -1,5 +1,5 @@
 {
- "asof": "2026-11-21T21:40-05:00",
+ "asof": "2026-11-22T17:24-05:00",
  "version": 4,
  "assets": {
   "gold": "Gold, close",
@@ -1157,7 +1157,7 @@
     "why": "not significant after correcting for the number of rules tested"
    },
    "gold2h": {
-    "b": -0.1812,
+    "b": -0.1811,
     "k": 0.45,
     "n": 182,
     "since": "2024-07-01",
@@ -4993,7 +4993,7 @@
  "disclaimer": "Historical statistics for education. Past reactions do not guarantee future moves, and nothing here is a recommendation to buy or sell.",
  "basis": "consensus",
  "moves": {
-  "asof": "2026-11-21",
+  "asof": "2026-11-22",
   "markets": {
    "gold": {
     "baseline": 1.897,
@@ -5624,6 +5624,6 @@
  "log": [
   "tv: 3 month(s) refreshed, 3592 releases with a consensus surprise",
   "markets: gold, nq, usd, y2, gold15m, gold2h, nq15m, nq2h",
-  "model: fit in 2s; proven: inflation:nq2h, labor:y2"
+  "model: fit in 3s; proven: inflation:nq2h, labor:y2"
  ]
 }
