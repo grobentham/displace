@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-20",
+ "updated": "2026-11-23",
  "events": [
   {
    "id": "20261117-earn-nvda",
@@ -97,17 +97,17 @@
    "note": "Results scheduled after the U.S. stock market closes. Date from the Nasdaq calendar. Check the company's investor relations page for changes."
   },
   {
-   "id": "20261216-earn-mu",
-   "date": "2026-12-16",
-   "time": "",
+   "id": "20261217-earn-mu",
+   "date": "2026-12-17",
+   "time": "16:05",
    "title": "Micron (MU) earnings · quarter ending Nov 2026",
    "cur": "USD",
    "impact": "earnings",
    "src": "Nasdaq earnings calendar",
    "tier": "notable",
    "status": "scheduled",
-   "session": "",
-   "note": "Time not published yet. Date from the Nasdaq calendar. Check the company's investor relations page for changes."
+   "session": "AMC",
+   "note": "Results scheduled after the U.S. stock market closes. Date from the Nasdaq calendar. Check the company's investor relations page for changes."
   }
  ]
 }
