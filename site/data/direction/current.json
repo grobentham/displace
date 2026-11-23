@@ -1,5 +1,5 @@
 {
- "asof": "2026-11-23T08:54-05:00",
+ "asof": "2026-11-23T10:24-05:00",
  "version": 4,
  "assets": {
   "gold": "Gold, close",
@@ -1094,7 +1094,7 @@
     "why": "too few tested calls"
    },
    "nq": {
-    "b": 0.0672,
+    "b": 0.0671,
     "k": 0.35,
     "n": 1179,
     "since": "2011-01-03",
@@ -1157,7 +1157,7 @@
     "why": "not significant after correcting for the number of rules tested"
    },
    "gold2h": {
-    "b": -0.1812,
+    "b": -0.1811,
     "k": 0.45,
     "n": 182,
     "since": "2024-07-01",
