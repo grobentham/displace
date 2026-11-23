@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-22",
+ "updated": "2026-11-23",
  "through": "2027-04-07",
  "events": [
   {
@@ -528,7 +528,11 @@
    "note": "",
    "id": "20261203-ism-services-pmi-nov",
    "previous": "54.5",
-   "metric": "ISM services index"
+   "metric": "ISM services index",
+   "brief": {
+    "asof": "2026-11-23",
+    "context": "The previous reading was 54.5. Services make up most of the US economy, and its prices index tracks sticky inflation. The next Fed decision is Dec 8–9."
+   }
   },
   {
    "date": "2026-12-04",

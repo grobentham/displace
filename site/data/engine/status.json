@@ -1,57 +1,57 @@
 {
- "lastRun": "2026-11-22T22:06-05:00",
+ "lastRun": "2026-11-23T06:48-05:00",
  "source": "public FRED and agency data",
- "fredCalls": 102,
+ "fredCalls": 79,
  "fred": true,
  "sources": {
   "fred": {
-   "state": "partial",
-   "checkedAt": "2026-11-22T22:06-05:00",
-   "lastSuccessAt": "2026-11-22T22:06-05:00"
+   "state": "available",
+   "checkedAt": "2026-11-23T06:48-05:00",
+   "lastSuccessAt": "2026-11-23T06:48-05:00"
   },
   "alfred": {
    "state": "available",
-   "checkedAt": "2026-11-22T22:06-05:00",
-   "lastSuccessAt": "2026-11-22T22:06-05:00"
+   "checkedAt": "2026-11-23T06:48-05:00",
+   "lastSuccessAt": "2026-11-23T06:48-05:00"
   },
   "bls": {
    "state": "available",
-   "checkedAt": "2026-11-22T22:06-05:00",
-   "lastSuccessAt": "2026-11-22T22:06-05:00"
+   "checkedAt": "2026-11-23T06:48-05:00",
+   "lastSuccessAt": "2026-11-23T06:48-05:00"
   },
   "bea": {
    "state": "available",
-   "checkedAt": "2026-11-22T22:06-05:00",
-   "lastSuccessAt": "2026-11-22T22:06-05:00"
+   "checkedAt": "2026-11-23T06:48-05:00",
+   "lastSuccessAt": "2026-11-23T06:48-05:00"
   },
   "census": {
    "state": "available",
-   "checkedAt": "2026-11-22T22:06-05:00",
-   "lastSuccessAt": "2026-11-22T22:06-05:00"
+   "checkedAt": "2026-11-23T06:48-05:00",
+   "lastSuccessAt": "2026-11-23T06:48-05:00"
   },
   "treasury": {
    "state": "available",
-   "checkedAt": "2026-11-22T22:06-05:00",
-   "lastSuccessAt": "2026-11-22T22:06-05:00"
+   "checkedAt": "2026-11-23T06:48-05:00",
+   "lastSuccessAt": "2026-11-23T06:48-05:00"
   },
   "nyFed": {
    "state": "available",
-   "checkedAt": "2026-11-22T22:06-05:00",
-   "lastSuccessAt": "2026-11-22T22:06-05:00"
+   "checkedAt": "2026-11-23T06:48-05:00",
+   "lastSuccessAt": "2026-11-23T06:48-05:00"
   },
   "fedStatements": {
    "state": "available",
-   "checkedAt": "2026-11-22T22:06-05:00",
-   "lastSuccessAt": "2026-11-22T22:06-05:00"
+   "checkedAt": "2026-11-23T06:48-05:00",
+   "lastSuccessAt": "2026-11-23T06:48-05:00"
   },
   "nasdaqCalendar": {
    "state": "available",
-   "checkedAt": "2026-11-22T22:06-05:00",
-   "lastSuccessAt": "2026-11-22T22:06-05:00"
+   "checkedAt": "2026-11-23T06:48-05:00",
+   "lastSuccessAt": "2026-11-23T06:48-05:00"
   }
  },
  "freshness": {
-  "calendarUpdatedOn": "2026-11-22",
+  "calendarUpdatedOn": "2026-11-23",
   "latestActual": {
    "title": "Initial jobless claims",
    "date": "2026-11-19"
@@ -63,21 +63,20 @@
   }
  },
  "quality": {
-  "passed": 34,
-  "total": 35,
+  "passed": 27,
+  "total": 28,
   "held": 0,
   "rejected": 0,
   "critical": 0
  },
- "fredErrors": 6,
+ "fredErrors": 0,
  "calendarThrough": "2027-04-07",
  "events": 92,
  "upcoming": 82,
- "warnings": [
-  "Data source errors on 6 request(s): release 101, release 101, release 101, release 101, release 101, release 101"
- ],
+ "warnings": [],
  "log": [
-  "engine run 2026-11-22T22:06-05:00 using public FRED and agency data",
-  "quality: 34/35 checks passed, 0 held, 0 rejected"
+  "engine run 2026-11-23T06:48-05:00 using public FRED and agency data",
+  "calendar saved",
+  "quality: 27/28 checks passed, 0 held, 0 rejected"
  ]
 }

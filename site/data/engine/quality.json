@@ -1,7 +1,7 @@
 {
- "asof": "2026-11-22T22:06-05:00",
- "passed": 34,
- "total": 35,
+ "asof": "2026-11-23T06:48-05:00",
+ "passed": 27,
+ "total": 28,
  "critical": 0,
  "rejected": [],
  "held": [],
@@ -10,7 +10,7 @@
   {
    "name": "market: usd",
    "ok": false,
-   "detail": "last data 2026-11-13 (9 days old)",
+   "detail": "last data 2026-11-13 (10 days old)",
    "critical": false
   }
  ]
