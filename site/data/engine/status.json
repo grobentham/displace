@@ -1,53 +1,53 @@
 {
- "lastRun": "2026-11-23T14:33-05:00",
+ "lastRun": "2026-11-23T17:23-05:00",
  "source": "public FRED and agency data",
  "fredCalls": 79,
  "fred": true,
  "sources": {
   "fred": {
    "state": "available",
-   "checkedAt": "2026-11-23T14:33-05:00",
-   "lastSuccessAt": "2026-11-23T14:33-05:00"
+   "checkedAt": "2026-11-23T17:23-05:00",
+   "lastSuccessAt": "2026-11-23T17:23-05:00"
   },
   "alfred": {
    "state": "available",
-   "checkedAt": "2026-11-23T14:33-05:00",
-   "lastSuccessAt": "2026-11-23T14:33-05:00"
+   "checkedAt": "2026-11-23T17:23-05:00",
+   "lastSuccessAt": "2026-11-23T17:23-05:00"
   },
   "bls": {
    "state": "available",
-   "checkedAt": "2026-11-23T14:33-05:00",
-   "lastSuccessAt": "2026-11-23T14:33-05:00"
+   "checkedAt": "2026-11-23T17:23-05:00",
+   "lastSuccessAt": "2026-11-23T17:23-05:00"
   },
   "bea": {
    "state": "available",
-   "checkedAt": "2026-11-23T14:33-05:00",
-   "lastSuccessAt": "2026-11-23T14:33-05:00"
+   "checkedAt": "2026-11-23T17:23-05:00",
+   "lastSuccessAt": "2026-11-23T17:23-05:00"
   },
   "census": {
    "state": "available",
-   "checkedAt": "2026-11-23T14:33-05:00",
-   "lastSuccessAt": "2026-11-23T14:33-05:00"
+   "checkedAt": "2026-11-23T17:23-05:00",
+   "lastSuccessAt": "2026-11-23T17:23-05:00"
   },
   "treasury": {
    "state": "available",
-   "checkedAt": "2026-11-23T14:33-05:00",
-   "lastSuccessAt": "2026-11-23T14:33-05:00"
+   "checkedAt": "2026-11-23T17:23-05:00",
+   "lastSuccessAt": "2026-11-23T17:23-05:00"
   },
   "nyFed": {
    "state": "available",
-   "checkedAt": "2026-11-23T14:33-05:00",
-   "lastSuccessAt": "2026-11-23T14:33-05:00"
+   "checkedAt": "2026-11-23T17:23-05:00",
+   "lastSuccessAt": "2026-11-23T17:23-05:00"
   },
   "fedStatements": {
    "state": "available",
-   "checkedAt": "2026-11-23T14:33-05:00",
-   "lastSuccessAt": "2026-11-23T14:33-05:00"
+   "checkedAt": "2026-11-23T17:23-05:00",
+   "lastSuccessAt": "2026-11-23T17:23-05:00"
   },
   "nasdaqCalendar": {
    "state": "available",
-   "checkedAt": "2026-11-23T14:33-05:00",
-   "lastSuccessAt": "2026-11-23T14:33-05:00"
+   "checkedAt": "2026-11-23T17:23-05:00",
+   "lastSuccessAt": "2026-11-23T17:23-05:00"
   }
  },
  "freshness": {
@@ -57,13 +57,13 @@
    "date": "2026-11-19"
   },
   "marketDates": {
-   "y2": "2026-11-20",
-   "y10": "2026-11-20",
+   "y2": "2026-11-23",
+   "y10": "2026-11-23",
    "effr": "2026-11-20"
   }
  },
  "quality": {
-  "passed": 27,
+  "passed": 28,
   "total": 28,
   "held": 0,
   "rejected": 0,
@@ -75,7 +75,9 @@
  "upcoming": 82,
  "warnings": [],
  "log": [
-  "engine run 2026-11-23T14:33-05:00 using public FRED and agency data",
-  "quality: 27/28 checks passed, 0 held, 0 rejected"
+  "engine run 2026-11-23T17:23-05:00 using public FRED and agency data",
+  "consensus: 3 forecast(s) filled from ForexFactory",
+  "calendar saved",
+  "quality: 28/28 checks passed, 0 held, 0 rejected"
  ]
 }
