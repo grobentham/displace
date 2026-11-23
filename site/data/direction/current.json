@@ -1,5 +1,5 @@
 {
- "asof": "2026-11-22T17:44-05:00",
+ "asof": "2026-11-22T21:56-05:00",
  "version": 4,
  "assets": {
   "gold": "Gold, close",
@@ -286,35 +286,35 @@
    "group": "labor"
   },
   "nfp:gold2h": {
-   "calls": 25,
-   "hits": 12,
+   "calls": 18,
+   "hits": 6,
    "proven": false,
-   "why": "right less than 55% of the time on unseen releases",
-   "brierSkill": 0.01,
+   "why": "too few tested calls",
+   "brierSkill": 0.002,
    "group": "labor"
   },
   "claims:gold2h": {
-   "calls": 25,
-   "hits": 12,
+   "calls": 18,
+   "hits": 6,
    "proven": false,
-   "why": "right less than 55% of the time on unseen releases",
-   "brierSkill": 0.01,
+   "why": "too few tested calls",
+   "brierSkill": 0.002,
    "group": "labor"
   },
   "jolts:gold2h": {
-   "calls": 25,
-   "hits": 12,
+   "calls": 18,
+   "hits": 6,
    "proven": false,
-   "why": "right less than 55% of the time on unseen releases",
-   "brierSkill": 0.01,
+   "why": "too few tested calls",
+   "brierSkill": 0.002,
    "group": "labor"
   },
   "adp:gold2h": {
-   "calls": 25,
-   "hits": 12,
+   "calls": 18,
+   "hits": 6,
    "proven": false,
-   "why": "right less than 55% of the time on unseen releases",
-   "brierSkill": 0.01,
+   "why": "too few tested calls",
+   "brierSkill": 0.002,
    "group": "labor"
   },
   "nfp:nq2h": {
@@ -1029,25 +1029,25 @@
     "why": ""
    },
    "gold2h": {
-    "b": -0.4677,
-    "k": 1.2,
+    "b": -0.4133,
+    "k": 0.95,
     "n": 205,
     "since": "2024-07-02",
     "bt": {
-     "calls": 25,
-     "hits": 12,
-     "rate": 0.48,
-     "pval": 0.6549810171127319,
-     "brierSkill": 0.01,
+     "calls": 18,
+     "hits": 6,
+     "rate": 0.333,
+     "pval": 0.951873779296875,
+     "brierSkill": 0.002,
      "halves": [
-      0.25,
-      0.692
+      0.222,
+      0.444
      ],
-     "recent": 0.55,
+     "recent": 0.333,
      "tested": 180
     },
     "proven": false,
-    "why": "right less than 55% of the time on unseen releases"
+    "why": "too few tested calls"
    },
    "nq2h": {
     "b": -0.2387,
@@ -1650,7 +1650,7 @@
      "inline": {
       "n": 8,
       "up": 0.375,
-      "med": -0.043
+      "med": -0.039
      },
      "cool": {
       "n": 8,
@@ -1672,7 +1672,7 @@
      "cool": {
       "n": 8,
       "up": 0.625,
-      "med": 0.022
+      "med": 0.023
      }
     }
    }
@@ -1766,7 +1766,7 @@
      "cool": {
       "n": 8,
       "up": 0.75,
-      "med": 0.542
+      "med": 0.539
      }
     },
     "nq2h": {
@@ -1867,7 +1867,7 @@
      "hot": {
       "n": 4,
       "up": 0.25,
-      "med": -0.348
+      "med": -0.377
      },
      "inline": {
       "n": 11,
@@ -1877,7 +1877,7 @@
      "cool": {
       "n": 12,
       "up": 0.75,
-      "med": 0.551
+      "med": 0.547
      }
     },
     "nq2h": {
@@ -1894,7 +1894,7 @@
      "cool": {
       "n": 12,
       "up": 0.667,
-      "med": 0.197
+      "med": 0.195
      }
     }
    }
@@ -1978,7 +1978,7 @@
      "hot": {
       "n": 12,
       "up": 0.5,
-      "med": 0.011
+      "med": 0.006
      },
      "inline": {
       "n": 10,
@@ -2005,7 +2005,7 @@
      "cool": {
       "n": 7,
       "up": 0.429,
-      "med": -0.126
+      "med": -0.121
      }
     }
    }
@@ -2116,7 +2116,7 @@
      "cool": {
       "n": 22,
       "up": 0.5,
-      "med": 0.031
+      "med": 0.03
      }
     },
     "nq15m": {
@@ -2133,7 +2133,7 @@
      "cool": {
       "n": 1,
       "up": 1.0,
-      "med": 0.218
+      "med": 0.221
      }
     },
     "nq2h": {
@@ -2150,7 +2150,7 @@
      "cool": {
       "n": 22,
       "up": 0.364,
-      "med": -0.112
+      "med": -0.114
      }
     }
    }
@@ -2233,8 +2233,8 @@
     "gold2h": {
      "hot": {
       "n": 3,
-      "up": 0.0,
-      "med": -0.422
+      "up": 0.333,
+      "med": -0.417
      },
      "inline": {
       "n": 16,
@@ -2251,7 +2251,7 @@
      "hot": {
       "n": 3,
       "up": 0.667,
-      "med": 0.265
+      "med": 0.252
      },
      "inline": {
       "n": 16,
@@ -2678,7 +2678,7 @@
      "inline": {
       "n": 13,
       "up": 0.538,
-      "med": 0.093
+      "med": 0.098
      },
      "cool": {
       "n": 8,
@@ -2806,7 +2806,7 @@
      "inline": {
       "n": 13,
       "up": 0.615,
-      "med": 0.138
+      "med": 0.142
      },
      "cool": {
       "n": 8,
@@ -3127,7 +3127,7 @@
      "cool": {
       "n": 20,
       "up": 0.65,
-      "med": 0.152
+      "med": 0.156
      }
     },
     "nq2h": {
@@ -3255,7 +3255,7 @@
      "cool": {
       "n": 5,
       "up": 0.8,
-      "med": 0.306
+      "med": 0.308
      }
     }
    }
@@ -3339,7 +3339,7 @@
      "hot": {
       "n": 8,
       "up": 0.625,
-      "med": 0.185
+      "med": 0.172
      },
      "inline": {
       "n": 11,
@@ -3356,7 +3356,7 @@
      "hot": {
       "n": 8,
       "up": 0.25,
-      "med": -0.177
+      "med": -0.183
      },
      "inline": {
       "n": 11,
@@ -3485,14 +3485,14 @@
      "hold": {
       "n": 1,
       "up": 0.0,
-      "med": -0.168
+      "med": -0.16
      }
     },
     "gold2h": {
      "hold": {
       "n": 12,
       "up": 0.5,
-      "med": 0.02
+      "med": 0.021
      },
      "cut": {
       "n": 6,
@@ -3509,7 +3509,7 @@
      "hike": {
       "n": 1,
       "up": 0.0,
-      "med": -0.032
+      "med": -0.04
      },
      "hold": {
       "n": 1,
@@ -3531,7 +3531,7 @@
      "hike": {
       "n": 1,
       "up": 0.0,
-      "med": -0.749
+      "med": -0.757
      }
     }
    }
@@ -3646,12 +3646,12 @@
    },
    "move": {
     "gold": {
-     "pct": 1.81,
-     "lo": 1.19,
-     "hi": 3.0,
-     "normal": 1.9,
+     "pct": 1.85,
+     "lo": 1.22,
+     "hi": 3.07,
+     "normal": 1.94,
      "mult": 0.954,
-     "pts": 63.6,
+     "pts": 66.3,
      "n": 189,
      "proven": false,
      "why": "no better than treating it as a normal day"
@@ -3771,12 +3771,12 @@
    },
    "move": {
     "gold": {
-     "pct": 1.79,
-     "lo": 1.14,
-     "hi": 2.85,
-     "normal": 1.9,
+     "pct": 1.83,
+     "lo": 1.16,
+     "hi": 2.92,
+     "normal": 1.94,
      "mult": 0.943,
-     "pts": 62.9,
+     "pts": 65.6,
      "n": 165,
      "proven": false,
      "why": "no better than treating it as a normal day"
@@ -3831,8 +3831,8 @@
     },
     "gold2h": {
      "none": true,
-     "n": 25,
-     "why": "right less than 55% of the time on unseen releases"
+     "n": 18,
+     "why": "too few tested calls"
     },
     "nq2h": {
      "none": true,
@@ -3863,8 +3863,8 @@
     },
     "gold2h": {
      "none": true,
-     "n": 25,
-     "why": "right less than 55% of the time on unseen releases"
+     "n": 18,
+     "why": "too few tested calls"
     },
     "nq2h": {
      "none": true,
@@ -3885,12 +3885,12 @@
    },
    "move": {
     "gold": {
-     "pct": 1.95,
-     "lo": 1.06,
-     "hi": 3.65,
-     "normal": 1.9,
+     "pct": 2.0,
+     "lo": 1.09,
+     "hi": 3.74,
+     "normal": 1.94,
      "mult": 1.029,
-     "pts": 68.6,
+     "pts": 71.5,
      "n": 836,
      "proven": false,
      "why": "no better than treating it as a normal day"
@@ -4001,12 +4001,12 @@
    },
    "move": {
     "gold": {
-     "pct": 2.09,
-     "lo": 1.33,
-     "hi": 3.84,
-     "normal": 1.9,
+     "pct": 2.14,
+     "lo": 1.36,
+     "hi": 3.93,
+     "normal": 1.94,
      "mult": 1.101,
-     "pts": 73.4,
+     "pts": 76.6,
      "n": 18,
      "proven": false,
      "why": "too few tested releases"
@@ -4101,12 +4101,12 @@
    },
    "move": {
     "gold": {
-     "pct": 1.84,
-     "lo": 1.14,
-     "hi": 3.48,
-     "normal": 1.9,
+     "pct": 1.89,
+     "lo": 1.17,
+     "hi": 3.56,
+     "normal": 1.94,
      "mult": 0.972,
-     "pts": 64.8,
+     "pts": 67.6,
      "n": 170,
      "proven": false,
      "why": "no better than treating it as a normal day"
@@ -4242,12 +4242,12 @@
    },
    "move": {
     "gold": {
-     "pct": 2.22,
-     "lo": 1.2,
-     "hi": 3.66,
-     "normal": 1.9,
+     "pct": 2.27,
+     "lo": 1.22,
+     "hi": 3.74,
+     "normal": 1.94,
      "mult": 1.17,
-     "pts": 78.0,
+     "pts": 81.4,
      "n": 169,
      "proven": false,
      "why": "not significant after correcting for the number of rules tested"
@@ -4302,8 +4302,8 @@
     },
     "gold2h": {
      "none": true,
-     "n": 25,
-     "why": "right less than 55% of the time on unseen releases"
+     "n": 18,
+     "why": "too few tested calls"
     },
     "nq2h": {
      "none": true,
@@ -4334,8 +4334,8 @@
     },
     "gold2h": {
      "none": true,
-     "n": 25,
-     "why": "right less than 55% of the time on unseen releases"
+     "n": 18,
+     "why": "too few tested calls"
     },
     "nq2h": {
      "none": true,
@@ -4368,12 +4368,12 @@
    },
    "move": {
     "gold": {
-     "pct": 1.93,
-     "lo": 1.23,
-     "hi": 3.04,
-     "normal": 1.9,
+     "pct": 1.98,
+     "lo": 1.26,
+     "hi": 3.11,
+     "normal": 1.94,
      "mult": 1.02,
-     "pts": 68.0,
+     "pts": 70.9,
      "n": 119,
      "proven": false,
      "why": "no better than treating it as a normal day"
@@ -4428,8 +4428,8 @@
     },
     "gold2h": {
      "none": true,
-     "n": 25,
-     "why": "right less than 55% of the time on unseen releases"
+     "n": 18,
+     "why": "too few tested calls"
     },
     "nq2h": {
      "none": true,
@@ -4460,8 +4460,8 @@
     },
     "gold2h": {
      "none": true,
-     "n": 25,
-     "why": "right less than 55% of the time on unseen releases"
+     "n": 18,
+     "why": "too few tested calls"
     },
     "nq2h": {
      "none": true,
@@ -4493,12 +4493,12 @@
    },
    "move": {
     "gold": {
-     "pct": 1.93,
-     "lo": 1.2,
-     "hi": 3.4,
-     "normal": 1.9,
+     "pct": 1.98,
+     "lo": 1.23,
+     "hi": 3.47,
+     "normal": 1.94,
      "mult": 1.02,
-     "pts": 68.0,
+     "pts": 70.9,
      "n": 187,
      "proven": false,
      "why": "no better than treating it as a normal day"
@@ -4553,8 +4553,8 @@
     },
     "gold2h": {
      "none": true,
-     "n": 25,
-     "why": "right less than 55% of the time on unseen releases"
+     "n": 18,
+     "why": "too few tested calls"
     },
     "nq2h": {
      "none": true,
@@ -4585,8 +4585,8 @@
     },
     "gold2h": {
      "none": true,
-     "n": 25,
-     "why": "right less than 55% of the time on unseen releases"
+     "n": 18,
+     "why": "too few tested calls"
     },
     "nq2h": {
      "none": true,
@@ -4607,12 +4607,12 @@
    },
    "move": {
     "gold": {
-     "pct": 1.95,
-     "lo": 1.06,
-     "hi": 3.65,
-     "normal": 1.9,
+     "pct": 2.0,
+     "lo": 1.09,
+     "hi": 3.74,
+     "normal": 1.94,
      "mult": 1.029,
-     "pts": 68.6,
+     "pts": 71.5,
      "n": 836,
      "proven": false,
      "why": "no better than treating it as a normal day"
@@ -4727,12 +4727,12 @@
    },
    "move": {
     "gold": {
-     "pct": 1.97,
-     "lo": 1.15,
-     "hi": 3.83,
-     "normal": 1.9,
+     "pct": 2.02,
+     "lo": 1.18,
+     "hi": 3.92,
+     "normal": 1.94,
      "mult": 1.04,
-     "pts": 69.4,
+     "pts": 72.3,
      "n": 177,
      "proven": false,
      "why": "no better than treating it as a normal day"
@@ -4787,8 +4787,8 @@
     },
     "gold2h": {
      "none": true,
-     "n": 25,
-     "why": "right less than 55% of the time on unseen releases"
+     "n": 18,
+     "why": "too few tested calls"
     },
     "nq2h": {
      "none": true,
@@ -4819,8 +4819,8 @@
     },
     "gold2h": {
      "none": true,
-     "n": 25,
-     "why": "right less than 55% of the time on unseen releases"
+     "n": 18,
+     "why": "too few tested calls"
     },
     "nq2h": {
      "none": true,
@@ -4846,12 +4846,12 @@
    },
    "move": {
     "gold": {
-     "pct": 2.51,
-     "lo": 1.42,
-     "hi": 4.44,
-     "normal": 1.9,
+     "pct": 2.57,
+     "lo": 1.45,
+     "hi": 4.55,
+     "normal": 1.94,
      "mult": 1.325,
-     "pts": 88.4,
+     "pts": 92.1,
      "n": 72,
      "proven": false,
      "why": "no better than treating it as a normal day"
@@ -4966,12 +4966,12 @@
    },
    "move": {
     "gold": {
-     "pct": 1.91,
-     "lo": 1.27,
-     "hi": 3.91,
-     "normal": 1.9,
+     "pct": 1.95,
+     "lo": 1.3,
+     "hi": 4.0,
+     "normal": 1.94,
      "mult": 1.006,
-     "pts": 67.1,
+     "pts": 69.9,
      "n": 91,
      "proven": false,
      "why": "no better than treating it as a normal day"
@@ -4996,9 +4996,9 @@
   "asof": "2026-11-22",
   "markets": {
    "gold": {
-    "baseline": 1.897,
-    "close": 3515.39990234375,
-    "asof": "2026-11-20"
+    "baseline": 1.941,
+    "close": 3582.199951171875,
+    "asof": "2026-11-22"
    },
    "nq": {
     "baseline": 1.534,
@@ -5624,6 +5624,6 @@
  "log": [
   "tv: 3 month(s) refreshed, 3592 releases with a consensus surprise",
   "markets: gold, nq, usd, y2, gold15m, gold2h, nq15m, nq2h",
-  "model: fit in 4s; proven: inflation:nq2h, labor:y2"
+  "model: fit in 2s; proven: inflation:nq2h, labor:y2"
  ]
 }
