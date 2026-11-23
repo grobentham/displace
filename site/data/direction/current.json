@@ -1,5 +1,5 @@
 {
- "asof": "2026-11-23T17:24-05:00",
+ "asof": "2026-11-23T17:44-05:00",
  "version": 4,
  "assets": {
   "gold": "Gold, close",
@@ -462,59 +462,59 @@
    "group": "activity"
   },
   "retail:usd": {
-   "calls": 122,
+   "calls": 123,
    "hits": 70,
    "proven": false,
    "why": "not significant after correcting for the number of rules tested",
-   "brierSkill": 0.004,
+   "brierSkill": 0.003,
    "group": "activity"
   },
   "durables:usd": {
-   "calls": 122,
+   "calls": 123,
    "hits": 70,
    "proven": false,
    "why": "not significant after correcting for the number of rules tested",
-   "brierSkill": 0.004,
+   "brierSkill": 0.003,
    "group": "activity"
   },
   "gdp:usd": {
-   "calls": 122,
+   "calls": 123,
    "hits": 70,
    "proven": false,
    "why": "not significant after correcting for the number of rules tested",
-   "brierSkill": 0.004,
+   "brierSkill": 0.003,
    "group": "activity"
   },
   "ism-m:usd": {
-   "calls": 122,
+   "calls": 123,
    "hits": 70,
    "proven": false,
    "why": "not significant after correcting for the number of rules tested",
-   "brierSkill": 0.004,
+   "brierSkill": 0.003,
    "group": "activity"
   },
   "ism-s:usd": {
-   "calls": 122,
+   "calls": 123,
    "hits": 70,
    "proven": false,
    "why": "not significant after correcting for the number of rules tested",
-   "brierSkill": 0.004,
+   "brierSkill": 0.003,
    "group": "activity"
   },
   "philly:usd": {
-   "calls": 122,
+   "calls": 123,
    "hits": 70,
    "proven": false,
    "why": "not significant after correcting for the number of rules tested",
-   "brierSkill": 0.004,
+   "brierSkill": 0.003,
    "group": "activity"
   },
   "empire:usd": {
-   "calls": 122,
+   "calls": 123,
    "hits": 70,
    "proven": false,
    "why": "not significant after correcting for the number of rules tested",
-   "brierSkill": 0.004,
+   "brierSkill": 0.003,
    "group": "activity"
   },
   "retail:y2": {
@@ -987,9 +987,9 @@
     "why": "too few tested calls"
    },
    "usd": {
-    "b": 0.0864,
+    "b": 0.0855,
     "k": 0.5,
-    "n": 1365,
+    "n": 1366,
     "since": "2010-04-01",
     "bt": {
      "calls": 179,
@@ -1002,7 +1002,7 @@
       0.578
      ],
      "recent": 0.5,
-     "tested": 1305
+     "tested": 1306
     },
     "proven": false,
     "why": "probabilities no better than a coin flip"
@@ -1115,22 +1115,22 @@
     "why": "not significant after correcting for the number of rules tested"
    },
    "usd": {
-    "b": 0.1764,
-    "k": 0.9,
-    "n": 1173,
+    "b": 0.168,
+    "k": 0.85,
+    "n": 1176,
     "since": "2011-01-03",
     "bt": {
-     "calls": 122,
+     "calls": 123,
      "hits": 70,
-     "rate": 0.574,
-     "pval": 0.06171354349189928,
-     "brierSkill": 0.004,
+     "rate": 0.569,
+     "pval": 0.07440812311919251,
+     "brierSkill": 0.003,
      "halves": [
       0.639,
-      0.508
+      0.5
      ],
-     "recent": 0.5,
-     "tested": 1113
+     "recent": 0.45,
+     "tested": 1116
     },
     "proven": false,
     "why": "not significant after correcting for the number of rules tested"
@@ -1245,7 +1245,7 @@
    "usd": {
     "b": 0.2238,
     "k": 0.75,
-    "n": 459,
+    "n": 460,
     "since": "2011-01-25",
     "bt": {
      "calls": 43,
@@ -1258,7 +1258,7 @@
       0.409
      ],
      "recent": 0.45,
-     "tested": 399
+     "tested": 400
     },
     "proven": false,
     "why": "right less than 55% of the time on unseen releases"
@@ -1947,9 +1947,9 @@
       "med": 0.075
      },
      "inline": {
-      "n": 71,
-      "up": 0.535,
-      "med": 0.011
+      "n": 72,
+      "up": 0.528,
+      "med": 0.009
      },
      "cool": {
       "n": 55,
@@ -2058,8 +2058,8 @@
       "med": 0.017
      },
      "inline": {
-      "n": 352,
-      "up": 0.526,
+      "n": 353,
+      "up": 0.527,
       "med": 0.029
      },
      "cool": {
@@ -2869,8 +2869,8 @@
       "med": -0.068
      },
      "cool": {
-      "n": 67,
-      "up": 0.537,
+      "n": 68,
+      "up": 0.544,
       "med": 0.064
      }
     },
@@ -2980,9 +2980,9 @@
       "med": -0.094
      },
      "cool": {
-      "n": 76,
-      "up": 0.5,
-      "med": 0.007
+      "n": 77,
+      "up": 0.506,
+      "med": 0.021
      }
     },
     "y2": {
@@ -3086,9 +3086,9 @@
       "med": 0.005
      },
      "inline": {
-      "n": 106,
-      "up": 0.5,
-      "med": 0.002
+      "n": 107,
+      "up": 0.505,
+      "med": 0.008
      },
      "cool": {
       "n": 87,
@@ -3696,7 +3696,7 @@
     },
     "usd": {
      "none": true,
-     "n": 122,
+     "n": 123,
      "why": "not significant after correcting for the number of rules tested"
     },
     "y2": {
@@ -3728,7 +3728,7 @@
     },
     "usd": {
      "none": true,
-     "n": 122,
+     "n": 123,
      "why": "not significant after correcting for the number of rules tested"
     },
     "y2": {
@@ -4151,7 +4151,7 @@
     },
     "usd": {
      "none": true,
-     "n": 122,
+     "n": 123,
      "why": "not significant after correcting for the number of rules tested"
     },
     "y2": {
@@ -4183,7 +4183,7 @@
     },
     "usd": {
      "none": true,
-     "n": 122,
+     "n": 123,
      "why": "not significant after correcting for the number of rules tested"
     },
     "y2": {
@@ -4657,7 +4657,7 @@
     },
     "usd": {
      "none": true,
-     "n": 122,
+     "n": 123,
      "why": "not significant after correcting for the number of rules tested"
     },
     "y2": {
@@ -4689,7 +4689,7 @@
     },
     "usd": {
      "none": true,
-     "n": 122,
+     "n": 123,
      "why": "not significant after correcting for the number of rules tested"
     },
     "y2": {
@@ -5624,6 +5624,6 @@
  "log": [
   "tv: 3 month(s) refreshed, 3592 releases with a consensus surprise",
   "markets: gold, nq, usd, y2, gold15m, gold2h, nq15m, nq2h",
-  "model: fit in 2s; proven: inflation:nq2h, labor:y2"
+  "model: fit in 1s; proven: inflation:nq2h, labor:y2"
  ]
 }

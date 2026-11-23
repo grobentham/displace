@@ -2,6 +2,58 @@
  "version": 2,
  "editions": [
   {
+   "date": "2026-11-24",
+   "opensAt": "2026-11-24T07:00+08:00",
+   "generatedAt": "2026-11-24T06:44:42+08:00",
+   "updates": [],
+   "upcoming": [
+    {
+     "at": "2026-11-24T23:00+08:00",
+     "title": "Consumer confidence (Nov)",
+     "source": "Conference Board",
+     "metric": "Conference Board consumer confidence index",
+     "forecast": "92.4",
+     "previous": "91.7",
+     "forecastSource": "ForexFactory consensus"
+    }
+   ],
+   "moreReleases": [],
+   "focus": {
+    "title": "Consumer confidence",
+    "at": "2026-11-24T23:00+08:00"
+   },
+   "nextFed": "Dec 8–9",
+   "otherCloses": [
+    "At the Fri Nov 20 close, the Fed's broad dollar index 123.6 (up 0.1%)."
+   ],
+   "treasury": {
+    "date": "2026-11-23",
+    "yield": 4.63,
+    "changeBp": 0
+   },
+   "outlook": {
+    "label": "Neutral",
+    "reason": "Neither yield moved by the 3 bp needed for a rates tilt.",
+    "rates": {
+     "date": "2026-11-23",
+     "twoYearBp": 0,
+     "tenYearBp": 0,
+     "twoYearYield": 4.63,
+     "tenYearYield": 4.92
+    },
+    "thresholdBp": 3
+   },
+   "earnings": {
+    "reports": [],
+    "upcoming": [],
+    "sourcesRead": 6,
+    "sourcesTotal": 6
+   },
+   "calendarCovered": true,
+   "feedsChecked": true,
+   "feedIssues": false
+  },
+  {
    "date": "2026-11-23",
    "opensAt": "2026-11-23T07:00+08:00",
    "generatedAt": "2026-11-23T06:44:53+08:00",
@@ -26,39 +78,6 @@
      "twoYearYield": 4.63,
      "tenYearYield": 4.92
     },
-    "thresholdBp": 3
-   },
-   "earnings": {
-    "reports": [],
-    "upcoming": [],
-    "sourcesRead": 6,
-    "sourcesTotal": 6
-   },
-   "calendarCovered": true,
-   "feedsChecked": true,
-   "feedIssues": false
-  },
-  {
-   "date": "2026-11-22",
-   "opensAt": "2026-11-22T07:00+08:00",
-   "generatedAt": "2026-11-22T06:45:52+08:00",
-   "updates": [],
-   "upcoming": [],
-   "moreReleases": [],
-   "focus": null,
-   "nextFed": "Dec 8–9",
-   "otherCloses": [
-    "At the Tue Nov 17 close, WTI crude $89.53 (up 0.3%)."
-   ],
-   "treasury": {
-    "date": "2026-11-20",
-    "yield": 4.63,
-    "changeBp": -13
-   },
-   "outlook": {
-    "label": "No U.S. session",
-    "reason": "U.S. cash equities are closed during this edition’s window.",
-    "rates": null,
     "thresholdBp": 3
    },
    "earnings": {
