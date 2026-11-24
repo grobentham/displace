@@ -75,3 +75,5 @@
 ## Product consolidation
 - Shared navigation and external research page styling; global search with report and economy deep links.
 - Crawlable source-linked static report pages, canonical URLs, generated sitemap and route/build/search regression tests.
+
+- Add pinned Chromium desktop/mobile smoke tests for intelligence pages, country selection, search and static article navigation as a production workflow prerequisite.
