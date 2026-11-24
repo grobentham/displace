@@ -34,6 +34,14 @@ def main():
         except ValueError:
             pass
         assert not P.check(root,manifest,"HEAD")
+    import publication as PUB
+    row={"market":"nq","candle":"2026-11-24"}
+    original=PUB.identity(row)
+    row["inputProvenance"]={"capture_id":"123-1","clean_candles_sha256":"a"*64}
+    assert PUB.identity(row)!=original
+    old=PUB.identity(row)
+    row["inputProvenance"]["clean_candles_sha256"]="b"*64
+    assert PUB.identity(row)!=old
     print("provenance tests passed")
 if __name__=="__main__":
     main()

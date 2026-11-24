@@ -85,3 +85,7 @@
 ## Bias and event safeguards
 - Seven-day label embargo, explicit completed-window checks, training-base-rate Brier skill, and suspension of automatic event and daily direction qualification.
 - Independent price-only range replay, point MAE and interval scores, simple rolling direction and level-bin benchmarks, source-linked audit dashboard and tests.
+
+## Dataset provenance
+- Git-backed per-run append-only manifests, SHA-256 verification against saved commits, current-vintage observation-change tracking, and public provenance summaries.
+- Cleaned bias-input and event-reaction fingerprints; new forecast identities bind input provenance without invalidating older receipts.

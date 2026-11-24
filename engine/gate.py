@@ -125,6 +125,8 @@ def strict_validate(data=DATA):
                 import provenance
                 if obj["id"] != provenance.capture_id():
                     raise ValueError("Missing current-run provenance")
+                if obj["manifest_path"] != provenance.ARCHIVE+"/"+obj["id"]+".json":
+                    raise ValueError("Invalid provenance manifest path")
                 manifest = provenance.read_json(provenance.ROOT / obj["manifest_path"])
                 if provenance.public_summary(manifest) != obj:
                     raise ValueError("Manifest summary mismatch")

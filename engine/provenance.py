@@ -59,13 +59,18 @@ def selected(root):
               or (p.startswith("research/") and p.count("/")==1 and p.endswith(".json")))}
     paths.update("site/data/"+p for p in OUTPUTS)
     paths.add(".github/workflows/engine.yml")
+    if (root/"site/data/bias/publication-receipts.json").is_file():
+        paths.add("site/data/bias/publication-receipts.json")
     return sorted(paths)
 
 def observations(path,data):
     doc=json.loads(data)
-    if not isinstance(doc,dict):
+    if isinstance(doc,dict):
+        rows=doc.get("rows",[])
+    elif isinstance(doc,list) and path.startswith("engine/cache/tv/"):
+        rows=doc
+    else:
         return None
-    rows=doc.get("rows",[])
     if path.startswith(("engine/cache/macro/","engine/cache/series/")):
         return {r[0]:r[1] for r in rows}
     if path.startswith("engine/cache/tv/"):
@@ -163,8 +168,8 @@ def check(root,manifest,commit=None):
 def verify_commit(root=ROOT):
     doc=read_json(root/PUBLIC)
     manifest=read_json(root/doc["manifest_path"])
-    if public_summary(manifest)!=doc:
-        raise ValueError("Public provenance does not match archived manifest")
+    if public_summary(manifest)!=doc or json.loads(git(root,"show","HEAD:"+PUBLIC))!=doc or json.loads(git(root,"show","HEAD:"+doc["manifest_path"]))!=manifest:
+        raise ValueError("Public provenance does not match committed archived manifest")
     check(root,manifest,"HEAD")
     # A run manifest is append-only on the normal branch, even though an
     # administrator could still rewrite history.
