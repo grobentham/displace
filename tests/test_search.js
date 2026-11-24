@@ -1,0 +1,10 @@
+'use strict';
+const assert=require('node:assert/strict');
+const S=require('../site/assets/search.js');
+const rows=[{title:'Gold research',description:'market volatility',kind:'page'},{title:'Singapore',description:'GDP growth',kind:'country'}];
+assert.equal(S.search(rows,'gold volatility','').length,1);
+assert.equal(S.search(rows,'gold','country').length,0);
+assert.equal(S.search(rows,'GDP','').length,1);
+assert.equal(S.reportEntries({reports:[{id:'../bad'},{id:'daily-2026-11-24',title:'Report',kind:'daily',generated_at:'2026-11-24'}]}).length,1);
+assert.equal(S.countryEntries({countries:[{id:'SGP',name:'Singapore'}]})[0].url,'atlas.html?country=SGP');
+console.log('global search tests passed');

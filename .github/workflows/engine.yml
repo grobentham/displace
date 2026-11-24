@@ -17,10 +17,10 @@ on:
   workflow_dispatch:
   pull_request:
     branches: [main]
-    paths: ["site/**", "engine/**", ".github/workflows/engine.yml"]
+    paths: ["site/**", "engine/**", "tests/**", "research/**", ".github/workflows/engine.yml"]
   push:
     branches: [main]
-    paths: ["site/**", "engine/**", ".github/workflows/engine.yml"]
+    paths: ["site/**", "engine/**", "tests/**", "research/**", ".github/workflows/engine.yml"]
 
 permissions:
   contents: read
@@ -61,10 +61,36 @@ jobs:
           python engine/test_atlas.py
           node --check site/assets/terminal.js
           node tests/test_terminal.js
+          node --check site/assets/search.js
+          node tests/test_search.js
+          python engine/test_sitebuild.py
+          python tests/test_site_routes.py
+
+  browser-test:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - name: Generate archived report pages for browser smoke tests
+        run: python engine/sitebuild.py
+      - name: Install pinned browser test dependency
+        run: |
+          npm install --no-save --package-lock=false playwright@1.56.1
+          npx playwright install --with-deps chromium
+      - name: Desktop and mobile browser checks
+        run: |
+          python -m http.server 8765 --bind 127.0.0.1 --directory site > /tmp/displace-http.log 2>&1 &
+          server=$!
+          trap 'kill "$server" 2>/dev/null || true' EXIT
+          for i in {1..20}; do curl -fsS http://127.0.0.1:8765/terminal.html >/dev/null && break; sleep 1; done
+          node tests/browser_smoke.js
 
   publish:
     if: github.ref == 'refs/heads/main'
-    needs: test
+    needs: [test, browser-test]
     runs-on: ubuntu-latest
     timeout-minutes: 30
     permissions:
@@ -112,11 +138,14 @@ jobs:
       - name: Final check before publishing (block invalid candidate snapshot)
         run: python engine/gate.py --strict
 
+      - name: Build static research articles and sitemap
+        run: python engine/sitebuild.py
+
       - name: Save new data
         run: |
           git config user.name "displace-engine"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -- site/data site/calendar.ics site/calendar-high.ics engine/pending.json engine/cache
+          git add -- site/data site/reports site/sitemap.xml site/calendar.ics site/calendar-high.ics engine/pending.json engine/cache
           if ! git diff --cached --quiet; then
             git commit -m "Engine update $(date -u +%Y-%m-%dT%H:%MZ)"
             # another run or a code push may have landed meanwhile: rebase onto it and retry

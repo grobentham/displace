@@ -71,3 +71,9 @@
 ## Unified intelligence terminal
 - Add responsive overview linking ten published research, market, calendar, Atlas, warning and evidence snapshots; isolate panel loading failures and preserve source dates.
 - Add primary navigation and homepage terminal entry, external CSS/JS modules and Node utility tests.
+
+## Product consolidation
+- Shared navigation and external research page styling; global search with report and economy deep links.
+- Crawlable source-linked static report pages, canonical URLs, generated sitemap and route/build/search regression tests.
+
+- Add pinned Chromium desktop/mobile smoke tests for intelligence pages, country selection, search and static article navigation as a production workflow prerequisite.
