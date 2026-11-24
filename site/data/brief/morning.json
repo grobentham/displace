@@ -2,6 +2,103 @@
  "version": 2,
  "editions": [
   {
+   "date": "2026-11-25",
+   "opensAt": "2026-11-25T07:00+08:00",
+   "generatedAt": "2026-11-25T06:45:04+08:00",
+   "updates": [],
+   "upcoming": [
+    {
+     "at": "2026-11-25T21:30+08:00",
+     "title": "GDP, second estimate (Q3)",
+     "watch": "Headline U.S. GDP growth is annualized. Subsequent estimates add data and may revise the same quarter.",
+     "source": "BEA",
+     "metric": "real GDP growth, annualized",
+     "forecast": "3.5%",
+     "previous": "3.4%",
+     "forecastSource": "ForexFactory consensus"
+    },
+    {
+     "at": "2026-11-25T21:30+08:00",
+     "title": "PCE inflation · Personal income and outlays (Oct)",
+     "watch": "Watch monthly core inflation and whether consumer spending is strengthening or slowing.",
+     "source": "BEA",
+     "metric": "core PCE price index month-on-month",
+     "forecast": "0.3%",
+     "previous": "0.3%",
+     "forecastSource": "ForexFactory consensus"
+    },
+    {
+     "at": "2026-11-25T21:30+08:00",
+     "title": "Durable goods orders (Oct)",
+     "source": "Census Bureau",
+     "metric": "durable goods orders month-on-month",
+     "forecast": "0.7%",
+     "previous": "1.8%",
+     "forecastSource": "ForexFactory consensus"
+    }
+   ],
+   "moreReleases": [
+    {
+     "at": "2026-11-25T21:30+08:00",
+     "title": "Initial jobless claims (moved to Wednesday for Thanksgiving)",
+     "watch": "Initial claims count new unemployment insurance applications. The four-week average smooths weekly swings.",
+     "source": "Dept. of Labor",
+     "metric": "initial claims",
+     "forecast": "201K",
+     "previous": "203K",
+     "forecastSource": "ForexFactory consensus"
+    },
+    {
+     "at": "2026-11-25T23:00+08:00",
+     "title": "New home sales (Oct)",
+     "source": "Census Bureau",
+     "metric": "new home sales, annualized rate",
+     "forecast": "650K",
+     "previous": "676K",
+     "forecastSource": "ForexFactory consensus"
+    },
+    {
+     "at": "2026-11-26T03:00+08:00",
+     "title": "Beige Book",
+     "source": "Federal Reserve"
+    }
+   ],
+   "focus": {
+    "title": "GDP, second estimate",
+    "at": "2026-11-25T21:30+08:00"
+   },
+   "nextFed": "Dec 8–9",
+   "otherCloses": [
+    "At the Fri Nov 20 close, the Fed's broad dollar index 123.6 (up 0.1%)."
+   ],
+   "treasury": {
+    "date": "2026-11-24",
+    "yield": 4.63,
+    "changeBp": 0
+   },
+   "outlook": {
+    "label": "Neutral",
+    "reason": "Neither yield moved by the 3 bp needed for a rates tilt.",
+    "rates": {
+     "date": "2026-11-24",
+     "twoYearBp": 0,
+     "tenYearBp": -1,
+     "twoYearYield": 4.63,
+     "tenYearYield": 4.91
+    },
+    "thresholdBp": 3
+   },
+   "earnings": {
+    "reports": [],
+    "upcoming": [],
+    "sourcesRead": 6,
+    "sourcesTotal": 6
+   },
+   "calendarCovered": true,
+   "feedsChecked": true,
+   "feedIssues": false
+  },
+  {
    "date": "2026-11-24",
    "opensAt": "2026-11-24T07:00+08:00",
    "generatedAt": "2026-11-24T06:44:42+08:00",
@@ -50,43 +147,6 @@
    "feedsChecked": true,
    "feedIssues": false,
    "refreshedAt": "2026-11-24T23:00:08+08:00"
-  },
-  {
-   "date": "2026-11-23",
-   "opensAt": "2026-11-23T07:00+08:00",
-   "generatedAt": "2026-11-23T06:44:53+08:00",
-   "updates": [],
-   "upcoming": [],
-   "moreReleases": [],
-   "focus": null,
-   "nextFed": "Dec 8–9",
-   "otherCloses": [],
-   "treasury": {
-    "date": "2026-11-20",
-    "yield": 4.63,
-    "changeBp": -13
-   },
-   "outlook": {
-    "label": "Bullish tilt",
-    "reason": "Both yields fell by at least 3 bp, easing pressure on tech valuations.",
-    "rates": {
-     "date": "2026-11-20",
-     "twoYearBp": -13,
-     "tenYearBp": -12,
-     "twoYearYield": 4.63,
-     "tenYearYield": 4.92
-    },
-    "thresholdBp": 3
-   },
-   "earnings": {
-    "reports": [],
-    "upcoming": [],
-    "sourcesRead": 6,
-    "sourcesTotal": 6
-   },
-   "calendarCovered": true,
-   "feedsChecked": true,
-   "feedIssues": false
   }
  ]
 }

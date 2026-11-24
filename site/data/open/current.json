@@ -1,13 +1,13 @@
 {
   "version": 1,
-  "asof": "2026-11-24T22:25:36.445853+00:00",
+  "asof": "2026-11-24T22:45:18.834817+00:00",
   "scope": "Recorded forecasts only; not all possible scheduled forecasts. No receipt before the target start means no prospective credit.",
   "forecast_counts": {
     "void": 2,
     "late": 8,
     "unknown_eligibility": 0,
-    "unverified": 29,
-    "verified_pending": 0,
+    "unverified": 22,
+    "verified_pending": 7,
     "verified_resolved": 0,
     "verified_invalid_outcome": 0,
     "verified_overdue": 0
@@ -998,9 +998,12 @@
       "day": null,
       "correction": null,
       "id": "4ab27c5e235ffe71135f97e165fbe418757e57d86d2af79b1f824e82961b5d99",
-      "status": "unverified",
+      "status": "verified_pending",
       "source": "bias/log.json",
-      "receipt": null,
+      "receipt": {
+        "published_at": "2026-11-24T22:25:55.181194+00:00",
+        "run": "45500243990"
+      },
       "target_start": "2026-11-24T18:00:00-05:00"
     },
     {
@@ -1023,9 +1026,12 @@
       "day": null,
       "correction": null,
       "id": "7ce0ecdba308ad8f7dd4c6dbafa8dd5be7fda80ee573a6ad3da69237af37b1ca",
-      "status": "unverified",
+      "status": "verified_pending",
       "source": "bias/log.json",
-      "receipt": null,
+      "receipt": {
+        "published_at": "2026-11-24T22:25:55.181194+00:00",
+        "run": "45500243990"
+      },
       "target_start": "2026-11-24T18:00:00-05:00"
     },
     {
@@ -1048,9 +1054,12 @@
       "day": null,
       "correction": null,
       "id": "cde1a6b7f3c5e78b9d6bafab73aaf7cc8cc059c02ce9416b1ec8074db56c5b61",
-      "status": "unverified",
+      "status": "verified_pending",
       "source": "bias/log.json",
-      "receipt": null,
+      "receipt": {
+        "published_at": "2026-11-24T22:25:55.181194+00:00",
+        "run": "45500243990"
+      },
       "target_start": "2026-11-24T18:00:00-05:00"
     },
     {
@@ -1073,9 +1082,12 @@
       "day": null,
       "correction": null,
       "id": "b0df34d85dd8947c54cb984088c7a0bee052ad7531ef2a7a41e258afef634f43",
-      "status": "unverified",
+      "status": "verified_pending",
       "source": "bias/log.json",
-      "receipt": null,
+      "receipt": {
+        "published_at": "2026-11-24T22:25:55.181194+00:00",
+        "run": "45500243990"
+      },
       "target_start": "2026-11-24T18:00:00-05:00"
     },
     {
@@ -1098,9 +1110,12 @@
       "day": null,
       "correction": null,
       "id": "4f7c98f6d1fcc615452f6f434f4ac4a8fa7a3538c726320a0179ba6fa110fea1",
-      "status": "unverified",
+      "status": "verified_pending",
       "source": "bias/log.json",
-      "receipt": null,
+      "receipt": {
+        "published_at": "2026-11-24T22:25:55.181194+00:00",
+        "run": "45500243990"
+      },
       "target_start": "2026-11-24T18:00:00-05:00"
     },
     {
@@ -1123,9 +1138,12 @@
       "day": null,
       "correction": null,
       "id": "02170ce626fa2cd1ef48597022881273a64c4ac57d9b05b521a27ff6706267ed",
-      "status": "unverified",
+      "status": "verified_pending",
       "source": "bias/log.json",
-      "receipt": null,
+      "receipt": {
+        "published_at": "2026-11-24T22:25:55.181194+00:00",
+        "run": "45500243990"
+      },
       "target_start": "2026-11-24T18:00:00-05:00"
     },
     {
@@ -1148,9 +1166,12 @@
       "day": null,
       "correction": null,
       "id": "a2452ac05c5f0ea645bfa37adb48a5f7257a1762193c86c813c6df59698dd114",
-      "status": "unverified",
+      "status": "verified_pending",
       "source": "bias/log.json",
-      "receipt": null,
+      "receipt": {
+        "published_at": "2026-11-24T22:25:55.181194+00:00",
+        "run": "45500243990"
+      },
       "target_start": "2026-11-24T18:00:00-05:00"
     }
   ],
