@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "asof": "2026-11-24T14:25:30.833348+00:00",
+  "asof": "2026-11-24T15:00:36.240562+00:00",
   "scope": "Recorded forecasts only; not all possible scheduled forecasts. No receipt before the target start means no prospective credit.",
   "forecast_counts": {
     "void": 2,
@@ -1073,7 +1073,7 @@
     {
       "name": "Daily market bias and range",
       "code": "engine/bias.py",
-      "code_sha256": "bcf9c31549a38738a88139cbd607035a50f17578bbf1f3275ed1d75b8856f96b",
+      "code_sha256": "63dcea584a06f0b3bed519ee6e3a3bf1e2afe3c6cc0f3afc64c22b0976b1f2a2",
       "plan": null,
       "plan_hash": null,
       "classification": "Base-rate or tested by market; live evidence counted separately"
