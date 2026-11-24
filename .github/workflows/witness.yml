@@ -1,0 +1,47 @@
+name: Witness
+
+# Reads Iron Brain's published plan decisions and commits what it saw to the `witness` branch. The branch's commit
+# history is the public timestamp proof for the intraday scorecard (engine/intraday.py). Light: no Pages deploy.
+on:
+  schedule:
+    - cron: "*/10 13-17 * * 1-5"   # every 10 minutes, 08:00-13:00 New York in winter (09:00-14:00 in summer)
+    - cron: "5 18-22 * * 1-5"      # hourly through the afternoon
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: witness
+  cancel-in-progress: false
+
+jobs:
+  witness:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          sparse-checkout: engine
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - name: Witness branch
+        run: |
+          if git fetch -q --depth 1 origin +refs/heads/witness:refs/remotes/origin/witness; then
+            git worktree add -q -B witness w origin/witness
+          else
+            git worktree add -q --orphan -b witness w
+          fi
+      - name: Read Iron Brain's published decisions
+        run: python engine/intraday.py witness w/iron-brain.json
+      - name: Save what was seen
+        run: |
+          cd w
+          git add -A
+          git -c user.name=displace-witness -c user.email=41898282+github-actions[bot]@users.noreply.github.com \
+            commit -q -m "Witnessed $(date -u +%Y-%m-%dT%H:%MZ)" || { echo "nothing new"; exit 0; }
+          for i in 1 2 3; do
+            git push -q origin witness && break
+            sleep 5
+          done
