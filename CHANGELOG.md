@@ -67,3 +67,7 @@
 ## Displace Atlas
 - Add registered 20-economy, eight-indicator annual World Development Indicators ingestion and cached refresh.
 - Add explicit observation years, missing/stale states, same-year comparison, coverage counts, source links and public country profiles.
+
+## Unified intelligence terminal
+- Add responsive overview linking ten published research, market, calendar, Atlas, warning and evidence snapshots; isolate panel loading failures and preserve source dates.
+- Add primary navigation and homepage terminal entry, external CSS/JS modules and Node utility tests.

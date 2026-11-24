@@ -213,3 +213,7 @@ The public `site/open.html` transparency centre uses `engine/evidence.py` to rec
 ## Displace Atlas
 
 Atlas uses the World Bank Indicators API v2, World Development Indicators source 2, with 20 selected economies and eight annual economic indicators from 2010 onward. It refreshes each series at most weekly after success, retries failures with a six-hour cooldown, and exposes observation years, source dates, missing values, cached fallback and stale-cache states. Country comparisons use a single selected year, never latest observations from mixed years. It is an annual descriptive database, not real-time macro or a forecast engine. Central government debt has uneven coverage and is not total public-sector debt. See `research/atlas-plan-v1.json`, `engine/atlas.py` and `site/atlas.html`. Source terms and third-party indicator rights must be reviewed before commercial redistribution.
+
+## Unified intelligence terminal
+
+`site/terminal.html` brings ten published data snapshots into one workspace using independently loaded, source-dated panels. It distinguishes model tiers, shows missing panels without hiding other data, uses New York time for upcoming releases, compares Atlas growth using a common reference year, and links back to the full research and trading tools. `site/assets/terminal.css` and `site/assets/terminal.js` are separate modules; utility regression tests run in CI. The terminal is a read-only snapshot viewer, not a live trading feed or uptime probe.
