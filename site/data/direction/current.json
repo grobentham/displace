@@ -1,5 +1,5 @@
 {
- "asof": "2026-11-24T08:44-05:00",
+ "asof": "2026-11-24T09:02-05:00",
  "version": 4,
  "assets": {
   "gold": "Gold, close",
@@ -937,7 +937,7 @@
     "historical_candidate": false
    },
    "nq2h": {
-    "b": -0.6021,
+    "b": -0.6022,
     "k": 1.25,
     "n": 85,
     "since": "2024-06-28",
@@ -5725,6 +5725,6 @@
  "log": [
   "tv: 3 month(s) refreshed, 3592 releases with a consensus surprise",
   "markets: gold, nq, usd, y2, gold15m, gold2h, nq15m, nq2h",
-  "model: fit in 2s; proven: labor:y2"
+  "model: fit in 3s; proven: labor:y2"
  ]
 }
