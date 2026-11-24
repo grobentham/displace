@@ -160,6 +160,55 @@ def sync(m, now, fetch=download):
     return c
 
 
+IRON_BRAIN = "https://raw.githubusercontent.com/grobentham/iron-brain/quotes/quotes.json"
+PATCHES = os.path.join(CACHE_DIR, "patches.json")
+
+
+def iron_brain_sessions(url=IRON_BRAIN):
+    """Clean daily candles from Iron Brain (its engine/sessions.py): NQ and gold Globex sessions rebuilt every 5 minutes
+    from spike-filtered 1-minute bars. {} when unreachable: the Yahoo candles then stand as they are."""
+    try:
+        with urllib.request.urlopen(urllib.request.Request(url, headers=UA), timeout=20) as r:
+            return (json.load(r).get("outlook") or {}).get("sessions") or {}
+    except Exception as e:
+        log(f"bias: Iron Brain sessions unavailable ({e!r})")
+        return {}
+
+
+def load_patches():
+    try:
+        return json.load(open(PATCHES))
+    except (OSError, ValueError):
+        return {}
+
+
+def despike_days(m, days, ib, patches):
+    """Clip a daily high or low that a bad print pushed past the clean session's (Yahoo took 23 Nov 2026's one-minute
+    27,137 print as NQ's high; the real high was about 27,090). Only clips, never extends, and only by more than 0.1%,
+    so a minute or two missing from the 1-minute feed can't move a real extreme. Fixes are kept in patches.json, because
+    Yahoo's next download would bring the bad print back after Iron Brain's 5-day window has passed."""
+    mp = patches.setdefault(m, {})
+    for d, x in (ib.get(m) or {}).items():
+        if d in days and x.get("complete") and x.get("full"):
+            o, h, l, c = days[d]
+            tol = 0.001 * c
+            nh = max(x["h"], o, c) if h - x["h"] > tol else h
+            nl = min(x["l"], o, c) if x["l"] - l > tol else l
+            if (nh, nl) != (h, l):
+                mp[d] = [round(nh, 6), round(nl, 6), round(h, 6), round(l, 6)]   # clean high, low; Yahoo's high, low
+    notes = []
+    for d, (nh, nl, yh, yl) in mp.items():
+        if d in days:
+            o, h, l, c = days[d]
+            days[d] = [o, min(h, nh), max(l, nl), c]
+            if h > nh or l < nl:
+                notes.append(f"{d}: Yahoo's " + " and ".join(
+                    ([f"high {yh:,.2f}"] if yh > nh else []) + ([f"low {yl:,.2f}"] if yl < nl else []))
+                    + " came from a bad print; using " + " and ".join(
+                    ([f"{nh:,.2f}"] if yh > nh else []) + ([f"{nl:,.2f}"] if yl < nl else [])) + " (Iron Brain's spike-filtered minute bars)")
+    return notes
+
+
 def clean(m, rows):
     """Drop placeholder candles (high = low), prices at or below zero, and history before the market's usable start."""
     start = START.get(m, "")
@@ -674,10 +723,13 @@ def run(now=None, fetch=download, fetch_series=fred_download, markets=None):
     entries = [e for e in entries if "p_up" in e]
     series = {sid: sync_series(sid, now, fetch_series) for sid in SERIES}
     tiers, fomc = calendar_tiers()
-    ctxs, rows_by = {}, {}
+    ctxs, rows_by, notes = {}, {}, {}
+    ib = iron_brain_sessions() if fetch is download else {}
+    patches = load_patches()
     for m in markets or MARKETS:
         try:
             c = sync(m, now, fetch)
+            notes[m] = despike_days(m, c["days"], ib, patches)
             rows = clean(m, finished(c["days"], now_ny))
             rows_by[m] = rows
             if len(rows) < 800:
@@ -686,6 +738,13 @@ def run(now=None, fetch=download, fetch_series=fred_download, markets=None):
             ctxs[m] = prepare(m, rows, series, tiers, fomc)
         except Exception as e:  # one market failing never blocks the others
             log(f"bias: {m} failed ({e!r})")
+    if any(patches.values()):
+        os.makedirs(CACHE_DIR, exist_ok=True)
+        with open(PATCHES, "w") as fh:
+            json.dump(patches, fh, indent=1, sort_keys=True)
+    for m, n in notes.items():
+        for x in n:
+            log(f"bias: {m} {x}")
     if not ctxs:
         log("bias: nothing to publish; the last file stays live")
         return 1
@@ -701,6 +760,7 @@ def run(now=None, fetch=download, fetch_series=fred_download, markets=None):
             log(f"bias: {m} failed ({e!r})")
             continue
         r["tests"] = {"signals": n_sig, "calendar": len(EVENTS) * len(ctxs)}
+        r["dataNotes"] = notes.get(m, [])[-3:]
         out[m] = r
         if not any(e["market"] == m and e["candle"] == r["candle"] for e in entries):
             t1 = next((t for t in r["touch"] if t["k"] == 1.0), None)
