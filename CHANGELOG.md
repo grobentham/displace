@@ -59,3 +59,7 @@
 ## Displace Open
 - Add archive-inclusive forecast accountability with receipt verification, exact target outcome checks, explicit exclusions, per-market scores and calibration, original corrections, research batch accounting, and current implementation hashes.
 - Add public evidence centre, source and engine snapshot health, downloadable JSON, and automated consistency tests.
+
+## Automated publishing
+- Deterministic daily intelligence editions, recorded warning bulletins, completed research summaries, weekly accountability and monthly model evidence snapshots.
+- Frozen report objects, source hashes, integrity-checked archive catalogue and RSS feed, public searchable reader and offline tests.

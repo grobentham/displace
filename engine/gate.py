@@ -84,6 +84,7 @@ CONTRACTS = {
     "research/discovery.json": {"version": int, "batches": list, "plan_hash": str},
     "research/discovery-v2.json": {"version": int, "batches": list, "plan_hash": str},
     "macro/current.json": {"version": int, "asof": str, "indices": list, "policy": str},
+    "publications/index.json": {"version": int, "reports": list},
     "open/current.json": {"version": int, "asof": str, "forecast_counts": dict, "forecasts": list, "by_market": dict, "corrections": list, "research": list, "models": list},
     "relationships/current.json": {"version": int, "asof": str, "series": list, "pairs": list, "plan_hash": str, "policy": str},
     "signals/current.json": {"version": int, "asof": str, "states": list, "events": list, "plan_hash": str, "policy": str},
@@ -116,6 +117,11 @@ def strict_validate(data=DATA):
                 failures[rel] = ["missing or wrong type: " + ", ".join(bad)]
             elif rel == "engine/quality.json" and obj["critical"]:
                 failures[rel] = ["critical source quality failure"]
+            elif rel == "publications/index.json":
+                import publisher
+                problems = publisher.check(publisher.Path(data))
+                if problems:
+                    failures[rel] = problems
             elif rel == "open/current.json":
                 import evidence
                 problems = evidence.check(obj)
