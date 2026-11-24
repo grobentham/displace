@@ -66,3 +66,5 @@ main p,main li{overflow-wrap:anywhere}
 
 /* in-page section links (Open, Atlas): a centred row under the headline */
 main nav{display:flex;flex-wrap:wrap;gap:8px 18px;justify-content:center;margin-top:14px;font-size:.95rem}
+/* the header logo keeps its size whatever a page does with svg */
+.gnav .brand svg{width:26px;height:26px;flex:none;display:block}
