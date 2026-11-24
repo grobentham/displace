@@ -58,6 +58,7 @@ jobs:
           python engine/test_relationships.py
           python engine/test_evidence.py
           python engine/test_publisher.py
+          python engine/test_atlas.py
 
   publish:
     if: github.ref == 'refs/heads/main'
@@ -104,6 +105,7 @@ jobs:
           python engine/guard.py relationships engine/relationships.py
           python engine/guard.py evidence engine/evidence.py
           python engine/guard.py publishing engine/publisher.py
+          python engine/guard.py atlas engine/atlas.py
 
       - name: Final check before publishing (block invalid candidate snapshot)
         run: python engine/gate.py --strict

@@ -1,0 +1,142 @@
+{
+  "version": 1,
+  "registered_at": "2026-11-24",
+  "source": "World Bank World Development Indicators (source 2)",
+  "start_year": 2010,
+  "refresh_days": 7,
+  "retry_hours": 6,
+  "stale_cache_days": 30,
+  "countries": [
+    {
+      "id": "USA",
+      "name": "United States"
+    },
+    {
+      "id": "CHN",
+      "name": "China"
+    },
+    {
+      "id": "JPN",
+      "name": "Japan"
+    },
+    {
+      "id": "DEU",
+      "name": "Germany"
+    },
+    {
+      "id": "IND",
+      "name": "India"
+    },
+    {
+      "id": "GBR",
+      "name": "United Kingdom"
+    },
+    {
+      "id": "FRA",
+      "name": "France"
+    },
+    {
+      "id": "ITA",
+      "name": "Italy"
+    },
+    {
+      "id": "CAN",
+      "name": "Canada"
+    },
+    {
+      "id": "BRA",
+      "name": "Brazil"
+    },
+    {
+      "id": "KOR",
+      "name": "South Korea"
+    },
+    {
+      "id": "AUS",
+      "name": "Australia"
+    },
+    {
+      "id": "MEX",
+      "name": "Mexico"
+    },
+    {
+      "id": "IDN",
+      "name": "Indonesia"
+    },
+    {
+      "id": "SAU",
+      "name": "Saudi Arabia"
+    },
+    {
+      "id": "SGP",
+      "name": "Singapore"
+    },
+    {
+      "id": "MYS",
+      "name": "Malaysia"
+    },
+    {
+      "id": "THA",
+      "name": "Thailand"
+    },
+    {
+      "id": "VNM",
+      "name": "Vietnam"
+    },
+    {
+      "id": "PHL",
+      "name": "Philippines"
+    }
+  ],
+  "indicators": [
+    {
+      "id": "growth",
+      "code": "NY.GDP.MKTP.KD.ZG",
+      "label": "Real GDP growth",
+      "unit": "%"
+    },
+    {
+      "id": "inflation",
+      "code": "FP.CPI.TOTL.ZG",
+      "label": "Consumer price inflation",
+      "unit": "%"
+    },
+    {
+      "id": "unemployment",
+      "code": "SL.UEM.TOTL.ZS",
+      "label": "Unemployment (modeled ILO estimate)",
+      "unit": "%"
+    },
+    {
+      "id": "gdp",
+      "code": "NY.GDP.MKTP.CD",
+      "label": "GDP (current US dollars)",
+      "unit": "USD"
+    },
+    {
+      "id": "income",
+      "code": "NY.GDP.PCAP.CD",
+      "label": "GDP per capita (current US dollars)",
+      "unit": "USD"
+    },
+    {
+      "id": "debt",
+      "code": "GC.DOD.TOTL.GD.ZS",
+      "label": "Central government debt",
+      "unit": "% of GDP"
+    },
+    {
+      "id": "current_account",
+      "code": "BN.CAB.XOKA.GD.ZS",
+      "label": "Current account balance",
+      "unit": "% of GDP"
+    },
+    {
+      "id": "trade",
+      "code": "NE.TRD.GNFS.ZS",
+      "label": "Trade in goods and services",
+      "unit": "% of GDP"
+    }
+  ],
+  "policy": "Annual observations only, not real-time conditions or forecasts. Latest available years can differ by country and indicator. Cross-country comparisons use exactly the selected reference year; never forward fill or rank different years together. Preserve null/missing observations. Central government debt coverage differs by country and excludes other public sector debt; modeled unemployment is not a national headline estimate. Current-dollar GDP is sensitive to exchange rates. Source revisions can change history; cache timestamps are retrieval dates, not release dates."
+}
