@@ -26,3 +26,7 @@ CHANGELOG.md.
 - **scheduler.yml waits on a runner between slots.** GitHub's cron often fires late or not at all on this repo; the
   waiting runner is what keeps the schedule. It costs nothing on a public repo. Revisit only if the repo becomes private
   (then it would use most of the free minutes).
+
+## Integrity follow-up limitations
+- Publication receipts prove successful Pages deployment at a conservative post-deploy time, not delivery to every browser. No receipt means no live credit. Old event-window reactions remain historical only; future publication-relative event models need a distinct target and validation.
+- Discovery v1 is fixed, automatically runs from cached daily candles, and publishes exploratory statistics and frozen prospective quarterly batches. Weekly-block intervals are approximate; no automatic model promotion, no claim of tradable edge. Full exchange-specific calendars, independent timestamping and data rights remain open.

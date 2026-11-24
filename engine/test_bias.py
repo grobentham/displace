@@ -89,7 +89,7 @@ def test_run_end_to_end():
     log = json.load(open(B.LOG))["entries"]
     done = [e for e in log if e["candle"] == last]
     assert len(done) == 2 and all(e["scored"] and e["up"] == 1 and e["highTaken"] and e["up1Hit"] for e in done)
-    assert json.load(open(B.OUT))["live"]["nq"]["days"] == 1
+    assert json.load(open(B.OUT))["live"]["nq"]["days"] == 0  # no verified deployment receipt
     assert all(e["eligible"] for e in log)          # 17:30 New York: after the close, before the 18:00 open
 
 

@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "registered_at": "2026-11-24",
+  "markets": [
+    "nq",
+    "gold"
+  ],
+  "conditions": [
+    "previous_up",
+    "previous_down",
+    "wide_range",
+    "narrow_range"
+  ],
+  "feature": "previous complete session only",
+  "outcome": "next observed session close-to-close positive return; gaps over four calendar days excluded",
+  "historical": {
+    "start": "2020-01-01",
+    "end": "2026-11-01"
+  },
+  "prospective_start": "2026-12-01",
+  "block_months": 3,
+  "min_group": 20,
+  "min_blocks": 8,
+  "alpha": 0.05,
+  "policy": "Fixed plan. Historical results exploratory; prospective batches disjoint and frozen once computed. Approximate weekly-block intervals, Bonferroni across all eight experiments within each batch; no model promotion or strategy profitability claim. Provider revisions and serial dependence can affect results."
+}

@@ -52,6 +52,7 @@ jobs:
           python engine/test_surprise.py
           python engine/test_bias.py
           python engine/test_gate.py
+          python engine/test_discovery.py
 
   publish:
     if: github.ref == 'refs/heads/main'
@@ -91,6 +92,7 @@ jobs:
           python engine/guard.py predict engine/predict.py
           python engine/guard.py watch engine/watch.py
           python engine/guard.py bias engine/bias.py
+          python engine/guard.py discovery engine/discovery.py
 
       - name: Final check before publishing (block invalid candidate snapshot)
         run: python engine/gate.py --strict
@@ -166,6 +168,16 @@ jobs:
       - id: deploy3
         if: steps.deploy.outcome == 'failure' && steps.deploy2.outcome == 'failure'
         uses: actions/deploy-pages@v4
+
+      - name: Record conservative publication receipt after successful deployment
+        if: ${{ success() && (steps.deploy.outcome == 'success' || steps.deploy2.outcome == 'success' || steps.deploy3.outcome == 'success') }}
+        run: |
+          python engine/publication.py
+          git add site/data/bias/publication-receipts.json
+          if ! git diff --cached --quiet; then
+            git commit -m "Record verified Pages publication receipt"
+            git push || { echo "Receipt not persisted; no prospective credit will be given"; exit 1; }
+          fi
 
       - name: Engine health (red if any step failed; the site keeps the last good files)
         if: ${{ !cancelled() }}

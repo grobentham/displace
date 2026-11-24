@@ -35,6 +35,7 @@ from zoneinfo import ZoneInfo
 import numpy as np
 
 import quant as Q
+import publication as PUB
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
@@ -813,11 +814,12 @@ def score_log(rows_by, entries):
 def summary(entries):
     voided = sum(1 for e in entries if e.get("void"))
     late = sum(1 for e in entries if e.get("eligible") is False and not e.get("void"))
-    done = [e for e in entries if e.get("scored") and not e.get("void") and e.get("eligible") is True]
+    done = [e for e in entries if e.get("scored") and not e.get("void") and e.get("eligible") is True and e.get("publication_verified") is True]
     calls = [e for e in done if "hit" in e and e.get("tier") == "tested"]
     out = {"days": len(done), "calls": len(calls), "hits": sum(e["hit"] for e in calls),
            "inRange": sum(e["inRange"] for e in done), "recent": done[-10:][::-1],
-           "voided": voided, "late": late}
+           "voided": voided, "late": late,
+           "unverified": sum(1 for e in entries if e.get("eligible") is True and not e.get("void") and not e.get("publication_verified"))}
     if done:
         out["brier"] = round(sum(e["brier"] for e in done) / len(done), 4)
         out["baseBrier"] = round(sum((e["base_up"] - e["up"]) ** 2 for e in done) / len(done), 4)
@@ -926,6 +928,12 @@ def run(now=None, fetch=download, fetch_series=fred_download, markets=None):
             lifetime[(e["market"], e["candle"])] = e
     for e in entries:
         lifetime[(e["market"], e["candle"])] = e
+    receipts = PUB.load()
+    for e in lifetime.values():
+        try:
+            e["publication_verified"] = PUB.verified(e, receipts, window_start(e["for"]))
+        except (KeyError, ValueError, TypeError):
+            e["publication_verified"] = False
     live = {m: summary([e for e in lifetime.values() if e["market"] == m]) for m in out}
     doc = {"asof": now.isoformat(timespec="minutes"), "for": day, "markets": out, "order": [m for m in MARKETS if m in out],
            "news": news_today(day), "live": live,
