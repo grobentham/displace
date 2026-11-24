@@ -12,7 +12,8 @@ on:
     - cron: "32 19 * * 1-5"  # after 14:00 (Fed) releases
     - cron: "22 22 * * 1-5"  # late data and archived readings
     - cron: "22 22 * * 0"    # Sunday: weekly outlook
-    - cron: "42 22 * * *"    # prepare the 07:00 SGT brief starting at 06:40 SGT
+    - cron: "42 22 * * *"    # prepare the 07:00 SGT brief starting at 06:40 SGT; the bias forecast (17:42 New York in winter)
+    - cron: "42 21 * * *"    # the bias forecast in summer (17:42 New York daylight time): must be in before the 18:00 open
   workflow_dispatch:
   pull_request:
     branches: [main]
@@ -50,6 +51,7 @@ jobs:
           python engine/test_moves.py
           python engine/test_surprise.py
           python engine/test_bias.py
+          python engine/test_gate.py
 
   publish:
     if: github.ref == 'refs/heads/main'
@@ -78,16 +80,20 @@ jobs:
         run: python -m pip install --quiet "numpy>=2,<3"
 
       - name: Refresh calendar and news
+        # each step through engine/guard.py: a failing engine is recorded and the others still run
         run: |
-          python -u engine/engine.py
-          python -u engine/news.py
-          python -u engine/morning.py
+          python engine/guard.py calendar engine/engine.py
+          python engine/guard.py news engine/news.py
+          python engine/guard.py morning engine/morning.py
 
       - name: News-outcome engine (gold, NQ and rates by release)
         run: |
-          python -u engine/predict.py
-          python -u engine/watch.py
-          python -u engine/bias.py
+          python engine/guard.py predict engine/predict.py
+          python engine/guard.py watch engine/watch.py
+          python engine/guard.py bias engine/bias.py
+
+      - name: Final check before publishing (invalid outputs go back to the last good version)
+        run: python engine/gate.py
 
       - name: Save new data
         run: |
@@ -164,3 +170,7 @@ jobs:
       - id: deploy3
         if: steps.deploy.outcome == 'failure' && steps.deploy2.outcome == 'failure'
         uses: actions/deploy-pages@v4
+
+      - name: Engine health (red if any step failed; the site keeps the last good files)
+        if: ${{ !cancelled() }}
+        run: python engine/gate.py --report

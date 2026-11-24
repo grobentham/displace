@@ -653,9 +653,82 @@ def read(m, rows, series, tiers, fomc):
 
 # ---------------------------------------------------------------- live record
 
+ARCHIVE_DIR = os.path.join(DATA, "bias", "archive")
+KEEP = 6000                                   # entries kept in the live log; older ones move to the archive, never dropped
+
+
+def window_start(day_iso):
+    """When the futures session a forecast is for opens: 18:00 New York the evening before (Sunday for Monday)."""
+    d = dt.date.fromisoformat(day_iso) - dt.timedelta(days=1)
+    return dt.datetime.combine(d, dt.time(18, 0), NY)
+
+
+def problems(e):
+    """Why a log entry can't be a valid forecast (empty when it can): probabilities outside 0-1, an expected range
+    below zero or upside down, touch levels on the wrong side."""
+    out = []
+    for k in ("p_up", "base_up", "p_high", "p_low", "p_up1", "p_dn1"):
+        v = e.get(k)
+        if v is not None and not (isinstance(v, (int, float)) and math.isfinite(v) and 0 <= v <= 1):
+            out.append(f"{k} {v} is not a probability")
+    lo, hi = e.get("range_lo"), e.get("range_hi")
+    if lo is None or hi is None or not (math.isfinite(lo) and math.isfinite(hi)) or lo < 0 or lo > hi:
+        out.append(f"expected range {lo} to {hi} is not a valid high-minus-low range")
+    if e.get("up1") is not None and e.get("dn1") is not None and not e["dn1"] < e["up1"]:
+        out.append("touch levels are on the wrong side")
+    return out
+
+
+def audit(entries, now):
+    """Mark, never delete: entries that fail problems() become void (kept, with the reason and when it was found, and
+    left out of every score), and each entry records whether it was issued before its session opened. Only eligible,
+    non-void entries count in the live record. Runs on old entries too, so earlier mistakes get a visible correction."""
+    stamp = now.isoformat(timespec="minutes")
+    for e in entries:
+        if "eligible" not in e and e.get("logged") and e.get("for"):
+            try:
+                e["eligible"] = dt.datetime.fromisoformat(e["logged"]) < window_start(e["for"])
+            except ValueError:
+                e["eligible"] = False
+        if not e.get("void"):
+            p = problems(e)
+            if p:
+                e["void"] = True
+                e["correction"] = {"found": stamp, "reason": "; ".join(p),
+                                   "note": "Kept as published but excluded from all scores: the forecast was invalid."}
+    return entries
+
+
+def archive(entries, keep=KEEP, directory=ARCHIVE_DIR):
+    """Move all but the newest `keep` entries into yearly archive files (by target day), merging without duplicates."""
+    old, live = entries[:-keep] if len(entries) > keep else [], entries[-keep:]
+    by = {}
+    for e in old:
+        by.setdefault(str(e.get("for", "unknown"))[:4], []).append(e)
+    for year, rows in by.items():
+        path = os.path.join(directory, f"log-{year}.json")
+        try:
+            have = json.load(open(path)).get("entries", [])
+        except (OSError, ValueError):
+            have = []
+        seen = {(x["market"], x["candle"]) for x in have}
+        have += [x for x in rows if (x["market"], x["candle"]) not in seen]
+        write_json(path, {"entries": sorted(have, key=lambda x: (x.get("for", ""), x["market"]))})
+    return live
+
+
+def write_json(path, doc, **kw):
+    """Write the whole file or nothing: a crash mid-write can't leave half a JSON file for the site."""
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+    tmp = path + ".tmp"
+    with open(tmp, "w") as fh:
+        json.dump(doc, fh, **kw)
+    os.replace(tmp, path)
+
+
 def score_log(rows_by, entries):
     for e in entries:
-        if e.get("scored"):
+        if e.get("scored") or e.get("void"):
             continue
         rows = rows_by.get(e["market"]) or []
         days = dict(rows)
@@ -675,10 +748,13 @@ def score_log(rows_by, entries):
 
 
 def summary(entries):
-    done = [e for e in entries if e.get("scored")]
+    voided = sum(1 for e in entries if e.get("void"))
+    late = sum(1 for e in entries if e.get("eligible") is False and not e.get("void"))
+    done = [e for e in entries if e.get("scored") and not e.get("void") and e.get("eligible", True)]
     calls = [e for e in done if "hit" in e]
     out = {"days": len(done), "calls": len(calls), "hits": sum(e["hit"] for e in calls),
-           "inRange": sum(e["inRange"] for e in done), "recent": done[-10:][::-1]}
+           "inRange": sum(e["inRange"] for e in done), "recent": done[-10:][::-1],
+           "voided": voided, "late": late}
     if done:
         out["brier"] = round(sum(e["brier"] for e in done) / len(done), 4)
         out["baseBrier"] = round(sum((e["base_up"] - e["up"]) ** 2 for e in done) / len(done), 4)
@@ -772,10 +848,12 @@ def run(now=None, fetch=download, fetch_series=fred_download, markets=None):
                             "range_lo": r["range"]["lo"], "range_hi": r["range"]["hi"],
                             "up1": t1["up"] if t1 else None, "dn1": t1["dn"] if t1 else None,
                             "p_up1": t1["up_p"] if t1 else None, "p_dn1": t1["dn_p"] if t1 else None,
-                            "logged": now.isoformat(timespec="minutes")})
+                            "logged": now.isoformat(timespec="minutes"),
+                            "eligible": now < window_start(next_session(r["candle"]))})
     if not out:
         log("bias: nothing to publish; the last file stays live")
         return 1
+    audit(entries, now)
     score_log(rows_by, entries)
     day = max(next_session(v["candle"]) for v in out.values())
     live = {m: summary([e for e in entries if e["market"] == m]) for m in out}
@@ -784,11 +862,8 @@ def run(now=None, fetch=download, fetch_series=fred_download, markets=None):
            "method": {"first_test_year": FIRST_TEST_YEAR, "lean": LEAN, "t_bar": round(t_bar, 2), "z_bar": round(z_bar, 2),
                       "signal_tests": n_sig, "calendar_tests": len(EVENTS) * len(ctxs)},
            "inputs": {sid: (max(v) if v else None) for sid, v in series.items()}}
-    os.makedirs(os.path.dirname(OUT), exist_ok=True)
-    with open(OUT, "w") as fh:
-        json.dump(_clean_json(doc), fh, separators=(",", ":"), allow_nan=False)
-    with open(LOG, "w") as fh:
-        json.dump({"entries": _clean_json(entries[-6000:])}, fh, separators=(",", ":"))
+    write_json(OUT, _clean_json(doc), separators=(",", ":"), allow_nan=False)
+    write_json(LOG, {"entries": _clean_json(archive(entries))}, separators=(",", ":"))
     for m, v in out.items():
         tested = [s["key"] for s in v["signals"] if s["tested"]] + [e["key"] for e in v["calendar"] if e["tested"]]
         log(f"bias: {m} P(up) {v['p_up']} ({v['tier']}); tested: {tested or 'none'}; range gain {v['vol']['stats'].get('gain')}; "
@@ -800,9 +875,11 @@ def run(now=None, fetch=download, fetch_series=fred_download, markets=None):
 def main():
     try:
         return run()
-    except Exception as e:  # never break the publish job
+    except Exception as e:  # the last file stays live; the run reports the failure (engine/guard.py)
         log(f"bias: unexpected error ({e!r}); the last file stays live")
-        return 0
+        import traceback
+        traceback.print_exc()
+        return 1
 
 
 if __name__ == "__main__":

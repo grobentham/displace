@@ -76,7 +76,7 @@ def test_run_end_to_end():
         tmp, os.path.join(tmp, "tv"), os.path.join(tmp, "series"))
     data = synthetic()
     last = max(data)
-    now = dt.datetime.combine(dt.date.fromisoformat(last), dt.time(18, 30), B.NY).astimezone(dt.timezone.utc)
+    now = dt.datetime.combine(dt.date.fromisoformat(last), dt.time(17, 30), B.NY).astimezone(dt.timezone.utc)
     assert B.run(now, fetch=lambda sym, rng="max": dict(data), fetch_series=series_fake, markets=["nq", "es"]) == 0
     doc = json.load(open(B.OUT))
     assert doc["order"] == ["nq", "es"] and doc["for"] == B.next_session(last)
@@ -84,12 +84,13 @@ def test_run_end_to_end():
     assert nq["pv"] == 20 and nq["micro"] == 2 and len(nq["calendar"]) == len(B.EVENTS)
     nd = B.next_session(last)
     data[nd] = [1, data[last][1] * 2, data[last][2] / 2, data[last][3] * 1.01]
-    now2 = dt.datetime.combine(dt.date.fromisoformat(nd), dt.time(18, 30), B.NY).astimezone(dt.timezone.utc)
+    now2 = dt.datetime.combine(dt.date.fromisoformat(nd), dt.time(17, 30), B.NY).astimezone(dt.timezone.utc)
     B.run(now2, fetch=lambda sym, rng="max": dict(data), fetch_series=series_fake, markets=["nq", "es"])
     log = json.load(open(B.LOG))["entries"]
     done = [e for e in log if e["candle"] == last]
     assert len(done) == 2 and all(e["scored"] and e["up"] == 1 and e["highTaken"] and e["up1Hit"] for e in done)
     assert json.load(open(B.OUT))["live"]["nq"]["days"] == 1
+    assert all(e["eligible"] for e in log)          # 17:30 New York: after the close, before the 18:00 open
 
 
 def test_fixes():

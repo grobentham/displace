@@ -299,16 +299,19 @@ def run(now=None, kind_of=None, events=None, store=None):
 
 
 def main():
+    rc = 0
     try:
         run()
     except Exception:
         log("model: unexpected error; the last good file stays live")
         traceback.print_exc()
+        rc = 1                                   # reported by engine/guard.py; the publish job carries on
     try:
         bars.export(DATA, log=log)  # real NQ bars for the site's MNQ backtester
     except Exception as e:
         log(f"bars: could not publish bars for the backtester ({e!r})")
-    return 0
+        rc = rc or 2
+    return rc
 
 
 if __name__ == "__main__":

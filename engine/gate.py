@@ -1,0 +1,133 @@
+"""The final check before anything is published, after every engine has run.
+
+    python engine/gate.py            validate the outputs; put back the last good version of any that fail
+    python engine/gate.py --report   at the end of the run: summary, and a red job if any step failed
+
+What it checks (site/data):
+  - every JSON file parses (a half-written file never reaches the site);
+  - the daily bias (bias/current.json): probabilities between 0 and 1, an expected range that is a real
+    high-minus-low (not below zero, low <= typical <= high), each day's high at or above its low, finite numbers;
+  - the forecast log (bias/log.json): every entry not marked void passes the same forecast checks, and no market has
+    two entries for one candle.
+A file that fails is restored from the last commit (the last good publication) and the failure is recorded in
+site/data/engine/health.json, so the site never shows an invalid result and the run says what went wrong.
+"""
+import glob
+import json
+import math
+import os
+import subprocess
+import sys
+
+HERE = os.path.dirname(os.path.abspath(__file__))
+ROOT = os.path.dirname(HERE)
+DATA = os.path.join(ROOT, "site", "data")
+sys.path.insert(0, HERE)
+import guard as G  # noqa: E402
+
+
+def finite(o, path="$"):
+    """Paths of any NaN or infinite numbers inside o."""
+    if isinstance(o, float) and not math.isfinite(o):
+        return [path]
+    if isinstance(o, dict):
+        return [p for k, v in o.items() for p in finite(v, f"{path}.{k}")]
+    if isinstance(o, list):
+        return [p for i, v in enumerate(o) for p in finite(v, f"{path}[{i}]")]
+    return []
+
+
+def prob(v):
+    return isinstance(v, (int, float)) and math.isfinite(v) and 0 <= v <= 1
+
+
+def check_bias(doc):
+    bad = finite(doc)[:5]
+    for m, v in (doc.get("markets") or {}).items():
+        for k in ("p_up", "base_up"):
+            if not prob(v.get(k)):
+                bad.append(f"{m}.{k} = {v.get(k)} is not a probability")
+        for side, t in (v.get("takes") or {}).items():
+            if not prob(t.get("p")):
+                bad.append(f"{m}.takes.{side}.p = {t.get('p')} is not a probability")
+        r = v.get("range") or {}
+        lo, pt, hi = r.get("lo"), r.get("points"), r.get("hi")
+        if None in (lo, pt, hi) or not (0 <= lo <= pt <= hi):
+            bad.append(f"{m}.range {lo} / {pt} / {hi} is not a valid high-minus-low range")
+        lv = v.get("levels") or {}
+        if lv and not lv.get("high", 0) >= lv.get("low", 0):
+            bad.append(f"{m}.levels high {lv.get('high')} is below low {lv.get('low')}")
+    return bad
+
+
+def check_log(doc):
+    import bias as B
+    bad, seen = [], set()
+    for e in doc.get("entries", []):
+        key = (e.get("market"), e.get("candle"))
+        if key in seen:
+            bad.append(f"duplicate forecast {key}")
+        seen.add(key)
+        if not e.get("void"):
+            bad += [f"{key}: {p}" for p in B.problems(e)]
+    return bad
+
+
+CHECKS = {os.path.join("bias", "current.json"): check_bias, os.path.join("bias", "log.json"): check_log}
+
+
+def restore(path):
+    """Put back the last committed version of a file (the last good publication); False if there is none."""
+    rel = os.path.relpath(path, ROOT)
+    r = subprocess.run(["git", "checkout", "HEAD", "--", rel], cwd=ROOT, capture_output=True, text=True)
+    return r.returncode == 0
+
+
+def validate(data=DATA, fix=True):
+    failures = {}
+    for tmp in glob.glob(os.path.join(data, "**", "*.tmp"), recursive=True):
+        os.remove(tmp)                          # left by a write that crashed half-way; never published
+    for path in sorted(glob.glob(os.path.join(data, "**", "*.json"), recursive=True)):
+        rel = os.path.relpath(path, data)
+        if rel == os.path.join("engine", "health.json"):
+            continue
+        try:
+            doc = json.load(open(path))
+        except ValueError as e:
+            failures[rel] = [f"not valid JSON ({e})"]
+            continue
+        check = CHECKS.get(rel)
+        if check:
+            bad = check(doc)
+            if bad:
+                failures[rel] = bad
+    for rel, bad in failures.items():
+        put_back = fix and restore(os.path.join(data, rel))
+        G.mark(f"output:{rel}", "failed", ("restored the last good version. " if put_back else "could not restore. ")
+               + "; ".join(bad[:8]))
+        print(f"gate: {rel} FAILED ({'restored' if put_back else 'not restored'}): {'; '.join(bad[:3])}")
+    G.mark("gate", "ok" if not failures else "failed", f"{len(failures)} output(s) failed" if failures else "")
+    print(f"gate: {len(failures)} invalid output(s)")
+    return failures
+
+
+def report():
+    doc = G.load()
+    rows = [(n, c) for n, c in sorted(doc.get("components", {}).items()) if c.get("run") == G.run_id()]
+    failed = [n for n, c in rows if c["state"] == "failed"]
+    lines = ["| Step | State | Seconds | Note |", "| --- | --- | --- | --- |"] + \
+            [f"| {n} | {c['state']} | {c.get('seconds') or ''} | {(c.get('note') or '').splitlines()[-1][:120] if c.get('note') else ''} |"
+             for n, c in rows]
+    out = os.environ.get("GITHUB_STEP_SUMMARY")
+    if out:
+        with open(out, "a") as fh:
+            fh.write("## Engine health\n\n" + "\n".join(lines) + "\n")
+    print("\n".join(lines))
+    if failed:
+        print(f"::error::{len(failed)} step(s) failed: {', '.join(failed)}. The site kept the last good files.")
+        return 1
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(report() if "--report" in sys.argv else (0 if validate() is not None else 1))

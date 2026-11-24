@@ -4034,7 +4034,8 @@ window.addEventListener("hashchange",function(){if(B1.on())B1.stop();calmOff();a
       '<div class="bk-g"><div class="bk-c"><h3>Calibration · '+esc(v.name)+' high/low odds</h3>'+calibSvg(v)+'<p class="bb-note">Each dot is a group of past forecasts: when the model said X%, how often it happened. On the dashed line means honest probabilities.</p></div>'+
       '<div class="bk-c"><h3>Range model · '+esc(v.name)+'</h3><div class="bk-n"><div><b>'+(st.gain!=null?Math.round(st.gain*100)+'%':'–')+'</b><span>lower error than a 20-day average</span></div><div><b>'+pc(st.coverage)+'</b><span>of days inside the 80% band (target 80%)</span></div><div><b>'+(st.n||0).toLocaleString("en-US")+'</b><span>days tested since '+(st.since||"–")+'</span></div></div></div></div>'+
       '<h3 class="bb-s">Live record</h3><table class="bb-t"><thead><tr><th>Market</th><th class="n">Days</th><th class="n">Direction</th><th class="n">Brier (base)</th><th class="n">In range band</th><th class="n">Level Brier</th></tr></thead><tbody>'+rows+'</tbody></table>'+
-      '<p class="bb-note">Every call is logged before the session and scored after it closes. Lower Brier is better; the base-rate forecast is in brackets.</p>';
+      '<p class="bb-note">Every call is logged before the session and scored after it closes. Lower Brier is better; the base-rate forecast is in brackets.</p>'+
+      (function(){var vo=0,la=0;D.order.forEach(function(m){var x=L[m]||{};vo+=x.voided||0;la+=x.late||0;});return (vo||la)?'<p class="bb-note">Not counted: '+(vo?vo+' invalid forecast'+(vo>1?'s':'')+' (kept in the log with a correction note: on 20 Nov 2026 a bug produced expected ranges below zero)':'')+(vo&&la?'; ':'')+(la?la+' issued after its session had opened (these can\'t count as forecasts)':'')+'. Nothing is deleted.</p>':'';})();
   }
   function render(){
     if(!D)return;if(!D.markets[cur])cur=D.order[0];var v=D.markets[cur];
