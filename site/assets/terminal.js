@@ -2,6 +2,7 @@
 const paths={bias:'bias/current.json',markets:'markets/latest.json',macro:'macro/current.json',signals:'signals/current.json',calendar:'calendar/events.json',relationships:'relationships/current.json',atlas:'atlas/current.json',publications:'publications/index.json',evidence:'open/current.json',health:'engine/health.json'};
 const finite=x=>typeof x==='number'&&Number.isFinite(x);
 const fmt=(x,n=2)=>finite(x)?x.toFixed(n):'—';
+const rangeDp=x=>!finite(x)?1:x<0.1?4:x<10?2:1;   // Euro ranges are about 0.006: one decimal showed 0.0
 const pct=x=>finite(x)?(100*x).toFixed(1)+'%':'—';
 function nyClock(now){const parts=new Intl.DateTimeFormat('en-CA',{timeZone:'America/New_York',year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',hourCycle:'h23'}).formatToParts(now);const p=Object.fromEntries(parts.map(x=>[x.type,x.value]));return {day:p.year+'-'+p.month+'-'+p.day,time:p.hour+':'+p.minute}}
 function upcoming(events,now,limit=10){const c=nyClock(now);return events.filter(e=>typeof e.date==='string'&&(e.date>c.day||(e.date===c.day&&(!/^([01]\d|2[0-3]):[0-5]\d$/.test(e.time||'')||e.time>=c.time)))&&!(e.actual!==null&&e.actual!==undefined&&String(e.actual).trim()!==''&&String(e.actual).trim()!=='—')).sort((a,b)=>a.date.localeCompare(b.date)||String(a.time||'99:99').localeCompare(String(b.time||'99:99'))).slice(0,limit)}
@@ -9,7 +10,7 @@ function atlasYear(d){return [...d.years].reverse().find(y=>(d.coverage.growth?.
 function forecastTier(t){return t==='tested'?'Tested model':t==='base'?'Base rate':String(t||'Unknown')}
 function researchTotal(d){return (d.research||[]).reduce((n,b)=>n+(finite(b.total)?b.total:0),0)}
 function safeReport(id){return typeof id==='string'&&/^[a-z0-9-]{1,100}$/.test(id)}
-if(typeof module!=='undefined'&&module.exports)module.exports={nyClock,upcoming,atlasYear,forecastTier,researchTotal,safeReport,fmt,pct};
+if(typeof module!=='undefined'&&module.exports)module.exports={rangeDp,nyClock,upcoming,atlasYear,forecastTier,researchTotal,safeReport,fmt,pct};
 if(typeof document!=='undefined'){
  const $=id=>document.getElementById(id);
  function el(tag,text,parent){const e=document.createElement(tag);if(text!==undefined)e.textContent=String(text);if(parent)parent.append(e);return e}
@@ -20,7 +21,7 @@ if(typeof document!=='undefined'){
  function item(root,title,sub){const e=el('div',undefined,root);e.className='item';el('strong',title,e);if(sub)el('div',sub,e).className='muted';return e}
  function bar(root,title,value){const r=el('div',undefined,root);r.className='score-row';el('span',title,r);el('strong',finite(value)?fmt(value,1)+'/100':'Unavailable',r);if(finite(value)&&value>=0&&value<=100){const t=el('div',undefined,r);t.className='track';const f=el('div',undefined,t);f.className='fill';f.style.width=value+'%'}}
  const render={
- bias(root,d){stamp(root,d.asof);const b=table(root,['Market','Target session','P(up)','Base rate','Model tier','Expected range (points)','Range interval']);for(const id of d.order||Object.keys(d.markets)){const m=d.markets[id];if(!m)continue;row(b,[m.name||id.toUpperCase(),m.for||d.for||'—',pct(m.p_up),pct(m.base_up),forecastTier(m.tier),fmt(m.range?.points,1),fmt(m.range?.lo,1)+' – '+fmt(m.range?.hi,1)])}},
+ bias(root,d){stamp(root,d.asof);const b=table(root,['Market','Target session','P(up)','Base rate','Model tier','Expected range (points)','Range interval']);for(const id of d.order||Object.keys(d.markets)){const m=d.markets[id];if(!m)continue;row(b,[m.name||id.toUpperCase(),m.for||d.for||'—',pct(m.p_up),pct(m.base_up),forecastTier(m.tier),fmt(m.range?.points,rangeDp(m.range?.points)),fmt(m.range?.lo,rangeDp(m.range?.points))+' – '+fmt(m.range?.hi,rangeDp(m.range?.points))])}},
  markets(root,d){stamp(root,d.asof);const grid=el('div',undefined,root);grid.className='tiles';for(const m of Object.values(d.tiles)){const p=el('div',undefined,grid);p.className='tile';el('small',m.label,p);el('strong',fmt(m.value)+(m.kind==='yield'||m.kind==='spread'?'%':''),p);el('small',m.date||'Observation date unavailable',p)}},
  macro(root,d){stamp(root,d.asof);$('stat-macro').textContent=d.indices.filter(i=>i.status==='available'&&finite(i.score)).length+' / '+d.indices.length;for(const i of d.indices)bar(root,i.id+' · '+i.name,i.status==='available'?i.score:null)},
  signals(root,d){stamp(root,d.asof);const active=d.states.filter(s=>s.status==='active'),missing=d.states.filter(s=>s.status==='unavailable');$('stat-signals').textContent=String(active.length);el('p',missing.length+' rules unavailable; no inference from unavailable inputs.',root).className='muted';if(!active.length)el('p','No active rules in this snapshot.',root);for(const s of active)item(root,s.label,fmt(s.score,1)+'/100 · '+s.severity+' · First detected '+(s.first_detected||'—')).classList.add('warning');for(const s of missing)if(s.active)item(root,s.label,'Unavailable; previously active')},

@@ -14,9 +14,15 @@ SITE=ROOT/"site"
 BASE=publisher.BASE
 PAGES=("terminal.html","macro.html","signals.html","relationships.html","atlas.html","research.html",
        "research-v2.html","research-v3.html","publications.html","open.html","search.html","backtest.html","validation.html")
-NAV=(("terminal.html","Terminal"),("macro.html","Macro"),("signals.html","Warnings"),
-     ("relationships.html","Relationships"),("atlas.html","Atlas"),("research-v3.html","Discovery"),
-     ("publications.html","Publications"),("open.html","Open"),("validation.html","Validation"),("search.html","Search"))
+NAV=(('terminal.html', 'Terminal'), ('index.html#bias', 'Bias'), ('index.html#calendar', 'News'), ('macro.html', 'Macro'), ('signals.html', 'Warnings'), ('relationships.html', 'Relationships'), ('atlas.html', 'Atlas'), ('research-v3.html', 'Discovery'), ('publications.html', 'Publications'), ('open.html', 'Open'), ('validation.html', 'Validation'), ('search.html', 'Search'), ('/iron-brain/', 'Intraday ›'))
+LOGO='<svg width="26" height="26" viewBox="0 0 26 26" aria-hidden="true"><defs><linearGradient id="dlg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2997ff"/><stop offset=".6" stop-color="#30d158"/><stop offset="1" stop-color="#ff9f0a"/></linearGradient></defs><rect width="26" height="26" rx="7" fill="url(#dlg)"/><rect x="5" y="13" width="4" height="7" rx="1" fill="#fff" opacity=".75"/><rect x="11" y="6" width="4" height="14" rx="1" fill="#fff"/><rect x="17" y="4" width="4" height="6" rx="1" fill="#fff" opacity=".75"/><rect x="9.5" y="10" width="7" height="3" rx="1" fill="#fff" opacity=".35"/></svg>'   # the main site's mark (index.html)
+
+
+def gnav(prefix="../"):
+    """The main site's header (index.html .gnav), for pages one folder down."""
+    links="".join(f'<li><a href="{u if u.startswith("/") else prefix+u}">{label}</a></li>' for u,label in NAV)
+    return (f'<nav class="gnav" aria-label="Site"><div class="wide"><a class="brand" href="{prefix}index.html#top">{LOGO}Displace</a>'
+            f'<ul>{links}</ul><a class="pillbtn" href="{prefix}index.html#bias">Today\'s bias</a></div></nav>')
 
 def esc(x):
     return html.escape(str(x),quote=True)
@@ -24,7 +30,6 @@ def esc(x):
 def page(r):
     publisher.validate_report(r)
     title=esc(r["title"])
-    links="".join(f'<a href="../{url}">{label}</a>' for url,label in NAV)
     sections="".join('<section class="panel"><h2>'+esc(b["title"])+'</h2><ul>'+
                      "".join("<li>"+esc(line)+"</li>" for line in b["lines"])+"</ul></section>" for b in r["sections"])
     sources="".join('<p class="dp-source"><a href="../data/'+esc(s["path"])+'">'+esc(s["path"])+'</a> · '+esc(s.get("asof") or "Unavailable")+
@@ -36,7 +41,7 @@ def page(r):
 <title>{title} | Displace</title><meta name="description" content="{desc}">
 <link rel="canonical" href="{url}"><link rel="stylesheet" href="../assets/intelligence.css">
 <meta property="og:type" content="article"><meta property="og:title" content="{title}"><meta property="og:url" content="{url}">
-</head><body><a class="dp-skip" href="#content">Skip to content</a><nav class="dp-nav" aria-label="Intelligence navigation"><a class="dp-brand" href="../index.html#top">Displace</a><div class="dp-links">{links}</div></nav>
+</head><body><a class="dp-skip" href="#content">Skip to content</a>{gnav()}
 <main id="content" class="dp-report"><header><p class="muted"><a href="../publications.html">Research publications</a> · {esc(r["kind"])}</p><h1>{title}</h1><p class="muted">Generated <time datetime="{esc(r["generated_at"])}">{esc(r["generated_at"])}</time> · UTC snapshot</p></header>
 {sections}<section class="panel"><h2>Source evidence</h2>{sources}<p>{esc(r["limitations"])}</p><p><a href="../data/publications/reports/{esc(r["id"])}.json">Original report JSON</a> · <a href="../open.html">Displace Open</a></p></section></main></body></html>\n'''
 

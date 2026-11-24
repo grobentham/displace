@@ -1,7 +1,64 @@
-/* Shared intelligence-page foundation. Legacy trading pages retain their own layouts. */
-:root{color-scheme:dark;--bg:#0d1117;--panel:#151b23;--border:#2c3542;--muted:#a5afbd;--text:#e9edf4;--accent:#8eb9f1;--warn:#f1c078;--amber:#f1c078}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:15px/1.65 system-ui,-apple-system,sans-serif}main{max-width:1200px;margin:auto;padding:28px clamp(14px,3vw,28px) 64px}header{border-bottom:1px solid var(--border);padding-bottom:20px}a{color:var(--accent)}h1{font-size:clamp(28px,5vw,46px);letter-spacing:-.04em;line-height:1.15;margin:16px 0 8px}h2{font-size:21px;margin:0 0 8px}.muted,small{color:var(--muted)}.panel{background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:20px;margin:16px 0;min-width:0}.scroll{overflow-x:auto}table{border-collapse:collapse;width:100%;font-variant-numeric:tabular-nums}th,td{text-align:left;padding:10px;border-bottom:1px solid var(--border);vertical-align:top}th{color:var(--muted);font-weight:550}p{max-width:80ch}a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible{outline:2px solid var(--accent);outline-offset:3px}select,input{max-width:100%;background:var(--bg);color:var(--text);border:1px solid var(--border);border-radius:6px;padding:8px;font:inherit}.dp-nav{display:flex;align-items:center;gap:20px;padding:12px clamp(14px,3vw,28px);border-bottom:1px solid var(--border);max-width:1200px;margin:auto}.dp-brand{font-size:21px;font-weight:750;letter-spacing:-.04em;color:var(--text);text-decoration:none}.dp-links{display:flex;gap:6px;flex-wrap:wrap;min-width:0}.dp-links a{font-size:13px;color:var(--muted);padding:6px 9px;text-decoration:none;border-radius:6px;white-space:nowrap}.dp-links a:hover,.dp-links a[aria-current=page]{background:#223047;color:var(--text)}.dp-skip{position:absolute;left:-9999px}.dp-skip:focus{left:12px;top:10px;background:var(--panel);padding:10px;z-index:5}.dp-result{border-bottom:1px solid var(--border);padding:12px 0}.dp-result:last-child{border:0}.dp-result a{font-weight:650}.dp-report{max-width:840px}.dp-report li{margin-bottom:9px}.dp-hash{font:12px monospace;overflow-wrap:anywhere}.dp-source{overflow-wrap:anywhere}
-@media(max-width:720px){.dp-nav{gap:10px;align-items:flex-start;flex-direction:column}.dp-links{flex-wrap:nowrap;overflow-x:auto;width:100%;padding-bottom:4px}.panel{padding:14px}h1{font-size:30px}}
+/* Displace pages outside index.html share the main site's design: Apple-style light pages, the system/SF type
+   stack, centred display headlines, soft gray rounded tiles, blue links and pill buttons, orange kicker labels.
+   Tokens are the main site's (:root in index.html); the older names below map onto them so page styles and scripts
+   keep working. Change a colour here, not in a page. */
+:root{
+  --bg:#ffffff;--gray:#f5f5f7;--ink:#1d1d1f;--muted:#6e6e73;--line:#d2d2d7;--link:#0066cc;--tile:#ffffff;
+  --bull:#1f9d6b;--bear:#e0443a;--accent:#e07b00;--blue:#0071e3;
+  --font:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text","Inter","Helvetica Neue",Arial,sans-serif;
+  --mono:"SF Mono","JetBrains Mono",ui-monospace,Menlo,monospace;
+  --text:var(--ink);--panel:var(--gray);--border:var(--line);--warn:#b25000;--amber:#b25000;--soft:#e8e8ed;
+  color-scheme:light}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);font-size:17px;line-height:1.47;letter-spacing:-.022em;-webkit-font-smoothing:antialiased}
+a{color:var(--link);text-decoration:none}a:hover{text-decoration:underline}
+:focus-visible{outline:2px solid var(--blue);outline-offset:3px;border-radius:6px}
+h1,h2,h3,h4{margin:0;font-weight:700;letter-spacing:-.03em;line-height:1.1;text-wrap:balance}
+h2{font-size:1.45rem;margin:0 0 10px}h3{font-size:1.1rem;margin:6px 0}
+p{margin:0 0 10px;max-width:80ch}
 
-/* Keep long fingerprints and source URLs within the page; tables scroll locally. */
-main{min-width:0;width:100%}main p,main li,.dp-hash{overflow-wrap:anywhere}.scroll{min-width:0;max-width:100%;overflow-x:auto}.dp-links{max-width:100%}
+/* the main site's header (index.html .gnav) */
+.gnav{position:sticky;top:0;z-index:30;background:rgba(251,251,253,.8);backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid rgba(0,0,0,.08)}
+.gnav .wide{max-width:1180px;margin:0 auto;padding:0 22px;display:flex;align-items:center;gap:22px;height:52px}
+.brand{font-size:1.3rem;font-weight:600;color:var(--ink);letter-spacing:-.03em;white-space:nowrap;display:flex;gap:9px;align-items:center;flex:none}
+.brand:hover{text-decoration:none}
+.gnav ul{list-style:none;margin:0;padding:0;display:flex;gap:20px;align-items:center;flex:1;min-width:0;overflow-x:auto;scrollbar-width:none}
+.gnav ul::-webkit-scrollbar{display:none}
+.gnav ul a{font-size:.76rem;color:var(--ink);opacity:.8;letter-spacing:-.01em;white-space:nowrap}
+.gnav ul a:hover,.gnav ul a[aria-current=page]{opacity:1;text-decoration:none}
+.gnav ul a[aria-current=page]{color:var(--link)}
+.pillbtn{display:inline-block;background:var(--blue);color:#fff;border-radius:980px;padding:6px 14px;font-size:.76rem;font-weight:500;border:0;white-space:nowrap;flex:none}
+.pillbtn:hover{background:#0077ed;text-decoration:none}
+.dp-skip,.jump{position:absolute;left:-9999px}.dp-skip:focus,.jump:focus{left:12px;top:10px;background:#fff;padding:10px;z-index:40;border-radius:8px}
+
+/* page */
+main{max-width:1180px;margin:0 auto;padding:0 22px 96px;min-width:0;width:100%}
+main>header{text-align:center;padding:64px 0 36px;border:0}
+main>header h1{font-size:clamp(2.4rem,5.4vw,4rem);letter-spacing:-.045em;line-height:1.04;margin:0}
+main>header p,main>header .muted{font-size:clamp(1.05rem,1.8vw,1.3rem);color:var(--muted);font-weight:500;letter-spacing:-.02em;line-height:1.35;max-width:720px;margin:14px auto 0}
+.muted,small{color:var(--muted)}
+.panel{background:var(--gray);border:0;border-radius:24px;padding:30px;margin:20px 0;min-width:0}
+.tag,.kick{display:block;font-size:.95rem;font-weight:600;letter-spacing:-.01em;text-transform:none;color:var(--accent);margin-bottom:4px}
+
+/* tables, as on the main site */
+.scroll{overflow-x:auto;min-width:0;max-width:100%}
+table{border-collapse:collapse;width:100%;font-variant-numeric:tabular-nums;font-size:.92rem}
+th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:.8rem;font-weight:600;color:var(--muted);letter-spacing:-.005em}
+tr:last-child td{border-bottom:0}
+
+/* controls */
+select,input{max-width:100%;background:#fff;color:var(--ink);border:1px solid var(--line);border-radius:10px;padding:8px 12px;font:inherit;font-size:.92rem}
+button{font:inherit;font-size:.86rem;font-weight:500;background:var(--blue);color:#fff;border:0;border-radius:980px;padding:8px 16px;cursor:pointer}
+button:hover{background:#0077ed}button:disabled{opacity:.45;cursor:default}
+details summary{cursor:pointer;color:var(--link)}
+
+/* reports, search results, fingerprints */
+.dp-result{border-bottom:1px solid var(--line);padding:14px 0}.dp-result:last-child{border:0}.dp-result a{font-weight:600}
+.dp-report{max-width:840px}.dp-report li{margin-bottom:9px}
+.dp-hash,.hash{font:12px var(--mono);overflow-wrap:anywhere;color:var(--muted)}.dp-source{overflow-wrap:anywhere}
+main p,main li{overflow-wrap:anywhere}
+
+@media(max-width:720px){.gnav .wide{gap:14px}.panel{padding:20px;border-radius:20px}main>header{padding:40px 0 24px}body{font-size:16px}}
