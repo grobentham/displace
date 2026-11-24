@@ -2,6 +2,14 @@
   "version": 1,
   "reports": [
     {
+      "id": "signal-c95b26a59dfac12545ca43a8b20a9b9690103969312d87679677f24c745eeac5",
+      "kind": "signal",
+      "title": "Weak risk appetite proxy — severity changed",
+      "generated_at": "2026-11-24T23:19:34+00:00",
+      "sha256": "cd5d4b2f2bd1e3b92f54edb7fed90ab604b3057a8c70e4d54aacc1efdd0b75ca",
+      "path": "reports/signal-c95b26a59dfac12545ca43a8b20a9b9690103969312d87679677f24c745eeac5.json"
+    },
+    {
       "id": "research-6aa66aede6330f89292cdaa517cdbe926c88a38d100097814c3787636d81c57d",
       "kind": "research",
       "title": "Discovery v3 — historical research batch",
