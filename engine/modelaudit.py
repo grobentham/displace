@@ -64,6 +64,13 @@ def replay(rows,plan):
         quant=np.quantile(y-A@beta,[.1,.5,.9])
         naive=np.quantile(y-np.array([r["base"] for r in train]),[.1,.5,.9])
         past=list(train)
+        base_up=sum(t['up'] for t in train)/len(train)
+        level_prob={}
+        for side in ('high','low'):
+            baseline=sum(t[side] for t in train)/len(train)
+            for k in range(5):
+                group=[t for t in train if t['bin']==k]
+                level_prob[side,k]=((sum(t[side] for t in group)+20*baseline)/(len(group)+20),baseline)
         for r in test:
             fit=float(np.array([1]+r["x"])@beta)
             # Match the original log-space point metric's unadjusted fit, and
@@ -77,15 +84,12 @@ def replay(rows,plan):
                 lo,hi=center+q[0],center+q[2]
                 errors["coverage"+suffix].append(lo<=r["y"]<=hi)
                 errors["interval"+("_model" if not suffix else "_base")].append(interval_score(r["y"],lo,hi))
-            base_up=sum(t["up"] for t in train)/len(train)
             recent=past[-252:]
             p=sum(t["up"] for t in recent)/len(recent)
             errors["direction"].append((p-r["up"])**2)
             errors["direction_base"].append((base_up-r["up"])**2)
             for side in ("high","low"):
-                baseline=sum(t[side] for t in train)/len(train)
-                group=[t for t in train if t["bin"]==r["bin"]]
-                probability=(sum(t[side] for t in group)+20*baseline)/(len(group)+20)
+                probability,baseline=level_prob[side,r["bin"]]
                 errors[side].append((probability-r[side])**2)
                 errors[side+"_base"].append((baseline-r[side])**2)
             past.append(r)
