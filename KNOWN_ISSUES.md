@@ -25,6 +25,10 @@ CHANGELOG.md.
 
 ## Decided, not changing
 
+- Contract rolls are detected by calendar rule, not measured per roll: free data has no per-contract prices, so the
+  jump can't be subtracted, only the switch day left out. Crude (monthly, sign varies) and bitcoin are not flagged.
+  ES/YM/RTY jumps (~0.1%) are below what the data can detect but follow the NQ calendar, so they are flagged too.
+
 - **scheduler.yml waits on a runner between slots.** GitHub's cron often fires late or not at all on this repo; the
   waiting runner is what keeps the schedule. It costs nothing on a public repo. Revisit only if the repo becomes private
   (then it would use most of the free minutes).
