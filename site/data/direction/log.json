@@ -31,7 +31,9 @@
    "tier": "hist",
    "logged": "2026-11-24T10:25-05:00",
    "eligible": false,
-   "evaluation_basis": "release-window historical observation"
+   "evaluation_basis": "release-window historical observation",
+   "move": -2.566,
+   "hit": true
   }
  ]
 }
