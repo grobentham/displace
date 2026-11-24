@@ -1,0 +1,862 @@
+{
+  "version": 1,
+  "asof": "2026-11-24T12:31:09.244757+00:00",
+  "plan_hash": "883ea066e20c4960c2c8f5afcace0852441d07e6c1a18d1e0b1c45eba76618cc",
+  "markets": {
+    "nq": {
+      "status": "historical_only",
+      "n": 2805,
+      "sample_n": 5003,
+      "since": 2012,
+      "log_mse": 0.18278594106232163,
+      "log_mse_baseline": 0.21456881832509953,
+      "log_mse_skill": 0.14812439901972485,
+      "point_mae": 63.11123335811792,
+      "point_mae_baseline": 69.28500108392697,
+      "point_mae_skill": 0.08910684317274642,
+      "coverage": 0.7736185383244206,
+      "coverage_baseline": 0.7532976827094474,
+      "interval_score": 1.5237854884645194,
+      "interval_score_baseline": 1.6484607480203484,
+      "direction_rolling_skill": -0.0011532330155308301,
+      "high_bin_skill": 0.2512734089872688,
+      "low_bin_skill": 0.20380120395533896,
+      "dataset_hash": "d3f24e0acc3c1b7d957ce9367b831aad738e3ab0848816418ec0e12f9935121a",
+      "raw_n": 5802,
+      "invalid_ohlc": 0,
+      "original_range_stats": {
+        "gain": 0.191,
+        "coverage": 0.79,
+        "coverage_old": 0.795,
+        "width": 1.032,
+        "width_old": 1.165,
+        "n": 3273,
+        "since": 2012
+      },
+      "original_tier": "base"
+    },
+    "es": {
+      "status": "historical_only",
+      "n": 2805,
+      "sample_n": 5003,
+      "since": 2012,
+      "log_mse": 0.18920501921987543,
+      "log_mse_baseline": 0.2337282952001297,
+      "log_mse_skill": 0.19049159598811627,
+      "point_mae": 15.913309790267792,
+      "point_mae_baseline": 17.90020612917655,
+      "point_mae_skill": 0.11099851725563115,
+      "coverage": 0.7828877005347593,
+      "coverage_baseline": 0.7572192513368984,
+      "interval_score": 1.5449803983480355,
+      "interval_score_baseline": 1.7251201718171092,
+      "direction_rolling_skill": -0.0024192817608885697,
+      "high_bin_skill": 0.19884256699308944,
+      "low_bin_skill": 0.19827059055834995,
+      "dataset_hash": "255cc5a5cc020a0d7cec2f33f3cc7b0c6c9fd01e2cb37ae93a99dc608fd0862e",
+      "raw_n": 5802,
+      "invalid_ohlc": 0,
+      "original_range_stats": {
+        "gain": 0.231,
+        "coverage": 0.78,
+        "coverage_old": 0.781,
+        "width": 1.021,
+        "width_old": 1.161,
+        "n": 3273,
+        "since": 2012
+      },
+      "original_tier": "base"
+    },
+    "ym": {
+      "status": "historical_only",
+      "n": 2805,
+      "sample_n": 4649,
+      "since": 2012,
+      "log_mse": 0.18772052770447167,
+      "log_mse_baseline": 0.22525234867159197,
+      "log_mse_skill": 0.1666212192168528,
+      "point_mae": 119.9005852835861,
+      "point_mae_baseline": 131.79414378406148,
+      "point_mae_skill": 0.09024345209118256,
+      "coverage": 0.7914438502673797,
+      "coverage_baseline": 0.7700534759358288,
+      "interval_score": 1.5209676180298075,
+      "interval_score_baseline": 1.6796074895236126,
+      "direction_rolling_skill": -0.003870599195763935,
+      "high_bin_skill": 0.22475985120753017,
+      "low_bin_skill": 0.20110224532761656,
+      "dataset_hash": "4d37501b7c329b5a364b698a98a6f455ecfcd4d51972d4220fa6b8c7e7b0bdef",
+      "raw_n": 5433,
+      "invalid_ohlc": 0,
+      "original_range_stats": {
+        "gain": 0.203,
+        "coverage": 0.798,
+        "coverage_old": 0.789,
+        "width": 1.034,
+        "width_old": 1.152,
+        "n": 3273,
+        "since": 2012
+      },
+      "original_tier": "base"
+    },
+    "rty": {
+      "status": "historical_only",
+      "n": 1134,
+      "sample_n": 1768,
+      "since": 2021,
+      "log_mse": 0.1475597210465834,
+      "log_mse_baseline": 0.16261237374513937,
+      "log_mse_skill": 0.09256769550727928,
+      "point_mae": 13.783715077072008,
+      "point_mae_baseline": 14.581537666882916,
+      "point_mae_skill": 0.054714571812470414,
+      "coverage": 0.8192239858906526,
+      "coverage_baseline": 0.8333333333333334,
+      "interval_score": 1.3743184854837496,
+      "interval_score_baseline": 1.4354220258881887,
+      "direction_rolling_skill": -0.0017993557712274733,
+      "high_bin_skill": 0.23533384269086743,
+      "low_bin_skill": 0.22590196487612357,
+      "dataset_hash": "4a03a378e95d326e850db5fca892eb03ef4e919326b4b0020dc6dd70c73c946d",
+      "raw_n": 2061,
+      "invalid_ohlc": 0,
+      "original_range_stats": {
+        "gain": 0.203,
+        "coverage": 0.812,
+        "coverage_old": 0.818,
+        "width": 0.964,
+        "width_old": 1.099,
+        "n": 1515,
+        "since": 2020
+      },
+      "original_tier": "base"
+    },
+    "gold": {
+      "status": "historical_only",
+      "n": 1640,
+      "sample_n": 2224,
+      "since": 2017,
+      "log_mse": 0.3411970704800675,
+      "log_mse_baseline": 0.34568101349602265,
+      "log_mse_skill": 0.01297133149028673,
+      "point_mae": 12.792030648832947,
+      "point_mae_baseline": 13.50348593001135,
+      "point_mae_skill": 0.052686786572436084,
+      "coverage": 0.8725609756097561,
+      "coverage_baseline": 0.8609756097560975,
+      "interval_score": 2.0408617783756657,
+      "interval_score_baseline": 2.0805059951973104,
+      "direction_rolling_skill": 0.0004339907651499386,
+      "high_bin_skill": 0.12600038498003807,
+      "low_bin_skill": 0.08554959274694718,
+      "dataset_hash": "d172aa5e93624cdd1b682efde648dedd344618862a4441e1e0e9b9da9e2d8830",
+      "raw_n": 2962,
+      "invalid_ohlc": 0,
+      "original_range_stats": {
+        "gain": 0.033,
+        "coverage": 0.866,
+        "coverage_old": 0.857,
+        "width": 1.592,
+        "width_old": 1.624,
+        "n": 2320,
+        "since": 2016
+      },
+      "original_tier": "base"
+    },
+    "cl": {
+      "status": "historical_only",
+      "n": 2799,
+      "sample_n": 4747,
+      "since": 2012,
+      "log_mse": 0.13547670818500476,
+      "log_mse_baseline": 0.1482397019991209,
+      "log_mse_skill": 0.08609700128911368,
+      "point_mae": 0.6393416637621043,
+      "point_mae_baseline": 0.6734049556860641,
+      "point_mae_skill": 0.05058366683573945,
+      "coverage": 0.7938549481957842,
+      "coverage_baseline": 0.788495891389782,
+      "interval_score": 1.2869426611057972,
+      "interval_score_baseline": 1.3438027614918004,
+      "direction_rolling_skill": -0.0005681748675885334,
+      "high_bin_skill": 0.19668396121824738,
+      "low_bin_skill": 0.16074950349478934,
+      "dataset_hash": "c1035fbfd57ca6720efe2e665fe3856ec77f076de7ad441979afd178a8b29cba",
+      "raw_n": 5789,
+      "invalid_ohlc": 0,
+      "original_range_stats": {
+        "gain": 0.121,
+        "coverage": 0.792,
+        "coverage_old": 0.796,
+        "width": 0.912,
+        "width_old": 0.961,
+        "n": 3271,
+        "since": 2012
+      },
+      "original_tier": "base"
+    },
+    "6e": {
+      "status": "historical_only",
+      "n": 2804,
+      "sample_n": 5015,
+      "since": 2012,
+      "log_mse": 0.1662581186173173,
+      "log_mse_baseline": 0.17089139662400987,
+      "log_mse_skill": 0.027112412316967482,
+      "point_mae": 0.002608908241333478,
+      "point_mae_baseline": 0.002650309231069426,
+      "point_mae_skill": 0.015621192142640128,
+      "coverage": 0.771398002853067,
+      "coverage_baseline": 0.7806704707560628,
+      "interval_score": 1.4463173796387736,
+      "interval_score_baseline": 1.4631039448942451,
+      "direction_rolling_skill": -0.003946952799879222,
+      "high_bin_skill": 0.1884515563445146,
+      "low_bin_skill": 0.17015177027365525,
+      "dataset_hash": "ecf39354f040dd418a43a4b3f99d4ae745a6ce2f20d0776771cc8f55e0c9c4d8",
+      "raw_n": 5798,
+      "invalid_ohlc": 0,
+      "original_range_stats": {
+        "gain": 0.024,
+        "coverage": 0.757,
+        "coverage_old": 0.762,
+        "width": 0.917,
+        "width_old": 0.929,
+        "n": 3272,
+        "since": 2012
+      },
+      "original_tier": "base"
+    },
+    "btc": {
+      "status": "historical_only",
+      "n": 1134,
+      "sample_n": 1671,
+      "since": 2021,
+      "log_mse": 0.2239969282009366,
+      "log_mse_baseline": 0.2594264508448213,
+      "log_mse_skill": 0.13656865955074582,
+      "point_mae": 886.5605721452702,
+      "point_mae_baseline": 924.1710190719157,
+      "point_mae_skill": 0.0406964145709906,
+      "coverage": 0.8403880070546738,
+      "coverage_baseline": 0.8518518518518519,
+      "interval_score": 1.6656446373348026,
+      "interval_score_baseline": 1.7984390406471553,
+      "direction_rolling_skill": 0.0005505327612070898,
+      "high_bin_skill": 0.1573739850425313,
+      "low_bin_skill": 0.1334378247490261,
+      "dataset_hash": "33a6a042dc30dd5e96c6babb3ae05e6db092d948c7965c17cfa319b41a02a94c",
+      "raw_n": 1964,
+      "invalid_ohlc": 0,
+      "original_range_stats": {
+        "gain": 0.113,
+        "coverage": 0.844,
+        "coverage_old": 0.858,
+        "width": 1.255,
+        "width_old": 1.354,
+        "n": 1294,
+        "since": 2021
+      },
+      "original_tier": "base"
+    }
+  },
+  "events": [
+    {
+      "group": "inflation",
+      "asset": "gold",
+      "historical_candidate": false,
+      "proven": false,
+      "historical_metrics": {
+        "calls": 15,
+        "hits": 5,
+        "rate": 0.333,
+        "pval": 0.940765380859375,
+        "brierSkill": -0.017,
+        "brierSkillBase": -0.0179,
+        "baseBrier": 0.249677,
+        "halves": [
+          0.429,
+          0.25
+        ],
+        "recent": 0.333,
+        "tested": 255
+      }
+    },
+    {
+      "group": "inflation",
+      "asset": "nq",
+      "historical_candidate": false,
+      "proven": false,
+      "historical_metrics": {
+        "calls": 1,
+        "hits": 1,
+        "rate": 1.0,
+        "pval": 0.5,
+        "brierSkill": -0.0,
+        "brierSkillBase": -0.0061,
+        "baseBrier": 0.248545,
+        "halves": [
+          0,
+          1.0
+        ],
+        "recent": 1.0,
+        "tested": 313
+      }
+    },
+    {
+      "group": "inflation",
+      "asset": "usd",
+      "historical_candidate": false,
+      "proven": false,
+      "historical_metrics": {
+        "calls": 5,
+        "hits": 2,
+        "rate": 0.4,
+        "pval": 0.8125,
+        "brierSkill": -0.003,
+        "brierSkillBase": -0.0134,
+        "baseBrier": 0.247534,
+        "halves": [
+          1.0,
+          0.0
+        ],
+        "recent": 0.4,
+        "tested": 315
+      }
+    },
+    {
+      "group": "inflation",
+      "asset": "y2",
+      "historical_candidate": false,
+      "proven": false,
+      "historical_metrics": {
+        "calls": 17,
+        "hits": 6,
+        "rate": 0.353,
+        "pval": 0.9282684326171875,
+        "brierSkill": -0.003,
+        "brierSkillBase": -0.0084,
+        "baseBrier": 0.248703,
+        "halves": [
+          0.5,
+          0.222
+        ],
+        "recent": 0.353,
+        "tested": 253
+      }
+    },
+    {
+      "group": "inflation",
+      "asset": "gold2h",
+      "historical_candidate": false,
+      "proven": false,
+      "historical_metrics": {
+        "calls": 25,
+        "hits": 18,
+        "rate": 0.72,
+        "pval": 0.021642625331878662,
+        "brierSkill": 0.008,
+        "brierSkillBase": 0.0241,
+        "baseBrier": 0.254136,
+        "halves": [
+          0.75,
+          0.692
+        ],
+        "recent": 0.7,
+        "tested": 59
+      }
+    },
+    {
+      "group": "inflation",
+      "asset": "nq2h",
+      "historical_candidate": false,
+      "proven": false,
+      "historical_metrics": {
+        "calls": 23,
+        "hits": 17,
+        "rate": 0.739,
+        "pval": 0.01734483242034912,
+        "brierSkill": 0.094,
+        "brierSkillBase": 0.1295,
+        "baseBrier": 0.260201,
+        "halves": [
+          0.818,
+          0.667
+        ],
+        "recent": 0.75,
+        "tested": 60
+      }
+    },
+    {
+      "group": "labor",
+      "asset": "gold",
+      "historical_candidate": false,
+      "proven": false,
+      "historical_metrics": {
+        "calls": 150,
+        "hits": 79,
+        "rate": 0.527,
+        "pval": 0.283887743837664,
+        "brierSkill": -0.0,
+        "brierSkillBase": -0.0003,
+        "baseBrier": 0.250019,
+        "halves": [
+          0.587,
+          0.467
+        ],
+        "recent": 0.45,
+        "tested": 1158
+      }
+    },
+    {
+      "group": "labor",
+      "asset": "nq",
+      "historical_candidate": false,
+      "proven": false,
+      "historical_metrics": {
+        "calls": 16,
+        "hits": 7,
+        "rate": 0.438,
+        "pval": 0.7727508544921875,
+        "brierSkill": -0.001,
+        "brierSkillBase": -0.0074,
+        "baseBrier": 0.248513,
+        "halves": [
+          0.25,
+          0.625
+        ],
+        "recent": 0.438,
+        "tested": 1303
+      }
+    },
+    {
+      "group": "labor",
+      "asset": "usd",
+      "historical_candidate": false,
+      "proven": false,
+      "historical_metrics": {
+        "calls": 176,
+        "hits": 103,
+        "rate": 0.585,
+        "pval": 0.014265690373907835,
+        "brierSkill": -0.0,
+        "brierSkillBase": 0.0066,
+        "baseBrier": 0.251723,
+        "halves": [
+          0.602,
+          0.568
+        ],
+        "recent": 0.55,
+        "tested": 1305
+      }
+    },
+    {
+      "group": "labor",
+      "asset": "y2",
+      "historical_candidate": true,
+      "proven": false,
+      "historical_metrics": {
+        "calls": 377,
+        "hits": 219,
+        "rate": 0.581,
+        "pval": 0.0009805865155501537,
+        "brierSkill": 0.01,
+        "brierSkillBase": 0.012,
+        "baseBrier": 0.250493,
+        "halves": [
+          0.628,
+          0.534
+        ],
+        "recent": 0.5,
+        "tested": 1037
+      }
+    },
+    {
+      "group": "labor",
+      "asset": "gold2h",
+      "historical_candidate": false,
+      "proven": false,
+      "historical_metrics": {
+        "calls": 28,
+        "hits": 15,
+        "rate": 0.536,
+        "pval": 0.4252770096063614,
+        "brierSkill": 0.011,
+        "brierSkillBase": 0.0354,
+        "baseBrier": 0.256354,
+        "halves": [
+          0.357,
+          0.714
+        ],
+        "recent": 0.65,
+        "tested": 180
+      }
+    },
+    {
+      "group": "labor",
+      "asset": "nq2h",
+      "historical_candidate": false,
+      "proven": false,
+      "historical_metrics": {
+        "calls": 5,
+        "hits": 2,
+        "rate": 0.4,
+        "pval": 0.8125,
+        "brierSkill": -0.007,
+        "brierSkillBase": -0.001,
+        "baseBrier": 0.251388,
+        "halves": [
+          0.5,
+          0.333
+        ],
+        "recent": 0.4,
+        "tested": 181
+      }
+    },
+    {
+      "group": "activity",
+      "asset": "gold",
+      "historical_candidate": false,
+      "proven": false,
+      "historical_metrics": {
+        "calls": 1,
+        "hits": 0,
+        "rate": 0.0,
+        "pval": 1.0,
+        "brierSkill": -0.001,
+        "brierSkillBase": -0.0015,
+        "baseBrier": 0.249876,
+        "halves": [
+          0,
+          0.0
+        ],
+        "recent": 0.0,
+        "tested": 988
+      }
+    },
+    {
+      "group": "activity",
+      "asset": "nq",
+      "historical_candidate": false,
+      "proven": false,
+      "historical_metrics": {
+        "calls": 66,
+        "hits": 35,
+        "rate": 0.53,
+        "pval": 0.3561154413186754,
+        "brierSkill": -0.002,
+        "brierSkillBase": -0.0213,
+        "baseBrier": 0.245221,
+        "halves": [
+          0.636,
+          0.424
+        ],
+        "recent": 0.45,
+        "tested": 1118
+      }
+    },
+    {
+      "group": "activity",
+      "asset": "usd",
+      "historical_candidate": false,
+      "proven": false,
+      "historical_metrics": {
+        "calls": 130,
+        "hits": 76,
+        "rate": 0.585,
+        "pval": 0.03254323499431863,
+        "brierSkill": 0.002,
+        "brierSkillBase": 0.0039,
+        "baseBrier": 0.25049,
+        "halves": [
+          0.646,
+          0.523
+        ],
+        "recent": 0.55,
+        "tested": 1115
+      }
+    },
+    {
+      "group": "activity",
+      "asset": "y2",
+      "historical_candidate": false,
+      "proven": false,
+      "historical_metrics": {
+        "calls": 159,
+        "hits": 89,
+        "rate": 0.56,
+        "pval": 0.07660747338006633,
+        "brierSkill": 0.006,
+        "brierSkillBase": -0.0001,
+        "baseBrier": 0.248455,
+        "halves": [
+          0.57,
+          0.55
+        ],
+        "recent": 0.65,
+        "tested": 878
+      }
+    },
+    {
+      "group": "activity",
+      "asset": "gold2h",
+      "historical_candidate": false,
+      "proven": false,
+      "historical_metrics": {
+        "calls": 55,
+        "hits": 30,
+        "rate": 0.545,
+        "pval": 0.29502666588831783,
+        "brierSkill": -0.002,
+        "brierSkillBase": 0.0138,
+        "baseBrier": 0.253916,
+        "halves": [
+          0.63,
+          0.464
+        ],
+        "recent": 0.35,
+        "tested": 156
+      }
+    },
+    {
+      "group": "activity",
+      "asset": "nq2h",
+      "historical_candidate": false,
+      "proven": false,
+      "historical_metrics": {
+        "calls": 22,
+        "hits": 10,
+        "rate": 0.455,
+        "pval": 0.7382664680480957,
+        "brierSkill": -0.024,
+        "brierSkillBase": -0.0103,
+        "baseBrier": 0.253305,
+        "halves": [
+          0.636,
+          0.273
+        ],
+        "recent": 0.45,
+        "tested": 156
+      }
+    },
+    {
+      "group": "sentiment",
+      "asset": "gold",
+      "historical_candidate": false,
+      "proven": false,
+      "historical_metrics": {
+        "calls": 65,
+        "hits": 37,
+        "rate": 0.569,
+        "pval": 0.1605420678424978,
+        "brierSkill": -0.005,
+        "brierSkillBase": 0.0028,
+        "baseBrier": 0.251961,
+        "halves": [
+          0.625,
+          0.515
+        ],
+        "recent": 0.45,
+        "tested": 216
+      }
+    },
+    {
+      "group": "sentiment",
+      "asset": "nq",
+      "historical_candidate": false,
+      "proven": false,
+      "historical_metrics": {
+        "calls": 7,
+        "hits": 3,
+        "rate": 0.429,
+        "pval": 0.7734375,
+        "brierSkill": -0.001,
+        "brierSkillBase": -0.0209,
+        "baseBrier": 0.245243,
+        "halves": [
+          0.333,
+          0.5
+        ],
+        "recent": 0.429,
+        "tested": 406
+      }
+    },
+    {
+      "group": "sentiment",
+      "asset": "usd",
+      "historical_candidate": false,
+      "proven": false,
+      "historical_metrics": {
+        "calls": 34,
+        "hits": 11,
+        "rate": 0.324,
+        "pval": 0.9878467449452728,
+        "brierSkill": -0.007,
+        "brierSkillBase": -0.0012,
+        "baseBrier": 0.251491,
+        "halves": [
+          0.353,
+          0.294
+        ],
+        "recent": 0.3,
+        "tested": 400
+      }
+    },
+    {
+      "group": "sentiment",
+      "asset": "y2",
+      "historical_candidate": false,
+      "proven": false,
+      "historical_metrics": {
+        "calls": 104,
+        "hits": 57,
+        "rate": 0.548,
+        "pval": 0.18879196164904927,
+        "brierSkill": -0.002,
+        "brierSkillBase": 0.008,
+        "baseBrier": 0.252402,
+        "halves": [
+          0.577,
+          0.519
+        ],
+        "recent": 0.5,
+        "tested": 322
+      }
+    },
+    {
+      "group": "sentiment",
+      "asset": "gold2h",
+      "historical_candidate": false,
+      "proven": false,
+      "historical_metrics": {
+        "calls": 1,
+        "hits": 0,
+        "rate": 0.0,
+        "pval": 1.0,
+        "brierSkill": -0.006,
+        "brierSkillBase": -0.1922,
+        "baseBrier": 0.210878,
+        "halves": [
+          0,
+          0.0
+        ],
+        "recent": 0.0,
+        "tested": 62
+      }
+    },
+    {
+      "group": "sentiment",
+      "asset": "nq2h",
+      "historical_candidate": false,
+      "proven": false,
+      "historical_metrics": {
+        "calls": 15,
+        "hits": 7,
+        "rate": 0.467,
+        "pval": 0.696380615234375,
+        "brierSkill": -0.018,
+        "brierSkillBase": -0.0064,
+        "baseBrier": 0.252765,
+        "halves": [
+          0.571,
+          0.375
+        ],
+        "recent": 0.467,
+        "tested": 61
+      }
+    },
+    {
+      "group": "housing",
+      "asset": "gold",
+      "historical_candidate": false,
+      "proven": false,
+      "historical_metrics": {
+        "calls": 6,
+        "hits": 1,
+        "rate": 0.167,
+        "pval": 0.984375,
+        "brierSkill": -0.009,
+        "brierSkillBase": -0.0009,
+        "baseBrier": 0.252133,
+        "halves": [
+          0.0,
+          0.333
+        ],
+        "recent": 0.167,
+        "tested": 111
+      }
+    },
+    {
+      "group": "housing",
+      "asset": "nq",
+      "historical_candidate": false,
+      "proven": false,
+      "historical_metrics": {
+        "calls": 3,
+        "hits": 0,
+        "rate": 0.0,
+        "pval": 1.0,
+        "brierSkill": -0.008,
+        "brierSkillBase": -0.022,
+        "baseBrier": 0.246455,
+        "halves": [
+          0.0,
+          0.0
+        ],
+        "recent": 0.0,
+        "tested": 127
+      }
+    },
+    {
+      "group": "housing",
+      "asset": "usd",
+      "historical_candidate": false,
+      "proven": false,
+      "historical_metrics": {
+        "calls": 20,
+        "hits": 12,
+        "rate": 0.6,
+        "pval": 0.2517223358154297,
+        "brierSkill": -0.004,
+        "brierSkillBase": 0.0063,
+        "baseBrier": 0.252554,
+        "halves": [
+          0.6,
+          0.6
+        ],
+        "recent": 0.6,
+        "tested": 127
+      }
+    },
+    {
+      "group": "housing",
+      "asset": "y2",
+      "historical_candidate": false,
+      "proven": false,
+      "historical_metrics": {
+        "calls": 5,
+        "hits": 0,
+        "rate": 0.0,
+        "pval": 1.0,
+        "brierSkill": -0.018,
+        "brierSkillBase": -0.0146,
+        "baseBrier": 0.250887,
+        "halves": [
+          0.0,
+          0.0
+        ],
+        "recent": 0.0,
+        "tested": 82
+      }
+    }
+  ],
+  "event_qualification": "suspended_pending_validation",
+  "policy": "Exploratory independent price-only benchmark replay on current-vintage cached daily candles; no economic predictors or model selection. Annual fits use outcome dates strictly before the test year. Range target log(high/low); regress its logarithm on log prior 1-, 5- and 22-session average ranges, compare with trailing 20-session average and training median residual. Evaluate log squared error, actual high-minus-low point MAE using prior-close-anchored ratio conversion, 80% interval coverage and interval score. Level probabilities use fixed close-location quintiles with 20-observation prior shrinkage vs expanding annual base rate. Direction rolling 252-observation base rate vs expanding annual base rate. Not an exact replication of the original full HAR, not a locked holdout, and not executable trading evidence.",
+  "limitations": [
+    "Cached data can be revised or patched; exact exchange calendars, settlement and contract rolls remain unresolved.",
+    "The price-only replay does not reproduce the original full model with retrospective economic calendar and cross-series inputs.",
+    "The point conversion is a prior-close-anchored approximation rather than an exact high-minus-low prediction.",
+    "Event statistics use a seven-calendar-day embargo and a prior base-rate benchmark but remain current-vintage and may contain overlapping outcomes.",
+    "Original reported model performance and the independent benchmark use different samples and model specifications."
+  ]
+}

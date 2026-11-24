@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "asof": "2026-11-24T12:26:27.246042+00:00",
+  "asof": "2026-11-24T12:31:07.969947+00:00",
   "scope": "Recorded forecasts only; not all possible scheduled forecasts. No receipt before the target start means no prospective credit.",
   "forecast_counts": {
     "void": 2,
@@ -1059,7 +1059,7 @@
     {
       "name": "Daily market bias and range",
       "code": "engine/bias.py",
-      "code_sha256": "7d1a2d14e7e6e1a83a8f2df7f42a7190639aef2a2255046f4a278c4df5cb51b6",
+      "code_sha256": "c967cf65f61b190ac472c93d0aa92e22f1ad5476aa20a40037f6630cd778663d",
       "plan": null,
       "plan_hash": null,
       "classification": "Base-rate or tested by market; live evidence counted separately"
@@ -1067,7 +1067,7 @@
     {
       "name": "Economic event reactions",
       "code": "engine/surprise.py",
-      "code_sha256": "cc9e769b900095b66598813cc8ebe6f0de0ba8203b8c840d065e79723cd19371",
+      "code_sha256": "e43147e8b7679bbf16a230f3a767d0a3d7aedc2ca36fb47d4cb6c9c209b7d915",
       "plan": null,
       "plan_hash": null,
       "classification": "Historical reaction window; not prospective"
