@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "asof": "2026-11-24T15:25:18.850412+00:00",
+  "asof": "2026-11-24T16:14:25.220481+00:00",
   "scope": "Recorded forecasts only; not all possible scheduled forecasts. No receipt before the target start means no prospective credit.",
   "forecast_counts": {
     "void": 2,
@@ -1133,6 +1133,14 @@
       "plan": "research/relationships-plan-v1.json",
       "plan_hash": "a8dc61414d06615434a79f48a5b0462827637614f1e8ba1b72be36995de28b4c",
       "classification": "Descriptive correlations and residuals"
+    },
+    {
+      "name": "Iron Brain live plans",
+      "code": "engine/intraday.py",
+      "code_sha256": "9d07db4ba964d035866f55c8414becd6480523da0769562beea9e13aa1122035",
+      "plan": null,
+      "plan_hash": null,
+      "classification": "Live intraday plans witnessed from 25 Nov 2026; counted only if locked before entry, seen live and unchanged"
     }
   ],
   "limitations": [
