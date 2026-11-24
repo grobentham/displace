@@ -1,5 +1,5 @@
 {
- "asof": "2026-11-24T10:00-05:00",
+ "asof": "2026-11-24T10:25-05:00",
  "version": 4,
  "assets": {
   "gold": "Gold, close",
@@ -1514,7 +1514,7 @@
    "calls": 0,
    "hits": 0,
    "open": 0,
-   "historicalOnly": 1,
+   "historicalOnly": 2,
    "byAsset": {},
    "recent": []
   }
@@ -3603,6 +3603,94 @@
   }
  },
  "events": {
+  "20261124-consumer-confidence-nov": {
+   "kind": "conf",
+   "group": "sentiment",
+   "date": "2026-11-24",
+   "when": "2026-11-24T10:00:00-05:00",
+   "basis": "consensus",
+   "consensus": {
+    "title": "CB Consumer Confidence",
+    "forecast": 92.5,
+    "actual": 103.3,
+    "unit": null,
+    "scale": null
+   },
+   "stage": "post",
+   "z": 2.21,
+   "bin": "hot",
+   "calls": {
+    "gold": {
+     "none": true,
+     "n": 65,
+     "why": "not significant after correcting for the number of rules tested"
+    },
+    "nq": {
+     "none": true,
+     "n": 7,
+     "why": "too few tested calls"
+    },
+    "usd": {
+     "none": true,
+     "n": 34,
+     "why": "right less than 55% of the time on unseen releases"
+    },
+    "y2": {
+     "none": true,
+     "n": 104,
+     "why": "right less than 55% of the time on unseen releases"
+    },
+    "gold15m": {
+     "none": true,
+     "why": "the first 15m have passed"
+    },
+    "gold2h": {
+     "none": true,
+     "n": 1,
+     "why": "too few tested calls"
+    },
+    "nq15m": {
+     "none": true,
+     "why": "the first 15m have passed"
+    },
+    "nq2h": {
+     "none": true,
+     "n": 15,
+     "why": "too few tested calls"
+    }
+   },
+   "hist": {
+    "gold": {
+     "dir": "down",
+     "p": 0.677,
+     "n": 62
+    }
+   },
+   "move": {
+    "gold": {
+     "pct": 1.85,
+     "lo": 1.22,
+     "hi": 3.07,
+     "normal": 1.94,
+     "mult": 0.954,
+     "pts": 67.6,
+     "n": 189,
+     "proven": false,
+     "why": "Historical range diagnostic; qualification suspended pending point-in-time validation"
+    },
+    "nq": {
+     "pct": 1.54,
+     "lo": 0.89,
+     "hi": 2.48,
+     "normal": 1.53,
+     "mult": 1.006,
+     "pts": 412.7,
+     "n": 189,
+     "proven": false,
+     "why": "Historical range diagnostic; qualification suspended pending point-in-time validation"
+    }
+   }
+  },
   "20261125-durable-goods-orders-oct": {
    "kind": "durables",
    "group": "activity",
@@ -5592,8 +5680,8 @@
   }
  },
  "log": [
-  "tv: 3 month(s) refreshed, 3592 releases with a consensus surprise",
+  "tv: 3 month(s) refreshed, 3593 releases with a consensus surprise",
   "markets: gold, nq, usd, y2, gold15m, gold2h, nq15m, nq2h",
-  "model: fit in 3s; proven: labor:y2"
+  "model: fit in 2s; proven: labor:y2"
  ]
 }

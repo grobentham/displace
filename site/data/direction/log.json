@@ -17,6 +17,21 @@
    "hit": false,
    "eligible": false,
    "evaluation_basis": "release-window historical observation"
+  },
+  {
+   "id": "20261124-consumer-confidence-nov",
+   "date": "2026-11-24",
+   "when": "2026-11-24T10:00:00-05:00",
+   "kind": "conf",
+   "group": "sentiment",
+   "asset": "gold",
+   "dir": "down",
+   "p": 0.677,
+   "z": 2.21,
+   "tier": "hist",
+   "logged": "2026-11-24T10:25-05:00",
+   "eligible": false,
+   "evaluation_basis": "release-window historical observation"
   }
  ]
 }
