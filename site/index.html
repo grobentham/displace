@@ -1770,7 +1770,8 @@ svg.cd line.wick{animation:fadein .5s ease-out both}
 .ms-grid small{display:block;color:var(--muted);font-size:.8rem}.ms-grid b{font-size:1.5rem;letter-spacing:-.03em;font-variant-numeric:tabular-nums}
 .ms-note{color:var(--muted);font-size:.82rem;margin-top:12px}
 </style>
-<link rel="canonical" href="https://grobentham.github.io/displace/"></head>
+<link rel="canonical" href="https://grobentham.github.io/displace/"><link rel="stylesheet" href="assets/morning.css?v=20261125a">
+</head>
 <body>
 
 <nav class="gnav" aria-label="Site">
@@ -1792,41 +1793,36 @@ svg.cd line.wick{animation:fadein .5s ease-out both}
 <main id="top">
 
 <!-- HERO -->
-<section class="hero dark" id="hero">
-  <div class="wrap">
-    <a class="badge" href="#method">Free. Public data. Every number tested. <b>How</b></a>
-    <div class="name">Displace</div>
-    <h1 class="h-xl silver">Markets, measured.</h1>
-    <p class="sub">Quant research for NQ and gold futures: a tested daily bias, release surprise models and a backtester on real bars. Every number is checked against a base rate and tracked live.</p>
-    <div class="ctas">
-      <a class="pillbtn lg" href="#bias">See today</a>
-      <a class="more" href="#calendar">Open News</a>
-      <a class="more" href="research-hub.html">Research</a>
-      <a class="more" href="#method">How we test</a>
+<section class="hero dark mc" id="hero">
+  <div class="wide" id="mc">
+    <div class="mc-top">
+      <div><p class="mc-for" id="mc-for">Today's session</p><h1 class="mc-q">How far could it move today?</h1></div>
+      <div class="mc-tabs" id="mc-tabs" role="tablist" aria-label="Market"></div>
     </div>
-    <div class="chooser" role="group" aria-label="Start with">
-      <span>Start with</span>
-      <a href="#bias"><b>Daily bias</b><small>P(up), range and levels</small></a>
-      <a href="#calendar"><b>Economic news</b><small>Consensus, surprises, the Fed</small></a>
-      <a href="#backtest"><b>Backtester</b><small>Real NQ bars, bar by bar</small></a>
+    <div class="mc-answer" aria-live="polite">
+      <div class="mc-big"><span id="mc-pts">—</span><small>points, expected high-to-low</small></div>
+      <p class="mc-range" id="mc-range">Loading today's numbers…</p>
+      <p class="mc-cmp" id="mc-cmp"></p>
+      <div class="mc-status" id="mc-status"></div>
     </div>
-  </div>
-  <div class="shot">
-    <div class="frame">
-      <canvas id="tape" aria-hidden="true"></canvas>
-      <div class="call c1" aria-hidden="true"><i class="dot-g"></i><b id="hc1">P(up) · NQ</b><small id="hc1s">Tested before each session</small></div>
-      <div class="call c2" aria-hidden="true"><i class="dot-r"></i><b id="hc2">Expected range</b><small id="hc2s">From the 20-day average</small></div>
-      <div class="call c3" aria-hidden="true"><i class="dot-o"></i><b id="hc3">Walk-forward tested</b><small id="hc3s">Every day since 2000</small></div>
+    <div class="mc-grid">
+      <section class="mc-card" aria-labelledby="mc-h-lv"><h2 id="mc-h-lv">Yesterday's levels</h2><div id="mc-levels"></div></section>
+      <section class="mc-card" aria-labelledby="mc-h-nw"><h2 id="mc-h-nw">News that moves it <span class="mc-muted">(your time)</span></h2><div id="mc-news"></div></section>
+      <section class="mc-card" aria-labelledby="mc-h-ac"><h2 id="mc-h-ac">Your account</h2>
+        <div class="mc-form">
+          <label>Daily loss limit ($)<input type="number" id="mc-limit" min="0" step="50" inputmode="decimal" placeholder="e.g. 1000"></label>
+          <label>Contracts<input type="number" id="mc-n" min="1" step="1" inputmode="numeric" value="1"></label>
+          <div class="mc-size" role="radiogroup" aria-label="Contract size"><label><input type="radio" name="mc-size" value="micro" checked><span>Micro, <span id="mc-sym-micro">MNQ</span></span></label><label><input type="radio" name="mc-size" value="mini"><span>Mini, <span id="mc-sym-mini">NQ</span></span></label></div>
+        </div>
+        <div id="mc-acct"></div><p class="mc-muted">Saved on this device only. Not financial advice.</p>
+      </section>
     </div>
+    <p class="mc-foot">Up or down? Our tests find no reliable daily direction edge, so we don't call one. <a href="research-hub.html">Why</a> · <a href="#bias">All 8 markets</a> · <a href="open.html">Our track record</a> · <span id="mc-made"></span></p>
   </div>
 </section>
 
 <!-- PILLARS -->
 <section id="pillars" class="gray" style="padding:70px 0 70px">
-  <div class="wide hx hx2">
-    <a class="hx-c hx-course" href="#bias"><small>Daily bias · NQ and gold</small><b>Tested probabilities, every session.</b><p>The chance of an up day, the expected range and the odds of taking yesterday's high or low, re-tested on 26 years of data each morning.</p><span class="hx-bias" id="hx-bias" hidden></span><em>See today's bias ›</em></a>
-    <a class="hx-c hx-news" href="#calendar"><small>News · live</small><b>Next: <span id="hx-rel">the next big release</span></b><div class="hx-cd" id="hx-cd">Countdown loading</div><p>Every US release in your time, with the consensus, a plain-English daily brief, a Fed tracker and how gold and NQ have reacted.</p><em>Open News ›</em></a>
-  </div>
   <div class="wide"><h3 class="hx-h">Also on Displace</h3></div>
   <div class="wide hx">
     <a class="hx-c hx-tools" href="#backtest"><small>Backtester</small><b>Replay real NQ bars.</b><p>Bar by bar on real futures data, plus a strategy lab that checks your rules against random entries, Monte Carlo and a deflated Sharpe.</p><em>Open the backtester ›</em></a>
@@ -2764,7 +2760,7 @@ function kk(k,flip){if(!flip)return k;return k==="bull"?"bear":k==="bear"?"bull"
 
 /* hero canvas */
 (function(){
-  var cv=document.getElementById("tape"),ctx=cv.getContext("2d"),candles=[],w=16,off=0,dpr=Math.max(1,window.devicePixelRatio||1);
+  var cv=document.getElementById("tape");if(!cv)return;var ctx=cv.getContext("2d"),candles=[],w=16,off=0,dpr=Math.max(1,window.devicePixelRatio||1);
   var reduce=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches,cols={bull:"#30d158",bear:"#ff453a",acc:"#ff9f0a"};
   var seed=11;function rnd(){seed=(seed*16807)%2147483647;return seed/2147483647;}
   var last=50,drift=0.7;function next(){var o=last,ch=(rnd()-0.5+drift*0.25)*7;if(rnd()<0.1)ch*=3;if(rnd()<0.035)drift=-drift;var c=o+ch;last=c;return[o,Math.max(o,c)+rnd()*3,Math.min(o,c)-rnd()*3,c];}
@@ -4097,5 +4093,6 @@ Promise.all([get("macro/current"),get("signals/current").catch(function(){return
   document.getElementById("ms-note").textContent="Scores out of 100, ranked against years of history; higher means more of the named condition. "+(act!=null?act+" macro warning"+(act===1?" is":"s are")+" active. ":"")+"Background, not a forecast. Updated "+m.asof+".";
   box.hidden=false;}).catch(function(){});})();
 </script>
+<script src="assets/morning.js?v=20261125a" defer></script>
 </body>
 </html>

@@ -720,7 +720,10 @@ def finish(m, ctx, tiers, t_bar, z_bar):
             "t_req": round(t_bar, 2), "z_req": round(z_bar, 2),
             "levels": {"high": h, "low": l, "close": c},
             "takes": {s: {k: v for k, v in L[s].items() if k != "calib"} for s in L},
-            "range": {"points": pts(V["pred"] + V["q"][1]), "lo": pts(V["pred"] + V["q"][0]), "hi": pts(V["pred"] + V["q"][2])},
+            "range": {"points": pts(V["pred"] + V["q"][1]), "lo": pts(V["pred"] + V["q"][0]), "hi": pts(V["pred"] + V["q"][2]),
+                      # what a normal day has looked like: last 20 sessions, and the last year (median), in points
+                      "avg20": round(float(np.mean((S["h"] - S["l"])[-20:])), 6),
+                      "med250": round(float(np.median((S["h"] - S["l"])[-250:])), 6)},
             "band": {"lo": round(c * math.exp(-V["sigma"]), 6), "hi": round(c * math.exp(V["sigma"]), 6), "sigma": round(c * (math.exp(V["sigma"]) - 1), 6)},
             "touch": touch,
             "vol": {"stats": V["stats"], "inputs": V["inputs"], "multipliers": V["multipliers"],

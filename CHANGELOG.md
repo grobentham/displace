@@ -1,5 +1,15 @@
 # Changelog
 
+## 2026-11-25: the homepage answers a trader's morning questions
+
+- The first screen is now a morning check for NQ, ES and gold: the expected high-to-low range for the session
+  (with the 8-in-10 band and how it compares with a normal day), the chance yesterday's high and low trade through,
+  the session's major US releases in the visitor's own time, holiday and short-session warnings, and an account
+  box that turns the range into dollars against the visitor's daily loss limit (saved on their device only).
+- It says plainly that Displace doesn't call daily direction, because the tests find no reliable edge.
+- bias.py publishes `range.avg20` and `range.med250` (normal-day ranges in points) for the comparison.
+- The duplicate "Daily bias" and "News" cards under the hero were removed; everything else is unchanged.
+
 ## 2026-11-25: Iron Brain's live plans join the accountability ledger
 
 - `engine/intraday.py` and `.github/workflows/witness.yml`: every 10 minutes through the New York morning (hourly
