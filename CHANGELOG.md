@@ -1,5 +1,15 @@
 # Changelog
 
+## 2026-11-24: macro plan v2
+
+- `research/macro-plan-v2.json` replaces v1 (kept for the record). Each FRED series now feeds one index only: in v1,
+  VIX fed both D-STRESS and D-RISK and the high-yield spread fed both D-RISK and D-CREDIT, so D-RISK was the mirror
+  image of the other two. D-STRESS is now NFCI and STLFSI4; D-RISK is the VIX alone, inverted.
+- A reading's age counts from the end of the period it covers: September's CPI (dated 1 Sep) was 84 days old on
+  24 Nov and marked stale; from 30 Sep it is 55 days, inside the 75-day limit. D-GROWTH and D-INFLATION are back.
+- Ranking windows: 5 years for daily and weekly series (credit spreads 3 years, all FRED provides), 10 years for
+  monthly, so 0 and 100 mean multi-year extremes.
+
 ## 2026-11-24: two registered direction tests (both failed)
 
 - Registered first (`research/registered-2026-11-24.json`), then tested with the engine's unchanged event test across

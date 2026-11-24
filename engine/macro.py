@@ -8,7 +8,7 @@ from pathlib import Path
 from urllib.parse import urlencode
 
 ROOT=Path(__file__).resolve().parent.parent
-PLAN=ROOT/"research/macro-plan-v1.json"
+PLAN=ROOT/"research/macro-plan-v2.json"   # v1 kept for the record
 OUT=ROOT/"site/data/macro/current.json"
 CACHE=ROOT/"engine/cache/macro"
 FREQ={"daily":(252,10),"weekly":(156,21),"monthly":(60,75)}
@@ -30,14 +30,22 @@ def transform(rows,mode,today):
             out.append((d,100*(v/prior[1]-1)))
     return out
 
-def component(spec,rows,today):
-    n,max_age=FREQ[spec["frequency"]]
+def period_end(d,frequency):
+    """Last day of the period a reading covers: FRED dates a monthly reading on the 1st of its month."""
+    d=dt.date.fromisoformat(d)
+    if frequency=="monthly":
+        return dt.date(d.year+(d.month==12),d.month%12+1,1)-dt.timedelta(days=1)
+    return d
+
+def component(spec,rows,today,windows=None,age_from="observation"):
+    n,max_age=(windows or FREQ)[spec["frequency"]]
+    n=spec.get("window",n)            # a shorter window where the source's history is shorter (plan v2: credit spreads)
     obs=transform(rows,spec["transform"],today)
     result=dict(spec,source="https://fred.stlouisfed.org/series/"+spec["id"],score=None,status="insufficient_history")
     if not obs:
         return result
     d,value=obs[-1]
-    age=(today-dt.date.fromisoformat(d)).days
+    age=(today-(period_end(d,spec["frequency"]) if age_from=="period_end" else dt.date.fromisoformat(d))).days
     result.update(observation_date=d,value=round(value,4),age_days=age,history_n=min(n,len(obs)-1))
     if age>max_age:
         result["status"]="stale"
@@ -49,7 +57,8 @@ def component(spec,rows,today):
 def calculate(plan,datasets,today):
     indices=[]
     for spec in plan["indices"]:
-        parts=[component(c,datasets.get(c["id"],[]),today) for c in spec["components"]]
+        parts=[component(c,datasets.get(c["id"],[]),today,plan.get("windows"),plan.get("age_from","observation"))
+               for c in spec["components"]]
         scores=[p["score"] for p in parts if p["score"] is not None]
         score=round(sum(scores)/len(scores),2) if len(scores)==len(parts) and scores else None
         indices.append({"id":spec["id"],"name":spec["name"],"score":score,"status":"available" if score is not None else "unavailable","components":parts})
