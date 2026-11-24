@@ -92,8 +92,8 @@ jobs:
           python engine/guard.py watch engine/watch.py
           python engine/guard.py bias engine/bias.py
 
-      - name: Final check before publishing (invalid outputs go back to the last good version)
-        run: python engine/gate.py
+      - name: Final check before publishing (block invalid candidate snapshot)
+        run: python engine/gate.py --strict
 
       - name: Save new data
         run: |
@@ -103,11 +103,7 @@ jobs:
           if ! git diff --cached --quiet; then
             git commit -m "Engine update $(date -u +%Y-%m-%dT%H:%MZ)"
             # another run or a code push may have landed meanwhile: rebase onto it and retry
-            for i in 1 2 3; do
-              git push && break
-              git pull --rebase -X theirs origin main
-              sleep $((i * 5))
-            done
+            git push || { echo "Candidate commit could not be saved; refusing to deploy"; exit 1; }
           fi
 
       - name: Flag when the schedule needs more dates

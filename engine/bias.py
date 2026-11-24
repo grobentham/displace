@@ -730,7 +730,7 @@ def problems(e):
     out = []
     for k in ("p_up", "base_up", "p_high", "p_low", "p_up1", "p_dn1"):
         v = e.get(k)
-        if v is not None and not (isinstance(v, (int, float)) and math.isfinite(v) and 0 <= v <= 1):
+        if (v is None and k in ("p_up", "base_up", "p_high", "p_low")) or (v is not None and not (type(v) in (int, float) and math.isfinite(v) and 0 <= v <= 1)):
             out.append(f"{k} {v} is not a probability")
     lo, hi = e.get("range_lo"), e.get("range_hi")
     if lo is None or hi is None or not (math.isfinite(lo) and math.isfinite(hi)) or lo < 0 or lo > hi:
@@ -749,8 +749,10 @@ def audit(entries, now):
         if "eligible" not in e and e.get("logged") and e.get("for"):
             try:
                 e["eligible"] = dt.datetime.fromisoformat(e["logged"]) < window_start(e["for"])
-            except ValueError:
+            except (ValueError, TypeError):
                 e["eligible"] = False
+        if "eligible" not in e:
+            e["eligible"] = False
         if not e.get("void"):
             p = problems(e)
             if p:
@@ -793,8 +795,8 @@ def score_log(rows_by, entries):
             continue
         rows = rows_by.get(e["market"]) or []
         days = dict(rows)
-        nxt = next((d for d, _ in rows if d > e["candle"]), None)
-        if not nxt or e["candle"] not in days:
+        nxt = e.get("for")
+        if not nxt or nxt not in days or e["candle"] not in days or nxt <= e["candle"]:
             continue
         a, b = days[e["candle"]], days[nxt]
         up = 1 if b[3] > a[3] else 0
@@ -811,8 +813,8 @@ def score_log(rows_by, entries):
 def summary(entries):
     voided = sum(1 for e in entries if e.get("void"))
     late = sum(1 for e in entries if e.get("eligible") is False and not e.get("void"))
-    done = [e for e in entries if e.get("scored") and not e.get("void") and e.get("eligible", True)]
-    calls = [e for e in done if "hit" in e]
+    done = [e for e in entries if e.get("scored") and not e.get("void") and e.get("eligible") is True]
+    calls = [e for e in done if "hit" in e and e.get("tier") == "tested"]
     out = {"days": len(done), "calls": len(calls), "hits": sum(e["hit"] for e in calls),
            "inRange": sum(e["inRange"] for e in done), "recent": done[-10:][::-1],
            "voided": voided, "late": late}
@@ -917,7 +919,14 @@ def run(now=None, fetch=download, fetch_series=fred_download, markets=None):
     audit(entries, now)
     score_log(rows_by, entries)
     day = max(next_session(v["candle"]) for v in out.values())
-    live = {m: summary([e for e in entries if e["market"] == m]) for m in out}
+    # Lifetime summaries include archived records; do not count duplicates.
+    lifetime = {}
+    for path in sorted(glob.glob(os.path.join(ARCHIVE_DIR, "log-*.json"))):
+        for e in json.load(open(path))["entries"]:
+            lifetime[(e["market"], e["candle"])] = e
+    for e in entries:
+        lifetime[(e["market"], e["candle"])] = e
+    live = {m: summary([e for e in lifetime.values() if e["market"] == m]) for m in out}
     doc = {"asof": now.isoformat(timespec="minutes"), "for": day, "markets": out, "order": [m for m in MARKETS if m in out],
            "news": news_today(day), "live": live,
            "method": {"first_test_year": FIRST_TEST_YEAR, "lean": LEAN, "t_bar": round(t_bar, 2), "z_bar": round(z_bar, 2),

@@ -348,12 +348,13 @@ def score(log_rows, markets, now):
     out = {}
     for tier in ("tested", "hist"):
         rows = [r for r in log_rows if r.get("tier", "tested") == tier]
-        done = [r for r in rows if "hit" in r]
+        done = [r for r in rows if "hit" in r and r.get("eligible") is True]
         by = {}
         for r in done:
             b = by.setdefault(r["asset"], [0, 0])
             b[0] += r["hit"]
             b[1] += 1
-        out[tier] = {"calls": len(done), "hits": sum(r["hit"] for r in done), "open": len(rows) - len(done),
+        out[tier] = {"calls": len(done), "hits": sum(r["hit"] for r in done), "open": sum(1 for r in rows if r.get("eligible") is True and "hit" not in r),
+                     "historicalOnly": sum(1 for r in rows if r.get("eligible") is not True),
                      "byAsset": by, "recent": done[-12:][::-1]}
     return {**out["tested"], "hist": out["hist"]}

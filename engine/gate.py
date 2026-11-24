@@ -38,7 +38,7 @@ def finite(o, path="$"):
 
 
 def prob(v):
-    return isinstance(v, (int, float)) and math.isfinite(v) and 0 <= v <= 1
+    return type(v) in (int, float) and math.isfinite(v) and 0 <= v <= 1
 
 
 def check_bias(doc):
@@ -74,6 +74,81 @@ def check_log(doc):
 
 
 CHECKS = {os.path.join("bias", "current.json"): check_bias, os.path.join("bias", "log.json"): check_log}
+
+# Minimum public contracts. Additional fields remain backward-compatible.
+CONTRACTS = {
+    "bias/current.json": {"markets": dict, "asof": str, "for": str},
+    "bias/log.json": {"entries": list},
+    "direction/current.json": {"assets": dict, "groups": dict, "events": dict, "live": dict, "scenarios": dict},
+    "direction/log.json": {"rows": list},
+    "calendar/events.json": {"updated": str, "through": str, "events": list},
+    "calendar/earnings.json": {"updated": str, "events": list},
+    "brief/morning.json": {"editions": list}, "brief/today.json": {"asof": str, "today": list, "recent": list},
+    "engine/status.json": {"lastRun": str, "quality": dict, "sources": dict},
+    "engine/quality.json": {"critical": int, "failures": list},
+    "engine/health.json": {"components": dict, "updated": str},
+    "fed/current.json": {"asof": str}, "history/main.json": {"series": dict},
+    "history/reactions.json": {"series": dict}, "markets/latest.json": {"tiles": dict},
+    "news/latest.json": {"items": list, "sourceHealth": dict},
+    "outlook/current.json": {"days": list}, "config/site.json": {"proOpen": bool},
+}
+
+def strict_validate(data=DATA):
+    """Fail closed on the whole candidate snapshot, never restore from unverified HEAD."""
+    failures = {}
+    for rel, fields in CONTRACTS.items():
+        path = os.path.join(data, rel)
+        try:
+            with open(path) as fh:
+                obj = json.load(fh)
+            if not isinstance(obj, dict):
+                raise ValueError("expected object")
+            bad = [k for k, t in fields.items() if type(obj.get(k)) is not t]
+            if bad:
+                failures[rel] = ["missing or wrong type: " + ", ".join(bad)]
+            elif rel == "engine/quality.json" and obj["critical"]:
+                failures[rel] = ["critical source quality failure"]
+            elif rel == "direction/current.json":
+                import predict
+                problems = predict.check(obj)
+                if problems:
+                    failures[rel] = problems
+            elif rel == "direction/log.json":
+                seen = set()
+                for row in obj["rows"]:
+                    key = (row["id"], row["asset"])
+                    if key in seen or not prob(row["p"]) or row.get("eligible") is not False:
+                        failures[rel] = ["duplicate, invalid or unclassified event record"]
+                    seen.add(key)
+            elif rel == "bias/log.json":
+                if any(type(row.get("eligible")) is not bool for row in obj["entries"]):
+                    failures[rel] = ["forecast eligibility must be explicit"]
+        except (OSError, ValueError, TypeError, KeyError, AttributeError) as exc:
+            failures[rel] = [str(exc)]
+    for path in sorted(glob.glob(os.path.join(data, "**", "*.json"), recursive=True)):
+        rel = os.path.relpath(path, data)
+        try:
+            with open(path) as fh:
+                obj = json.load(fh)
+            bad = finite(obj)
+            if rel in CHECKS:
+                bad += CHECKS[rel](obj)
+            if bad:
+                failures.setdefault(rel, []).extend(bad[:10])
+        except (OSError, ValueError, TypeError, KeyError, AttributeError) as exc:
+            failures[rel] = [str(exc)]
+    return failures
+
+def strict_main():
+    failures = strict_validate()
+    health = G.load().get("components", {})
+    failed = [name for name, row in health.items()
+              if row.get("run") == G.run_id() and row.get("state") == "failed"]
+    if failed:
+        failures["engine failures"] = failed
+    G.mark("gate", "failed" if failures else "ok", json.dumps(failures)[:1400])
+    print(json.dumps(failures, indent=2))
+    return 1 if failures else 0
 
 
 def restore(path):
@@ -130,4 +205,4 @@ def report():
 
 
 if __name__ == "__main__":
-    sys.exit(report() if "--report" in sys.argv else (0 if validate() is not None else 1))
+    sys.exit(report() if "--report" in sys.argv else strict_main() if "--strict" in sys.argv else (1 if validate() else 0))

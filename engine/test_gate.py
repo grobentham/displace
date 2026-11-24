@@ -126,6 +126,25 @@ def test_guard_reports_a_crash_and_carries_on():
             os.environ.pop("GITHUB_RUN_ID", None)
 
 
+def test_missing_target_and_unknown_eligibility():
+    e = entry(eligible=True)
+    rows = {"nq": [("2026-11-19", [100, 105, 95, 101]), ("2026-11-23", [101, 106, 96, 103])]}
+    B.score_log(rows, [e])
+    assert not e.get("scored")
+    unknown = entry(scored=1, up=1, brier=0.1, inRange=1, highTaken=1, lowTaken=0)
+    assert B.summary([unknown])["days"] == 0
+    assert B.problems(entry(p_up=None))
+
+
+def test_strict_gate_rejects_missing_contract_and_nonfinite():
+    with tempfile.TemporaryDirectory() as d:
+        os.makedirs(os.path.join(d, "extra"))
+        json.dump({"x": float("nan")}, open(os.path.join(d, "extra", "bad.json"), "w"))
+        failures = GT.strict_validate(d)
+        assert "bias/current.json" in failures
+        assert "extra/bad.json" in failures
+
+
 if __name__ == "__main__":
     test_negative_range_is_voided_not_deleted()
     test_bad_probabilities_and_levels()
@@ -134,4 +153,6 @@ if __name__ == "__main__":
     test_gate_checks_bias_output()
     test_gate_restores_invalid_files()
     test_guard_reports_a_crash_and_carries_on()
+    test_missing_target_and_unknown_eligibility()
+    test_strict_gate_rejects_missing_contract_and_nonfinite()
     print("gate tests passed")

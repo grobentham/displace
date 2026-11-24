@@ -96,7 +96,8 @@ def test_hist_bias():
     rows = [{"asset": "gold", "dir": "up", "when": "2025-01-01T10:00:00-05:00", "tier": "hist"},
             {"asset": "gold", "dir": "up", "when": "2025-01-01T10:00:00-05:00"}]
     r = S.score(rows, {}, None)
-    assert r["open"] == 1 and r["hist"]["open"] == 1
+    assert r["open"] == 0 and r["hist"]["open"] == 0
+    assert r["historicalOnly"] == 1 and r["hist"]["historicalOnly"] == 1
 
 if __name__ == "__main__":
     main()
