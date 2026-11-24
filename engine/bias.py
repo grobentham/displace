@@ -86,7 +86,10 @@ CROSS_FOR = {
     "crypto": ["hy5", "usd5", "y2_5", "term"],
 }
 EVENTS = {"tom": "Turn of the month", "prefomc": "Day before a Fed decision", "fomc": "Fed decision day",
-          "bigdown": "After a 2-sigma down day", "bigup": "After a 2-sigma up day"}
+          "bigdown": "After a 2-sigma down day", "bigup": "After a 2-sigma up day",
+          # registered 24 Nov 2026 (research/registered-2026-11-24.json), before testing
+          "announce": "CPI, payrolls or Fed day", "preholiday": "Day before a market holiday"}
+EVENT_FROM = {"prefomc": 2010, "fomc": 2010, "announce": 2010}   # first year each event's calendar is complete
 EQUITY = ("nq", "es", "ym", "rty")
 TIER1 = re.compile(r"\bCPI\b|Non-farm|FOMC rate decision", re.I)
 TIER2 = re.compile(r"Retail sales|\bPCE\b|\bGDP\b|\bISM\b|\bPPI\b", re.I)
@@ -311,6 +314,58 @@ def calendar_tiers():
     return tiers, fomc
 
 
+def _nth(y, m, wd, n):
+    """n-th weekday wd (0 = Monday) of a month; n = -1 for the last."""
+    if n > 0:
+        d = dt.date(y, m, 1)
+        return d + dt.timedelta(days=(wd - d.weekday()) % 7 + 7 * (n - 1))
+    d = dt.date(y + (m == 12), m % 12 + 1, 1) - dt.timedelta(days=1)
+    return d - dt.timedelta(days=(d.weekday() - wd) % 7)
+
+
+def _easter(y):
+    a, b, c = y % 19, y // 100, y % 100
+    d, e = b // 4, b % 4
+    f = (b + 8) // 25
+    g = (b - f + 1) // 3
+    h = (19 * a + b - d - g + 15) % 30
+    i, k = c // 4, c % 4
+    l_ = (32 + 2 * e + 2 * i - h - k) % 7
+    m = (a + 11 * h + 22 * l_) // 451
+    month = (h + l_ - 7 * m + 114) // 31
+    return dt.date(y, month, (h + l_ - 7 * m + 114) % 31 + 1)
+
+
+# closures outside the regular rules (national days of mourning, 9/11, Hurricane Sandy)
+SPECIAL_CLOSED = {"2001-09-11", "2001-09-12", "2001-09-13", "2001-09-14", "2004-06-11", "2007-01-02", "2012-10-29",
+                  "2012-10-30", "2018-12-05", "2025-01-09"}
+
+
+def nyse_holidays(y):
+    """The US stock exchanges' full-day holidays for year y, by their published rules (a Saturday holiday is observed
+    on Friday, a Sunday one on Monday; New Year's Day on a Saturday is not moved back into December)."""
+    def obs(d, back=True):
+        if d.weekday() == 5:
+            return d - dt.timedelta(days=1) if back else None
+        return d + dt.timedelta(days=1) if d.weekday() == 6 else d
+    days = [obs(dt.date(y, 1, 1), back=False), _nth(y, 2, 0, 3), _easter(y) - dt.timedelta(days=2),
+            _nth(y, 5, 0, -1), obs(dt.date(y, 7, 4)), _nth(y, 9, 0, 1), _nth(y, 11, 3, 4), obs(dt.date(y, 12, 25))]
+    if y >= 1998:
+        days.append(_nth(y, 1, 0, 3))                       # Martin Luther King Jr. Day
+    if y >= 2022:
+        days.append(obs(dt.date(y, 6, 19)))                  # Juneteenth
+    return {d.isoformat() for d in days if d} | {d for d in SPECIAL_CLOSED if d.startswith(str(y))}
+
+
+def market_holidays():
+    """Weekdays the US exchanges are closed, from Displace's calendar ('... US markets closed')."""
+    try:
+        ev = json.load(open(os.path.join(DATA, "calendar", "events.json")))["events"]
+    except (OSError, ValueError, KeyError):
+        return set()
+    return {e["date"] for e in ev if e.get("impact") == "holiday" and re.search(r"markets closed", e.get("title", ""), re.I)}
+
+
 # ---------------------------------------------------------------- features
 
 def _roll(a, w, f):
@@ -353,6 +408,12 @@ def build(rows, tiers, fomc):
     F["bigdown"] = (np.nan_to_num(F["rev1"]) < -2).astype(float)
     F["bigup"] = (np.nan_to_num(F["rev1"]) > 2).astype(float)
     F["ev1"] = np.array([1.0 if tiers.get(d) == 2 else 0.0 for d in nxt])
+    F["announce"] = F["ev1"]
+    # the next weekday is an exchange holiday (scheduled, so known in advance): the exchanges' holiday rules, plus
+    # Displace's calendar of 'US markets closed' days. Not gaps in the candles: Yahoo's history has missing days.
+    yrs = {int(k[:4]) for k in keys} | {int(keys[-1][:4]) + 1} if keys else set()
+    closed = set().union(*(nyse_holidays(y) for y in yrs)) | market_holidays() if yrs else market_holidays()
+    F["preholiday"] = np.array([1.0 if next_session(d) in closed else 0.0 for d in nxt])
     F["ev2"] = np.array([1.0 if tiers.get(d) == 1 else 0.0 for d in nxt])
     F["mon"] = np.array([1.0 if dt.date.fromisoformat(d).weekday() == 0 else 0.0 for d in nxt])
     F["dist_h"] = np.log(h / c) / atr
@@ -398,7 +459,7 @@ def direction_tests(F, S, signals):
     ev = {}
     half_year = years[n // 2]
     for k in EVENTS:
-        lo = FOMC_KNOWN_FROM if k in ("prefomc", "fomc") else 0
+        lo = EVENT_FROM.get(k, 0)
         allow = known & (years >= lo)
         sel = allow & (F[k] == 1)
         if sel.sum() < 20:
