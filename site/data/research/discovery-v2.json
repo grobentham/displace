@@ -1,0 +1,3865 @@
+{
+  "version": 2,
+  "plan_hash": "1c8cd80a76c86cea2d531433a51f8a3c5c362975db8d1c8059a1ec5535b05235",
+  "batches": [
+    {
+      "kind": "historical",
+      "start": "2020-01-01",
+      "end": "2026-11-01",
+      "computed_on": "2026-11-24",
+      "dataset_hashes": {
+        "nq": "71ac1e7309bd01273dc3152a775b54d5da4f3ea816242de0236be371b6bf87b0",
+        "es": "e6541790f7edfd389f48617dffcc1d0942478da357b331acb732825a4ee96880",
+        "ym": "9535ccf85d2f35f48e41d9da7d958d9430d2a527a70ef28213a0ef8bd9cb0b69",
+        "rty": "9dc37f4a5a0e37ec318819a03a54ec7f60201bdec67b09fdc59adbdafe4dd06b",
+        "gold": "9ded791e8b8d63dfa94f2facfd39513f1829eea5018419561c9412cf5ceb559b",
+        "cl": "93442009845c8f20b6d4210414b8d52317976e1fc48657b1f156764b6ff3cd7c",
+        "6e": "b97c57c78cba0fccaf11a6f454c3d5b93fcff42778146985a0e8a626e5d2c7d9",
+        "btc": "6457d49a8a4dcd8ff1e8f6fd43069581c53f4a7b7439e46cb40da904b69654a6"
+      },
+      "results": [
+        {
+          "condition": "previous_up",
+          "n": 1304,
+          "condition_n": 722,
+          "comparison_n": 582,
+          "status": "exploratory_candidate",
+          "promoted": false,
+          "condition_rate": 0.5484764542936288,
+          "comparison_rate": 0.5618556701030928,
+          "effect": -0.013379215809463996,
+          "paired_weeks": 276,
+          "weekly_effect": -0.24154589371980678,
+          "approx_interval": [
+            -0.33199587168750555,
+            -0.15109591575210798
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "nq",
+          "outcome": "next_positive_close"
+        },
+        {
+          "condition": "previous_down",
+          "n": 1304,
+          "condition_n": 582,
+          "comparison_n": 722,
+          "status": "exploratory_candidate",
+          "promoted": false,
+          "condition_rate": 0.5618556701030928,
+          "comparison_rate": 0.5484764542936288,
+          "effect": 0.013379215809463996,
+          "paired_weeks": 276,
+          "weekly_effect": 0.24154589371980678,
+          "approx_interval": [
+            0.15109591575210798,
+            0.33199587168750555
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "nq",
+          "outcome": "next_positive_close"
+        },
+        {
+          "condition": "wide_range",
+          "n": 1304,
+          "condition_n": 656,
+          "comparison_n": 648,
+          "status": "inconclusive",
+          "promoted": false,
+          "condition_rate": 0.573170731707317,
+          "comparison_rate": 0.5354938271604939,
+          "effect": 0.03767690454682315,
+          "paired_weeks": 231,
+          "weekly_effect": 0.11038961038961038,
+          "approx_interval": [
+            -0.01754931644642095,
+            0.23832853722564173
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "nq",
+          "outcome": "next_positive_close"
+        },
+        {
+          "condition": "narrow_range",
+          "n": 1304,
+          "condition_n": 648,
+          "comparison_n": 656,
+          "status": "inconclusive",
+          "promoted": false,
+          "condition_rate": 0.5354938271604939,
+          "comparison_rate": 0.573170731707317,
+          "effect": -0.03767690454682315,
+          "paired_weeks": 231,
+          "weekly_effect": -0.11038961038961038,
+          "approx_interval": [
+            -0.23832853722564173,
+            0.01754931644642095
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "nq",
+          "outcome": "next_positive_close"
+        },
+        {
+          "condition": "momentum_5_up",
+          "n": 1304,
+          "condition_n": 782,
+          "comparison_n": 522,
+          "status": "exploratory_candidate",
+          "promoted": false,
+          "condition_rate": 0.5498721227621484,
+          "comparison_rate": 0.5613026819923371,
+          "effect": -0.011430559230188764,
+          "paired_weeks": 156,
+          "weekly_effect": -0.23076923076923078,
+          "approx_interval": [
+            -0.36280241560442783,
+            -0.0987360459340337
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "nq",
+          "outcome": "next_positive_close"
+        },
+        {
+          "condition": "momentum_5_down",
+          "n": 1304,
+          "condition_n": 522,
+          "comparison_n": 782,
+          "status": "exploratory_candidate",
+          "promoted": false,
+          "condition_rate": 0.5613026819923371,
+          "comparison_rate": 0.5498721227621484,
+          "effect": 0.011430559230188764,
+          "paired_weeks": 156,
+          "weekly_effect": 0.23076923076923078,
+          "approx_interval": [
+            0.0987360459340337,
+            0.36280241560442783
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "nq",
+          "outcome": "next_positive_close"
+        },
+        {
+          "condition": "momentum_20_up",
+          "n": 1304,
+          "condition_n": 839,
+          "comparison_n": 465,
+          "status": "exploratory_candidate",
+          "promoted": false,
+          "condition_rate": 0.5530393325387366,
+          "comparison_rate": 0.556989247311828,
+          "effect": -0.0039499147730913675,
+          "paired_weeks": 69,
+          "weekly_effect": -0.29347826086956524,
+          "approx_interval": [
+            -0.5114516384576019,
+            -0.0755048832815286
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "nq",
+          "outcome": "next_positive_close"
+        },
+        {
+          "condition": "momentum_20_down",
+          "n": 1304,
+          "condition_n": 465,
+          "comparison_n": 839,
+          "status": "exploratory_candidate",
+          "promoted": false,
+          "condition_rate": 0.556989247311828,
+          "comparison_rate": 0.5530393325387366,
+          "effect": 0.0039499147730913675,
+          "paired_weeks": 69,
+          "weekly_effect": 0.29347826086956524,
+          "approx_interval": [
+            0.0755048832815286,
+            0.5114516384576019
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "nq",
+          "outcome": "next_positive_close"
+        },
+        {
+          "condition": "close_near_high",
+          "n": 1304,
+          "condition_n": 402,
+          "comparison_n": 902,
+          "status": "inconclusive",
+          "promoted": false,
+          "condition_rate": 0.5572139303482587,
+          "comparison_rate": 0.5532150776053215,
+          "effect": 0.003998852742937209,
+          "paired_weeks": 245,
+          "weekly_effect": -0.1139455782312925,
+          "approx_interval": [
+            -0.22821585878708184,
+            0.00032470232449682834
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "nq",
+          "outcome": "next_positive_close"
+        },
+        {
+          "condition": "close_near_low",
+          "n": 1304,
+          "condition_n": 260,
+          "comparison_n": 1044,
+          "status": "inconclusive",
+          "promoted": false,
+          "condition_rate": 0.5461538461538461,
+          "comparison_rate": 0.5565134099616859,
+          "effect": -0.010359563807839756,
+          "paired_weeks": 186,
+          "weekly_effect": 0.10752688172043012,
+          "approx_interval": [
+            -0.03337033480153612,
+            0.24842409824239636
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "nq",
+          "outcome": "next_positive_close"
+        },
+        {
+          "condition": "inside_day",
+          "n": 1304,
+          "condition_n": 142,
+          "comparison_n": 1162,
+          "status": "inconclusive",
+          "promoted": false,
+          "condition_rate": 0.5492957746478874,
+          "comparison_rate": 0.5550774526678142,
+          "effect": -0.005781678019926795,
+          "paired_weeks": 126,
+          "weekly_effect": 0.023809523809523826,
+          "approx_interval": [
+            -0.1649818955148081,
+            0.21260094313385577
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "nq",
+          "outcome": "next_positive_close"
+        },
+        {
+          "condition": "outside_day",
+          "n": 1304,
+          "condition_n": 153,
+          "comparison_n": 1151,
+          "status": "inconclusive",
+          "promoted": false,
+          "condition_rate": 0.5686274509803921,
+          "comparison_rate": 0.5525629887054735,
+          "effect": 0.016064462274918645,
+          "paired_weeks": 137,
+          "weekly_effect": 0.013990267639902696,
+          "approx_interval": [
+            -0.14367263238633413,
+            0.1716531676661395
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "nq",
+          "outcome": "next_positive_close"
+        },
+        {
+          "condition": "previous_up",
+          "n": 1304,
+          "condition_n": 722,
+          "comparison_n": 582,
+          "status": "inconclusive",
+          "promoted": false,
+          "condition_rate": 0.48753462603878117,
+          "comparison_rate": 0.5051546391752577,
+          "effect": -0.017620013136476542,
+          "paired_weeks": 276,
+          "weekly_effect": 0.013285024154589369,
+          "approx_interval": [
+            -0.11237223621777084,
+            0.1389422845269496
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "nq",
+          "outcome": "next_range_expansion"
+        },
+        {
+          "condition": "previous_down",
+          "n": 1304,
+          "condition_n": 582,
+          "comparison_n": 722,
+          "status": "inconclusive",
+          "promoted": false,
+          "condition_rate": 0.5051546391752577,
+          "comparison_rate": 0.48753462603878117,
+          "effect": 0.017620013136476542,
+          "paired_weeks": 276,
+          "weekly_effect": -0.013285024154589369,
+          "approx_interval": [
+            -0.1389422845269496,
+            0.11237223621777084
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "nq",
+          "outcome": "next_range_expansion"
+        },
+        {
+          "condition": "wide_range",
+          "n": 1304,
+          "condition_n": 656,
+          "comparison_n": 648,
+          "status": "exploratory_candidate",
+          "promoted": false,
+          "condition_rate": 0.31097560975609756,
+          "comparison_rate": 0.6820987654320988,
+          "effect": -0.37112315567600124,
+          "paired_weeks": 231,
+          "weekly_effect": -0.5400432900432901,
+          "approx_interval": [
+            -0.6288602625473432,
+            -0.4512263175392371
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "nq",
+          "outcome": "next_range_expansion"
+        },
+        {
+          "condition": "narrow_range",
+          "n": 1304,
+          "condition_n": 648,
+          "comparison_n": 656,
+          "status": "exploratory_candidate",
+          "promoted": false,
+          "condition_rate": 0.6820987654320988,
+          "comparison_rate": 0.31097560975609756,
+          "effect": 0.37112315567600124,
+          "paired_weeks": 231,
+          "weekly_effect": 0.5400432900432901,
+          "approx_interval": [
+            0.4512263175392371,
+            0.6288602625473432
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "nq",
+          "outcome": "next_range_expansion"
+        },
+        {
+          "condition": "momentum_5_up",
+          "n": 1304,
+          "condition_n": 782,
+          "comparison_n": 522,
+          "status": "inconclusive",
+          "promoted": false,
+          "condition_rate": 0.5012787723785166,
+          "comparison_rate": 0.48659003831417624,
+          "effect": 0.014688734064340347,
+          "paired_weeks": 156,
+          "weekly_effect": 0.04754273504273505,
+          "approx_interval": [
+            -0.118149610568212,
+            0.21323508065368207
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "nq",
+          "outcome": "next_range_expansion"
+        },
+        {
+          "condition": "momentum_5_down",
+          "n": 1304,
+          "condition_n": 522,
+          "comparison_n": 782,
+          "status": "inconclusive",
+          "promoted": false,
+          "condition_rate": 0.48659003831417624,
+          "comparison_rate": 0.5012787723785166,
+          "effect": -0.014688734064340347,
+          "paired_weeks": 156,
+          "weekly_effect": -0.04754273504273505,
+          "approx_interval": [
+            -0.21323508065368207,
+            0.118149610568212
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "nq",
+          "outcome": "next_range_expansion"
+        },
+        {
+          "condition": "momentum_20_up",
+          "n": 1304,
+          "condition_n": 839,
+          "comparison_n": 465,
+          "status": "inconclusive",
+          "promoted": false,
+          "condition_rate": 0.4970202622169249,
+          "comparison_rate": 0.4924731182795699,
+          "effect": 0.004547143937355003,
+          "paired_weeks": 69,
+          "weekly_effect": 0.033816425120772944,
+          "approx_interval": [
+            -0.21172549633396348,
+            0.2793583465755094
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "nq",
+          "outcome": "next_range_expansion"
+        },
+        {
+          "condition": "momentum_20_down",
+          "n": 1304,
+          "condition_n": 465,
+          "comparison_n": 839,
+          "status": "inconclusive",
+          "promoted": false,
+          "condition_rate": 0.4924731182795699,
+          "comparison_rate": 0.4970202622169249,
+          "effect": -0.004547143937355003,
+          "paired_weeks": 69,
+          "weekly_effect": -0.033816425120772944,
+          "approx_interval": [
+            -0.2793583465755094,
+            0.21172549633396348
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "nq",
+          "outcome": "next_range_expansion"
+        },
+        {
+          "condition": "close_near_high",
+          "n": 1304,
+          "condition_n": 402,
+          "comparison_n": 902,
+          "status": "exploratory_candidate",
+          "promoted": false,
+          "condition_rate": 0.3805970149253731,
+          "comparison_rate": 0.5465631929046563,
+          "effect": -0.16596617797928315,
+          "paired_weeks": 245,
+          "weekly_effect": -0.16462585034013605,
+          "approx_interval": [
+            -0.3027193635235478,
+            -0.026532337156724345
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "nq",
+          "outcome": "next_range_expansion"
+        },
+        {
+          "condition": "close_near_low",
+          "n": 1304,
+          "condition_n": 260,
+          "comparison_n": 1044,
+          "status": "inconclusive",
+          "promoted": false,
+          "condition_rate": 0.4307692307692308,
+          "comparison_rate": 0.5114942528735632,
+          "effect": -0.08072502210433241,
+          "paired_weeks": 186,
+          "weekly_effect": -0.08915770609318995,
+          "approx_interval": [
+            -0.24675124447934482,
+            0.06843583229296495
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "nq",
+          "outcome": "next_range_expansion"
+        },
+        {
+          "condition": "inside_day",
+          "n": 1304,
+          "condition_n": 142,
+          "comparison_n": 1162,
+          "status": "exploratory_candidate",
+          "promoted": false,
+          "condition_rate": 0.7394366197183099,
+          "comparison_rate": 0.4655765920826162,
+          "effect": 0.27386002763569367,
+          "paired_weeks": 126,
+          "weekly_effect": 0.31018518518518523,
+          "approx_interval": [
+            0.13921572689935788,
+            0.48115464347101256
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "nq",
+          "outcome": "next_range_expansion"
+        },
+        {
+          "condition": "outside_day",
+          "n": 1304,
+          "condition_n": 153,
+          "comparison_n": 1151,
+          "status": "exploratory_candidate",
+          "promoted": false,
+          "condition_rate": 0.2679738562091503,
+          "comparison_rate": 0.525629887054735,
+          "effect": -0.2576560308455847,
+          "paired_weeks": 137,
+          "weekly_effect": -0.322992700729927,
+          "approx_interval": [
+            -0.4702180702670208,
+            -0.1757673311928332
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "nq",
+          "outcome": "next_range_expansion"
+        },
+        {
+          "condition": "previous_up",
+          "n": 1304,
+          "condition_n": 694,
+          "comparison_n": 610,
+          "status": "exploratory_candidate",
+          "promoted": false,
+          "condition_rate": 0.5331412103746398,
+          "comparison_rate": 0.5344262295081967,
+          "effect": -0.0012850191335569416,
+          "paired_weeks": 271,
+          "weekly_effect": -0.23247232472324725,
+          "approx_interval": [
+            -0.3204756112280558,
+            -0.14446903821843873
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "es",
+          "outcome": "next_positive_close"
+        },
+        {
+          "condition": "previous_down",
+          "n": 1304,
+          "condition_n": 608,
+          "comparison_n": 696,
+          "status": "exploratory_candidate",
+          "promoted": false,
+          "condition_rate": 0.5345394736842105,
+          "comparison_rate": 0.5330459770114943,
+          "effect": 0.0014934966727162546,
+          "paired_weeks": 270,
+          "weekly_effect": 0.23271604938271606,
+          "approx_interval": [
+            0.1443330111506756,
+            0.32109908761475653
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "es",
+          "outcome": "next_positive_close"
+        },
+        {
+          "condition": "wide_range",
+          "n": 1304,
+          "condition_n": 657,
+          "comparison_n": 647,
+          "status": "exploratory_candidate",
+          "promoted": false,
+          "condition_rate": 0.5525114155251142,
+          "comparison_rate": 0.5146831530139103,
+          "effect": 0.03782826251120386,
+          "paired_weeks": 219,
+          "weekly_effect": 0.1689497716894977,
+          "approx_interval": [
+            0.0337174525573499,
+            0.3041820908216455
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "es",
+          "outcome": "next_positive_close"
+        },
+        {
+          "condition": "narrow_range",
+          "n": 1304,
+          "condition_n": 647,
+          "comparison_n": 657,
+          "status": "exploratory_candidate",
+          "promoted": false,
+          "condition_rate": 0.5146831530139103,
+          "comparison_rate": 0.5525114155251142,
+          "effect": -0.03782826251120386,
+          "paired_weeks": 219,
+          "weekly_effect": -0.1689497716894977,
+          "approx_interval": [
+            -0.3041820908216455,
+            -0.0337174525573499
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "es",
+          "outcome": "next_positive_close"
+        },
+        {
+          "condition": "momentum_5_up",
+          "n": 1304,
+          "condition_n": 777,
+          "comparison_n": 527,
+          "status": "exploratory_candidate",
+          "promoted": false,
+          "condition_rate": 0.5160875160875161,
+          "comparison_rate": 0.5597722960151803,
+          "effect": -0.043684779927664175,
+          "paired_weeks": 156,
+          "weekly_effect": -0.3295940170940171,
+          "approx_interval": [
+            -0.45944806800005966,
+            -0.19973996618797452
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "es",
+          "outcome": "next_positive_close"
+        },
+        {
+          "condition": "momentum_5_down",
+          "n": 1304,
+          "condition_n": 527,
+          "comparison_n": 777,
+          "status": "exploratory_candidate",
+          "promoted": false,
+          "condition_rate": 0.5597722960151803,
+          "comparison_rate": 0.5160875160875161,
+          "effect": 0.043684779927664175,
+          "paired_weeks": 156,
+          "weekly_effect": 0.3295940170940171,
+          "approx_interval": [
+            0.19973996618797452,
+            0.45944806800005966
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "es",
+          "outcome": "next_positive_close"
+        },
+        {
+          "condition": "momentum_20_up",
+          "n": 1304,
+          "condition_n": 885,
+          "comparison_n": 419,
+          "status": "exploratory_candidate",
+          "promoted": false,
+          "condition_rate": 0.5389830508474577,
+          "comparison_rate": 0.522673031026253,
+          "effect": 0.016310019821204724,
+          "paired_weeks": 64,
+          "weekly_effect": -0.28255208333333337,
+          "approx_interval": [
+            -0.4726429502058741,
+            -0.09246121646079264
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "es",
+          "outcome": "next_positive_close"
+        },
+        {
+          "condition": "momentum_20_down",
+          "n": 1304,
+          "condition_n": 419,
+          "comparison_n": 885,
+          "status": "exploratory_candidate",
+          "promoted": false,
+          "condition_rate": 0.522673031026253,
+          "comparison_rate": 0.5389830508474577,
+          "effect": -0.016310019821204724,
+          "paired_weeks": 64,
+          "weekly_effect": 0.28255208333333337,
+          "approx_interval": [
+            0.09246121646079264,
+            0.4726429502058741
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "es",
+          "outcome": "next_positive_close"
+        },
+        {
+          "condition": "close_near_high",
+          "n": 1304,
+          "condition_n": 393,
+          "comparison_n": 911,
+          "status": "inconclusive",
+          "promoted": false,
+          "condition_rate": 0.5343511450381679,
+          "comparison_rate": 0.5334796926454446,
+          "effect": 0.0008714523927233486,
+          "paired_weeks": 240,
+          "weekly_effect": -0.12118055555555554,
+          "approx_interval": [
+            -0.24620399993032904,
+            0.00384288881921796
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "es",
+          "outcome": "next_positive_close"
+        },
+        {
+          "condition": "close_near_low",
+          "n": 1304,
+          "condition_n": 253,
+          "comparison_n": 1051,
+          "status": "exploratory_candidate",
+          "promoted": false,
+          "condition_rate": 0.5533596837944664,
+          "comparison_rate": 0.5290199809705043,
+          "effect": 0.02433970282396214,
+          "paired_weeks": 185,
+          "weekly_effect": 0.15360360360360362,
+          "approx_interval": [
+            0.00546393940186457,
+            0.30174326780534266
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "es",
+          "outcome": "next_positive_close"
+        },
+        {
+          "condition": "inside_day",
+          "n": 1304,
+          "condition_n": 137,
+          "comparison_n": 1167,
+          "status": "inconclusive",
+          "promoted": false,
+          "condition_rate": 0.5182481751824818,
+          "comparison_rate": 0.5355612682090831,
+          "effect": -0.017313093026601334,
+          "paired_weeks": 121,
+          "weekly_effect": -0.003443526170798879,
+          "approx_interval": [
+            -0.2021512031640788,
+            0.19526415082248105
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "es",
+          "outcome": "next_positive_close"
+        },
+        {
+          "condition": "outside_day",
+          "n": 1304,
+          "condition_n": 154,
+          "comparison_n": 1150,
+          "status": "inconclusive",
+          "promoted": false,
+          "condition_rate": 0.551948051948052,
+          "comparison_rate": 0.5313043478260869,
+          "effect": 0.020643704121965034,
+          "paired_weeks": 134,
+          "weekly_effect": 0.05286069651741295,
+          "approx_interval": [
+            -0.1278575719913571,
+            0.23357896502618303
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "es",
+          "outcome": "next_positive_close"
+        },
+        {
+          "condition": "previous_up",
+          "n": 1304,
+          "condition_n": 694,
+          "comparison_n": 610,
+          "status": "inconclusive",
+          "promoted": false,
+          "condition_rate": 0.484149855907781,
+          "comparison_rate": 0.5327868852459017,
+          "effect": -0.048637029338120696,
+          "paired_weeks": 271,
+          "weekly_effect": -0.049507995079950795,
+          "approx_interval": [
+            -0.17460919875591002,
+            0.07559320859600843
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "es",
+          "outcome": "next_range_expansion"
+        },
+        {
+          "condition": "previous_down",
+          "n": 1304,
+          "condition_n": 608,
+          "comparison_n": 696,
+          "status": "inconclusive",
+          "promoted": false,
+          "condition_rate": 0.5345394736842105,
+          "comparison_rate": 0.4827586206896552,
+          "effect": 0.051780852994555315,
+          "paired_weeks": 270,
+          "weekly_effect": 0.05277777777777778,
+          "approx_interval": [
+            -0.07249966236770686,
+            0.17805521792326243
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "es",
+          "outcome": "next_range_expansion"
+        },
+        {
+          "condition": "wide_range",
+          "n": 1304,
+          "condition_n": 657,
+          "comparison_n": 647,
+          "status": "exploratory_candidate",
+          "promoted": false,
+          "condition_rate": 0.3257229832572298,
+          "comparison_rate": 0.6908809891808346,
+          "effect": -0.3651580059236048,
+          "paired_weeks": 219,
+          "weekly_effect": -0.5677321156773212,
+          "approx_interval": [
+            -0.6619807770873541,
+            -0.4734834542672882
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "es",
+          "outcome": "next_range_expansion"
+        },
+        {
+          "condition": "narrow_range",
+          "n": 1304,
+          "condition_n": 647,
+          "comparison_n": 657,
+          "status": "exploratory_candidate",
+          "promoted": false,
+          "condition_rate": 0.6908809891808346,
+          "comparison_rate": 0.3257229832572298,
+          "effect": 0.3651580059236048,
+          "paired_weeks": 219,
+          "weekly_effect": 0.5677321156773212,
+          "approx_interval": [
+            0.4734834542672882,
+            0.6619807770873541
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "es",
+          "outcome": "next_range_expansion"
+        },
+        {
+          "condition": "momentum_5_up",
+          "n": 1304,
+          "condition_n": 777,
+          "comparison_n": 527,
+          "status": "inconclusive",
+          "promoted": false,
+          "condition_rate": 0.5225225225225225,
+          "comparison_rate": 0.4838709677419355,
+          "effect": 0.038651554780587016,
+          "paired_weeks": 156,
+          "weekly_effect": 0.06517094017094018,
+          "approx_interval": [
+            -0.09300460626250372,
+            0.22334648660438405
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "es",
+          "outcome": "next_range_expansion"
+        },
+        {
+          "condition": "momentum_5_down",
+          "n": 1304,
+          "condition_n": 527,
+          "comparison_n": 777,
+          "status": "inconclusive",
+          "promoted": false,
+          "condition_rate": 0.4838709677419355,
+          "comparison_rate": 0.5225225225225225,
+          "effect": -0.038651554780587016,
+          "paired_weeks": 156,
+          "weekly_effect": -0.06517094017094018,
+          "approx_interval": [
+            -0.22334648660438405,
+            0.09300460626250372
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "es",
+          "outcome": "next_range_expansion"
+        },
+        {
+          "condition": "momentum_20_up",
+          "n": 1304,
+          "condition_n": 885,
+          "comparison_n": 419,
+          "status": "inconclusive",
+          "promoted": false,
+          "condition_rate": 0.5220338983050847,
+          "comparison_rate": 0.47494033412887826,
+          "effect": 0.04709356417620647,
+          "paired_weeks": 64,
+          "weekly_effect": 0.0546875,
+          "approx_interval": [
+            -0.2070405161557773,
+            0.3164155161557773
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "es",
+          "outcome": "next_range_expansion"
+        },
+        {
+          "condition": "momentum_20_down",
+          "n": 1304,
+          "condition_n": 419,
+          "comparison_n": 885,
+          "status": "inconclusive",
+          "promoted": false,
+          "condition_rate": 0.47494033412887826,
+          "comparison_rate": 0.5220338983050847,
+          "effect": -0.04709356417620647,
+          "paired_weeks": 64,
+          "weekly_effect": -0.0546875,
+          "approx_interval": [
+            -0.3164155161557773,
+            0.2070405161557773
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "es",
+          "outcome": "next_range_expansion"
+        },
+        {
+          "condition": "close_near_high",
+          "n": 1304,
+          "condition_n": 393,
+          "comparison_n": 911,
+          "status": "exploratory_candidate",
+          "promoted": false,
+          "condition_rate": 0.3842239185750636,
+          "comparison_rate": 0.5598243688254665,
+          "effect": -0.17560045025040288,
+          "paired_weeks": 240,
+          "weekly_effect": -0.21944444444444444,
+          "approx_interval": [
+            -0.3479464560017468,
+            -0.09094243288714207
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "es",
+          "outcome": "next_range_expansion"
+        },
+        {
+          "condition": "close_near_low",
+          "n": 1304,
+          "condition_n": 253,
+          "comparison_n": 1051,
+          "status": "inconclusive",
+          "promoted": false,
+          "condition_rate": 0.48221343873517786,
+          "comparison_rate": 0.5128449096098954,
+          "effect": -0.030631470874717515,
+          "paired_weeks": 185,
+          "weekly_effect": -0.040990990990990975,
+          "approx_interval": [
+            -0.20575295087804485,
+            0.12377096889606291
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "es",
+          "outcome": "next_range_expansion"
+        },
+        {
+          "condition": "inside_day",
+          "n": 1304,
+          "condition_n": 137,
+          "comparison_n": 1167,
+          "status": "exploratory_candidate",
+          "promoted": false,
+          "condition_rate": 0.781021897810219,
+          "comparison_rate": 0.47472150814053127,
+          "effect": 0.30630038966968776,
+          "paired_weeks": 121,
+          "weekly_effect": 0.37396694214876036,
+          "approx_interval": [
+            0.2142777755995559,
+            0.5336561086979648
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "es",
+          "outcome": "next_range_expansion"
+        },
+        {
+          "condition": "outside_day",
+          "n": 1304,
+          "condition_n": 154,
+          "comparison_n": 1150,
+          "status": "exploratory_candidate",
+          "promoted": false,
+          "condition_rate": 0.2857142857142857,
+          "comparison_rate": 0.5365217391304348,
+          "effect": -0.2508074534161491,
+          "paired_weeks": 134,
+          "weekly_effect": -0.34825870646766166,
+          "approx_interval": [
+            -0.4960194872101067,
+            -0.20049792572521663
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "es",
+          "outcome": "next_range_expansion"
+        },
+        {
+          "condition": "previous_up",
+          "n": 1304,
+          "condition_n": 697,
+          "comparison_n": 607,
+          "status": "exploratory_candidate",
+          "promoted": false,
+          "condition_rate": 0.5351506456241033,
+          "comparison_rate": 0.5321252059308073,
+          "effect": 0.0030254396932960503,
+          "paired_weeks": 274,
+          "weekly_effect": -0.23600973236009734,
+          "approx_interval": [
+            -0.33076544394237994,
+            -0.14125402077781474
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "ym",
+          "outcome": "next_positive_close"
+        },
+        {
+          "condition": "previous_down",
+          "n": 1304,
+          "condition_n": 606,
+          "comparison_n": 698,
+          "status": "exploratory_candidate",
+          "promoted": false,
+          "condition_rate": 0.5313531353135313,
+          "comparison_rate": 0.5358166189111748,
+          "effect": -0.004463483597643481,
+          "paired_weeks": 274,
+          "weekly_effect": 0.23418491484184914,
+          "approx_interval": [
+            0.13960016462239977,
+            0.3287696650612985
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "ym",
+          "outcome": "next_positive_close"
+        },
+        {
+          "condition": "wide_range",
+          "n": 1304,
+          "condition_n": 655,
+          "comparison_n": 649,
+          "status": "inconclusive",
+          "promoted": false,
+          "condition_rate": 0.5603053435114503,
+          "comparison_rate": 0.5069337442218799,
+          "effect": 0.05337159928957047,
+          "paired_weeks": 238,
+          "weekly_effect": 0.11904761904761905,
+          "approx_interval": [
+            -0.00813584418123385,
+            0.24623108227647195
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "ym",
+          "outcome": "next_positive_close"
+        },
+        {
+          "condition": "narrow_range",
+          "n": 1304,
+          "condition_n": 649,
+          "comparison_n": 655,
+          "status": "inconclusive",
+          "promoted": false,
+          "condition_rate": 0.5069337442218799,
+          "comparison_rate": 0.5603053435114503,
+          "effect": -0.05337159928957047,
+          "paired_weeks": 238,
+          "weekly_effect": -0.11904761904761905,
+          "approx_interval": [
+            -0.24623108227647195,
+            0.00813584418123385
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "ym",
+          "outcome": "next_positive_close"
+        },
+        {
+          "condition": "momentum_5_up",
+          "n": 1304,
+          "condition_n": 747,
+          "comparison_n": 557,
+          "status": "exploratory_candidate",
+          "promoted": false,
+          "condition_rate": 0.5261044176706827,
+          "comparison_rate": 0.5439856373429084,
+          "effect": -0.017881219672225668,
+          "paired_weeks": 164,
+          "weekly_effect": -0.30233739837398377,
+          "approx_interval": [
+            -0.4376390994689218,
+            -0.16703569727904571
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "ym",
+          "outcome": "next_positive_close"
+        },
+        {
+          "condition": "momentum_5_down",
+          "n": 1304,
+          "condition_n": 555,
+          "comparison_n": 749,
+          "status": "exploratory_candidate",
+          "promoted": false,
+          "condition_rate": 0.5459459459459459,
+          "comparison_rate": 0.5246995994659546,
+          "effect": 0.02124634647999135,
+          "paired_weeks": 164,
+          "weekly_effect": 0.3074186991869919,
+          "approx_interval": [
+            0.17197843049832656,
+            0.4428589678756572
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "ym",
+          "outcome": "next_positive_close"
+        },
+        {
+          "condition": "momentum_20_up",
+          "n": 1304,
+          "condition_n": 850,
+          "comparison_n": 454,
+          "status": "exploratory_candidate",
+          "promoted": false,
+          "condition_rate": 0.5411764705882353,
+          "comparison_rate": 0.5198237885462555,
+          "effect": 0.02135268204197971,
+          "paired_weeks": 61,
+          "weekly_effect": -0.28415300546448086,
+          "approx_interval": [
+            -0.4949865665887775,
+            -0.0733194443401842
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "ym",
+          "outcome": "next_positive_close"
+        },
+        {
+          "condition": "momentum_20_down",
+          "n": 1304,
+          "condition_n": 453,
+          "comparison_n": 851,
+          "status": "exploratory_candidate",
+          "promoted": false,
+          "condition_rate": 0.5209713024282561,
+          "comparison_rate": 0.5405405405405406,
+          "effect": -0.019569238112284504,
+          "paired_weeks": 60,
+          "weekly_effect": 0.3055555555555556,
+          "approx_interval": [
+            0.10645280640270188,
+            0.5046583047084092
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "ym",
+          "outcome": "next_positive_close"
+        },
+        {
+          "condition": "close_near_high",
+          "n": 1304,
+          "condition_n": 361,
+          "comparison_n": 943,
+          "status": "exploratory_candidate",
+          "promoted": false,
+          "condition_rate": 0.5235457063711911,
+          "comparison_rate": 0.5376458112407211,
+          "effect": -0.01410010486952995,
+          "paired_weeks": 227,
+          "weekly_effect": -0.15969162995594713,
+          "approx_interval": [
+            -0.28562437225237375,
+            -0.03375888765952051
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "ym",
+          "outcome": "next_positive_close"
+        },
+        {
+          "condition": "close_near_low",
+          "n": 1304,
+          "condition_n": 261,
+          "comparison_n": 1043,
+          "status": "exploratory_candidate",
+          "promoted": false,
+          "condition_rate": 0.5747126436781609,
+          "comparison_rate": 0.5234899328859061,
+          "effect": 0.05122271079225482,
+          "paired_weeks": 192,
+          "weekly_effect": 0.18055555555555558,
+          "approx_interval": [
+            0.03577374998042468,
+            0.32533736113068645
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "ym",
+          "outcome": "next_positive_close"
+        },
+        {
+          "condition": "inside_day",
+          "n": 1304,
+          "condition_n": 147,
+          "comparison_n": 1157,
+          "status": "inconclusive",
+          "promoted": false,
+          "condition_rate": 0.5306122448979592,
+          "comparison_rate": 0.5341400172860847,
+          "effect": -0.0035277723881255163,
+          "paired_weeks": 131,
+          "weekly_effect": 0.008905852417302818,
+          "approx_interval": [
+            -0.1846382432359901,
+            0.20244994807059574
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "ym",
+          "outcome": "next_positive_close"
+        },
+        {
+          "condition": "outside_day",
+          "n": 1304,
+          "condition_n": 155,
+          "comparison_n": 1149,
+          "status": "inconclusive",
+          "promoted": false,
+          "condition_rate": 0.5741935483870968,
+          "comparison_rate": 0.5282854656222803,
+          "effect": 0.045908082764816505,
+          "paired_weeks": 131,
+          "weekly_effect": 0.0241730279898219,
+          "approx_interval": [
+            -0.1544751876718742,
+            0.20282124365151802
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "ym",
+          "outcome": "next_positive_close"
+        },
+        {
+          "condition": "previous_up",
+          "n": 1304,
+          "condition_n": 697,
+          "comparison_n": 607,
+          "status": "inconclusive",
+          "promoted": false,
+          "condition_rate": 0.4734576757532281,
+          "comparison_rate": 0.5238879736408567,
+          "effect": -0.050430297887628595,
+          "paired_weeks": 274,
+          "weekly_effect": -0.026763990267639905,
+          "approx_interval": [
+            -0.1540655305909614,
+            0.1005375500556816
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "ym",
+          "outcome": "next_range_expansion"
+        },
+        {
+          "condition": "previous_down",
+          "n": 1304,
+          "condition_n": 606,
+          "comparison_n": 698,
+          "status": "inconclusive",
+          "promoted": false,
+          "condition_rate": 0.523102310231023,
+          "comparison_rate": 0.47421203438395415,
+          "effect": 0.0488902758470689,
+          "paired_weeks": 274,
+          "weekly_effect": 0.024939172749391728,
+          "approx_interval": [
+            -0.102671852016395,
+            0.15255019751517845
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "ym",
+          "outcome": "next_range_expansion"
+        },
+        {
+          "condition": "wide_range",
+          "n": 1304,
+          "condition_n": 655,
+          "comparison_n": 649,
+          "status": "exploratory_candidate",
+          "promoted": false,
+          "condition_rate": 0.3236641221374046,
+          "comparison_rate": 0.6718027734976888,
+          "effect": -0.3481386513602842,
+          "paired_weeks": 238,
+          "weekly_effect": -0.532563025210084,
+          "approx_interval": [
+            -0.6163573282543093,
+            -0.4487687221658587
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "ym",
+          "outcome": "next_range_expansion"
+        },
+        {
+          "condition": "narrow_range",
+          "n": 1304,
+          "condition_n": 649,
+          "comparison_n": 655,
+          "status": "exploratory_candidate",
+          "promoted": false,
+          "condition_rate": 0.6718027734976888,
+          "comparison_rate": 0.3236641221374046,
+          "effect": 0.3481386513602842,
+          "paired_weeks": 238,
+          "weekly_effect": 0.532563025210084,
+          "approx_interval": [
+            0.4487687221658587,
+            0.6163573282543093
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "ym",
+          "outcome": "next_range_expansion"
+        },
+        {
+          "condition": "momentum_5_up",
+          "n": 1304,
+          "condition_n": 747,
+          "comparison_n": 557,
+          "status": "inconclusive",
+          "promoted": false,
+          "condition_rate": 0.5087014725568942,
+          "comparison_rate": 0.48114901256732495,
+          "effect": 0.02755245998956929,
+          "paired_weeks": 164,
+          "weekly_effect": 0.07063008130081301,
+          "approx_interval": [
+            -0.08437224794988472,
+            0.22563241055151073
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "ym",
+          "outcome": "next_range_expansion"
+        },
+        {
+          "condition": "momentum_5_down",
+          "n": 1304,
+          "condition_n": 555,
+          "comparison_n": 749,
+          "status": "inconclusive",
+          "promoted": false,
+          "condition_rate": 0.47927927927927927,
+          "comparison_rate": 0.5100133511348465,
+          "effect": -0.030734071855567202,
+          "paired_weeks": 164,
+          "weekly_effect": -0.07571138211382114,
+          "approx_interval": [
+            -0.23172109943572894,
+            0.08029833520808666
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "ym",
+          "outcome": "next_range_expansion"
+        },
+        {
+          "condition": "momentum_20_up",
+          "n": 1304,
+          "condition_n": 850,
+          "comparison_n": 454,
+          "status": "inconclusive",
+          "promoted": false,
+          "condition_rate": 0.5129411764705882,
+          "comparison_rate": 0.4669603524229075,
+          "effect": 0.045980824047680724,
+          "paired_weeks": 61,
+          "weekly_effect": 0.024590163934426222,
+          "approx_interval": [
+            -0.2508643765517321,
+            0.3000447044205845
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "ym",
+          "outcome": "next_range_expansion"
+        },
+        {
+          "condition": "momentum_20_down",
+          "n": 1304,
+          "condition_n": 453,
+          "comparison_n": 851,
+          "status": "inconclusive",
+          "promoted": false,
+          "condition_rate": 0.46578366445916114,
+          "comparison_rate": 0.5135135135135135,
+          "effect": -0.04772984905435235,
+          "paired_weeks": 60,
+          "weekly_effect": -0.033333333333333326,
+          "approx_interval": [
+            -0.31152980350670445,
+            0.2448631368400378
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "ym",
+          "outcome": "next_range_expansion"
+        },
+        {
+          "condition": "close_near_high",
+          "n": 1304,
+          "condition_n": 361,
+          "comparison_n": 943,
+          "status": "exploratory_candidate",
+          "promoted": false,
+          "condition_rate": 0.3656509695290859,
+          "comparison_rate": 0.5471898197242842,
+          "effect": -0.18153885019519828,
+          "paired_weeks": 227,
+          "weekly_effect": -0.21622613803230542,
+          "approx_interval": [
+            -0.34994067153627706,
+            -0.08251160452833381
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "ym",
+          "outcome": "next_range_expansion"
+        },
+        {
+          "condition": "close_near_low",
+          "n": 1304,
+          "condition_n": 261,
+          "comparison_n": 1043,
+          "status": "inconclusive",
+          "promoted": false,
+          "condition_rate": 0.4482758620689655,
+          "comparison_rate": 0.5091083413231065,
+          "effect": -0.060832479254140925,
+          "paired_weeks": 192,
+          "weekly_effect": -0.09548611111111109,
+          "approx_interval": [
+            -0.2551587048122949,
+            0.06418648259007272
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "ym",
+          "outcome": "next_range_expansion"
+        },
+        {
+          "condition": "inside_day",
+          "n": 1304,
+          "condition_n": 147,
+          "comparison_n": 1157,
+          "status": "exploratory_candidate",
+          "promoted": false,
+          "condition_rate": 0.7346938775510204,
+          "comparison_rate": 0.46672428694900603,
+          "effect": 0.2679695906020144,
+          "paired_weeks": 131,
+          "weekly_effect": 0.3384223918575064,
+          "approx_interval": [
+            0.16665614845114193,
+            0.5101886352638708
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "ym",
+          "outcome": "next_range_expansion"
+        },
+        {
+          "condition": "outside_day",
+          "n": 1304,
+          "condition_n": 155,
+          "comparison_n": 1149,
+          "status": "exploratory_candidate",
+          "promoted": false,
+          "condition_rate": 0.3032258064516129,
+          "comparison_rate": 0.5230635335073978,
+          "effect": -0.21983772705578486,
+          "paired_weeks": 131,
+          "weekly_effect": -0.3136132315521628,
+          "approx_interval": [
+            -0.4805004293294597,
+            -0.14672603377486593
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "ym",
+          "outcome": "next_range_expansion"
+        },
+        {
+          "condition": "previous_up",
+          "n": 1304,
+          "condition_n": 654,
+          "comparison_n": 650,
+          "status": "exploratory_candidate",
+          "promoted": false,
+          "condition_rate": 0.48623853211009177,
+          "comparison_rate": 0.5215384615384615,
+          "effect": -0.035299929428369736,
+          "paired_weeks": 288,
+          "weekly_effect": -0.25462962962962965,
+          "approx_interval": [
+            -0.34157501528744283,
+            -0.16768424397181644
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "rty",
+          "outcome": "next_positive_close"
+        },
+        {
+          "condition": "previous_down",
+          "n": 1304,
+          "condition_n": 648,
+          "comparison_n": 656,
+          "status": "exploratory_candidate",
+          "promoted": false,
+          "condition_rate": 0.5200617283950617,
+          "comparison_rate": 0.4878048780487805,
+          "effect": 0.03225685034628123,
+          "paired_weeks": 287,
+          "weekly_effect": 0.25261324041811845,
+          "approx_interval": [
+            0.16562594064074182,
+            0.33960054019549507
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "rty",
+          "outcome": "next_positive_close"
+        },
+        {
+          "condition": "wide_range",
+          "n": 1304,
+          "condition_n": 659,
+          "comparison_n": 645,
+          "status": "inconclusive",
+          "promoted": false,
+          "condition_rate": 0.5128983308042488,
+          "comparison_rate": 0.4945736434108527,
+          "effect": 0.018324687393396155,
+          "paired_weeks": 235,
+          "weekly_effect": 0.10425531914893617,
+          "approx_interval": [
+            -0.02674550304692773,
+            0.23525614134480005
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "rty",
+          "outcome": "next_positive_close"
+        },
+        {
+          "condition": "narrow_range",
+          "n": 1304,
+          "condition_n": 645,
+          "comparison_n": 659,
+          "status": "inconclusive",
+          "promoted": false,
+          "condition_rate": 0.4945736434108527,
+          "comparison_rate": 0.5128983308042488,
+          "effect": -0.018324687393396155,
+          "paired_weeks": 235,
+          "weekly_effect": -0.10425531914893617,
+          "approx_interval": [
+            -0.23525614134480005,
+            0.02674550304692773
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "rty",
+          "outcome": "next_positive_close"
+        },
+        {
+          "condition": "momentum_5_up",
+          "n": 1304,
+          "condition_n": 675,
+          "comparison_n": 629,
+          "status": "exploratory_candidate",
+          "promoted": false,
+          "condition_rate": 0.5037037037037037,
+          "comparison_rate": 0.5039745627980922,
+          "effect": -0.0002708590943885092,
+          "paired_weeks": 163,
+          "weekly_effect": -0.24948875255623723,
+          "approx_interval": [
+            -0.37219131258469706,
+            -0.12678619252777737
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "rty",
+          "outcome": "next_positive_close"
+        },
+        {
+          "condition": "momentum_5_down",
+          "n": 1304,
+          "condition_n": 629,
+          "comparison_n": 675,
+          "status": "exploratory_candidate",
+          "promoted": false,
+          "condition_rate": 0.5039745627980922,
+          "comparison_rate": 0.5037037037037037,
+          "effect": 0.0002708590943885092,
+          "paired_weeks": 163,
+          "weekly_effect": 0.24948875255623723,
+          "approx_interval": [
+            0.12678619252777737,
+            0.37219131258469706
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "rty",
+          "outcome": "next_positive_close"
+        },
+        {
+          "condition": "momentum_20_up",
+          "n": 1304,
+          "condition_n": 758,
+          "comparison_n": 546,
+          "status": "exploratory_candidate",
+          "promoted": false,
+          "condition_rate": 0.5026385224274407,
+          "comparison_rate": 0.5054945054945055,
+          "effect": -0.0028559830670648045,
+          "paired_weeks": 77,
+          "weekly_effect": -0.3235930735930736,
+          "approx_interval": [
+            -0.5105179345343395,
+            -0.1366682126518077
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "rty",
+          "outcome": "next_positive_close"
+        },
+        {
+          "condition": "momentum_20_down",
+          "n": 1304,
+          "condition_n": 545,
+          "comparison_n": 759,
+          "status": "exploratory_candidate",
+          "promoted": false,
+          "condition_rate": 0.5045871559633027,
+          "comparison_rate": 0.5032938076416338,
+          "effect": 0.0012933483216689412,
+          "paired_weeks": 76,
+          "weekly_effect": 0.32346491228070173,
+          "approx_interval": [
+            0.13406471115655338,
+            0.5128651134048501
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "rty",
+          "outcome": "next_positive_close"
+        },
+        {
+          "condition": "close_near_high",
+          "n": 1304,
+          "condition_n": 356,
+          "comparison_n": 948,
+          "status": "exploratory_candidate",
+          "promoted": false,
+          "condition_rate": 0.4943820224719101,
+          "comparison_rate": 0.5073839662447257,
+          "effect": -0.013001943772815605,
+          "paired_weeks": 225,
+          "weekly_effect": -0.15444444444444444,
+          "approx_interval": [
+            -0.27523254672829844,
+            -0.03365634216059041
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "rty",
+          "outcome": "next_positive_close"
+        },
+        {
+          "condition": "close_near_low",
+          "n": 1304,
+          "condition_n": 281,
+          "comparison_n": 1023,
+          "status": "exploratory_candidate",
+          "promoted": false,
+          "condition_rate": 0.5338078291814946,
+          "comparison_rate": 0.49560117302052786,
+          "effect": 0.038206656160966745,
+          "paired_weeks": 198,
+          "weekly_effect": 0.16540404040404041,
+          "approx_interval": [
+            0.02875480700271238,
+            0.30205327380536845
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "rty",
+          "outcome": "next_positive_close"
+        },
+        {
+          "condition": "inside_day",
+          "n": 1304,
+          "condition_n": 154,
+          "comparison_n": 1150,
+          "status": "inconclusive",
+          "promoted": false,
+          "condition_rate": 0.512987012987013,
+          "comparison_rate": 0.5026086956521739,
+          "effect": 0.010378317334839071,
+          "paired_weeks": 132,
+          "weekly_effect": 0.0258838383838384,
+          "approx_interval": [
+            -0.14211969613720957,
+            0.19388737290488636
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "rty",
+          "outcome": "next_positive_close"
+        },
+        {
+          "condition": "outside_day",
+          "n": 1304,
+          "condition_n": 133,
+          "comparison_n": 1171,
+          "status": "inconclusive",
+          "promoted": false,
+          "condition_rate": 0.518796992481203,
+          "comparison_rate": 0.502134927412468,
+          "effect": 0.01666206506873502,
+          "paired_weeks": 124,
+          "weekly_effect": 0.01344086021505378,
+          "approx_interval": [
+            -0.16395461773009856,
+            0.19083633816020612
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "rty",
+          "outcome": "next_positive_close"
+        },
+        {
+          "condition": "previous_up",
+          "n": 1304,
+          "condition_n": 654,
+          "comparison_n": 650,
+          "status": "inconclusive",
+          "promoted": false,
+          "condition_rate": 0.45565749235474007,
+          "comparison_rate": 0.4846153846153846,
+          "effect": -0.028957892260644547,
+          "paired_weeks": 288,
+          "weekly_effect": -0.020543981481481483,
+          "approx_interval": [
+            -0.14280552683962083,
+            0.10171756387665787
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "rty",
+          "outcome": "next_range_expansion"
+        },
+        {
+          "condition": "previous_down",
+          "n": 1304,
+          "condition_n": 648,
+          "comparison_n": 656,
+          "status": "inconclusive",
+          "promoted": false,
+          "condition_rate": 0.4845679012345679,
+          "comparison_rate": 0.4557926829268293,
+          "effect": 0.028775218307738604,
+          "paired_weeks": 287,
+          "weekly_effect": 0.019454123112659698,
+          "approx_interval": [
+            -0.10331626898210933,
+            0.1422245152074287
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "rty",
+          "outcome": "next_range_expansion"
+        },
+        {
+          "condition": "wide_range",
+          "n": 1304,
+          "condition_n": 659,
+          "comparison_n": 645,
+          "status": "exploratory_candidate",
+          "promoted": false,
+          "condition_rate": 0.2928679817905918,
+          "comparison_rate": 0.6511627906976745,
+          "effect": -0.35829480890708265,
+          "paired_weeks": 235,
+          "weekly_effect": -0.550354609929078,
+          "approx_interval": [
+            -0.6381809851711147,
+            -0.4625282346870414
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "rty",
+          "outcome": "next_range_expansion"
+        },
+        {
+          "condition": "narrow_range",
+          "n": 1304,
+          "condition_n": 645,
+          "comparison_n": 659,
+          "status": "exploratory_candidate",
+          "promoted": false,
+          "condition_rate": 0.6511627906976745,
+          "comparison_rate": 0.2928679817905918,
+          "effect": 0.35829480890708265,
+          "paired_weeks": 235,
+          "weekly_effect": 0.550354609929078,
+          "approx_interval": [
+            0.4625282346870414,
+            0.6381809851711147
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "rty",
+          "outcome": "next_range_expansion"
+        },
+        {
+          "condition": "momentum_5_up",
+          "n": 1304,
+          "condition_n": 675,
+          "comparison_n": 629,
+          "status": "inconclusive",
+          "promoted": false,
+          "condition_rate": 0.4888888888888889,
+          "comparison_rate": 0.44992050874403816,
+          "effect": 0.03896838014485071,
+          "paired_weeks": 163,
+          "weekly_effect": 0.0950920245398773,
+          "approx_interval": [
+            -0.06178978090806023,
+            0.2519738299878148
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "rty",
+          "outcome": "next_range_expansion"
+        },
+        {
+          "condition": "momentum_5_down",
+          "n": 1304,
+          "condition_n": 629,
+          "comparison_n": 675,
+          "status": "inconclusive",
+          "promoted": false,
+          "condition_rate": 0.44992050874403816,
+          "comparison_rate": 0.4888888888888889,
+          "effect": -0.03896838014485071,
+          "paired_weeks": 163,
+          "weekly_effect": -0.0950920245398773,
+          "approx_interval": [
+            -0.2519738299878148,
+            0.06178978090806023
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "rty",
+          "outcome": "next_range_expansion"
+        },
+        {
+          "condition": "momentum_20_up",
+          "n": 1304,
+          "condition_n": 758,
+          "comparison_n": 546,
+          "status": "inconclusive",
+          "promoted": false,
+          "condition_rate": 0.47757255936675463,
+          "comparison_rate": 0.4597069597069597,
+          "effect": 0.01786559965979495,
+          "paired_weeks": 77,
+          "weekly_effect": -0.016233766233766236,
+          "approx_interval": [
+            -0.26016705057124173,
+            0.22769951810370928
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "rty",
+          "outcome": "next_range_expansion"
+        },
+        {
+          "condition": "momentum_20_down",
+          "n": 1304,
+          "condition_n": 545,
+          "comparison_n": 759,
+          "status": "inconclusive",
+          "promoted": false,
+          "condition_rate": 0.46055045871559636,
+          "comparison_rate": 0.4769433465085639,
+          "effect": -0.016392887792967548,
+          "paired_weeks": 76,
+          "weekly_effect": 0.02960526315789474,
+          "approx_interval": [
+            -0.21255637925903334,
+            0.2717669055748228
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "rty",
+          "outcome": "next_range_expansion"
+        },
+        {
+          "condition": "close_near_high",
+          "n": 1304,
+          "condition_n": 356,
+          "comparison_n": 948,
+          "status": "exploratory_candidate",
+          "promoted": false,
+          "condition_rate": 0.37640449438202245,
+          "comparison_rate": 0.5052742616033755,
+          "effect": -0.12886976722135307,
+          "paired_weeks": 225,
+          "weekly_effect": -0.14185185185185184,
+          "approx_interval": [
+            -0.27913611084339446,
+            -0.004567592860309222
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "rty",
+          "outcome": "next_range_expansion"
+        },
+        {
+          "condition": "close_near_low",
+          "n": 1304,
+          "condition_n": 281,
+          "comparison_n": 1023,
+          "status": "inconclusive",
+          "promoted": false,
+          "condition_rate": 0.4306049822064057,
+          "comparison_rate": 0.4809384164222874,
+          "effect": -0.05033343421588171,
+          "paired_weeks": 198,
+          "weekly_effect": -0.09175084175084174,
+          "approx_interval": [
+            -0.24209172747583035,
+            0.058590043974146896
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "rty",
+          "outcome": "next_range_expansion"
+        },
+        {
+          "condition": "inside_day",
+          "n": 1304,
+          "condition_n": 154,
+          "comparison_n": 1150,
+          "status": "exploratory_candidate",
+          "promoted": false,
+          "condition_rate": 0.6753246753246753,
+          "comparison_rate": 0.4426086956521739,
+          "effect": 0.2327159796725014,
+          "paired_weeks": 132,
+          "weekly_effect": 0.29103535353535354,
+          "approx_interval": [
+            0.12935537132426542,
+            0.4527153357464416
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "rty",
+          "outcome": "next_range_expansion"
+        },
+        {
+          "condition": "outside_day",
+          "n": 1304,
+          "condition_n": 133,
+          "comparison_n": 1171,
+          "status": "exploratory_candidate",
+          "promoted": false,
+          "condition_rate": 0.2781954887218045,
+          "comparison_rate": 0.4918872758326217,
+          "effect": -0.2136917871108172,
+          "paired_weeks": 124,
+          "weekly_effect": -0.293010752688172,
+          "approx_interval": [
+            -0.4569249063193737,
+            -0.1290965990569703
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "rty",
+          "outcome": "next_range_expansion"
+        },
+        {
+          "condition": "previous_up",
+          "n": 1295,
+          "condition_n": 703,
+          "comparison_n": 592,
+          "status": "exploratory_candidate",
+          "promoted": false,
+          "condition_rate": 0.5163584637268848,
+          "comparison_rate": 0.5726351351351351,
+          "effect": -0.05627667140825032,
+          "paired_weeks": 273,
+          "weekly_effect": -0.26556776556776557,
+          "approx_interval": [
+            -0.3627800634629585,
+            -0.16835546767257265
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "gold",
+          "outcome": "next_positive_close"
+        },
+        {
+          "condition": "previous_down",
+          "n": 1295,
+          "condition_n": 586,
+          "comparison_n": 709,
+          "status": "exploratory_candidate",
+          "promoted": false,
+          "condition_rate": 0.5784982935153583,
+          "comparison_rate": 0.5119887165021156,
+          "effect": 0.06650957701324267,
+          "paired_weeks": 273,
+          "weekly_effect": 0.2716727716727717,
+          "approx_interval": [
+            0.17477489623765596,
+            0.36857064710788745
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "gold",
+          "outcome": "next_positive_close"
+        },
+        {
+          "condition": "wide_range",
+          "n": 1295,
+          "condition_n": 641,
+          "comparison_n": 654,
+          "status": "inconclusive",
+          "promoted": false,
+          "condition_rate": 0.5616224648985959,
+          "comparison_rate": 0.5229357798165137,
+          "effect": 0.03868668508208217,
+          "paired_weeks": 254,
+          "weekly_effect": 0.047900262467191604,
+          "approx_interval": [
+            -0.07982370612759675,
+            0.17562423106197994
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "gold",
+          "outcome": "next_positive_close"
+        },
+        {
+          "condition": "narrow_range",
+          "n": 1295,
+          "condition_n": 654,
+          "comparison_n": 641,
+          "status": "inconclusive",
+          "promoted": false,
+          "condition_rate": 0.5229357798165137,
+          "comparison_rate": 0.5616224648985959,
+          "effect": -0.03868668508208217,
+          "paired_weeks": 254,
+          "weekly_effect": -0.047900262467191604,
+          "approx_interval": [
+            -0.17562423106197994,
+            0.07982370612759675
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "gold",
+          "outcome": "next_positive_close"
+        },
+        {
+          "condition": "momentum_5_up",
+          "n": 1295,
+          "condition_n": 738,
+          "comparison_n": 557,
+          "status": "exploratory_candidate",
+          "promoted": false,
+          "condition_rate": 0.5338753387533876,
+          "comparison_rate": 0.5529622980251346,
+          "effect": -0.019086959271747084,
+          "paired_weeks": 149,
+          "weekly_effect": -0.32997762863534674,
+          "approx_interval": [
+            -0.46550537032732164,
+            -0.19444988694337187
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "gold",
+          "outcome": "next_positive_close"
+        },
+        {
+          "condition": "momentum_5_down",
+          "n": 1295,
+          "condition_n": 555,
+          "comparison_n": 740,
+          "status": "exploratory_candidate",
+          "promoted": false,
+          "condition_rate": 0.5531531531531532,
+          "comparison_rate": 0.5337837837837838,
+          "effect": 0.019369369369369394,
+          "paired_weeks": 148,
+          "weekly_effect": 0.32882882882882886,
+          "approx_interval": [
+            0.1924476299200638,
+            0.4652100277375939
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "gold",
+          "outcome": "next_positive_close"
+        },
+        {
+          "condition": "momentum_20_up",
+          "n": 1295,
+          "condition_n": 770,
+          "comparison_n": 525,
+          "status": "exploratory_candidate",
+          "promoted": false,
+          "condition_rate": 0.535064935064935,
+          "comparison_rate": 0.5523809523809524,
+          "effect": -0.017316017316017396,
+          "paired_weeks": 83,
+          "weekly_effect": -0.29518072289156627,
+          "approx_interval": [
+            -0.5150437129870835,
+            -0.07531773279604906
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "gold",
+          "outcome": "next_positive_close"
+        },
+        {
+          "condition": "momentum_20_down",
+          "n": 1295,
+          "condition_n": 525,
+          "comparison_n": 770,
+          "status": "exploratory_candidate",
+          "promoted": false,
+          "condition_rate": 0.5523809523809524,
+          "comparison_rate": 0.535064935064935,
+          "effect": 0.017316017316017396,
+          "paired_weeks": 83,
+          "weekly_effect": 0.29518072289156627,
+          "approx_interval": [
+            0.07531773279604906,
+            0.5150437129870835
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "gold",
+          "outcome": "next_positive_close"
+        },
+        {
+          "condition": "close_near_high",
+          "n": 1295,
+          "condition_n": 277,
+          "comparison_n": 1018,
+          "status": "inconclusive",
+          "promoted": false,
+          "condition_rate": 0.5342960288808665,
+          "comparison_rate": 0.5442043222003929,
+          "effect": -0.009908293319526473,
+          "paired_weeks": 194,
+          "weekly_effect": -0.11125429553264603,
+          "approx_interval": [
+            -0.25049998243952915,
+            0.027991391374237076
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "gold",
+          "outcome": "next_positive_close"
+        },
+        {
+          "condition": "close_near_low",
+          "n": 1295,
+          "condition_n": 196,
+          "comparison_n": 1099,
+          "status": "exploratory_candidate",
+          "promoted": false,
+          "condition_rate": 0.6224489795918368,
+          "comparison_rate": 0.5277525022747953,
+          "effect": 0.09469647731704145,
+          "paired_weeks": 151,
+          "weekly_effect": 0.22958057395143489,
+          "approx_interval": [
+            0.07126684171204462,
+            0.38789430619082516
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "gold",
+          "outcome": "next_positive_close"
+        },
+        {
+          "condition": "inside_day",
+          "n": 1295,
+          "condition_n": 160,
+          "comparison_n": 1135,
+          "status": "inconclusive",
+          "promoted": false,
+          "condition_rate": 0.5375,
+          "comparison_rate": 0.5427312775330396,
+          "effect": -0.005231277533039647,
+          "paired_weeks": 140,
+          "weekly_effect": 0.0273809523809524,
+          "approx_interval": [
+            -0.15127349602744164,
+            0.20603540078934643
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "gold",
+          "outcome": "next_positive_close"
+        },
+        {
+          "condition": "outside_day",
+          "n": 1295,
+          "condition_n": 136,
+          "comparison_n": 1159,
+          "status": "inconclusive",
+          "promoted": false,
+          "condition_rate": 0.5073529411764706,
+          "comparison_rate": 0.546160483175151,
+          "effect": -0.03880754199868042,
+          "paired_weeks": 125,
+          "weekly_effect": -0.05533333333333331,
+          "approx_interval": [
+            -0.2513658822802214,
+            0.14069921561355478
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "gold",
+          "outcome": "next_positive_close"
+        },
+        {
+          "condition": "previous_up",
+          "n": 1295,
+          "condition_n": 703,
+          "comparison_n": 592,
+          "status": "inconclusive",
+          "promoted": false,
+          "condition_rate": 0.5078236130867709,
+          "comparison_rate": 0.46452702702702703,
+          "effect": 0.0432965860597439,
+          "paired_weeks": 273,
+          "weekly_effect": 0.036019536019536016,
+          "approx_interval": [
+            -0.09167720443835696,
+            0.16371627647742898
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "gold",
+          "outcome": "next_range_expansion"
+        },
+        {
+          "condition": "previous_down",
+          "n": 1295,
+          "condition_n": 586,
+          "comparison_n": 709,
+          "status": "inconclusive",
+          "promoted": false,
+          "condition_rate": 0.46075085324232085,
+          "comparison_rate": 0.5105782792665726,
+          "effect": -0.049827426024251775,
+          "paired_weeks": 273,
+          "weekly_effect": -0.04273504273504273,
+          "approx_interval": [
+            -0.17066210742543908,
+            0.08519202195535364
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "gold",
+          "outcome": "next_range_expansion"
+        },
+        {
+          "condition": "wide_range",
+          "n": 1295,
+          "condition_n": 641,
+          "comparison_n": 654,
+          "status": "exploratory_candidate",
+          "promoted": false,
+          "condition_rate": 0.25585023400936036,
+          "comparison_rate": 0.7155963302752294,
+          "effect": -0.45974609626586904,
+          "paired_weeks": 254,
+          "weekly_effect": -0.6131889763779528,
+          "approx_interval": [
+            -0.6896837852206893,
+            -0.5366941675352163
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "gold",
+          "outcome": "next_range_expansion"
+        },
+        {
+          "condition": "narrow_range",
+          "n": 1295,
+          "condition_n": 654,
+          "comparison_n": 641,
+          "status": "exploratory_candidate",
+          "promoted": false,
+          "condition_rate": 0.7155963302752294,
+          "comparison_rate": 0.25585023400936036,
+          "effect": 0.45974609626586904,
+          "paired_weeks": 254,
+          "weekly_effect": 0.6131889763779528,
+          "approx_interval": [
+            0.5366941675352163,
+            0.6896837852206893
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "gold",
+          "outcome": "next_range_expansion"
+        },
+        {
+          "condition": "momentum_5_up",
+          "n": 1295,
+          "condition_n": 738,
+          "comparison_n": 557,
+          "status": "inconclusive",
+          "promoted": false,
+          "condition_rate": 0.508130081300813,
+          "comparison_rate": 0.4614003590664273,
+          "effect": 0.04672972223438576,
+          "paired_weeks": 149,
+          "weekly_effect": 0.05313199105145414,
+          "approx_interval": [
+            -0.11901257246418931,
+            0.22527655456709758
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "gold",
+          "outcome": "next_range_expansion"
+        },
+        {
+          "condition": "momentum_5_down",
+          "n": 1295,
+          "condition_n": 555,
+          "comparison_n": 740,
+          "status": "inconclusive",
+          "promoted": false,
+          "condition_rate": 0.46306306306306305,
+          "comparison_rate": 0.5067567567567568,
+          "effect": -0.04369369369369375,
+          "paired_weeks": 148,
+          "weekly_effect": -0.045608108108108114,
+          "approx_interval": [
+            -0.21867692829082475,
+            0.12746071207460852
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "gold",
+          "outcome": "next_range_expansion"
+        },
+        {
+          "condition": "momentum_20_up",
+          "n": 1295,
+          "condition_n": 770,
+          "comparison_n": 525,
+          "status": "inconclusive",
+          "promoted": false,
+          "condition_rate": 0.4935064935064935,
+          "comparison_rate": 0.48,
+          "effect": 0.013506493506493522,
+          "paired_weeks": 83,
+          "weekly_effect": 0.04518072289156626,
+          "approx_interval": [
+            -0.18941319324537326,
+            0.27977463902850574
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "gold",
+          "outcome": "next_range_expansion"
+        },
+        {
+          "condition": "momentum_20_down",
+          "n": 1295,
+          "condition_n": 525,
+          "comparison_n": 770,
+          "status": "inconclusive",
+          "promoted": false,
+          "condition_rate": 0.48,
+          "comparison_rate": 0.4935064935064935,
+          "effect": -0.013506493506493522,
+          "paired_weeks": 83,
+          "weekly_effect": -0.04518072289156626,
+          "approx_interval": [
+            -0.27977463902850574,
+            0.18941319324537326
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "gold",
+          "outcome": "next_range_expansion"
+        },
+        {
+          "condition": "close_near_high",
+          "n": 1295,
+          "condition_n": 277,
+          "comparison_n": 1018,
+          "status": "exploratory_candidate",
+          "promoted": false,
+          "condition_rate": 0.37184115523465705,
+          "comparison_rate": 0.5196463654223968,
+          "effect": -0.1478052101877398,
+          "paired_weeks": 194,
+          "weekly_effect": -0.18943298969072164,
+          "approx_interval": [
+            -0.3389511540056647,
+            -0.03991482537577856
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "gold",
+          "outcome": "next_range_expansion"
+        },
+        {
+          "condition": "close_near_low",
+          "n": 1295,
+          "condition_n": 196,
+          "comparison_n": 1099,
+          "status": "exploratory_candidate",
+          "promoted": false,
+          "condition_rate": 0.336734693877551,
+          "comparison_rate": 0.5150136487716106,
+          "effect": -0.1782789548940596,
+          "paired_weeks": 151,
+          "weekly_effect": -0.21688741721854302,
+          "approx_interval": [
+            -0.3887987641494483,
+            -0.044976070287637726
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "gold",
+          "outcome": "next_range_expansion"
+        },
+        {
+          "condition": "inside_day",
+          "n": 1295,
+          "condition_n": 160,
+          "comparison_n": 1135,
+          "status": "exploratory_candidate",
+          "promoted": false,
+          "condition_rate": 0.75625,
+          "comparison_rate": 0.4502202643171806,
+          "effect": 0.3060297356828194,
+          "paired_weeks": 140,
+          "weekly_effect": 0.3922619047619048,
+          "approx_interval": [
+            0.23938635472007377,
+            0.5451374548037359
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "gold",
+          "outcome": "next_range_expansion"
+        },
+        {
+          "condition": "outside_day",
+          "n": 1295,
+          "condition_n": 136,
+          "comparison_n": 1159,
+          "status": "exploratory_candidate",
+          "promoted": false,
+          "condition_rate": 0.22794117647058823,
+          "comparison_rate": 0.5185504745470233,
+          "effect": -0.2906092980764351,
+          "paired_weeks": 125,
+          "weekly_effect": -0.38799999999999996,
+          "approx_interval": [
+            -0.5433292669544717,
+            -0.23267073304552824
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "gold",
+          "outcome": "next_range_expansion"
+        },
+        {
+          "condition": "previous_up",
+          "n": 1298,
+          "condition_n": 698,
+          "comparison_n": 600,
+          "status": "exploratory_candidate",
+          "promoted": false,
+          "condition_rate": 0.5458452722063037,
+          "comparison_rate": 0.5316666666666666,
+          "effect": 0.014178605539637124,
+          "paired_weeks": 272,
+          "weekly_effect": -0.21507352941176472,
+          "approx_interval": [
+            -0.30682229976549213,
+            -0.12332475905803733
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "cl",
+          "outcome": "next_positive_close"
+        },
+        {
+          "condition": "previous_down",
+          "n": 1298,
+          "condition_n": 595,
+          "comparison_n": 703,
+          "status": "exploratory_candidate",
+          "promoted": false,
+          "condition_rate": 0.5327731092436975,
+          "comparison_rate": 0.5448079658605974,
+          "effect": -0.012034856616899958,
+          "paired_weeks": 270,
+          "weekly_effect": 0.2154320987654321,
+          "approx_interval": [
+            0.12383861716432674,
+            0.30702558036653743
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "cl",
+          "outcome": "next_positive_close"
+        },
+        {
+          "condition": "wide_range",
+          "n": 1298,
+          "condition_n": 647,
+          "comparison_n": 651,
+          "status": "inconclusive",
+          "promoted": false,
+          "condition_rate": 0.5394126738794436,
+          "comparison_rate": 0.5391705069124424,
+          "effect": 0.00024216696700118945,
+          "paired_weeks": 243,
+          "weekly_effect": 0.11625514403292181,
+          "approx_interval": [
+            -0.00433467865908535,
+            0.23684496672492897
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "cl",
+          "outcome": "next_positive_close"
+        },
+        {
+          "condition": "narrow_range",
+          "n": 1298,
+          "condition_n": 651,
+          "comparison_n": 647,
+          "status": "inconclusive",
+          "promoted": false,
+          "condition_rate": 0.5391705069124424,
+          "comparison_rate": 0.5394126738794436,
+          "effect": -0.00024216696700118945,
+          "paired_weeks": 243,
+          "weekly_effect": -0.11625514403292181,
+          "approx_interval": [
+            -0.23684496672492897,
+            0.00433467865908535
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "cl",
+          "outcome": "next_positive_close"
+        },
+        {
+          "condition": "momentum_5_up",
+          "n": 1298,
+          "condition_n": 698,
+          "comparison_n": 600,
+          "status": "exploratory_candidate",
+          "promoted": false,
+          "condition_rate": 0.5257879656160458,
+          "comparison_rate": 0.555,
+          "effect": -0.029212034383954255,
+          "paired_weeks": 172,
+          "weekly_effect": -0.3280038759689923,
+          "approx_interval": [
+            -0.4556936087365733,
+            -0.2003141432014113
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "cl",
+          "outcome": "next_positive_close"
+        },
+        {
+          "condition": "momentum_5_down",
+          "n": 1298,
+          "condition_n": 599,
+          "comparison_n": 699,
+          "status": "exploratory_candidate",
+          "promoted": false,
+          "condition_rate": 0.5559265442404007,
+          "comparison_rate": 0.525035765379113,
+          "effect": 0.03089077886128766,
+          "paired_weeks": 172,
+          "weekly_effect": 0.3280038759689923,
+          "approx_interval": [
+            0.2003141432014113,
+            0.4556936087365733
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "cl",
+          "outcome": "next_positive_close"
+        },
+        {
+          "condition": "momentum_20_up",
+          "n": 1298,
+          "condition_n": 670,
+          "comparison_n": 628,
+          "status": "exploratory_candidate",
+          "promoted": false,
+          "condition_rate": 0.564179104477612,
+          "comparison_rate": 0.5127388535031847,
+          "effect": 0.05144025097442728,
+          "paired_weeks": 61,
+          "weekly_effect": -0.27049180327868855,
+          "approx_interval": [
+            -0.4939426874136067,
+            -0.0470409191437704
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "cl",
+          "outcome": "next_positive_close"
+        },
+        {
+          "condition": "momentum_20_down",
+          "n": 1298,
+          "condition_n": 628,
+          "comparison_n": 670,
+          "status": "exploratory_candidate",
+          "promoted": false,
+          "condition_rate": 0.5127388535031847,
+          "comparison_rate": 0.564179104477612,
+          "effect": -0.05144025097442728,
+          "paired_weeks": 61,
+          "weekly_effect": 0.27049180327868855,
+          "approx_interval": [
+            0.0470409191437704,
+            0.4939426874136067
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "cl",
+          "outcome": "next_positive_close"
+        },
+        {
+          "condition": "close_near_high",
+          "n": 1298,
+          "condition_n": 301,
+          "comparison_n": 997,
+          "status": "exploratory_candidate",
+          "promoted": false,
+          "condition_rate": 0.5016611295681063,
+          "comparison_rate": 0.5506519558676028,
+          "effect": -0.04899082629949658,
+          "paired_weeks": 209,
+          "weekly_effect": -0.15749601275917063,
+          "approx_interval": [
+            -0.2864867552209776,
+            -0.02850527029736366
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "cl",
+          "outcome": "next_positive_close"
+        },
+        {
+          "condition": "close_near_low",
+          "n": 1298,
+          "condition_n": 264,
+          "comparison_n": 1034,
+          "status": "inconclusive",
+          "promoted": false,
+          "condition_rate": 0.5303030303030303,
+          "comparison_rate": 0.5415860735009671,
+          "effect": -0.011283043197936826,
+          "paired_weeks": 185,
+          "weekly_effect": 0.11981981981981983,
+          "approx_interval": [
+            -0.019040332104015387,
+            0.25867997174365503
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "cl",
+          "outcome": "next_positive_close"
+        },
+        {
+          "condition": "inside_day",
+          "n": 1298,
+          "condition_n": 147,
+          "comparison_n": 1151,
+          "status": "inconclusive",
+          "promoted": false,
+          "condition_rate": 0.5374149659863946,
+          "comparison_rate": 0.5395308427454387,
+          "effect": -0.002115876759044122,
+          "paired_weeks": 126,
+          "weekly_effect": -0.0033068783068782876,
+          "approx_interval": [
+            -0.17951845836012845,
+            0.17290470174637187
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "cl",
+          "outcome": "next_positive_close"
+        },
+        {
+          "condition": "outside_day",
+          "n": 1298,
+          "condition_n": 134,
+          "comparison_n": 1164,
+          "status": "inconclusive",
+          "promoted": false,
+          "condition_rate": 0.6044776119402985,
+          "comparison_rate": 0.531786941580756,
+          "effect": 0.07269067035954246,
+          "paired_weeks": 121,
+          "weekly_effect": 0.1019283746556474,
+          "approx_interval": [
+            -0.08298289922735176,
+            0.2868396485386466
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "cl",
+          "outcome": "next_positive_close"
+        },
+        {
+          "condition": "previous_up",
+          "n": 1298,
+          "condition_n": 698,
+          "comparison_n": 600,
+          "status": "inconclusive",
+          "promoted": false,
+          "condition_rate": 0.48424068767908307,
+          "comparison_rate": 0.4866666666666667,
+          "effect": -0.0024259789875836213,
+          "paired_weeks": 272,
+          "weekly_effect": -0.023284313725490197,
+          "approx_interval": [
+            -0.15411818962170032,
+            0.10754956217071993
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "cl",
+          "outcome": "next_range_expansion"
+        },
+        {
+          "condition": "previous_down",
+          "n": 1298,
+          "condition_n": 595,
+          "comparison_n": 703,
+          "status": "inconclusive",
+          "promoted": false,
+          "condition_rate": 0.4857142857142857,
+          "comparison_rate": 0.4850640113798009,
+          "effect": 0.000650274334484835,
+          "paired_weeks": 270,
+          "weekly_effect": 0.020370370370370372,
+          "approx_interval": [
+            -0.1107803274934305,
+            0.15152106823417125
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "cl",
+          "outcome": "next_range_expansion"
+        },
+        {
+          "condition": "wide_range",
+          "n": 1298,
+          "condition_n": 647,
+          "comparison_n": 651,
+          "status": "exploratory_candidate",
+          "promoted": false,
+          "condition_rate": 0.2874806800618238,
+          "comparison_rate": 0.6820276497695853,
+          "effect": -0.3945469697077615,
+          "paired_weeks": 243,
+          "weekly_effect": -0.5925925925925926,
+          "approx_interval": [
+            -0.6775383165471348,
+            -0.5076468686380503
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "cl",
+          "outcome": "next_range_expansion"
+        },
+        {
+          "condition": "narrow_range",
+          "n": 1298,
+          "condition_n": 651,
+          "comparison_n": 647,
+          "status": "exploratory_candidate",
+          "promoted": false,
+          "condition_rate": 0.6820276497695853,
+          "comparison_rate": 0.2874806800618238,
+          "effect": 0.3945469697077615,
+          "paired_weeks": 243,
+          "weekly_effect": 0.5925925925925926,
+          "approx_interval": [
+            0.5076468686380503,
+            0.6775383165471348
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "cl",
+          "outcome": "next_range_expansion"
+        },
+        {
+          "condition": "momentum_5_up",
+          "n": 1298,
+          "condition_n": 698,
+          "comparison_n": 600,
+          "status": "inconclusive",
+          "promoted": false,
+          "condition_rate": 0.501432664756447,
+          "comparison_rate": 0.4666666666666667,
+          "effect": 0.034765998089780314,
+          "paired_weeks": 172,
+          "weekly_effect": 0.06734496124031009,
+          "approx_interval": [
+            -0.09277515646766107,
+            0.22746507894828125
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "cl",
+          "outcome": "next_range_expansion"
+        },
+        {
+          "condition": "momentum_5_down",
+          "n": 1298,
+          "condition_n": 599,
+          "comparison_n": 699,
+          "status": "inconclusive",
+          "promoted": false,
+          "condition_rate": 0.4657762938230384,
+          "comparison_rate": 0.5021459227467812,
+          "effect": -0.036369628923742736,
+          "paired_weeks": 172,
+          "weekly_effect": -0.07122093023255814,
+          "approx_interval": [
+            -0.23057918625022605,
+            0.08813732578510976
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "cl",
+          "outcome": "next_range_expansion"
+        },
+        {
+          "condition": "momentum_20_up",
+          "n": 1298,
+          "condition_n": 670,
+          "comparison_n": 628,
+          "status": "inconclusive",
+          "promoted": false,
+          "condition_rate": 0.4955223880597015,
+          "comparison_rate": 0.4745222929936306,
+          "effect": 0.021000095066070923,
+          "paired_weeks": 61,
+          "weekly_effect": -0.016393442622950817,
+          "approx_interval": [
+            -0.29134003510796297,
+            0.2585531498620613
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "cl",
+          "outcome": "next_range_expansion"
+        },
+        {
+          "condition": "momentum_20_down",
+          "n": 1298,
+          "condition_n": 628,
+          "comparison_n": 670,
+          "status": "inconclusive",
+          "promoted": false,
+          "condition_rate": 0.4745222929936306,
+          "comparison_rate": 0.4955223880597015,
+          "effect": -0.021000095066070923,
+          "paired_weeks": 61,
+          "weekly_effect": 0.016393442622950817,
+          "approx_interval": [
+            -0.2585531498620613,
+            0.29134003510796297
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "cl",
+          "outcome": "next_range_expansion"
+        },
+        {
+          "condition": "close_near_high",
+          "n": 1298,
+          "condition_n": 301,
+          "comparison_n": 997,
+          "status": "exploratory_candidate",
+          "promoted": false,
+          "condition_rate": 0.38205980066445183,
+          "comparison_rate": 0.5165496489468405,
+          "effect": -0.1344898482823887,
+          "paired_weeks": 209,
+          "weekly_effect": -0.182615629984051,
+          "approx_interval": [
+            -0.319193837482047,
+            -0.046037422486055024
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "cl",
+          "outcome": "next_range_expansion"
+        },
+        {
+          "condition": "close_near_low",
+          "n": 1298,
+          "condition_n": 264,
+          "comparison_n": 1034,
+          "status": "inconclusive",
+          "promoted": false,
+          "condition_rate": 0.4053030303030303,
+          "comparison_rate": 0.5058027079303675,
+          "effect": -0.10049967762733725,
+          "paired_weeks": 185,
+          "weekly_effect": -0.10315315315315314,
+          "approx_interval": [
+            -0.2580887941873988,
+            0.05178248788109248
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "cl",
+          "outcome": "next_range_expansion"
+        },
+        {
+          "condition": "inside_day",
+          "n": 1298,
+          "condition_n": 147,
+          "comparison_n": 1151,
+          "status": "exploratory_candidate",
+          "promoted": false,
+          "condition_rate": 0.7891156462585034,
+          "comparison_rate": 0.4465682015638575,
+          "effect": 0.3425474446946459,
+          "paired_weeks": 126,
+          "weekly_effect": 0.43518518518518523,
+          "approx_interval": [
+            0.2866985773995743,
+            0.5836717929707962
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "cl",
+          "outcome": "next_range_expansion"
+        },
+        {
+          "condition": "outside_day",
+          "n": 1298,
+          "condition_n": 134,
+          "comparison_n": 1164,
+          "status": "exploratory_candidate",
+          "promoted": false,
+          "condition_rate": 0.22388059701492538,
+          "comparison_rate": 0.5154639175257731,
+          "effect": -0.2915833205108478,
+          "paired_weeks": 121,
+          "weekly_effect": -0.34848484848484845,
+          "approx_interval": [
+            -0.5219900465845198,
+            -0.1749796503851772
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "cl",
+          "outcome": "next_range_expansion"
+        },
+        {
+          "condition": "previous_up",
+          "n": 1303,
+          "condition_n": 640,
+          "comparison_n": 663,
+          "status": "exploratory_candidate",
+          "promoted": false,
+          "condition_rate": 0.4875,
+          "comparison_rate": 0.4947209653092006,
+          "effect": -0.007220965309200633,
+          "paired_weeks": 277,
+          "weekly_effect": -0.2325511432009627,
+          "approx_interval": [
+            -0.3330009510032776,
+            -0.13210133539864782
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "6e",
+          "outcome": "next_positive_close"
+        },
+        {
+          "condition": "previous_down",
+          "n": 1303,
+          "condition_n": 657,
+          "comparison_n": 646,
+          "status": "exploratory_candidate",
+          "promoted": false,
+          "condition_rate": 0.4961948249619482,
+          "comparison_rate": 0.48606811145510836,
+          "effect": 0.010126713506839857,
+          "paired_weeks": 279,
+          "weekly_effect": 0.23237753882915174,
+          "approx_interval": [
+            0.13214353965115383,
+            0.33261153800714965
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "6e",
+          "outcome": "next_positive_close"
+        },
+        {
+          "condition": "wide_range",
+          "n": 1303,
+          "condition_n": 657,
+          "comparison_n": 646,
+          "status": "inconclusive",
+          "promoted": false,
+          "condition_rate": 0.4916286149162861,
+          "comparison_rate": 0.4907120743034056,
+          "effect": 0.0009165406128805453,
+          "paired_weeks": 257,
+          "weekly_effect": -0.008754863813229572,
+          "approx_interval": [
+            -0.12574907659363382,
+            0.10823934896717467
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "6e",
+          "outcome": "next_positive_close"
+        },
+        {
+          "condition": "narrow_range",
+          "n": 1303,
+          "condition_n": 646,
+          "comparison_n": 657,
+          "status": "inconclusive",
+          "promoted": false,
+          "condition_rate": 0.4907120743034056,
+          "comparison_rate": 0.4916286149162861,
+          "effect": -0.0009165406128805453,
+          "paired_weeks": 257,
+          "weekly_effect": 0.008754863813229572,
+          "approx_interval": [
+            -0.10823934896717467,
+            0.12574907659363382
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "6e",
+          "outcome": "next_positive_close"
+        },
+        {
+          "condition": "momentum_5_up",
+          "n": 1303,
+          "condition_n": 623,
+          "comparison_n": 680,
+          "status": "exploratory_candidate",
+          "promoted": false,
+          "condition_rate": 0.4799357945425361,
+          "comparison_rate": 0.5014705882352941,
+          "effect": -0.021534793692758014,
+          "paired_weeks": 159,
+          "weekly_effect": -0.2830188679245283,
+          "approx_interval": [
+            -0.4116440325588642,
+            -0.15439370329019236
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "6e",
+          "outcome": "next_positive_close"
+        },
+        {
+          "condition": "momentum_5_down",
+          "n": 1303,
+          "condition_n": 679,
+          "comparison_n": 624,
+          "status": "exploratory_candidate",
+          "promoted": false,
+          "condition_rate": 0.5022091310751104,
+          "comparison_rate": 0.4791666666666667,
+          "effect": 0.023042464408443764,
+          "paired_weeks": 160,
+          "weekly_effect": 0.2875,
+          "approx_interval": [
+            0.15863800642914117,
+            0.4163619935708588
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "6e",
+          "outcome": "next_positive_close"
+        },
+        {
+          "condition": "momentum_20_up",
+          "n": 1303,
+          "condition_n": 626,
+          "comparison_n": 677,
+          "status": "exploratory_candidate",
+          "promoted": false,
+          "condition_rate": 0.46006389776357826,
+          "comparison_rate": 0.5199409158050221,
+          "effect": -0.05987701804144385,
+          "paired_weeks": 69,
+          "weekly_effect": -0.4142512077294686,
+          "approx_interval": [
+            -0.5876835226568246,
+            -0.24081889280211263
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "6e",
+          "outcome": "next_positive_close"
+        },
+        {
+          "condition": "momentum_20_down",
+          "n": 1303,
+          "condition_n": 677,
+          "comparison_n": 626,
+          "status": "exploratory_candidate",
+          "promoted": false,
+          "condition_rate": 0.5199409158050221,
+          "comparison_rate": 0.46006389776357826,
+          "effect": 0.05987701804144385,
+          "paired_weeks": 69,
+          "weekly_effect": 0.4142512077294686,
+          "approx_interval": [
+            0.24081889280211263,
+            0.5876835226568246
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "6e",
+          "outcome": "next_positive_close"
+        },
+        {
+          "condition": "close_near_high",
+          "n": 1303,
+          "condition_n": 262,
+          "comparison_n": 1041,
+          "status": "exploratory_candidate",
+          "promoted": false,
+          "condition_rate": 0.44656488549618323,
+          "comparison_rate": 0.5024015369836695,
+          "effect": -0.05583665148748629,
+          "paired_weeks": 186,
+          "weekly_effect": -0.20206093189964155,
+          "approx_interval": [
+            -0.3411038538860969,
+            -0.06301800991318621
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "6e",
+          "outcome": "next_positive_close"
+        },
+        {
+          "condition": "close_near_low",
+          "n": 1303,
+          "condition_n": 312,
+          "comparison_n": 991,
+          "status": "inconclusive",
+          "promoted": false,
+          "condition_rate": 0.5,
+          "comparison_rate": 0.4883955600403633,
+          "effect": 0.011604439959636725,
+          "paired_weeks": 220,
+          "weekly_effect": 0.11666666666666668,
+          "approx_interval": [
+            -0.01271435016140883,
+            0.2460476834947422
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "6e",
+          "outcome": "next_positive_close"
+        },
+        {
+          "condition": "inside_day",
+          "n": 1303,
+          "condition_n": 166,
+          "comparison_n": 1137,
+          "status": "inconclusive",
+          "promoted": false,
+          "condition_rate": 0.5481927710843374,
+          "comparison_rate": 0.48284960422163586,
+          "effect": 0.06534316686270153,
+          "paired_weeks": 140,
+          "weekly_effect": 0.025595238095238115,
+          "approx_interval": [
+            -0.14430624467294975,
+            0.19549672086342598
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "6e",
+          "outcome": "next_positive_close"
+        },
+        {
+          "condition": "outside_day",
+          "n": 1303,
+          "condition_n": 132,
+          "comparison_n": 1171,
+          "status": "inconclusive",
+          "promoted": false,
+          "condition_rate": 0.5454545454545454,
+          "comparison_rate": 0.4850555081127242,
+          "effect": 0.06039903734182123,
+          "paired_weeks": 117,
+          "weekly_effect": 0.03418803418803421,
+          "approx_interval": [
+            -0.16129488607953663,
+            0.22967095445560504
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "6e",
+          "outcome": "next_positive_close"
+        },
+        {
+          "condition": "previous_up",
+          "n": 1303,
+          "condition_n": 640,
+          "comparison_n": 663,
+          "status": "inconclusive",
+          "promoted": false,
+          "condition_rate": 0.5203125,
+          "comparison_rate": 0.48114630467571645,
+          "effect": 0.039166195324283504,
+          "paired_weeks": 277,
+          "weekly_effect": 0.02196149217809868,
+          "approx_interval": [
+            -0.10080258790348973,
+            0.1447255722596871
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "6e",
+          "outcome": "next_range_expansion"
+        },
+        {
+          "condition": "previous_down",
+          "n": 1303,
+          "condition_n": 657,
+          "comparison_n": 646,
+          "status": "inconclusive",
+          "promoted": false,
+          "condition_rate": 0.4794520547945205,
+          "comparison_rate": 0.521671826625387,
+          "effect": -0.042219771830866504,
+          "paired_weeks": 279,
+          "weekly_effect": -0.023297491039426525,
+          "approx_interval": [
+            -0.1461966426503271,
+            0.09960166057147406
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "6e",
+          "outcome": "next_range_expansion"
+        },
+        {
+          "condition": "wide_range",
+          "n": 1303,
+          "condition_n": 657,
+          "comparison_n": 646,
+          "status": "exploratory_candidate",
+          "promoted": false,
+          "condition_rate": 0.2815829528158295,
+          "comparison_rate": 0.7229102167182663,
+          "effect": -0.44132726390243676,
+          "paired_weeks": 257,
+          "weekly_effect": -0.6164072632944229,
+          "approx_interval": [
+            -0.6910434904074484,
+            -0.5417710361813973
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "6e",
+          "outcome": "next_range_expansion"
+        },
+        {
+          "condition": "narrow_range",
+          "n": 1303,
+          "condition_n": 646,
+          "comparison_n": 657,
+          "status": "exploratory_candidate",
+          "promoted": false,
+          "condition_rate": 0.7229102167182663,
+          "comparison_rate": 0.2815829528158295,
+          "effect": 0.44132726390243676,
+          "paired_weeks": 257,
+          "weekly_effect": 0.6164072632944229,
+          "approx_interval": [
+            0.5417710361813973,
+            0.6910434904074484
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "6e",
+          "outcome": "next_range_expansion"
+        },
+        {
+          "condition": "momentum_5_up",
+          "n": 1303,
+          "condition_n": 623,
+          "comparison_n": 680,
+          "status": "inconclusive",
+          "promoted": false,
+          "condition_rate": 0.507223113964687,
+          "comparison_rate": 0.49411764705882355,
+          "effect": 0.01310546690586345,
+          "paired_weeks": 159,
+          "weekly_effect": 0.044549266247379454,
+          "approx_interval": [
+            -0.1083224859256377,
+            0.1974210184203966
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "6e",
+          "outcome": "next_range_expansion"
+        },
+        {
+          "condition": "momentum_5_down",
+          "n": 1303,
+          "condition_n": 679,
+          "comparison_n": 624,
+          "status": "inconclusive",
+          "promoted": false,
+          "condition_rate": 0.49337260677466865,
+          "comparison_rate": 0.5080128205128205,
+          "effect": -0.01464021373815183,
+          "paired_weeks": 160,
+          "weekly_effect": -0.0484375,
+          "approx_interval": [
+            -0.20101293269244108,
+            0.1041379326924411
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "6e",
+          "outcome": "next_range_expansion"
+        },
+        {
+          "condition": "momentum_20_up",
+          "n": 1303,
+          "condition_n": 626,
+          "comparison_n": 677,
+          "status": "inconclusive",
+          "promoted": false,
+          "condition_rate": 0.5143769968051118,
+          "comparison_rate": 0.4874446085672083,
+          "effect": 0.02693238823790356,
+          "paired_weeks": 69,
+          "weekly_effect": 0.04951690821256039,
+          "approx_interval": [
+            -0.19384498596137448,
+            0.2928788023864953
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "6e",
+          "outcome": "next_range_expansion"
+        },
+        {
+          "condition": "momentum_20_down",
+          "n": 1303,
+          "condition_n": 677,
+          "comparison_n": 626,
+          "status": "inconclusive",
+          "promoted": false,
+          "condition_rate": 0.4874446085672083,
+          "comparison_rate": 0.5143769968051118,
+          "effect": -0.02693238823790356,
+          "paired_weeks": 69,
+          "weekly_effect": -0.04951690821256039,
+          "approx_interval": [
+            -0.2928788023864953,
+            0.19384498596137448
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "6e",
+          "outcome": "next_range_expansion"
+        },
+        {
+          "condition": "close_near_high",
+          "n": 1303,
+          "condition_n": 262,
+          "comparison_n": 1041,
+          "status": "inconclusive",
+          "promoted": false,
+          "condition_rate": 0.4389312977099237,
+          "comparison_rate": 0.515850144092219,
+          "effect": -0.07691884638229529,
+          "paired_weeks": 186,
+          "weekly_effect": -0.10125448028673834,
+          "approx_interval": [
+            -0.26386833151989797,
+            0.06135937094642127
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "6e",
+          "outcome": "next_range_expansion"
+        },
+        {
+          "condition": "close_near_low",
+          "n": 1303,
+          "condition_n": 312,
+          "comparison_n": 991,
+          "status": "exploratory_candidate",
+          "promoted": false,
+          "condition_rate": 0.3942307692307692,
+          "comparison_rate": 0.5338042381432896,
+          "effect": -0.13957346891252037,
+          "paired_weeks": 220,
+          "weekly_effect": -0.17651515151515149,
+          "approx_interval": [
+            -0.31842363734264095,
+            -0.03460666568766202
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "6e",
+          "outcome": "next_range_expansion"
+        },
+        {
+          "condition": "inside_day",
+          "n": 1303,
+          "condition_n": 166,
+          "comparison_n": 1137,
+          "status": "exploratory_candidate",
+          "promoted": false,
+          "condition_rate": 0.7108433734939759,
+          "comparison_rate": 0.46965699208443273,
+          "effect": 0.24118638140954313,
+          "paired_weeks": 140,
+          "weekly_effect": 0.30000000000000004,
+          "approx_interval": [
+            0.13286876035953196,
+            0.4671312396404681
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "6e",
+          "outcome": "next_range_expansion"
+        },
+        {
+          "condition": "outside_day",
+          "n": 1303,
+          "condition_n": 132,
+          "comparison_n": 1171,
+          "status": "exploratory_candidate",
+          "promoted": false,
+          "condition_rate": 0.25757575757575757,
+          "comparison_rate": 0.5277540563620837,
+          "effect": -0.27017829878632615,
+          "paired_weeks": 117,
+          "weekly_effect": -0.33404558404558404,
+          "approx_interval": [
+            -0.4948376764186207,
+            -0.1732534916725474
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "6e",
+          "outcome": "next_range_expansion"
+        },
+        {
+          "condition": "previous_up",
+          "n": 1304,
+          "condition_n": 657,
+          "comparison_n": 647,
+          "status": "exploratory_candidate",
+          "promoted": false,
+          "condition_rate": 0.4611872146118721,
+          "comparison_rate": 0.5425038639876353,
+          "effect": -0.08131664937576316,
+          "paired_weeks": 285,
+          "weekly_effect": -0.2888888888888889,
+          "approx_interval": [
+            -0.38282941500067147,
+            -0.19494836277710637
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "btc",
+          "outcome": "next_positive_close"
+        },
+        {
+          "condition": "previous_down",
+          "n": 1304,
+          "condition_n": 646,
+          "comparison_n": 658,
+          "status": "exploratory_candidate",
+          "promoted": false,
+          "condition_rate": 0.541795665634675,
+          "comparison_rate": 0.46200607902735563,
+          "effect": 0.07978958660731933,
+          "paired_weeks": 285,
+          "weekly_effect": 0.28654970760233917,
+          "approx_interval": [
+            0.19246774806094602,
+            0.3806316671437323
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "btc",
+          "outcome": "next_positive_close"
+        },
+        {
+          "condition": "wide_range",
+          "n": 1304,
+          "condition_n": 651,
+          "comparison_n": 653,
+          "status": "inconclusive",
+          "promoted": false,
+          "condition_rate": 0.500768049155146,
+          "comparison_rate": 0.5022970903522205,
+          "effect": -0.0015290411970745321,
+          "paired_weeks": 261,
+          "weekly_effect": 0.013729246487867181,
+          "approx_interval": [
+            -0.11154598105927534,
+            0.1390044740350097
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "btc",
+          "outcome": "next_positive_close"
+        },
+        {
+          "condition": "narrow_range",
+          "n": 1304,
+          "condition_n": 653,
+          "comparison_n": 651,
+          "status": "inconclusive",
+          "promoted": false,
+          "condition_rate": 0.5022970903522205,
+          "comparison_rate": 0.500768049155146,
+          "effect": 0.0015290411970745321,
+          "paired_weeks": 261,
+          "weekly_effect": -0.013729246487867181,
+          "approx_interval": [
+            -0.1390044740350097,
+            0.11154598105927534
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "btc",
+          "outcome": "next_positive_close"
+        },
+        {
+          "condition": "momentum_5_up",
+          "n": 1304,
+          "condition_n": 692,
+          "comparison_n": 612,
+          "status": "exploratory_candidate",
+          "promoted": false,
+          "condition_rate": 0.4869942196531792,
+          "comparison_rate": 0.5179738562091504,
+          "effect": -0.03097963655597119,
+          "paired_weeks": 174,
+          "weekly_effect": -0.30842911877394635,
+          "approx_interval": [
+            -0.43542647405518914,
+            -0.18143176349270357
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "btc",
+          "outcome": "next_positive_close"
+        },
+        {
+          "condition": "momentum_5_down",
+          "n": 1304,
+          "condition_n": 611,
+          "comparison_n": 693,
+          "status": "exploratory_candidate",
+          "promoted": false,
+          "condition_rate": 0.5171849427168577,
+          "comparison_rate": 0.48773448773448774,
+          "effect": 0.029450454982369922,
+          "paired_weeks": 174,
+          "weekly_effect": 0.3074712643678161,
+          "approx_interval": [
+            0.1805371319687699,
+            0.4344053967668623
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "btc",
+          "outcome": "next_positive_close"
+        },
+        {
+          "condition": "momentum_20_up",
+          "n": 1304,
+          "condition_n": 739,
+          "comparison_n": 565,
+          "status": "exploratory_candidate",
+          "promoted": false,
+          "condition_rate": 0.5128552097428958,
+          "comparison_rate": 0.48672566371681414,
+          "effect": 0.02612954602608164,
+          "paired_weeks": 70,
+          "weekly_effect": -0.23452380952380952,
+          "approx_interval": [
+            -0.42880394541407835,
+            -0.0402436736335407
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "btc",
+          "outcome": "next_positive_close"
+        },
+        {
+          "condition": "momentum_20_down",
+          "n": 1304,
+          "condition_n": 564,
+          "comparison_n": 740,
+          "status": "exploratory_candidate",
+          "promoted": false,
+          "condition_rate": 0.4858156028368794,
+          "comparison_rate": 0.5135135135135135,
+          "effect": -0.027697910676634074,
+          "paired_weeks": 70,
+          "weekly_effect": 0.23452380952380952,
+          "approx_interval": [
+            0.0402436736335407,
+            0.42880394541407835
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "btc",
+          "outcome": "next_positive_close"
+        },
+        {
+          "condition": "close_near_high",
+          "n": 1304,
+          "condition_n": 266,
+          "comparison_n": 1038,
+          "status": "exploratory_candidate",
+          "promoted": false,
+          "condition_rate": 0.4398496240601504,
+          "comparison_rate": 0.5173410404624278,
+          "effect": -0.07749141640227741,
+          "paired_weeks": 197,
+          "weekly_effect": -0.1937394247038917,
+          "approx_interval": [
+            -0.334518463699777,
+            -0.05296038570800635
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "btc",
+          "outcome": "next_positive_close"
+        },
+        {
+          "condition": "close_near_low",
+          "n": 1304,
+          "condition_n": 237,
+          "comparison_n": 1067,
+          "status": "exploratory_candidate",
+          "promoted": false,
+          "condition_rate": 0.5949367088607594,
+          "comparison_rate": 0.48078725398313027,
+          "effect": 0.11414945487762918,
+          "paired_weeks": 178,
+          "weekly_effect": 0.2457865168539326,
+          "approx_interval": [
+            0.09833725075342517,
+            0.39323578295444006
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "btc",
+          "outcome": "next_positive_close"
+        },
+        {
+          "condition": "inside_day",
+          "n": 1304,
+          "condition_n": 207,
+          "comparison_n": 1097,
+          "status": "inconclusive",
+          "promoted": false,
+          "condition_rate": 0.4830917874396135,
+          "comparison_rate": 0.5050136736554239,
+          "effect": -0.021921886215810427,
+          "paired_weeks": 164,
+          "weekly_effect": -0.022865853658536568,
+          "approx_interval": [
+            -0.18111367699146336,
+            0.1353819696743902
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "btc",
+          "outcome": "next_positive_close"
+        },
+        {
+          "condition": "outside_day",
+          "n": 1304,
+          "condition_n": 124,
+          "comparison_n": 1180,
+          "status": "inconclusive",
+          "promoted": false,
+          "condition_rate": 0.5564516129032258,
+          "comparison_rate": 0.4957627118644068,
+          "effect": 0.060688901038818965,
+          "paired_weeks": 111,
+          "weekly_effect": 0.0840840840840841,
+          "approx_interval": [
+            -0.10989333943540558,
+            0.2780615076035738
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "btc",
+          "outcome": "next_positive_close"
+        },
+        {
+          "condition": "previous_up",
+          "n": 1304,
+          "condition_n": 657,
+          "comparison_n": 647,
+          "status": "inconclusive",
+          "promoted": false,
+          "condition_rate": 0.5007610350076104,
+          "comparison_rate": 0.48377125193199383,
+          "effect": 0.01698978307561655,
+          "paired_weeks": 285,
+          "weekly_effect": 0.028362573099415204,
+          "approx_interval": [
+            -0.09755700442538628,
+            0.15428215062421669
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "btc",
+          "outcome": "next_range_expansion"
+        },
+        {
+          "condition": "previous_down",
+          "n": 1304,
+          "condition_n": 646,
+          "comparison_n": 658,
+          "status": "inconclusive",
+          "promoted": false,
+          "condition_rate": 0.4845201238390093,
+          "comparison_rate": 0.5,
+          "effect": -0.015479876160990724,
+          "paired_weeks": 285,
+          "weekly_effect": -0.027777777777777776,
+          "approx_interval": [
+            -0.15383061614758975,
+            0.09827506059203418
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "btc",
+          "outcome": "next_range_expansion"
+        },
+        {
+          "condition": "wide_range",
+          "n": 1304,
+          "condition_n": 651,
+          "comparison_n": 653,
+          "status": "exploratory_candidate",
+          "promoted": false,
+          "condition_rate": 0.2903225806451613,
+          "comparison_rate": 0.6937212863705973,
+          "effect": -0.40339870572543596,
+          "paired_weeks": 261,
+          "weekly_effect": -0.5542784163473818,
+          "approx_interval": [
+            -0.63336552328566,
+            -0.47519130940910365
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "btc",
+          "outcome": "next_range_expansion"
+        },
+        {
+          "condition": "narrow_range",
+          "n": 1304,
+          "condition_n": 653,
+          "comparison_n": 651,
+          "status": "exploratory_candidate",
+          "promoted": false,
+          "condition_rate": 0.6937212863705973,
+          "comparison_rate": 0.2903225806451613,
+          "effect": 0.40339870572543596,
+          "paired_weeks": 261,
+          "weekly_effect": 0.5542784163473818,
+          "approx_interval": [
+            0.47519130940910365,
+            0.63336552328566
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "btc",
+          "outcome": "next_range_expansion"
+        },
+        {
+          "condition": "momentum_5_up",
+          "n": 1304,
+          "condition_n": 692,
+          "comparison_n": 612,
+          "status": "inconclusive",
+          "promoted": false,
+          "condition_rate": 0.49421965317919075,
+          "comparison_rate": 0.49019607843137253,
+          "effect": 0.004023574747818226,
+          "paired_weeks": 174,
+          "weekly_effect": -0.004310344827586207,
+          "approx_interval": [
+            -0.16141278108478235,
+            0.15279209142960992
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "btc",
+          "outcome": "next_range_expansion"
+        },
+        {
+          "condition": "momentum_5_down",
+          "n": 1304,
+          "condition_n": 611,
+          "comparison_n": 693,
+          "status": "inconclusive",
+          "promoted": false,
+          "condition_rate": 0.48936170212765956,
+          "comparison_rate": 0.494949494949495,
+          "effect": -0.005587792821835413,
+          "paired_weeks": 174,
+          "weekly_effect": -0.00047892720306513397,
+          "approx_interval": [
+            -0.1573899221351644,
+            0.15643206772903412
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "btc",
+          "outcome": "next_range_expansion"
+        },
+        {
+          "condition": "momentum_20_up",
+          "n": 1304,
+          "condition_n": 739,
+          "comparison_n": 565,
+          "status": "inconclusive",
+          "promoted": false,
+          "condition_rate": 0.4857916102841678,
+          "comparison_rate": 0.5008849557522124,
+          "effect": -0.015093345468044583,
+          "paired_weeks": 70,
+          "weekly_effect": -0.058333333333333334,
+          "approx_interval": [
+            -0.3186653088031603,
+            0.2019986421364936
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "btc",
+          "outcome": "next_range_expansion"
+        },
+        {
+          "condition": "momentum_20_down",
+          "n": 1304,
+          "condition_n": 564,
+          "comparison_n": 740,
+          "status": "inconclusive",
+          "promoted": false,
+          "condition_rate": 0.5,
+          "comparison_rate": 0.4864864864864865,
+          "effect": 0.013513513513513487,
+          "paired_weeks": 70,
+          "weekly_effect": 0.04880952380952381,
+          "approx_interval": [
+            -0.21424381318625724,
+            0.31186286080530484
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "btc",
+          "outcome": "next_range_expansion"
+        },
+        {
+          "condition": "close_near_high",
+          "n": 1304,
+          "condition_n": 266,
+          "comparison_n": 1038,
+          "status": "inconclusive",
+          "promoted": false,
+          "condition_rate": 0.39849624060150374,
+          "comparison_rate": 0.5163776493256262,
+          "effect": -0.1178814087241225,
+          "paired_weeks": 197,
+          "weekly_effect": -0.10236886632825717,
+          "approx_interval": [
+            -0.2433820753586171,
+            0.03864434270210276
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "btc",
+          "outcome": "next_range_expansion"
+        },
+        {
+          "condition": "close_near_low",
+          "n": 1304,
+          "condition_n": 237,
+          "comparison_n": 1067,
+          "status": "inconclusive",
+          "promoted": false,
+          "condition_rate": 0.4388185654008439,
+          "comparison_rate": 0.5042174320524836,
+          "effect": -0.06539886665163969,
+          "paired_weeks": 178,
+          "weekly_effect": -0.10814606741573032,
+          "approx_interval": [
+            -0.26397576767010833,
+            0.04768363283864771
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "btc",
+          "outcome": "next_range_expansion"
+        },
+        {
+          "condition": "inside_day",
+          "n": 1304,
+          "condition_n": 207,
+          "comparison_n": 1097,
+          "status": "exploratory_candidate",
+          "promoted": false,
+          "condition_rate": 0.7342995169082126,
+          "comparison_rate": 0.44667274384685507,
+          "effect": 0.28762677306135753,
+          "paired_weeks": 164,
+          "weekly_effect": 0.3699186991869919,
+          "approx_interval": [
+            0.22523704738585815,
+            0.5146003509881256
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "btc",
+          "outcome": "next_range_expansion"
+        },
+        {
+          "condition": "outside_day",
+          "n": 1304,
+          "condition_n": 124,
+          "comparison_n": 1180,
+          "status": "exploratory_candidate",
+          "promoted": false,
+          "condition_rate": 0.27419354838709675,
+          "comparison_rate": 0.5152542372881356,
+          "effect": -0.24106068890103882,
+          "paired_weeks": 111,
+          "weekly_effect": -0.3363363363363363,
+          "approx_interval": [
+            -0.5132776425856371,
+            -0.1593950300870355
+          ],
+          "family_adjusted_alpha": 0.00026041666666666666,
+          "market": "btc",
+          "outcome": "next_range_expansion"
+        }
+      ],
+      "policy": "192 registered market-condition-outcome tests per batch. Historical exploratory only; prospective disjoint half-year batches. Approximate paired-week intervals, Bonferroni across the full family per batch; no correction across successive batches, no model promotion. Adjacent observed candles, not exact exchange calendars. Provider revisions, contract rolls, missing observations and serial dependence remain limitations."
+    }
+  ]
+}

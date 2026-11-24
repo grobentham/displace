@@ -1,0 +1,211 @@
+{
+  "version": 1,
+  "asof": "2026-11-24",
+  "policy": "Current-vintage descriptive percentiles, not a point-in-time backtest or forecast. Equal-weight components; all required. Daily scores compare with prior 252 readings; weekly with 156; monthly with 60. Higher scores represent more of the named condition, not universally good or bad. Review provider usage rights before commercial use.",
+  "indices": [
+    {
+      "id": "D-GROWTH",
+      "name": "Growth momentum",
+      "score": null,
+      "status": "unavailable",
+      "components": [
+        {
+          "id": "INDPRO",
+          "transform": "yoy",
+          "frequency": "monthly",
+          "sign": 1,
+          "source": "https://fred.stlouisfed.org/series/INDPRO",
+          "score": 88.33,
+          "status": "available",
+          "observation_date": "2026-10-01",
+          "value": 2.1497,
+          "age_days": 54,
+          "history_n": 60
+        },
+        {
+          "id": "RRSFS",
+          "transform": "yoy",
+          "frequency": "monthly",
+          "sign": 1,
+          "source": "https://fred.stlouisfed.org/series/RRSFS",
+          "score": null,
+          "status": "stale",
+          "observation_date": "2026-09-01",
+          "value": 2.7495,
+          "age_days": 84,
+          "history_n": 60
+        }
+      ]
+    },
+    {
+      "id": "D-INFLATION",
+      "name": "Inflation pressure",
+      "score": null,
+      "status": "unavailable",
+      "components": [
+        {
+          "id": "CPIAUCSL",
+          "transform": "yoy",
+          "frequency": "monthly",
+          "sign": 1,
+          "source": "https://fred.stlouisfed.org/series/CPIAUCSL",
+          "score": null,
+          "status": "stale",
+          "observation_date": "2026-09-01",
+          "value": 3.7173,
+          "age_days": 84,
+          "history_n": 60
+        },
+        {
+          "id": "PCEPI",
+          "transform": "yoy",
+          "frequency": "monthly",
+          "sign": 1,
+          "source": "https://fred.stlouisfed.org/series/PCEPI",
+          "score": null,
+          "status": "stale",
+          "observation_date": "2026-09-01",
+          "value": 3.6489,
+          "age_days": 84,
+          "history_n": 60
+        }
+      ]
+    },
+    {
+      "id": "D-STRESS",
+      "name": "Financial stress",
+      "score": 74.84,
+      "status": "available",
+      "components": [
+        {
+          "id": "NFCI",
+          "transform": "level",
+          "frequency": "weekly",
+          "sign": 1,
+          "source": "https://fred.stlouisfed.org/series/NFCI",
+          "score": 49.68,
+          "status": "available",
+          "observation_date": "2026-11-13",
+          "value": -0.478,
+          "age_days": 11,
+          "history_n": 156
+        },
+        {
+          "id": "VIXCLS",
+          "transform": "level",
+          "frequency": "daily",
+          "sign": 1,
+          "source": "https://fred.stlouisfed.org/series/VIXCLS",
+          "score": 100.0,
+          "status": "available",
+          "observation_date": "2026-11-20",
+          "value": 35.89,
+          "age_days": 4,
+          "history_n": 252
+        }
+      ]
+    },
+    {
+      "id": "D-LIQUIDITY",
+      "name": "Monetary conditions proxy (easier = higher)",
+      "score": 11.02,
+      "status": "available",
+      "components": [
+        {
+          "id": "DFII10",
+          "transform": "level",
+          "frequency": "daily",
+          "sign": -1,
+          "source": "https://fred.stlouisfed.org/series/DFII10",
+          "score": 9.33,
+          "status": "available",
+          "observation_date": "2026-11-20",
+          "value": 2.77,
+          "age_days": 4,
+          "history_n": 252
+        },
+        {
+          "id": "DFF",
+          "transform": "level",
+          "frequency": "daily",
+          "sign": -1,
+          "source": "https://fred.stlouisfed.org/series/DFF",
+          "score": 12.7,
+          "status": "available",
+          "observation_date": "2026-11-20",
+          "value": 3.88,
+          "age_days": 4,
+          "history_n": 252
+        }
+      ]
+    },
+    {
+      "id": "D-RISK",
+      "name": "Risk appetite proxy",
+      "score": 0.0,
+      "status": "available",
+      "components": [
+        {
+          "id": "VIXCLS",
+          "transform": "level",
+          "frequency": "daily",
+          "sign": -1,
+          "source": "https://fred.stlouisfed.org/series/VIXCLS",
+          "score": 0.0,
+          "status": "available",
+          "observation_date": "2026-11-20",
+          "value": 35.89,
+          "age_days": 4,
+          "history_n": 252
+        },
+        {
+          "id": "BAMLH0A0HYM2",
+          "transform": "level",
+          "frequency": "daily",
+          "sign": -1,
+          "source": "https://fred.stlouisfed.org/series/BAMLH0A0HYM2",
+          "score": 0.0,
+          "status": "available",
+          "observation_date": "2026-11-20",
+          "value": 3.76,
+          "age_days": 4,
+          "history_n": 252
+        }
+      ]
+    },
+    {
+      "id": "D-CREDIT",
+      "name": "Credit stress",
+      "score": 100.0,
+      "status": "available",
+      "components": [
+        {
+          "id": "BAMLH0A0HYM2",
+          "transform": "level",
+          "frequency": "daily",
+          "sign": 1,
+          "source": "https://fred.stlouisfed.org/series/BAMLH0A0HYM2",
+          "score": 100.0,
+          "status": "available",
+          "observation_date": "2026-11-20",
+          "value": 3.76,
+          "age_days": 4,
+          "history_n": 252
+        },
+        {
+          "id": "BAMLC0A0CM",
+          "transform": "level",
+          "frequency": "daily",
+          "sign": 1,
+          "source": "https://fred.stlouisfed.org/series/BAMLC0A0CM",
+          "score": 100.0,
+          "status": "available",
+          "observation_date": "2026-11-20",
+          "value": 0.98,
+          "age_days": 4,
+          "history_n": 252
+        }
+      ]
+    }
+  ]
+}
