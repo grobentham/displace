@@ -55,6 +55,7 @@ jobs:
           python engine/test_discovery.py
           python engine/test_intelligence.py
           python engine/test_signals.py
+          python engine/test_relationships.py
 
   publish:
     if: github.ref == 'refs/heads/main'
@@ -98,6 +99,7 @@ jobs:
           python engine/guard.py discovery_v2 engine/discovery_v2.py
           python engine/guard.py macro engine/macro.py
           python engine/guard.py signals engine/signals.py
+          python engine/guard.py relationships engine/relationships.py
 
       - name: Final check before publishing (block invalid candidate snapshot)
         run: python engine/gate.py --strict
