@@ -25,6 +25,11 @@ CHANGELOG.md.
 
 ## Decided, not changing
 
+- The intraday witness depends on GitHub's scheduler, which can run late or skip; a trade that starts and finishes
+  between two readings is "not seen live" and isn't counted. Lock and fill times are Iron Brain's clock; the
+  witness proves only that a decision was public by the commit that recorded it. Days before 25 Nov 2026 aren't
+  witnessed.
+
 - Contract rolls are detected by calendar rule, not measured per roll: free data has no per-contract prices, so the
   jump can't be subtracted, only the switch day left out. Crude (monthly, sign varies) and bitcoin are not flagged.
   ES/YM/RTY jumps (~0.1%) are below what the data can detect but follow the NQ calendar, so they are flagged too.

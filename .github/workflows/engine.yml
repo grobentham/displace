@@ -59,6 +59,7 @@ jobs:
           python engine/test_signals.py
           python engine/test_relationships.py
           python engine/test_evidence.py
+          python engine/test_intraday.py
           python engine/test_publisher.py
           python engine/test_atlas.py
           python engine/test_validation.py
@@ -137,6 +138,9 @@ jobs:
           python engine/guard.py macro engine/macro.py
           python engine/guard.py signals engine/signals.py
           python engine/guard.py relationships engine/relationships.py
+          git fetch -q --depth 1 origin +refs/heads/witness:refs/remotes/origin/witness \
+            && git show origin/witness:iron-brain.json > /tmp/iron-brain-witness.json || echo "no witness record yet"
+          python engine/guard.py intraday engine/intraday.py report /tmp/iron-brain-witness.json site/data/open/intraday.json
           python engine/guard.py evidence engine/evidence.py
           python engine/guard.py publishing engine/publisher.py
           python engine/guard.py atlas engine/atlas.py

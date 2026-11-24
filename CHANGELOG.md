@@ -1,5 +1,17 @@
 # Changelog
 
+## 2026-11-25: Iron Brain's live plans join the accountability ledger
+
+- `engine/intraday.py` and `.github/workflows/witness.yml`: every 10 minutes through the New York morning (hourly
+  after), Displace reads the plan decisions Iron Brain publishes and commits what it saw to the public `witness`
+  branch. Iron Brain's own lock record is now private (it holds trade mechanics), so this commit history is the
+  public timestamp proof.
+- A finished trade counts only if it was locked before entry, Displace saw it live before the result, and none of
+  its locked levels changed afterwards. Trades locked after their entry minute (Opening Drive v2 enters at the
+  10:00 open and is usually published around 10:13) are scored apart with the lag, since a follower could not
+  have had that entry. Fewer than 30 counted trades: no claim either way. Results in points and R, before costs.
+- Accountability page: new "Iron Brain live intraday plans" section; the registry lists it.
+
 ## 2026-11-24: contract roll days
 
 - `engine/rolls.py`: the days Yahoo's continuous futures switch contract, measured from 2016-2026 candles (average

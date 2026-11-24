@@ -153,7 +153,8 @@ def main():
         ("Discovery v3","engine/discovery_v3.py","research/discovery-plan-v3.json","History descriptive only; prospective from Dec 2026, candidates need 30 blocks"),
         ("Macro indices","engine/macro.py","research/macro-plan-v2.json","Descriptive current-vintage indicators"),
         ("Early warnings","engine/signals.py","research/signals-plan-v1.json","Descriptive threshold monitoring"),
-        ("Financial relationships","engine/relationships.py","research/relationships-plan-v1.json","Descriptive correlations and residuals")]
+        ("Financial relationships","engine/relationships.py","research/relationships-plan-v1.json","Descriptive correlations and residuals"),
+        ("Iron Brain live plans","engine/intraday.py",None,"Live intraday plans witnessed from 25 Nov 2026; counted only if locked before entry, seen live and unchanged")]
     models=[{"name":name,"code":path,"code_sha256":hashlib.sha256((ROOT/path).read_bytes()).hexdigest(),
              "plan":plan,"plan_hash":D.digest(load(ROOT/plan)) if plan else None,"classification":classification}
             for name,path,plan,classification in registry]
