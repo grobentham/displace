@@ -59,6 +59,8 @@ jobs:
           python engine/test_evidence.py
           python engine/test_publisher.py
           python engine/test_atlas.py
+          node --check site/assets/terminal.js
+          node tests/test_terminal.js
 
   publish:
     if: github.ref == 'refs/heads/main'

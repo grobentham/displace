@@ -1,0 +1,11 @@
+'use strict';
+const assert=require('node:assert/strict');
+const T=require('../site/assets/terminal.js');
+assert.deepEqual(T.nyClock(new Date('2026-11-24T13:00:00Z')),{day:'2026-11-24',time:'08:00'});
+assert.deepEqual(T.nyClock(new Date('2026-07-04T13:00:00Z')),{day:'2026-07-04',time:'09:00'});
+const rows=[{id:1,date:'2026-11-24',time:'07:59'},{id:2,date:'2026-11-24',time:'08:01'},{id:3,date:'2026-11-24',time:'TBD'},{id:4,date:'2026-11-25',time:'08:30',actual:'100'},{id:5,date:'2026-11-25',time:'10:00'}];
+assert.deepEqual(T.upcoming(rows,new Date('2026-11-24T13:00:00Z')).map(r=>r.id),[2,3,5]);
+assert.equal(T.atlasYear({years:[2024,2025,2026],coverage:{growth:{2024:20,2025:16,2026:0}},countries:Array(20)}),2025);
+assert.equal(T.atlasYear({years:[2026],coverage:{growth:{2026:0}},countries:Array(20)}),null);
+assert.equal(T.pct(null),'—');assert.equal(T.pct(0),'0.0%');assert.equal(T.forecastTier('base'),'Base rate');assert.equal(T.researchTotal({research:[{total:8},{total:192}]}),200);assert(!T.safeReport('../evil'));assert(T.safeReport('daily-2026-11-24'));
+console.log('terminal utility tests passed');
