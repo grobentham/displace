@@ -1,0 +1,1717 @@
+{
+  "version": 1,
+  "plan_hash": "a8dc61414d06615434a79f48a5b0462827637614f1e8ba1b72be36995de28b4c",
+  "asof": "2026-11-24",
+  "series": [
+    {
+      "id": "nq",
+      "label": "Nasdaq futures",
+      "kind": "futures",
+      "transform": "log_return_pct",
+      "source": "Yahoo Finance via existing bias cache"
+    },
+    {
+      "id": "es",
+      "label": "S&P 500 futures",
+      "kind": "futures",
+      "transform": "log_return_pct",
+      "source": "Yahoo Finance via existing bias cache"
+    },
+    {
+      "id": "ym",
+      "label": "Dow futures",
+      "kind": "futures",
+      "transform": "log_return_pct",
+      "source": "Yahoo Finance via existing bias cache"
+    },
+    {
+      "id": "rty",
+      "label": "Russell 2000 futures",
+      "kind": "futures",
+      "transform": "log_return_pct",
+      "source": "Yahoo Finance via existing bias cache"
+    },
+    {
+      "id": "gold",
+      "label": "Gold futures",
+      "kind": "futures",
+      "transform": "log_return_pct",
+      "source": "Yahoo Finance via existing bias cache"
+    },
+    {
+      "id": "cl",
+      "label": "WTI crude futures",
+      "kind": "futures",
+      "transform": "log_return_pct",
+      "source": "Yahoo Finance via existing bias cache"
+    },
+    {
+      "id": "6e",
+      "label": "Euro FX futures",
+      "kind": "futures",
+      "transform": "log_return_pct",
+      "source": "Yahoo Finance via existing bias cache"
+    },
+    {
+      "id": "btc",
+      "label": "Bitcoin futures",
+      "kind": "futures",
+      "transform": "log_return_pct",
+      "source": "Yahoo Finance via existing bias cache"
+    },
+    {
+      "id": "VIXCLS",
+      "label": "VIX",
+      "kind": "macro",
+      "transform": "point_change",
+      "source": "https://fred.stlouisfed.org/series/VIXCLS"
+    },
+    {
+      "id": "BAMLH0A0HYM2",
+      "label": "High-yield credit spread",
+      "kind": "macro",
+      "transform": "basis_point_change",
+      "source": "https://fred.stlouisfed.org/series/BAMLH0A0HYM2"
+    },
+    {
+      "id": "DGS2",
+      "label": "2-year Treasury yield",
+      "kind": "series",
+      "transform": "basis_point_change",
+      "source": "https://fred.stlouisfed.org/series/DGS2"
+    },
+    {
+      "id": "DTWEXBGS",
+      "label": "Broad dollar index",
+      "kind": "series",
+      "transform": "log_return_pct",
+      "source": "https://fred.stlouisfed.org/series/DTWEXBGS"
+    }
+  ],
+  "policy": "Descriptive current-vintage associations between changes, not price levels. Match exact start and end observation dates; no forward filling or bridging gaps over four days. Futures use completed daily candles; other series use available cached observations. Different market closing times, delayed publication, contract rolls, missing observations and revisions limit comparability. Correlation shift compares disjoint 60-observation windows; divergence is an out-of-sample residual relative to prior 60 paired observations (second series regressed on first). Thresholds are monitoring choices, not significance tests; no causal, directional or trading edge claims.",
+  "pairs": [
+    {
+      "a": "nq",
+      "b": "es",
+      "status": "available",
+      "latest": "2026-11-23",
+      "age_days": 1,
+      "paired_n": 5765,
+      "correlations": {
+        "20": 0.9778,
+        "60": 0.9611,
+        "252": 0.946
+      },
+      "prior60": 0.9213,
+      "shift60": 0.0398,
+      "divergence": {
+        "z": 1.603,
+        "observed": 4.504091,
+        "fitted": 3.928912,
+        "beta": 0.608763,
+        "training_n": 60,
+        "training_end": "2026-11-20"
+      },
+      "flags": []
+    },
+    {
+      "a": "nq",
+      "b": "ym",
+      "status": "available",
+      "latest": "2026-11-23",
+      "age_days": 1,
+      "paired_n": 5382,
+      "correlations": {
+        "20": 0.8194,
+        "60": 0.7314,
+        "252": 0.7015
+      },
+      "prior60": 0.618,
+      "shift60": 0.1134,
+      "divergence": {
+        "z": 0.6136,
+        "observed": 2.985113,
+        "fitted": 2.508822,
+        "beta": 0.397374,
+        "training_n": 60,
+        "training_end": "2026-11-20"
+      },
+      "flags": []
+    },
+    {
+      "a": "nq",
+      "b": "rty",
+      "status": "available",
+      "latest": "2026-11-23",
+      "age_days": 1,
+      "paired_n": 2047,
+      "correlations": {
+        "20": 0.9163,
+        "60": 0.8339,
+        "252": 0.7696
+      },
+      "prior60": 0.7804,
+      "shift60": 0.0535,
+      "divergence": {
+        "z": -0.4124,
+        "observed": 3.295944,
+        "fitted": 3.610891,
+        "beta": 0.573529,
+        "training_n": 60,
+        "training_end": "2026-11-20"
+      },
+      "flags": []
+    },
+    {
+      "a": "nq",
+      "b": "gold",
+      "status": "available",
+      "latest": "2026-11-23",
+      "age_days": 1,
+      "paired_n": 2872,
+      "correlations": {
+        "20": 0.5128,
+        "60": 0.4284,
+        "252": 0.2922
+      },
+      "prior60": 0.2939,
+      "shift60": 0.1345,
+      "divergence": {
+        "z": 1.3775,
+        "observed": 3.795734,
+        "fitted": 1.678929,
+        "beta": 0.303779,
+        "training_n": 60,
+        "training_end": "2026-11-20"
+      },
+      "flags": []
+    },
+    {
+      "a": "nq",
+      "b": "cl",
+      "status": "available",
+      "latest": "2026-11-23",
+      "age_days": 1,
+      "paired_n": 5712,
+      "correlations": {
+        "20": -0.4234,
+        "60": -0.4127,
+        "252": -0.3089
+      },
+      "prior60": -0.3017,
+      "shift60": -0.111,
+      "divergence": {
+        "z": -0.083,
+        "observed": -4.642936,
+        "fitted": -4.395659,
+        "beta": -0.6561,
+        "training_n": 60,
+        "training_end": "2026-11-20"
+      },
+      "flags": []
+    },
+    {
+      "a": "nq",
+      "b": "6e",
+      "status": "available",
+      "latest": "2026-11-23",
+      "age_days": 1,
+      "paired_n": 5744,
+      "correlations": {
+        "20": -0.2619,
+        "60": -0.128,
+        "252": 0.1239
+      },
+      "prior60": 0.3128,
+      "shift60": -0.4408,
+      "divergence": {
+        "z": -1.3804,
+        "observed": -0.607488,
+        "fitted": -0.138788,
+        "beta": -0.008451,
+        "training_n": 60,
+        "training_end": "2026-11-20"
+      },
+      "flags": [
+        "correlation_shift"
+      ]
+    },
+    {
+      "a": "nq",
+      "b": "btc",
+      "status": "available",
+      "latest": "2026-11-23",
+      "age_days": 1,
+      "paired_n": 1950,
+      "correlations": {
+        "20": 0.7956,
+        "60": 0.6053,
+        "252": 0.5032
+      },
+      "prior60": 0.3581,
+      "shift60": 0.2472,
+      "divergence": {
+        "z": -0.4974,
+        "observed": 4.805076,
+        "fitted": 5.956199,
+        "beta": 0.898899,
+        "training_n": 60,
+        "training_end": "2026-11-20"
+      },
+      "flags": []
+    },
+    {
+      "a": "nq",
+      "b": "VIXCLS",
+      "status": "available",
+      "latest": "2026-11-20",
+      "age_days": 4,
+      "paired_n": 3081,
+      "correlations": {
+        "20": -0.8598,
+        "60": -0.6581,
+        "252": -0.4868
+      },
+      "prior60": -0.1038,
+      "shift60": -0.5543,
+      "divergence": {
+        "z": 1.6343,
+        "observed": 7.45,
+        "fitted": 4.481925,
+        "beta": -0.808932,
+        "training_n": 60,
+        "training_end": "2026-11-19"
+      },
+      "flags": [
+        "correlation_shift"
+      ]
+    },
+    {
+      "a": "nq",
+      "b": "BAMLH0A0HYM2",
+      "status": "available",
+      "latest": "2026-11-20",
+      "age_days": 4,
+      "paired_n": 536,
+      "correlations": {
+        "20": -0.6818,
+        "60": -0.4928,
+        "252": -0.3755
+      },
+      "prior60": -0.1248,
+      "shift60": -0.368,
+      "divergence": {
+        "z": 2.7519,
+        "observed": 24.0,
+        "fitted": 8.739333,
+        "beta": -1.388048,
+        "training_n": 60,
+        "training_end": "2026-11-19"
+      },
+      "flags": [
+        "unusual_residual"
+      ]
+    },
+    {
+      "a": "nq",
+      "b": "DGS2",
+      "status": "available",
+      "latest": "2026-11-20",
+      "age_days": 4,
+      "paired_n": 4753,
+      "correlations": {
+        "20": 0.5611,
+        "60": 0.3546,
+        "252": 0.1933
+      },
+      "prior60": 0.1047,
+      "shift60": 0.2499,
+      "divergence": {
+        "z": -1.1963,
+        "observed": -13.0,
+        "fitted": -6.169924,
+        "beta": 1.06061,
+        "training_n": 60,
+        "training_end": "2026-11-19"
+      },
+      "flags": []
+    },
+    {
+      "a": "nq",
+      "b": "DTWEXBGS",
+      "status": "available",
+      "latest": "2026-11-20",
+      "age_days": 4,
+      "paired_n": 3712,
+      "correlations": {
+        "20": -0.0224,
+        "60": 0.0268,
+        "252": -0.0844
+      },
+      "prior60": -0.1458,
+      "shift60": 0.1726,
+      "divergence": {
+        "z": 0.178,
+        "observed": 0.058675,
+        "fitted": 0.010471,
+        "beta": 0.005458,
+        "training_n": 60,
+        "training_end": "2026-11-19"
+      },
+      "flags": []
+    },
+    {
+      "a": "es",
+      "b": "ym",
+      "status": "available",
+      "latest": "2026-11-23",
+      "age_days": 1,
+      "paired_n": 5382,
+      "correlations": {
+        "20": 0.9124,
+        "60": 0.8744,
+        "252": 0.8621
+      },
+      "prior60": 0.8324,
+      "shift60": 0.042,
+      "divergence": {
+        "z": -0.883,
+        "observed": 2.985113,
+        "fitted": 3.471336,
+        "beta": 0.777537,
+        "training_n": 60,
+        "training_end": "2026-11-20"
+      },
+      "flags": []
+    },
+    {
+      "a": "es",
+      "b": "rty",
+      "status": "available",
+      "latest": "2026-11-23",
+      "age_days": 1,
+      "paired_n": 2047,
+      "correlations": {
+        "20": 0.947,
+        "60": 0.8857,
+        "252": 0.8417
+      },
+      "prior60": 0.8281,
+      "shift60": 0.0576,
+      "divergence": {
+        "z": -1.5205,
+        "observed": 3.295944,
+        "fitted": 4.265224,
+        "beta": 0.966022,
+        "training_n": 60,
+        "training_end": "2026-11-20"
+      },
+      "flags": []
+    },
+    {
+      "a": "es",
+      "b": "gold",
+      "status": "available",
+      "latest": "2026-11-23",
+      "age_days": 1,
+      "paired_n": 2872,
+      "correlations": {
+        "20": 0.5735,
+        "60": 0.5124,
+        "252": 0.3303
+      },
+      "prior60": 0.3805,
+      "shift60": 0.1319,
+      "divergence": {
+        "z": 0.9017,
+        "observed": 3.795734,
+        "fitted": 2.468005,
+        "beta": 0.605722,
+        "training_n": 60,
+        "training_end": "2026-11-20"
+      },
+      "flags": []
+    },
+    {
+      "a": "es",
+      "b": "cl",
+      "status": "available",
+      "latest": "2026-11-23",
+      "age_days": 1,
+      "paired_n": 5712,
+      "correlations": {
+        "20": -0.5044,
+        "60": -0.4301,
+        "252": -0.3733
+      },
+      "prior60": -0.4698,
+      "shift60": 0.0397,
+      "divergence": {
+        "z": 0.134,
+        "observed": -4.642936,
+        "fitted": -5.038514,
+        "beta": -1.082639,
+        "training_n": 60,
+        "training_end": "2026-11-20"
+      },
+      "flags": []
+    },
+    {
+      "a": "es",
+      "b": "6e",
+      "status": "available",
+      "latest": "2026-11-23",
+      "age_days": 1,
+      "paired_n": 5744,
+      "correlations": {
+        "20": -0.1769,
+        "60": -0.0236,
+        "252": 0.1842
+      },
+      "prior60": 0.3758,
+      "shift60": -0.3994,
+      "divergence": {
+        "z": -1.8622,
+        "observed": -0.607488,
+        "fitted": 0.023595,
+        "beta": 0.02233,
+        "training_n": 60,
+        "training_end": "2026-11-20"
+      },
+      "flags": []
+    },
+    {
+      "a": "es",
+      "b": "btc",
+      "status": "available",
+      "latest": "2026-11-23",
+      "age_days": 1,
+      "paired_n": 1950,
+      "correlations": {
+        "20": 0.8143,
+        "60": 0.6146,
+        "252": 0.5281
+      },
+      "prior60": 0.4208,
+      "shift60": 0.1938,
+      "divergence": {
+        "z": -0.7946,
+        "observed": 4.805076,
+        "fitted": 6.622405,
+        "beta": 1.437682,
+        "training_n": 60,
+        "training_end": "2026-11-20"
+      },
+      "flags": []
+    },
+    {
+      "a": "es",
+      "b": "VIXCLS",
+      "status": "available",
+      "latest": "2026-11-20",
+      "age_days": 4,
+      "paired_n": 3081,
+      "correlations": {
+        "20": -0.9371,
+        "60": -0.7142,
+        "252": -0.5277
+      },
+      "prior60": -0.1457,
+      "shift60": -0.5685,
+      "divergence": {
+        "z": 1.3836,
+        "observed": 7.45,
+        "fitted": 5.114708,
+        "beta": -1.412479,
+        "training_n": 60,
+        "training_end": "2026-11-19"
+      },
+      "flags": [
+        "correlation_shift"
+      ]
+    },
+    {
+      "a": "es",
+      "b": "BAMLH0A0HYM2",
+      "status": "available",
+      "latest": "2026-11-20",
+      "age_days": 4,
+      "paired_n": 536,
+      "correlations": {
+        "20": -0.7552,
+        "60": -0.526,
+        "252": -0.3949
+      },
+      "prior60": -0.1604,
+      "shift60": -0.3656,
+      "divergence": {
+        "z": 2.6182,
+        "observed": 24.0,
+        "fitted": 9.780891,
+        "beta": -2.411219,
+        "training_n": 60,
+        "training_end": "2026-11-19"
+      },
+      "flags": [
+        "unusual_residual"
+      ]
+    },
+    {
+      "a": "es",
+      "b": "DGS2",
+      "status": "available",
+      "latest": "2026-11-20",
+      "age_days": 4,
+      "paired_n": 4753,
+      "correlations": {
+        "20": 0.5838,
+        "60": 0.3914,
+        "252": 0.1836
+      },
+      "prior60": 0.073,
+      "shift60": 0.3184,
+      "divergence": {
+        "z": -1.0771,
+        "observed": -13.0,
+        "fitted": -6.91377,
+        "beta": 1.822741,
+        "training_n": 60,
+        "training_end": "2026-11-19"
+      },
+      "flags": []
+    },
+    {
+      "a": "es",
+      "b": "DTWEXBGS",
+      "status": "available",
+      "latest": "2026-11-20",
+      "age_days": 4,
+      "paired_n": 3712,
+      "correlations": {
+        "20": -0.1222,
+        "60": -0.0176,
+        "252": -0.1028
+      },
+      "prior60": -0.1445,
+      "shift60": 0.1269,
+      "divergence": {
+        "z": 0.0158,
+        "observed": 0.058675,
+        "fitted": 0.054386,
+        "beta": -0.003946,
+        "training_n": 60,
+        "training_end": "2026-11-19"
+      },
+      "flags": []
+    },
+    {
+      "a": "ym",
+      "b": "rty",
+      "status": "available",
+      "latest": "2026-11-23",
+      "age_days": 1,
+      "paired_n": 2047,
+      "correlations": {
+        "20": 0.8845,
+        "60": 0.8341,
+        "252": 0.815
+      },
+      "prior60": 0.7379,
+      "shift60": 0.0962,
+      "divergence": {
+        "z": 0.5853,
+        "observed": 3.295944,
+        "fitted": 2.848662,
+        "beta": 0.986269,
+        "training_n": 60,
+        "training_end": "2026-11-20"
+      },
+      "flags": []
+    },
+    {
+      "a": "ym",
+      "b": "gold",
+      "status": "available",
+      "latest": "2026-11-23",
+      "age_days": 1,
+      "paired_n": 2872,
+      "correlations": {
+        "20": 0.6069,
+        "60": 0.551,
+        "252": 0.3403
+      },
+      "prior60": 0.3982,
+      "shift60": 0.1528,
+      "divergence": {
+        "z": 1.2509,
+        "observed": 3.795734,
+        "fitted": 2.016083,
+        "beta": 0.755969,
+        "training_n": 60,
+        "training_end": "2026-11-20"
+      },
+      "flags": []
+    },
+    {
+      "a": "ym",
+      "b": "cl",
+      "status": "available",
+      "latest": "2026-11-23",
+      "age_days": 1,
+      "paired_n": 5368,
+      "correlations": {
+        "20": -0.6464,
+        "60": -0.4724,
+        "252": -0.4626
+      },
+      "prior60": -0.6131,
+      "shift60": 0.1407,
+      "divergence": {
+        "z": -0.1612,
+        "observed": -4.642936,
+        "fitted": -4.178155,
+        "beta": -1.334594,
+        "training_n": 60,
+        "training_end": "2026-11-20"
+      },
+      "flags": []
+    },
+    {
+      "a": "ym",
+      "b": "6e",
+      "status": "available",
+      "latest": "2026-11-23",
+      "age_days": 1,
+      "paired_n": 5380,
+      "correlations": {
+        "20": 0.0431,
+        "60": 0.1782,
+        "252": 0.2382
+      },
+      "prior60": 0.3523,
+      "shift60": -0.1741,
+      "divergence": {
+        "z": -2.4397,
+        "observed": -0.607488,
+        "fitted": 0.191191,
+        "beta": 0.085958,
+        "training_n": 60,
+        "training_end": "2026-11-20"
+      },
+      "flags": []
+    },
+    {
+      "a": "ym",
+      "b": "btc",
+      "status": "available",
+      "latest": "2026-11-23",
+      "age_days": 1,
+      "paired_n": 1950,
+      "correlations": {
+        "20": 0.7223,
+        "60": 0.5278,
+        "252": 0.4395
+      },
+      "prior60": 0.3122,
+      "shift60": 0.2156,
+      "divergence": {
+        "z": 0.3138,
+        "observed": 4.805076,
+        "fitted": 4.029751,
+        "beta": 1.315083,
+        "training_n": 60,
+        "training_end": "2026-11-20"
+      },
+      "flags": []
+    },
+    {
+      "a": "ym",
+      "b": "VIXCLS",
+      "status": "available",
+      "latest": "2026-11-20",
+      "age_days": 4,
+      "paired_n": 3081,
+      "correlations": {
+        "20": -0.8795,
+        "60": -0.5948,
+        "252": -0.4365
+      },
+      "prior60": -0.0991,
+      "shift60": -0.4957,
+      "divergence": {
+        "z": 2.8008,
+        "observed": 7.45,
+        "fitted": 2.285431,
+        "beta": -1.210809,
+        "training_n": 60,
+        "training_end": "2026-11-19"
+      },
+      "flags": [
+        "correlation_shift",
+        "unusual_residual"
+      ]
+    },
+    {
+      "a": "ym",
+      "b": "BAMLH0A0HYM2",
+      "status": "available",
+      "latest": "2026-11-20",
+      "age_days": 4,
+      "paired_n": 536,
+      "correlations": {
+        "20": -0.705,
+        "60": -0.4259,
+        "252": -0.313
+      },
+      "prior60": -0.0689,
+      "shift60": -0.357,
+      "divergence": {
+        "z": 3.4101,
+        "observed": 24.0,
+        "fitted": 5.093672,
+        "beta": -2.145877,
+        "training_n": 60,
+        "training_end": "2026-11-19"
+      },
+      "flags": [
+        "unusual_residual"
+      ]
+    },
+    {
+      "a": "ym",
+      "b": "DGS2",
+      "status": "available",
+      "latest": "2026-11-20",
+      "age_days": 4,
+      "paired_n": 4450,
+      "correlations": {
+        "20": 0.4982,
+        "60": 0.3537,
+        "252": 0.1404
+      },
+      "prior60": 0.0157,
+      "shift60": 0.338,
+      "divergence": {
+        "z": -1.6891,
+        "observed": -13.0,
+        "fitted": -3.384623,
+        "beta": 1.654521,
+        "training_n": 60,
+        "training_end": "2026-11-19"
+      },
+      "flags": []
+    },
+    {
+      "a": "ym",
+      "b": "DTWEXBGS",
+      "status": "available",
+      "latest": "2026-11-20",
+      "age_days": 4,
+      "paired_n": 3706,
+      "correlations": {
+        "20": -0.2759,
+        "60": -0.0456,
+        "252": -0.0769
+      },
+      "prior60": -0.0229,
+      "shift60": -0.0227,
+      "divergence": {
+        "z": -0.0034,
+        "observed": 0.058675,
+        "fitted": 0.05959,
+        "beta": -0.010663,
+        "training_n": 60,
+        "training_end": "2026-11-19"
+      },
+      "flags": []
+    },
+    {
+      "a": "rty",
+      "b": "gold",
+      "status": "available",
+      "latest": "2026-11-23",
+      "age_days": 1,
+      "paired_n": 1934,
+      "correlations": {
+        "20": 0.5157,
+        "60": 0.4774,
+        "252": 0.322
+      },
+      "prior60": 0.2919,
+      "shift60": 0.1855,
+      "divergence": {
+        "z": 1.5482,
+        "observed": 3.795734,
+        "fitted": 1.496412,
+        "beta": 0.525276,
+        "training_n": 60,
+        "training_end": "2026-11-20"
+      },
+      "flags": []
+    },
+    {
+      "a": "rty",
+      "b": "cl",
+      "status": "available",
+      "latest": "2026-11-23",
+      "age_days": 1,
+      "paired_n": 2043,
+      "correlations": {
+        "20": -0.5594,
+        "60": -0.4142,
+        "252": -0.3567
+      },
+      "prior60": -0.4752,
+      "shift60": 0.061,
+      "divergence": {
+        "z": -0.4665,
+        "observed": -4.642936,
+        "fitted": -3.252582,
+        "beta": -0.925051,
+        "training_n": 60,
+        "training_end": "2026-11-20"
+      },
+      "flags": []
+    },
+    {
+      "a": "rty",
+      "b": "6e",
+      "status": "available",
+      "latest": "2026-11-23",
+      "age_days": 1,
+      "paired_n": 2045,
+      "correlations": {
+        "20": -0.0716,
+        "60": 0.0996,
+        "252": 0.2286
+      },
+      "prior60": 0.3584,
+      "shift60": -0.2588,
+      "divergence": {
+        "z": -2.1093,
+        "observed": -0.607488,
+        "fitted": 0.096392,
+        "beta": 0.04974,
+        "training_n": 60,
+        "training_end": "2026-11-20"
+      },
+      "flags": []
+    },
+    {
+      "a": "rty",
+      "b": "btc",
+      "status": "available",
+      "latest": "2026-11-23",
+      "age_days": 1,
+      "paired_n": 1950,
+      "correlations": {
+        "20": 0.7514,
+        "60": 0.4977,
+        "252": 0.4936
+      },
+      "prior60": 0.4469,
+      "shift60": 0.0508,
+      "divergence": {
+        "z": 0.5437,
+        "observed": 4.805076,
+        "fitted": 3.43182,
+        "beta": 0.999374,
+        "training_n": 60,
+        "training_end": "2026-11-20"
+      },
+      "flags": []
+    },
+    {
+      "a": "rty",
+      "b": "VIXCLS",
+      "status": "available",
+      "latest": "2026-11-20",
+      "age_days": 4,
+      "paired_n": 1707,
+      "correlations": {
+        "20": -0.9448,
+        "60": -0.6208,
+        "252": -0.4193
+      },
+      "prior60": -0.1018,
+      "shift60": -0.519,
+      "divergence": {
+        "z": 2.4527,
+        "observed": 7.45,
+        "fitted": 2.979744,
+        "beta": -1.085592,
+        "training_n": 60,
+        "training_end": "2026-11-19"
+      },
+      "flags": [
+        "correlation_shift"
+      ]
+    },
+    {
+      "a": "rty",
+      "b": "BAMLH0A0HYM2",
+      "status": "available",
+      "latest": "2026-11-20",
+      "age_days": 4,
+      "paired_n": 536,
+      "correlations": {
+        "20": -0.6984,
+        "60": -0.3917,
+        "252": -0.2724
+      },
+      "prior60": -0.1133,
+      "shift60": -0.2784,
+      "divergence": {
+        "z": 3.279,
+        "observed": 24.0,
+        "fitted": 5.371568,
+        "beta": -1.565117,
+        "training_n": 60,
+        "training_end": "2026-11-19"
+      },
+      "flags": [
+        "unusual_residual"
+      ]
+    },
+    {
+      "a": "rty",
+      "b": "DGS2",
+      "status": "available",
+      "latest": "2026-11-20",
+      "age_days": 4,
+      "paired_n": 1674,
+      "correlations": {
+        "20": 0.5468,
+        "60": 0.3574,
+        "252": 0.145
+      },
+      "prior60": 0.0953,
+      "shift60": 0.2621,
+      "divergence": {
+        "z": -1.5088,
+        "observed": -13.0,
+        "fitted": -4.39651,
+        "beta": 1.471347,
+        "training_n": 60,
+        "training_end": "2026-11-19"
+      },
+      "flags": []
+    },
+    {
+      "a": "rty",
+      "b": "DTWEXBGS",
+      "status": "available",
+      "latest": "2026-11-20",
+      "age_days": 4,
+      "paired_n": 1652,
+      "correlations": {
+        "20": 0.0203,
+        "60": 0.1498,
+        "252": -0.0172
+      },
+      "prior60": -0.0476,
+      "shift60": 0.1974,
+      "divergence": {
+        "z": 0.4537,
+        "observed": 0.058675,
+        "fitted": -0.062603,
+        "beta": 0.037708,
+        "training_n": 60,
+        "training_end": "2026-11-19"
+      },
+      "flags": []
+    },
+    {
+      "a": "gold",
+      "b": "cl",
+      "status": "available",
+      "latest": "2026-11-23",
+      "age_days": 1,
+      "paired_n": 2868,
+      "correlations": {
+        "20": -0.6146,
+        "60": -0.3187,
+        "252": -0.1678
+      },
+      "prior60": -0.293,
+      "shift60": -0.0257,
+      "divergence": {
+        "z": -0.7916,
+        "observed": -4.642936,
+        "fitted": -2.196774,
+        "beta": -0.53904,
+        "training_n": 60,
+        "training_end": "2026-11-20"
+      },
+      "flags": []
+    },
+    {
+      "a": "gold",
+      "b": "6e",
+      "status": "available",
+      "latest": "2026-11-23",
+      "age_days": 1,
+      "paired_n": 2870,
+      "correlations": {
+        "20": 0.1408,
+        "60": 0.3433,
+        "252": 0.354
+      },
+      "prior60": 0.4969,
+      "shift60": -0.1536,
+      "divergence": {
+        "z": -2.9764,
+        "observed": -0.607488,
+        "fitted": 0.300914,
+        "beta": 0.091532,
+        "training_n": 60,
+        "training_end": "2026-11-20"
+      },
+      "flags": [
+        "unusual_residual"
+      ]
+    },
+    {
+      "a": "gold",
+      "b": "btc",
+      "status": "available",
+      "latest": "2026-11-23",
+      "age_days": 1,
+      "paired_n": 1853,
+      "correlations": {
+        "20": 0.6281,
+        "60": 0.5873,
+        "252": 0.2652
+      },
+      "prior60": 0.4079,
+      "shift60": 0.1794,
+      "divergence": {
+        "z": 0.386,
+        "observed": 4.805076,
+        "fitted": 3.894146,
+        "beta": 0.96606,
+        "training_n": 60,
+        "training_end": "2026-11-20"
+      },
+      "flags": []
+    },
+    {
+      "a": "gold",
+      "b": "VIXCLS",
+      "status": "available",
+      "latest": "2026-11-20",
+      "age_days": 4,
+      "paired_n": 2405,
+      "correlations": {
+        "20": -0.2636,
+        "60": -0.1508,
+        "252": -0.1643
+      },
+      "prior60": -0.2337,
+      "shift60": 0.0829,
+      "divergence": {
+        "z": 3.2822,
+        "observed": 7.45,
+        "fitted": 0.111168,
+        "beta": -0.002865,
+        "training_n": 60,
+        "training_end": "2026-11-19"
+      },
+      "flags": [
+        "unusual_residual"
+      ]
+    },
+    {
+      "a": "gold",
+      "b": "BAMLH0A0HYM2",
+      "status": "available",
+      "latest": "2026-11-20",
+      "age_days": 4,
+      "paired_n": 536,
+      "correlations": {
+        "20": -0.3228,
+        "60": -0.1593,
+        "252": -0.1095
+      },
+      "prior60": 0.0801,
+      "shift60": -0.2394,
+      "divergence": {
+        "z": 3.8369,
+        "observed": 24.0,
+        "fitted": 1.055924,
+        "beta": 0.034535,
+        "training_n": 60,
+        "training_end": "2026-11-19"
+      },
+      "flags": [
+        "unusual_residual"
+      ]
+    },
+    {
+      "a": "gold",
+      "b": "DGS2",
+      "status": "available",
+      "latest": "2026-11-20",
+      "age_days": 4,
+      "paired_n": 2363,
+      "correlations": {
+        "20": 0.1224,
+        "60": 0.1395,
+        "252": 0.0478
+      },
+      "prior60": -0.1141,
+      "shift60": 0.2536,
+      "divergence": {
+        "z": -2.0574,
+        "observed": -13.0,
+        "fitted": -0.75852,
+        "beta": 0.079651,
+        "training_n": 60,
+        "training_end": "2026-11-19"
+      },
+      "flags": []
+    },
+    {
+      "a": "gold",
+      "b": "DTWEXBGS",
+      "status": "available",
+      "latest": "2026-11-20",
+      "age_days": 4,
+      "paired_n": 2321,
+      "correlations": {
+        "20": -0.377,
+        "60": -0.0922,
+        "252": -0.184
+      },
+      "prior60": -0.0757,
+      "shift60": -0.0165,
+      "divergence": {
+        "z": -0.2109,
+        "observed": 0.058675,
+        "fitted": 0.115576,
+        "beta": -0.015992,
+        "training_n": 60,
+        "training_end": "2026-11-19"
+      },
+      "flags": []
+    },
+    {
+      "a": "cl",
+      "b": "6e",
+      "status": "available",
+      "latest": "2026-11-23",
+      "age_days": 1,
+      "paired_n": 5700,
+      "correlations": {
+        "20": -0.2261,
+        "60": 0.0594,
+        "252": -0.1957
+      },
+      "prior60": -0.2401,
+      "shift60": 0.2995,
+      "divergence": {
+        "z": -1.5021,
+        "observed": -0.607488,
+        "fitted": -0.097186,
+        "beta": 0.003347,
+        "training_n": 60,
+        "training_end": "2026-11-20"
+      },
+      "flags": []
+    },
+    {
+      "a": "cl",
+      "b": "btc",
+      "status": "available",
+      "latest": "2026-11-23",
+      "age_days": 1,
+      "paired_n": 1946,
+      "correlations": {
+        "20": -0.4271,
+        "60": -0.2311,
+        "252": -0.171
+      },
+      "prior60": -0.308,
+      "shift60": 0.0769,
+      "divergence": {
+        "z": 1.4803,
+        "observed": 4.805076,
+        "fitted": 0.686551,
+        "beta": -0.176276,
+        "training_n": 60,
+        "training_end": "2026-11-20"
+      },
+      "flags": []
+    },
+    {
+      "a": "cl",
+      "b": "VIXCLS",
+      "status": "available",
+      "latest": "2026-11-20",
+      "age_days": 4,
+      "paired_n": 3078,
+      "correlations": {
+        "20": 0.4824,
+        "60": 0.2313,
+        "252": 0.1553
+      },
+      "prior60": 0.1876,
+      "shift60": 0.0437,
+      "divergence": {
+        "z": 3.3455,
+        "observed": 7.45,
+        "fitted": 0.196468,
+        "beta": 0.194814,
+        "training_n": 60,
+        "training_end": "2026-11-19"
+      },
+      "flags": [
+        "unusual_residual"
+      ]
+    },
+    {
+      "a": "cl",
+      "b": "BAMLH0A0HYM2",
+      "status": "available",
+      "latest": "2026-11-20",
+      "age_days": 4,
+      "paired_n": 536,
+      "correlations": {
+        "20": 0.2205,
+        "60": 0.0986,
+        "252": -0.0137
+      },
+      "prior60": -0.0907,
+      "shift60": 0.1893,
+      "divergence": {
+        "z": 3.8112,
+        "observed": 24.0,
+        "fitted": 1.326184,
+        "beta": 0.216309,
+        "training_n": 60,
+        "training_end": "2026-11-19"
+      },
+      "flags": [
+        "unusual_residual"
+      ]
+    },
+    {
+      "a": "cl",
+      "b": "DGS2",
+      "status": "available",
+      "latest": "2026-11-20",
+      "age_days": 4,
+      "paired_n": 4752,
+      "correlations": {
+        "20": -0.2774,
+        "60": -0.0322,
+        "252": 0.0722
+      },
+      "prior60": 0.2262,
+      "shift60": -0.2584,
+      "divergence": {
+        "z": -2.1205,
+        "observed": -13.0,
+        "fitted": -0.380663,
+        "beta": 0.004455,
+        "training_n": 60,
+        "training_end": "2026-11-19"
+      },
+      "flags": []
+    },
+    {
+      "a": "cl",
+      "b": "DTWEXBGS",
+      "status": "available",
+      "latest": "2026-11-20",
+      "age_days": 4,
+      "paired_n": 3704,
+      "correlations": {
+        "20": 0.2115,
+        "60": -0.0717,
+        "252": -0.0363
+      },
+      "prior60": 0.0382,
+      "shift60": -0.1099,
+      "divergence": {
+        "z": 0.0843,
+        "observed": 0.058675,
+        "fitted": 0.035898,
+        "beta": -0.007257,
+        "training_n": 60,
+        "training_end": "2026-11-19"
+      },
+      "flags": []
+    },
+    {
+      "a": "6e",
+      "b": "btc",
+      "status": "available",
+      "latest": "2026-11-23",
+      "age_days": 1,
+      "paired_n": 1948,
+      "correlations": {
+        "20": -0.122,
+        "60": 0.1811,
+        "252": 0.1708
+      },
+      "prior60": 0.3865,
+      "shift60": -0.2054,
+      "divergence": {
+        "z": 2.1507,
+        "observed": 4.805076,
+        "fitted": -1.141241,
+        "beta": 1.900368,
+        "training_n": 60,
+        "training_end": "2026-11-20"
+      },
+      "flags": []
+    },
+    {
+      "a": "6e",
+      "b": "VIXCLS",
+      "status": "available",
+      "latest": "2026-11-20",
+      "age_days": 4,
+      "paired_n": 3079,
+      "correlations": {
+        "20": -0.055,
+        "60": 0.013,
+        "252": -0.0415
+      },
+      "prior60": -0.1412,
+      "shift60": 0.1542,
+      "divergence": {
+        "z": 3.2881,
+        "observed": 7.45,
+        "fitted": 0.099023,
+        "beta": 0.109371,
+        "training_n": 60,
+        "training_end": "2026-11-19"
+      },
+      "flags": [
+        "unusual_residual"
+      ]
+    },
+    {
+      "a": "6e",
+      "b": "BAMLH0A0HYM2",
+      "status": "available",
+      "latest": "2026-11-20",
+      "age_days": 4,
+      "paired_n": 536,
+      "correlations": {
+        "20": -0.0373,
+        "60": 0.0477,
+        "252": -0.0603
+      },
+      "prior60": -0.0119,
+      "shift60": 0.0596,
+      "divergence": {
+        "z": 3.814,
+        "observed": 24.0,
+        "fitted": 1.226882,
+        "beta": 0.939428,
+        "training_n": 60,
+        "training_end": "2026-11-19"
+      },
+      "flags": [
+        "unusual_residual"
+      ]
+    },
+    {
+      "a": "6e",
+      "b": "DGS2",
+      "status": "available",
+      "latest": "2026-11-20",
+      "age_days": 4,
+      "paired_n": 4743,
+      "correlations": {
+        "20": -0.1424,
+        "60": -0.1095,
+        "252": -0.0957
+      },
+      "prior60": -0.2098,
+      "shift60": 0.1003,
+      "divergence": {
+        "z": -2.139,
+        "observed": -13.0,
+        "fitted": -0.347839,
+        "beta": -1.915034,
+        "training_n": 60,
+        "training_end": "2026-11-19"
+      },
+      "flags": []
+    },
+    {
+      "a": "6e",
+      "b": "DTWEXBGS",
+      "status": "available",
+      "latest": "2026-11-20",
+      "age_days": 4,
+      "paired_n": 3713,
+      "correlations": {
+        "20": -0.409,
+        "60": -0.0267,
+        "252": -0.2692
+      },
+      "prior60": -0.3076,
+      "shift60": 0.2809,
+      "divergence": {
+        "z": 0.0666,
+        "observed": 0.058675,
+        "fitted": 0.040652,
+        "beta": -0.021749,
+        "training_n": 60,
+        "training_end": "2026-11-19"
+      },
+      "flags": []
+    },
+    {
+      "a": "btc",
+      "b": "VIXCLS",
+      "status": "available",
+      "latest": "2026-11-20",
+      "age_days": 4,
+      "paired_n": 1628,
+      "correlations": {
+        "20": -0.6221,
+        "60": -0.3566,
+        "252": -0.3251
+      },
+      "prior60": -0.2248,
+      "shift60": -0.1318,
+      "divergence": {
+        "z": 2.7637,
+        "observed": 7.45,
+        "fitted": 1.505802,
+        "beta": -0.237195,
+        "training_n": 60,
+        "training_end": "2026-11-19"
+      },
+      "flags": [
+        "unusual_residual"
+      ]
+    },
+    {
+      "a": "btc",
+      "b": "BAMLH0A0HYM2",
+      "status": "available",
+      "latest": "2026-11-20",
+      "age_days": 4,
+      "paired_n": 536,
+      "correlations": {
+        "20": -0.5175,
+        "60": -0.2577,
+        "252": -0.2216
+      },
+      "prior60": -0.1835,
+      "shift60": -0.0742,
+      "divergence": {
+        "z": 3.506,
+        "observed": 24.0,
+        "fitted": 3.267643,
+        "beta": -0.345521,
+        "training_n": 60,
+        "training_end": "2026-11-19"
+      },
+      "flags": [
+        "unusual_residual"
+      ]
+    },
+    {
+      "a": "btc",
+      "b": "DGS2",
+      "status": "available",
+      "latest": "2026-11-20",
+      "age_days": 4,
+      "paired_n": 1596,
+      "correlations": {
+        "20": 0.3461,
+        "60": 0.1561,
+        "252": 0.0929
+      },
+      "prior60": 0.1761,
+      "shift60": -0.02,
+      "divergence": {
+        "z": -1.9703,
+        "observed": -13.0,
+        "fitted": -1.298672,
+        "beta": 0.151623,
+        "training_n": 60,
+        "training_end": "2026-11-19"
+      },
+      "flags": []
+    },
+    {
+      "a": "btc",
+      "b": "DTWEXBGS",
+      "status": "available",
+      "latest": "2026-11-20",
+      "age_days": 4,
+      "paired_n": 1576,
+      "correlations": {
+        "20": -0.11,
+        "60": -0.0189,
+        "252": -0.0664
+      },
+      "prior60": -0.1029,
+      "shift60": 0.084,
+      "divergence": {
+        "z": 0.0355,
+        "observed": 0.058675,
+        "fitted": 0.049064,
+        "beta": -0.00146,
+        "training_n": 60,
+        "training_end": "2026-11-19"
+      },
+      "flags": []
+    },
+    {
+      "a": "VIXCLS",
+      "b": "BAMLH0A0HYM2",
+      "status": "available",
+      "latest": "2026-11-20",
+      "age_days": 4,
+      "paired_n": 759,
+      "correlations": {
+        "20": 0.7455,
+        "60": 0.6435,
+        "252": 0.5976
+      },
+      "prior60": 0.3276,
+      "shift60": 0.3159,
+      "divergence": {
+        "z": 1.6518,
+        "observed": 24.0,
+        "fitted": 14.592836,
+        "beta": 1.816266,
+        "training_n": 60,
+        "training_end": "2026-11-19"
+      },
+      "flags": []
+    },
+    {
+      "a": "VIXCLS",
+      "b": "DGS2",
+      "status": "available",
+      "latest": "2026-11-20",
+      "age_days": 4,
+      "paired_n": 4145,
+      "correlations": {
+        "20": -0.6064,
+        "60": -0.3476,
+        "252": -0.0249
+      },
+      "prior60": 0.3319,
+      "shift60": -0.6795,
+      "divergence": {
+        "z": -1.3613,
+        "observed": -13.0,
+        "fitted": -4.810562,
+        "beta": -0.763588,
+        "training_n": 60,
+        "training_end": "2026-11-19"
+      },
+      "flags": [
+        "correlation_shift"
+      ]
+    },
+    {
+      "a": "VIXCLS",
+      "b": "DTWEXBGS",
+      "status": "available",
+      "latest": "2026-11-20",
+      "age_days": 4,
+      "paired_n": 4081,
+      "correlations": {
+        "20": 0.0867,
+        "60": 0.1196,
+        "252": 0.3204
+      },
+      "prior60": 0.4597,
+      "shift60": -0.3401,
+      "divergence": {
+        "z": -0.4708,
+        "observed": 0.058675,
+        "fitted": 0.16986,
+        "beta": 0.013771,
+        "training_n": 60,
+        "training_end": "2026-11-19"
+      },
+      "flags": []
+    },
+    {
+      "a": "BAMLH0A0HYM2",
+      "b": "DGS2",
+      "status": "available",
+      "latest": "2026-11-20",
+      "age_days": 4,
+      "paired_n": 711,
+      "correlations": {
+        "20": -0.7135,
+        "60": -0.4937,
+        "252": -0.3101
+      },
+      "prior60": -0.2259,
+      "shift60": -0.2678,
+      "divergence": {
+        "z": -0.8555,
+        "observed": -13.0,
+        "fitted": -8.188835,
+        "beta": -0.39434,
+        "training_n": 60,
+        "training_end": "2026-11-19"
+      },
+      "flags": []
+    },
+    {
+      "a": "BAMLH0A0HYM2",
+      "b": "DTWEXBGS",
+      "status": "available",
+      "latest": "2026-11-20",
+      "age_days": 4,
+      "paired_n": 710,
+      "correlations": {
+        "20": -0.0716,
+        "60": 0.2053,
+        "252": 0.3922
+      },
+      "prior60": 0.3562,
+      "shift60": -0.1509,
+      "divergence": {
+        "z": -0.8028,
+        "observed": 0.058675,
+        "fitted": 0.244959,
+        "beta": 0.007739,
+        "training_n": 60,
+        "training_end": "2026-11-19"
+      },
+      "flags": []
+    },
+    {
+      "a": "DGS2",
+      "b": "DTWEXBGS",
+      "status": "available",
+      "latest": "2026-11-20",
+      "age_days": 4,
+      "paired_n": 5123,
+      "correlations": {
+        "20": 0.3095,
+        "60": 0.2334,
+        "252": 0.276
+      },
+      "prior60": 0.2063,
+      "shift60": 0.0271,
+      "divergence": {
+        "z": 0.4996,
+        "observed": 0.058675,
+        "fitted": -0.057695,
+        "beta": 0.009336,
+        "training_n": 60,
+        "training_end": "2026-11-19"
+      },
+      "flags": []
+    }
+  ]
+}
