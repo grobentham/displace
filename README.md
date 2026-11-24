@@ -217,3 +217,7 @@ Atlas uses the World Bank Indicators API v2, World Development Indicators source
 ## Unified intelligence terminal
 
 `site/terminal.html` brings ten published data snapshots into one workspace using independently loaded, source-dated panels. It distinguishes model tiers, shows missing panels without hiding other data, uses New York time for upcoming releases, compares Atlas growth using a common reference year, and links back to the full research and trading tools. `site/assets/terminal.css` and `site/assets/terminal.js` are separate modules; utility regression tests run in CI. The terminal is a read-only snapshot viewer, not a live trading feed or uptime probe.
+
+## Product consolidation
+
+Research pages share a dark intelligence stylesheet and consistent navigation; page-specific styles remain in external CSS files. The original trading homepage and replay desk keep their legacy layouts. `search.html` searches tools, report titles and country names; country deep links select the profile. `engine/sitebuild.py` creates escaped crawlable report HTML and a project sitemap after the strict gate, before saving and deploying the candidate. Static report pages are derived from the verified archive, not a replacement for original JSON. Sitemap is available at `/displace/sitemap.xml`; GitHub Pages project paths are not a separate domain root, so robots.txt submission is not claimed. Source terms, legal review and a full legacy frontend refactor remain open.
