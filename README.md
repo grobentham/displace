@@ -225,3 +225,5 @@ Research pages share a dark intelligence stylesheet and consistent navigation; p
 ## Research validation
 
 The separate implementation in `engine/validation.py` recalculates Discovery V2 conditions and rates, verifies frozen dataset fingerprints, compares marginal effects with the original within-week estimand, applies approximate 28-day cluster-robust intervals and family correction, and evaluates an exploratory early/late open-to-close cost proxy for directional conditions. It publishes discrepancies and never promotes models. This is internal code-path replication using the same cached market data, not third-party validation or point-in-time/executable strategy testing. See `research/validation-plan-v1.json`.
+
+The validation engine includes a deterministic IID-direction null control. The paired-week contrast can create a spurious effect when the previous direction overlaps the next outcome within the same week; the new marginal diagnostics answer a different question. The 30-cluster requirement cannot be met by a six-month prospective block, so those blocks remain descriptive unless a separately registered longer evaluation is conducted.

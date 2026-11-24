@@ -5,6 +5,8 @@ import itertools
 import json
 import math
 import os
+import random
+import statistics as st
 from pathlib import Path
 from statistics import NormalDist
 
@@ -98,6 +100,48 @@ def compare(result,original,matched):
             return "mismatch"
     return "reproduced"
 
+def null_control(plan):
+    """IID Bernoulli returns: previous direction has no predictive information.
+    Reproduce the paired-week estimand on five-observation blocks and compare
+    with marginal rates. This synthetic diagnostic is not market evidence.
+    """
+    rng=random.Random(20261124)
+    marginal_effects=[]
+    weekly_effects=[]
+    weekly_flags=0
+    marginal_flags=0
+    alpha=plan["alpha"]/192
+    z=NormalDist().inv_cdf(1-alpha/2)
+    for _ in range(100):
+        bits=[rng.randrange(2) for _ in range(1301)]
+        pairs=list(zip(bits[:-1],bits[1:]))
+        yes=[y for x,y in pairs if x]
+        no=[y for x,y in pairs if not x]
+        marginal_effects.append(st.mean(yes)-st.mean(no))
+        diffs=[]
+        for i in range(0,len(pairs),5):
+            week=pairs[i:i+5]
+            a=[y for x,y in week if x]
+            b=[y for x,y in week if not x]
+            if a and b:
+                diffs.append(st.mean(a)-st.mean(b))
+        effect=st.mean(diffs)
+        se=st.stdev(diffs)/math.sqrt(len(diffs))
+        weekly_effects.append(effect)
+        weekly_flags+=int(se>0 and abs(effect)>z*se)
+        start=dt.date(2020,1,6)
+        rows=[((start+dt.timedelta(days=(i//5)*7+i%5)).isoformat(),
+               {"previous_up":bool(x)},{"next_positive_close":y},0.)
+              for i,(x,y) in enumerate(pairs)]
+        result=marginal(rows,"previous_up","next_positive_close",plan,alpha)
+        marginal_flags+=int(result["status"]=="marginal_candidate")
+    return {"seed":20261124,"replications":100,"observations_per_replication":1300,
+            "data_generating_process":"Independent fair Bernoulli directions; predictor is previous direction",
+            "mean_marginal_effect":st.mean(marginal_effects),"mean_weekly_effect":st.mean(weekly_effects),
+            "weekly_threshold_flags":weekly_flags,"marginal_threshold_flags":marginal_flags,
+            "adjusted_alpha_per_test":alpha,
+            "interpretation":"Overlapping predictor/outcome sequences within paired weeks can induce a spurious within-week association under an IID null. This is a targeted diagnostic, not a general proof of validity of the replacement interval."}
+
 def evaluate(plan,registered,archive,datasets,now):
     if archive["plan_hash"]!=digest(registered):
         raise ValueError("Discovery plan mismatch")
@@ -128,10 +172,11 @@ def evaluate(plan,registered,archive,datasets,now):
                     results.append(r)
         batches.append({"kind":b["kind"],"start":b["start"],"end":b["end"],"results":results})
     return {"version":1,"asof":now.isoformat(),"plan_hash":digest(plan),"discovery_plan_hash":digest(registered),
-            "family_alpha":alpha,"batches":batches,"policy":plan["policy"],
+            "family_alpha":alpha,"batches":batches,"null_control":null_control(plan),"policy":plan["policy"],
             "unresolved":["No independent vendor feed or point-in-time snapshot archive.",
             "No exact futures exchange-session calendar, contract-roll or fill simulation.",
             "Historical splits are exploratory; no prospective evidence is promoted.",
+            "Six-month prospective batches cannot satisfy the 30-cluster minimum; their marginal diagnostics remain descriptive until a separately registered longer evaluation is available.",
             "Within-week conditioning can answer a different question from unconditional marginal association.",
             "Only Discovery V2 is recalculated; other engines need separate validation."]}
 

@@ -11,7 +11,7 @@ def main():
     rows=[]
     d=dt.date(2019,1,1)
     price=100.
-    while d<dt.date(2026,11,2):
+    while d<dt.date(2026,11,5):
         if d.weekday()<5:
             start=price
             price*=1+rnd.uniform(-.02,.02)
@@ -29,11 +29,17 @@ def main():
     data={m:rows for m in registered["markets"]}
     frozen=D.run(registered,data,dt.date(2026,11,24))
     out=V.evaluate(plan,registered,frozen,data,dt.datetime(2026,11,24,tzinfo=dt.timezone.utc))
+    assert len(frozen["batches"])==1, "fixture must include a completed candle on or after the exclusive end"
     assert len(out["batches"][0]["results"])==192
     assert all(r["reproduction"]=="reproduced" for r in out["batches"][0]["results"])
     assert not V.check(out,plan,registered)
     empty=V.evaluate(plan,registered,frozen,{},dt.datetime(2026,11,24,tzinfo=dt.timezone.utc))
     assert all(r["reproduction"]=="different_input_vintage" for r in empty["batches"][0]["results"])
+    null=V.null_control(plan)
+    assert null["replications"]==100
+    assert abs(null["mean_marginal_effect"])<.03
+    assert null["mean_weekly_effect"]<-.10
+    assert null==V.null_control(plan)
     print("validation tests passed")
 if __name__=="__main__":
     main()
