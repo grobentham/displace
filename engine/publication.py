@@ -16,6 +16,9 @@ RECEIPTS = ROOT / "site/data/bias/publication-receipts.json"
 
 def identity(row):
     payload = {k: row.get(k) for k in FIELDS}
+    # Preserve legacy receipt IDs; bind new forecasts to their captured input fingerprints.
+    if row.get("inputProvenance") is not None:
+        payload["inputProvenance"] = row["inputProvenance"]
     return hashlib.sha256(json.dumps(payload, sort_keys=True, separators=(",", ":"), allow_nan=False).encode()).hexdigest()
 
 def load(path=RECEIPTS):

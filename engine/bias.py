@@ -866,6 +866,7 @@ def run(now=None, fetch=download, fetch_series=fred_download, markets=None):
     entries = [e for e in entries if "p_up" in e]
     series = {sid: sync_series(sid, now, fetch_series) for sid in SERIES}
     tiers, fomc = calendar_tiers()
+    import provenance as PR
     ctxs, rows_by, notes = {}, {}, {}
     ib = iron_brain_sessions() if fetch is download else {}
     patches = load_patches()
@@ -911,6 +912,9 @@ def run(now=None, fetch=download, fetch_series=fred_download, markets=None):
             continue
         r["tests"] = {"signals": n_sig, "calendar": len(EVENTS) * len(ctxs)}
         r["dataNotes"] = notes.get(m, [])[-3:]
+        r["inputProvenance"] = {"capture_id": PR.capture_id(), "clean_candles_sha256": PR.fingerprint(ctx["rows"]),
+                                "calendar_sha256": PR.fingerprint({"tiers":tiers,"fomc":sorted(fomc)}),
+                                "cross_series_sha256": PR.fingerprint(series)}
         out[m] = r
         if not any(e["market"] == m and e["candle"] == r["candle"] for e in entries):
             t1 = next((t for t in r["touch"] if t["k"] == 1.0), None)
@@ -921,6 +925,7 @@ def run(now=None, fetch=download, fetch_series=fred_download, markets=None):
                             "up1": t1["up"] if t1 else None, "dn1": t1["dn"] if t1 else None,
                             "p_up1": t1["up_p"] if t1 else None, "p_dn1": t1["dn_p"] if t1 else None,
                             "logged": now.isoformat(timespec="minutes"),
+                            "inputProvenance": r["inputProvenance"],
                             "eligible": now < window_start(next_session(r["candle"]))})
     if not out:
         log("bias: nothing to publish; the last file stays live")

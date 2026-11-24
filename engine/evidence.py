@@ -59,7 +59,7 @@ def ledger(rows,receipts,now):
             status="verified_overdue"
         else:
             status="verified_pending"
-        item={k:row.get(k) for k in ("market","candle","for","logged","tier","bias","p_up","base_up","p_high","p_low","range_lo","range_hi","up","highTaken","lowTaken","inRange","day","correction")}
+        item={k:row.get(k) for k in ("market","candle","for","logged","tier","bias","p_up","base_up","p_high","p_low","range_lo","range_hi","up","highTaken","lowTaken","inRange","day","correction","inputProvenance")}
         item.update(id=identity,status=status,source=path,receipt=rec,target_start=start.isoformat() if start else None)
         out.append(item)
     return sorted(out,key=lambda r:(r["for"],r["market"],r["candle"]))
