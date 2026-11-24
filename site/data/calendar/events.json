@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-23",
+ "updated": "2026-11-24",
  "through": "2027-04-07",
  "events": [
   {
@@ -564,7 +564,11 @@
     }
    ],
    "forecast": "93K",
-   "fsrc": "TradingView consensus"
+   "fsrc": "TradingView consensus",
+   "brief": {
+    "asof": "2026-11-24",
+    "context": "The previous reading was 165K. Jobs and wages are half of the Fed's mandate, and payrolls are often the most volatile release of the month. The next Fed decision is Dec 8–9."
+   }
   },
   {
    "date": "2026-12-04",
@@ -941,7 +945,18 @@
    "src": "BLS",
    "note": "",
    "id": "20270105-jolts-job-openings-nov",
-   "metric": "job openings"
+   "metric": "job openings",
+   "previous": "7.52M",
+   "components": [
+    {
+     "label": "Job openings",
+     "previous": "7.52M"
+    },
+    {
+     "label": "Quits rate",
+     "previous": "2.1%"
+    }
+   ]
   },
   {
    "id": "20270106-ism-services-pmi-dec",
