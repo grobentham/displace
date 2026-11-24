@@ -1,5 +1,5 @@
 {
- "asof": "2026-11-23T17:57-05:00",
+ "asof": "2026-11-23T19:25-05:00",
  "version": 4,
  "assets": {
   "gold": "Gold, close",
@@ -1266,7 +1266,7 @@
    "y2": {
     "b": 0.1601,
     "k": 0.5,
-    "n": 381,
+    "n": 382,
     "since": "2011-01-25",
     "bt": {
      "calls": 98,
@@ -1279,7 +1279,7 @@
       0.51
      ],
      "recent": 0.5,
-     "tested": 321
+     "tested": 322
     },
     "proven": false,
     "why": "not significant after correcting for the number of rules tested"
@@ -3103,8 +3103,8 @@
       "med": 2.0
      },
      "inline": {
-      "n": 97,
-      "up": 0.474,
+      "n": 98,
+      "up": 0.469,
       "med": -1.0
      },
      "cool": {
@@ -3646,12 +3646,12 @@
    },
    "move": {
     "gold": {
-     "pct": 1.85,
-     "lo": 1.22,
-     "hi": 3.07,
-     "normal": 1.94,
+     "pct": 1.81,
+     "lo": 1.19,
+     "hi": 3.0,
+     "normal": 1.9,
      "mult": 0.954,
-     "pts": 67.7,
+     "pts": 65.8,
      "n": 189,
      "proven": false,
      "why": "no better than treating it as a normal day"
@@ -3771,12 +3771,12 @@
    },
    "move": {
     "gold": {
-     "pct": 1.83,
-     "lo": 1.16,
-     "hi": 2.92,
-     "normal": 1.94,
+     "pct": 1.79,
+     "lo": 1.14,
+     "hi": 2.85,
+     "normal": 1.9,
      "mult": 0.943,
-     "pts": 66.9,
+     "pts": 65.0,
      "n": 165,
      "proven": false,
      "why": "no better than treating it as a normal day"
@@ -3885,12 +3885,12 @@
    },
    "move": {
     "gold": {
-     "pct": 2.0,
-     "lo": 1.09,
-     "hi": 3.74,
-     "normal": 1.94,
+     "pct": 1.95,
+     "lo": 1.06,
+     "hi": 3.65,
+     "normal": 1.9,
      "mult": 1.029,
-     "pts": 73.0,
+     "pts": 71.0,
      "n": 836,
      "proven": false,
      "why": "no better than treating it as a normal day"
@@ -3901,7 +3901,7 @@
      "hi": 3.3,
      "normal": 1.53,
      "mult": 1.067,
-     "pts": 437.7,
+     "pts": 437.8,
      "n": 858,
      "proven": false,
      "why": "no better than treating it as a normal day"
@@ -4001,12 +4001,12 @@
    },
    "move": {
     "gold": {
-     "pct": 2.14,
-     "lo": 1.36,
-     "hi": 3.93,
-     "normal": 1.94,
+     "pct": 2.09,
+     "lo": 1.33,
+     "hi": 3.84,
+     "normal": 1.9,
      "mult": 1.101,
-     "pts": 78.1,
+     "pts": 75.9,
      "n": 18,
      "proven": false,
      "why": "too few tested releases"
@@ -4017,7 +4017,7 @@
      "hi": 2.93,
      "normal": 1.53,
      "mult": 1.322,
-     "pts": 542.3,
+     "pts": 542.4,
      "n": 29,
      "proven": false,
      "why": "too few tested releases"
@@ -4101,12 +4101,12 @@
    },
    "move": {
     "gold": {
-     "pct": 1.89,
-     "lo": 1.17,
-     "hi": 3.56,
-     "normal": 1.94,
+     "pct": 1.84,
+     "lo": 1.14,
+     "hi": 3.48,
+     "normal": 1.9,
      "mult": 0.972,
-     "pts": 68.9,
+     "pts": 67.0,
      "n": 170,
      "proven": false,
      "why": "no better than treating it as a normal day"
@@ -4242,12 +4242,12 @@
    },
    "move": {
     "gold": {
-     "pct": 2.27,
-     "lo": 1.22,
-     "hi": 3.74,
-     "normal": 1.94,
+     "pct": 2.22,
+     "lo": 1.2,
+     "hi": 3.66,
+     "normal": 1.9,
      "mult": 1.17,
-     "pts": 83.0,
+     "pts": 80.7,
      "n": 169,
      "proven": false,
      "why": "not significant after correcting for the number of rules tested"
@@ -4368,12 +4368,12 @@
    },
    "move": {
     "gold": {
-     "pct": 1.98,
-     "lo": 1.26,
-     "hi": 3.11,
-     "normal": 1.94,
+     "pct": 1.93,
+     "lo": 1.23,
+     "hi": 3.04,
+     "normal": 1.9,
      "mult": 1.02,
-     "pts": 72.3,
+     "pts": 70.3,
      "n": 119,
      "proven": false,
      "why": "no better than treating it as a normal day"
@@ -4384,7 +4384,7 @@
      "hi": 2.78,
      "normal": 1.53,
      "mult": 1.01,
-     "pts": 414.3,
+     "pts": 414.4,
      "n": 124,
      "proven": false,
      "why": "no better than treating it as a normal day"
@@ -4493,12 +4493,12 @@
    },
    "move": {
     "gold": {
-     "pct": 1.98,
-     "lo": 1.23,
-     "hi": 3.47,
-     "normal": 1.94,
+     "pct": 1.93,
+     "lo": 1.2,
+     "hi": 3.4,
+     "normal": 1.9,
      "mult": 1.02,
-     "pts": 72.3,
+     "pts": 70.3,
      "n": 187,
      "proven": false,
      "why": "no better than treating it as a normal day"
@@ -4607,12 +4607,12 @@
    },
    "move": {
     "gold": {
-     "pct": 2.0,
-     "lo": 1.09,
-     "hi": 3.74,
-     "normal": 1.94,
+     "pct": 1.95,
+     "lo": 1.06,
+     "hi": 3.65,
+     "normal": 1.9,
      "mult": 1.029,
-     "pts": 73.0,
+     "pts": 71.0,
      "n": 836,
      "proven": false,
      "why": "no better than treating it as a normal day"
@@ -4623,7 +4623,7 @@
      "hi": 3.3,
      "normal": 1.53,
      "mult": 1.067,
-     "pts": 437.7,
+     "pts": 437.8,
      "n": 858,
      "proven": false,
      "why": "no better than treating it as a normal day"
@@ -4727,12 +4727,12 @@
    },
    "move": {
     "gold": {
-     "pct": 2.02,
-     "lo": 1.18,
-     "hi": 3.92,
-     "normal": 1.94,
+     "pct": 1.97,
+     "lo": 1.15,
+     "hi": 3.83,
+     "normal": 1.9,
      "mult": 1.04,
-     "pts": 73.8,
+     "pts": 71.7,
      "n": 177,
      "proven": false,
      "why": "no better than treating it as a normal day"
@@ -4846,12 +4846,12 @@
    },
    "move": {
     "gold": {
-     "pct": 2.57,
-     "lo": 1.45,
-     "hi": 4.55,
-     "normal": 1.94,
+     "pct": 2.51,
+     "lo": 1.42,
+     "hi": 4.44,
+     "normal": 1.9,
      "mult": 1.325,
-     "pts": 94.0,
+     "pts": 91.4,
      "n": 72,
      "proven": false,
      "why": "no better than treating it as a normal day"
@@ -4862,7 +4862,7 @@
      "hi": 3.35,
      "normal": 1.53,
      "mult": 1.253,
-     "pts": 514.0,
+     "pts": 514.1,
      "n": 185,
      "proven": false,
      "why": "no better than treating it as a normal day"
@@ -4966,12 +4966,12 @@
    },
    "move": {
     "gold": {
-     "pct": 1.95,
-     "lo": 1.3,
-     "hi": 4.0,
-     "normal": 1.94,
+     "pct": 1.91,
+     "lo": 1.27,
+     "hi": 3.91,
+     "normal": 1.9,
      "mult": 1.006,
-     "pts": 71.3,
+     "pts": 69.4,
      "n": 91,
      "proven": false,
      "why": "no better than treating it as a normal day"
@@ -4982,7 +4982,7 @@
      "hi": 3.09,
      "normal": 1.53,
      "mult": 1.087,
-     "pts": 445.9,
+     "pts": 446.0,
      "n": 277,
      "proven": false,
      "why": "no better than treating it as a normal day"
@@ -4996,13 +4996,13 @@
   "asof": "2026-11-23",
   "markets": {
    "gold": {
-    "baseline": 1.941,
-    "close": 3653.89990234375,
+    "baseline": 1.897,
+    "close": 3635.5,
     "asof": "2026-11-23"
    },
    "nq": {
     "baseline": 1.534,
-    "close": 26743.3828125,
+    "close": 26746.095703125,
     "asof": "2026-11-23"
    }
   },
