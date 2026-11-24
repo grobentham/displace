@@ -2,7 +2,7 @@
 const assert=require('node:assert/strict');
 const {chromium}=require('playwright');
 const base='http://127.0.0.1:8765/';
-const pages=['terminal','macro','signals','relationships','atlas','research','research-v2','research-v3','publications','open','search','validation'];
+const pages=['research-hub','macro','signals','relationships','atlas','research','research-v2','research-v3','publications','open','search','validation'];
 (async()=>{
  const browser=await chromium.launch({headless:true});
  try{
@@ -18,7 +18,6 @@ const pages=['terminal','macro','signals','relationships','atlas','research','re
     assert(await page.locator('h1').first().isVisible(),name+' heading');
     const dims=await page.evaluate(()=>({scroll:document.documentElement.scrollWidth,inner:innerWidth}));
     assert(dims.scroll<=dims.inner+2,name+' horizontal overflow at '+width+': '+JSON.stringify(dims));
-    if(name==='terminal')await page.waitForFunction(()=>/10 \/ 10 panels loaded/.test(document.querySelector('#load-status').textContent));
     if(name==='atlas'){
      await page.waitForSelector('#country option[value="SGP"]',{state:'attached'});
      await page.selectOption('#country','USA');
