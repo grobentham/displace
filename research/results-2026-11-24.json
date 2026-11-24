@@ -1,0 +1,140 @@
+{
+ "registered": "research/registered-2026-11-24.json",
+ "run": "2026-11-24, engine/bias.py with the cached history (same data the live engine uses)",
+ "bar": {
+  "z": 3.32,
+  "calendar_tests": 56
+ },
+ "verdict": "Both fail in every market: no day type moves the up-rate anywhere near the bar. Announcement days in US equity index futures went up slightly LESS often than normal (z -1.3 to +0.2); the pre-holiday edge is small and inside noise (NQ 57% vs 54%, z +0.8). Published as fails; both stay in the engine's event tests (and the bar).",
+ "note_on_process": "The first run used gaps in Yahoo's candles as holidays; Yahoo's history has missing days, so it found 1,017 'pre-holiday' days for NQ instead of about 230. That run was discarded as a bug in implementing the registered definition (an exchange holiday), fixed with the exchanges' holiday rules (bias.nyse_holidays), and rerun with nothing else changed. Its numbers were also fails (largest |z| 2.11, crude).",
+ "results": {
+  "nq": {
+   "announce": {
+    "n": 518,
+    "up": 0.562,
+    "base": 0.557,
+    "z": 0.23,
+    "tested": false
+   },
+   "preholiday": {
+    "n": 230,
+    "up": 0.57,
+    "base": 0.543,
+    "z": 0.81,
+    "tested": false
+   }
+  },
+  "es": {
+   "announce": {
+    "n": 518,
+    "up": 0.539,
+    "base": 0.55,
+    "z": -0.5,
+    "tested": false
+   },
+   "preholiday": {
+    "n": 230,
+    "up": 0.548,
+    "base": 0.543,
+    "z": 0.15,
+    "tested": false
+   }
+  },
+  "ym": {
+   "announce": {
+    "n": 518,
+    "up": 0.527,
+    "base": 0.549,
+    "z": -0.99,
+    "tested": false
+   },
+   "preholiday": {
+    "n": 214,
+    "up": 0.551,
+    "base": 0.544,
+    "z": 0.2,
+    "tested": false
+   }
+  },
+  "rty": {
+   "announce": {
+    "n": 288,
+    "up": 0.476,
+    "base": 0.515,
+    "z": -1.34,
+    "tested": false
+   },
+   "preholiday": {
+    "n": 83,
+    "up": 0.494,
+    "base": 0.515,
+    "z": -0.39,
+    "tested": false
+   }
+  },
+  "gold": {
+   "announce": {
+    "n": 417,
+    "up": 0.547,
+    "base": 0.516,
+    "z": 1.28,
+    "tested": false
+   },
+   "preholiday": {
+    "n": 114,
+    "up": 0.553,
+    "base": 0.516,
+    "z": 0.79,
+    "tested": false
+   }
+  },
+  "cl": {
+   "announce": {
+    "n": 518,
+    "up": 0.546,
+    "base": 0.527,
+    "z": 0.86,
+    "tested": false
+   },
+   "preholiday": {
+    "n": 230,
+    "up": 0.526,
+    "base": 0.528,
+    "z": -0.04,
+    "tested": false
+   }
+  },
+  "6e": {
+   "announce": {
+    "n": 518,
+    "up": 0.488,
+    "base": 0.494,
+    "z": -0.24,
+    "tested": false
+   },
+   "preholiday": {
+    "n": 230,
+    "up": 0.457,
+    "base": 0.501,
+    "z": -1.34,
+    "tested": false
+   }
+  },
+  "btc": {
+   "announce": {
+    "n": 274,
+    "up": 0.515,
+    "base": 0.494,
+    "z": 0.69,
+    "tested": false
+   },
+   "preholiday": {
+    "n": 81,
+    "up": 0.605,
+    "base": 0.494,
+    "z": 2.0,
+    "tested": false
+   }
+  }
+ }
+}

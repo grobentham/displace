@@ -5,8 +5,11 @@ CHANGELOG.md.
 
 ## Open
 
-- **No tested daily direction.** Every daily bias is the base rate ("NQ rose on 54% of past days"); no direction signal
-  has passed its bar. The site says so. This is a research question, not a bug.
+- **No tested daily direction.** Every daily bias is the base rate ("NQ rose on 54% of past days"); 138 direction tests
+  (82 signals, 56 calendar events, including the announcement-day and pre-holiday effects registered on 24 Nov 2026)
+  and none passes its bar. The site says so. Direction research has a low prior; the range and level-touch forecasts
+  are where the tested skill is (NQ: range error 19% below a 20-day average, 80% band covers 79% of days; level-touch
+  Brier skill about 0.21-0.26, walk-forward since 2012).
 - **Thin live record.** The bias log starts 19 Nov 2026. Until there are months of eligible forecasts, live scores mean
   little.
 - **BTC daily candles look thin** (open equals low, or close equals high, on several days): Yahoo's BTC=F data. Treat BTC

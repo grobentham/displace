@@ -1,5 +1,15 @@
 # Changelog
 
+## 2026-11-24: two registered direction tests (both failed)
+
+- Registered first (`research/registered-2026-11-24.json`), then tested with the engine's unchanged event test across
+  all 8 markets: the announcement-day premium (CPI, payrolls, Fed; Savor and Wilson 2013) and the pre-holiday effect
+  (Ariel 1990). Neither passes in any market (bar |z| >= 3.32 over 56 event tests). Results:
+  `research/results-2026-11-24.json`. Both stay in the event tests, so they keep counting toward the bar.
+- `bias.nyse_holidays`: the exchanges' holiday rules (observed dates, Good Friday, Juneteenth from 2022, special
+  closures), used for the pre-holiday flag. A first run used gaps in Yahoo's candles, which include missing data; it
+  was discarded as an implementation bug and is described in the results file.
+
 ## 2026-11-24: integrity fixes (Phase 1)
 
 - **Invalid forecasts are voided, not deleted.** On 20 Nov 2026 the NQ and gold forecasts were logged with expected

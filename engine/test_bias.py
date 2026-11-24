@@ -168,6 +168,26 @@ def test_despike_days_from_iron_brain():
     assert d3["2026-11-23"] == [3570.5, 3691.0, 3552.3, 3651.4]
 
 
+def test_nyse_holidays_and_preholiday():
+    """The exchanges' holiday rules (observed dates, Good Friday, Juneteenth from 2022) and the pre-holiday flag."""
+    assert sorted(B.nyse_holidays(2026)) == ["2026-01-01", "2026-01-19", "2026-02-16", "2026-04-03", "2026-05-25",
+                                             "2026-06-19", "2026-07-03", "2026-09-07", "2026-11-26", "2026-12-25"]
+    assert "2027-12-24" in B.nyse_holidays(2027) and "2021-12-31" not in B.nyse_holidays(2022)   # Sat New Year: no Friday
+    assert "2021-06-18" not in B.nyse_holidays(2021) and "2012-10-29" in B.nyse_holidays(2012)
+    days, d = [], dt.date(2025, 11, 3)
+    while d <= dt.date(2026, 11, 24):
+        if d.weekday() < 5 and d.isoformat() not in B.nyse_holidays(d.year):
+            days.append(d.isoformat())
+        d += dt.timedelta(days=1)
+    rows = [(k, [100.0 + i % 7, 101.5 + i % 7, 99.0 + i % 7, 100.5 + i % 5]) for i, k in enumerate(days)]
+    F, S = B.build(rows, {}, set())
+    pre = [k for k, v in zip(days, F["preholiday"]) if v]
+    # each is the day BEFORE the forecast session, which itself precedes a holiday
+    assert "2026-11-24" in pre and "2026-11-23" not in pre                 # forecast for Wed 25 Nov: Thanksgiving next
+    assert "2026-07-01" in pre                                             # Thu 2 Jul, then the 3 Jul holiday
+    assert 8 <= len(pre) <= 11
+
+
 if __name__ == "__main__":
     test_quant_basics()
     test_random_walk_finds_no_direction_but_real_volatility()
@@ -175,4 +195,5 @@ if __name__ == "__main__":
     test_fixes()
     test_sessions_keep_mondays()
     test_despike_days_from_iron_brain()
+    test_nyse_holidays_and_preholiday()
     print("bias tests passed")
