@@ -110,6 +110,8 @@ class Minutes:
         return (b[4] / a[4] - 1) * 100 if a[4] else None
 
     def move(self, when):
+        if self.complete_before is not None and when + dt.timedelta(minutes=self.minutes) > self.complete_before:
+            return None
         m = self._duka(when)
         if m is None:
             m = self._bars5(when)
@@ -167,23 +169,39 @@ def weights(points, asof):
 
 
 def walk_forward(points, horizon):
-    """points: [(when, z, up)] oldest first -> out-of-sample predictions."""
+    """Historical replay, with a conservative seven-calendar-day label embargo.
+    No same-day releases can train or calibrate one another. The embargo is not
+    proof of vendor publication availability, particularly for revised FRED data.
+    """
+    points = sorted(points, key=lambda p: p[0])
+    dates = [p[0].date() for p in points]
     preds, pairs = [], []
-    b, k, last = None, 0.5, -10 ** 9
+    b, k, p0, last = None, 0.5, 0.5, -10 ** 9
     refit = max(5, len(points) // 40)
     for i, (when, z, y) in enumerate(points):
-        if i < MIN_TRAIN[horizon]:
+        cutoff = when.date() - dt.timedelta(days=7)
+        end = bisect.bisect_right(dates, cutoff, 0, i)
+        if end < MIN_TRAIN[horizon]:
             continue
-        if b is None or i - last >= refit:
-            train = points[:i]
+        if b is None or end - last >= refit:
+            train = points[:end]
             b = fit_slope([p[1] for p in train], [p[2] for p in train], weights(train, when))
-            k = calib_k(pairs)
-            last = i
+            k = calib_k([(p, label) for day, p, label in pairs if day <= cutoff])
+            p0 = sum(p[2] for p in train) / len(train)
+            last = end
         raw = _sig(b * z)
         p = min(0.98, max(0.02, 0.5 + k * (raw - 0.5)))
-        pairs.append((raw, y))
-        preds.append({"when": when, "p": p, "y": y, "call": abs(p - 0.5) >= EDGE})
-    return preds, calib_k(pairs)
+        pairs.append((when.date(), raw, y))
+        preds.append({"when": when, "p": p, "p0": p0, "y": y, "call": abs(p - 0.5) >= EDGE,
+                      "training_end": dates[last-1].isoformat(), "training_n": last})
+    return preds, calib_k([(p,y) for _,p,y in pairs])
+
+def window_finished(key, when, now):
+    if now is None:
+        return True
+    minutes = MINUTES.get(MARKETS[key][2])
+    end = when + dt.timedelta(minutes=minutes) if minutes else dt.datetime.combine(when.date(),dt.time(17,15),when.tzinfo)
+    return end <= now and when <= now
 
 
 def binom_p(h, n):
@@ -197,10 +215,12 @@ def evaluate(preds, live=()):
     hits = [(q["p"] > 0.5) == (q["y"] == 1) for q in calls]
     n, h = len(calls), sum(hits)
     brier = sum((q["p"] - q["y"]) ** 2 for q in preds) / len(preds) if preds else 0.25
+    baseline = sum((q.get("p0",.5) - q["y"]) ** 2 for q in preds) / len(preds) if preds else .25
     half = n // 2
     recent = (hits + [bool(r["hit"]) for r in live])[-BREAKER_N:]
     return {"calls": n, "hits": h, "rate": round(h / n, 3) if n else 0, "pval": binom_p(h, n),
             "brierSkill": round(1 - brier / 0.25, 3),
+            "brierSkillBase": round(1-brier/baseline,4) if baseline else None, "baseBrier": round(baseline,6),
             "halves": [round(sum(hits[:half]) / half, 3) if half else 0, round(sum(hits[half:]) / (n - half), 3) if n - half else 0],
             "recent": round(sum(recent) / len(recent), 3) if recent else 0, "tested": len(preds)}
 
@@ -218,7 +238,7 @@ def dataset(rels, markets, key, settled_before):
     """[(when, z, up, move, kind, decision)] for one market."""
     out = []
     for r in rels:
-        if r["z"] is None or r["when"] >= settled_before:
+        if r["z"] is None or not window_finished(key, r["when"], settled_before):
             continue
         m = reaction(markets, key, r["when"])
         if m is None or m == 0:
@@ -284,7 +304,7 @@ def fit(rels, markets, now, live_rows=()):
             for key in markets:
                 dc = {}
                 for r in rels:
-                    if r["kind"] != kind or not r.get("decision") or r["when"] >= now:
+                    if r["kind"] != kind or not r.get("decision") or not window_finished(key,r["when"],now):
                         continue
                     m = reaction(markets, key, r["when"])
                     if m is not None and m != 0:
@@ -340,6 +360,8 @@ def score(log_rows, markets, now):
         if "hit" in r or r["asset"] not in markets:
             continue
         when = dt.datetime.fromisoformat(r["when"])
+        if not window_finished(r["asset"],when,now):
+            continue
         m = reaction(markets, r["asset"], when)
         if m is None or m == 0:
             continue

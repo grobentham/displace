@@ -60,9 +60,12 @@ jobs:
           python engine/test_publisher.py
           python engine/test_atlas.py
           python engine/test_validation.py
+          python engine/test_model_safeguards.py
+          python engine/test_modelaudit.py
           node --check site/assets/terminal.js
           node tests/test_terminal.js
           node --check site/assets/validation.js
+          node --check site/assets/modelaudit.js
           node --check site/assets/search.js
           node tests/test_search.js
           python engine/test_sitebuild.py
@@ -137,6 +140,7 @@ jobs:
           python engine/guard.py publishing engine/publisher.py
           python engine/guard.py atlas engine/atlas.py
           python engine/guard.py validation engine/validation.py
+          python engine/guard.py modelaudit engine/modelaudit.py
 
       - name: Final check before publishing (block invalid candidate snapshot)
         run: python engine/gate.py --strict

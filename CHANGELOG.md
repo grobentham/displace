@@ -81,3 +81,7 @@
 ## Research validation
 - Separate Discovery V2 implementation, input-fingerprint-aware replication diagnostics, marginal 28-day cluster intervals, within-week effect comparisons and exploratory cost proxies.
 - Public validation explorer with explicit unresolved requirements; no automatic model promotion or claim of external certification.
+
+## Bias and event safeguards
+- Seven-day label embargo, explicit completed-window checks, training-base-rate Brier skill, and suspension of automatic event and daily direction qualification.
+- Independent price-only range replay, point MAE and interval scores, simple rolling direction and level-bin benchmarks, source-linked audit dashboard and tests.

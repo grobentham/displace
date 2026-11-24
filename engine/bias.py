@@ -684,10 +684,10 @@ def finish(m, ctx, tiers, t_bar, z_bar):
     val = lambda a: None if not np.isfinite(a) else round(float(a), 2)
     board = [{"key": k, "label": labels[k], "value": val(F[k][i]), "skill": T["signals"][k].get("skill"),
               "t": T["signals"][k].get("t"), "stable": T["signals"][k].get("stable"), "tested": T["signals"][k].get("tested"),
-              "used": k in why, "kind": "price" if k in PRICE_SIGNALS else "cross"} for k in sigs]
+              "historical_candidate": T["signals"][k].get("historical_candidate",False), "used": k in why, "kind": "price" if k in PRICE_SIGNALS else "cross"} for k in sigs]
     cal = [{"key": k, "label": lab, "active": bool(F[k][i] == 1), "n": T["events"][k].get("n"), "up": T["events"][k].get("up"),
             "base": T["events"][k].get("base"), "z": T["events"][k].get("z"), "tested": T["events"][k].get("tested"),
-            "used": k in why} for k, lab in EVENTS.items()]
+            "historical_candidate": T["events"][k].get("historical_candidate",False), "used": k in why} for k, lab in EVENTS.items()]
     touch = [{**t, "up": round(c * math.exp(t["k"] * V["sigma"]), 6), "dn": round(c * math.exp(-t["k"] * V["sigma"]), 6)} for t in V["touch"]]
     return {"name": short, "full": full, "pv": pv, "micro": micro, "dp": dp, "group": group,
             "candle": yd, "day_name": WD[dt.date.fromisoformat(yd).weekday()],
@@ -895,6 +895,13 @@ def run(now=None, fetch=download, fetch_series=fred_download, markets=None):
     n_sig = sum(len(x["sigs"]) for x in ctxs.values())
     t_bar, z_bar = Q.t_needed(n_sig), Q.z_needed(len(EVENTS) * len(ctxs))
     decide({m: x["T"] for m, x in ctxs.items()}, t_bar, z_bar)
+    # Selection and combined-model performance need a separate untouched evaluation.
+    # Preserve candidate diagnostics, but prevent automatic deployment of selected directions.
+    for ctx in ctxs.values():
+        for group in ("signals","events"):
+            for result in ctx["T"][group].values():
+                result["historical_candidate"] = bool(result.get("tested"))
+                result["tested"] = False
     out = {}
     for m, ctx in ctxs.items():
         try:
@@ -938,7 +945,12 @@ def run(now=None, fetch=download, fetch_series=fred_download, markets=None):
     doc = {"asof": now.isoformat(timespec="minutes"), "for": day, "markets": out, "order": [m for m in MARKETS if m in out],
            "news": news_today(day), "live": live,
            "method": {"first_test_year": FIRST_TEST_YEAR, "lean": LEAN, "t_bar": round(t_bar, 2), "z_bar": round(z_bar, 2),
-                      "signal_tests": n_sig, "calendar_tests": len(EVENTS) * len(ctxs)},
+                      "signal_tests": n_sig, "calendar_tests": len(EVENTS) * len(ctxs),
+                      "directionQualification": "base_rate_only_pending_validation",
+                      "rangeSkillMetric": "historical walk-forward squared error in log log-range, not points",
+                      "limitations": ["Current-vintage cross series and retrospective calendar; publication availability not verified.",
+                                      "Selected individual signals and their combined model need untouched evaluation.",
+                                      "Level and range skill is historical, not prospective."]},
            "inputs": {sid: (max(v) if v else None) for sid, v in series.items()}}
     write_json(OUT, _clean_json(doc), separators=(",", ":"), allow_nan=False)
     write_json(LOG, {"entries": _clean_json(archive(entries))}, separators=(",", ":"))

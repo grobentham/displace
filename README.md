@@ -229,3 +229,7 @@ The separate implementation in `engine/validation.py` recalculates Discovery V2 
 The validation engine includes a deterministic IID-direction null control. The paired-week contrast can create a spurious effect when the previous direction overlaps the next outcome within the same week; the new marginal diagnostics answer a different question. The 30-cluster requirement cannot be met by a six-month prospective block, so those blocks remain descriptive unless a separately registered longer evaluation is conducted.
 
 **Research correction:** paired-week candidate inference is under review; original archives are retained. See `research/correction-2026-11-24-discovery.md`. No historical candidate is an approved trading edge.
+
+## Bias and event model audit
+
+Production directional model promotion is suspended: daily directions use the historical base rate; event and event-range candidate statuses are historical only. The event walk-forward replay uses a seven-calendar-day label embargo, refuses unsettled reactions, and reports Brier skill against both 50% and the prior training base rate. These remain current-vintage diagnostics, not verified first-release forecasts. `engine/modelaudit.py` independently replays a price-only range model and simple probability benchmarks, reports log-space error and anchored point-space error separately, and exposes interval scores. It is not an exact replication of the original full model and no historical output constitutes an approved trade.
