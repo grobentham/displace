@@ -18,6 +18,23 @@ def test_macro():
     assert len(M.calculate(plan,{},today)["indices"])==6
     assert all(i["score"] is None for i in M.calculate(plan,{},today)["indices"])
 
+def test_macro_plan_v2():
+    """Plan v2: no series in two indices; a monthly reading's age counts from the end of its month; per-series window."""
+    plan=json.loads(M.PLAN.read_text())
+    ids=[c["id"] for i in plan["indices"] for c in i["components"]]
+    assert plan["version"]==2 and len(ids)==len(set(ids))
+    rows=[(f"{2011+i//12:04d}-{i%12+1:02d}-01",100*(1.002**i)) for i in range(15*12+9)]   # to 2026-09-01
+    spec={"id":"CPI","transform":"yoy","frequency":"monthly","sign":1}
+    today=dt.date(2026,11,24)
+    old=M.component(spec,rows,today,windows={"monthly":(60,75)},age_from="observation")
+    new=M.component(spec,rows,today,windows={"monthly":(60,75)},age_from="period_end")
+    assert old["status"]=="stale" and old["age_days"]==84          # September counted from 1 Sep
+    assert new["status"]=="available" and new["age_days"]==55      # ...and from 30 Sep
+    d=[((today-dt.timedelta(days=800-i)).isoformat(),float(i)) for i in range(801)]
+    sp={"id":"HY","transform":"level","frequency":"daily","sign":1}
+    assert M.component(sp,d,today,windows={"daily":(1260,10)})["status"]=="insufficient_history"
+    assert M.component(dict(sp,window=750),d,today,windows={"daily":(1260,10)})["score"]==100
+
 def test_discovery():
     plan=json.loads(V.PLAN.read_text())
     rnd=random.Random(9)
@@ -44,5 +61,6 @@ def test_discovery():
 
 if __name__=="__main__":
     test_macro()
+    test_macro_plan_v2()
     test_discovery()
     print("macro and expanded discovery tests passed")

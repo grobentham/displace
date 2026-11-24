@@ -148,7 +148,7 @@ def main():
         ("Economic event reactions","engine/surprise.py",None,"Historical reaction window; not prospective"),
         ("Discovery v1","engine/discovery.py","research/discovery-plan-v1.json","Exploratory / prospective registered batches"),
         ("Discovery v2","engine/discovery_v2.py","research/discovery-plan-v2.json","Exploratory / prospective registered batches"),
-        ("Macro indices","engine/macro.py","research/macro-plan-v1.json","Descriptive current-vintage indicators"),
+        ("Macro indices","engine/macro.py","research/macro-plan-v2.json","Descriptive current-vintage indicators"),
         ("Early warnings","engine/signals.py","research/signals-plan-v1.json","Descriptive threshold monitoring"),
         ("Financial relationships","engine/relationships.py","research/relationships-plan-v1.json","Descriptive correlations and residuals")]
     models=[{"name":name,"code":path,"code_sha256":hashlib.sha256((ROOT/path).read_bytes()).hexdigest(),

@@ -1,0 +1,134 @@
+{
+  "version": 2,
+  "registered_at": "2026-11-24",
+  "supersedes": "research/macro-plan-v1.json",
+  "changes": [
+    "Each FRED series feeds exactly one index: in v1 VIX fed D-STRESS and D-RISK, and the high-yield spread fed D-RISK and D-CREDIT, so D-RISK was the mirror image of the other two.",
+    "D-STRESS uses two financial-stress indices (Chicago Fed NFCI, St. Louis Fed STLFSI4); D-RISK is the VIX alone (sign -1).",
+    "A reading's age counts from the end of the period it covers (a monthly reading dated the 1st covers the whole month), not from its first day, so a normally published monthly release is not marked stale.",
+    "Longer ranking windows (5 years daily and weekly, 10 years monthly), so 0 and 100 mean a multi-year extreme, not a one-year one.",
+    "The ICE BofA credit-spread series on FRED only reach back about 3 years (a licence limit), so D-CREDIT ranks against the prior 750 readings instead of 5 years."
+  ],
+  "windows": {
+    "daily": [
+      1260,
+      10
+    ],
+    "weekly": [
+      260,
+      21
+    ],
+    "monthly": [
+      120,
+      75
+    ]
+  },
+  "age_from": "period_end",
+  "policy": "Current-vintage descriptive percentiles, not a point-in-time backtest or forecast. Equal-weight components; all required; each series in one index only. Daily and weekly scores compare with the prior 5 years of readings (credit spreads: 3 years, all FRED provides), monthly with the prior 10 years. A reading is stale when more than 10 (daily), 21 (weekly) or 75 (monthly) days have passed since the end of the period it covers. Higher scores represent more of the named condition, not universally good or bad. Review provider usage rights before commercial use.",
+  "indices": [
+    {
+      "id": "D-GROWTH",
+      "name": "Growth momentum",
+      "components": [
+        {
+          "id": "INDPRO",
+          "transform": "yoy",
+          "frequency": "monthly",
+          "sign": 1
+        },
+        {
+          "id": "RRSFS",
+          "transform": "yoy",
+          "frequency": "monthly",
+          "sign": 1
+        }
+      ]
+    },
+    {
+      "id": "D-INFLATION",
+      "name": "Inflation pressure",
+      "components": [
+        {
+          "id": "CPIAUCSL",
+          "transform": "yoy",
+          "frequency": "monthly",
+          "sign": 1
+        },
+        {
+          "id": "PCEPI",
+          "transform": "yoy",
+          "frequency": "monthly",
+          "sign": 1
+        }
+      ]
+    },
+    {
+      "id": "D-STRESS",
+      "name": "Financial stress",
+      "components": [
+        {
+          "id": "NFCI",
+          "transform": "level",
+          "frequency": "weekly",
+          "sign": 1
+        },
+        {
+          "id": "STLFSI4",
+          "transform": "level",
+          "frequency": "weekly",
+          "sign": 1
+        }
+      ]
+    },
+    {
+      "id": "D-LIQUIDITY",
+      "name": "Monetary conditions proxy (easier = higher)",
+      "components": [
+        {
+          "id": "DFII10",
+          "transform": "level",
+          "frequency": "daily",
+          "sign": -1
+        },
+        {
+          "id": "DFF",
+          "transform": "level",
+          "frequency": "daily",
+          "sign": -1
+        }
+      ]
+    },
+    {
+      "id": "D-RISK",
+      "name": "Risk appetite proxy (VIX, inverted)",
+      "components": [
+        {
+          "id": "VIXCLS",
+          "transform": "level",
+          "frequency": "daily",
+          "sign": -1
+        }
+      ]
+    },
+    {
+      "id": "D-CREDIT",
+      "name": "Credit stress",
+      "components": [
+        {
+          "id": "BAMLH0A0HYM2",
+          "transform": "level",
+          "frequency": "daily",
+          "sign": 1,
+          "window": 750
+        },
+        {
+          "id": "BAMLC0A0CM",
+          "transform": "level",
+          "frequency": "daily",
+          "sign": 1,
+          "window": 750
+        }
+      ]
+    }
+  ]
+}
