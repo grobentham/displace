@@ -1,0 +1,25 @@
+{
+ "registered": "2026-11-24",
+ "by": "Claude for Groben, before any result for these was computed",
+ "question": "Does the day's direction (close above the previous close) differ from the base rate on these days?",
+ "hypotheses": [
+  {
+   "key": "announce",
+   "label": "Macro announcement day (CPI, payrolls or a Fed decision)",
+   "source": "Savor and Wilson (2013), 'How much do investors care about macroeconomic risk? Evidence from scheduled economic announcements', Journal of Financial and Quantitative Analysis 48(2): higher average equity returns on announcement days.",
+   "expected": "up more often than the base rate (equities)",
+   "days": "the session is a tier-1 release day in bias.calendar_tiers (CPI, core CPI, non-farm payrolls, FOMC rate decision)",
+   "history_from": 2010
+  },
+  {
+   "key": "preholiday",
+   "label": "Day before a US market holiday",
+   "source": "Ariel (1990), 'High stock returns before holidays', Journal of Finance 45(5); Kim and Park (1994), JFQA 29(1).",
+   "expected": "up more often than the base rate (equities)",
+   "days": "the session is followed by a weekday with no session (an exchange holiday; known in advance). Live: the next weekday is a 'US markets closed' holiday in Displace's calendar.",
+   "history_from": null
+  }
+ ],
+ "rules": "Exactly the existing event test in engine/bias.py (direction_tests / decide), unchanged: all 8 markets; z of the up-rate against the market's base rate; pass needs |z| >= the bar for ALL event tests across all markets (Bonferroni, z_bar from quant.z_needed, which these 16 new tests raise), at least 60 days, and the same sign in both halves of the history and since 2019. No parameter is tuned. A pass makes the event a driver of that market's bias; a fail is published as a fail.",
+ "tests_added": 16
+}
