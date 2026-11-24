@@ -1,5 +1,20 @@
 # Changelog
 
+## 2026-11-24: discovery v3; v1 and v2 retired
+
+- v1/v2 compared outcomes inside each week. With a condition built from the previous result ("after an up day")
+  that leans toward reversal even on coin flips (the hot-hand small-sample bias): it flags "previous up" on 100 of
+  100 random runs, which is why v2 had 100 "candidates" out of 192. v2's range outcome (tomorrow vs today's range) was
+  close to circular. Both stopped running; their files and pages stay, marked retired.
+- `research/discovery-plan-v3.json` (registered before running) and `engine/discovery_v3.py`: the overall rate
+  difference with 28-day clustered errors (`validation.marginal`), range measured against a normal day (median of
+  the last 20), one of each complementary pair: 128 tests. The 2020-2026 history was already seen, so it is
+  descriptive only. Prospective evidence starts 1 Dec 2026; a candidate needs 30 blocks (late March 2029).
+- First run on the history: no direction test differs from chance in any market; the 26 differences are all range
+  persistence (wide days follow wide days; calmer days follow up days), known effects, not direction edges.
+- `engine/test_discovery_v3.py`: no false reversal on 12 random-walk runs, the range outcome isn't circular, snapshots
+  freeze and the history can never produce a candidate. New page: `research-v3.html` (the Discovery link).
+
 ## 2026-11-24: macro plan v2
 
 - `research/macro-plan-v2.json` replaces v1 (kept for the record). Each FRED series now feeds one index only: in v1,

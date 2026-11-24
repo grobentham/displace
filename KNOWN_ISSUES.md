@@ -21,6 +21,8 @@ CHANGELOG.md.
 - **Market data licensing.** Prices come from Yahoo Finance, which does not license its data for a paid product. Sort
   out licensed data, and whether paid trading content needs a licence in Singapore, before charging anyone.
 
+- **Discovery v1/v2 results are retired**, not deleted: their within-week method is biased toward reversal. Use v3.
+
 ## Decided, not changing
 
 - **scheduler.yml waits on a runner between slots.** GitHub's cron often fires late or not at all on this repo; the

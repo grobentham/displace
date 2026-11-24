@@ -142,12 +142,15 @@ def main():
     paths=[DATA/"bias/log.json"]+sorted((DATA/"bias/archive").glob("log-*.json"))
     rows=[(r,str(path.relative_to(DATA))) for path in paths for r in load(path)["entries"]]
     research=[("Discovery v1","research/discovery.json",load(DATA/"research/discovery.json")),
-              ("Discovery v2","research/discovery-v2.json",load(DATA/"research/discovery-v2.json"))]
+              ("Discovery v2","research/discovery-v2.json",load(DATA/"research/discovery-v2.json")),
+              ("Discovery v3","research/discovery-v3.json",load(DATA/"research/discovery-v3.json")
+               if (DATA/"research/discovery-v3.json").exists() else {"batches":[]})]
     registry=[
         ("Daily market bias and range","engine/bias.py",None,"Base-rate or tested by market; live evidence counted separately"),
         ("Economic event reactions","engine/surprise.py",None,"Historical reaction window; not prospective"),
-        ("Discovery v1","engine/discovery.py","research/discovery-plan-v1.json","Exploratory / prospective registered batches"),
-        ("Discovery v2","engine/discovery_v2.py","research/discovery-plan-v2.json","Exploratory / prospective registered batches"),
+        ("Discovery v1","engine/discovery.py","research/discovery-plan-v1.json","Retired 24 Nov 2026: biased within-week estimator; results kept"),
+        ("Discovery v2","engine/discovery_v2.py","research/discovery-plan-v2.json","Retired 24 Nov 2026: biased within-week estimator; results kept"),
+        ("Discovery v3","engine/discovery_v3.py","research/discovery-plan-v3.json","History descriptive only; prospective from Dec 2026, candidates need 30 blocks"),
         ("Macro indices","engine/macro.py","research/macro-plan-v2.json","Descriptive current-vintage indicators"),
         ("Early warnings","engine/signals.py","research/signals-plan-v1.json","Descriptive threshold monitoring"),
         ("Financial relationships","engine/relationships.py","research/relationships-plan-v1.json","Descriptive correlations and residuals")]
