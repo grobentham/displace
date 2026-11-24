@@ -84,6 +84,7 @@ CONTRACTS = {
     "research/discovery.json": {"version": int, "batches": list, "plan_hash": str},
     "research/discovery-v2.json": {"version": int, "batches": list, "plan_hash": str},
     "macro/current.json": {"version": int, "asof": str, "indices": list, "policy": str},
+    "validation/current.json": {"version": int, "asof": str, "batches": list, "plan_hash": str, "discovery_plan_hash": str, "policy": str},
     "atlas/current.json": {"version": int, "asof": str, "years": list, "countries": list, "indicators": list, "coverage": dict, "plan_hash": str, "policy": str},
     "publications/index.json": {"version": int, "reports": list},
     "open/current.json": {"version": int, "asof": str, "forecast_counts": dict, "forecasts": list, "by_market": dict, "corrections": list, "research": list, "models": list},
@@ -118,6 +119,11 @@ def strict_validate(data=DATA):
                 failures[rel] = ["missing or wrong type: " + ", ".join(bad)]
             elif rel == "engine/quality.json" and obj["critical"]:
                 failures[rel] = ["critical source quality failure"]
+            elif rel == "validation/current.json":
+                import validation
+                problems = validation.check(obj, validation.load(validation.PLAN), validation.load(validation.DISCOVERY))
+                if problems:
+                    failures[rel] = problems
             elif rel == "atlas/current.json":
                 import atlas
                 problems = atlas.check(obj, atlas.load(atlas.PLAN))

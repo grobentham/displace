@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "registered_at": "2026-11-24",
+  "family": "Discovery V2",
+  "alpha": 0.05,
+  "block_days": 28,
+  "min_blocks": 30,
+  "min_group": 25,
+  "split": "2023-01-01",
+  "cost_bps": [
+    2,
+    5,
+    10
+  ],
+  "policy": "Internal independent implementation, not third-party certification. Recompute frozen study from currently cached cleaned candles; compare counts/rates only if dataset hash matches. Estimate marginal rate difference with 28-calendar-day clustered influence standard error and normal Bonferroni interval across all 192 combinations; approximate and not guaranteed valid under dependence across clusters. Contrast with original within-week estimand. Historical split is exploratory, not untouched holdout. For direction hypotheses only, choose long or short from early conditional open-to-close returns, then measure later conditional open-to-close returns net of hypothetical fixed round-trip costs and compare same-direction unconditional returns; no fills, slippage model, roll-adjusted data or trade execution claim. No automatic promotion."
+}
