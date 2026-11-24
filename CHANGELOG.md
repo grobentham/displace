@@ -63,3 +63,7 @@
 ## Automated publishing
 - Deterministic daily intelligence editions, recorded warning bulletins, completed research summaries, weekly accountability and monthly model evidence snapshots.
 - Frozen report objects, source hashes, integrity-checked archive catalogue and RSS feed, public searchable reader and offline tests.
+
+## Displace Atlas
+- Add registered 20-economy, eight-indicator annual World Development Indicators ingestion and cached refresh.
+- Add explicit observation years, missing/stale states, same-year comparison, coverage counts, source links and public country profiles.
