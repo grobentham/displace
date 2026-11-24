@@ -62,6 +62,7 @@ jobs:
           python engine/test_validation.py
           node --check site/assets/terminal.js
           node tests/test_terminal.js
+          node --check site/assets/validation.js
           node --check site/assets/search.js
           node tests/test_search.js
           python engine/test_sitebuild.py

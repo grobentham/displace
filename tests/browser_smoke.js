@@ -2,7 +2,7 @@
 const assert=require('node:assert/strict');
 const {chromium}=require('playwright');
 const base='http://127.0.0.1:8765/';
-const pages=['terminal','macro','signals','relationships','atlas','research','research-v2','publications','open','search'];
+const pages=['terminal','macro','signals','relationships','atlas','research','research-v2','publications','open','search','validation'];
 (async()=>{
  const browser=await chromium.launch({headless:true});
  try{

@@ -4,7 +4,7 @@ from pathlib import Path
 from urllib.parse import urlsplit
 
 SITE=Path(__file__).resolve().parent.parent/"site"
-PAGES=("macro","signals","relationships","atlas","research","research-v2","publications","open","search","terminal")
+PAGES=("macro","signals","relationships","atlas","research","research-v2","publications","open","search","terminal","validation")
 class Page(HTMLParser):
     def __init__(self):
         super().__init__()

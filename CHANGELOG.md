@@ -77,3 +77,7 @@
 - Crawlable source-linked static report pages, canonical URLs, generated sitemap and route/build/search regression tests.
 
 - Add pinned Chromium desktop/mobile smoke tests for intelligence pages, country selection, search and static article navigation as a production workflow prerequisite.
+
+## Research validation
+- Separate Discovery V2 implementation, input-fingerprint-aware replication diagnostics, marginal 28-day cluster intervals, within-week effect comparisons and exploratory cost proxies.
+- Public validation explorer with explicit unresolved requirements; no automatic model promotion or claim of external certification.

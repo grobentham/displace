@@ -1,0 +1,15 @@
+'use strict';
+const $=id=>document.getElementById(id);let doc;
+const fmt=x=>typeof x==='number'?(100*x).toFixed(2)+' pp':'—';
+function el(tag,text,parent){const n=document.createElement(tag);if(text!==undefined)n.textContent=String(text);if(parent)parent.append(n);return n}
+function render(){
+ const b=doc.batches[Number($('batch').value)];$('results').replaceChildren();if(!b){$('summary').textContent='No batches available.';return}
+ const rows=b.results,original=rows.filter(r=>r.original_status.includes('candidate')).length,marginal=rows.filter(r=>r.status==='marginal_candidate').length;
+ $('summary').textContent=rows.length+' tests · '+original+' original candidates · '+marginal+' marginal candidates · '+rows.filter(r=>r.reproduction==='reproduced').length+' reproduced counts/rates · '+rows.filter(r=>r.reproduction==='mismatch').length+' discrepancies · '+rows.filter(r=>r.reproduction==='different_input_vintage').length+' different input vintage · 0 promoted';
+ const m=$('market').value,f=$('filter').value;const selected=rows.filter(r=>(!m||r.market===m)&&(!f||(f==='original'?r.original_status.includes('candidate'):f==='marginal'?r.status==='marginal_candidate':f==='mismatch'?r.reproduction==='mismatch':r.reproduction==='different_input_vintage')));
+ const t=el('table',undefined,$('results')),h=el('tr',undefined,el('thead',undefined,t));['Market / condition','Outcome','N','Original marginal','Original weekly','Recomputed marginal','Adjusted interval','Reproduction','Diagnostic status','Cost proxy'].forEach(x=>el('th',x,h));const body=el('tbody',undefined,t);
+ for(const r of selected){const tr=el('tr',undefined,body);[r.market.toUpperCase()+' / '+r.condition.replaceAll('_',' '),r.outcome.replaceAll('_',' '),r.n,fmt(r.original_effect),fmt(r.original_weekly_effect),fmt(r.effect),r.interval?r.interval.map(fmt).join(' to '):'—',r.reproduction.replaceAll('_',' '),r.status.replaceAll('_',' ')].forEach(x=>el('td',x,tr));const c=el('td',undefined,tr);if(r.cost_proxy){const p=r.cost_proxy,d=el('details',undefined,c);el('summary',p.direction+' · N='+p.test_n,d);el('p','Gross '+p.gross_bps.toFixed(2)+' bps; unconditional '+p.unconditional_gross_bps.toFixed(2)+' bps',d);for(const [cost,net] of Object.entries(p.net_bps))el('p',cost+' bps cost: '+net.toFixed(2)+' bps net',d)}else c.textContent='—'}
+ if(!selected.length)el('p','No matching results.',$('results'));
+}
+for(const id of ['batch','market','filter'])$(id).addEventListener('change',()=>{if(doc)render()});
+fetch('data/validation/current.json',{cache:'no-store'}).then(r=>{if(!r.ok)throw Error();return r.json()}).then(d=>{doc=d;$('status').textContent='Calculated '+d.asof+' · adjusted alpha '+d.family_alpha;for(const [i,b] of d.batches.entries()){const o=el('option',b.kind+' '+b.start+' – '+b.end,$('batch'));o.value=i}for(const m of [...new Set(d.batches.flatMap(b=>b.results.map(r=>r.market)))]){const o=el('option',m.toUpperCase(),$('market'));o.value=m}for(const l of d.unresolved)el('li',l,$('limits'));render()}).catch(()=>{$('status').textContent='Validation data unavailable or not yet published.'});
