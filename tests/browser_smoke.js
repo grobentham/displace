@@ -20,7 +20,7 @@ const pages=['terminal','macro','signals','relationships','atlas','research','re
     assert(dims.scroll<=dims.inner+2,name+' horizontal overflow at '+width+': '+JSON.stringify(dims));
     if(name==='terminal')await page.waitForFunction(()=>/10 \/ 10 panels loaded/.test(document.querySelector('#load-status').textContent));
     if(name==='atlas'){
-     await page.waitForSelector('#country option[value="SGP"]');
+     await page.waitForSelector('#country option[value="SGP"]',{state:'attached'});
      await page.selectOption('#country','USA');
      await page.waitForFunction(()=>document.querySelector('#profile-note').textContent.includes('United States'));
     }
