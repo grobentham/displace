@@ -55,3 +55,7 @@
 ## Financial relationships
 - Add 66 cross-market relationships across 12 registered series, matched interval endpoints, rolling correlations, disjoint-window shifts and prior-window residual diagnostics.
 - Add source-linked interactive public explorer, missing/stale data handling and publication checks.
+
+## Displace Open
+- Add archive-inclusive forecast accountability with receipt verification, exact target outcome checks, explicit exclusions, per-market scores and calibration, original corrections, research batch accounting, and current implementation hashes.
+- Add public evidence centre, source and engine snapshot health, downloadable JSON, and automated consistency tests.

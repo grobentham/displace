@@ -201,3 +201,7 @@ The registered `research/signals-plan-v1.json` defines ten descriptive monitorin
 ## Financial relationships
 
 The registered `research/relationships-plan-v1.json` defines 12 series and 66 pairs. `engine/relationships.py` matches exact observation interval endpoints, computes correlations of changes over 20, 60 and 252 matched observations, compares disjoint 60-observation windows, and measures an unusual residual using a regression fitted only to the prior 60 observations. Stale results are suppressed. All metrics are descriptive, current-vintage, and affected by mismatched market closes, provider delays, revisions and futures rolls. Threshold flags are not significance tests or signals to trade. See `site/relationships.html`.
+
+## Displace Open
+
+The public `site/open.html` transparency centre uses `engine/evidence.py` to reconcile active and archived recorded forecasts with successful deployment receipts, explicitly classify exclusions, recompute per-market prospective Brier scores, benchmark skill, range coverage and calibration, and surface original corrections, research batch counts and current code/plan hashes. Historical event reactions are kept separate. The counts cover recorded forecasts, not all potential scheduled calls; uptime and completeness require separate monitoring. Source and component health are read from the published engine snapshot, not a real-time availability probe. No current implementation hash is represented as a historical model version.
