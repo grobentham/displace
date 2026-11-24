@@ -95,7 +95,7 @@ def main():
         out = P.run(now=dt.datetime(2026, 11, 12, 18, 0, tzinfo=NY), kind_of=kind_of, events=events, store=store)
         assert "cpi-oct" not in out["events"]
         rows = json.load(open(P.LOG_PATH))["rows"]
-        assert all("hit" in r for r in rows if r["asset"] == "gold2h") and out["live"]["calls"] >= 1, rows
+        assert all("hit" in r for r in rows if r["asset"] == "gold2h") and out["live"]["calls"] == 0 and out["live"]["historicalOnly"] >= 1, rows
         n = len(rows)
         out = P.run(now=dt.datetime(2026, 11, 12, 19, 0, tzinfo=NY), kind_of=kind_of, events=events, store=store)
         assert len(json.load(open(P.LOG_PATH))["rows"]) == n, "logged the same call twice"

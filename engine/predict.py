@@ -193,7 +193,8 @@ def log_calls(log_rows, live, now):
             have.add((eid, a))
             log_rows.append({"id": eid, "date": v["date"], "when": v["when"], "kind": v["kind"], "group": v["group"],
                              "asset": a, "dir": c["dir"], "p": c["p"], "z": v["z"], "tier": tier,
-                             "logged": now.isoformat(timespec="minutes")})
+                             "logged": now.isoformat(timespec="minutes"), "eligible": False,
+                             "evaluation_basis": "release-window historical observation"})
     return log_rows
 
 
@@ -262,8 +263,13 @@ def run(now=None, kind_of=None, events=None, store=None):
     log("markets: " + ", ".join(f"{k}" for k in markets))
     log_doc = load(LOG_PATH, {"rows": []})
     log_rows = [r for r in log_doc.get("rows", []) if "when" in r]  # rows from the old model are retired
+    # All post-release calls use a reaction window beginning before publication.
+    # Preserve the observations, but do not treat them as prospective evidence.
+    for r in log_rows:
+        r["eligible"] = False
+        r["evaluation_basis"] = "release-window historical observation"
     t0 = dt.datetime.now()
-    model = SP.fit(rels, markets, now, live_rows=[r for r in log_rows if "hit" in r])
+    model = SP.fit(rels, markets, now, live_rows=[r for r in log_rows if r.get("eligible") is True and "hit" in r])
     log(f"model: fit in {(dt.datetime.now() - t0).seconds}s; proven: "
         + ", ".join(f"{g}:{k}" for g, gm in model["groups"].items() for k, s in gm.items() if s.get("proven")))
     live = live_calls(model, events, rels, kind_of, now)
@@ -301,7 +307,8 @@ def run(now=None, kind_of=None, events=None, store=None):
 def main():
     rc = 0
     try:
-        run()
+        if run() is None:
+            rc = 1
     except Exception:
         log("model: unexpected error; the last good file stays live")
         traceback.print_exc()

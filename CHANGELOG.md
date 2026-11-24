@@ -33,3 +33,11 @@
   to the spike-filtered minute data (`bias.despike_days`, kept in `cache/daily/patches.json`).
 - **Pages deploy retries** twice when GitHub can't find the uploaded site.
 - Tests: `engine/test_gate.py` (one test per fix); the bias test's fake data no longer changes between runs.
+
+## Integrity follow-up (24 November 2026)
+- Fail closed before deployment; minimum output contracts and nonfinite checks. No unverified restore or rebase on publication conflicts.
+- Require exact daily target candle; exclude unknown eligibility and base-rate hits; include archived history.
+- Preserve post-release historical observations but exclude them from live accuracy and live model training. Actual publication receipts remain a separate future improvement.
+
+- Add successful Pages deployment receipts (forecast hash and timestamp) and require verified pre-window publication for live daily scoring.
+- Add deterministic discovery v1: fixed eight registered experiments, exploratory historical study and disjoint prospective quarterly windows, persistent frozen results and offline tests. No model promotion or AI dependency.
