@@ -442,7 +442,9 @@
    "brief": {
     "asof": "2026-11-21",
     "context": "The previous reading was 55.5. Factory activity is one of the first readings of each month. The next Fed decision is Dec 8–9."
-   }
+   },
+   "forecast": "55.2",
+   "fsrc": "TradingView consensus"
   },
   {
    "date": "2026-12-01",
@@ -532,7 +534,9 @@
    "brief": {
     "asof": "2026-11-23",
     "context": "The previous reading was 54.5. Services make up most of the US economy, and its prices index tracks sticky inflation. The next Fed decision is Dec 8–9."
-   }
+   },
+   "forecast": "54.5",
+   "fsrc": "TradingView consensus"
   },
   {
    "date": "2026-12-04",
@@ -590,7 +594,9 @@
      "label": "1-yr inflation expectations",
      "previous": "4.7%"
     }
-   ]
+   ],
+   "forecast": "51.8",
+   "fsrc": "TradingView consensus"
   },
   {
    "date": "2026-12-09",

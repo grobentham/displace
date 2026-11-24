@@ -1,5 +1,5 @@
 {
- "asof": "2026-11-24T08:38-05:00",
+ "asof": "2026-11-24T08:44-05:00",
  "version": 4,
  "assets": {
   "gold": "Gold, close",
@@ -4189,7 +4189,7 @@
    "basis": "consensus",
    "consensus": {
     "title": "ISM Manufacturing PMI",
-    "forecast": null,
+    "forecast": 55.2,
     "actual": null,
     "unit": null,
     "scale": null
@@ -4695,7 +4695,7 @@
    "basis": "consensus",
    "consensus": {
     "title": "ISM Services PMI",
-    "forecast": null,
+    "forecast": 54.5,
     "actual": null,
     "unit": null,
     "scale": null
@@ -4815,7 +4815,7 @@
    "basis": "consensus",
    "consensus": {
     "title": "Non Farm Payrolls",
-    "forecast": 93.0,
+    "forecast": 90.0,
     "actual": null,
     "unit": null,
     "scale": "K"
@@ -4934,7 +4934,7 @@
    "basis": "consensus",
    "consensus": {
     "title": "Michigan Consumer Sentiment Prel",
-    "forecast": null,
+    "forecast": 51.8,
     "actual": null,
     "unit": null,
     "scale": null
@@ -5725,6 +5725,6 @@
  "log": [
   "tv: 3 month(s) refreshed, 3592 releases with a consensus surprise",
   "markets: gold, nq, usd, y2, gold15m, gold2h, nq15m, nq2h",
-  "model: fit in 1s; proven: labor:y2"
+  "model: fit in 2s; proven: labor:y2"
  ]
 }
