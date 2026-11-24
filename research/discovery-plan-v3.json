@@ -1,0 +1,51 @@
+{
+  "version": 3,
+  "registered_at": "2026-11-24",
+  "supersedes": [
+    "research/discovery-plan-v1.json",
+    "research/discovery-plan-v2.json"
+  ],
+  "why": [
+    "The v1/v2 estimator (difference of within-week conditional rates, averaged over weeks) is biased toward reversal when the condition is built from the previous outcome (the 'hot hand' small-sample bias, Miller and Sanjurjo 2018): on independent coin flips it flags 'previous up' in 100 of 100 runs (validation.null_control). v3 uses the marginal rate difference with 28-day clustered standard errors (validation.marginal), which gives about zero on the same null.",
+    "v2's range outcome ('tomorrow's range above TODAY's') is close to circular for range conditions: a wide day is hard to beat by definition. v3 compares tomorrow's range with a normal day: the median of the 20 ranges up to today.",
+    "Exact complements (previous_down, momentum_5_down, momentum_20_down, narrow_range) answered the same question as their pairs and doubled the count; v3 keeps one of each pair."
+  ],
+  "markets": [
+    "nq",
+    "es",
+    "ym",
+    "rty",
+    "gold",
+    "cl",
+    "6e",
+    "btc"
+  ],
+  "conditions": [
+    "previous_up",
+    "wide_range",
+    "momentum_5_up",
+    "momentum_20_up",
+    "close_near_high",
+    "close_near_low",
+    "inside_day",
+    "outside_day"
+  ],
+  "outcomes": [
+    "next_positive_close",
+    "next_range_above_normal"
+  ],
+  "estimator": "validation.marginal: P(outcome | condition) - P(outcome | not condition); standard error clustered on 28-day blocks; normal interval at alpha / 128 (Bonferroni over every market x condition x outcome).",
+  "block_days": 28,
+  "min_group": 25,
+  "min_blocks": 30,
+  "alpha": 0.05,
+  "historical": {
+    "start": "2020-01-01",
+    "end": "2026-11-01",
+    "status": "seen before registration (v1, v2 and the validation page used this period): descriptive only, never evidence"
+  },
+  "prospective_start": "2026-12-01",
+  "prospective": "Cumulative from 2026-12-01, recomputed each 1 December and frozen once computed. A result can be a candidate only when the cumulative prospective sample has at least 30 blocks (about 2.3 years, from late March 2029); earlier yearly snapshots are descriptive.",
+  "policy": "Fixed plan; no parameter changes, no automatic promotion, no trading claim. A candidate means: worth a separately registered test with costs, not an edge. Known effects such as volatility clustering are expected to show up in the range outcome and are labelled as such.",
+  "tests": 128
+}
