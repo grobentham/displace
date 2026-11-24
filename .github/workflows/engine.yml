@@ -67,7 +67,7 @@ jobs:
           python tests/test_site_routes.py
 
   browser-test:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 12
     steps:
       - uses: actions/checkout@v5
