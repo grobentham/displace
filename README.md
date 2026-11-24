@@ -183,3 +183,9 @@ while the volatility and level models find their (real) skill.
 After a rule test, MNQ Replay checks whether the result is better than luck: 100 runs of random entries at the same
 rate with the same exits and costs, 1,000 Monte Carlo reshuffles of the trades (90% net range, 95th-percentile
 drawdown), and a deflated Sharpe ratio that corrects for the number of distinct rule sets tried on the device.
+
+## Autonomous discovery and verified publication
+
+`engine/discovery.py` runs the fixed, registered `research/discovery-plan-v1.json` on completed daily candles and generates `site/data/research/discovery.json`. The research page is `site/research.html`. Historical results are exploratory; prospective quarterly results are frozen on first completion. Approximate weekly-block intervals account for the eight tests within a batch, not indefinite repeated research. No automatic promotion. Changing a registered plan requires a new version and preserving the old archive.
+
+The strict final publication gate validates minimum contracts and blocks the candidate deployment on errors. The last successfully deployed site remains available. Daily live scoring requires a successful pre-window deployment receipt; post-release event reaction records are retained but not credited as prospective predictions. Receipts are recorded after successful Pages deployment and incorporated on the next engine run. Actual availability to individual browsers is not guaranteed.
