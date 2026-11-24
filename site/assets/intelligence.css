@@ -1,3 +1,4 @@
+/* After changing any file in assets/, bump ?v= in the pages and engine/sitebuild.py, or browsers mix old and new files. */
 /* Displace pages outside index.html share the main site's design: Apple-style light pages, the system/SF type
    stack, centred display headlines, soft gray rounded tiles, blue links and pill buttons, orange kicker labels.
    Tokens are the main site's (:root in index.html); the older names below map onto them so page styles and scripts
@@ -62,3 +63,6 @@ details summary{cursor:pointer;color:var(--link)}
 main p,main li{overflow-wrap:anywhere}
 
 @media(max-width:720px){.gnav .wide{gap:14px}.panel{padding:20px;border-radius:20px}main>header{padding:40px 0 24px}body{font-size:16px}}
+
+/* in-page section links (Open, Atlas): a centred row under the headline */
+main nav{display:flex;flex-wrap:wrap;gap:8px 18px;justify-content:center;margin-top:14px;font-size:.95rem}
