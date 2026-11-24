@@ -1,5 +1,22 @@
 # Changelog
 
+## 2026-11-24: exchange session engine
+
+- `engine/exchange.py` (shared with Iron Brain): CME trading dates, holidays (full closures, early halts, early
+  closes), session open, close and settlement times per market in New York time (daylight saving handled), which
+  session a moment belongs to, and which session a forecast should be for. Rules and sources are in the file.
+- Forecast targets use it: a forecast made from Wednesday 25 Nov 2026's candle is for Friday 27 Nov (Thanksgiving
+  has no CME trading date), and eligibility uses the real session open (Friday's opens Wednesday 18:00). A logged
+  forecast whose target date has no session is voided with a correction. Every past entry was rechecked: no changes.
+- Daily candles: Yahoo publishes a candle for US holidays on which CME only trades until its early halt (37 NQ
+  candles from 2015 to 2026). bias.clean now folds each into the next trading date, as CME does, instead of treating
+  it as a short day. Effect on the tested results is small (NQ range model 19.1% -> 18.8% better than a 20-day
+  average; level-touch skill unchanged), so the published findings stand. The frozen discovery batches keep their
+  original data, as registered.
+- The registered historical event features keep their weekday next-session rule, unchanged.
+- `engine/test_exchange.py`: 2026 calendar, Thanksgiving week, weekends and closures, daylight saving, settlement
+  times, forecast targets, holiday candles.
+
 ## 2026-11-24: discovery v3; v1 and v2 retired
 
 - v1/v2 compared outcomes inside each week. With a condition built from the previous result ("after an up day")

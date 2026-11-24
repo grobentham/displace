@@ -216,9 +216,29 @@ def despike_days(m, days, ib, patches):
 
 
 def clean(m, rows):
-    """Drop placeholder candles (high = low), prices at or below zero, and history before the market's usable start."""
+    """Drop placeholder candles (high = low), prices at or below zero, and history before the market's usable start;
+    then fold holiday candles into the next trading date (merge_holidays)."""
     start = START.get(m, "")
-    return [(d, v) for d, v in rows if d >= start and v[1] > v[2] and min(v) > 0]
+    return merge_holidays([(d, v) for d, v in rows if d >= start and v[1] > v[2] and min(v) > 0])
+
+
+def merge_holidays(rows):
+    """Yahoo publishes a daily candle for US holidays on which CME only trades a short, thin session until its early
+    halt (Memorial Day, Independence Day, Labor Day...; 37 such NQ candles from 2015 to 2026). CME has no trading date
+    for those days: that trading belongs to the next one. So each such candle is folded into the next trading date
+    (its open, the wider high and low, the next day's close) instead of standing as a short day of its own; a holiday
+    candle with no following candle is dropped. engine/exchange.py decides which dates trade."""
+    import exchange as X
+    out, carry = [], None
+    for d, v in rows:
+        if not X.is_trade_date(d):
+            carry = [carry[0], max(carry[1], v[1]), min(carry[2], v[2]), v[3]] if carry else list(v)
+            continue
+        if carry:
+            v = [carry[0], max(carry[1], v[1]), min(carry[2], v[2]), v[3]]
+            carry = None
+        out.append((d, v))
+    return out
 
 
 def fred_download(sid, start="1999-01-01"):
@@ -679,7 +699,7 @@ def finish(m, ctx, tiers, t_bar, z_bar):
     c, h, l = float(S["c"][i]), float(S["h"][i]), float(S["l"][i])
     pts = lambda x: round(c * (math.exp(math.exp(x)) - 1), 6)  # x is the log of the log-range
     yd = rows[-1][0]
-    nxt = next_session(yd)
+    nxt = target_session(yd)
     labels = {**PRICE_SIGNALS, **CROSS_SIGNALS}
     val = lambda a: None if not np.isfinite(a) else round(float(a), 2)
     board = [{"key": k, "label": labels[k], "value": val(F[k][i]), "skill": T["signals"][k].get("skill"),
@@ -719,10 +739,23 @@ ARCHIVE_DIR = os.path.join(DATA, "bias", "archive")
 KEEP = 6000                                   # entries kept in the live log; older ones move to the archive, never dropped
 
 
-def window_start(day_iso):
-    """When the futures session a forecast is for opens: 18:00 New York the evening before (Sunday for Monday)."""
+def window_start(day_iso, market="nq"):
+    """When the futures session a forecast is for opens (engine/exchange.py: 18:00 New York after the previous
+    trading date, so Friday 27 Nov 2026 opens Wednesday 25 Nov; Monday opens Sunday). A date with no session
+    (a holiday) falls back to 18:00 the evening before, and problems() voids such a forecast anyway."""
+    import exchange as X
+    s = X.session(market if market in X.GROUP else "nq", day_iso)
+    if s:
+        return s["open"]
     d = dt.date.fromisoformat(day_iso) - dt.timedelta(days=1)
     return dt.datetime.combine(d, dt.time(18, 0), NY)
+
+
+def target_session(candle_iso):
+    """The trading date a forecast made from this candle is for: the next CME trading date (engine/exchange.py),
+    which skips exchange holidays. The registered historical features keep next_session (weekdays) unchanged."""
+    import exchange as X
+    return X.next_trade_date(candle_iso).isoformat()
 
 
 def problems(e):
@@ -738,6 +771,13 @@ def problems(e):
         out.append(f"expected range {lo} to {hi} is not a valid high-minus-low range")
     if e.get("up1") is not None and e.get("dn1") is not None and not e["dn1"] < e["up1"]:
         out.append("touch levels are on the wrong side")
+    if e.get("for"):
+        import exchange as X
+        try:
+            if not X.is_trade_date(e["for"]):
+                out.append(f"target date {e['for']} has no CME session ({X.day_status(e['for'])[1] or 'weekend'})")
+        except ValueError:
+            out.append(f"target date {e['for']} is not a date")
     return out
 
 
@@ -747,6 +787,16 @@ def audit(entries, now):
     non-void entries count in the live record. Runs on old entries too, so earlier mistakes get a visible correction."""
     stamp = now.isoformat(timespec="minutes")
     for e in entries:
+        if e.get("logged") and e.get("for") and "eligible" in e and not e.get("eligibility_checked"):
+            try:
+                new = dt.datetime.fromisoformat(e["logged"]) < window_start(e["for"], e.get("market", "nq"))
+            except (ValueError, TypeError):
+                new = False
+            if new != e["eligible"]:
+                e["eligibility_correction"] = {"found": stamp, "was": e["eligible"], "now": new,
+                                               "reason": "rechecked against CME session times (engine/exchange.py)"}
+                e["eligible"] = new
+            e["eligibility_checked"] = "exchange " + __import__("exchange").EXCHANGE_VERSION
         if "eligible" not in e and e.get("logged") and e.get("for"):
             try:
                 e["eligible"] = dt.datetime.fromisoformat(e["logged"]) < window_start(e["for"])
@@ -914,20 +964,20 @@ def run(now=None, fetch=download, fetch_series=fred_download, markets=None):
         out[m] = r
         if not any(e["market"] == m and e["candle"] == r["candle"] for e in entries):
             t1 = next((t for t in r["touch"] if t["k"] == 1.0), None)
-            entries.append({"market": m, "candle": r["candle"], "for": next_session(r["candle"]), "bias": r["bias"],
+            entries.append({"market": m, "candle": r["candle"], "for": target_session(r["candle"]), "bias": r["bias"],
                             "p_up": r["p_up"], "base_up": r["base_up"], "tier": r["tier"],
                             "p_high": r["takes"]["high"]["p"], "p_low": r["takes"]["low"]["p"],
                             "range_lo": r["range"]["lo"], "range_hi": r["range"]["hi"],
                             "up1": t1["up"] if t1 else None, "dn1": t1["dn"] if t1 else None,
                             "p_up1": t1["up_p"] if t1 else None, "p_dn1": t1["dn_p"] if t1 else None,
                             "logged": now.isoformat(timespec="minutes"),
-                            "eligible": now < window_start(next_session(r["candle"]))})
+                            "eligible": now < window_start(target_session(r["candle"]), m)})
     if not out:
         log("bias: nothing to publish; the last file stays live")
         return 1
     audit(entries, now)
     score_log(rows_by, entries)
-    day = max(next_session(v["candle"]) for v in out.values())
+    day = max(target_session(v["candle"]) for v in out.values())
     # Lifetime summaries include archived records; do not count duplicates.
     lifetime = {}
     for path in sorted(glob.glob(os.path.join(ARCHIVE_DIR, "log-*.json"))):
