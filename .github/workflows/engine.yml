@@ -60,6 +60,7 @@ jobs:
           python engine/test_publisher.py
           python engine/test_atlas.py
           python engine/test_validation.py
+          python engine/test_model_safeguards.py
           node --check site/assets/terminal.js
           node tests/test_terminal.js
           node --check site/assets/validation.js

@@ -76,17 +76,18 @@ def main():
         # 1. release morning, 09:00: lean for the first 2 hours, logged; scenario for the next CPI
         out = P.run(now=dt.datetime(2026, 11, 12, 9, 0, tzinfo=NY), kind_of=kind_of, events=events, store=store)
         g = out["groups"]["inflation"]
-        assert g["gold2h"]["proven"] and g["gold2h"]["b"] < 0, g["gold2h"]
-        assert g["y2"]["proven"] and g["y2"]["b"] > 0, g["y2"]
+        assert not g["gold2h"]["proven"] and g["gold2h"]["b"] < 0, g["gold2h"]
+        assert not g["y2"]["proven"] and g["y2"]["b"] > 0, g["y2"]
+        assert out["proven"]==0 and out["qualification"]=="suspended_pending_validation"
         assert not g["nq"]["proven"] and not g["gold"]["proven"]
         assert "eur" not in out["assets"] and set(out["assets"]) >= {"gold2h", "gold", "nq", "usd", "y2"}
         pre = out["events"]["cpi-nov"]
-        assert pre["stage"] == "pre" and pre["hot"]["gold2h"]["dir"] == "down" and pre["cool"]["gold2h"]["dir"] == "up"
+        assert pre["stage"] == "pre" and pre["hot"]["gold2h"].get("none") and pre["cool"]["gold2h"].get("none")
         assert pre["consensus"]["forecast"] == 0.3
         post = out["events"]["cpi-oct"]
-        assert post["stage"] == "post" and post["z"] > 2 and post["calls"]["gold2h"]["dir"] == "down", post
+        assert post["stage"] == "post" and post["z"] > 2 and post["calls"]["gold2h"].get("none"), post
         logged = json.load(open(P.LOG_PATH))["rows"]
-        assert any(r["asset"] == "gold2h" and r["dir"] == "down" for r in logged), logged
+        assert all(r["tier"]=="hist" and r["eligible"] is False for r in logged), logged
         assert not any("hit" in r for r in logged), "scored before the window closed"
         sc = out["scenarios"]["cpi"]["assets"]["gold2h"]
         assert sc["hot"]["up"] < 0.4 < 0.6 < sc["cool"]["up"], sc
@@ -95,7 +96,7 @@ def main():
         out = P.run(now=dt.datetime(2026, 11, 12, 18, 0, tzinfo=NY), kind_of=kind_of, events=events, store=store)
         assert "cpi-oct" not in out["events"]
         rows = json.load(open(P.LOG_PATH))["rows"]
-        assert all("hit" in r for r in rows if r["asset"] == "gold2h") and out["live"]["calls"] == 0 and out["live"]["historicalOnly"] >= 1, rows
+        assert all("hit" in r for r in rows if r["asset"] == "gold2h") and out["live"]["calls"] == 0 and out["live"]["historicalOnly"] == 0, rows
         n = len(rows)
         out = P.run(now=dt.datetime(2026, 11, 12, 19, 0, tzinfo=NY), kind_of=kind_of, events=events, store=store)
         assert len(json.load(open(P.LOG_PATH))["rows"]) == n, "logged the same call twice"

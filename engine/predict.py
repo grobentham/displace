@@ -41,8 +41,8 @@ DUKA_PATH = os.path.join(HERE, "cache", "minutes", "dukascopy.json")
 CLOSE = dt.time(16, 0)
 SETTLED = dt.time(17, 15)  # gold settles at 17:00 New York, after the stock close
 HORIZON_DAYS = 14
-DISCLAIMER = ("Historical statistics for education. Past reactions do not guarantee future moves, and nothing "
-              "here is a recommendation to buy or sell.")
+DISCLAIMER = ("Historical current-vintage research, under methodological review. No event rule is prospectively validated. "
+              "Release-window movements can begin before the actual surprise is known; no trading recommendations.")
 LOGLINES = []
 
 
@@ -78,7 +78,7 @@ def now_ny():
 def markets_now(now, store=None, log=log):
     """{market key: reaction source} with nothing that hasn't settled yet."""
     today = now.date().isoformat()
-    cut = today if now.time() < SETTLED else "9999"
+    cut = today if now.time() < SETTLED else (now.date()+dt.timedelta(days=1)).isoformat()
     out = {}
     for a in ("gold", "nq"):
         rows, _ = prices.closes(a, "2009-06-01", now=now.astimezone(dt.timezone.utc), log=log)
@@ -198,6 +198,13 @@ def log_calls(log_rows, live, now):
     return log_rows
 
 
+def suspend_event_qualification(model):
+    for gm in model["groups"].values():
+        for s in gm.values():
+            s["historical_candidate"] = bool(s.get("proven"))
+            s["proven"] = False
+            s["why"] = "Historical candidate; qualification suspended pending point-in-time and prospective validation" if s["historical_candidate"] else s.get("why","")
+
 def summary(model, live, record):
     rules, bt_calls, bt_hits = {}, 0, 0
     for g, gm in model["groups"].items():
@@ -216,10 +223,14 @@ def summary(model, live, record):
                       "assets": sc["assets"], **({"decision": sc["decision"]} if sc.get("decision") else {})}
     return {"asof": model["asof"], "version": 4, "assets": model["markets"],
             "proven": sum(1 for gm in model["groups"].values() for s in gm.values() if s.get("proven")),
-            "rules": rules, "groups": {g: {k: {kk: s[kk] for kk in ("b", "k", "n", "since", "bt", "proven", "why")}
+            "rules": rules, "groups": {g: {k: {kk: s[kk] for kk in ("b", "k", "n", "since", "bt", "proven", "why", "historical_candidate")}
                                            for k, s in gm.items()} for g, gm in model["groups"].items()},
             "backtest": {"calls": bt_calls, "hits": bt_hits}, "live": record, "scenarios": scen,
-            "events": live, "disclaimer": DISCLAIMER, "basis": "consensus"}
+            "events": live, "disclaimer": DISCLAIMER, "basis": "consensus", "qualification": "suspended_pending_validation",
+            "methodAudit": {"label_embargo_days":7,"benchmark":"prior eligible training base rate",
+                            "limitations":["Current-vintage consensus and macro series; historical first-release availability not established.",
+                            "Intraday hourly fallback is not an exact two-hour reaction window; close outcomes include pre-release movement.",
+                            "Overlapping releases and selected historical models are not independent prospective evidence."]}}
 
 
 def check(out):
@@ -272,15 +283,21 @@ def run(now=None, kind_of=None, events=None, store=None):
     model = SP.fit(rels, markets, now, live_rows=[r for r in log_rows if r.get("eligible") is True and "hit" in r])
     log(f"model: fit in {(dt.datetime.now() - t0).seconds}s; proven: "
         + ", ".join(f"{g}:{k}" for g, gm in model["groups"].items() for k, s in gm.items() if s.get("proven")))
+    suspend_event_qualification(model)
     live = live_calls(model, events, rels, kind_of, now)
     try:
         days = {}
         for r in rels:
             if r["z"] is not None:
                 days.setdefault(r["kind"], []).append(r["when"].date().isoformat())
-        cut = now.date().isoformat() if now.time() < SETTLED else "9999"
+        cut = now.date().isoformat() if now.time() < SETTLED else (now.date()+dt.timedelta(days=1)).isoformat()
         rows = {a: [r for r in prices.ranges(a, "2007-01-01") if r[0] < cut] for a in ("gold", "nq")}
         mv = MV.fit({a: r for a, r in rows.items() if r}, days, now.date())
+        for group in mv.get("kinds",{}).values():
+            for stats in group.values():
+                stats["historical_candidate"] = bool(stats.get("proven"))
+                stats["proven"] = False
+                stats["why"] = "Historical range diagnostic; qualification suspended pending point-in-time validation"
         for v in live.values():
             v["move"] = MV.for_event(mv, v["kind"])
     except Exception as ex:
