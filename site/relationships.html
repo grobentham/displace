@@ -1,0 +1,40 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Displace | Financial Relationships</title><meta name="description" content="Explore 66 cross-market relationships using matched daily changes, rolling correlations and descriptive divergence diagnostics.">
+<style>
+:root{color-scheme:dark;--bg:#101318;--panel:#191f27;--border:#303945;--muted:#a5afbd;--text:#e9edf3;--accent:#8eb9f1}*{box-sizing:border-box}body{background:var(--bg);color:var(--text);font:15px/1.6 system-ui,sans-serif;margin:0}main{max-width:1200px;margin:auto;padding:28px 20px 64px}header{border-bottom:1px solid var(--border);padding-bottom:20px}a{color:var(--accent)}h1{font-size:clamp(28px,5vw,44px);letter-spacing:-.035em;margin:16px 0 4px}h2{font-size:20px;margin:0 0 8px}.muted,small{color:var(--muted)}.panel{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:20px;margin:16px 0}.scroll{overflow-x:auto}table{border-collapse:collapse;width:100%;font-variant-numeric:tabular-nums}th,td{text-align:left;padding:10px;border-bottom:1px solid var(--border);vertical-align:top}th{color:var(--muted);font-weight:500}.matrix td,.matrix th{text-align:center;white-space:nowrap}.matrix td{border:2px solid var(--panel);min-width:54px}.matrix th:first-child{position:sticky;left:0;background:var(--panel);z-index:1}p{max-width:80ch}select{padding:5px;max-width:100%}.controls{display:flex;flex-wrap:wrap;gap:14px;align-items:center}.legend{display:flex;gap:14px;flex-wrap:wrap}.flag{color:#f1c078}button{background:transparent;color:inherit;border:0;text-decoration:underline;cursor:pointer;font:inherit}button:focus-visible{outline:2px solid var(--accent)}
+</style></head><body><main><header><a href="index.html#top">← DISPLACE</a><h1>Financial relationships</h1><p class="muted">Cross-market monitoring · Matched observation intervals · Descriptive statistical analysis</p></header>
+<section class="panel"><h2>Methodology</h2><p>Returns and changes are aligned by both their starting and ending observation dates. Rolling correlations use the latest 20, 60 or 252 matched observations, not calendar days. A correlation shift compares two disjoint 60-observation windows. The residual diagnostic regresses the second series on the first using only the preceding 60 matched observations. It measures how unusual the latest relationship is, not a future price prediction.</p><p><a href="macro.html">Macro intelligence</a> · <a href="signals.html">Early warnings</a> · <a href="https://github.com/grobentham/displace/blob/main/research/relationships-plan-v1.json">Registered plan</a> · <a href="data/relationships/current.json">Download data</a></p></section>
+<p id="status" class="muted" aria-live="polite">Loading published relationships…</p>
+<section class="panel"><h2>Correlation matrix</h2><div class="controls"><label for="window">Matched observations</label><select id="window"><option value="20">20</option><option value="60" selected>60</option><option value="252">252</option></select></div><p class="legend muted">Blue: positive · Orange: negative · —: unavailable</p><div id="matrix" class="scroll"></div></section>
+<section class="panel"><h2>Pair explorer</h2><div class="controls"><label for="instrument">Series</label><select id="instrument"><option value="">All series</option></select><label for="filter">Show</label><select id="filter"><option value="">All pairs</option><option value="flag">Threshold flags</option><option value="available">Available</option><option value="unavailable">Unavailable</option></select></div><div class="scroll" id="pairs"></div></section>
+<section class="panel"><h2>Source series</h2><div id="sources"></div><p class="muted">Futures data is inherited from the existing bias cache; macro series are inherited from FRED-based caches. Confirm provider usage rights before commercial redistribution.</p></section>
+<section class="panel"><h2>Limitations</h2><p>Correlation does not imply causation. These are current-vintage descriptive relationships, affected by different market closing times, data publication lags, revisions, missing observations and futures rolls. Threshold flags are monitoring choices, not significance tests or validated trading opportunities. The fitted residual is contemporaneous and is not a forecast. Stale pairs have no current metrics.</p></section></main>
+<script>
+const $=id=>document.getElementById(id);let doc=null;
+function el(tag,text,parent){const n=document.createElement(tag);if(text!==undefined)n.textContent=text;if(parent)parent.append(n);return n}
+const fmt=x=>typeof x==='number'?x.toFixed(2):'—';
+function matrix(){
+ const root=$('matrix');root.replaceChildren();const w=$('window').value;
+ const table=el('table',undefined,root);table.className='matrix';const head=el('tr',undefined,el('thead',undefined,table));el('th','Series',head);
+ for(const s of doc.series)el('th',s.id.toUpperCase(),head).title=s.label;
+ const lookup=new Map();for(const p of doc.pairs){lookup.set(p.a+'|'+p.b,p);lookup.set(p.b+'|'+p.a,p)}
+ const body=el('tbody',undefined,table);
+ for(const a of doc.series){const tr=el('tr',undefined,body);el('th',a.id.toUpperCase(),tr).title=a.label;
+ for(const b of doc.series){const p=lookup.get(a.id+'|'+b.id);const v=p?p.correlations[w]:null;const td=el('td',a.id===b.id?'·':fmt(v),tr);
+ if(typeof v==='number')td.style.background=v>=0?'rgba(67,133,208,'+Math.abs(v)*.5+')':'rgba(211,146,74,'+Math.abs(v)*.5+')';
+ if(p)td.title=p.status+' · latest '+(p.latest||'—')}}
+}
+function pairs(){
+ const root=$('pairs');root.replaceChildren();const key=$('instrument').value,f=$('filter').value,series=new Map(doc.series.map(s=>[s.id,s]));
+ let rows=doc.pairs.filter(p=>(!key||p.a===key||p.b===key)&&(!f||(f==='flag'?p.flags.length:f==='available'?p.status==='available':p.status!=='available')));
+ rows.sort((a,b)=>b.flags.length-a.flags.length||Math.abs(b.divergence?.z||0)-Math.abs(a.divergence?.z||0));
+ if(!rows.length){el('p','No matching pairs.',root);return}
+ const table=el('table',undefined,root);const head=el('tr',undefined,el('thead',undefined,table));['Pair','Latest interval end','Matched N','20','60','252','60 shift','Residual z','Status / flags'].forEach(x=>el('th',x,head));const body=el('tbody',undefined,table);
+ for(const p of rows){const tr=el('tr',undefined,body);[series.get(p.a).label+' → '+series.get(p.b).label,p.latest||'—',String(p.paired_n),fmt(p.correlations['20']),fmt(p.correlations['60']),fmt(p.correlations['252']),fmt(p.shift60),fmt(p.divergence?.z)].forEach(x=>el('td',x,tr));const last=el('td',p.status,tr);if(p.flags.length)el('div',p.flags.join(' · ').replaceAll('_',' '),last).className='flag';if(p.divergence){const d=el('details',undefined,last);el('summary','Residual details',d);el('p','Prior fit ends '+p.divergence.training_end+' · Observed '+fmt(p.divergence.observed)+' · Fitted '+fmt(p.divergence.fitted)+' · beta '+fmt(p.divergence.beta),d)}}
+}
+$('window').addEventListener('change',()=>{if(doc)matrix()});$('instrument').addEventListener('change',()=>{if(doc)pairs()});$('filter').addEventListener('change',()=>{if(doc)pairs()});
+fetch('data/relationships/current.json',{cache:'no-store'}).then(r=>{if(!r.ok)throw Error();return r.json()}).then(data=>{
+ doc=data;const n=doc.pairs.filter(p=>p.status==='available').length;const flags=doc.pairs.filter(p=>p.flags.length).length;$('status').textContent='As of '+doc.asof+' · '+n+' of '+doc.pairs.length+' pairs available · '+flags+' pairs with monitoring flags';
+ const list=el('ul',undefined,$('sources'));for(const s of doc.series){const o=el('option',s.label,$('instrument'));o.value=s.id;const li=el('li',s.label+' · '+s.transform.replaceAll('_',' ')+' · ',list);if(s.source.startsWith('https://fred.stlouisfed.org/series/')){const a=el('a',s.id,li);a.href=s.source}else el('span',s.source,li)}matrix();pairs();
+}).catch(()=>{$('status').textContent='Relationship metrics have not been published yet or are temporarily unavailable.'});
+</script></body></html>
