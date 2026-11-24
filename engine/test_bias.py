@@ -145,7 +145,7 @@ def test_despike_days_from_iron_brain():
     incomplete sessions leave the candle alone, and a clean feed never extends a range."""
     import bias as B
     days = {"2026-11-23": [25561.5, 27137.0, 25426.75, 26808.0], "2026-11-24": [26888.0, 27036.0, 26684.0, 26831.0]}
-    ib = {"nq": {"2026-11-23": {"h": 27090.5, "l": 25400.0, "complete": True, "full": True},
+    ib = {"nq": {"2026-11-23": {"h": 27090.5, "l": 25462.0, "rawH": 27137.0, "rawL": 25462.0, "complete": True, "full": True},
                  "2026-11-24": {"h": 26900.0, "l": 26700.0, "complete": False, "full": True}}}
     patches = {}
     notes = B.despike_days("nq", days, ib, patches)
@@ -160,6 +160,10 @@ def test_despike_days_from_iron_brain():
     d2 = {"2026-11-23": [100.0, 110.0, 90.0, 105.0]}
     B.despike_days("gold", d2, {"gold": {"2026-11-23": {"h": 109.95, "l": 90.05, "complete": True, "full": True}}}, {})
     assert d2["2026-11-23"] == [100.0, 110.0, 90.0, 105.0]
+    # a different window (Yahoo's low below anything the minute bars saw, no spike there) is left alone
+    d3 = {"2026-11-23": [3570.5, 3691.0, 3552.3, 3651.4]}
+    B.despike_days("gold", d3, {"gold": {"2026-11-23": {"h": 3691.0, "l": 3566.3, "rawH": 3691.0, "rawL": 3566.3, "complete": True, "full": True}}}, {})
+    assert d3["2026-11-23"] == [3570.5, 3691.0, 3552.3, 3651.4]
 
 
 if __name__ == "__main__":

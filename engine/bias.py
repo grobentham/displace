@@ -184,16 +184,18 @@ def load_patches():
 
 def despike_days(m, days, ib, patches):
     """Clip a daily high or low that a bad print pushed past the clean session's (Yahoo took 23 Nov 2026's one-minute
-    27,137 print as NQ's high; the real high was about 27,090). Only clips, never extends, and only by more than 0.1%,
-    so a minute or two missing from the 1-minute feed can't move a real extreme. Fixes are kept in patches.json, because
+    27,137 print as NQ's high; the real high was about 27,090). Only clips, never extends, by more than 0.1%, and only
+    when the minute bars saw the same print and filtered it out. Fixes are kept in patches.json, because
     Yahoo's next download would bring the bad print back after Iron Brain's 5-day window has passed."""
     mp = patches.setdefault(m, {})
     for d, x in (ib.get(m) or {}).items():
         if d in days and x.get("complete") and x.get("full"):
             o, h, l, c = days[d]
             tol = 0.001 * c
-            nh = max(x["h"], o, c) if h - x["h"] > tol else h
-            nl = min(x["l"], o, c) if x["l"] - l > tol else l
+            # only the bad print the filter removed: Yahoo's extreme equals the minute bars' raw one and the clean one is
+            # well inside it. A candle that merely covers a different window (Yahoo's opens and lows differ) stays as is.
+            nh = max(x["h"], o, c) if h - x["h"] > tol and abs(h - x.get("rawH", x["h"])) <= tol else h
+            nl = min(x["l"], o, c) if x["l"] - l > tol and abs(l - x.get("rawL", x["l"])) <= tol else l
             if (nh, nl) != (h, l):
                 mp[d] = [round(nh, 6), round(nl, 6), round(h, 6), round(l, 6)]   # clean high, low; Yahoo's high, low
     notes = []
