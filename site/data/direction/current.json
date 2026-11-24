@@ -1,5 +1,5 @@
 {
- "asof": "2026-11-24T18:19-05:00",
+ "asof": "2026-11-24T18:32-05:00",
  "version": 4,
  "assets": {
   "gold": "Gold, close",
@@ -5594,6 +5594,6 @@
  "log": [
   "tv: 3 month(s) refreshed, 3593 releases with a consensus surprise",
   "markets: gold, nq, usd, y2, gold15m, gold2h, nq15m, nq2h",
-  "model: fit in 2s; proven: labor:y2"
+  "model: fit in 3s; proven: labor:y2"
  ]
 }
