@@ -112,7 +112,7 @@ def candidates(docs,now):
         lines=[b["family"]+" · "+b["kind"]+" · "+b["start"]+" to "+b["end"]+" (exclusive).",
                str(b["total"])+" registered tests; "+str(b["promoted"])+" promoted models."]
         lines.extend(k.replace("_"," ")+": "+str(v) for k,v in sorted(b["statuses"].items()))
-        lines.append("Candidate status is not a validated or profitable trading edge. Full results: "+b["source"]+".")
+        lines.append("Legacy paired-week candidate status is under methodological review and is not a validated or profitable trading edge. See the public research correction. Full results: "+b["source"]+".")
         yield report(rid,"research",b["family"]+" — "+b["kind"]+" research batch",now,docs,["open"],[block("Research results",lines)])
     # First observed snapshot per new UTC week/month. Filter by completed target dates.
     # These are as-of reviews, not final settlement claims; unresolved outcomes remain explicit.
