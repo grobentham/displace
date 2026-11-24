@@ -4,7 +4,7 @@ from pathlib import Path
 from urllib.parse import urlsplit
 
 SITE=Path(__file__).resolve().parent.parent/"site"
-PAGES=("macro","signals","relationships","atlas","research","research-v2","research-v3","publications","open","search","terminal","validation")
+PAGES=("macro","signals","relationships","atlas","research","research-v2","research-v3","publications","open","search","research-hub","validation")
 class Page(HTMLParser):
     def __init__(self):
         super().__init__()
@@ -36,7 +36,7 @@ def main():
             u=urlsplit(a)
             if not u.scheme and not u.path.startswith("/") and u.path.endswith(".html"):
                 assert (SITE/u.path).is_file(),(name,a)
-        if name!="terminal": assert "search.html" in p.links and "terminal.html" in p.links,name
+        assert "search.html" in p.links and "research-hub.html" in p.links and "index.html#bias" in p.links,name
     print("intelligence route audit passed")
 if __name__=="__main__":
     main()

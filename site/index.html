@@ -1757,6 +1757,18 @@ svg.cd line.wick{animation:fadein .5s ease-out both}
 .ib-link .kick{display:block;color:#e07b00;font-weight:600;font-size:.82rem}
 .ib-link b{display:block;font-size:1.25rem;margin:2px 0 4px}
 .ib-link span:last-child{color:#6e6e73;font-size:.92rem}
+
+/* Tools: journal and mindset sit with the other tools */
+.tools-more{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(280px,100%),1fr));gap:20px;margin:20px 0}
+.tools-more a{display:flex;flex-direction:column;gap:4px;background:#fff;border-radius:24px;padding:24px 28px;color:var(--ink)}
+.tools-more a:hover{text-decoration:none;box-shadow:0 4px 18px rgba(0,0,0,.06)}
+.tools-more b{font-size:1.2rem}.tools-more b::after{content:" ›";color:var(--link)}.tools-more span{color:var(--muted);font-size:.95rem}
+/* Today: macro backdrop */
+.macro-snap .ms-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:14px}
+.ms-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
+.ms-grid div{background:var(--gray);border-radius:16px;padding:14px 16px}
+.ms-grid small{display:block;color:var(--muted);font-size:.8rem}.ms-grid b{font-size:1.5rem;letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+.ms-note{color:var(--muted);font-size:.82rem;margin-top:12px}
 </style>
 <link rel="canonical" href="https://grobentham.github.io/displace/"></head>
 <body>
@@ -1765,16 +1777,11 @@ svg.cd line.wick{animation:fadein .5s ease-out both}
   <div class="wide">
     <a class="brand" href="#top"><svg width="26" height="26" viewBox="0 0 26 26" aria-hidden="true"><defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2997ff"/><stop offset=".6" stop-color="#30d158"/><stop offset="1" stop-color="#ff9f0a"/></linearGradient></defs><rect width="26" height="26" rx="7" fill="url(#lg)"/><rect x="5" y="13" width="4" height="7" rx="1" fill="#fff" opacity=".75"/><rect x="11" y="6" width="4" height="14" rx="1" fill="#fff"/><rect x="17" y="4" width="4" height="6" rx="1" fill="#fff" opacity=".75"/><rect x="9.5" y="10" width="7" height="3" rx="1" fill="#fff" opacity=".35"/></svg>Displace</a>
     <ul id="navlinks">
-      <li><a href="terminal.html">Terminal</a></li><li><a href="search.html">Research search</a></li>
-      <li><a href="#bias" data-p="bias">Bias</a></li>
+      <li><a href="#bias" data-p="bias">Today</a></li>
       <li><a href="#calendar" data-p="calendar">News</a></li>
-      <li><a href="#backtest" data-p="backtest">Backtester</a></li>
       <li><a href="#tools" data-p="tools">Tools</a></li>
-      <li><a href="#method" data-p="method">Method</a></li>
+      <li><a href="research-hub.html">Research</a></li>
       <li><a href="/iron-brain/" class="navib" title="Iron Brain intraday desk">Intraday ›</a></li>
-      <li><a href="#journal" data-p="journal">Journal</a></li>
-      <li><a href="#mind" data-p="mind">Mindset</a></li>
-      <li><a href="#pro" data-p="pro" class="navpro">Pro</a></li>
     </ul>
     <div class="navr"><button type="button" class="srch-btn" id="srch-btn" aria-label="Search the site"><svg width="17" height="17" viewBox="0 0 16 16" aria-hidden="true"><circle cx="7" cy="7" r="5" fill="none" stroke="currentColor" stroke-width="1.6"/><line x1="11" y1="11" x2="15" y2="15" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></button><a class="pillbtn" href="#bias">Today's bias</a><button type="button" class="menu-btn" id="menu-btn" aria-expanded="false" aria-controls="navlinks" aria-label="Open menu"><span></span><span></span></button></div>
   </div>
@@ -1792,9 +1799,9 @@ svg.cd line.wick{animation:fadein .5s ease-out both}
     <h1 class="h-xl silver">Markets, measured.</h1>
     <p class="sub">Quant research for NQ and gold futures: a tested daily bias, release surprise models and a backtester on real bars. Every number is checked against a base rate and tracked live.</p>
     <div class="ctas">
-      <a class="pillbtn lg" href="terminal.html">Open terminal</a>
-      <a class="more" href="#bias">See today's bias</a>
+      <a class="pillbtn lg" href="#bias">See today</a>
       <a class="more" href="#calendar">Open News</a>
+      <a class="more" href="research-hub.html">Research</a>
       <a class="more" href="#method">How we test</a>
     </div>
     <div class="chooser" role="group" aria-label="Start with">
@@ -2035,6 +2042,7 @@ svg.cd line.wick{animation:fadein .5s ease-out both}
   </div>
   <div class="wide"><a class="bt-card" href="#backtest"><div><small>New</small><b>MNQ Replay</b><p>A bar-by-bar backtester with a strategy lab. Replay real NQ futures bars one candle at a time, place orders with a stop and target, and track win rate, expectancy and drawdown.</p><em>Open the backtester ›</em></div><div class="bt-mini" aria-hidden="true"><i style="height:38%"></i><i style="height:54%"></i><i style="height:46%"></i><i style="height:70%"></i><i style="height:62%"></i><i class="dn" style="height:48%"></i><i style="height:66%"></i><i style="height:84%"></i><i class="dn" style="height:72%"></i><i style="height:92%"></i></div></a></div>
   <div class="wide">
+    <div class="tools-more"><a href="#journal"><b>Journal</b><span>Log trades and see your stats by strategy, session and day.</span></a><a href="#mind"><b>Mindset</b><span>Routines and calm-down tools for trading psychology.</span></a></div>
     <div class="livebar" id="livebar" aria-live="polite">
       <div><small>New York</small><b id="lb-ny">--:--</b></div>
       <div><small>Right now</small><b id="lb-now">–</b></div>
@@ -2288,6 +2296,7 @@ svg.cd line.wick{animation:fadein .5s ease-out both}
       <section class="bias" id="bias-day" aria-labelledby="bias-title" hidden></section>
       <section class="dk-card bias-board" id="bias-board" hidden></section>
       <section class="dk-card bias-live" id="bias-live" hidden></section>
+      <section class="dk-card macro-snap" id="macro-snap" aria-labelledby="macro-snap-title" hidden><div class="ms-head"><h3 id="macro-snap-title">Macro backdrop</h3><a href="macro.html">Macro details ›</a></div><div class="ms-grid" id="ms-grid"></div><p class="ms-note" id="ms-note"></p></section>
       <a class="dk-card ib-link" href="/iron-brain/"><span class="kick">Intraday · Iron Brain</span><b>Where price can still go today ›</b><span>Live touch odds from the current price to the 17:00 close, the chance of a new high or low, and today’s pace, for NQ and gold. Same testing standard.</span></a>
     </div>
   </div>
@@ -2453,7 +2462,7 @@ svg.cd line.wick{animation:fadein .5s ease-out both}
       <p>This site is educational and is not financial advice. Nothing here is a recommendation to buy or sell any instrument. Past statistics do not guarantee future results. Leveraged products such as futures and forex can lose more than your deposit.</p>
     </div>
     <div class="fcols">
-      <div><h5>Research</h5><ul><li><a href="#bias">Daily bias</a></li><li><a href="#calendar">Economic calendar</a></li><li><a href="#daily-brief">Daily brief</a></li><li><a href="#method">Method</a></li><li><a href="research.html">Research discovery</a></li><li><a href="macro.html">Macro intelligence</a></li><li><a href="signals.html">Early warnings</a></li><li><a href="relationships.html">Financial relationships</a></li><li><a href="open.html">Displace Open</a></li><li><a href="publications.html">Publications</a></li><li><a href="atlas.html">Global economic atlas</a></li><li><a href="terminal.html">Intelligence terminal</a></li><li><a href="search.html">Global search</a></li><li><a href="/iron-brain/">Intraday desk (Iron Brain)</a></li></ul></div>
+      <div><h5>Research</h5><ul><li><a href="#bias">Today</a></li><li><a href="#calendar">Economic calendar</a></li><li><a href="#daily-brief">Daily brief</a></li><li><a href="research-hub.html">Research</a></li><li><a href="open.html">Accountability</a></li><li><a href="#method">Method</a></li></ul></div>
       <div><h5>Tools</h5><ul><li><a href="#backtest">MNQ backtester</a></li><li><a href="#calc">Trade planner</a></li><li><a href="#prop">Prop firm tracker</a></li><li><a href="#sim">Edge simulator</a></li><li><a href="#recovery">Drawdown recovery</a></li></ul></div>
       <div><h5>You</h5><ul><li><a href="#journal">Journal</a></li><li><a href="#mind">Mindset</a></li><li><a href="#pro">Pro</a></li></ul></div>
       <div><h5>Displace</h5><ul><li><a href="#join">Free, no sign-up</a></li><li><a href="#faq">FAQ</a></li><li><a href="https://github.com/grobentham/displace">Source</a></li></ul></div>
@@ -3559,7 +3568,7 @@ function route(){
   var h=decodeURIComponent((location.hash||"").slice(1)),r=pageOf(h),pg=PAGES.filter(function(x){return x.id===r.p;})[0];
   if(cur!==r.p){cur=r.p;Object.keys(els).forEach(function(k){els[k].classList.toggle("on",k===cur);});
     document.title=cur==="home"?"Displace · Markets, measured":pg.t+(pg.tool?" · Displace Tools":" · Displace");window.__page=cur;window.__tool=!!pg.tool||cur==="tools";
-    links.forEach(function(a){var p=a.getAttribute("data-p");a.classList.toggle("on",p===cur||(p==="tools"&&!!pg.tool)||(p==="learn"&&!!pg.st&&cur!=="models"));});
+    links.forEach(function(a){var p=a.getAttribute("data-p");a.classList.toggle("on",p===cur||(p==="tools"&&(!!pg.tool||cur==="journal"||cur==="mind"||cur==="backtest"))||(p==="learn"&&!!pg.st&&cur!=="models"));});
     var on=els[cur].querySelector(".stepper a.on");if(on){var ol=on.closest("ol");ol.scrollLeft=on.offsetLeft-ol.offsetWidth/2+on.offsetWidth/2;}
     window.dispatchEvent(new Event("resize"));}
   links.forEach(function(a){if(a.getAttribute("data-p")==="learn")a.classList.toggle("on",a.classList.contains("on")||h==="path");});
@@ -4076,5 +4085,17 @@ window.addEventListener("hashchange",function(){if(B1.on())B1.stop();calmOff();a
 </script>
 <div class="al-toast" id="al-toast" role="alert"></div>
 <div class="nbar" id="nbar" role="status" aria-live="polite"></div>
+<script>
+/* Today: the macro backdrop (data/macro/current.json, data/signals/current.json). Descriptive, not a forecast. */
+(function(){var box=document.getElementById("macro-snap");if(!box||!window.fetch)return;
+function get(p){return fetch("data/"+p+".json",{cache:"no-store"}).then(function(r){if(!r.ok)throw 0;return r.json();});}
+Promise.all([get("macro/current"),get("signals/current").catch(function(){return null;})]).then(function(a){
+  var m=a[0],sg=a[1],g=document.getElementById("ms-grid");g.textContent="";
+  (m.indices||[]).forEach(function(i){var d=document.createElement("div"),s=document.createElement("small"),b=document.createElement("b");
+    s.textContent=i.name;b.textContent=typeof i.score==="number"?Math.round(i.score)+"":"–";d.appendChild(s);d.appendChild(b);g.appendChild(d);});
+  var act=sg&&sg.states?sg.states.filter(function(x){return x.state==="active"||x.active===true;}).length:null;
+  document.getElementById("ms-note").textContent="Scores out of 100, ranked against years of history; higher means more of the named condition. "+(act!=null?act+" macro warning"+(act===1?" is":"s are")+" active. ":"")+"Background, not a forecast. Updated "+m.asof+".";
+  box.hidden=false;}).catch(function(){});})();
+</script>
 </body>
 </html>

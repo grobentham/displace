@@ -68,3 +68,22 @@ main p,main li{overflow-wrap:anywhere}
 main nav{display:flex;flex-wrap:wrap;gap:8px 18px;justify-content:center;margin-top:14px;font-size:.95rem}
 /* the header logo keeps its size whatever a page does with svg */
 .gnav .brand svg{width:26px;height:26px;flex:none;display:block}
+
+/* header: search icon + pill on the right (as on the home page) */
+.gnav .navr{display:flex;align-items:center;gap:14px;flex:none}
+.navsrch{color:var(--ink);opacity:.8;display:flex}.navsrch:hover{opacity:1}
+/* research sub-menu: one row of tabs under the header on every research page */
+.rnav{background:#fff;border-bottom:1px solid rgba(0,0,0,.06)}
+.rnav .wide{max-width:1180px;margin:0 auto;padding:0 22px;display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;height:44px;align-items:center}
+.rnav .wide::-webkit-scrollbar{display:none}
+.rnav a{font-size:.8rem;color:var(--ink);opacity:.75;padding:6px 12px;border-radius:980px;white-space:nowrap}
+.rnav a:hover{opacity:1;text-decoration:none;background:var(--gray)}
+.rnav a[aria-current=page]{opacity:1;background:var(--ink);color:#fff}
+/* research overview cards */
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px,100%),1fr));gap:20px}
+.card{display:flex;flex-direction:column;gap:6px;background:var(--gray);border-radius:24px;padding:28px;color:var(--ink)}
+.card:hover{text-decoration:none;background:#ececf0}
+.card b{font-size:1.25rem;letter-spacing:-.02em}.card p{color:var(--muted);font-size:.95rem;margin:0}
+.card em{font-style:normal;color:var(--link);font-size:.95rem;margin-top:auto}
+.card em::after{content:" ›"}
+.cards.small .card{padding:20px}.cards.small .card b{font-size:1.05rem}
