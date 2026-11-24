@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "registered_at": "2026-11-24",
+  "markets": [
+    "nq",
+    "es",
+    "ym",
+    "rty",
+    "gold",
+    "cl",
+    "6e",
+    "btc"
+  ],
+  "first_test_year": 2012,
+  "min_train": 500,
+  "lookback": 22,
+  "max_gap_days": 4,
+  "policy": "Exploratory independent price-only benchmark replay on current-vintage cached daily candles; no economic predictors or model selection. Annual fits use outcome dates strictly before the test year. Range target log(high/low); regress its logarithm on log prior 1-, 5- and 22-session average ranges, compare with trailing 20-session average and training median residual. Evaluate log squared error, actual high-minus-low point MAE using prior-close-anchored ratio conversion, 80% interval coverage and interval score. Level probabilities use fixed close-location quintiles with 20-observation prior shrinkage vs expanding annual base rate. Direction rolling 252-observation base rate vs expanding annual base rate. Not an exact replication of the original full HAR, not a locked holdout, and not executable trading evidence."
+}
