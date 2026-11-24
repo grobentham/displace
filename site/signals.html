@@ -1,0 +1,32 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Displace | Statistical Early Warnings</title><meta name="description" content="Source-linked monitoring of registered US macro conditions and alert history.">
+<style>
+:root{color-scheme:dark;--bg:#101318;--panel:#191f27;--border:#303945;--muted:#a5afbd;--text:#e9edf3;--accent:#8eb9f1;--amber:#f1c078}
+*{box-sizing:border-box}body{background:var(--bg);color:var(--text);font:15px/1.6 system-ui,sans-serif;margin:0}main{max-width:1080px;margin:auto;padding:28px 20px 64px}header{border-bottom:1px solid var(--border);padding-bottom:20px}a{color:var(--accent)}h1{font-size:clamp(28px,5vw,44px);letter-spacing:-.035em;margin:16px 0 4px}h2{font-size:20px;margin:0 0 8px}h3{font-size:17px;margin:5px 0}.muted,small{color:var(--muted)}.panel{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:20px;margin:16px 0}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(290px,100%),1fr));gap:12px}.grid .panel{margin:0}.score{font-size:30px;font-variant-numeric:tabular-nums;font-weight:650}.active{color:var(--amber)}.scroll{overflow-x:auto}table{border-collapse:collapse;width:100%;font-variant-numeric:tabular-nums}th,td{text-align:left;padding:11px;border-bottom:1px solid var(--border);vertical-align:top}th{color:var(--muted);font-weight:500}p{max-width:75ch}ul{padding-left:18px}details{margin-top:8px}select{max-width:100%;padding:5px}
+</style></head><body><main><header><a href="index.html#top">← DISPLACE</a><h1>Statistical early warnings</h1><p class="muted">US macro monitoring · Registered thresholds · No discretionary trading calls</p></header>
+<section class="panel"><h2>Monitoring methodology</h2><p>Alerts describe current conditions, not future market direction. A condition activates at its entry threshold and clears only after reaching its separate exit threshold. A first detection is not necessarily a new crossing. Missing or stale inputs suspend evaluation without declaring the condition resolved.</p><p><a href="macro.html">Macro indicators</a> · <a href="https://github.com/grobentham/displace/blob/main/research/signals-plan-v1.json">Registered rules</a> · <a href="data/signals/current.json">Machine-readable record</a></p></section>
+<p id="status" class="muted" aria-live="polite">Loading published signal history…</p>
+<section><h2>Current conditions</h2><p><label for="filter">Show: </label><select id="filter"><option value="">All rules</option><option value="active">Active</option><option value="normal">Normal</option><option value="unavailable">Unavailable</option></select></p><div class="grid" id="states"></div></section>
+<section class="panel"><h2>Recorded transitions</h2><p class="muted">Engine observation timestamps in UTC. The latest observations are displayed first. The archive preserves every recorded transition.</p><div class="scroll" id="events"></div></section>
+<section class="panel"><h2>Limitations</h2><p>These thresholds are fixed monitoring policy choices, not independently validated predictive rules. Components and indices overlap, so alerts are not independent. Current-vintage data can be revised. The system does not infer causes, recommend trades or claim predictive accuracy.</p></section></main>
+<script>
+function el(tag,text,parent){const n=document.createElement(tag);if(text!==undefined)n.textContent=text;if(parent)parent.append(n);return n}
+const root=document.getElementById('states'),log=document.getElementById('events'),status=document.getElementById('status'),filter=document.getElementById('filter');
+const fmt=x=>typeof x==='number'?x.toFixed(1):'—';
+function sources(parent,items){const details=el('details',undefined,parent);el('summary','Supporting observations',details);const ul=el('ul',undefined,details);for(const c of items){const li=el('li',undefined,ul);const a=el('a',c.id,li);a.href='https://fred.stlouisfed.org/series/'+encodeURIComponent(c.id);el('div',(c.observation_date||'No date')+' · Value '+fmt(c.value)+' · Component score '+fmt(c.score),li).className='muted'}}
+filter.addEventListener('change',()=>{for(const p of root.children)p.hidden=!!(filter.value&&filter.value!==p.dataset.state)});
+fetch('data/signals/current.json',{cache:'no-store'}).then(r=>{if(!r.ok)throw Error();return r.json()}).then(doc=>{
+ const current=doc.states.filter(s=>s.status==='active').length, missing=doc.states.filter(s=>s.status==='unavailable').length;
+ status.textContent='Evaluated '+doc.asof+' · '+current+' active · '+missing+' unavailable · '+doc.events.length+' recorded transitions';
+ for(const s of doc.states){const p=el('article',undefined,root);p.className='panel';p.dataset.state=s.status;
+ el('small',s.index,p);el('h3',s.label,p);const st=el('p',s.status==='unavailable'?(s.active?'Unavailable — previously active':'Unavailable'):s.status==='active'?'Active · '+s.severity:'Normal',p);if(s.status==='active')st.className='active';
+ el('div',s.score===null?'—':fmt(s.score)+' / 100',p).className='score';
+ el('p','Activate '+(s.direction==='high'?'≥ ':'≤ ')+s.enter+' · Clear '+(s.direction==='high'?'≤ ':'≥ ')+s.exit,p).className='muted';
+ if(s.first_detected)el('small','First detected: '+s.first_detected,p);
+ if(s.evidence.length)sources(p,s.evidence)}
+ if(!doc.events.length){el('p','No recorded transitions yet.',log);return}
+ const table=el('table',undefined,log),head=el('tr',undefined,el('thead',undefined,table));
+ ['Observed UTC','Condition','Transition','Score','Evidence'].forEach(x=>el('th',x,head));const body=el('tbody',undefined,table);
+ for(const e of [...doc.events].reverse()){const tr=el('tr',undefined,body);[e.observed_at,e.label,e.type.replaceAll('_',' '),fmt(e.score)].forEach(x=>el('td',x,tr));sources(el('td',undefined,tr),e.evidence)}
+}).catch(()=>{status.textContent='Signals have not been published yet or are temporarily unavailable.'});
+</script></body></html>

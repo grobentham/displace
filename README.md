@@ -193,3 +193,7 @@ The strict final publication gate validates minimum contracts and blocks the can
 ## Macro and expanded research
 
 Discovery v2 is registered separately from v1: 8 markets × 12 prior-session conditions × 2 outcomes = 192 candidate experiments, with frozen historical and six-month prospective batches. Macro v1 computes six descriptive US indices from FRED series, equal-weighting component percentiles only when all components have sufficient and reasonably fresh data. These are current-vintage descriptive indicators, not validated recession or return forecasts. See the registered JSON plans for definitions. Review data rights before commercial use.
+
+## Statistical early warnings
+
+The registered `research/signals-plan-v1.json` defines ten descriptive monitoring rules on the six macro indices. `engine/signals.py` runs after macro ingestion, uses separate entry and exit thresholds to avoid repeated toggling, records initial detections, activations, severity changes and clearances, and retains source-linked evidence. Stale inputs suspend evaluation without declaring that an existing condition cleared. All transition timestamps reflect the engine observation time, not the original release time; no forecast accuracy is claimed. `site/signals.html` displays current states and history. Thresholds are policy settings rather than validated probabilities.

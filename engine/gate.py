@@ -84,6 +84,7 @@ CONTRACTS = {
     "research/discovery.json": {"version": int, "batches": list, "plan_hash": str},
     "research/discovery-v2.json": {"version": int, "batches": list, "plan_hash": str},
     "macro/current.json": {"version": int, "asof": str, "indices": list, "policy": str},
+    "signals/current.json": {"version": int, "asof": str, "states": list, "events": list, "plan_hash": str, "policy": str},
     "direction/current.json": {"assets": dict, "groups": dict, "events": dict, "live": dict, "scenarios": dict},
     "direction/log.json": {"rows": list},
     "calendar/events.json": {"updated": str, "through": str, "events": list},
@@ -113,6 +114,11 @@ def strict_validate(data=DATA):
                 failures[rel] = ["missing or wrong type: " + ", ".join(bad)]
             elif rel == "engine/quality.json" and obj["critical"]:
                 failures[rel] = ["critical source quality failure"]
+            elif rel == "signals/current.json":
+                import signals
+                problems = signals.check(obj, json.loads(signals.PLAN.read_text()))
+                if problems:
+                    failures[rel] = problems
             elif rel == "macro/current.json":
                 ids = [i["id"] for i in obj["indices"]]
                 if len(ids) != 6 or len(set(ids)) != 6 or any(
