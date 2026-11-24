@@ -3,6 +3,7 @@ import datetime as dt
 import json
 import os
 import random
+import zlib
 import sys
 import tempfile
 import warnings
@@ -32,7 +33,7 @@ def synthetic(n=2600, seed=3, start=dt.date(2008, 1, 1), drift=0.0004, vol=0.012
 
 
 def series_fake(sid, start="1999-01-01"):
-    rnd = random.Random(hash(sid) % 1000)
+    rnd = random.Random(zlib.crc32(sid.encode()) % 1000)   # hash() changes every run (PYTHONHASHSEED): flaky
     d, v, out = dt.date(2005, 1, 3), 20.0, []
     while d < dt.date(2026, 12, 1):
         if d.weekday() < 5:
