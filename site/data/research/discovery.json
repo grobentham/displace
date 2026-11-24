@@ -1,0 +1,171 @@
+{
+  "version": 1,
+  "plan_hash": "070e1fed7b67a8d7cbcfc9b08945e71258e02154c3a697f1c41e799651f327c5",
+  "batches": [
+    {
+      "kind": "historical",
+      "start": "2020-01-01",
+      "end": "2026-11-01",
+      "dataset_hashes": {
+        "nq": "71ac1e7309bd01273dc3152a775b54d5da4f3ea816242de0236be371b6bf87b0",
+        "gold": "9ded791e8b8d63dfa94f2facfd39513f1829eea5018419561c9412cf5ceb559b"
+      },
+      "computed_on": "2026-11-24",
+      "results": [
+        {
+          "condition": "previous_up",
+          "n": 1480,
+          "condition_n": 820,
+          "comparison_n": 660,
+          "status": "exploratory_candidate",
+          "promoted": false,
+          "condition_rate": 0.5487804878048781,
+          "comparison_rate": 0.5590909090909091,
+          "effect": -0.01031042128603099,
+          "paired_weeks": 313,
+          "weekly_effect": -0.25186368477103305,
+          "approx_interval": [
+            -0.31685705352601834,
+            -0.18687031601604775
+          ],
+          "family_adjusted_alpha": 0.00625,
+          "market": "nq"
+        },
+        {
+          "condition": "previous_down",
+          "n": 1480,
+          "condition_n": 660,
+          "comparison_n": 820,
+          "status": "exploratory_candidate",
+          "promoted": false,
+          "condition_rate": 0.5590909090909091,
+          "comparison_rate": 0.5487804878048781,
+          "effect": 0.01031042128603099,
+          "paired_weeks": 313,
+          "weekly_effect": 0.25186368477103305,
+          "approx_interval": [
+            0.18687031601604775,
+            0.31685705352601834
+          ],
+          "family_adjusted_alpha": 0.00625,
+          "market": "nq"
+        },
+        {
+          "condition": "wide_range",
+          "n": 1480,
+          "condition_n": 737,
+          "comparison_n": 743,
+          "status": "exploratory_candidate",
+          "promoted": false,
+          "condition_rate": 0.5671641791044776,
+          "comparison_rate": 0.5397039030955586,
+          "effect": 0.027460276008918982,
+          "paired_weeks": 260,
+          "weekly_effect": 0.11794871794871795,
+          "approx_interval": [
+            0.02888792071574811,
+            0.20700951518168778
+          ],
+          "family_adjusted_alpha": 0.00625,
+          "market": "nq"
+        },
+        {
+          "condition": "narrow_range",
+          "n": 1480,
+          "condition_n": 743,
+          "comparison_n": 737,
+          "status": "exploratory_candidate",
+          "promoted": false,
+          "condition_rate": 0.5397039030955586,
+          "comparison_rate": 0.5671641791044776,
+          "effect": -0.027460276008918982,
+          "paired_weeks": 260,
+          "weekly_effect": -0.11794871794871795,
+          "approx_interval": [
+            -0.20700951518168778,
+            -0.02888792071574811
+          ],
+          "family_adjusted_alpha": 0.00625,
+          "market": "nq"
+        },
+        {
+          "condition": "previous_up",
+          "n": 1476,
+          "condition_n": 802,
+          "comparison_n": 674,
+          "status": "exploratory_candidate",
+          "promoted": false,
+          "condition_rate": 0.516209476309227,
+          "comparison_rate": 0.5771513353115727,
+          "effect": -0.06094185900234572,
+          "paired_weeks": 312,
+          "weekly_effect": -0.27564102564102566,
+          "approx_interval": [
+            -0.34302094593415416,
+            -0.20826110534789716
+          ],
+          "family_adjusted_alpha": 0.00625,
+          "market": "gold"
+        },
+        {
+          "condition": "previous_down",
+          "n": 1476,
+          "condition_n": 668,
+          "comparison_n": 808,
+          "status": "exploratory_candidate",
+          "promoted": false,
+          "condition_rate": 0.5823353293413174,
+          "comparison_rate": 0.5123762376237624,
+          "effect": 0.06995909171755499,
+          "paired_weeks": 312,
+          "weekly_effect": 0.280982905982906,
+          "approx_interval": [
+            0.2138161160388192,
+            0.34814969592699274
+          ],
+          "family_adjusted_alpha": 0.00625,
+          "market": "gold"
+        },
+        {
+          "condition": "wide_range",
+          "n": 1476,
+          "condition_n": 725,
+          "comparison_n": 751,
+          "status": "inconclusive",
+          "promoted": false,
+          "condition_rate": 0.5737931034482758,
+          "comparison_rate": 0.5153129161118508,
+          "effect": 0.058480187336425016,
+          "paired_weeks": 289,
+          "weekly_effect": 0.060553633217993084,
+          "approx_interval": [
+            -0.030202011531668217,
+            0.1513092779676544
+          ],
+          "family_adjusted_alpha": 0.00625,
+          "market": "gold"
+        },
+        {
+          "condition": "narrow_range",
+          "n": 1476,
+          "condition_n": 751,
+          "comparison_n": 725,
+          "status": "inconclusive",
+          "promoted": false,
+          "condition_rate": 0.5153129161118508,
+          "comparison_rate": 0.5737931034482758,
+          "effect": -0.058480187336425016,
+          "paired_weeks": 289,
+          "weekly_effect": -0.060553633217993084,
+          "approx_interval": [
+            -0.1513092779676544,
+            0.030202011531668217
+          ],
+          "family_adjusted_alpha": 0.00625,
+          "market": "gold"
+        }
+      ],
+      "policy": "Fixed plan. Historical results exploratory; prospective batches disjoint and frozen once computed. Approximate weekly-block intervals, Bonferroni across all eight experiments within each batch; no model promotion or strategy profitability claim. Provider revisions and serial dependence can affect results."
+    }
+  ]
+}

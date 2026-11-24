@@ -1,5 +1,5 @@
 {
- "asof": "2026-11-24T04:58-05:00",
+ "asof": "2026-11-24T05:25-05:00",
  "version": 4,
  "assets": {
   "gold": "Gold, close",
@@ -1299,7 +1299,7 @@
       0,
       0
      ],
-     "recent": 0.0,
+     "recent": 0,
      "tested": 62
     },
     "proven": false,
@@ -1423,35 +1423,16 @@
   "calls": 0,
   "hits": 0,
   "open": 0,
+  "historicalOnly": 0,
   "byAsset": {},
   "recent": [],
   "hist": {
-   "calls": 1,
+   "calls": 0,
    "hits": 0,
    "open": 0,
-   "byAsset": {
-    "gold2h": [
-     0,
-     1
-    ]
-   },
-   "recent": [
-    {
-     "id": "20261120-umich-consumer-sentiment-final-nov",
-     "date": "2026-11-20",
-     "when": "2026-11-20T10:00:00-05:00",
-     "kind": "umich",
-     "group": "sentiment",
-     "asset": "gold2h",
-     "dir": "up",
-     "p": 0.682,
-     "z": 0.0,
-     "tier": "hist",
-     "logged": "2026-11-20T10:24-05:00",
-     "move": -0.877,
-     "hit": false
-    }
-   ]
+   "historicalOnly": 1,
+   "byAsset": {},
+   "recent": []
   }
  },
  "scenarios": {
@@ -5624,6 +5605,6 @@
  "log": [
   "tv: 3 month(s) refreshed, 3592 releases with a consensus surprise",
   "markets: gold, nq, usd, y2, gold15m, gold2h, nq15m, nq2h",
-  "model: fit in 2s; proven: inflation:nq2h, labor:y2"
+  "model: fit in 3s; proven: inflation:nq2h, labor:y2"
  ]
 }
