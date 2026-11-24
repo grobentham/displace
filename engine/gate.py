@@ -84,6 +84,7 @@ CONTRACTS = {
     "research/discovery.json": {"version": int, "batches": list, "plan_hash": str},
     "research/discovery-v2.json": {"version": int, "batches": list, "plan_hash": str},
     "macro/current.json": {"version": int, "asof": str, "indices": list, "policy": str},
+    "provenance/current.json": {"version": int, "id": str, "asof": str, "manifest_path": str, "manifest_sha256": str, "groups": dict},
     "validation/models.json": {"version": int, "asof": str, "plan_hash": str, "markets": dict, "events": list, "policy": str},
     "validation/current.json": {"version": int, "asof": str, "batches": list, "plan_hash": str, "discovery_plan_hash": str, "policy": str},
     "atlas/current.json": {"version": int, "asof": str, "years": list, "countries": list, "indicators": list, "coverage": dict, "plan_hash": str, "policy": str},
@@ -120,6 +121,14 @@ def strict_validate(data=DATA):
                 failures[rel] = ["missing or wrong type: " + ", ".join(bad)]
             elif rel == "engine/quality.json" and obj["critical"]:
                 failures[rel] = ["critical source quality failure"]
+            elif rel == "provenance/current.json":
+                import provenance
+                if obj["id"] != provenance.capture_id():
+                    raise ValueError("Missing current-run provenance")
+                manifest = provenance.read_json(provenance.ROOT / obj["manifest_path"])
+                if provenance.public_summary(manifest) != obj:
+                    raise ValueError("Manifest summary mismatch")
+                provenance.check(provenance.ROOT,manifest)
             elif rel == "validation/models.json":
                 import modelaudit
                 problems = modelaudit.check(obj, json.loads(modelaudit.PLAN.read_text()))

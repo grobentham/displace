@@ -253,6 +253,10 @@ def fit(rels, markets, now, live_rows=()):
              "groups": {}, "scenarios": {}}
     tests, keys = [], []
     data = {key: dataset(rels, markets, key, now) for key in markets}
+    import provenance as PR
+    model["inputProvenance"] = {"capture_id":PR.capture_id(),
+        "reaction_samples_sha256":{key:PR.fingerprint([(w.isoformat(),z,y,move,kind,decision) for w,z,y,move,kind,decision in rows]) for key,rows in data.items()},
+        "reaction_samples_n":{key:len(rows) for key,rows in data.items()}}
     for g, kinds in tv.GROUPS.items():
         gm = model["groups"].setdefault(g, {})
         for key in markets:

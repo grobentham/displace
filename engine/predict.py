@@ -307,6 +307,7 @@ def run(now=None, kind_of=None, events=None, store=None):
     record = SP.score(log_rows, markets, now)
     out = summary(model, live, record)
     out["moves"] = mv
+    out["inputProvenance"] = model["inputProvenance"]
     problems = check(out)
     if problems:
         log(f"quality: {len(problems)} problem(s); keeping the last good file: " + "; ".join(problems[:5]))

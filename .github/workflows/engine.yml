@@ -62,6 +62,7 @@ jobs:
           python engine/test_validation.py
           python engine/test_model_safeguards.py
           python engine/test_modelaudit.py
+          python engine/test_provenance.py
           node --check site/assets/terminal.js
           node tests/test_terminal.js
           node --check site/assets/validation.js
@@ -142,6 +143,9 @@ jobs:
           python engine/guard.py validation engine/validation.py
           python engine/guard.py modelaudit engine/modelaudit.py
 
+      - name: Capture data and model provenance
+        run: python engine/guard.py provenance engine/provenance.py
+
       - name: Final check before publishing (block invalid candidate snapshot)
         run: python engine/gate.py --strict
 
@@ -152,10 +156,11 @@ jobs:
         run: |
           git config user.name "displace-engine"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -- site/data site/reports site/sitemap.xml site/calendar.ics site/calendar-high.ics engine/pending.json engine/cache
+          git add -- site/data site/reports site/sitemap.xml site/calendar.ics site/calendar-high.ics engine/pending.json engine/cache research/provenance
           if ! git diff --cached --quiet; then
             git commit -m "Engine update $(date -u +%Y-%m-%dT%H:%MZ)"
             # another run or a code push may have landed meanwhile: rebase onto it and retry
+            python engine/provenance.py --verify-commit
             git push || { echo "Candidate commit could not be saved; refusing to deploy"; exit 1; }
           fi
 
