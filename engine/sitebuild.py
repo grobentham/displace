@@ -13,9 +13,9 @@ ROOT=Path(__file__).resolve().parent.parent
 SITE=ROOT/"site"
 BASE=publisher.BASE
 PAGES=("terminal.html","macro.html","signals.html","relationships.html","atlas.html","research.html",
-       "research-v2.html","publications.html","open.html","search.html","backtest.html","validation.html")
+       "research-v2.html","research-v3.html","publications.html","open.html","search.html","backtest.html","validation.html")
 NAV=(("terminal.html","Terminal"),("macro.html","Macro"),("signals.html","Warnings"),
-     ("relationships.html","Relationships"),("atlas.html","Atlas"),("research-v2.html","Discovery"),
+     ("relationships.html","Relationships"),("atlas.html","Atlas"),("research-v3.html","Discovery"),
      ("publications.html","Publications"),("open.html","Open"),("validation.html","Validation"),("search.html","Search"))
 
 def esc(x):

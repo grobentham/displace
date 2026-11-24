@@ -1,0 +1,2523 @@
+{
+  "version": 3,
+  "plan_hash": "b0fa21ccff595c0c6c9d85272eeeb0c2631b71fea52d75bf385e374a941080d8",
+  "batches": [
+    {
+      "kind": "historical",
+      "start": "2020-01-01",
+      "end": "2026-11-01",
+      "computed_on": "2026-11-24",
+      "tests": 128,
+      "family_alpha": 0.000390625,
+      "dataset_hashes": {
+        "nq": "71ac1e7309bd01273dc3152a775b54d5da4f3ea816242de0236be371b6bf87b0",
+        "es": "e6541790f7edfd389f48617dffcc1d0942478da357b331acb732825a4ee96880",
+        "ym": "9535ccf85d2f35f48e41d9da7d958d9430d2a527a70ef28213a0ef8bd9cb0b69",
+        "rty": "9dc37f4a5a0e37ec318819a03a54ec7f60201bdec67b09fdc59adbdafe4dd06b",
+        "gold": "9ded791e8b8d63dfa94f2facfd39513f1829eea5018419561c9412cf5ceb559b",
+        "cl": "93442009845c8f20b6d4210414b8d52317976e1fc48657b1f156764b6ff3cd7c",
+        "6e": "b97c57c78cba0fccaf11a6f454c3d5b93fcff42778146985a0e8a626e5d2c7d9",
+        "btc": "6457d49a8a4dcd8ff1e8f6fd43069581c53f4a7b7439e46cb40da904b69654a6"
+      },
+      "results": [
+        {
+          "n": 1304,
+          "condition_n": 722,
+          "comparison_n": 582,
+          "effect": -0.013379215809463996,
+          "interval": [
+            -0.10268688062352882,
+            0.07592844900460083
+          ],
+          "blocks": 86,
+          "status": "inconclusive",
+          "condition_rate": 0.5484764542936288,
+          "comparison_rate": 0.5618556701030928,
+          "standard_error": 0.025183067054126373,
+          "market": "nq",
+          "condition": "previous_up",
+          "outcome": "next_positive_close",
+          "promoted": false
+        },
+        {
+          "n": 1304,
+          "condition_n": 722,
+          "comparison_n": 582,
+          "effect": -0.18204015192620726,
+          "interval": [
+            -0.28076951773064623,
+            -0.0833107861217683
+          ],
+          "blocks": 86,
+          "status": "descriptive_difference",
+          "condition_rate": 0.42105263157894735,
+          "comparison_rate": 0.6030927835051546,
+          "standard_error": 0.027839807976627287,
+          "note": "Range persistence (volatility clustering) is a known effect, not a direction edge.",
+          "market": "nq",
+          "condition": "previous_up",
+          "outcome": "next_range_above_normal",
+          "promoted": false
+        },
+        {
+          "n": 1304,
+          "condition_n": 656,
+          "comparison_n": 648,
+          "effect": 0.03767690454682315,
+          "interval": [
+            -0.05271333375179696,
+            0.12806714284544327
+          ],
+          "blocks": 86,
+          "status": "inconclusive",
+          "condition_rate": 0.573170731707317,
+          "comparison_rate": 0.5354938271604939,
+          "standard_error": 0.025488332237236185,
+          "market": "nq",
+          "condition": "wide_range",
+          "outcome": "next_positive_close",
+          "promoted": false
+        },
+        {
+          "n": 1304,
+          "condition_n": 656,
+          "comparison_n": 648,
+          "effect": 0.22544037940379408,
+          "interval": [
+            0.11451798856509007,
+            0.33636277024249805
+          ],
+          "blocks": 86,
+          "status": "descriptive_difference",
+          "condition_rate": 0.614329268292683,
+          "comparison_rate": 0.3888888888888889,
+          "standard_error": 0.03127800969951211,
+          "note": "Range persistence (volatility clustering) is a known effect, not a direction edge.",
+          "market": "nq",
+          "condition": "wide_range",
+          "outcome": "next_range_above_normal",
+          "promoted": false
+        },
+        {
+          "n": 1304,
+          "condition_n": 782,
+          "comparison_n": 522,
+          "effect": -0.011430559230188764,
+          "interval": [
+            -0.09891293605435272,
+            0.0760518175939752
+          ],
+          "blocks": 86,
+          "status": "inconclusive",
+          "condition_rate": 0.5498721227621484,
+          "comparison_rate": 0.5613026819923371,
+          "standard_error": 0.0246683704719409,
+          "market": "nq",
+          "condition": "momentum_5_up",
+          "outcome": "next_positive_close",
+          "promoted": false
+        },
+        {
+          "n": 1304,
+          "condition_n": 782,
+          "comparison_n": 522,
+          "effect": -0.26450010288973164,
+          "interval": [
+            -0.3893811594528972,
+            -0.13961904632656608
+          ],
+          "blocks": 86,
+          "status": "descriptive_difference",
+          "condition_rate": 0.39641943734015345,
+          "comparison_rate": 0.6609195402298851,
+          "standard_error": 0.035214088597746725,
+          "note": "Range persistence (volatility clustering) is a known effect, not a direction edge.",
+          "market": "nq",
+          "condition": "momentum_5_up",
+          "outcome": "next_range_above_normal",
+          "promoted": false
+        },
+        {
+          "n": 1304,
+          "condition_n": 839,
+          "comparison_n": 465,
+          "effect": -0.0039499147730913675,
+          "interval": [
+            -0.12105613113700578,
+            0.11315630159082304
+          ],
+          "blocks": 86,
+          "status": "inconclusive",
+          "condition_rate": 0.5530393325387366,
+          "comparison_rate": 0.556989247311828,
+          "standard_error": 0.033021731172653425,
+          "market": "nq",
+          "condition": "momentum_20_up",
+          "outcome": "next_positive_close",
+          "promoted": false
+        },
+        {
+          "n": 1304,
+          "condition_n": 839,
+          "comparison_n": 465,
+          "effect": -0.10171094621092697,
+          "interval": [
+            -0.2307236554502537,
+            0.02730176302839976
+          ],
+          "blocks": 86,
+          "status": "inconclusive",
+          "condition_rate": 0.466030989272944,
+          "comparison_rate": 0.567741935483871,
+          "standard_error": 0.036379136263081514,
+          "note": "Range persistence (volatility clustering) is a known effect, not a direction edge.",
+          "market": "nq",
+          "condition": "momentum_20_up",
+          "outcome": "next_range_above_normal",
+          "promoted": false
+        },
+        {
+          "n": 1304,
+          "condition_n": 402,
+          "comparison_n": 902,
+          "effect": 0.003998852742937209,
+          "interval": [
+            -0.09766822996507987,
+            0.10566593545095429
+          ],
+          "blocks": 86,
+          "status": "inconclusive",
+          "condition_rate": 0.5572139303482587,
+          "comparison_rate": 0.5532150776053215,
+          "standard_error": 0.028668188406491546,
+          "market": "nq",
+          "condition": "close_near_high",
+          "outcome": "next_positive_close",
+          "promoted": false
+        },
+        {
+          "n": 1304,
+          "condition_n": 402,
+          "comparison_n": 902,
+          "effect": -0.15436674719528748,
+          "interval": [
+            -0.2639820089652518,
+            -0.04475148542532313
+          ],
+          "blocks": 86,
+          "status": "descriptive_difference",
+          "condition_rate": 0.39552238805970147,
+          "comparison_rate": 0.549889135254989,
+          "standard_error": 0.03090942410212804,
+          "note": "Range persistence (volatility clustering) is a known effect, not a direction edge.",
+          "market": "nq",
+          "condition": "close_near_high",
+          "outcome": "next_range_above_normal",
+          "promoted": false
+        },
+        {
+          "n": 1304,
+          "condition_n": 260,
+          "comparison_n": 1044,
+          "effect": -0.010359563807839756,
+          "interval": [
+            -0.10771564578076041,
+            0.0869965181650809
+          ],
+          "blocks": 86,
+          "status": "inconclusive",
+          "condition_rate": 0.5461538461538461,
+          "comparison_rate": 0.5565134099616859,
+          "standard_error": 0.027452567991285887,
+          "market": "nq",
+          "condition": "close_near_low",
+          "outcome": "next_positive_close",
+          "promoted": false
+        },
+        {
+          "n": 1304,
+          "condition_n": 260,
+          "comparison_n": 1044,
+          "effect": 0.17007073386383725,
+          "interval": [
+            0.030753488666289353,
+            0.30938797906138515
+          ],
+          "blocks": 86,
+          "status": "descriptive_difference",
+          "condition_rate": 0.6384615384615384,
+          "comparison_rate": 0.46839080459770116,
+          "standard_error": 0.03928481989659504,
+          "note": "Range persistence (volatility clustering) is a known effect, not a direction edge.",
+          "market": "nq",
+          "condition": "close_near_low",
+          "outcome": "next_range_above_normal",
+          "promoted": false
+        },
+        {
+          "n": 1304,
+          "condition_n": 142,
+          "comparison_n": 1162,
+          "effect": -0.005781678019926795,
+          "interval": [
+            -0.1823451160768959,
+            0.17078176003704232
+          ],
+          "blocks": 86,
+          "status": "inconclusive",
+          "condition_rate": 0.5492957746478874,
+          "comparison_rate": 0.5550774526678142,
+          "standard_error": 0.04978753961547418,
+          "market": "nq",
+          "condition": "inside_day",
+          "outcome": "next_positive_close",
+          "promoted": false
+        },
+        {
+          "n": 1304,
+          "condition_n": 142,
+          "comparison_n": 1162,
+          "effect": 0.013223921844318864,
+          "interval": [
+            -0.13647081517566118,
+            0.1629186588642989
+          ],
+          "blocks": 86,
+          "status": "inconclusive",
+          "condition_rate": 0.5140845070422535,
+          "comparison_rate": 0.5008605851979346,
+          "standard_error": 0.04221107569963334,
+          "note": "Range persistence (volatility clustering) is a known effect, not a direction edge.",
+          "market": "nq",
+          "condition": "inside_day",
+          "outcome": "next_range_above_normal",
+          "promoted": false
+        },
+        {
+          "n": 1304,
+          "condition_n": 153,
+          "comparison_n": 1151,
+          "effect": 0.016064462274918645,
+          "interval": [
+            -0.13030498364102439,
+            0.16243390819086168
+          ],
+          "blocks": 86,
+          "status": "inconclusive",
+          "condition_rate": 0.5686274509803921,
+          "comparison_rate": 0.5525629887054735,
+          "standard_error": 0.041273406698637743,
+          "market": "nq",
+          "condition": "outside_day",
+          "outcome": "next_positive_close",
+          "promoted": false
+        },
+        {
+          "n": 1304,
+          "condition_n": 153,
+          "comparison_n": 1151,
+          "effect": 0.11216731117584594,
+          "interval": [
+            -0.047418829686950964,
+            0.2717534520386429
+          ],
+          "blocks": 86,
+          "status": "inconclusive",
+          "condition_rate": 0.6013071895424836,
+          "comparison_rate": 0.4891398783666377,
+          "standard_error": 0.04500026391490813,
+          "note": "Range persistence (volatility clustering) is a known effect, not a direction edge.",
+          "market": "nq",
+          "condition": "outside_day",
+          "outcome": "next_range_above_normal",
+          "promoted": false
+        },
+        {
+          "n": 1304,
+          "condition_n": 694,
+          "comparison_n": 610,
+          "effect": -0.0012850191335569416,
+          "interval": [
+            -0.09178717436906357,
+            0.08921713610194969
+          ],
+          "blocks": 86,
+          "status": "inconclusive",
+          "condition_rate": 0.5331412103746398,
+          "comparison_rate": 0.5344262295081967,
+          "standard_error": 0.02551989069005178,
+          "market": "es",
+          "condition": "previous_up",
+          "outcome": "next_positive_close",
+          "promoted": false
+        },
+        {
+          "n": 1304,
+          "condition_n": 694,
+          "comparison_n": 610,
+          "effect": -0.21601549581896345,
+          "interval": [
+            -0.3079014172805695,
+            -0.12412957435735741
+          ],
+          "blocks": 86,
+          "status": "descriptive_difference",
+          "condition_rate": 0.4020172910662824,
+          "comparison_rate": 0.6180327868852459,
+          "standard_error": 0.025910086511783857,
+          "note": "Range persistence (volatility clustering) is a known effect, not a direction edge.",
+          "market": "es",
+          "condition": "previous_up",
+          "outcome": "next_range_above_normal",
+          "promoted": false
+        },
+        {
+          "n": 1304,
+          "condition_n": 657,
+          "comparison_n": 647,
+          "effect": 0.03782826251120386,
+          "interval": [
+            -0.06968258468391693,
+            0.14533910970632463
+          ],
+          "blocks": 86,
+          "status": "inconclusive",
+          "condition_rate": 0.5525114155251142,
+          "comparison_rate": 0.5146831530139103,
+          "standard_error": 0.030316019118823402,
+          "market": "es",
+          "condition": "wide_range",
+          "outcome": "next_positive_close",
+          "promoted": false
+        },
+        {
+          "n": 1304,
+          "condition_n": 657,
+          "comparison_n": 647,
+          "effect": 0.24996765307154667,
+          "interval": [
+            0.13174825638655796,
+            0.3681870497565354
+          ],
+          "blocks": 86,
+          "status": "descriptive_difference",
+          "condition_rate": 0.6270928462709284,
+          "comparison_rate": 0.37712519319938176,
+          "standard_error": 0.03333562690296182,
+          "note": "Range persistence (volatility clustering) is a known effect, not a direction edge.",
+          "market": "es",
+          "condition": "wide_range",
+          "outcome": "next_range_above_normal",
+          "promoted": false
+        },
+        {
+          "n": 1304,
+          "condition_n": 777,
+          "comparison_n": 527,
+          "effect": -0.043684779927664175,
+          "interval": [
+            -0.1448914895406749,
+            0.05752192968534656
+          ],
+          "blocks": 86,
+          "status": "inconclusive",
+          "condition_rate": 0.5160875160875161,
+          "comparison_rate": 0.5597722960151803,
+          "standard_error": 0.02853837192830238,
+          "market": "es",
+          "condition": "momentum_5_up",
+          "outcome": "next_positive_close",
+          "promoted": false
+        },
+        {
+          "n": 1304,
+          "condition_n": 777,
+          "comparison_n": 527,
+          "effect": -0.2957905045191573,
+          "interval": [
+            -0.4106109346481833,
+            -0.18097007439013127
+          ],
+          "blocks": 86,
+          "status": "descriptive_difference",
+          "condition_rate": 0.3835263835263835,
+          "comparison_rate": 0.6793168880455408,
+          "standard_error": 0.03237718282235855,
+          "note": "Range persistence (volatility clustering) is a known effect, not a direction edge.",
+          "market": "es",
+          "condition": "momentum_5_up",
+          "outcome": "next_range_above_normal",
+          "promoted": false
+        },
+        {
+          "n": 1304,
+          "condition_n": 885,
+          "comparison_n": 419,
+          "effect": 0.016310019821204724,
+          "interval": [
+            -0.09139139246678367,
+            0.12401143210919312
+          ],
+          "blocks": 86,
+          "status": "inconclusive",
+          "condition_rate": 0.5389830508474577,
+          "comparison_rate": 0.522673031026253,
+          "standard_error": 0.030369754859443786,
+          "market": "es",
+          "condition": "momentum_20_up",
+          "outcome": "next_positive_close",
+          "promoted": false
+        },
+        {
+          "n": 1304,
+          "condition_n": 885,
+          "comparison_n": 419,
+          "effect": -0.13438507072259753,
+          "interval": [
+            -0.24847633388322748,
+            -0.020293807561967594
+          ],
+          "blocks": 86,
+          "status": "descriptive_difference",
+          "condition_rate": 0.4598870056497175,
+          "comparison_rate": 0.594272076372315,
+          "standard_error": 0.03217157157166688,
+          "note": "Range persistence (volatility clustering) is a known effect, not a direction edge.",
+          "market": "es",
+          "condition": "momentum_20_up",
+          "outcome": "next_range_above_normal",
+          "promoted": false
+        },
+        {
+          "n": 1304,
+          "condition_n": 393,
+          "comparison_n": 911,
+          "effect": 0.0008714523927233486,
+          "interval": [
+            -0.09497901542359272,
+            0.09672192020903941
+          ],
+          "blocks": 86,
+          "status": "inconclusive",
+          "condition_rate": 0.5343511450381679,
+          "comparison_rate": 0.5334796926454446,
+          "standard_error": 0.027028013364957283,
+          "market": "es",
+          "condition": "close_near_high",
+          "outcome": "next_positive_close",
+          "promoted": false
+        },
+        {
+          "n": 1304,
+          "condition_n": 393,
+          "comparison_n": 911,
+          "effect": -0.17011197604623168,
+          "interval": [
+            -0.2787610496624735,
+            -0.06146290242998985
+          ],
+          "blocks": 86,
+          "status": "descriptive_difference",
+          "condition_rate": 0.3842239185750636,
+          "comparison_rate": 0.5543358946212953,
+          "standard_error": 0.030636977374148375,
+          "note": "Range persistence (volatility clustering) is a known effect, not a direction edge.",
+          "market": "es",
+          "condition": "close_near_high",
+          "outcome": "next_range_above_normal",
+          "promoted": false
+        },
+        {
+          "n": 1304,
+          "condition_n": 253,
+          "comparison_n": 1051,
+          "effect": 0.02433970282396214,
+          "interval": [
+            -0.09577235690605564,
+            0.1444517625539799
+          ],
+          "blocks": 86,
+          "status": "inconclusive",
+          "condition_rate": 0.5533596837944664,
+          "comparison_rate": 0.5290199809705043,
+          "standard_error": 0.033869321972394735,
+          "market": "es",
+          "condition": "close_near_low",
+          "outcome": "next_positive_close",
+          "promoted": false
+        },
+        {
+          "n": 1304,
+          "condition_n": 253,
+          "comparison_n": 1051,
+          "effect": 0.12124722173123281,
+          "interval": [
+            0.009943561465924136,
+            0.2325508819965415
+          ],
+          "blocks": 86,
+          "status": "descriptive_difference",
+          "condition_rate": 0.6007905138339921,
+          "comparison_rate": 0.47954329210275926,
+          "standard_error": 0.031385520444036266,
+          "note": "Range persistence (volatility clustering) is a known effect, not a direction edge.",
+          "market": "es",
+          "condition": "close_near_low",
+          "outcome": "next_range_above_normal",
+          "promoted": false
+        },
+        {
+          "n": 1304,
+          "condition_n": 137,
+          "comparison_n": 1167,
+          "effect": -0.017313093026601334,
+          "interval": [
+            -0.18220116442010348,
+            0.1475749783669008
+          ],
+          "blocks": 86,
+          "status": "inconclusive",
+          "condition_rate": 0.5182481751824818,
+          "comparison_rate": 0.5355612682090831,
+          "standard_error": 0.04649530773168523,
+          "market": "es",
+          "condition": "inside_day",
+          "outcome": "next_positive_close",
+          "promoted": false
+        },
+        {
+          "n": 1304,
+          "condition_n": 137,
+          "comparison_n": 1167,
+          "effect": 0.025118996240907188,
+          "interval": [
+            -0.15496105620983425,
+            0.20519904869164862
+          ],
+          "blocks": 86,
+          "status": "inconclusive",
+          "condition_rate": 0.5255474452554745,
+          "comparison_rate": 0.5004284490145673,
+          "standard_error": 0.050779158154221675,
+          "note": "Range persistence (volatility clustering) is a known effect, not a direction edge.",
+          "market": "es",
+          "condition": "inside_day",
+          "outcome": "next_range_above_normal",
+          "promoted": false
+        },
+        {
+          "n": 1304,
+          "condition_n": 154,
+          "comparison_n": 1150,
+          "effect": 0.020643704121965034,
+          "interval": [
+            -0.14407747394076464,
+            0.1853648821846947
+          ],
+          "blocks": 86,
+          "status": "inconclusive",
+          "condition_rate": 0.551948051948052,
+          "comparison_rate": 0.5313043478260869,
+          "standard_error": 0.046448246978854225,
+          "market": "es",
+          "condition": "outside_day",
+          "outcome": "next_positive_close",
+          "promoted": false
+        },
+        {
+          "n": 1304,
+          "condition_n": 154,
+          "comparison_n": 1150,
+          "effect": 0.09224167137210615,
+          "interval": [
+            -0.06759342301157778,
+            0.2520767657557901
+          ],
+          "blocks": 86,
+          "status": "inconclusive",
+          "condition_rate": 0.5844155844155844,
+          "comparison_rate": 0.49217391304347824,
+          "standard_error": 0.04507046408443346,
+          "note": "Range persistence (volatility clustering) is a known effect, not a direction edge.",
+          "market": "es",
+          "condition": "outside_day",
+          "outcome": "next_range_above_normal",
+          "promoted": false
+        },
+        {
+          "n": 1304,
+          "condition_n": 697,
+          "comparison_n": 607,
+          "effect": 0.0030254396932960503,
+          "interval": [
+            -0.09133970237835107,
+            0.09739058176494317
+          ],
+          "blocks": 86,
+          "status": "inconclusive",
+          "condition_rate": 0.5351506456241033,
+          "comparison_rate": 0.5321252059308073,
+          "standard_error": 0.026609179685864966,
+          "market": "ym",
+          "condition": "previous_up",
+          "outcome": "next_positive_close",
+          "promoted": false
+        },
+        {
+          "n": 1304,
+          "condition_n": 697,
+          "comparison_n": 607,
+          "effect": -0.1390165902821932,
+          "interval": [
+            -0.23712837111660978,
+            -0.04090480944777665
+          ],
+          "blocks": 86,
+          "status": "descriptive_difference",
+          "condition_rate": 0.4375896700143472,
+          "comparison_rate": 0.5766062602965404,
+          "standard_error": 0.027665660732445335,
+          "note": "Range persistence (volatility clustering) is a known effect, not a direction edge.",
+          "market": "ym",
+          "condition": "previous_up",
+          "outcome": "next_range_above_normal",
+          "promoted": false
+        },
+        {
+          "n": 1304,
+          "condition_n": 655,
+          "comparison_n": 649,
+          "effect": 0.05337159928957047,
+          "interval": [
+            -0.044960450772844815,
+            0.15170364935198577
+          ],
+          "blocks": 86,
+          "status": "inconclusive",
+          "condition_rate": 0.5603053435114503,
+          "comparison_rate": 0.5069337442218799,
+          "standard_error": 0.02772777247559976,
+          "market": "ym",
+          "condition": "wide_range",
+          "outcome": "next_positive_close",
+          "promoted": false
+        },
+        {
+          "n": 1304,
+          "condition_n": 655,
+          "comparison_n": 649,
+          "effect": 0.18709935426198848,
+          "interval": [
+            0.07154913923680871,
+            0.30264956928716824
+          ],
+          "blocks": 86,
+          "status": "descriptive_difference",
+          "condition_rate": 0.5954198473282443,
+          "comparison_rate": 0.4083204930662558,
+          "standard_error": 0.032582968316954015,
+          "note": "Range persistence (volatility clustering) is a known effect, not a direction edge.",
+          "market": "ym",
+          "condition": "wide_range",
+          "outcome": "next_range_above_normal",
+          "promoted": false
+        },
+        {
+          "n": 1304,
+          "condition_n": 747,
+          "comparison_n": 557,
+          "effect": -0.017881219672225668,
+          "interval": [
+            -0.1109536743199044,
+            0.07519123497545306
+          ],
+          "blocks": 86,
+          "status": "inconclusive",
+          "condition_rate": 0.5261044176706827,
+          "comparison_rate": 0.5439856373429084,
+          "standard_error": 0.026244666358306825,
+          "market": "ym",
+          "condition": "momentum_5_up",
+          "outcome": "next_positive_close",
+          "promoted": false
+        },
+        {
+          "n": 1304,
+          "condition_n": 747,
+          "comparison_n": 557,
+          "effect": -0.21693236140252214,
+          "interval": [
+            -0.33350079364886454,
+            -0.10036392915617974
+          ],
+          "blocks": 86,
+          "status": "descriptive_difference",
+          "condition_rate": 0.40963855421686746,
+          "comparison_rate": 0.6265709156193896,
+          "standard_error": 0.03287008625481064,
+          "note": "Range persistence (volatility clustering) is a known effect, not a direction edge.",
+          "market": "ym",
+          "condition": "momentum_5_up",
+          "outcome": "next_range_above_normal",
+          "promoted": false
+        },
+        {
+          "n": 1304,
+          "condition_n": 850,
+          "comparison_n": 454,
+          "effect": 0.02135268204197971,
+          "interval": [
+            -0.08341944700234948,
+            0.1261248110863089
+          ],
+          "blocks": 86,
+          "status": "inconclusive",
+          "condition_rate": 0.5411764705882353,
+          "comparison_rate": 0.5198237885462555,
+          "standard_error": 0.029543752561665856,
+          "market": "ym",
+          "condition": "momentum_20_up",
+          "outcome": "next_positive_close",
+          "promoted": false
+        },
+        {
+          "n": 1304,
+          "condition_n": 850,
+          "comparison_n": 454,
+          "effect": -0.1586680487172843,
+          "interval": [
+            -0.275421361113907,
+            -0.041914736320661575
+          ],
+          "blocks": 86,
+          "status": "descriptive_difference",
+          "condition_rate": 0.4470588235294118,
+          "comparison_rate": 0.6057268722466961,
+          "standard_error": 0.03292221894948113,
+          "note": "Range persistence (volatility clustering) is a known effect, not a direction edge.",
+          "market": "ym",
+          "condition": "momentum_20_up",
+          "outcome": "next_range_above_normal",
+          "promoted": false
+        },
+        {
+          "n": 1304,
+          "condition_n": 361,
+          "comparison_n": 943,
+          "effect": -0.01410010486952995,
+          "interval": [
+            -0.12043422723184669,
+            0.09223401749278679
+          ],
+          "blocks": 86,
+          "status": "inconclusive",
+          "condition_rate": 0.5235457063711911,
+          "comparison_rate": 0.5376458112407211,
+          "standard_error": 0.029984205041829498,
+          "market": "ym",
+          "condition": "close_near_high",
+          "outcome": "next_positive_close",
+          "promoted": false
+        },
+        {
+          "n": 1304,
+          "condition_n": 361,
+          "comparison_n": 943,
+          "effect": -0.11618192660307913,
+          "interval": [
+            -0.23039031827014717,
+            -0.001973534936011087
+          ],
+          "blocks": 86,
+          "status": "descriptive_difference",
+          "condition_rate": 0.4182825484764543,
+          "comparison_rate": 0.5344644750795334,
+          "standard_error": 0.032204599588217545,
+          "note": "Range persistence (volatility clustering) is a known effect, not a direction edge.",
+          "market": "ym",
+          "condition": "close_near_high",
+          "outcome": "next_range_above_normal",
+          "promoted": false
+        },
+        {
+          "n": 1304,
+          "condition_n": 261,
+          "comparison_n": 1043,
+          "effect": 0.05122271079225482,
+          "interval": [
+            -0.08244053619857952,
+            0.18488595778308917
+          ],
+          "blocks": 86,
+          "status": "inconclusive",
+          "condition_rate": 0.5747126436781609,
+          "comparison_rate": 0.5234899328859061,
+          "standard_error": 0.0376904996749207,
+          "market": "ym",
+          "condition": "close_near_low",
+          "outcome": "next_positive_close",
+          "promoted": false
+        },
+        {
+          "n": 1304,
+          "condition_n": 261,
+          "comparison_n": 1043,
+          "effect": 0.07137163281574294,
+          "interval": [
+            -0.04703362482271077,
+            0.18977689045419666
+          ],
+          "blocks": 86,
+          "status": "inconclusive",
+          "condition_rate": 0.5593869731800766,
+          "comparison_rate": 0.48801534036433364,
+          "standard_error": 0.03338803616552173,
+          "note": "Range persistence (volatility clustering) is a known effect, not a direction edge.",
+          "market": "ym",
+          "condition": "close_near_low",
+          "outcome": "next_range_above_normal",
+          "promoted": false
+        },
+        {
+          "n": 1304,
+          "condition_n": 147,
+          "comparison_n": 1157,
+          "effect": -0.0035277723881255163,
+          "interval": [
+            -0.165659798075093,
+            0.15860425329884198
+          ],
+          "blocks": 86,
+          "status": "inconclusive",
+          "condition_rate": 0.5306122448979592,
+          "comparison_rate": 0.5341400172860847,
+          "standard_error": 0.04571815513256175,
+          "market": "ym",
+          "condition": "inside_day",
+          "outcome": "next_positive_close",
+          "promoted": false
+        },
+        {
+          "n": 1304,
+          "condition_n": 147,
+          "comparison_n": 1157,
+          "effect": -0.006426425367035304,
+          "interval": [
+            -0.16384476031953066,
+            0.15099190958546005
+          ],
+          "blocks": 86,
+          "status": "inconclusive",
+          "condition_rate": 0.4965986394557823,
+          "comparison_rate": 0.5030250648228176,
+          "standard_error": 0.044388983777720416,
+          "note": "Range persistence (volatility clustering) is a known effect, not a direction edge.",
+          "market": "ym",
+          "condition": "inside_day",
+          "outcome": "next_range_above_normal",
+          "promoted": false
+        },
+        {
+          "n": 1304,
+          "condition_n": 155,
+          "comparison_n": 1149,
+          "effect": 0.045908082764816505,
+          "interval": [
+            -0.10149265559461826,
+            0.19330882112425127
+          ],
+          "blocks": 86,
+          "status": "inconclusive",
+          "condition_rate": 0.5741935483870968,
+          "comparison_rate": 0.5282854656222803,
+          "standard_error": 0.04156421160111657,
+          "market": "ym",
+          "condition": "outside_day",
+          "outcome": "next_positive_close",
+          "promoted": false
+        },
+        {
+          "n": 1304,
+          "condition_n": 155,
+          "comparison_n": 1149,
+          "effect": 0.05962548078272828,
+          "interval": [
+            -0.09225470967207278,
+            0.21150567123752934
+          ],
+          "blocks": 86,
+          "status": "inconclusive",
+          "condition_rate": 0.5548387096774193,
+          "comparison_rate": 0.49521322889469105,
+          "standard_error": 0.0428273321039112,
+          "note": "Range persistence (volatility clustering) is a known effect, not a direction edge.",
+          "market": "ym",
+          "condition": "outside_day",
+          "outcome": "next_range_above_normal",
+          "promoted": false
+        },
+        {
+          "n": 1304,
+          "condition_n": 654,
+          "comparison_n": 650,
+          "effect": -0.035299929428369736,
+          "interval": [
+            -0.11817970934649416,
+            0.04757985048975469
+          ],
+          "blocks": 86,
+          "status": "inconclusive",
+          "condition_rate": 0.48623853211009177,
+          "comparison_rate": 0.5215384615384615,
+          "standard_error": 0.023370525468947898,
+          "market": "rty",
+          "condition": "previous_up",
+          "outcome": "next_positive_close",
+          "promoted": false
+        },
+        {
+          "n": 1304,
+          "condition_n": 654,
+          "comparison_n": 650,
+          "effect": -0.11658433309809457,
+          "interval": [
+            -0.2275749642518824,
+            -0.005593701944306764
+          ],
+          "blocks": 86,
+          "status": "descriptive_difference",
+          "condition_rate": 0.44495412844036697,
+          "comparison_rate": 0.5615384615384615,
+          "standard_error": 0.031297252173650564,
+          "note": "Range persistence (volatility clustering) is a known effect, not a direction edge.",
+          "market": "rty",
+          "condition": "previous_up",
+          "outcome": "next_range_above_normal",
+          "promoted": false
+        },
+        {
+          "n": 1304,
+          "condition_n": 659,
+          "comparison_n": 645,
+          "effect": 0.018324687393396155,
+          "interval": [
+            -0.08231684891779169,
+            0.118966223704584
+          ],
+          "blocks": 86,
+          "status": "inconclusive",
+          "condition_rate": 0.5128983308042488,
+          "comparison_rate": 0.4945736434108527,
+          "standard_error": 0.028379003780152498,
+          "market": "rty",
+          "condition": "wide_range",
+          "outcome": "next_positive_close",
+          "promoted": false
+        },
+        {
+          "n": 1304,
+          "condition_n": 659,
+          "comparison_n": 645,
+          "effect": 0.18860618037665716,
+          "interval": [
+            0.07277439583154506,
+            0.3044379649217693
+          ],
+          "blocks": 86,
+          "status": "descriptive_difference",
+          "condition_rate": 0.5963581183611533,
+          "comparison_rate": 0.4077519379844961,
+          "standard_error": 0.03266236557939075,
+          "note": "Range persistence (volatility clustering) is a known effect, not a direction edge.",
+          "market": "rty",
+          "condition": "wide_range",
+          "outcome": "next_range_above_normal",
+          "promoted": false
+        },
+        {
+          "n": 1304,
+          "condition_n": 675,
+          "comparison_n": 629,
+          "effect": -0.0002708590943885092,
+          "interval": [
+            -0.08386107953076606,
+            0.08331936134198904
+          ],
+          "blocks": 86,
+          "status": "inconclusive",
+          "condition_rate": 0.5037037037037037,
+          "comparison_rate": 0.5039745627980922,
+          "standard_error": 0.023570856215993915,
+          "market": "rty",
+          "condition": "momentum_5_up",
+          "outcome": "next_positive_close",
+          "promoted": false
+        },
+        {
+          "n": 1304,
+          "condition_n": 675,
+          "comparison_n": 629,
+          "effect": -0.20752988282400042,
+          "interval": [
+            -0.33084600861847263,
+            -0.08421375702952823
+          ],
+          "blocks": 86,
+          "status": "descriptive_difference",
+          "condition_rate": 0.40296296296296297,
+          "comparison_rate": 0.6104928457869634,
+          "standard_error": 0.03477280781221594,
+          "note": "Range persistence (volatility clustering) is a known effect, not a direction edge.",
+          "market": "rty",
+          "condition": "momentum_5_up",
+          "outcome": "next_range_above_normal",
+          "promoted": false
+        },
+        {
+          "n": 1304,
+          "condition_n": 758,
+          "comparison_n": 546,
+          "effect": -0.0028559830670648045,
+          "interval": [
+            -0.09655384439118547,
+            0.09084187825705586
+          ],
+          "blocks": 86,
+          "status": "inconclusive",
+          "condition_rate": 0.5026385224274407,
+          "comparison_rate": 0.5054945054945055,
+          "standard_error": 0.026421019175298804,
+          "market": "rty",
+          "condition": "momentum_20_up",
+          "outcome": "next_positive_close",
+          "promoted": false
+        },
+        {
+          "n": 1304,
+          "condition_n": 758,
+          "comparison_n": 546,
+          "effect": -0.1113011878183382,
+          "interval": [
+            -0.23323398015912938,
+            0.010631604522452986
+          ],
+          "blocks": 86,
+          "status": "inconclusive",
+          "condition_rate": 0.45646437994722955,
+          "comparison_rate": 0.5677655677655677,
+          "standard_error": 0.03438273402409492,
+          "note": "Range persistence (volatility clustering) is a known effect, not a direction edge.",
+          "market": "rty",
+          "condition": "momentum_20_up",
+          "outcome": "next_range_above_normal",
+          "promoted": false
+        },
+        {
+          "n": 1304,
+          "condition_n": 356,
+          "comparison_n": 948,
+          "effect": -0.013001943772815605,
+          "interval": [
+            -0.11126916018397297,
+            0.08526527263834176
+          ],
+          "blocks": 86,
+          "status": "inconclusive",
+          "condition_rate": 0.4943820224719101,
+          "comparison_rate": 0.5073839662447257,
+          "standard_error": 0.027709490616025987,
+          "market": "rty",
+          "condition": "close_near_high",
+          "outcome": "next_positive_close",
+          "promoted": false
+        },
+        {
+          "n": 1304,
+          "condition_n": 356,
+          "comparison_n": 948,
+          "effect": -0.11627080073958179,
+          "interval": [
+            -0.2312593773651809,
+            -0.0012822241139826829
+          ],
+          "blocks": 86,
+          "status": "descriptive_difference",
+          "condition_rate": 0.41853932584269665,
+          "comparison_rate": 0.5348101265822784,
+          "standard_error": 0.03242459694416917,
+          "note": "Range persistence (volatility clustering) is a known effect, not a direction edge.",
+          "market": "rty",
+          "condition": "close_near_high",
+          "outcome": "next_range_above_normal",
+          "promoted": false
+        },
+        {
+          "n": 1304,
+          "condition_n": 281,
+          "comparison_n": 1023,
+          "effect": 0.038206656160966745,
+          "interval": [
+            -0.06917787232528376,
+            0.14559118464721726
+          ],
+          "blocks": 86,
+          "status": "inconclusive",
+          "condition_rate": 0.5338078291814946,
+          "comparison_rate": 0.49560117302052786,
+          "standard_error": 0.03028039963955145,
+          "market": "rty",
+          "condition": "close_near_low",
+          "outcome": "next_positive_close",
+          "promoted": false
+        },
+        {
+          "n": 1304,
+          "condition_n": 281,
+          "comparison_n": 1023,
+          "effect": 0.12083642068718403,
+          "interval": [
+            0.01244054087958403,
+            0.22923230049478405
+          ],
+          "blocks": 86,
+          "status": "descriptive_difference",
+          "condition_rate": 0.597864768683274,
+          "comparison_rate": 0.47702834799608995,
+          "standard_error": 0.03056558152392665,
+          "note": "Range persistence (volatility clustering) is a known effect, not a direction edge.",
+          "market": "rty",
+          "condition": "close_near_low",
+          "outcome": "next_range_above_normal",
+          "promoted": false
+        },
+        {
+          "n": 1304,
+          "condition_n": 154,
+          "comparison_n": 1150,
+          "effect": 0.010378317334839071,
+          "interval": [
+            -0.15164949889196544,
+            0.17240613356164358
+          ],
+          "blocks": 86,
+          "status": "inconclusive",
+          "condition_rate": 0.512987012987013,
+          "comparison_rate": 0.5026086956521739,
+          "standard_error": 0.04568877004194918,
+          "market": "rty",
+          "condition": "inside_day",
+          "outcome": "next_positive_close",
+          "promoted": false
+        },
+        {
+          "n": 1304,
+          "condition_n": 154,
+          "comparison_n": 1150,
+          "effect": -0.0329305477131564,
+          "interval": [
+            -0.18467569563212205,
+            0.11881460020580925
+          ],
+          "blocks": 86,
+          "status": "inconclusive",
+          "condition_rate": 0.474025974025974,
+          "comparison_rate": 0.5069565217391304,
+          "standard_error": 0.0427892526709512,
+          "note": "Range persistence (volatility clustering) is a known effect, not a direction edge.",
+          "market": "rty",
+          "condition": "inside_day",
+          "outcome": "next_range_above_normal",
+          "promoted": false
+        },
+        {
+          "n": 1304,
+          "condition_n": 133,
+          "comparison_n": 1171,
+          "effect": 0.01666206506873502,
+          "interval": [
+            -0.1349069350722382,
+            0.16823106520970824
+          ],
+          "blocks": 86,
+          "status": "inconclusive",
+          "condition_rate": 0.518796992481203,
+          "comparison_rate": 0.502134927412468,
+          "standard_error": 0.04273958233958765,
+          "market": "rty",
+          "condition": "outside_day",
+          "outcome": "next_positive_close",
+          "promoted": false
+        },
+        {
+          "n": 1304,
+          "condition_n": 133,
+          "comparison_n": 1171,
+          "effect": 0.025888803991190534,
+          "interval": [
+            -0.1097969294928628,
+            0.16157453747524386
+          ],
+          "blocks": 86,
+          "status": "inconclusive",
+          "condition_rate": 0.5263157894736842,
+          "comparison_rate": 0.5004269854824936,
+          "standard_error": 0.03826080249361871,
+          "note": "Range persistence (volatility clustering) is a known effect, not a direction edge.",
+          "market": "rty",
+          "condition": "outside_day",
+          "outcome": "next_range_above_normal",
+          "promoted": false
+        },
+        {
+          "n": 1295,
+          "condition_n": 703,
+          "comparison_n": 592,
+          "effect": -0.05627667140825032,
+          "interval": [
+            -0.15067045124828063,
+            0.038117108431779984
+          ],
+          "blocks": 85,
+          "status": "inconclusive",
+          "condition_rate": 0.5163584637268848,
+          "comparison_rate": 0.5726351351351351,
+          "standard_error": 0.026617254993208137,
+          "market": "gold",
+          "condition": "previous_up",
+          "outcome": "next_positive_close",
+          "promoted": false
+        },
+        {
+          "n": 1295,
+          "condition_n": 703,
+          "comparison_n": 592,
+          "effect": -0.003022759601706948,
+          "interval": [
+            -0.09768999067325565,
+            0.09164447146984175
+          ],
+          "blocks": 85,
+          "status": "inconclusive",
+          "condition_rate": 0.49359886201991465,
+          "comparison_rate": 0.4966216216216216,
+          "standard_error": 0.026694363052339437,
+          "note": "Range persistence (volatility clustering) is a known effect, not a direction edge.",
+          "market": "gold",
+          "condition": "previous_up",
+          "outcome": "next_range_above_normal",
+          "promoted": false
+        },
+        {
+          "n": 1295,
+          "condition_n": 641,
+          "comparison_n": 654,
+          "effect": 0.03868668508208217,
+          "interval": [
+            -0.05831922499638954,
+            0.13569259516055387
+          ],
+          "blocks": 85,
+          "status": "inconclusive",
+          "condition_rate": 0.5616224648985959,
+          "comparison_rate": 0.5229357798165137,
+          "standard_error": 0.027353826160819963,
+          "market": "gold",
+          "condition": "wide_range",
+          "outcome": "next_positive_close",
+          "promoted": false
+        },
+        {
+          "n": 1295,
+          "condition_n": 641,
+          "comparison_n": 654,
+          "effect": 0.05473099657931274,
+          "interval": [
+            -0.06746759831698439,
+            0.17692959147560988
+          ],
+          "blocks": 85,
+          "status": "inconclusive",
+          "condition_rate": 0.5226209048361935,
+          "comparison_rate": 0.46788990825688076,
+          "standard_error": 0.034457685301708105,
+          "note": "Range persistence (volatility clustering) is a known effect, not a direction edge.",
+          "market": "gold",
+          "condition": "wide_range",
+          "outcome": "next_range_above_normal",
+          "promoted": false
+        },
+        {
+          "n": 1295,
+          "condition_n": 738,
+          "comparison_n": 557,
+          "effect": -0.019086959271747084,
+          "interval": [
+            -0.10681278196185652,
+            0.06863886341836235
+          ],
+          "blocks": 85,
+          "status": "inconclusive",
+          "condition_rate": 0.5338753387533876,
+          "comparison_rate": 0.5529622980251346,
+          "standard_error": 0.024737017587268782,
+          "market": "gold",
+          "condition": "momentum_5_up",
+          "outcome": "next_positive_close",
+          "promoted": false
+        },
+        {
+          "n": 1295,
+          "condition_n": 738,
+          "comparison_n": 557,
+          "effect": -0.03243518072523632,
+          "interval": [
+            -0.142461356937476,
+            0.07759099548700335
+          ],
+          "blocks": 85,
+          "status": "inconclusive",
+          "condition_rate": 0.481029810298103,
+          "comparison_rate": 0.5134649910233393,
+          "standard_error": 0.03102529417862005,
+          "note": "Range persistence (volatility clustering) is a known effect, not a direction edge.",
+          "market": "gold",
+          "condition": "momentum_5_up",
+          "outcome": "next_range_above_normal",
+          "promoted": false
+        },
+        {
+          "n": 1295,
+          "condition_n": 770,
+          "comparison_n": 525,
+          "effect": -0.017316017316017396,
+          "interval": [
+            -0.12444893549889896,
+            0.08981690086686417
+          ],
+          "blocks": 85,
+          "status": "inconclusive",
+          "condition_rate": 0.535064935064935,
+          "comparison_rate": 0.5523809523809524,
+          "standard_error": 0.03020945030777303,
+          "market": "gold",
+          "condition": "momentum_20_up",
+          "outcome": "next_positive_close",
+          "promoted": false
+        },
+        {
+          "n": 1295,
+          "condition_n": 770,
+          "comparison_n": 525,
+          "effect": 0.05722943722943724,
+          "interval": [
+            -0.04721096947928109,
+            0.1616698439381556
+          ],
+          "blocks": 85,
+          "status": "inconclusive",
+          "condition_rate": 0.5181818181818182,
+          "comparison_rate": 0.46095238095238095,
+          "standard_error": 0.029450213156751042,
+          "note": "Range persistence (volatility clustering) is a known effect, not a direction edge.",
+          "market": "gold",
+          "condition": "momentum_20_up",
+          "outcome": "next_range_above_normal",
+          "promoted": false
+        },
+        {
+          "n": 1295,
+          "condition_n": 277,
+          "comparison_n": 1018,
+          "effect": -0.009908293319526473,
+          "interval": [
+            -0.11447624035552438,
+            0.09465965371647143
+          ],
+          "blocks": 85,
+          "status": "inconclusive",
+          "condition_rate": 0.5342960288808665,
+          "comparison_rate": 0.5442043222003929,
+          "standard_error": 0.029486177109236796,
+          "market": "gold",
+          "condition": "close_near_high",
+          "outcome": "next_positive_close",
+          "promoted": false
+        },
+        {
+          "n": 1295,
+          "condition_n": 277,
+          "comparison_n": 1018,
+          "effect": -0.04183541026859483,
+          "interval": [
+            -0.1649291496341243,
+            0.08125832909693465
+          ],
+          "blocks": 85,
+          "status": "inconclusive",
+          "condition_rate": 0.4620938628158845,
+          "comparison_rate": 0.5039292730844793,
+          "standard_error": 0.03471009905856471,
+          "note": "Range persistence (volatility clustering) is a known effect, not a direction edge.",
+          "market": "gold",
+          "condition": "close_near_high",
+          "outcome": "next_range_above_normal",
+          "promoted": false
+        },
+        {
+          "n": 1295,
+          "condition_n": 196,
+          "comparison_n": 1099,
+          "effect": 0.09469647731704145,
+          "interval": [
+            -0.04468692232818158,
+            0.23407987696226448
+          ],
+          "blocks": 85,
+          "status": "inconclusive",
+          "condition_rate": 0.6224489795918368,
+          "comparison_rate": 0.5277525022747953,
+          "standard_error": 0.03930347419569915,
+          "market": "gold",
+          "condition": "close_near_low",
+          "outcome": "next_positive_close",
+          "promoted": false
+        },
+        {
+          "n": 1295,
+          "condition_n": 196,
+          "comparison_n": 1099,
+          "effect": 0.023950344468997742,
+          "interval": [
+            -0.10014903510095814,
+            0.1480497240389536
+          ],
+          "blocks": 85,
+          "status": "inconclusive",
+          "condition_rate": 0.5153061224489796,
+          "comparison_rate": 0.4913557779799818,
+          "standard_error": 0.034993670516323926,
+          "note": "Range persistence (volatility clustering) is a known effect, not a direction edge.",
+          "market": "gold",
+          "condition": "close_near_low",
+          "outcome": "next_range_above_normal",
+          "promoted": false
+        },
+        {
+          "n": 1295,
+          "condition_n": 160,
+          "comparison_n": 1135,
+          "effect": -0.005231277533039647,
+          "interval": [
+            -0.172821784766901,
+            0.1623592297008217
+          ],
+          "blocks": 85,
+          "status": "inconclusive",
+          "condition_rate": 0.5375,
+          "comparison_rate": 0.5427312775330396,
+          "standard_error": 0.047257343365680694,
+          "market": "gold",
+          "condition": "inside_day",
+          "outcome": "next_positive_close",
+          "promoted": false
+        },
+        {
+          "n": 1295,
+          "condition_n": 160,
+          "comparison_n": 1135,
+          "effect": 0.04138215859030836,
+          "interval": [
+            -0.09290382763658186,
+            0.17566814481719858
+          ],
+          "blocks": 85,
+          "status": "inconclusive",
+          "condition_rate": 0.53125,
+          "comparison_rate": 0.48986784140969164,
+          "standard_error": 0.037866100324332824,
+          "note": "Range persistence (volatility clustering) is a known effect, not a direction edge.",
+          "market": "gold",
+          "condition": "inside_day",
+          "outcome": "next_range_above_normal",
+          "promoted": false
+        },
+        {
+          "n": 1295,
+          "condition_n": 136,
+          "comparison_n": 1159,
+          "effect": -0.03880754199868042,
+          "interval": [
+            -0.218389227089904,
+            0.14077414309254316
+          ],
+          "blocks": 85,
+          "status": "inconclusive",
+          "condition_rate": 0.5073529411764706,
+          "comparison_rate": 0.546160483175151,
+          "standard_error": 0.050638628014300816,
+          "market": "gold",
+          "condition": "outside_day",
+          "outcome": "next_positive_close",
+          "promoted": false
+        },
+        {
+          "n": 1295,
+          "condition_n": 136,
+          "comparison_n": 1159,
+          "effect": -0.010823224889610739,
+          "interval": [
+            -0.17809481133722785,
+            0.15644836155800637
+          ],
+          "blocks": 85,
+          "status": "inconclusive",
+          "condition_rate": 0.4852941176470588,
+          "comparison_rate": 0.49611734253666956,
+          "standard_error": 0.04716741375480503,
+          "note": "Range persistence (volatility clustering) is a known effect, not a direction edge.",
+          "market": "gold",
+          "condition": "outside_day",
+          "outcome": "next_range_above_normal",
+          "promoted": false
+        },
+        {
+          "n": 1298,
+          "condition_n": 698,
+          "comparison_n": 600,
+          "effect": 0.014178605539637124,
+          "interval": [
+            -0.07386399024430171,
+            0.10222120132357596
+          ],
+          "blocks": 86,
+          "status": "inconclusive",
+          "condition_rate": 0.5458452722063037,
+          "comparison_rate": 0.5316666666666666,
+          "standard_error": 0.02482634158963137,
+          "market": "cl",
+          "condition": "previous_up",
+          "outcome": "next_positive_close",
+          "promoted": false
+        },
+        {
+          "n": 1298,
+          "condition_n": 698,
+          "comparison_n": 600,
+          "effect": -0.1223065902578796,
+          "interval": [
+            -0.2275808624025285,
+            -0.017032318113230707
+          ],
+          "blocks": 86,
+          "status": "descriptive_difference",
+          "condition_rate": 0.44269340974212035,
+          "comparison_rate": 0.565,
+          "standard_error": 0.02968534738885617,
+          "note": "Range persistence (volatility clustering) is a known effect, not a direction edge.",
+          "market": "cl",
+          "condition": "previous_up",
+          "outcome": "next_range_above_normal",
+          "promoted": false
+        },
+        {
+          "n": 1298,
+          "condition_n": 647,
+          "comparison_n": 651,
+          "effect": 0.00024216696700118945,
+          "interval": [
+            -0.08536226589143239,
+            0.08584659982543477
+          ],
+          "blocks": 86,
+          "status": "inconclusive",
+          "condition_rate": 0.5394126738794436,
+          "comparison_rate": 0.5391705069124424,
+          "standard_error": 0.024138825903606918,
+          "market": "cl",
+          "condition": "wide_range",
+          "outcome": "next_positive_close",
+          "promoted": false
+        },
+        {
+          "n": 1298,
+          "condition_n": 647,
+          "comparison_n": 651,
+          "effect": 0.17257008003380842,
+          "interval": [
+            0.06978538105990692,
+            0.2753547790077099
+          ],
+          "blocks": 86,
+          "status": "descriptive_difference",
+          "condition_rate": 0.5857805255023184,
+          "comparison_rate": 0.41321044546851,
+          "standard_error": 0.028983334989073753,
+          "note": "Range persistence (volatility clustering) is a known effect, not a direction edge.",
+          "market": "cl",
+          "condition": "wide_range",
+          "outcome": "next_range_above_normal",
+          "promoted": false
+        },
+        {
+          "n": 1298,
+          "condition_n": 698,
+          "comparison_n": 600,
+          "effect": -0.029212034383954255,
+          "interval": [
+            -0.13224459883368053,
+            0.07382053006577202
+          ],
+          "blocks": 86,
+          "status": "inconclusive",
+          "condition_rate": 0.5257879656160458,
+          "comparison_rate": 0.555,
+          "standard_error": 0.029053228350534876,
+          "market": "cl",
+          "condition": "momentum_5_up",
+          "outcome": "next_positive_close",
+          "promoted": false
+        },
+        {
+          "n": 1298,
+          "condition_n": 698,
+          "comparison_n": 600,
+          "effect": -0.14710124164278893,
+          "interval": [
+            -0.26642810506633496,
+            -0.027774378219242904
+          ],
+          "blocks": 86,
+          "status": "descriptive_difference",
+          "condition_rate": 0.43123209169054444,
+          "comparison_rate": 0.5783333333333334,
+          "standard_error": 0.033647911511403526,
+          "note": "Range persistence (volatility clustering) is a known effect, not a direction edge.",
+          "market": "cl",
+          "condition": "momentum_5_up",
+          "outcome": "next_range_above_normal",
+          "promoted": false
+        },
+        {
+          "n": 1298,
+          "condition_n": 670,
+          "comparison_n": 628,
+          "effect": 0.05144025097442728,
+          "interval": [
+            -0.04411990853277553,
+            0.1470004104816301
+          ],
+          "blocks": 86,
+          "status": "inconclusive",
+          "condition_rate": 0.564179104477612,
+          "comparison_rate": 0.5127388535031847,
+          "standard_error": 0.026946151929771515,
+          "market": "cl",
+          "condition": "momentum_20_up",
+          "outcome": "next_positive_close",
+          "promoted": false
+        },
+        {
+          "n": 1298,
+          "condition_n": 670,
+          "comparison_n": 628,
+          "effect": -0.047765947333396785,
+          "interval": [
+            -0.1730754552501985,
+            0.07754356058340492
+          ],
+          "blocks": 86,
+          "status": "inconclusive",
+          "condition_rate": 0.4761194029850746,
+          "comparison_rate": 0.5238853503184714,
+          "standard_error": 0.03533490375051681,
+          "note": "Range persistence (volatility clustering) is a known effect, not a direction edge.",
+          "market": "cl",
+          "condition": "momentum_20_up",
+          "outcome": "next_range_above_normal",
+          "promoted": false
+        },
+        {
+          "n": 1298,
+          "condition_n": 301,
+          "comparison_n": 997,
+          "effect": -0.04899082629949658,
+          "interval": [
+            -0.18186511747682035,
+            0.08388346487782719
+          ],
+          "blocks": 86,
+          "status": "inconclusive",
+          "condition_rate": 0.5016611295681063,
+          "comparison_rate": 0.5506519558676028,
+          "standard_error": 0.03746802910427321,
+          "market": "cl",
+          "condition": "close_near_high",
+          "outcome": "next_positive_close",
+          "promoted": false
+        },
+        {
+          "n": 1298,
+          "condition_n": 301,
+          "comparison_n": 997,
+          "effect": -0.11794186546350016,
+          "interval": [
+            -0.2324684941031274,
+            -0.0034152368238729303
+          ],
+          "blocks": 86,
+          "status": "descriptive_difference",
+          "condition_rate": 0.40863787375415284,
+          "comparison_rate": 0.526579739217653,
+          "standard_error": 0.03229433637660794,
+          "note": "Range persistence (volatility clustering) is a known effect, not a direction edge.",
+          "market": "cl",
+          "condition": "close_near_high",
+          "outcome": "next_range_above_normal",
+          "promoted": false
+        },
+        {
+          "n": 1298,
+          "condition_n": 264,
+          "comparison_n": 1034,
+          "effect": -0.011283043197936826,
+          "interval": [
+            -0.1445061201000807,
+            0.12194003370420706
+          ],
+          "blocks": 86,
+          "status": "inconclusive",
+          "condition_rate": 0.5303030303030303,
+          "comparison_rate": 0.5415860735009671,
+          "standard_error": 0.037566380061203435,
+          "market": "cl",
+          "condition": "close_near_low",
+          "outcome": "next_positive_close",
+          "promoted": false
+        },
+        {
+          "n": 1298,
+          "condition_n": 264,
+          "comparison_n": 1034,
+          "effect": 0.07229206963249513,
+          "interval": [
+            -0.05273812543899342,
+            0.19732226470398367
+          ],
+          "blocks": 86,
+          "status": "inconclusive",
+          "condition_rate": 0.5568181818181818,
+          "comparison_rate": 0.48452611218568664,
+          "standard_error": 0.03525614282750707,
+          "note": "Range persistence (volatility clustering) is a known effect, not a direction edge.",
+          "market": "cl",
+          "condition": "close_near_low",
+          "outcome": "next_range_above_normal",
+          "promoted": false
+        },
+        {
+          "n": 1298,
+          "condition_n": 147,
+          "comparison_n": 1151,
+          "effect": -0.002115876759044122,
+          "interval": [
+            -0.13892201484212036,
+            0.1346902613240321
+          ],
+          "blocks": 86,
+          "status": "inconclusive",
+          "condition_rate": 0.5374149659863946,
+          "comparison_rate": 0.5395308427454387,
+          "standard_error": 0.03857673533324327,
+          "market": "cl",
+          "condition": "inside_day",
+          "outcome": "next_positive_close",
+          "promoted": false
+        },
+        {
+          "n": 1298,
+          "condition_n": 147,
+          "comparison_n": 1151,
+          "effect": 0.06607682169305595,
+          "interval": [
+            -0.08483992463694942,
+            0.21699356802306133
+          ],
+          "blocks": 86,
+          "status": "inconclusive",
+          "condition_rate": 0.5578231292517006,
+          "comparison_rate": 0.4917463075586447,
+          "standard_error": 0.042555659140026784,
+          "note": "Range persistence (volatility clustering) is a known effect, not a direction edge.",
+          "market": "cl",
+          "condition": "inside_day",
+          "outcome": "next_range_above_normal",
+          "promoted": false
+        },
+        {
+          "n": 1298,
+          "condition_n": 134,
+          "comparison_n": 1164,
+          "effect": 0.07269067035954246,
+          "interval": [
+            -0.07647590171823052,
+            0.22185724243731544
+          ],
+          "blocks": 86,
+          "status": "inconclusive",
+          "condition_rate": 0.6044776119402985,
+          "comparison_rate": 0.531786941580756,
+          "standard_error": 0.042062143206740024,
+          "market": "cl",
+          "condition": "outside_day",
+          "outcome": "next_positive_close",
+          "promoted": false
+        },
+        {
+          "n": 1298,
+          "condition_n": 134,
+          "comparison_n": 1164,
+          "effect": 0.050789865107452425,
+          "interval": [
+            -0.10769901177361235,
+            0.2092787419885172
+          ],
+          "blocks": 86,
+          "status": "inconclusive",
+          "condition_rate": 0.5447761194029851,
+          "comparison_rate": 0.49398625429553267,
+          "standard_error": 0.04469085629031546,
+          "note": "Range persistence (volatility clustering) is a known effect, not a direction edge.",
+          "market": "cl",
+          "condition": "outside_day",
+          "outcome": "next_range_above_normal",
+          "promoted": false
+        },
+        {
+          "n": 1303,
+          "condition_n": 640,
+          "comparison_n": 663,
+          "effect": -0.007220965309200633,
+          "interval": [
+            -0.12334719046246645,
+            0.10890525984406518
+          ],
+          "blocks": 86,
+          "status": "inconclusive",
+          "condition_rate": 0.4875,
+          "comparison_rate": 0.4947209653092006,
+          "standard_error": 0.032745392244504325,
+          "market": "6e",
+          "condition": "previous_up",
+          "outcome": "next_positive_close",
+          "promoted": false
+        },
+        {
+          "n": 1303,
+          "condition_n": 640,
+          "comparison_n": 663,
+          "effect": 0.04859539969834087,
+          "interval": [
+            -0.05667851508882869,
+            0.15386931448551044
+          ],
+          "blocks": 86,
+          "status": "inconclusive",
+          "condition_rate": 0.53125,
+          "comparison_rate": 0.48265460030165913,
+          "standard_error": 0.0296852466208271,
+          "note": "Range persistence (volatility clustering) is a known effect, not a direction edge.",
+          "market": "6e",
+          "condition": "previous_up",
+          "outcome": "next_range_above_normal",
+          "promoted": false
+        },
+        {
+          "n": 1303,
+          "condition_n": 657,
+          "comparison_n": 646,
+          "effect": 0.0009165406128805453,
+          "interval": [
+            -0.1003654153515465,
+            0.10219849657730759
+          ],
+          "blocks": 86,
+          "status": "inconclusive",
+          "condition_rate": 0.4916286149162861,
+          "comparison_rate": 0.4907120743034056,
+          "standard_error": 0.028559589971761924,
+          "market": "6e",
+          "condition": "wide_range",
+          "outcome": "next_positive_close",
+          "promoted": false
+        },
+        {
+          "n": 1303,
+          "condition_n": 657,
+          "comparison_n": 646,
+          "effect": 0.09889920880632957,
+          "interval": [
+            -0.007509738873220165,
+            0.2053081564858793
+          ],
+          "blocks": 86,
+          "status": "inconclusive",
+          "condition_rate": 0.5555555555555556,
+          "comparison_rate": 0.456656346749226,
+          "standard_error": 0.03000530436163758,
+          "note": "Range persistence (volatility clustering) is a known effect, not a direction edge.",
+          "market": "6e",
+          "condition": "wide_range",
+          "outcome": "next_range_above_normal",
+          "promoted": false
+        },
+        {
+          "n": 1303,
+          "condition_n": 623,
+          "comparison_n": 680,
+          "effect": -0.021534793692758014,
+          "interval": [
+            -0.10131038560887978,
+            0.058240798223363754
+          ],
+          "blocks": 86,
+          "status": "inconclusive",
+          "condition_rate": 0.4799357945425361,
+          "comparison_rate": 0.5014705882352941,
+          "standard_error": 0.022495203347763778,
+          "market": "6e",
+          "condition": "momentum_5_up",
+          "outcome": "next_positive_close",
+          "promoted": false
+        },
+        {
+          "n": 1303,
+          "condition_n": 623,
+          "comparison_n": 680,
+          "effect": 0.0013407610235105505,
+          "interval": [
+            -0.11468247867436067,
+            0.11736400072138177
+          ],
+          "blocks": 86,
+          "status": "inconclusive",
+          "condition_rate": 0.507223113964687,
+          "comparison_rate": 0.5058823529411764,
+          "standard_error": 0.03271635230001354,
+          "note": "Range persistence (volatility clustering) is a known effect, not a direction edge.",
+          "market": "6e",
+          "condition": "momentum_5_up",
+          "outcome": "next_range_above_normal",
+          "promoted": false
+        },
+        {
+          "n": 1303,
+          "condition_n": 626,
+          "comparison_n": 677,
+          "effect": -0.05987701804144385,
+          "interval": [
+            -0.1557449900356805,
+            0.03599095395279278
+          ],
+          "blocks": 86,
+          "status": "inconclusive",
+          "condition_rate": 0.46006389776357826,
+          "comparison_rate": 0.5199409158050221,
+          "standard_error": 0.02703294921102625,
+          "market": "6e",
+          "condition": "momentum_20_up",
+          "outcome": "next_positive_close",
+          "promoted": false
+        },
+        {
+          "n": 1303,
+          "condition_n": 626,
+          "comparison_n": 677,
+          "effect": -0.015629940396694686,
+          "interval": [
+            -0.1235022319484329,
+            0.09224235115504353
+          ],
+          "blocks": 86,
+          "status": "inconclusive",
+          "condition_rate": 0.4984025559105431,
+          "comparison_rate": 0.5140324963072378,
+          "standard_error": 0.030417939569749794,
+          "note": "Range persistence (volatility clustering) is a known effect, not a direction edge.",
+          "market": "6e",
+          "condition": "momentum_20_up",
+          "outcome": "next_range_above_normal",
+          "promoted": false
+        },
+        {
+          "n": 1303,
+          "condition_n": 262,
+          "comparison_n": 1041,
+          "effect": -0.05583665148748629,
+          "interval": [
+            -0.168957232494869,
+            0.057283929519896415
+          ],
+          "blocks": 86,
+          "status": "inconclusive",
+          "condition_rate": 0.44656488549618323,
+          "comparison_rate": 0.5024015369836695,
+          "standard_error": 0.031897857621085345,
+          "market": "6e",
+          "condition": "close_near_high",
+          "outcome": "next_positive_close",
+          "promoted": false
+        },
+        {
+          "n": 1303,
+          "condition_n": 262,
+          "comparison_n": 1041,
+          "effect": 0.04438626980809707,
+          "interval": [
+            -0.07918357692400674,
+            0.16795611654020087
+          ],
+          "blocks": 86,
+          "status": "inconclusive",
+          "condition_rate": 0.5419847328244275,
+          "comparison_rate": 0.49759846301633043,
+          "standard_error": 0.03484435230281163,
+          "note": "Range persistence (volatility clustering) is a known effect, not a direction edge.",
+          "market": "6e",
+          "condition": "close_near_high",
+          "outcome": "next_range_above_normal",
+          "promoted": false
+        },
+        {
+          "n": 1303,
+          "condition_n": 312,
+          "comparison_n": 991,
+          "effect": 0.011604439959636725,
+          "interval": [
+            -0.08801205683776436,
+            0.11122093675703781
+          ],
+          "blocks": 86,
+          "status": "inconclusive",
+          "condition_rate": 0.5,
+          "comparison_rate": 0.4883955600403633,
+          "standard_error": 0.028089962085214398,
+          "market": "6e",
+          "condition": "close_near_low",
+          "outcome": "next_positive_close",
+          "promoted": false
+        },
+        {
+          "n": 1303,
+          "condition_n": 312,
+          "comparison_n": 991,
+          "effect": -0.059147714041760446,
+          "interval": [
+            -0.1569277649243369,
+            0.038632336840816
+          ],
+          "blocks": 86,
+          "status": "inconclusive",
+          "condition_rate": 0.46153846153846156,
+          "comparison_rate": 0.520686175580222,
+          "standard_error": 0.02757211917989837,
+          "note": "Range persistence (volatility clustering) is a known effect, not a direction edge.",
+          "market": "6e",
+          "condition": "close_near_low",
+          "outcome": "next_range_above_normal",
+          "promoted": false
+        },
+        {
+          "n": 1303,
+          "condition_n": 166,
+          "comparison_n": 1137,
+          "effect": 0.06534316686270153,
+          "interval": [
+            -0.08713102742743589,
+            0.21781736115283895
+          ],
+          "blocks": 86,
+          "status": "inconclusive",
+          "condition_rate": 0.5481927710843374,
+          "comparison_rate": 0.48284960422163586,
+          "standard_error": 0.04299482991551369,
+          "market": "6e",
+          "condition": "inside_day",
+          "outcome": "next_positive_close",
+          "promoted": false
+        },
+        {
+          "n": 1303,
+          "condition_n": 166,
+          "comparison_n": 1137,
+          "effect": -0.000572209683059488,
+          "interval": [
+            -0.1412905589054781,
+            0.14014613953935912
+          ],
+          "blocks": 86,
+          "status": "inconclusive",
+          "condition_rate": 0.5060240963855421,
+          "comparison_rate": 0.5065963060686016,
+          "standard_error": 0.03967990464863268,
+          "note": "Range persistence (volatility clustering) is a known effect, not a direction edge.",
+          "market": "6e",
+          "condition": "inside_day",
+          "outcome": "next_range_above_normal",
+          "promoted": false
+        },
+        {
+          "n": 1303,
+          "condition_n": 132,
+          "comparison_n": 1171,
+          "effect": 0.06039903734182123,
+          "interval": [
+            -0.08289391004027122,
+            0.20369198472391367
+          ],
+          "blocks": 86,
+          "status": "inconclusive",
+          "condition_rate": 0.5454545454545454,
+          "comparison_rate": 0.4850555081127242,
+          "standard_error": 0.040405892482123604,
+          "market": "6e",
+          "condition": "outside_day",
+          "outcome": "next_positive_close",
+          "promoted": false
+        },
+        {
+          "n": 1303,
+          "condition_n": 132,
+          "comparison_n": 1171,
+          "effect": -0.08312631006909404,
+          "interval": [
+            -0.24548649034487974,
+            0.07923387020669165
+          ],
+          "blocks": 86,
+          "status": "inconclusive",
+          "condition_rate": 0.4318181818181818,
+          "comparison_rate": 0.5149444918872759,
+          "standard_error": 0.045782490397859275,
+          "note": "Range persistence (volatility clustering) is a known effect, not a direction edge.",
+          "market": "6e",
+          "condition": "outside_day",
+          "outcome": "next_range_above_normal",
+          "promoted": false
+        },
+        {
+          "n": 1304,
+          "condition_n": 657,
+          "comparison_n": 647,
+          "effect": -0.08131664937576316,
+          "interval": [
+            -0.1713052102064504,
+            0.008671911454924075
+          ],
+          "blocks": 86,
+          "status": "inconclusive",
+          "condition_rate": 0.4611872146118721,
+          "comparison_rate": 0.5425038639876353,
+          "standard_error": 0.025375066812256757,
+          "market": "btc",
+          "condition": "previous_up",
+          "outcome": "next_positive_close",
+          "promoted": false
+        },
+        {
+          "n": 1304,
+          "condition_n": 657,
+          "comparison_n": 647,
+          "effect": 0.016848632842365818,
+          "interval": [
+            -0.09719023808771557,
+            0.1308875037724472
+          ],
+          "blocks": 86,
+          "status": "inconclusive",
+          "condition_rate": 0.5098934550989346,
+          "comparison_rate": 0.49304482225656876,
+          "standard_error": 0.03215679795668359,
+          "note": "Range persistence (volatility clustering) is a known effect, not a direction edge.",
+          "market": "btc",
+          "condition": "previous_up",
+          "outcome": "next_range_above_normal",
+          "promoted": false
+        },
+        {
+          "n": 1304,
+          "condition_n": 651,
+          "comparison_n": 653,
+          "effect": -0.0015290411970745321,
+          "interval": [
+            -0.10325620480440495,
+            0.10019812241025589
+          ],
+          "blocks": 86,
+          "status": "inconclusive",
+          "condition_rate": 0.500768049155146,
+          "comparison_rate": 0.5022970903522205,
+          "standard_error": 0.028685130080190326,
+          "market": "btc",
+          "condition": "wide_range",
+          "outcome": "next_positive_close",
+          "promoted": false
+        },
+        {
+          "n": 1304,
+          "condition_n": 651,
+          "comparison_n": 653,
+          "effect": 0.11503565018360251,
+          "interval": [
+            0.006486114499344456,
+            0.22358518586786058
+          ],
+          "blocks": 86,
+          "status": "descriptive_difference",
+          "condition_rate": 0.5591397849462365,
+          "comparison_rate": 0.444104134762634,
+          "standard_error": 0.030608909565850002,
+          "note": "Range persistence (volatility clustering) is a known effect, not a direction edge.",
+          "market": "btc",
+          "condition": "wide_range",
+          "outcome": "next_range_above_normal",
+          "promoted": false
+        },
+        {
+          "n": 1304,
+          "condition_n": 692,
+          "comparison_n": 612,
+          "effect": -0.03097963655597119,
+          "interval": [
+            -0.12343890528269409,
+            0.06147963217075171
+          ],
+          "blocks": 86,
+          "status": "inconclusive",
+          "condition_rate": 0.4869942196531792,
+          "comparison_rate": 0.5179738562091504,
+          "standard_error": 0.026071759562499026,
+          "market": "btc",
+          "condition": "momentum_5_up",
+          "outcome": "next_positive_close",
+          "promoted": false
+        },
+        {
+          "n": 1304,
+          "condition_n": 692,
+          "comparison_n": 612,
+          "effect": 0.00904832067701844,
+          "interval": [
+            -0.10640357964896065,
+            0.12450022100299753
+          ],
+          "blocks": 86,
+          "status": "inconclusive",
+          "condition_rate": 0.5057803468208093,
+          "comparison_rate": 0.49673202614379086,
+          "standard_error": 0.03255524543709223,
+          "note": "Range persistence (volatility clustering) is a known effect, not a direction edge.",
+          "market": "btc",
+          "condition": "momentum_5_up",
+          "outcome": "next_range_above_normal",
+          "promoted": false
+        },
+        {
+          "n": 1304,
+          "condition_n": 739,
+          "comparison_n": 565,
+          "effect": 0.02612954602608164,
+          "interval": [
+            -0.06493654007622333,
+            0.11719563212838661
+          ],
+          "blocks": 86,
+          "status": "inconclusive",
+          "condition_rate": 0.5128552097428958,
+          "comparison_rate": 0.48672566371681414,
+          "standard_error": 0.025678908495097307,
+          "market": "btc",
+          "condition": "momentum_20_up",
+          "outcome": "next_positive_close",
+          "promoted": false
+        },
+        {
+          "n": 1304,
+          "condition_n": 739,
+          "comparison_n": 565,
+          "effect": 0.013637180116637004,
+          "interval": [
+            -0.10645523761934211,
+            0.13372959785261612
+          ],
+          "blocks": 86,
+          "status": "inconclusive",
+          "condition_rate": 0.5074424898511503,
+          "comparison_rate": 0.49380530973451325,
+          "standard_error": 0.03386378330274099,
+          "note": "Range persistence (volatility clustering) is a known effect, not a direction edge.",
+          "market": "btc",
+          "condition": "momentum_20_up",
+          "outcome": "next_range_above_normal",
+          "promoted": false
+        },
+        {
+          "n": 1304,
+          "condition_n": 266,
+          "comparison_n": 1038,
+          "effect": -0.07749141640227741,
+          "interval": [
+            -0.21871891904138482,
+            0.06373608623683
+          ],
+          "blocks": 86,
+          "status": "inconclusive",
+          "condition_rate": 0.4398496240601504,
+          "comparison_rate": 0.5173410404624278,
+          "standard_error": 0.039823476252033196,
+          "market": "btc",
+          "condition": "close_near_high",
+          "outcome": "next_positive_close",
+          "promoted": false
+        },
+        {
+          "n": 1304,
+          "condition_n": 266,
+          "comparison_n": 1038,
+          "effect": -0.025540730438813775,
+          "interval": [
+            -0.172792149750402,
+            0.12171068887277445
+          ],
+          "blocks": 86,
+          "status": "inconclusive",
+          "condition_rate": 0.48120300751879697,
+          "comparison_rate": 0.5067437379576107,
+          "standard_error": 0.04152210646263594,
+          "note": "Range persistence (volatility clustering) is a known effect, not a direction edge.",
+          "market": "btc",
+          "condition": "close_near_high",
+          "outcome": "next_range_above_normal",
+          "promoted": false
+        },
+        {
+          "n": 1304,
+          "condition_n": 237,
+          "comparison_n": 1067,
+          "effect": 0.11414945487762918,
+          "interval": [
+            -0.027241713114380617,
+            0.25554062286963897
+          ],
+          "blocks": 86,
+          "status": "inconclusive",
+          "condition_rate": 0.5949367088607594,
+          "comparison_rate": 0.48078725398313027,
+          "standard_error": 0.03986962677634888,
+          "market": "btc",
+          "condition": "close_near_low",
+          "outcome": "next_positive_close",
+          "promoted": false
+        },
+        {
+          "n": 1304,
+          "condition_n": 237,
+          "comparison_n": 1067,
+          "effect": -0.030235804475658268,
+          "interval": [
+            -0.16042127907137443,
+            0.0999496701200579
+          ],
+          "blocks": 86,
+          "status": "inconclusive",
+          "condition_rate": 0.4767932489451477,
+          "comparison_rate": 0.507029053420806,
+          "standard_error": 0.036709833842849156,
+          "note": "Range persistence (volatility clustering) is a known effect, not a direction edge.",
+          "market": "btc",
+          "condition": "close_near_low",
+          "outcome": "next_range_above_normal",
+          "promoted": false
+        },
+        {
+          "n": 1304,
+          "condition_n": 207,
+          "comparison_n": 1097,
+          "effect": -0.021921886215810427,
+          "interval": [
+            -0.14213000146560284,
+            0.09828622903398199
+          ],
+          "blocks": 86,
+          "status": "inconclusive",
+          "condition_rate": 0.4830917874396135,
+          "comparison_rate": 0.5050136736554239,
+          "standard_error": 0.03389640780652151,
+          "market": "btc",
+          "condition": "inside_day",
+          "outcome": "next_positive_close",
+          "promoted": false
+        },
+        {
+          "n": 1304,
+          "condition_n": 207,
+          "comparison_n": 1097,
+          "effect": 0.024018073005429796,
+          "interval": [
+            -0.10404488893300762,
+            0.1520810349438672
+          ],
+          "blocks": 86,
+          "status": "inconclusive",
+          "condition_rate": 0.5217391304347826,
+          "comparison_rate": 0.4977210574293528,
+          "standard_error": 0.03611132554367051,
+          "note": "Range persistence (volatility clustering) is a known effect, not a direction edge.",
+          "market": "btc",
+          "condition": "inside_day",
+          "outcome": "next_range_above_normal",
+          "promoted": false
+        },
+        {
+          "n": 1304,
+          "condition_n": 124,
+          "comparison_n": 1180,
+          "effect": 0.060688901038818965,
+          "interval": [
+            -0.08781878777839838,
+            0.2091965898560363
+          ],
+          "blocks": 86,
+          "status": "inconclusive",
+          "condition_rate": 0.5564516129032258,
+          "comparison_rate": 0.4957627118644068,
+          "standard_error": 0.04187635062817514,
+          "market": "btc",
+          "condition": "outside_day",
+          "outcome": "next_positive_close",
+          "promoted": false
+        },
+        {
+          "n": 1304,
+          "condition_n": 124,
+          "comparison_n": 1180,
+          "effect": -0.010606889010388199,
+          "interval": [
+            -0.1478055690787739,
+            0.1265917910579975
+          ],
+          "blocks": 86,
+          "status": "inconclusive",
+          "condition_rate": 0.49193548387096775,
+          "comparison_rate": 0.502542372881356,
+          "standard_error": 0.03868742472544929,
+          "note": "Range persistence (volatility clustering) is a known effect, not a direction edge.",
+          "market": "btc",
+          "condition": "outside_day",
+          "outcome": "next_range_above_normal",
+          "promoted": false
+        }
+      ],
+      "evidence": "descriptive only: seen before registration"
+    }
+  ]
+}

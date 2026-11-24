@@ -83,6 +83,7 @@ CONTRACTS = {
     "bars/nq-5m.json": {"rows": list, "market": str, "interval": str},
     "research/discovery.json": {"version": int, "batches": list, "plan_hash": str},
     "research/discovery-v2.json": {"version": int, "batches": list, "plan_hash": str},
+    "research/discovery-v3.json": {"version": int, "batches": list, "plan_hash": str},
     "macro/current.json": {"version": int, "asof": str, "indices": list, "policy": str},
     "validation/models.json": {"version": int, "asof": str, "plan_hash": str, "markets": dict, "events": list, "policy": str},
     "validation/current.json": {"version": int, "asof": str, "batches": list, "plan_hash": str, "discovery_plan_hash": str, "policy": str},

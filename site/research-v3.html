@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Displace | Research Discovery v3</title><meta name="description" content="Registered, repeatable quantitative research on futures markets, with failed and inconclusive results preserved.">
+<link rel="stylesheet" href="assets/intelligence.css"><link rel="stylesheet" href="assets/research-v2.css"><link rel="canonical" href="https://grobentham.github.io/displace/research-v3.html"><meta name="theme-color" content="#0d1117"></head><body><a class="dp-skip" href="#content">Skip to content</a><nav class="dp-nav" aria-label="Intelligence navigation"><a class="dp-brand" href="index.html#top">Displace</a><div class="dp-links"><a href="terminal.html">Terminal</a><a href="macro.html">Macro</a><a href="signals.html">Warnings</a><a href="relationships.html">Relationships</a><a href="atlas.html">Atlas</a><a href="research-v3.html" aria-current="page">Discovery</a><a href="publications.html">Publications</a><a href="open.html">Open</a><a href="validation.html">Validation</a><a href="search.html">Search</a></div></nav><main id="content"><header><h1>Research discovery</h1><p class="muted">Version 3 · 128 registered tests · corrected method · every result kept</p></header>
+<section class="panel"><h2>What changed from versions 1 and 2</h2><p>Versions 1 and 2 compared outcomes inside each week. When the condition comes from the previous day's result (“after an up day”), that method leans toward reversal even on random coin flips, so their “candidates” are not evidence. Version 3 measures the overall difference in rates with errors grouped in 28-day blocks, and asks whether tomorrow’s range beats a <em>normal</em> day’s, not today’s. Versions 1 and 2 stopped running on 24 November 2026; their results stay published for the record (<a href="research-v2.html">version 2</a>, <a href="research.html">version 1</a>).</p></section>
+<section class="panel"><h2>How to read it</h2><p>The 2020–2026 history was already looked at before this plan was registered, so it is <b>descriptive only</b>. New evidence starts on 1 December 2026: each 1 December a cumulative snapshot is computed and frozen, and a test can only become a candidate once that sample covers 30 blocks of 28 days (late March 2029). A candidate means “worth a separate, costed test”, never an edge. Nothing is promoted automatically.</p><p><a href="https://github.com/grobentham/displace/blob/main/research/discovery-plan-v3.json">Registered plan</a> · <a href="data/research/discovery-v3.json">Machine-readable results</a> · <a href="validation.html">Validation diagnostics</a></p></section>
+<section class="panel"><label for="market">Filter market: </label><select id="market"><option value="">All markets</option><option>nq</option><option>es</option><option>ym</option><option>rty</option><option>gold</option><option>cl</option><option>6e</option><option>btc</option></select> <label for="outcome"> Outcome: </label><select id="outcome"><option value="">All outcomes</option><option value="next_positive_close">Positive close</option><option value="next_range_above_normal">Range above a normal day</option></select></section><div id="results" aria-live="polite"><p>Loading published research…</p></div>
+<p class="muted">Research only. Not investment advice. No trading edge or profitability is implied by a historical association.</p></main>
+<script>
+const root=document.getElementById('results');
+function el(tag,text,parent){const n=document.createElement(tag);if(text!==undefined)n.textContent=text;if(parent)parent.append(n);return n}
+function pct(x){return typeof x==='number'?(100*x).toFixed(1)+'%':'—'}
+function pp(x){return typeof x==='number'?(100*x).toFixed(1)+' pp':'—'}
+fetch('data/research/discovery-v3.json',{cache:'no-store'}).then(r=>{if(!r.ok)throw Error('not published');return r.json()}).then(doc=>{
+ root.replaceChildren();el('p','Registered plan SHA-256: '+doc.plan_hash,root).className='muted';
+ if(!doc.batches.length)el('p','No completed research batch has been published yet.',root);
+ for(const b of [...doc.batches].reverse()){
+ const panel=el('section',undefined,root);panel.className='panel';
+ el('div',b.kind==='historical'?'Historical, descriptive only':'Prospective, cumulative',panel).className='tag';
+ el('h2',b.start+' — '+b.end+' (exclusive)',panel);el('p','Computed '+b.computed_on+' · '+b.results.length+' registered tests · '+b.evidence,panel).className='muted';
+ const wrap=el('div',undefined,panel);wrap.className='scroll';const table=el('table',undefined,wrap);
+ const head=el('tr',undefined,el('thead',undefined,table));
+ ['Market','Condition','Outcome','Sample','Conditional rate','Comparison rate','Difference','Interval','Status'].forEach(x=>el('th',x,head));
+ const body=el('tbody',undefined,table);
+ for(const r of b.results){const tr=el('tr',undefined,body);tr.dataset.market=r.market;tr.dataset.outcome=r.outcome;[r.market.toUpperCase(),r.condition.replaceAll('_',' '),r.outcome.replaceAll('_',' '),r.condition_n+' / '+r.comparison_n,pct(r.condition_rate),pct(r.comparison_rate),pp(r.effect),r.interval?pp(r.interval[0])+' to '+pp(r.interval[1]):'—',r.status.replaceAll('_',' ')+(r.note&&r.status==='descriptive_difference'?' (range persistence, a known effect)':'')].forEach(x=>el('td',String(x),tr))}
+ el('p','No result is automatically promoted. A descriptive difference in the already-seen history is not evidence.',panel).className='muted';
+ }
+}).catch(()=>{root.replaceChildren();el('p','Research results have not been published yet or are temporarily unavailable.',root)});
+function filter(){const m=document.getElementById('market').value,o=document.getElementById('outcome').value;for(const tr of root.querySelectorAll('tr[data-market]'))tr.hidden=!!((m&&tr.dataset.market!==m)||(o&&tr.dataset.outcome!==o))}
+document.getElementById('market').addEventListener('change',filter);document.getElementById('outcome').addEventListener('change',filter);
+</script></body></html>

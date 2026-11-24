@@ -52,6 +52,7 @@ jobs:
           python engine/test_surprise.py
           python engine/test_bias.py
           python engine/test_gate.py
+          python engine/test_discovery_v3.py
           python engine/test_discovery.py
           python engine/test_intelligence.py
           python engine/test_signals.py
@@ -131,8 +132,7 @@ jobs:
           python engine/guard.py predict engine/predict.py
           python engine/guard.py watch engine/watch.py
           python engine/guard.py bias engine/bias.py
-          python engine/guard.py discovery engine/discovery.py
-          python engine/guard.py discovery_v2 engine/discovery_v2.py
+          python engine/guard.py discovery_v3 engine/discovery_v3.py   # v1/v2 retired 24 Nov 2026: biased estimator (files kept)
           python engine/guard.py macro engine/macro.py
           python engine/guard.py signals engine/signals.py
           python engine/guard.py relationships engine/relationships.py
