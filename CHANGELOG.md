@@ -41,3 +41,8 @@
 
 - Add successful Pages deployment receipts (forecast hash and timestamp) and require verified pre-window publication for live daily scoring.
 - Add deterministic discovery v1: fixed eight registered experiments, exploratory historical study and disjoint prospective quarterly windows, persistent frozen results and offline tests. No model promotion or AI dependency.
+
+## Macro and discovery expansion
+- Separate v2 registered family of 192 candidate experiments across eight markets, 12 conditions, and two outcomes; v1 preserved.
+- Six descriptive US macro indices based on current-vintage FRED observations, with freshness checks and missing-data suppression.
+- Public macro dashboard and expanded research results with market/outcome filters.

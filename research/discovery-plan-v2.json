@@ -1,0 +1,42 @@
+{
+  "version": 2,
+  "registered_at": "2026-11-24",
+  "markets": [
+    "nq",
+    "es",
+    "ym",
+    "rty",
+    "gold",
+    "cl",
+    "6e",
+    "btc"
+  ],
+  "conditions": [
+    "previous_up",
+    "previous_down",
+    "wide_range",
+    "narrow_range",
+    "momentum_5_up",
+    "momentum_5_down",
+    "momentum_20_up",
+    "momentum_20_down",
+    "close_near_high",
+    "close_near_low",
+    "inside_day",
+    "outside_day"
+  ],
+  "outcomes": [
+    "next_positive_close",
+    "next_range_expansion"
+  ],
+  "historical": {
+    "start": "2020-01-01",
+    "end": "2026-11-01"
+  },
+  "prospective_start": "2026-12-01",
+  "block_months": 6,
+  "min_group": 25,
+  "min_blocks": 12,
+  "alpha": 0.05,
+  "policy": "192 registered market-condition-outcome tests per batch. Historical exploratory only; prospective disjoint half-year batches. Approximate paired-week intervals, Bonferroni across the full family per batch; no correction across successive batches, no model promotion. Adjacent observed candles, not exact exchange calendars. Provider revisions, contract rolls, missing observations and serial dependence remain limitations."
+}

@@ -1,0 +1,114 @@
+{
+  "version": 1,
+  "policy": "Current-vintage descriptive percentiles, not a point-in-time backtest or forecast. Equal-weight components; all required. Daily scores compare with prior 252 readings; weekly with 156; monthly with 60. Higher scores represent more of the named condition, not universally good or bad. Review provider usage rights before commercial use.",
+  "indices": [
+    {
+      "id": "D-GROWTH",
+      "name": "Growth momentum",
+      "components": [
+        {
+          "id": "INDPRO",
+          "transform": "yoy",
+          "frequency": "monthly",
+          "sign": 1
+        },
+        {
+          "id": "RRSFS",
+          "transform": "yoy",
+          "frequency": "monthly",
+          "sign": 1
+        }
+      ]
+    },
+    {
+      "id": "D-INFLATION",
+      "name": "Inflation pressure",
+      "components": [
+        {
+          "id": "CPIAUCSL",
+          "transform": "yoy",
+          "frequency": "monthly",
+          "sign": 1
+        },
+        {
+          "id": "PCEPI",
+          "transform": "yoy",
+          "frequency": "monthly",
+          "sign": 1
+        }
+      ]
+    },
+    {
+      "id": "D-STRESS",
+      "name": "Financial stress",
+      "components": [
+        {
+          "id": "NFCI",
+          "transform": "level",
+          "frequency": "weekly",
+          "sign": 1
+        },
+        {
+          "id": "VIXCLS",
+          "transform": "level",
+          "frequency": "daily",
+          "sign": 1
+        }
+      ]
+    },
+    {
+      "id": "D-LIQUIDITY",
+      "name": "Monetary conditions proxy (easier = higher)",
+      "components": [
+        {
+          "id": "DFII10",
+          "transform": "level",
+          "frequency": "daily",
+          "sign": -1
+        },
+        {
+          "id": "DFF",
+          "transform": "level",
+          "frequency": "daily",
+          "sign": -1
+        }
+      ]
+    },
+    {
+      "id": "D-RISK",
+      "name": "Risk appetite proxy",
+      "components": [
+        {
+          "id": "VIXCLS",
+          "transform": "level",
+          "frequency": "daily",
+          "sign": -1
+        },
+        {
+          "id": "BAMLH0A0HYM2",
+          "transform": "level",
+          "frequency": "daily",
+          "sign": -1
+        }
+      ]
+    },
+    {
+      "id": "D-CREDIT",
+      "name": "Credit stress",
+      "components": [
+        {
+          "id": "BAMLH0A0HYM2",
+          "transform": "level",
+          "frequency": "daily",
+          "sign": 1
+        },
+        {
+          "id": "BAMLC0A0CM",
+          "transform": "level",
+          "frequency": "daily",
+          "sign": 1
+        }
+      ]
+    }
+  ]
+}
