@@ -1,0 +1,97 @@
+{
+  "version": 1,
+  "registered_at": "2026-11-24",
+  "policy": "Descriptive monitoring only, not a forecast. Trigger on a fresh available macro index reaching a specified score; clear only after the separate exit threshold. First observation already beyond the threshold is an initial detection, not evidence of a new crossing. Missing or stale input suspends evaluation without clearing an active condition. All transitions recorded at observation time in UTC; current-vintage revisions can alter scores. Thresholds are policy choices, not empirically validated probabilities.",
+  "rules": [
+    {
+      "id": "growth_weak",
+      "index": "D-GROWTH",
+      "label": "Weak growth momentum",
+      "direction": "low",
+      "enter": 20,
+      "exit": 35,
+      "extreme": 10
+    },
+    {
+      "id": "growth_strong",
+      "index": "D-GROWTH",
+      "label": "Strong growth momentum",
+      "direction": "high",
+      "enter": 80,
+      "exit": 65,
+      "extreme": 90
+    },
+    {
+      "id": "inflation_high",
+      "index": "D-INFLATION",
+      "label": "Elevated inflation pressure",
+      "direction": "high",
+      "enter": 80,
+      "exit": 65,
+      "extreme": 90
+    },
+    {
+      "id": "inflation_low",
+      "index": "D-INFLATION",
+      "label": "Low inflation pressure",
+      "direction": "low",
+      "enter": 20,
+      "exit": 35,
+      "extreme": 10
+    },
+    {
+      "id": "stress_high",
+      "index": "D-STRESS",
+      "label": "Elevated financial stress",
+      "direction": "high",
+      "enter": 80,
+      "exit": 65,
+      "extreme": 90
+    },
+    {
+      "id": "monetary_tight",
+      "index": "D-LIQUIDITY",
+      "label": "Restrictive monetary conditions proxy",
+      "direction": "low",
+      "enter": 20,
+      "exit": 35,
+      "extreme": 10
+    },
+    {
+      "id": "monetary_easy",
+      "index": "D-LIQUIDITY",
+      "label": "Accommodative monetary conditions proxy",
+      "direction": "high",
+      "enter": 80,
+      "exit": 65,
+      "extreme": 90
+    },
+    {
+      "id": "risk_low",
+      "index": "D-RISK",
+      "label": "Weak risk appetite proxy",
+      "direction": "low",
+      "enter": 20,
+      "exit": 35,
+      "extreme": 10
+    },
+    {
+      "id": "risk_high",
+      "index": "D-RISK",
+      "label": "Strong risk appetite proxy",
+      "direction": "high",
+      "enter": 80,
+      "exit": 65,
+      "extreme": 90
+    },
+    {
+      "id": "credit_high",
+      "index": "D-CREDIT",
+      "label": "Elevated credit stress",
+      "direction": "high",
+      "enter": 80,
+      "exit": 65,
+      "extreme": 90
+    }
+  ]
+}

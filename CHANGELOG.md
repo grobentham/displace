@@ -46,3 +46,8 @@
 - Separate v2 registered family of 192 candidate experiments across eight markets, 12 conditions, and two outcomes; v1 preserved.
 - Six descriptive US macro indices based on current-vintage FRED observations, with freshness checks and missing-data suppression.
 - Public macro dashboard and expanded research results with market/outcome filters.
+
+## Statistical early warnings
+- Add ten registered macro monitoring rules with separate entry/exit thresholds, severe-condition tiers, and source-linked transition history.
+- Deduplicate repeated observations; preserve active state during data outages without displaying a current score.
+- Add public early-warning page, offline tests and strict publication gate integration.
