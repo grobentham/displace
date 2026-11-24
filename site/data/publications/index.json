@@ -2,6 +2,14 @@
   "version": 1,
   "reports": [
     {
+      "id": "signal-29a074d7fc830707147c1835374eb8384df8da6216f3e670eb3a7a8a031cdf98",
+      "kind": "signal",
+      "title": "Restrictive monetary conditions proxy — cleared",
+      "generated_at": "2026-11-24T12:49:09+00:00",
+      "sha256": "d7c5851008fd13d2388a50566c0392bc59db706e0ce75ae260363d33b3dcd75f",
+      "path": "reports/signal-29a074d7fc830707147c1835374eb8384df8da6216f3e670eb3a7a8a031cdf98.json"
+    },
+    {
       "id": "daily-2026-11-24",
       "kind": "daily",
       "title": "Daily financial intelligence — 2026-11-24",

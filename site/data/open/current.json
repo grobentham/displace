@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "asof": "2026-11-24T12:31:07.969947+00:00",
+  "asof": "2026-11-24T12:49:09.577399+00:00",
   "scope": "Recorded forecasts only; not all possible scheduled forecasts. No receipt before the target start means no prospective credit.",
   "forecast_counts": {
     "void": 2,
@@ -1091,9 +1091,9 @@
     {
       "name": "Macro indices",
       "code": "engine/macro.py",
-      "code_sha256": "56b8a00f1d389df0e7f4f0b70705d9c03c2a8572dcba9817d4849884ba760323",
-      "plan": "research/macro-plan-v1.json",
-      "plan_hash": "dc9163e601ab864cb0d3c092708f482af8e54386a887f9757d813a09c90ccdf9",
+      "code_sha256": "8dc7cb482a47e10313c3ead43cad23095b52d684a04c528aa811600979db68c1",
+      "plan": "research/macro-plan-v2.json",
+      "plan_hash": "d42fd15963dbe516630a73b1172411109885eb59b1148f814dae8dc1817cfebb",
       "classification": "Descriptive current-vintage indicators"
     },
     {

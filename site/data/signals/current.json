@@ -1,7 +1,7 @@
 {
   "version": 1,
   "plan_hash": "0df5c39c6368d3795ef4e33ce5579e538d37614c520ed17d5c883231cfa8a93d",
-  "asof": "2026-11-24T12:31:07+00:00",
+  "asof": "2026-11-24T12:49:09+00:00",
   "macro_asof": "2026-11-24",
   "policy": "Descriptive monitoring only, not a forecast. Trigger on a fresh available macro index reaching a specified score; clear only after the separate exit threshold. First observation already beyond the threshold is an initial detection, not evidence of a new crossing. Missing or stale input suspends evaluation without clearing an active condition. All transitions recorded at observation time in UTC; current-vintage revisions can alter scores. Thresholds are policy choices, not empirically validated probabilities.",
   "states": [
@@ -83,25 +83,25 @@
       "extreme": 90,
       "active": false,
       "first_detected": null,
-      "last_evaluated": "2026-11-24T11:22:57+00:00",
-      "last_fingerprint": "7b93de4122dbfe3fb145192e01b520073574d0f119f176784f299597d7c6037c",
+      "last_evaluated": "2026-11-24T12:49:09+00:00",
+      "last_fingerprint": "51246deaa7b65009814411b6671f39a8d57d2eb784f323871a451a9bbab4cac5",
       "severity": null,
-      "score": 74.84,
+      "score": 19.52,
       "status": "normal",
       "evidence": [
         {
           "id": "NFCI",
           "observation_date": "2026-11-13",
           "value": -0.478,
-          "score": 49.68,
+          "score": 34.81,
           "source": "https://fred.stlouisfed.org/series/NFCI"
         },
         {
-          "id": "VIXCLS",
-          "observation_date": "2026-11-20",
-          "value": 35.89,
-          "score": 100.0,
-          "source": "https://fred.stlouisfed.org/series/VIXCLS"
+          "id": "STLFSI4",
+          "observation_date": "2026-11-13",
+          "value": -0.8655,
+          "score": 4.23,
+          "source": "https://fred.stlouisfed.org/series/STLFSI4"
         }
       ]
     },
@@ -113,26 +113,26 @@
       "enter": 20,
       "exit": 35,
       "extreme": 10,
-      "active": true,
-      "first_detected": "2026-11-24T11:22:57+00:00",
-      "last_evaluated": "2026-11-24T11:22:57+00:00",
-      "last_fingerprint": "657875e9091cbedf61243fc0b7153d985d32943bd2bb5cb4899660ed2c42f1ab",
-      "severity": "elevated",
-      "score": 11.02,
-      "status": "active",
+      "active": false,
+      "first_detected": null,
+      "last_evaluated": "2026-11-24T12:49:09+00:00",
+      "last_fingerprint": "eca22447e5bfb03ad9fb83a7e6fde6b689d44382036e52d689be80a2718ea12a",
+      "severity": null,
+      "score": 37.7,
+      "status": "normal",
       "evidence": [
         {
           "id": "DFII10",
           "observation_date": "2026-11-20",
           "value": 2.77,
-          "score": 9.33,
+          "score": 1.87,
           "source": "https://fred.stlouisfed.org/series/DFII10"
         },
         {
           "id": "DFF",
           "observation_date": "2026-11-20",
           "value": 3.88,
-          "score": 12.7,
+          "score": 73.53,
           "source": "https://fred.stlouisfed.org/series/DFF"
         }
       ]
@@ -147,24 +147,24 @@
       "extreme": 90,
       "active": false,
       "first_detected": null,
-      "last_evaluated": "2026-11-24T11:22:57+00:00",
-      "last_fingerprint": "657875e9091cbedf61243fc0b7153d985d32943bd2bb5cb4899660ed2c42f1ab",
+      "last_evaluated": "2026-11-24T12:49:09+00:00",
+      "last_fingerprint": "eca22447e5bfb03ad9fb83a7e6fde6b689d44382036e52d689be80a2718ea12a",
       "severity": null,
-      "score": 11.02,
+      "score": 37.7,
       "status": "normal",
       "evidence": [
         {
           "id": "DFII10",
           "observation_date": "2026-11-20",
           "value": 2.77,
-          "score": 9.33,
+          "score": 1.87,
           "source": "https://fred.stlouisfed.org/series/DFII10"
         },
         {
           "id": "DFF",
           "observation_date": "2026-11-20",
           "value": 3.88,
-          "score": 12.7,
+          "score": 73.53,
           "source": "https://fred.stlouisfed.org/series/DFF"
         }
       ]
@@ -179,25 +179,18 @@
       "extreme": 10,
       "active": true,
       "first_detected": "2026-11-24T11:22:57+00:00",
-      "last_evaluated": "2026-11-24T11:22:57+00:00",
-      "last_fingerprint": "393b4a652d1ea329affe4939ed8c9137cd48ef17d205a352796940ca971be1b8",
+      "last_evaluated": "2026-11-24T12:49:09+00:00",
+      "last_fingerprint": "effb90cf404bcc6816184def5b03c355d453e766bc1f2ea0bfd5031c56314b2d",
       "severity": "extreme",
-      "score": 0.0,
+      "score": 0.56,
       "status": "active",
       "evidence": [
         {
           "id": "VIXCLS",
           "observation_date": "2026-11-20",
           "value": 35.89,
-          "score": 0.0,
+          "score": 0.56,
           "source": "https://fred.stlouisfed.org/series/VIXCLS"
-        },
-        {
-          "id": "BAMLH0A0HYM2",
-          "observation_date": "2026-11-20",
-          "value": 3.76,
-          "score": 0.0,
-          "source": "https://fred.stlouisfed.org/series/BAMLH0A0HYM2"
         }
       ]
     },
@@ -211,25 +204,18 @@
       "extreme": 90,
       "active": false,
       "first_detected": null,
-      "last_evaluated": "2026-11-24T11:22:57+00:00",
-      "last_fingerprint": "393b4a652d1ea329affe4939ed8c9137cd48ef17d205a352796940ca971be1b8",
+      "last_evaluated": "2026-11-24T12:49:09+00:00",
+      "last_fingerprint": "effb90cf404bcc6816184def5b03c355d453e766bc1f2ea0bfd5031c56314b2d",
       "severity": null,
-      "score": 0.0,
+      "score": 0.56,
       "status": "normal",
       "evidence": [
         {
           "id": "VIXCLS",
           "observation_date": "2026-11-20",
           "value": 35.89,
-          "score": 0.0,
+          "score": 0.56,
           "source": "https://fred.stlouisfed.org/series/VIXCLS"
-        },
-        {
-          "id": "BAMLH0A0HYM2",
-          "observation_date": "2026-11-20",
-          "value": 3.76,
-          "score": 0.0,
-          "source": "https://fred.stlouisfed.org/series/BAMLH0A0HYM2"
         }
       ]
     },
@@ -243,24 +229,24 @@
       "extreme": 90,
       "active": true,
       "first_detected": "2026-11-24T11:22:57+00:00",
-      "last_evaluated": "2026-11-24T11:22:57+00:00",
-      "last_fingerprint": "864ca623b932a29ccb9bdaf968dab3425d92e917c1b7c87a2849984bf78181d3",
+      "last_evaluated": "2026-11-24T12:49:09+00:00",
+      "last_fingerprint": "3ad44ceee3c0b530d1f19034d5e7af36040bc6fe0d9c8e0a4a359dcc7b5ec24d",
       "severity": "extreme",
-      "score": 100.0,
+      "score": 93.67,
       "status": "active",
       "evidence": [
         {
           "id": "BAMLH0A0HYM2",
           "observation_date": "2026-11-20",
           "value": 3.76,
-          "score": 100.0,
+          "score": 97.87,
           "source": "https://fred.stlouisfed.org/series/BAMLH0A0HYM2"
         },
         {
           "id": "BAMLC0A0CM",
           "observation_date": "2026-11-20",
           "value": 0.98,
-          "score": 100.0,
+          "score": 89.47,
           "source": "https://fred.stlouisfed.org/series/BAMLC0A0CM"
         }
       ]
@@ -350,6 +336,34 @@
       "plan_hash": "0df5c39c6368d3795ef4e33ce5579e538d37614c520ed17d5c883231cfa8a93d",
       "input_hash": "864ca623b932a29ccb9bdaf968dab3425d92e917c1b7c87a2849984bf78181d3",
       "id": "076f4b3fea2f0163979d3b58a92f00729e7bad10c14e59955a94d86da454a2b9"
+    },
+    {
+      "rule_id": "monetary_tight",
+      "index": "D-LIQUIDITY",
+      "label": "Restrictive monetary conditions proxy",
+      "type": "cleared",
+      "observed_at": "2026-11-24T12:49:09+00:00",
+      "score": 37.7,
+      "severity": null,
+      "evidence": [
+        {
+          "id": "DFII10",
+          "observation_date": "2026-11-20",
+          "value": 2.77,
+          "score": 1.87,
+          "source": "https://fred.stlouisfed.org/series/DFII10"
+        },
+        {
+          "id": "DFF",
+          "observation_date": "2026-11-20",
+          "value": 3.88,
+          "score": 73.53,
+          "source": "https://fred.stlouisfed.org/series/DFF"
+        }
+      ],
+      "plan_hash": "0df5c39c6368d3795ef4e33ce5579e538d37614c520ed17d5c883231cfa8a93d",
+      "input_hash": "eca22447e5bfb03ad9fb83a7e6fde6b689d44382036e52d689be80a2718ea12a",
+      "id": "29a074d7fc830707147c1835374eb8384df8da6216f3e670eb3a7a8a031cdf98"
     }
   ]
 }

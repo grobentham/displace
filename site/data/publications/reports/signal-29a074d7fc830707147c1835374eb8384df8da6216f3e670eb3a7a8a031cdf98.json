@@ -1,0 +1,27 @@
+{
+  "version": 1,
+  "id": "signal-29a074d7fc830707147c1835374eb8384df8da6216f3e670eb3a7a8a031cdf98",
+  "kind": "signal",
+  "title": "Restrictive monetary conditions proxy — cleared",
+  "generated_at": "2026-11-24T12:49:09+00:00",
+  "sources": [
+    {
+      "path": "signals/current.json",
+      "asof": "2026-11-24T12:49:09+00:00",
+      "sha256": "2434e5e932ea6289e89c2785cd0fd683b18b1a096f993deb6412ff9479cff5a0"
+    }
+  ],
+  "sections": [
+    {
+      "title": "Recorded transition",
+      "lines": [
+        "Restrictive monetary conditions proxy — cleared.",
+        "Observed 2026-11-24T12:49:09+00:00; score 37.70/100.",
+        "Severity: cleared.",
+        "DFII10: 2.7700; observation 2026-11-20; score 1.87",
+        "DFF: 3.8800; observation 2026-11-20; score 73.53"
+      ]
+    }
+  ],
+  "limitations": "Deterministic snapshot reports, not trading recommendations. Observation dates differ by source. Historical results and descriptive monitoring are not validated forecasts. Source hashes identify inputs at generation time; linked live data may later change."
+}
