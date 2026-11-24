@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "asof": "2026-11-24T12:49:09.577399+00:00",
+  "asof": "2026-11-24T12:56:13.894477+00:00",
   "scope": "Recorded forecasts only; not all possible scheduled forecasts. No receipt before the target start means no prospective credit.",
   "forecast_counts": {
     "void": 2,
@@ -1046,6 +1046,20 @@
       },
       "promoted": 0,
       "plan_hash": "1c8cd80a76c86cea2d531433a51f8a3c5c362975db8d1c8059a1ec5535b05235"
+    },
+    {
+      "family": "Discovery v3",
+      "source": "research/discovery-v3.json",
+      "kind": "historical",
+      "start": "2020-01-01",
+      "end": "2026-11-01",
+      "total": 128,
+      "statuses": {
+        "inconclusive": 102,
+        "descriptive_difference": 26
+      },
+      "promoted": 0,
+      "plan_hash": "b0fa21ccff595c0c6c9d85272eeeb0c2631b71fea52d75bf385e374a941080d8"
     }
   ],
   "legacy_research": {
@@ -1078,7 +1092,7 @@
       "code_sha256": "b3d3bcea833e97599c719bc81c41163bb39172761700c80dfd1d1a392c4cc18c",
       "plan": "research/discovery-plan-v1.json",
       "plan_hash": "070e1fed7b67a8d7cbcfc9b08945e71258e02154c3a697f1c41e799651f327c5",
-      "classification": "Exploratory / prospective registered batches"
+      "classification": "Retired 24 Nov 2026: biased within-week estimator; results kept"
     },
     {
       "name": "Discovery v2",
@@ -1086,7 +1100,15 @@
       "code_sha256": "e538f381ff743f6b35456a390fb9037a60e798bf6e3ba6ef5a543980ad56e9ce",
       "plan": "research/discovery-plan-v2.json",
       "plan_hash": "1c8cd80a76c86cea2d531433a51f8a3c5c362975db8d1c8059a1ec5535b05235",
-      "classification": "Exploratory / prospective registered batches"
+      "classification": "Retired 24 Nov 2026: biased within-week estimator; results kept"
+    },
+    {
+      "name": "Discovery v3",
+      "code": "engine/discovery_v3.py",
+      "code_sha256": "6791434d81b652f643b7e082c0ca0ccbf74922aee7bd9ad61233612c992a597b",
+      "plan": "research/discovery-plan-v3.json",
+      "plan_hash": "b0fa21ccff595c0c6c9d85272eeeb0c2631b71fea52d75bf385e374a941080d8",
+      "classification": "History descriptive only; prospective from Dec 2026, candidates need 30 blocks"
     },
     {
       "name": "Macro indices",

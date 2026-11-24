@@ -2,6 +2,14 @@
   "version": 1,
   "reports": [
     {
+      "id": "research-6aa66aede6330f89292cdaa517cdbe926c88a38d100097814c3787636d81c57d",
+      "kind": "research",
+      "title": "Discovery v3 — historical research batch",
+      "generated_at": "2026-11-24T12:56:13+00:00",
+      "sha256": "8057b3efdcb607891baffe0f4b635c0cb10757cb32fb7c7dd4977f3b558c497e",
+      "path": "reports/research-6aa66aede6330f89292cdaa517cdbe926c88a38d100097814c3787636d81c57d.json"
+    },
+    {
       "id": "signal-29a074d7fc830707147c1835374eb8384df8da6216f3e670eb3a7a8a031cdf98",
       "kind": "signal",
       "title": "Restrictive monetary conditions proxy — cleared",

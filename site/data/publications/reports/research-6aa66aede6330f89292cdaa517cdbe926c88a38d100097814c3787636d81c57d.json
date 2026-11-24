@@ -1,0 +1,27 @@
+{
+  "version": 1,
+  "id": "research-6aa66aede6330f89292cdaa517cdbe926c88a38d100097814c3787636d81c57d",
+  "kind": "research",
+  "title": "Discovery v3 — historical research batch",
+  "generated_at": "2026-11-24T12:56:13+00:00",
+  "sources": [
+    {
+      "path": "open/current.json",
+      "asof": "2026-11-24T12:56:13.894477+00:00",
+      "sha256": "5a81f9774e36d2278f8c12467cdb5c0a29d170b68d7e2ceadd90015c639202da"
+    }
+  ],
+  "sections": [
+    {
+      "title": "Research results",
+      "lines": [
+        "Discovery v3 · historical · 2020-01-01 to 2026-11-01 (exclusive).",
+        "128 registered tests; 0 promoted models.",
+        "descriptive difference: 26",
+        "inconclusive: 102",
+        "Corrected method (overall rate difference, 28-day clustered errors). History seen before registration is descriptive only; candidates need 30 prospective blocks. Not a trading edge. Full results: research/discovery-v3.json."
+      ]
+    }
+  ],
+  "limitations": "Deterministic snapshot reports, not trading recommendations. Observation dates differ by source. Historical results and descriptive monitoring are not validated forecasts. Source hashes identify inputs at generation time; linked live data may later change."
+}
