@@ -59,6 +59,7 @@ jobs:
           python engine/test_evidence.py
           python engine/test_publisher.py
           python engine/test_atlas.py
+          python engine/test_validation.py
           node --check site/assets/terminal.js
           node tests/test_terminal.js
           node --check site/assets/search.js
@@ -134,6 +135,7 @@ jobs:
           python engine/guard.py evidence engine/evidence.py
           python engine/guard.py publishing engine/publisher.py
           python engine/guard.py atlas engine/atlas.py
+          python engine/guard.py validation engine/validation.py
 
       - name: Final check before publishing (block invalid candidate snapshot)
         run: python engine/gate.py --strict

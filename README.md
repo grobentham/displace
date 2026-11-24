@@ -221,3 +221,7 @@ Atlas uses the World Bank Indicators API v2, World Development Indicators source
 ## Product consolidation
 
 Research pages share a dark intelligence stylesheet and consistent navigation; page-specific styles remain in external CSS files. The original trading homepage and replay desk keep their legacy layouts. `search.html` searches tools, report titles and country names; country deep links select the profile. `engine/sitebuild.py` creates escaped crawlable report HTML and a project sitemap after the strict gate, before saving and deploying the candidate. Static report pages are derived from the verified archive, not a replacement for original JSON. Sitemap is available at `/displace/sitemap.xml`; GitHub Pages project paths are not a separate domain root, so robots.txt submission is not claimed. Source terms, legal review and a full legacy frontend refactor remain open.
+
+## Research validation
+
+The separate implementation in `engine/validation.py` recalculates Discovery V2 conditions and rates, verifies frozen dataset fingerprints, compares marginal effects with the original within-week estimand, applies approximate 28-day cluster-robust intervals and family correction, and evaluates an exploratory early/late open-to-close cost proxy for directional conditions. It publishes discrepancies and never promotes models. This is internal code-path replication using the same cached market data, not third-party validation or point-in-time/executable strategy testing. See `research/validation-plan-v1.json`.
