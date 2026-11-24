@@ -51,3 +51,7 @@
 - Add ten registered macro monitoring rules with separate entry/exit thresholds, severe-condition tiers, and source-linked transition history.
 - Deduplicate repeated observations; preserve active state during data outages without displaying a current score.
 - Add public early-warning page, offline tests and strict publication gate integration.
+
+## Financial relationships
+- Add 66 cross-market relationships across 12 registered series, matched interval endpoints, rolling correlations, disjoint-window shifts and prior-window residual diagnostics.
+- Add source-linked interactive public explorer, missing/stale data handling and publication checks.

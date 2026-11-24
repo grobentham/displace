@@ -197,3 +197,7 @@ Discovery v2 is registered separately from v1: 8 markets × 12 prior-session con
 ## Statistical early warnings
 
 The registered `research/signals-plan-v1.json` defines ten descriptive monitoring rules on the six macro indices. `engine/signals.py` runs after macro ingestion, uses separate entry and exit thresholds to avoid repeated toggling, records initial detections, activations, severity changes and clearances, and retains source-linked evidence. Stale inputs suspend evaluation without declaring that an existing condition cleared. All transition timestamps reflect the engine observation time, not the original release time; no forecast accuracy is claimed. `site/signals.html` displays current states and history. Thresholds are policy settings rather than validated probabilities.
+
+## Financial relationships
+
+The registered `research/relationships-plan-v1.json` defines 12 series and 66 pairs. `engine/relationships.py` matches exact observation interval endpoints, computes correlations of changes over 20, 60 and 252 matched observations, compares disjoint 60-observation windows, and measures an unusual residual using a regression fitted only to the prior 60 observations. Stale results are suppressed. All metrics are descriptive, current-vintage, and affected by mismatched market closes, provider delays, revisions and futures rolls. Threshold flags are not significance tests or signals to trade. See `site/relationships.html`.

@@ -1,0 +1,101 @@
+{
+  "version": 1,
+  "registered_at": "2026-11-24",
+  "series": [
+    {
+      "id": "nq",
+      "label": "Nasdaq futures",
+      "kind": "futures",
+      "transform": "log_return_pct",
+      "source": "Yahoo Finance via existing bias cache"
+    },
+    {
+      "id": "es",
+      "label": "S&P 500 futures",
+      "kind": "futures",
+      "transform": "log_return_pct",
+      "source": "Yahoo Finance via existing bias cache"
+    },
+    {
+      "id": "ym",
+      "label": "Dow futures",
+      "kind": "futures",
+      "transform": "log_return_pct",
+      "source": "Yahoo Finance via existing bias cache"
+    },
+    {
+      "id": "rty",
+      "label": "Russell 2000 futures",
+      "kind": "futures",
+      "transform": "log_return_pct",
+      "source": "Yahoo Finance via existing bias cache"
+    },
+    {
+      "id": "gold",
+      "label": "Gold futures",
+      "kind": "futures",
+      "transform": "log_return_pct",
+      "source": "Yahoo Finance via existing bias cache"
+    },
+    {
+      "id": "cl",
+      "label": "WTI crude futures",
+      "kind": "futures",
+      "transform": "log_return_pct",
+      "source": "Yahoo Finance via existing bias cache"
+    },
+    {
+      "id": "6e",
+      "label": "Euro FX futures",
+      "kind": "futures",
+      "transform": "log_return_pct",
+      "source": "Yahoo Finance via existing bias cache"
+    },
+    {
+      "id": "btc",
+      "label": "Bitcoin futures",
+      "kind": "futures",
+      "transform": "log_return_pct",
+      "source": "Yahoo Finance via existing bias cache"
+    },
+    {
+      "id": "VIXCLS",
+      "label": "VIX",
+      "kind": "macro",
+      "transform": "point_change",
+      "source": "https://fred.stlouisfed.org/series/VIXCLS"
+    },
+    {
+      "id": "BAMLH0A0HYM2",
+      "label": "High-yield credit spread",
+      "kind": "macro",
+      "transform": "basis_point_change",
+      "source": "https://fred.stlouisfed.org/series/BAMLH0A0HYM2"
+    },
+    {
+      "id": "DGS2",
+      "label": "2-year Treasury yield",
+      "kind": "series",
+      "transform": "basis_point_change",
+      "source": "https://fred.stlouisfed.org/series/DGS2"
+    },
+    {
+      "id": "DTWEXBGS",
+      "label": "Broad dollar index",
+      "kind": "series",
+      "transform": "log_return_pct",
+      "source": "https://fred.stlouisfed.org/series/DTWEXBGS"
+    }
+  ],
+  "windows": [
+    20,
+    60,
+    252
+  ],
+  "max_gap_days": 4,
+  "max_age_days": 10,
+  "divergence_window": 60,
+  "divergence_threshold": 2.5,
+  "correlation_shift_threshold": 0.4,
+  "policy": "Descriptive current-vintage associations between changes, not price levels. Match exact start and end observation dates; no forward filling or bridging gaps over four days. Futures use completed daily candles; other series use available cached observations. Different market closing times, delayed publication, contract rolls, missing observations and revisions limit comparability. Correlation shift compares disjoint 60-observation windows; divergence is an out-of-sample residual relative to prior 60 paired observations (second series regressed on first). Thresholds are monitoring choices, not significance tests; no causal, directional or trading edge claims."
+}
