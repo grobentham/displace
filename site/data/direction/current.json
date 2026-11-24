@@ -1,5 +1,5 @@
 {
- "asof": "2026-11-24T12:00-05:00",
+ "asof": "2026-11-24T14:35-05:00",
  "version": 4,
  "assets": {
   "gold": "Gold, close",
@@ -766,19 +766,19 @@
    "group": "sentiment"
   },
   "umich:nq2h": {
-   "calls": 15,
+   "calls": 16,
    "hits": 7,
    "proven": false,
    "why": "too few tested calls",
-   "brierSkill": -0.018,
+   "brierSkill": -0.024,
    "group": "sentiment"
   },
   "conf:nq2h": {
-   "calls": 15,
+   "calls": 16,
    "hits": 7,
    "proven": false,
    "why": "too few tested calls",
-   "brierSkill": -0.018,
+   "brierSkill": -0.024,
    "group": "sentiment"
   },
   "homes:gold": {
@@ -1351,9 +1351,9 @@
     "historical_candidate": false
    },
    "gold2h": {
-    "b": 0.0148,
+    "b": -0.035,
     "k": 0.0,
-    "n": 87,
+    "n": 88,
     "since": "2024-06-28",
     "bt": {
      "calls": 1,
@@ -1361,38 +1361,38 @@
      "rate": 0.0,
      "pval": 1.0,
      "brierSkill": -0.006,
-     "brierSkillBase": -0.1922,
-     "baseBrier": 0.210878,
+     "brierSkillBase": -0.1683,
+     "baseBrier": 0.215179,
      "halves": [
       0,
       0.0
      ],
      "recent": 0.0,
-     "tested": 62
+     "tested": 63
     },
     "proven": false,
     "why": "too few tested calls",
     "historical_candidate": false
    },
    "nq2h": {
-    "b": 0.2668,
-    "k": 0.6,
-    "n": 86,
+    "b": 0.2002,
+    "k": 0.35,
+    "n": 87,
     "since": "2024-06-28",
     "bt": {
-     "calls": 15,
+     "calls": 16,
      "hits": 7,
-     "rate": 0.467,
-     "pval": 0.696380615234375,
-     "brierSkill": -0.018,
-     "brierSkillBase": -0.0064,
-     "baseBrier": 0.252765,
+     "rate": 0.438,
+     "pval": 0.7727508544921875,
+     "brierSkill": -0.024,
+     "brierSkillBase": -0.0084,
+     "baseBrier": 0.253955,
      "halves": [
-      0.571,
+      0.5,
       0.375
      ],
-     "recent": 0.467,
-     "tested": 61
+     "recent": 0.438,
+     "tested": 62
     },
     "proven": false,
     "why": "too few tested calls",
@@ -3291,9 +3291,9 @@
     },
     "gold2h": {
      "hot": {
-      "n": 9,
-      "up": 0.889,
-      "med": 0.105
+      "n": 10,
+      "up": 0.8,
+      "med": 0.099
      },
      "inline": {
       "n": 14,
@@ -3308,9 +3308,9 @@
     },
     "nq2h": {
      "hot": {
-      "n": 9,
-      "up": 0.667,
-      "med": 0.348
+      "n": 10,
+      "up": 0.6,
+      "med": 0.332
      },
      "inline": {
       "n": 14,
@@ -4923,7 +4923,7 @@
     },
     "nq2h": {
      "none": true,
-     "n": 15,
+     "n": 16,
      "why": "too few tested calls"
     }
    },
@@ -4955,7 +4955,7 @@
     },
     "nq2h": {
      "none": true,
-     "n": 15,
+     "n": 16,
      "why": "too few tested calls"
     }
    },
