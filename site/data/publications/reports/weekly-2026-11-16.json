@@ -1,0 +1,41 @@
+{
+  "version": 1,
+  "id": "weekly-2026-11-16",
+  "kind": "weekly",
+  "title": "Weekly accountability review — 2026-11-16",
+  "generated_at": "2026-11-24T11:58:34+00:00",
+  "sources": [
+    {
+      "path": "open/current.json",
+      "asof": "2026-11-24T11:58:34.198875+00:00",
+      "sha256": "d3b34def153cde06234e0602acb69e5e60c0e35032116a545ac0281552920527"
+    }
+  ],
+  "sections": [
+    {
+      "title": "Review period",
+      "lines": [
+        "2026-11-16 to 2026-11-23 (exclusive), by target date.",
+        "Frozen as-of snapshot; later settlements appear in Displace Open, not rewritten here."
+      ]
+    },
+    {
+      "title": "Forecast accountability",
+      "lines": [
+        "16 recorded daily forecasts in scope; 0 verified resolved. Counts are not a measure of all possible scheduled forecasts.",
+        "late: 8",
+        "unverified: 6",
+        "void: 2",
+        "6E: verified N=0; Brier Unavailable; baseline Unavailable; Brier skill Unavailable.",
+        "BTC: verified N=0; Brier Unavailable; baseline Unavailable; Brier skill Unavailable.",
+        "CL: verified N=0; Brier Unavailable; baseline Unavailable; Brier skill Unavailable.",
+        "ES: verified N=0; Brier Unavailable; baseline Unavailable; Brier skill Unavailable.",
+        "GOLD: verified N=0; Brier Unavailable; baseline Unavailable; Brier skill Unavailable.",
+        "NQ: verified N=0; Brier Unavailable; baseline Unavailable; Brier skill Unavailable.",
+        "RTY: verified N=0; Brier Unavailable; baseline Unavailable; Brier skill Unavailable.",
+        "YM: verified N=0; Brier Unavailable; baseline Unavailable; Brier skill Unavailable."
+      ]
+    }
+  ],
+  "limitations": "Deterministic snapshot reports, not trading recommendations. Observation dates differ by source. Historical results and descriptive monitoring are not validated forecasts. Source hashes identify inputs at generation time; linked live data may later change."
+}

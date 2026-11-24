@@ -1,0 +1,53 @@
+{
+  "version": 1,
+  "reports": [
+    {
+      "id": "weekly-2026-11-16",
+      "kind": "weekly",
+      "title": "Weekly accountability review — 2026-11-16",
+      "generated_at": "2026-11-24T11:58:34+00:00",
+      "sha256": "4f8981c3ed0032880aa8cb35c13ade98f9d6b83217ee307de9d26e35c8daff36",
+      "path": "reports/weekly-2026-11-16.json"
+    },
+    {
+      "id": "signal-ea5fd45117f463f61d3a444af48cdfd87c99f550af4b383a99098fff1f5f20dd",
+      "kind": "signal",
+      "title": "Restrictive monetary conditions proxy — initial detection",
+      "generated_at": "2026-11-24T11:58:34+00:00",
+      "sha256": "ebdccac047ba89fcf92f77f866be763ac8971a00b397807517c328ddcc87ff47",
+      "path": "reports/signal-ea5fd45117f463f61d3a444af48cdfd87c99f550af4b383a99098fff1f5f20dd.json"
+    },
+    {
+      "id": "signal-595028d52846fd5a207b01a18d2948385eadd32c0dca12632ad333f47eb5e28d",
+      "kind": "signal",
+      "title": "Weak risk appetite proxy — initial detection",
+      "generated_at": "2026-11-24T11:58:34+00:00",
+      "sha256": "1fd6ff3d17db77159ae70dde1ead54c746b8d277728417696099920f6d16ab9e",
+      "path": "reports/signal-595028d52846fd5a207b01a18d2948385eadd32c0dca12632ad333f47eb5e28d.json"
+    },
+    {
+      "id": "signal-076f4b3fea2f0163979d3b58a92f00729e7bad10c14e59955a94d86da454a2b9",
+      "kind": "signal",
+      "title": "Elevated credit stress — initial detection",
+      "generated_at": "2026-11-24T11:58:34+00:00",
+      "sha256": "2b6e40badf61e294a7c16e611941662abf838e99b1b4add8340ebac18eae007c",
+      "path": "reports/signal-076f4b3fea2f0163979d3b58a92f00729e7bad10c14e59955a94d86da454a2b9.json"
+    },
+    {
+      "id": "research-680b084b7aa3246185f4776326ab28e335ecac096782ae958039b15806cd2bc3",
+      "kind": "research",
+      "title": "Discovery v1 — historical research batch",
+      "generated_at": "2026-11-24T11:58:34+00:00",
+      "sha256": "4fa04a5a61a44011758b89c5fd0a605b336544231b4f6fa0b382fbee21f4218c",
+      "path": "reports/research-680b084b7aa3246185f4776326ab28e335ecac096782ae958039b15806cd2bc3.json"
+    },
+    {
+      "id": "research-2e05ef7dccd3c5f82e2b8269ea84f9f00ec5a523ab63c58dd20bc6bc71f0d2dc",
+      "kind": "research",
+      "title": "Discovery v2 — historical research batch",
+      "generated_at": "2026-11-24T11:58:34+00:00",
+      "sha256": "3fa9bdb037a1c9e427407e2e559571aa33dd573566c8d313747e26ba824849f4",
+      "path": "reports/research-2e05ef7dccd3c5f82e2b8269ea84f9f00ec5a523ab63c58dd20bc6bc71f0d2dc.json"
+    }
+  ]
+}

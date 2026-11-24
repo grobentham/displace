@@ -1,0 +1,27 @@
+{
+  "version": 1,
+  "id": "signal-595028d52846fd5a207b01a18d2948385eadd32c0dca12632ad333f47eb5e28d",
+  "kind": "signal",
+  "title": "Weak risk appetite proxy — initial detection",
+  "generated_at": "2026-11-24T11:58:34+00:00",
+  "sources": [
+    {
+      "path": "signals/current.json",
+      "asof": "2026-11-24T11:58:33+00:00",
+      "sha256": "cc21e337d61bbfa0c3c37425b7b9bb1f2e8b7b51e1f57e8653b11b7275b67f29"
+    }
+  ],
+  "sections": [
+    {
+      "title": "Recorded transition",
+      "lines": [
+        "Weak risk appetite proxy — initial detection.",
+        "Observed 2026-11-24T11:22:57+00:00; score 0.00/100.",
+        "Severity: extreme.",
+        "VIXCLS: 35.8900; observation 2026-11-20; score 0.00",
+        "BAMLH0A0HYM2: 3.7600; observation 2026-11-20; score 0.00"
+      ]
+    }
+  ],
+  "limitations": "Deterministic snapshot reports, not trading recommendations. Observation dates differ by source. Historical results and descriptive monitoring are not validated forecasts. Source hashes identify inputs at generation time; linked live data may later change."
+}

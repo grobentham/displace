@@ -1,0 +1,27 @@
+{
+  "version": 1,
+  "id": "research-680b084b7aa3246185f4776326ab28e335ecac096782ae958039b15806cd2bc3",
+  "kind": "research",
+  "title": "Discovery v1 — historical research batch",
+  "generated_at": "2026-11-24T11:58:34+00:00",
+  "sources": [
+    {
+      "path": "open/current.json",
+      "asof": "2026-11-24T11:58:34.198875+00:00",
+      "sha256": "d3b34def153cde06234e0602acb69e5e60c0e35032116a545ac0281552920527"
+    }
+  ],
+  "sections": [
+    {
+      "title": "Research results",
+      "lines": [
+        "Discovery v1 · historical · 2020-01-01 to 2026-11-01 (exclusive).",
+        "8 registered tests; 0 promoted models.",
+        "exploratory candidate: 6",
+        "inconclusive: 2",
+        "Candidate status is not a validated or profitable trading edge. Full results: research/discovery.json."
+      ]
+    }
+  ],
+  "limitations": "Deterministic snapshot reports, not trading recommendations. Observation dates differ by source. Historical results and descriptive monitoring are not validated forecasts. Source hashes identify inputs at generation time; linked live data may later change."
+}
