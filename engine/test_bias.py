@@ -139,10 +139,34 @@ def test_sessions_keep_mondays():
     assert not S["overnight"]["passed"] and not S["momentum"]["passed"]
 
 
+
+def test_despike_days_from_iron_brain():
+    """A bad print in Yahoo's daily high is clipped to Iron Brain's clean session high and remembered; small gaps and
+    incomplete sessions leave the candle alone, and a clean feed never extends a range."""
+    import bias as B
+    days = {"2026-11-23": [25561.5, 27137.0, 25426.75, 26808.0], "2026-11-24": [26888.0, 27036.0, 26684.0, 26831.0]}
+    ib = {"nq": {"2026-11-23": {"h": 27090.5, "l": 25400.0, "complete": True, "full": True},
+                 "2026-11-24": {"h": 26900.0, "l": 26700.0, "complete": False, "full": True}}}
+    patches = {}
+    notes = B.despike_days("nq", days, ib, patches)
+    assert days["2026-11-23"] == [25561.5, 27090.5, 25426.75, 26808.0], days
+    assert days["2026-11-24"] == [26888.0, 27036.0, 26684.0, 26831.0]
+    assert patches["nq"]["2026-11-23"][:2] == [27090.5, 25426.75] and "27,137.00" in notes[0]
+    # next run: Iron Brain's window has moved on and Yahoo serves the bad print again; the patch still applies
+    again = {"2026-11-23": [25561.5, 27137.0, 25426.75, 26808.0]}
+    B.despike_days("nq", again, {}, patches)
+    assert again["2026-11-23"][1] == 27090.5
+    # a tiny difference (minutes missing from the 1-minute feed) changes nothing
+    d2 = {"2026-11-23": [100.0, 110.0, 90.0, 105.0]}
+    B.despike_days("gold", d2, {"gold": {"2026-11-23": {"h": 109.95, "l": 90.05, "complete": True, "full": True}}}, {})
+    assert d2["2026-11-23"] == [100.0, 110.0, 90.0, 105.0]
+
+
 if __name__ == "__main__":
     test_quant_basics()
     test_random_walk_finds_no_direction_but_real_volatility()
     test_run_end_to_end()
     test_fixes()
     test_sessions_keep_mondays()
+    test_despike_days_from_iron_brain()
     print("bias tests passed")
