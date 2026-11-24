@@ -87,3 +87,6 @@ main nav{display:flex;flex-wrap:wrap;gap:8px 18px;justify-content:center;margin-
 .card em{font-style:normal;color:var(--link);font-size:.95rem;margin-top:auto}
 .card em::after{content:" ›"}
 .cards.small .card{padding:20px}.cards.small .card b{font-size:1.05rem}
+/* main cards in pairs (four of them), the header kicker at the main site's size */
+.cards:not(.small){grid-template-columns:repeat(auto-fit,minmax(min(420px,100%),1fr))}
+main>header .kick,main>header .label{font-size:1.3rem;margin-bottom:10px}

@@ -35,7 +35,7 @@ def page(r):
     return f'''<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>{title} | Displace</title><meta name="description" content="{desc}">
-<link rel="canonical" href="{url}"><link rel="stylesheet" href="../assets/intelligence.css?v=20261124d">
+<link rel="canonical" href="{url}"><link rel="stylesheet" href="../assets/intelligence.css?v=20261124e">
 <meta property="og:type" content="article"><meta property="og:title" content="{title}"><meta property="og:url" content="{url}">
 </head><body><a class="dp-skip" href="#content">Skip to content</a>{gnav()}
 <main id="content" class="dp-report"><header><p class="muted"><a href="../publications.html">Research publications</a> · {esc(r["kind"])}</p><h1>{title}</h1><p class="muted">Generated <time datetime="{esc(r["generated_at"])}">{esc(r["generated_at"])}</time> · UTC snapshot</p></header>
