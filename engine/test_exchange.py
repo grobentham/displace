@@ -82,6 +82,29 @@ def test_holiday_candles_fold_into_the_next_session():
     assert B.clean("nq", rows[:2]) == rows[:1]                   # a holiday candle with nothing after it is dropped
 
 
+def test_roll_days():
+    """rolls.py: the measured switch days, and the research leaves the switch-day outcome out."""
+    import rolls as R
+    import bias as B
+    import numpy as np
+    assert R.is_roll("nq", "2026-12-21") and R.is_roll("nq", "2026-06-22") and not R.is_roll("nq", "2026-12-18")
+    assert R.is_roll("gold", "2026-02-02") and R.is_roll("gold", "2026-12-01") and not R.is_roll("gold", "2026-01-02")
+    assert R.is_roll("6e", "2026-12-14")                    # 3rd Wednesday 16 Dec: two sessions before
+    assert not R.is_roll("cl", "2026-12-21") and R.mask("cl", ["2026-12-21"]) == [False]
+    days, d = [], dt.date(2025, 9, 1)
+    while d <= dt.date(2026, 7, 10):
+        if X.is_trade_date(d):
+            days.append(d.isoformat())
+        d += dt.timedelta(days=1)
+    rows = [(k, [100.0 + i % 7, 101.5 + i % 7, 99.0 + i % 7, 100.5 + (i * 3) % 5]) for i, k in enumerate(days)]
+    F, S = B.build(rows, {}, set(), "nq")
+    assert [k for k, r in zip(days, S["roll"]) if r] == ["2025-09-22", "2025-12-22", "2026-03-23", "2026-06-22"]
+    y = np.r_[(S["c"][1:] > S["c"][:-1]).astype(float), np.nan]
+    T = B.direction_tests(F, S, [])
+    i = days.index("2026-06-22") - 1                         # Thu 18 Jun (19 Jun is Juneteenth)
+    assert np.isnan(T["y"][i]) and not np.isnan(T["y"][i - 1])  # the outcome on the switch day is left out
+
+
 if __name__ == "__main__":
     test_2026_calendar()
     test_thanksgiving_week()
@@ -90,4 +113,5 @@ if __name__ == "__main__":
     test_settlement_by_market()
     test_forecast_targets()
     test_holiday_candles_fold_into_the_next_session()
+    test_roll_days()
     print("exchange tests passed")

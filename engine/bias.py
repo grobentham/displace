@@ -402,7 +402,7 @@ def _turn_of_month(d):
     return after.month != day.month or k <= 3
 
 
-def build(rows, tiers, fomc):
+def build(rows, tiers, fomc, market=None):
     keys = [d for d, _ in rows]
     X = np.array([v for _, v in rows], float)
     o, h, l, c = X.T
@@ -439,7 +439,9 @@ def build(rows, tiers, fomc):
     F["mon"] = np.array([1.0 if dt.date.fromisoformat(d).weekday() == 0 else 0.0 for d in nxt])
     F["dist_h"] = np.log(h / c) / atr
     F["dist_l"] = np.log(c / l) / atr
+    import rolls
     S = {"keys": keys, "o": o, "h": h, "l": l, "c": c, "r": r, "rg": rg, "vol": vol, "atr": atr,
+         "roll": np.array(rolls.mask(market, keys) if market else [False] * len(keys), bool),
          "years": np.array([int(k[:4]) for k in keys])}
     return F, S
 
@@ -468,6 +470,7 @@ def direction_tests(F, S, signals):
     c, years = S["c"], S["years"]
     n = len(c)
     y = np.r_[(c[1:] > c[:-1]).astype(float), np.nan]
+    y[np.r_[S["roll"][1:], False]] = np.nan          # contract switch: the move from the last close isn't real (rolls.py)
     known = ~np.isnan(y)
     out = {}
     for k in signals:
@@ -540,6 +543,7 @@ def levels(F, S):
     out = {}
     for side, key in (("high", "dist_h"), ("low", "dist_l")):
         y = np.r_[((h[1:] > h[:-1]) if side == "high" else (l[1:] < l[:-1])).astype(float), np.nan]
+        y[np.r_[S["roll"][1:], False]] = np.nan      # contract switch (rolls.py)
         x = F[key]
         m = np.isfinite(y) & np.isfinite(x)
         w = Q.walk_forward_logit(years[m], x[m][:, None], y[m], first=FIRST_TEST_YEAR)
@@ -596,6 +600,7 @@ def touch_ladder(S, wf, sigma_today):
     n = len(c)
     idx = wf["idx"].astype(int)
     keep = (idx + 1 < n) & np.isfinite(wf["c"])
+    keep &= ~S["roll"][np.minimum(idx + 1, n - 1)]   # contract switch (rolls.py)
     idx = idx[keep]
     sig = wf["c"][keep] * np.exp(wf["pred"][keep])
     yrs = years[idx]
@@ -683,7 +688,7 @@ def sessions(m):
 
 def prepare(m, rows, series, tiers, fomc):
     group, iv_sid = MARKETS[m][7], MARKETS[m][5]
-    F, S = build(rows, tiers, fomc)
+    F, S = build(rows, tiers, fomc, m)
     cross_features(F, S, series, iv_sid)
     sigs = list(PRICE_SIGNALS) + [k for k in CROSS_FOR[group] if k in F and np.isfinite(F[k]).sum() > 1500]
     return {"F": F, "S": S, "sigs": sigs, "T": direction_tests(F, S, sigs), "rows": rows}
@@ -851,6 +856,9 @@ def score_log(rows_by, entries):
             continue
         a, b = days[e["candle"]], days[nxt]
         up = 1 if b[3] > a[3] else 0
+        import rolls
+        if rolls.is_roll(e["market"], nxt):
+            e["roll"] = True                             # contract switch day: kept, not counted (rolls.py)
         e.update({"day": nxt, "scored": 1, "up": up, "brier": round((e["p_up"] - up) ** 2, 4),
                   "highTaken": int(b[1] > a[1]), "lowTaken": int(b[2] < a[2]),
                   "inRange": int(e["range_lo"] <= b[1] - b[2] <= e["range_hi"])})
@@ -864,7 +872,7 @@ def score_log(rows_by, entries):
 def summary(entries):
     voided = sum(1 for e in entries if e.get("void"))
     late = sum(1 for e in entries if e.get("eligible") is False and not e.get("void"))
-    done = [e for e in entries if e.get("scored") and not e.get("void") and e.get("eligible") is True and e.get("publication_verified") is True]
+    done = [e for e in entries if e.get("scored") and not e.get("void") and not e.get("roll") and e.get("eligible") is True and e.get("publication_verified") is True]
     calls = [e for e in done if "hit" in e and e.get("tier") == "tested"]
     out = {"days": len(done), "calls": len(calls), "hits": sum(e["hit"] for e in calls),
            "inRange": sum(e["inRange"] for e in done), "recent": done[-10:][::-1],

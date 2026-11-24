@@ -1,5 +1,18 @@
 # Changelog
 
+## 2026-11-24: contract roll days
+
+- `engine/rolls.py`: the days Yahoo's continuous futures switch contract, measured from 2016-2026 candles (average
+  open gap on the switch day: NQ +0.41%, t 4.1; gold +0.42%, t 5.6; euro +0.21%, t 6.9). NQ/ES/YM/RTY switch on the
+  first session after the 3rd Friday of Mar/Jun/Sep/Dec, gold on the first session of even months, the euro on the
+  Monday of expiry week. Crude and bitcoin have no reliable switch day in free data and are not flagged.
+- On a switch day the move from the previous close is partly the price gap between two contracts, so the research
+  leaves that day's outcome out of the direction tests, the level-touch model and the touch ladder. Ranges are kept
+  (one contract). Live forecasts for a switch day are still logged and shown but marked `roll` and left out of the
+  scorecard; the next is NQ on Monday 21 Dec 2026.
+- Effect: level-touch skill slightly higher everywhere (NQ high 0.266 -> 0.268, low 0.211 -> 0.216; ES high
+  0.235 -> 0.245); range model unchanged (NQ 18.8%). The frozen discovery batches keep their registered data.
+
 ## 2026-11-24: exchange session engine
 
 - `engine/exchange.py` (shared with Iron Brain): CME trading dates, holidays (full closures, early halts, early
