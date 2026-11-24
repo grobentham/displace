@@ -82,6 +82,8 @@ CONTRACTS = {
     "bars/nq-1h.json": {"rows": list, "market": str, "interval": str},
     "bars/nq-5m.json": {"rows": list, "market": str, "interval": str},
     "research/discovery.json": {"version": int, "batches": list, "plan_hash": str},
+    "research/discovery-v2.json": {"version": int, "batches": list, "plan_hash": str},
+    "macro/current.json": {"version": int, "asof": str, "indices": list, "policy": str},
     "direction/current.json": {"assets": dict, "groups": dict, "events": dict, "live": dict, "scenarios": dict},
     "direction/log.json": {"rows": list},
     "calendar/events.json": {"updated": str, "through": str, "events": list},
@@ -111,6 +113,16 @@ def strict_validate(data=DATA):
                 failures[rel] = ["missing or wrong type: " + ", ".join(bad)]
             elif rel == "engine/quality.json" and obj["critical"]:
                 failures[rel] = ["critical source quality failure"]
+            elif rel == "macro/current.json":
+                ids = [i["id"] for i in obj["indices"]]
+                if len(ids) != 6 or len(set(ids)) != 6 or any(
+                    (i["score"] is not None and not (type(i["score"]) in (int,float) and 0 <= i["score"] <= 100))
+                    or (i["status"] == "available") != (i["score"] is not None)
+                    for i in obj["indices"]):
+                    failures[rel] = ["invalid index score or state"]
+            elif rel == "research/discovery-v2.json":
+                if any(len(b["results"]) != 192 or any(r["promoted"] is not False for r in b["results"]) for b in obj["batches"]):
+                    failures[rel] = ["incomplete experiment family or unapproved promotion"]
             elif rel == "direction/current.json":
                 import predict
                 problems = predict.check(obj)
