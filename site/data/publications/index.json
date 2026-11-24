@@ -2,6 +2,14 @@
   "version": 1,
   "reports": [
     {
+      "id": "daily-2026-11-24",
+      "kind": "daily",
+      "title": "Daily financial intelligence — 2026-11-24",
+      "generated_at": "2026-11-24T12:03:22+00:00",
+      "sha256": "0520ee8839855032e545bd4dc24d81bbdfb8ba61eabc9cab008964e1677abc22",
+      "path": "reports/daily-2026-11-24.json"
+    },
+    {
       "id": "weekly-2026-11-16",
       "kind": "weekly",
       "title": "Weekly accountability review — 2026-11-16",
