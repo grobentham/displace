@@ -53,6 +53,7 @@ jobs:
           python engine/test_bias.py
           python engine/test_gate.py
           python engine/test_discovery_v3.py
+          python engine/test_exchange.py
           python engine/test_discovery.py
           python engine/test_intelligence.py
           python engine/test_signals.py
