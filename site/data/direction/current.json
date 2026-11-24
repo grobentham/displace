@@ -1,5 +1,5 @@
 {
- "asof": "2026-11-24T11:14-05:00",
+ "asof": "2026-11-24T12:00-05:00",
  "version": 4,
  "assets": {
   "gold": "Gold, close",
@@ -3646,8 +3646,7 @@
     },
     "gold2h": {
      "none": true,
-     "n": 1,
-     "why": "too few tested calls"
+     "why": "the first 2h have passed"
     },
     "nq15m": {
      "none": true,
@@ -3655,8 +3654,7 @@
     },
     "nq2h": {
      "none": true,
-     "n": 15,
-     "why": "too few tested calls"
+     "why": "the first 2h have passed"
     }
    },
    "hist": {
@@ -5682,6 +5680,6 @@
  "log": [
   "tv: 3 month(s) refreshed, 3593 releases with a consensus surprise",
   "markets: gold, nq, usd, y2, gold15m, gold2h, nq15m, nq2h",
-  "model: fit in 3s; proven: labor:y2"
+  "model: fit in 2s; proven: labor:y2"
  ]
 }

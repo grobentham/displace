@@ -1,7 +1,7 @@
 {
   "version": 1,
   "plan_hash": "0df5c39c6368d3795ef4e33ce5579e538d37614c520ed17d5c883231cfa8a93d",
-  "asof": "2026-11-24T16:14:23+00:00",
+  "asof": "2026-11-24T17:00:19+00:00",
   "macro_asof": "2026-11-24",
   "policy": "Descriptive monitoring only, not a forecast. Trigger on a fresh available macro index reaching a specified score; clear only after the separate exit threshold. First observation already beyond the threshold is an initial detection, not evidence of a new crossing. Missing or stale input suspends evaluation without clearing an active condition. All transitions recorded at observation time in UTC; current-vintage revisions can alter scores. Thresholds are policy choices, not empirically validated probabilities.",
   "states": [
