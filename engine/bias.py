@@ -34,6 +34,7 @@ from zoneinfo import ZoneInfo
 
 import numpy as np
 
+import exchange as X
 import quant as Q
 import publication as PUB
 
@@ -228,7 +229,6 @@ def merge_holidays(rows):
     for those days: that trading belongs to the next one. So each such candle is folded into the next trading date
     (its open, the wider high and low, the next day's close) instead of standing as a short day of its own; a holiday
     candle with no following candle is dropped. engine/exchange.py decides which dates trade."""
-    import exchange as X
     out, carry = [], None
     for d, v in rows:
         if not X.is_trade_date(d):
@@ -751,7 +751,6 @@ def window_start(day_iso, market="nq"):
     """When the futures session a forecast is for opens (engine/exchange.py: 18:00 New York after the previous
     trading date, so Friday 27 Nov 2026 opens Wednesday 25 Nov; Monday opens Sunday). A date with no session
     (a holiday) falls back to 18:00 the evening before, and problems() voids such a forecast anyway."""
-    import exchange as X
     s = X.session(market if market in X.GROUP else "nq", day_iso)
     if s:
         return s["open"]
@@ -762,7 +761,6 @@ def window_start(day_iso, market="nq"):
 def target_session(candle_iso):
     """The trading date a forecast made from this candle is for: the next CME trading date (engine/exchange.py),
     which skips exchange holidays. The registered historical features keep next_session (weekdays) unchanged."""
-    import exchange as X
     return X.next_trade_date(candle_iso).isoformat()
 
 
@@ -780,7 +778,6 @@ def problems(e):
     if e.get("up1") is not None and e.get("dn1") is not None and not e["dn1"] < e["up1"]:
         out.append("touch levels are on the wrong side")
     if e.get("for"):
-        import exchange as X
         try:
             if not X.is_trade_date(e["for"]):
                 out.append(f"target date {e['for']} has no CME session ({X.day_status(e['for'])[1] or 'weekend'})")
@@ -972,17 +969,23 @@ def run(now=None, fetch=download, fetch_series=fred_download, markets=None):
             continue
         r["tests"] = {"signals": n_sig, "calendar": len(EVENTS) * len(ctxs)}
         r["dataNotes"] = notes.get(m, [])[-3:]
+        target = target_session(r["candle"])
+        session = X.session(m, target)
+        if session:
+            r["session"] = {"date": target, "open": session["open"].isoformat(),
+                            "close": session["close"].isoformat() if session["close"] else None,
+                            "halts": [halt["halt_at"] for halt in session["includes_halt_days"]]}
         out[m] = r
         if not any(e["market"] == m and e["candle"] == r["candle"] for e in entries):
             t1 = next((t for t in r["touch"] if t["k"] == 1.0), None)
-            entries.append({"market": m, "candle": r["candle"], "for": target_session(r["candle"]), "bias": r["bias"],
+            entries.append({"market": m, "candle": r["candle"], "for": target, "bias": r["bias"],
                             "p_up": r["p_up"], "base_up": r["base_up"], "tier": r["tier"],
                             "p_high": r["takes"]["high"]["p"], "p_low": r["takes"]["low"]["p"],
                             "range_lo": r["range"]["lo"], "range_hi": r["range"]["hi"],
                             "up1": t1["up"] if t1 else None, "dn1": t1["dn"] if t1 else None,
                             "p_up1": t1["up_p"] if t1 else None, "p_dn1": t1["dn_p"] if t1 else None,
                             "logged": now.isoformat(timespec="minutes"),
-                            "eligible": now < window_start(target_session(r["candle"]), m)})
+                            "eligible": now < window_start(target, m)})
     if not out:
         log("bias: nothing to publish; the last file stays live")
         return 1
