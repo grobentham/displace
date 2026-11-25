@@ -47,7 +47,7 @@ async function checkOutlook(page, width) {
  await page.waitForFunction(()=>document.querySelector('#mc-pts').textContent==='776');
  assert.equal(await outlook.isVisible(),false,'Iron Brain has its own page');
  assert.equal(ironRequests,0,'homepage does not fetch the Iron Brain feed');
- const biasTab=page.locator('#navlinks').getByRole('link',{name:'Bias',exact:true});
+ const biasTab=page.locator('#navlinks a[href="#intraday-bias"]');
  if (!await biasTab.isVisible()) await page.getByRole('button',{name:'Open menu'}).click();
  await biasTab.click();
  await page.waitForURL('**/index.html#intraday-bias');
