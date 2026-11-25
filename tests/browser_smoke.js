@@ -66,7 +66,7 @@ async function checkOutlook(page, width) {
  assert.match(await page.title(),/^Bias · Displace$/);
  await page.getByRole('link',{name:'Displace',exact:true}).click();
  await page.waitForURL('**/index.html#top');
- assert.equal(await outlook.isVisible(),false);
+ await outlook.waitFor({state:'hidden'});
  await page.waitForFunction(()=>document.querySelector('#mc-pts').textContent==='776');
  await page.waitForFunction(()=>document.querySelector('#mc-evidence').textContent==='Live scoring pending');
  assert.match(await page.locator('#mc-window').innerText(),/Nov 24, 18:00.*Nov 25, 17:00 New York/);
