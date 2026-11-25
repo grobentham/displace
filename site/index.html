@@ -1748,7 +1748,7 @@ svg.cd line.wick{animation:fadein .5s ease-out both}
 .ms-grid small{display:block;color:var(--muted);font-size:.8rem}.ms-grid b{font-size:1.5rem;letter-spacing:-.03em;font-variant-numeric:tabular-nums}
 .ms-note{color:var(--muted);font-size:.82rem;margin-top:12px}
 </style>
-<link rel="canonical" href="https://grobentham.github.io/displace/"><link rel="stylesheet" href="assets/morning.css?v=20261125d">
+<link rel="canonical" href="https://grobentham.github.io/displace/"><link rel="stylesheet" href="assets/morning.css?v=20261125e">
 </head>
 <body>
 
@@ -1757,6 +1757,7 @@ svg.cd line.wick{animation:fadein .5s ease-out both}
     <a class="brand" href="#top"><svg width="26" height="26" viewBox="0 0 26 26" aria-hidden="true"><defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2997ff"/><stop offset=".6" stop-color="#30d158"/><stop offset="1" stop-color="#ff9f0a"/></linearGradient></defs><rect width="26" height="26" rx="7" fill="url(#lg)"/><rect x="5" y="13" width="4" height="7" rx="1" fill="#fff" opacity=".75"/><rect x="11" y="6" width="4" height="14" rx="1" fill="#fff"/><rect x="17" y="4" width="4" height="6" rx="1" fill="#fff" opacity=".75"/><rect x="9.5" y="10" width="7" height="3" rx="1" fill="#fff" opacity=".35"/></svg>Displace</a>
     <ul id="navlinks">
       <li><a href="#bias" data-p="bias">Today</a></li>
+      <li><a href="#intraday-bias" data-p="intraday-bias">Bias</a></li>
       <li><a href="#calendar" data-p="calendar">News</a></li>
       <li><a href="#tools" data-p="tools">Tools</a></li>
       <li><a href="research-hub.html">Research</a></li>
@@ -1773,18 +1774,6 @@ svg.cd line.wick{animation:fadein .5s ease-out both}
 <!-- HERO -->
 <section class="hero dark mc" id="hero">
   <div class="wide" id="mc">
-    <section class="mc-card ib-outlook" aria-labelledby="ib-outlook-title">
-      <div class="ib-outlook-top">
-        <div><h2 id="ib-outlook-title">Iron Brain market outlook</h2><p id="ib-outlook-stamp" class="mc-muted">Loading delayed market data…</p></div>
-        <div class="mc-tabs ib-outlook-tabs" role="group" aria-label="Iron Brain market">
-          <button type="button" data-ib-market="nq" aria-pressed="true">NQ</button>
-          <button type="button" data-ib-market="es" aria-pressed="false">ES</button>
-          <button type="button" data-ib-market="xauusd" aria-pressed="false">XAUUSD</button>
-        </div>
-      </div>
-      <div id="ib-outlook-body" aria-live="polite"></div>
-      <footer class="ib-outlook-footer"><span>Intraday market conditions · delayed data</span><a href="/iron-brain/">Open Iron Brain</a></footer>
-    </section>
     <div class="mc-top">
       <div><p class="mc-for" id="mc-for">Today's session</p><h1 class="mc-q">How far could it move today?</h1></div>
       <div class="mc-tabs" id="mc-tabs" role="tablist" aria-label="Market"></div>
@@ -1854,6 +1843,24 @@ svg.cd line.wick{animation:fadein .5s ease-out both}
       </form>
     </section>
     <p class="mc-foot">Up or down? Our tests find no reliable daily direction edge, so we don't call one. <a href="research-hub.html">Why</a> · <a href="#bias">All 8 markets</a> · <span id="mc-made"></span></p>
+  </div>
+</section>
+
+<!-- IRON BRAIN BIAS -->
+<section class="iron-bias-page dark mc" id="intraday-bias" aria-labelledby="ib-outlook-title">
+  <div class="wide">
+    <section class="mc-card ib-outlook" aria-labelledby="ib-outlook-title">
+      <div class="ib-outlook-top">
+        <div><h1 id="ib-outlook-title">Iron Brain market outlook</h1><p id="ib-outlook-stamp" class="mc-muted">Loading delayed market data…</p></div>
+        <div class="mc-tabs ib-outlook-tabs" role="group" aria-label="Iron Brain market">
+          <button type="button" data-ib-market="nq" aria-pressed="true">NQ</button>
+          <button type="button" data-ib-market="es" aria-pressed="false">ES</button>
+          <button type="button" data-ib-market="xauusd" aria-pressed="false">XAUUSD</button>
+        </div>
+      </div>
+      <div id="ib-outlook-body" aria-live="polite"></div>
+      <footer class="ib-outlook-footer"><span>Intraday market conditions · delayed data</span><a href="/iron-brain/">Open Iron Brain</a></footer>
+    </section>
   </div>
 </section>
 
@@ -2467,7 +2474,7 @@ svg.cd line.wick{animation:fadein .5s ease-out both}
       <p>This site is educational and is not financial advice. Nothing here is a recommendation to buy or sell any instrument. Past statistics do not guarantee future results. Leveraged products such as futures and forex can lose more than your deposit.</p>
     </div>
     <div class="fcols">
-      <div><h5>Research</h5><ul><li><a href="#bias">Today</a></li><li><a href="#calendar">Economic calendar</a></li><li><a href="#daily-brief">Daily brief</a></li><li><a href="research-hub.html">Research</a></li><li><a href="open.html">Accountability</a></li><li><a href="#method">Method</a></li></ul></div>
+      <div><h5>Research</h5><ul><li><a href="#bias">Today</a></li><li><a href="#intraday-bias">Bias</a></li><li><a href="#calendar">Economic calendar</a></li><li><a href="#daily-brief">Daily brief</a></li><li><a href="research-hub.html">Research</a></li><li><a href="open.html">Accountability</a></li><li><a href="#method">Method</a></li></ul></div>
       <div><h5>Tools</h5><ul><li><a href="#backtest">MNQ backtester</a></li><li><a href="#calc">Trade planner</a></li><li><a href="#prop">Prop firm tracker</a></li><li><a href="#sim">Edge simulator</a></li><li><a href="#recovery">Drawdown recovery</a></li></ul></div>
       <div><h5>You</h5><ul><li><a href="#journal">Journal</a></li><li><a href="#mind">Mindset</a></li><li><a href="#pro">Pro</a></li></ul></div>
       <div><h5>Displace</h5><ul><li><a href="#join">Free, no sign-up</a></li><li><a href="#faq">FAQ</a></li><li><a href="https://github.com/grobentham/displace">Source</a></li></ul></div>
@@ -3513,6 +3520,7 @@ window.addEventListener("displace:route",function(){if(window.__page==="tools")u
 var PAGES=[
  {id:"home",t:"Displace · Quant research desk",secs:["hero","pillars","join","faq"]},
  {id:"bias",t:"Daily bias",secs:["bias"],next:["calendar","Up next","News","Every US release with the consensus, the market reaction model and the Fed tracker."]},
+ {id:"intraday-bias",t:"Bias",secs:["intraday-bias"]},
  {id:"calendar",t:"News · Economic calendar",secs:["calendar"]},
  {id:"tools",t:"Tools",secs:["tools"],next:["method","Up next","Method","How every number on Displace is tested before it is shown."]},
  {id:"calc",t:"Trade planner",tool:1,secs:["tp-calc"]},
@@ -3542,7 +3550,7 @@ function route(){
   var h=decodeURIComponent((location.hash||"").slice(1)),r=pageOf(h),pg=PAGES.filter(function(x){return x.id===r.p;})[0];
   if(cur!==r.p){cur=r.p;Object.keys(els).forEach(function(k){els[k].classList.toggle("on",k===cur);});
     document.title=cur==="home"?"Displace · Markets, measured":pg.t+(pg.tool?" · Displace Tools":" · Displace");window.__page=cur;window.__tool=!!pg.tool||cur==="tools";
-    links.forEach(function(a){var p=a.getAttribute("data-p");a.classList.toggle("on",p===cur||(p==="tools"&&(!!pg.tool||cur==="journal"||cur==="mind"||cur==="backtest"))||(p==="learn"&&!!pg.st&&cur!=="models"));});
+    links.forEach(function(a){var p=a.getAttribute("data-p");a.classList.toggle("on",p===cur||(p==="tools"&&(!!pg.tool||cur==="journal"||cur==="mind"||cur==="backtest"))||(p==="learn"&&!!pg.st&&cur!=="models"));if(p===cur)a.setAttribute("aria-current","page");else a.removeAttribute("aria-current");});
     var on=els[cur].querySelector(".stepper a.on");if(on){var ol=on.closest("ol");ol.scrollLeft=on.offsetLeft-ol.offsetWidth/2+on.offsetWidth/2;}
     window.dispatchEvent(new Event("resize"));}
   links.forEach(function(a){if(a.getAttribute("data-p")==="learn")a.classList.toggle("on",a.classList.contains("on")||h==="path");});
@@ -3725,6 +3733,7 @@ setInterval(function(){var n=window.__nextRel,c=$i("hx-cd");if(!c||!n)return;$i(
   c.textContent=s?Math.floor(s/86400)+"d "+p2(Math.floor(s%86400/3600))+"h "+p2(Math.floor(s%3600/60))+"m "+p2(s%60)+"s":"Out now";},1000);
 var box=$i("srch"),q=$i("srch-q"),r=$i("srch-r");if(!box)return;
 var IX=[["Home","Markets, measured","hero"],["Daily bias","NQ and gold probability of an up day, expected range, yesterday's high and low","bias"],
+ ["Bias","Iron Brain intraday outlook for NQ, ES and XAUUSD","intraday-bias"],
  ["News","Economic calendar, CPI, NFP, FOMC, surprises, market reactions","calendar"],["Daily brief","NQ rates outlook, earnings, economic releases","daily-brief"],["Method","Testing, walk-forward, Brier score, base rate, data sources","method"],
  ["Tools","Every free tool","tools"],["MNQ Replay backtester","Bar-by-bar replay, backtest, real NQ bars","backtest"],["Trade planner","Position size, risk, reward calculator","calc"],["Prop firm tracker","Evaluation, drawdown, target","prop"],["Edge simulator","Win rate, streaks, expectancy","sim"],["Drawdown recovery","Gain needed to recover a loss","recovery"],
  ["Journal","Trade journal, stats","journal"],["Mindset","Trading psychology, wellbeing, stress","mind"],["Calm mode","Breathing, relax, full screen","mind","md-calm-open"],["Peaceful sounds","Rain, waves, birdsong, sleep timer","mind","md-s-sound"],["One-minute check-in","Should I trade today","mind","md-s-check"],["Breathing reset","Box breathing, 4-7-8","mind","md-s-check"],["Decompress","Screen break, grounding, stretch","mind","md-s-relief"],["Mood log and debrief","Reflect, wind-down, my rules","mind","md-s-reflect"],["Trading traps","FOMO, revenge trading, tilt","mind","md-s-traps"],
@@ -4077,6 +4086,6 @@ Promise.all([get("macro/current"),get("signals/current").catch(function(){return
 </script>
 <script src="assets/session-planner.js?v=20261125c" defer></script>
 <script src="assets/morning.js?v=20261125c" defer></script>
-<script src="assets/iron-outlook.js?v=20261125d" defer></script>
+<script src="assets/iron-outlook.js?v=20261125e" defer></script>
 </body>
 </html>
