@@ -57,9 +57,17 @@
     }
     const age = Math.max(0, Math.floor((Date.now() - Date.parse(market.time)) / 60000));
     const barAge = (Date.now() - Date.parse(market.barTime)) / 60000;
-    const stale = age > 20 || barAge > 35;
-    stamp.textContent = sources[selected] + " · Prices as of " + local.format(new Date(market.barTime))
+    const sampledGold = selected === "xauusd" && market.source === "xaus";
+    const stale = age > 20 || barAge > (sampledGold ? 15 : 35);
+    const details = " · Prices as of " + local.format(new Date(market.barTime))
       + (stale || failed ? " · Last available snapshot" : " · Updated " + (age < 1 ? "just now" : age + " min ago"));
+    if (sampledGold) {
+      const attribution = node("a", "", "XAUS indicative spot");
+      attribution.href = "https://xaus.com/api/";
+      stamp.replaceChildren(attribution, document.createTextNode(details));
+    } else {
+      stamp.textContent = sources[selected] + details;
+    }
 
     if (labels[market.lean]) {
       const banner = node("p", "ib-outlook-lean");
