@@ -94,3 +94,25 @@
 .mnq-brief .mnq-brief-button{display:inline-block;color:#fff;background:#0071e3;text-decoration:none;font-weight:600;padding:10px 18px;border-radius:980px}
 .mnq-brief-button:hover{text-decoration:underline}
 @media (max-width:480px){.mnq-brief .wide{padding:0 16px}.mnq-brief-time{flex-basis:6.25rem}}
+
+/* Delayed Iron Brain outlook, above the session forecast and private planner. */
+.ib-outlook{margin:0 0 32px;border:1px solid #3d3d44;background:#17171b}
+.ib-outlook-top{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;flex-wrap:wrap}
+.ib-outlook-top h2{margin:0;font-size:1.25rem}
+.ib-outlook-top p{margin:4px 0 0}
+.ib-outlook-tabs [aria-pressed="true"]{background:#f5f5f7;color:#141417}
+.ib-outlook-heading{margin:18px 0 8px;font-size:1rem;font-weight:650}
+.ib-outlook-lean{margin:0 0 12px;padding:10px 12px;border-radius:9px;background:#303036;color:#ededf0}
+.ib-outlook-lean[data-lean="bullish"]{background:#173127;color:#a0f0bf}
+.ib-outlook-lean[data-lean="bearish"]{background:#402426;color:#ffc1bc}
+.ib-outlook-lean strong{margin-right:8px}
+.ib-outlook-phase{margin:0 0 6px;color:#d1d1d6}
+.ib-outlook-lines{margin:0;padding-left:1.15em;display:grid;gap:4px}
+.ib-outlook-levels{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin-top:14px;max-width:44rem}
+.ib-outlook-levels h4{margin:0 0 4px;font-size:.82rem;color:#a1a1a6}
+.ib-outlook-levels dl{margin:0}
+.ib-outlook-levels dl div{display:flex;justify-content:space-between;gap:8px;padding:5px 0;border-top:1px solid #37373c;font-size:.88rem}
+.ib-outlook-levels dd{margin:0;font-weight:650;white-space:nowrap;font-variant-numeric:tabular-nums}
+.mc .ib-outlook-footer{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-top:13px;padding:10px 0 0;border-top:1px solid #37373c;background:none;color:#a1a1a6;font-size:.83rem}
+.ib-outlook-message{margin:16px 0;color:#d1d1d6}
+@media(max-width:480px){.ib-outlook-levels{grid-template-columns:1fr;gap:8px}.ib-outlook-tabs button{padding-inline:13px}}
