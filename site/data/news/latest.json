@@ -1,5 +1,5 @@
 {
- "checkedAt": "2026-11-25T13:55:03+00:00",
+ "checkedAt": "2026-11-25T14:24:52+00:00",
  "sources": {
   "Federal Reserve": true,
   "European Central Bank": true,
@@ -8,21 +8,30 @@
  "sourceHealth": {
   "Federal Reserve": {
    "state": "available",
-   "checkedAt": "2026-11-25T13:55:03+00:00",
-   "lastSuccessAt": "2026-11-25T13:55:03+00:00"
+   "checkedAt": "2026-11-25T14:24:52+00:00",
+   "lastSuccessAt": "2026-11-25T14:24:52+00:00"
   },
   "European Central Bank": {
    "state": "available",
-   "checkedAt": "2026-11-25T13:55:03+00:00",
-   "lastSuccessAt": "2026-11-25T13:55:03+00:00"
+   "checkedAt": "2026-11-25T14:24:52+00:00",
+   "lastSuccessAt": "2026-11-25T14:24:52+00:00"
   },
   "Bank of England": {
    "state": "available",
-   "checkedAt": "2026-11-25T13:55:03+00:00",
-   "lastSuccessAt": "2026-11-25T13:55:03+00:00"
+   "checkedAt": "2026-11-25T14:24:52+00:00",
+   "lastSuccessAt": "2026-11-25T14:24:52+00:00"
   }
  },
  "items": [
+  {
+   "id": "20261125-gdp-second-estimate-q3",
+   "title": "GDP, second estimate (Q3)",
+   "source": "BEA",
+   "url": "https://alfred.stlouisfed.org/series?seid=A191RL1Q225SBEA&vintage_date=2026-11-25",
+   "published": "2026-11-25T13:30:00+00:00",
+   "analysis": "GDP came in at 4.3% against a 3.5% forecast, above expectations. The previous reading was 3.4%. The real GDP, annualized reading was the highest since Q3 2023.",
+   "context": "Headline U.S. GDP growth is annualized. Subsequent estimates add data and may revise the same quarter."
+  },
   {
    "id": "20261125-initial-jobless-claims-moved-to-wednesda",
    "title": "Initial jobless claims (moved to Wednesday for Thanksgiving)",

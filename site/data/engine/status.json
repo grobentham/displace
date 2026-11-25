@@ -1,53 +1,53 @@
 {
- "lastRun": "2026-11-25T08:54-05:00",
+ "lastRun": "2026-11-25T09:23-05:00",
  "source": "public FRED and agency data",
- "fredCalls": 93,
+ "fredCalls": 81,
  "fred": true,
  "sources": {
   "fred": {
    "state": "available",
-   "checkedAt": "2026-11-25T08:54-05:00",
-   "lastSuccessAt": "2026-11-25T08:54-05:00"
+   "checkedAt": "2026-11-25T09:23-05:00",
+   "lastSuccessAt": "2026-11-25T09:23-05:00"
   },
   "alfred": {
    "state": "available",
-   "checkedAt": "2026-11-25T08:54-05:00",
-   "lastSuccessAt": "2026-11-25T08:54-05:00"
+   "checkedAt": "2026-11-25T09:23-05:00",
+   "lastSuccessAt": "2026-11-25T09:23-05:00"
   },
   "bls": {
    "state": "available",
-   "checkedAt": "2026-11-25T08:54-05:00",
-   "lastSuccessAt": "2026-11-25T08:54-05:00"
+   "checkedAt": "2026-11-25T09:23-05:00",
+   "lastSuccessAt": "2026-11-25T09:23-05:00"
   },
   "bea": {
    "state": "partial",
-   "checkedAt": "2026-11-25T08:54-05:00",
-   "lastSuccessAt": "2026-11-25T08:54-05:00"
+   "checkedAt": "2026-11-25T09:23-05:00",
+   "lastSuccessAt": "2026-11-25T09:23-05:00"
   },
   "census": {
    "state": "available",
-   "checkedAt": "2026-11-25T08:54-05:00",
-   "lastSuccessAt": "2026-11-25T08:54-05:00"
+   "checkedAt": "2026-11-25T09:23-05:00",
+   "lastSuccessAt": "2026-11-25T09:23-05:00"
   },
   "treasury": {
    "state": "available",
-   "checkedAt": "2026-11-25T08:54-05:00",
-   "lastSuccessAt": "2026-11-25T08:54-05:00"
+   "checkedAt": "2026-11-25T09:23-05:00",
+   "lastSuccessAt": "2026-11-25T09:23-05:00"
   },
   "nyFed": {
    "state": "available",
-   "checkedAt": "2026-11-25T08:54-05:00",
-   "lastSuccessAt": "2026-11-25T08:54-05:00"
+   "checkedAt": "2026-11-25T09:23-05:00",
+   "lastSuccessAt": "2026-11-25T09:23-05:00"
   },
   "fedStatements": {
    "state": "available",
-   "checkedAt": "2026-11-25T08:54-05:00",
-   "lastSuccessAt": "2026-11-25T08:54-05:00"
+   "checkedAt": "2026-11-25T09:23-05:00",
+   "lastSuccessAt": "2026-11-25T09:23-05:00"
   },
   "nasdaqCalendar": {
    "state": "available",
-   "checkedAt": "2026-11-25T08:54-05:00",
-   "lastSuccessAt": "2026-11-25T08:54-05:00"
+   "checkedAt": "2026-11-25T09:23-05:00",
+   "lastSuccessAt": "2026-11-25T09:23-05:00"
   }
  },
  "freshness": {
@@ -59,12 +59,12 @@
   "marketDates": {
    "y2": "2026-11-24",
    "y10": "2026-11-24",
-   "effr": "2026-11-23"
+   "effr": "2026-11-24"
   }
  },
  "quality": {
-  "passed": 43,
-  "total": 44,
+  "passed": 28,
+  "total": 29,
   "held": 0,
   "rejected": 0,
   "critical": 0
@@ -75,11 +75,9 @@
  "upcoming": 81,
  "warnings": [],
  "log": [
-  "engine run 2026-11-25T08:54-05:00 using public FRED and agency data",
-  "actual 20261125-durable-goods-orders-oct 0.2%",
-  "actual 20261125-initial-jobless-claims-moved-to-wednesda 189K",
-  "actual 20261125-pce-inflation-personal-income-and-outlay 0.3%",
+  "engine run 2026-11-25T09:23-05:00 using public FRED and agency data",
+  "actual 20261125-gdp-second-estimate-q3 4.3%",
   "calendar saved",
-  "quality: 43/44 checks passed, 0 held, 0 rejected"
+  "quality: 28/29 checks passed, 0 held, 0 rejected"
  ]
 }

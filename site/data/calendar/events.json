@@ -316,11 +316,22 @@
    "components": [
     {
      "label": "Real GDP, annualized",
+     "actual": "4.3%",
      "previous": "3.4%"
     }
    ],
    "forecast": "3.5%",
-   "fsrc": "ForexFactory consensus"
+   "fsrc": "ForexFactory consensus",
+   "actual": "4.3%",
+   "provenance": {
+    "via": "ALFRED",
+    "series": "A191RL1Q225SBEA",
+    "asof": "2026-11-25"
+   },
+   "facts": [
+    "The real GDP, annualized reading was the highest since Q3 2023."
+   ],
+   "recap": "GDP came in at 4.3% against a 3.5% forecast, above expectations. The previous reading was 3.4%. The real GDP, annualized reading was the highest since Q3 2023."
   },
   {
    "date": "2026-11-25",
@@ -558,7 +569,21 @@
    "note": "Weekly initial claims for unemployment insurance.",
    "id": "20261203-initial-jobless-claims",
    "metric": "initial claims",
-   "previous": "189K"
+   "previous": "189K",
+   "components": [
+    {
+     "label": "Initial claims",
+     "previous": "189K"
+    },
+    {
+     "label": "4-week average",
+     "previous": "196K"
+    },
+    {
+     "label": "Continuing claims",
+     "previous": "1.70M"
+    }
+   ]
   },
   {
    "date": "2026-12-03",
