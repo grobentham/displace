@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "asof": "2026-11-25T22:02:27.002305+00:00",
+  "asof": "2026-11-25T22:25:36.864940+00:00",
   "plan_hash": "883ea066e20c4960c2c8f5afcace0852441d07e6c1a18d1e0b1c45eba76618cc",
   "markets": {
     "nq": {
@@ -8,15 +8,15 @@
       "n": 1981,
       "sample_n": 3580,
       "since": 2012,
-      "log_mse": 0.18507117508674847,
+      "log_mse": 0.18507117508674845,
       "log_mse_baseline": 0.22199810246626284,
-      "log_mse_skill": 0.16633893249211973,
+      "log_mse_skill": 0.16633893249211984,
       "point_mae": 64.85493033979913,
       "point_mae_baseline": 72.64772777665227,
       "point_mae_skill": 0.10726828870424243,
       "coverage": 0.7576981322564361,
       "coverage_baseline": 0.7375063099444725,
-      "interval_score": 1.5415538043626744,
+      "interval_score": 1.5415538043626746,
       "interval_score_baseline": 1.687081121426788,
       "direction_rolling_skill": -0.002458263917712422,
       "high_bin_skill": 0.2597013603200229,
@@ -75,9 +75,9 @@
       "log_mse": 0.1873956681751741,
       "log_mse_baseline": 0.23123813501273546,
       "log_mse_skill": 0.18959877372798706,
-      "point_mae": 122.98667160823614,
+      "point_mae": 122.98667160823611,
       "point_mae_baseline": 137.12821003797686,
-      "point_mae_skill": 0.10312639846917204,
+      "point_mae_skill": 0.10312639846917226,
       "coverage": 0.7910146390711762,
       "coverage_baseline": 0.7713276123170116,
       "interval_score": 1.5311890596416435,
@@ -112,7 +112,7 @@
       "point_mae_skill": 0.04941962196252936,
       "coverage": 0.8132716049382716,
       "coverage_baseline": 0.8317901234567902,
-      "interval_score": 1.4131479224628003,
+      "interval_score": 1.4131479224628,
       "interval_score_baseline": 1.4699240688465534,
       "direction_rolling_skill": -0.0005625034500913451,
       "high_bin_skill": 0.22908470106955736,
@@ -139,9 +139,9 @@
       "log_mse": 0.32178708076957685,
       "log_mse_baseline": 0.3425430329745927,
       "log_mse_skill": 0.06059370708776135,
-      "point_mae": 14.938225179601256,
+      "point_mae": 14.938225179601261,
       "point_mae_baseline": 15.98935915857752,
-      "point_mae_skill": 0.06573959397318196,
+      "point_mae_skill": 0.06573959397318163,
       "coverage": 0.8817921830314586,
       "coverage_baseline": 0.8589132507149666,
       "interval_score": 2.001888404706367,
@@ -200,12 +200,12 @@
       "n": 1981,
       "sample_n": 3572,
       "since": 2012,
-      "log_mse": 0.16920331255503804,
+      "log_mse": 0.16920331255503807,
       "log_mse_baseline": 0.17514749826013176,
-      "log_mse_skill": 0.03393817076545014,
-      "point_mae": 0.00264759363002143,
+      "log_mse_skill": 0.033938170765449915,
+      "point_mae": 0.0026475936300214306,
       "point_mae_baseline": 0.0026971056142694842,
-      "point_mae_skill": 0.01835745103421338,
+      "point_mae_skill": 0.018357451034213268,
       "coverage": 0.7688036345280161,
       "coverage_baseline": 0.7763755678950025,
       "interval_score": 1.4596670562629759,
@@ -235,12 +235,12 @@
       "log_mse": 0.2784046250827851,
       "log_mse_baseline": 0.32400674601749857,
       "log_mse_skill": 0.14074435639142735,
-      "point_mae": 928.1595865221932,
+      "point_mae": 928.1595865221934,
       "point_mae_baseline": 976.7616583288924,
-      "point_mae_skill": 0.04975837390039528,
+      "point_mae_skill": 0.04975837390039506,
       "coverage": 0.816358024691358,
       "coverage_baseline": 0.8287037037037037,
-      "interval_score": 1.8225747216684938,
+      "interval_score": 1.8225747216684933,
       "interval_score_baseline": 1.9840968112690218,
       "direction_rolling_skill": -0.0024521565418238467,
       "high_bin_skill": 0.1599004131798183,
@@ -272,14 +272,14 @@
         "rate": 0.333,
         "pval": 0.940765380859375,
         "brierSkill": -0.017,
-        "brierSkillBase": -0.0179,
-        "baseBrier": 0.249677,
+        "brierSkillBase": -0.0185,
+        "baseBrier": 0.249518,
         "halves": [
           0.429,
           0.25
         ],
         "recent": 0.333,
-        "tested": 255
+        "tested": 256
       }
     },
     {
@@ -293,14 +293,14 @@
         "rate": 1.0,
         "pval": 0.5,
         "brierSkill": -0.0,
-        "brierSkillBase": -0.0061,
-        "baseBrier": 0.248545,
+        "brierSkillBase": -0.0052,
+        "baseBrier": 0.248747,
         "halves": [
           0,
           1.0
         ],
         "recent": 1.0,
-        "tested": 313
+        "tested": 314
       }
     },
     {
@@ -398,14 +398,14 @@
         "rate": 0.527,
         "pval": 0.283887743837664,
         "brierSkill": -0.0,
-        "brierSkillBase": -0.0003,
-        "baseBrier": 0.250019,
+        "brierSkillBase": -0.0004,
+        "baseBrier": 0.24999,
         "halves": [
           0.587,
           0.467
         ],
         "recent": 0.45,
-        "tested": 1158
+        "tested": 1159
       }
     },
     {
@@ -419,14 +419,14 @@
         "rate": 0.438,
         "pval": 0.7727508544921875,
         "brierSkill": -0.001,
-        "brierSkillBase": -0.0074,
-        "baseBrier": 0.248513,
+        "brierSkillBase": -0.0071,
+        "baseBrier": 0.248563,
         "halves": [
           0.25,
           0.625
         ],
         "recent": 0.438,
-        "tested": 1303
+        "tested": 1304
       }
     },
     {
@@ -524,14 +524,14 @@
         "rate": 0.0,
         "pval": 1.0,
         "brierSkill": -0.001,
-        "brierSkillBase": -0.0015,
-        "baseBrier": 0.249876,
+        "brierSkillBase": -0.0016,
+        "baseBrier": 0.249845,
         "halves": [
           0,
           0.0
         ],
         "recent": 0.0,
-        "tested": 988
+        "tested": 989
       }
     },
     {
@@ -545,14 +545,14 @@
         "rate": 0.53,
         "pval": 0.3561154413186754,
         "brierSkill": -0.002,
-        "brierSkillBase": -0.0213,
-        "baseBrier": 0.245221,
+        "brierSkillBase": -0.0209,
+        "baseBrier": 0.245298,
         "halves": [
           0.636,
           0.424
         ],
         "recent": 0.45,
-        "tested": 1118
+        "tested": 1119
       }
     },
     {
@@ -776,14 +776,14 @@
         "rate": 0.167,
         "pval": 0.984375,
         "brierSkill": -0.009,
-        "brierSkillBase": -0.0009,
-        "baseBrier": 0.252133,
+        "brierSkillBase": -0.0015,
+        "baseBrier": 0.251959,
         "halves": [
           0.0,
           0.333
         ],
         "recent": 0.167,
-        "tested": 111
+        "tested": 112
       }
     },
     {
@@ -796,15 +796,15 @@
         "hits": 0,
         "rate": 0.0,
         "pval": 1.0,
-        "brierSkill": -0.008,
-        "brierSkillBase": -0.022,
-        "baseBrier": 0.246455,
+        "brierSkill": -0.007,
+        "brierSkillBase": -0.0197,
+        "baseBrier": 0.246999,
         "halves": [
           0.0,
           0.0
         ],
         "recent": 0.0,
-        "tested": 127
+        "tested": 128
       }
     },
     {

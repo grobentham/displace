@@ -1,13 +1,13 @@
 {
   "version": 1,
-  "asof": "2026-11-25T22:02:25.673269+00:00",
+  "asof": "2026-11-25T22:25:34.843642+00:00",
   "scope": "Recorded forecasts only; not all possible scheduled forecasts. No receipt before the target start means no prospective credit.",
   "forecast_counts": {
     "void": 2,
     "late": 9,
     "unknown_eligibility": 0,
-    "unverified": 30,
-    "verified_pending": 0,
+    "unverified": 22,
+    "verified_pending": 8,
     "verified_resolved": 7,
     "verified_invalid_outcome": 0,
     "verified_overdue": 0
@@ -1275,9 +1275,12 @@
       "day": null,
       "correction": null,
       "id": "36113db20710a4c35f6b91cbcde4d898d2e91d7c6d0cfd4796e4782720c3bbc1",
-      "status": "unverified",
+      "status": "verified_pending",
       "source": "bias/log.json",
-      "receipt": null,
+      "receipt": {
+        "published_at": "2026-11-25T22:03:32.413393+00:00",
+        "run": "45709217028"
+      },
       "target_start": "2026-11-26T18:00:00-05:00"
     },
     {
@@ -1300,9 +1303,12 @@
       "day": null,
       "correction": null,
       "id": "4a8110113cb5742f2402a14f2072664c8dd46c88f6a756ef50a356e1f8fdbcdf",
-      "status": "unverified",
+      "status": "verified_pending",
       "source": "bias/log.json",
-      "receipt": null,
+      "receipt": {
+        "published_at": "2026-11-25T22:03:32.413393+00:00",
+        "run": "45709217028"
+      },
       "target_start": "2026-11-26T18:00:00-05:00"
     },
     {
@@ -1325,9 +1331,12 @@
       "day": null,
       "correction": null,
       "id": "87f419fc963440e7575012ae5304e823c8b93f1033e9f8034e64f5ad8101fa37",
-      "status": "unverified",
+      "status": "verified_pending",
       "source": "bias/log.json",
-      "receipt": null,
+      "receipt": {
+        "published_at": "2026-11-25T22:03:32.413393+00:00",
+        "run": "45709217028"
+      },
       "target_start": "2026-11-26T18:00:00-05:00"
     },
     {
@@ -1350,9 +1359,12 @@
       "day": null,
       "correction": null,
       "id": "4b64e57d49b0c928aed244c369a5febced4825c5ddd265f96ac15e8014b48a78",
-      "status": "unverified",
+      "status": "verified_pending",
       "source": "bias/log.json",
-      "receipt": null,
+      "receipt": {
+        "published_at": "2026-11-25T22:03:32.413393+00:00",
+        "run": "45709217028"
+      },
       "target_start": "2026-11-26T18:00:00-05:00"
     },
     {
@@ -1375,9 +1387,12 @@
       "day": null,
       "correction": null,
       "id": "b1f207bb7bbdea9032880bfa2cefc499560de8694f099a5d72efad2d18bd290f",
-      "status": "unverified",
+      "status": "verified_pending",
       "source": "bias/log.json",
-      "receipt": null,
+      "receipt": {
+        "published_at": "2026-11-25T22:03:32.413393+00:00",
+        "run": "45709217028"
+      },
       "target_start": "2026-11-26T18:00:00-05:00"
     },
     {
@@ -1400,9 +1415,12 @@
       "day": null,
       "correction": null,
       "id": "e3a3ae0dd8f352d06fe4638e7056f3f3a9e52ac6632e8e111db49c29815fef58",
-      "status": "unverified",
+      "status": "verified_pending",
       "source": "bias/log.json",
-      "receipt": null,
+      "receipt": {
+        "published_at": "2026-11-25T22:03:32.413393+00:00",
+        "run": "45709217028"
+      },
       "target_start": "2026-11-26T18:00:00-05:00"
     },
     {
@@ -1425,9 +1443,12 @@
       "day": null,
       "correction": null,
       "id": "c0ef7a9e5917d639f947e07ba65eb8b47d9a8aefed9b817955f02644bb3cf7e8",
-      "status": "unverified",
+      "status": "verified_pending",
       "source": "bias/log.json",
-      "receipt": null,
+      "receipt": {
+        "published_at": "2026-11-25T22:03:32.413393+00:00",
+        "run": "45709217028"
+      },
       "target_start": "2026-11-26T18:00:00-05:00"
     },
     {
@@ -1450,9 +1471,12 @@
       "day": null,
       "correction": null,
       "id": "244445b769f38abe6ddd69c27053e21bc744b6e9e9bb6765941fa3dcba823fa8",
-      "status": "unverified",
+      "status": "verified_pending",
       "source": "bias/log.json",
-      "receipt": null,
+      "receipt": {
+        "published_at": "2026-11-25T22:03:32.413393+00:00",
+        "run": "45709217028"
+      },
       "target_start": "2026-11-26T18:00:00-05:00"
     }
   ],
@@ -1491,7 +1515,7 @@
   "event_observations": {
     "total": 5,
     "historical_only": 5,
-    "historical_resolved": 3,
+    "historical_resolved": 4,
     "source": "direction/log.json",
     "policy": "Post-release reaction windows are historical observations, excluded from prospective accuracy."
   },

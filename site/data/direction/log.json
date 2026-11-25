@@ -48,7 +48,9 @@
    "tier": "hist",
    "logged": "2026-11-25T08:55-05:00",
    "eligible": false,
-   "evaluation_basis": "release-window historical observation"
+   "evaluation_basis": "release-window historical observation",
+   "move": -0.776,
+   "hit": false
   },
   {
    "id": "20261125-durable-goods-orders-oct",
