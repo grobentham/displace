@@ -38,7 +38,7 @@ async function checkOutlook(page, width) {
  await page.route('https://raw.githubusercontent.com/grobentham/iron-brain/quotes/quotes.json*',route=>{
   ironRequests++;
   return route.fulfill({
-   json:{outlook:{...snapshot('NQ'),markets:{es:snapshot('ES'),xauusd:snapshot('XAUUSD',day+'T09:00:00Z')}}},
+   json:{outlook:{...snapshot('NQ'),markets:{es:snapshot('ES'),xauusd:{...snapshot('XAUUSD',day+'T09:00:00Z'),source:'xaus'}}}},
    headers:{'access-control-allow-origin':'*'}
   });
  });
@@ -59,7 +59,8 @@ async function checkOutlook(page, width) {
  assert.equal(await outlook.locator('.ib-outlook-lines').innerText(),'ES price line');
  await outlook.getByRole('button',{name:'XAUUSD',exact:true}).click();
  assert.equal(await outlook.locator('.ib-outlook-lines').innerText(),'XAUUSD price line');
- assert.match(await outlook.locator('#ib-outlook-stamp').innerText(),/Dukascopy spot gold bid.*Last available snapshot/);
+ assert.match(await outlook.locator('#ib-outlook-stamp').innerText(),/XAUS indicative spot.*Last available snapshot/);
+ assert.equal(await outlook.getByRole('link',{name:'XAUS indicative spot'}).getAttribute('href'),'https://xaus.com/api/');
  await outlook.getByRole('button',{name:'NQ',exact:true}).click();
  await page.reload();
  await outlook.getByText('NQ price line',{exact:true}).waitFor();
