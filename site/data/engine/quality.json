@@ -1,10 +1,17 @@
 {
- "asof": "2026-11-24T23:58-05:00",
- "passed": 28,
+ "asof": "2026-11-25T00:03-05:00",
+ "passed": 27,
  "total": 28,
  "critical": 0,
  "rejected": [],
  "held": [],
  "droppedText": [],
- "failures": []
+ "failures": [
+  {
+   "name": "market: oil",
+   "ok": false,
+   "detail": "last data 2026-11-17 (8 days old)",
+   "critical": false
+  }
+ ]
 }

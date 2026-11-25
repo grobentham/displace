@@ -1,5 +1,5 @@
 {
- "asof": "2026-11-24T23:59-05:00",
+ "asof": "2026-11-25T00:04-05:00",
  "version": 4,
  "assets": {
   "gold": "Gold, close",
@@ -4914,6 +4914,29 @@
      "why": "Historical range diagnostic; qualification suspended pending point-in-time validation"
     }
    }
+  },
+  "20261209-fomc-rate-decision-projections-dot-plot": {
+   "kind": "fomc",
+   "group": "fed",
+   "date": "2026-12-09",
+   "when": "2026-12-09T14:00:00-05:00",
+   "basis": "consensus",
+   "consensus": {
+    "title": "Interest Rate",
+    "forecast": null,
+    "actual": null,
+    "unit": "%",
+    "scale": null
+   },
+   "stage": "pre",
+   "hot": {},
+   "cool": {},
+   "hist": {
+    "hot": {},
+    "inline": {},
+    "cool": {}
+   },
+   "move": {}
   }
  },
  "disclaimer": "Historical current-vintage research, under methodological review. No event rule is prospectively validated. Release-window movements can begin before the actual surprise is known; no trading recommendations.",
@@ -4929,7 +4952,7 @@
   ]
  },
  "moves": {
-  "asof": "2026-11-24",
+  "asof": "2026-11-25",
   "markets": {
    "gold": {
     "baseline": 1.96,

@@ -1,5 +1,5 @@
 {
- "asof": "2026-11-24",
+ "asof": "2026-11-25",
  "tiles": {
   "y2": {
    "label": "2-year Treasury",
@@ -575,7 +575,8 @@
     92.3,
     89.24,
     89.53
-   ]
+   ],
+   "stale": true
   },
   "nfci": {
    "label": "Financial conditions (Chicago Fed)",
