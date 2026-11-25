@@ -1,5 +1,5 @@
 {
- "checkedAt": "2026-11-25T12:49:47+00:00",
+ "checkedAt": "2026-11-25T12:54:00+00:00",
  "sources": {
   "Federal Reserve": true,
   "European Central Bank": true,
@@ -8,18 +8,18 @@
  "sourceHealth": {
   "Federal Reserve": {
    "state": "available",
-   "checkedAt": "2026-11-25T12:49:47+00:00",
-   "lastSuccessAt": "2026-11-25T12:49:47+00:00"
+   "checkedAt": "2026-11-25T12:54:00+00:00",
+   "lastSuccessAt": "2026-11-25T12:54:00+00:00"
   },
   "European Central Bank": {
    "state": "available",
-   "checkedAt": "2026-11-25T12:49:47+00:00",
-   "lastSuccessAt": "2026-11-25T12:49:47+00:00"
+   "checkedAt": "2026-11-25T12:54:00+00:00",
+   "lastSuccessAt": "2026-11-25T12:54:00+00:00"
   },
   "Bank of England": {
    "state": "available",
-   "checkedAt": "2026-11-25T12:49:47+00:00",
-   "lastSuccessAt": "2026-11-25T12:49:47+00:00"
+   "checkedAt": "2026-11-25T12:54:00+00:00",
+   "lastSuccessAt": "2026-11-25T12:54:00+00:00"
   }
  },
  "items": [
