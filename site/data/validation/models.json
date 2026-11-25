@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "asof": "2026-11-25T15:25:25.240257+00:00",
+  "asof": "2026-11-25T19:35:24.990917+00:00",
   "plan_hash": "883ea066e20c4960c2c8f5afcace0852441d07e6c1a18d1e0b1c45eba76618cc",
   "markets": {
     "nq": {
@@ -356,14 +356,14 @@
         "rate": 0.72,
         "pval": 0.021642625331878662,
         "brierSkill": 0.008,
-        "brierSkillBase": 0.0241,
-        "baseBrier": 0.254136,
+        "brierSkillBase": 0.0292,
+        "baseBrier": 0.255512,
         "halves": [
           0.75,
           0.692
         ],
         "recent": 0.7,
-        "tested": 59
+        "tested": 60
       }
     },
     {
@@ -376,15 +376,15 @@
         "hits": 17,
         "rate": 0.739,
         "pval": 0.01734483242034912,
-        "brierSkill": 0.094,
-        "brierSkillBase": 0.1295,
-        "baseBrier": 0.260201,
+        "brierSkill": 0.092,
+        "brierSkillBase": 0.1275,
+        "baseBrier": 0.260034,
         "halves": [
           0.818,
           0.667
         ],
         "recent": 0.75,
-        "tested": 60
+        "tested": 61
       }
     },
     {
@@ -477,19 +477,19 @@
       "historical_candidate": false,
       "proven": false,
       "historical_metrics": {
-        "calls": 22,
-        "hits": 10,
-        "rate": 0.455,
-        "pval": 0.7382664680480957,
-        "brierSkill": 0.002,
-        "brierSkillBase": 0.0243,
-        "baseBrier": 0.255792,
+        "calls": 29,
+        "hits": 16,
+        "rate": 0.552,
+        "pval": 0.355535551905632,
+        "brierSkill": 0.013,
+        "brierSkillBase": 0.0386,
+        "baseBrier": 0.256544,
         "halves": [
-          0.273,
-          0.636
+          0.357,
+          0.733
         ],
-        "recent": 0.45,
-        "tested": 180
+        "recent": 0.7,
+        "tested": 181
       }
     },
     {
@@ -503,14 +503,14 @@
         "rate": 0.4,
         "pval": 0.8125,
         "brierSkill": -0.007,
-        "brierSkillBase": -0.001,
-        "baseBrier": 0.251388,
+        "brierSkillBase": -0.0012,
+        "baseBrier": 0.251341,
         "halves": [
           0.5,
           0.333
         ],
         "recent": 0.4,
-        "tested": 181
+        "tested": 182
       }
     },
     {
@@ -609,13 +609,13 @@
         "pval": 0.29502666588831783,
         "brierSkill": -0.002,
         "brierSkillBase": 0.0138,
-        "baseBrier": 0.253916,
+        "baseBrier": 0.253945,
         "halves": [
           0.63,
           0.464
         ],
         "recent": 0.35,
-        "tested": 156
+        "tested": 157
       }
     },
     {
@@ -629,14 +629,14 @@
         "rate": 0.455,
         "pval": 0.7382664680480957,
         "brierSkill": -0.024,
-        "brierSkillBase": -0.0103,
-        "baseBrier": 0.253305,
+        "brierSkillBase": -0.0101,
+        "baseBrier": 0.253338,
         "halves": [
           0.636,
           0.273
         ],
         "recent": 0.45,
-        "tested": 156
+        "tested": 157
       }
     },
     {
