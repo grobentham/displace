@@ -1,6 +1,6 @@
 /* Morning check: the first thing on Displace. For a futures trader before the New York open:
    how big today could get, which of yesterday's levels are likely to go, the news that moves it,
-   and what that means for their own account. Data: data/bias/current.json, data/calendar/events.json. */
+   and what that means for their own account. Evidence comes from the verified forecast ledger. */
 (function () {
   "use strict";
   var MARKETS = [["nq", "NQ"], ["es", "ES"], ["gold", "Gold"]];
@@ -8,7 +8,8 @@
   var root = document.getElementById("mc");
   if (!root) return;
   var $ = function (id) { return document.getElementById(id); };
-  var B = null, EV = [];
+  var B = null, EV = [], evidence, highImpact = [];
+  var outlook = window.DisplaceOutlook, calendar = window.ECON;
   var store = {
     get: function (k, d) { try { var v = localStorage.getItem("mc." + k); return v === null ? d : v; } catch (e) { return d; } },
     set: function (k, v) { try { localStorage.setItem("mc." + k, v); } catch (e) {} }
@@ -16,46 +17,64 @@
   var mk = store.get("m", "nq");
 
   function num(x, dp) { return Number(x).toLocaleString("en-US", { minimumFractionDigits: dp, maximumFractionDigits: dp }); }
-  function round(x) { var s = x >= 1000 ? 10 : x >= 100 ? 5 : x >= 10 ? 1 : 0.1; return Math.round(x / s) * s; }
-  function pts(x, m) { var r = round(x); return num(r, r < 10 ? 1 : 0); }
+  function pts(x, market) { return outlook.formatPoints(x, market); }
   function usd(x) { return "$" + Math.round(x).toLocaleString("en-US"); }
   function pc(p) { return Math.round(100 * p) + "%"; }
 
-  // A New York wall-clock time -> a Date (so it can be shown in the visitor's own time)
-  function nyDate(day, hm) {
-    var p = (hm || "00:00").split(":"), guess = new Date(day + "T" + p[0] + ":" + p[1] + ":00Z");
-    var ny = new Date(guess.toLocaleString("en-US", { timeZone: "America/New_York" }));
-    var utc = new Date(guess.toLocaleString("en-US", { timeZone: "UTC" }));
-    return new Date(guess.getTime() + (utc - ny));
-  }
-  function localTime(d) { return d.toLocaleTimeString([], { hour: "numeric", minute: "2-digit" }); }
   function dayName(iso) { return new Date(iso + "T12:00:00Z").toLocaleDateString("en-US", { weekday: "long", day: "numeric", month: "short", timeZone: "UTC" }); }
   function el(tag, cls, text) { var n = document.createElement(tag); if (cls) n.className = cls; if (text !== undefined) n.textContent = text; return n; }
 
+  function renderEvidence() {
+    $("mc-evidence").textContent = outlook.scoringStatus(evidence, mk);
+  }
+
+  function renderReminder() {
+    var button = $("mc-reminder");
+    var event = highImpact.find(function (e) { return calendar.instant(e.date, e.time) > Date.now(); });
+    button.hidden = !event;
+    if (!event) return;
+    var state = calendar.reminderState(event);
+    var label = state === "automatic" ? "Automatic reminder set" : state === "selected" ? "Reminder set" : "Remind me";
+    button.dataset.bell = event.id;
+    button.textContent = label;
+    button.setAttribute("aria-label", label + " for " + event.title);
+    button.setAttribute("aria-pressed", String(state !== "off"));
+    button.disabled = state === "automatic";
+  }
+
   function render() {
-    if (!B) return;
-    var m = B.markets[mk] || B.markets.nq, day = B["for"], r = m.range;
-    MARKETS.forEach(function (x) { var b = $("mc-t-" + x[0]); if (b) b.setAttribute("aria-selected", String(x[0] === mk)); });
+    if (!B || !B.markets[mk]) return;
+    var m = B.markets[mk], day = m.session ? m.session.date : B["for"], r = m.range;
+    MARKETS.forEach(function (x) {
+      var button = $("mc-t-" + x[0]);
+      button.disabled = !B.markets[x[0]];
+      button.setAttribute("aria-selected", String(x[0] === mk));
+    });
 
     // 1. how big
     $("mc-for").textContent = m.name + " · " + dayName(day) + " session";
     $("mc-pts").textContent = pts(r.points, m);
-    $("mc-range").textContent = "Most days like this (8 in 10) land between " + pts(r.lo, m) + " and " + pts(r.hi, m) + " points.";
+    $("mc-range").textContent = "80% range band: " + pts(r.lo, m) + "–" + pts(r.hi, m) + " points.";
+    var windowLabel = outlook.sessionWindow(m.session), session = $("mc-window");
+    session.hidden = !windowLabel;
+    session.textContent = windowLabel ? "Session hours · " + windowLabel : "";
+    renderEvidence();
     var cmp = $("mc-cmp"); cmp.textContent = "";
     if (r.med250) {
       var x = r.points / r.med250;
       cmp.textContent = (x >= 1.5 ? "Much bigger than a normal day" : x >= 1.15 ? "Bigger than a normal day" : x <= 0.8 ? "Quieter than a normal day" : "About a normal day") +
-        " (past year: " + pts(r.med250, m) + "; last 20 sessions: " + pts(r.avg20, m) + ").";
+        " (past-year median: " + pts(r.med250, m) + " · last 20 sessions average: " + pts(r.avg20, m) + ").";
     }
 
     // day status: holidays and big releases on the session date
     var today = EV.filter(function (e) { return e.date === day; });
     var hol = today.filter(function (e) { return e.impact === "holiday"; })[0];
-    var big = today.filter(function (e) { return e.impact === "high" && e.time; });
+    highImpact = today.filter(function (e) { return e.impact === "high" && e.time && e.id; })
+      .sort(function (a, b) { return a.time.localeCompare(b.time); });
     var chips = $("mc-status"); chips.replaceChildren();
     if (hol) chips.append(el("span", "mc-chip warn", hol.title.replace(/^[^:]*:\s*/, "").replace(/^./, function (c) { return c.toUpperCase(); }) + " (" + hol.title.split(":")[0] + ")"));
-    if (big.length) {
-      var times = Array.from(new Set(big.map(function (e) { return e.time; })));
+    if (highImpact.length) {
+      var times = Array.from(new Set(highImpact.map(function (e) { return e.time; })));
       chips.append(el("span", "mc-chip warn", "Big news at " + times.join(" and ") + " New York"));
     }
     if (r.med250 && r.points / r.med250 >= 1.5) chips.append(el("span", "mc-chip warn", "Wide-range day"));
@@ -77,14 +96,19 @@
     var list = today.filter(function (e) { return e.impact !== "holiday" && (e.impact === "high" || e.impact === "medium"); });
     if (!list.length) nw.append(el("p", "mc-muted", "No major US releases scheduled for this session."));
     list.slice(0, 6).forEach(function (e) {
-      var row = el("div", "mc-row"), when = e.time ? nyDate(day, e.time) : null;
-      var tm = el("div", "mc-tm" + (e.impact === "high" ? " hi" : ""), when ? localTime(when) : "All day");
+      var row = el("div", "mc-row");
+      var tm = el(e.time ? "time" : "div", "mc-tm" + (e.impact === "high" ? " hi" : ""), e.time ? calendar.local(e) : "All day");
+      if (e.time) {
+        tm.dateTime = new Date(calendar.instant(e.date, e.time)).toISOString();
+        if (calendar.localDay(e) !== e.date) tm.append(el("small", "mc-tm-day", calendar.localDayLabel(e)));
+      }
       var tx = el("div", "mc-rt");
       tx.append(el("b", "", e.title));
       tx.append(el("small", "", (e.time ? e.time + " New York" : "") + (e.forecast ? " · expected " + e.forecast : "") + (e.previous ? " · last " + e.previous : "")));
       row.append(tm, tx); nw.append(row);
     });
 
+    renderReminder();
     account(m, r);
     var made = new Date(B.asof), age = (Date.now() - made) / 36e5;
     $("mc-made").textContent = "Forecast made " + made.toLocaleString([], { weekday: "short", hour: "numeric", minute: "2-digit" }) + " your time" +
@@ -128,8 +152,17 @@
   }
 
   bind();
+  window.addEventListener("displace:reminder-change", renderReminder);
+  window.addEventListener("displace:route", renderReminder);
+  setInterval(renderReminder, 30000);
+  outlook.evidence().then(function (data) { evidence = data; renderEvidence(); });
+
   function get(p) { return fetch(p + "?t=" + Date.now(), { cache: "no-store" }).then(function (r) { if (!r.ok) throw Error(p); return r.json(); }); }
   Promise.all([get("data/bias/current.json"), get("data/calendar/events.json").catch(function () { return { events: [] }; })]).then(function (x) {
-    B = x[0]; EV = x[1].events || []; root.classList.add("ready"); render();
+    B = x[0]; EV = x[1].events || [];
+    var available = MARKETS.find(function (market) { return B.markets[market[0]]; });
+    if (!available) throw Error("No markets available");
+    if (!B.markets[mk]) mk = available[0];
+    root.classList.add("ready"); render();
   }).catch(function () { $("mc-for").textContent = "Today's numbers are unavailable right now. Try again in a minute."; });
 })();
