@@ -1,16 +1,166 @@
 {
- "asof": "2026-11-25T21:45:34+00:00",
- "last_seen": "2026-11-25T02:19:49+00:00",
+ "asof": "2026-11-25T22:02:25+00:00",
+ "last_seen": "2026-11-25T22:01:58+00:00",
  "limitations": [
   "The witness reads every 10 minutes from 09:20 to 13:00 New York, then hourly to 17:00; a trade that starts and finishes between two readings is unwitnessed, not counted.",
   "Lock and fill times are Iron Brain's own clock; the witness proves only that a decision was public no later than the commit that recorded it.",
   "Points are before commissions and slippage. Trading rules are private; the ledger shows decisions and results, not the rules."
  ],
  "policy": "A finished trade counts only if it was locked before entry, Displace saw it live before the result, and its locked levels never changed. Trades locked after their entry minute are scored separately, with the lag, because a follower could not have had that entry. Results in NQ points and R (points / locked risk), before costs. Fewer than 30 counted trades: no claim either way.",
- "records": [],
+ "records": [
+  {
+   "date": "2026-11-25",
+   "first_seen": "2026-11-25T22:01:58+00:00",
+   "id": "orb-prop",
+   "lag": null,
+   "lock": {
+    "at": "10:00",
+    "buyStop": 25477.25,
+    "dir": "LONG",
+    "entry": 25477.25,
+    "filledAt": "2026-11-25 11:14",
+    "lockedAt": "2026-11-25 10:18",
+    "sellStop": 25027.5,
+    "stop": 25252.38
+   },
+   "market": "nq",
+   "name": "orb-prop",
+   "r": -1.0,
+   "result": {
+    "exit": 25252.38,
+    "resolvedAt": "2026-11-25 11:14",
+    "resultPts": -224.88,
+    "stage": "stopped"
+   },
+   "result_seen": "2026-11-25T22:01:58+00:00",
+   "state": "signal",
+   "status": "unwitnessed"
+  },
+  {
+   "date": "2026-11-25",
+   "first_seen": "2026-11-25T22:01:58+00:00",
+   "id": "orb-0930",
+   "lag": null,
+   "lock": {
+    "at": "09:45",
+    "buyStop": 25439.75,
+    "dir": "SHORT",
+    "entry": 25058.75,
+    "lockedAt": "2026-11-25 09:53",
+    "sellStop": 25058.75,
+    "stop": 25162.85
+   },
+   "market": "nq",
+   "name": "ORB 09:30 (15-min range)",
+   "r": -1.0,
+   "result": {
+    "exit": 25162.85,
+    "resolvedAt": "2026-11-25 09:53",
+    "resultPts": -104.1,
+    "stage": "stopped"
+   },
+   "result_seen": "2026-11-25T22:01:58+00:00",
+   "state": "signal",
+   "status": "unwitnessed"
+  },
+  {
+   "date": "2026-11-25",
+   "first_seen": "2026-11-25T22:01:58+00:00",
+   "id": "drive-v2",
+   "lag": null,
+   "lock": {
+    "lockedAt": "2026-11-25 10:18"
+   },
+   "market": "nq",
+   "name": "drive-v2",
+   "note": "No trade today: the setup's conditions weren't met.",
+   "r": null,
+   "state": "none",
+   "status": "no_trade"
+  }
+ ],
  "since": "2026-11-25",
  "source": "https://grobentham.github.io/iron-brain/data/desk.json",
- "strategies": {},
+ "strategies": {
+  "drive-v2": {
+   "counts": {
+    "altered": 0,
+    "counted": 0,
+    "expired": 0,
+    "late_lock": 0,
+    "no_trade": 1,
+    "pending": 0,
+    "unwitnessed": 0
+   },
+   "late": {
+    "mean_points": null,
+    "mean_r": null,
+    "median_lag_minutes": null,
+    "points": 0,
+    "trades": 0,
+    "wins": 0
+   },
+   "mean_points": null,
+   "mean_r": null,
+   "name": "drive-v2",
+   "points": 0,
+   "trades": 0,
+   "verdict": "0 of 30 counted trades: too few to judge",
+   "wins": 0
+  },
+  "orb-0930": {
+   "counts": {
+    "altered": 0,
+    "counted": 0,
+    "expired": 0,
+    "late_lock": 0,
+    "no_trade": 0,
+    "pending": 0,
+    "unwitnessed": 1
+   },
+   "late": {
+    "mean_points": null,
+    "mean_r": null,
+    "median_lag_minutes": null,
+    "points": 0,
+    "trades": 0,
+    "wins": 0
+   },
+   "mean_points": null,
+   "mean_r": null,
+   "name": "ORB 09:30 (15-min range)",
+   "points": 0,
+   "trades": 0,
+   "verdict": "0 of 30 counted trades: too few to judge",
+   "wins": 0
+  },
+  "orb-prop": {
+   "counts": {
+    "altered": 0,
+    "counted": 0,
+    "expired": 0,
+    "late_lock": 0,
+    "no_trade": 0,
+    "pending": 0,
+    "unwitnessed": 1
+   },
+   "late": {
+    "mean_points": null,
+    "mean_r": null,
+    "median_lag_minutes": null,
+    "points": 0,
+    "trades": 0,
+    "wins": 0
+   },
+   "mean_points": null,
+   "mean_r": null,
+   "name": "orb-prop",
+   "points": 0,
+   "trades": 0,
+   "verdict": "0 of 30 counted trades: too few to judge",
+   "wins": 0
+  }
+ },
  "version": 1,
  "witness": "https://github.com/grobentham/displace/commits/witness"
 }

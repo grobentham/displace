@@ -1,63 +1,28 @@
 {
-  "date": "2026-11-25",
-  "asof": "2026-11-25T21:45+00:00",
+  "date": "2026-11-27",
+  "asof": "2026-11-25T22:02+00:00",
   "session": {
-    "open": "2026-11-24T18:00:00-05:00",
-    "close": "2026-11-25T17:00:00-05:00",
-    "halts": []
+    "open": "2026-11-25T18:00:00-05:00",
+    "close": "2026-11-27T13:15:00-05:00",
+    "halts": [
+      "2026-11-26T13:00:00-05:00"
+    ]
   },
   "range": {
-    "points": 943.162669,
-    "lo": 554.55247,
-    "hi": 1618.32277
+    "points": 1003.025853,
+    "lo": 589.766737,
+    "hi": 1722.544162
   },
   "levels": {
     "high": {
-      "price": 27036.0,
-      "probability": 0.291
+      "price": 26350.75,
+      "probability": 0.682
     },
     "low": {
-      "price": 25998.0,
-      "probability": 0.619
+      "price": 25027.5,
+      "probability": 0.122
     }
   },
-  "news": [
-    {
-      "title": "Durable goods orders (Oct)",
-      "instant": "2026-11-25T08:30:00-05:00",
-      "time_ny": "08:30",
-      "impact": "medium"
-    },
-    {
-      "title": "GDP, second estimate (Q3)",
-      "instant": "2026-11-25T08:30:00-05:00",
-      "time_ny": "08:30",
-      "impact": "high"
-    },
-    {
-      "title": "Initial jobless claims (moved to Wednesday for Thanksgiving)",
-      "instant": "2026-11-25T08:30:00-05:00",
-      "time_ny": "08:30",
-      "impact": "medium"
-    },
-    {
-      "title": "PCE inflation · Personal income and outlays (Oct)",
-      "instant": "2026-11-25T08:30:00-05:00",
-      "time_ny": "08:30",
-      "impact": "high"
-    },
-    {
-      "title": "New home sales (Oct)",
-      "instant": "2026-11-25T10:00:00-05:00",
-      "time_ny": "10:00",
-      "impact": "medium"
-    },
-    {
-      "title": "Beige Book",
-      "instant": "2026-11-25T14:00:00-05:00",
-      "time_ny": "14:00",
-      "impact": "medium"
-    }
-  ],
-  "live_count": 0
+  "news": [],
+  "live_count": 1
 }
