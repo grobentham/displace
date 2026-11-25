@@ -7,7 +7,7 @@
 .mc-tabs{display:inline-flex;background:#1d1d1f;border-radius:980px;padding:3px}
 .mc-tabs button{font:inherit;font-size:.9rem;border:0;background:none;color:#a1a1a6;padding:7px 16px;border-radius:980px;cursor:pointer}
 .mc-tabs button[aria-selected="true"]{background:#f5f5f7;color:#000}
-.mc-tabs button:focus-visible,.mc input:focus-visible{outline:2px solid #2997ff;outline-offset:2px}
+.mc button:focus-visible,.mc a:focus-visible,.mc input:focus-visible{outline:2px solid #2997ff;outline-offset:2px}
 .mc-answer{margin:34px 0 8px}
 .mc-big{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}
 .mc-big #mc-pts{font-size:clamp(4rem,12vw,7.5rem);font-weight:700;letter-spacing:-.05em;line-height:.9;color:#f5f5f7;font-variant-numeric:tabular-nums}
@@ -21,7 +21,7 @@
 .mc-chip{font-size:.86rem;padding:5px 12px;border-radius:980px;border:1px solid #424245;color:#f5f5f7}
 .mc-chip.warn{border-color:rgba(255,159,10,.6);color:#ffb340}
 .mc-chip.ok{border-color:rgba(48,209,88,.5);color:#30d158}
-.mc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:40px}
+.mc-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;margin-top:40px}
 .mc-card{background:#1d1d1f;border-radius:18px;padding:22px 22px 20px;color:#f5f5f7}
 .mc-card h2{margin:0 0 14px;font-size:1.05rem;font-weight:600;letter-spacing:-.01em}
 .mc-row{display:flex;gap:14px;align-items:flex-start;padding:10px 0;border-top:1px solid #333336}
@@ -39,14 +39,58 @@
 .mc-reminder[aria-pressed="true"]{color:#78e8a0}
 .mc-reminder:disabled{cursor:default}
 .mc-tabs button:disabled{opacity:.55;cursor:default}
-.mc-form{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}
-.mc-form label{display:flex;flex-direction:column;gap:4px;font-size:.8rem;color:#a1a1a6}
-.mc-form input[type=number]{font:inherit;font-size:1rem;background:#000;color:#f5f5f7;border:1px solid #424245;border-radius:10px;padding:8px 10px;width:100%;box-sizing:border-box}
-.mc-size{grid-column:1/-1;display:flex;gap:16px;font-size:.88rem;color:#f5f5f7}
-.mc-size label{display:inline-flex;flex-direction:row;align-items:center;gap:6px;color:#f5f5f7;font-size:.88rem}
-#mc-acct p{margin:8px 0 0;font-size:.95rem}
-#mc-acct .mc-warn{color:#ffb340}
+.mc-hero-actions,.mc-plan-actions,.mc-share-controls{display:flex;align-items:center;flex-wrap:wrap;gap:10px}
+.mc-hero-actions{margin-top:20px}
+.mc .pillbtn{color:#fff}
+.mc-secondary{font:inherit;font-size:.9rem;color:#f5f5f7;background:#202024;border:1px solid #56565c;border-radius:980px;padding:9px 15px;cursor:pointer}
+.mc-secondary:hover{background:#38383d}
+.mc-share-panel{border:1px solid #424245;border-radius:14px;background:#151518;margin-top:14px;padding:14px;max-width:34rem;color:#f5f5f7;font-size:.9rem}
+.mc-share-panel label{display:block;margin-bottom:6px}
+.mc-share-panel a{display:inline-block;margin-top:10px}
+.mc-share-panel p{margin:4px 0 0}
+.mc-share-controls input{flex:1 1 12rem;min-width:0}
+.mc-plan{margin-top:16px;scroll-margin-top:72px}
+.mc-plan-head h2{font-size:1.35rem;margin:0 0 4px}
+.mc-plan-head p{margin:0 0 16px}
+.mc-plan fieldset{border:0;padding:0;margin:0;min-width:0}
+.mc-visually-hidden{position:absolute;width:1px;height:1px;clip-path:inset(50%);overflow:hidden;white-space:nowrap}
+.mc-plan-grid{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:18px}
+.mc-form{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px}
+.mc-form label{display:flex;flex-direction:column;gap:6px;color:#d1d1d6;font-size:.875rem}
+.mc-form input[type=number],.mc-share-controls input{font:inherit;font-size:1rem;background:#060609;color:#f5f5f7;border:1px solid #5b5b60;border-radius:10px;padding:9px 10px;box-sizing:border-box}
+.mc-form input[type=number]{width:100%;min-height:42px}
+.mc-form .mc-cost,.mc-size{grid-column:1/-1}
+.mc-size{display:flex;flex-wrap:wrap;gap:16px}
+.mc-size label{display:inline-flex;flex-direction:row;align-items:center;gap:6px;color:#f5f5f7}
+.mc-plan-result{background:#111114;border-radius:12px;border:1px solid #39393d;padding:14px}
+.mc-plan-result p{margin:0;color:#d1d1d6;font-size:.94rem}
+.mc-plan-result p.mc-warn{color:#ffb340}
+.mc-plan-result dl{margin:12px 0 0}
+.mc-plan-result dl div{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:8px 0;border-top:1px solid #333336}
+.mc-plan-result dt{font-size:.88rem;color:#d1d1d6}
+.mc-plan-result dd{margin:0;font-weight:600;text-align:right;font-variant-numeric:tabular-nums}
+.mc-plan-actions{margin-top:16px}
+.mc-plan-actions p,.mc-plan-note{margin:0}
+.mc-plan-note{margin-top:12px}
+.mc-plan-actions button:disabled{opacity:.55;cursor:default}
+@media (max-width:680px){.mc-plan-grid{grid-template-columns:1fr}}
+@media (max-width:380px){.mc-form{grid-template-columns:1fr}}
 .mc-foot{margin-top:28px;color:#a1a1a6;font-size:.92rem}
 .mc-foot a{color:#2997ff}
 #mc:not(.ready) #mc-pts{opacity:.3}
 @media (max-width:860px){.mc-grid{grid-template-columns:1fr}.hero.mc{padding:44px 0 64px}.mc-answer{margin-top:24px}}
+/* The dated public brief shares the dashboard's type and cards. */
+.mnq-brief{margin:0;min-height:100vh;background:#101013;color:#f5f5f7;font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+.mnq-brief .wide{box-sizing:border-box;width:100%;max-width:1080px;margin:0 auto;padding:0 24px}
+.mnq-brief-nav{border-bottom:1px solid #333336}
+.mnq-brief-nav .wide{display:flex;justify-content:space-between;align-items:center;gap:16px;min-height:58px}
+.mnq-brief-nav a{color:#d1d1d6;text-decoration:none;font-size:.9rem}
+.mnq-brief-nav .mnq-brief-brand{font-size:1.15rem;color:#f5f5f7;font-weight:700}
+.mnq-brief main{padding:44px 0 56px}
+.mnq-brief-heading h1{margin-bottom:20px}
+.mnq-brief .mc-big #brief-range{font-size:clamp(3.75rem,11vw,6.75rem);font-weight:700;letter-spacing:-.05em;line-height:.95;font-variant-numeric:tabular-nums}
+.mnq-brief-time{flex:0 0 8.25rem;font-size:.85rem;font-weight:600;color:#a1a1a6}
+.mnq-brief-action{margin:24px 0 0}
+.mnq-brief .mnq-brief-button{display:inline-block;color:#fff;background:#0071e3;text-decoration:none;font-weight:600;padding:10px 18px;border-radius:980px}
+.mnq-brief-button:hover{text-decoration:underline}
+@media (max-width:480px){.mnq-brief .wide{padding:0 16px}.mnq-brief-time{flex-basis:6.25rem}}

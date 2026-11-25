@@ -1748,7 +1748,7 @@ svg.cd line.wick{animation:fadein .5s ease-out both}
 .ms-grid small{display:block;color:var(--muted);font-size:.8rem}.ms-grid b{font-size:1.5rem;letter-spacing:-.03em;font-variant-numeric:tabular-nums}
 .ms-note{color:var(--muted);font-size:.82rem;margin-top:12px}
 </style>
-<link rel="canonical" href="https://grobentham.github.io/displace/"><link rel="stylesheet" href="assets/morning.css?v=20261125b">
+<link rel="canonical" href="https://grobentham.github.io/displace/"><link rel="stylesheet" href="assets/morning.css?v=20261125c">
 </head>
 <body>
 
@@ -1777,6 +1777,16 @@ svg.cd line.wick{animation:fadein .5s ease-out both}
       <div><p class="mc-for" id="mc-for">Today's session</p><h1 class="mc-q">How far could it move today?</h1></div>
       <div class="mc-tabs" id="mc-tabs" role="tablist" aria-label="Market"></div>
     </div>
+    <div class="mc-hero-actions">
+      <a class="pillbtn" href="#session-plan">Plan my session</a>
+      <button type="button" class="mc-secondary" id="mc-share" aria-expanded="false" aria-controls="mc-share-panel" hidden>Share MNQ brief</button>
+    </div>
+    <div class="mc-share-panel" id="mc-share-panel" hidden>
+      <label for="mc-share-url">Public brief link</label>
+      <div class="mc-share-controls"><input type="url" id="mc-share-url" readonly><button type="button" class="mc-secondary" id="mc-copy">Copy link</button></div>
+      <a id="mc-share-preview" href="mnq-brief.html">Open public brief</a>
+      <p class="mc-muted" id="mc-share-status" role="status"></p>
+    </div>
     <div class="mc-answer" aria-live="polite">
       <div class="mc-big"><span id="mc-pts">—</span><small>points, expected high-to-low</small></div>
       <p class="mc-range" id="mc-range">Loading today's numbers…</p>
@@ -1786,21 +1796,51 @@ svg.cd line.wick{animation:fadein .5s ease-out both}
       <div class="mc-status" id="mc-status"></div>
     </div>
     <div class="mc-grid">
-      <section class="mc-card" aria-labelledby="mc-h-lv"><h2 id="mc-h-lv">Yesterday's levels</h2><div id="mc-levels"></div></section>
+      <section class="mc-card" aria-labelledby="mc-h-lv"><h2 id="mc-h-lv">Prior session levels</h2><div id="mc-levels"></div></section>
       <section class="mc-card" aria-labelledby="mc-h-nw">
         <h2 id="mc-h-nw">Scheduled news <span class="mc-muted">(your time)</span></h2>
         <div id="mc-news"></div>
         <div class="mc-news-actions"><button type="button" class="mc-reminder" id="mc-reminder" hidden>Remind me</button><a href="#calendar">Full calendar</a></div>
       </section>
-      <section class="mc-card" aria-labelledby="mc-h-ac"><h2 id="mc-h-ac">Your account</h2>
-        <div class="mc-form">
-          <label>Daily loss limit ($)<input type="number" id="mc-limit" min="0" step="50" inputmode="decimal" placeholder="e.g. 1000"></label>
-          <label>Contracts<input type="number" id="mc-n" min="1" step="1" inputmode="numeric" value="1"></label>
-          <div class="mc-size" role="radiogroup" aria-label="Contract size"><label><input type="radio" name="mc-size" value="micro" checked><span>Micro, <span id="mc-sym-micro">MNQ</span></span></label><label><input type="radio" name="mc-size" value="mini"><span>Mini, <span id="mc-sym-mini">NQ</span></span></label></div>
-        </div>
-        <div id="mc-acct"></div><p class="mc-muted">Saved on this device only. Not financial advice.</p>
-      </section>
     </div>
+    <section class="mc-card mc-plan" id="session-plan" aria-labelledby="mc-plan-title">
+      <div class="mc-plan-head">
+        <h2 id="mc-plan-title">Plan your session</h2>
+        <p id="mc-plan-session" class="mc-muted">Loading the session date…</p>
+      </div>
+      <form id="mc-plan-form" autocomplete="off">
+        <fieldset id="mc-plan-fields" disabled>
+          <legend class="mc-visually-hidden">Trade risk inputs</legend>
+          <div class="mc-plan-grid">
+            <div class="mc-form">
+              <label>Remaining daily loss allowance (USD)<input type="number" id="mc-allowance" min="0" step="0.01" inputmode="decimal" placeholder="e.g. 300" required></label>
+              <label>Risk budget for this trade (USD)<input type="number" id="mc-budget" min="0" step="0.01" inputmode="decimal" placeholder="e.g. 100" required></label>
+              <label>Stop distance (points)<input type="number" id="mc-stop" min="0.000001" step="any" inputmode="decimal" placeholder="e.g. 25" required></label>
+              <label>Contracts planned<input type="number" id="mc-qty" min="1" step="1" inputmode="numeric" value="1" required></label>
+              <div class="mc-size" role="radiogroup" aria-label="Contract size">
+                <label><input type="radio" name="mc-size" value="micro" checked><span id="mc-sym-micro">MNQ</span></label>
+                <label><input type="radio" name="mc-size" value="mini"><span id="mc-sym-mini">NQ</span></label>
+              </div>
+              <label class="mc-cost">Estimated round-trip fees and slippage per contract (USD, optional)<input type="number" id="mc-cost" min="0" step="0.01" inputmode="decimal" placeholder="e.g. 2.50"></label>
+            </div>
+            <div class="mc-plan-result" id="mc-plan-result" aria-live="polite">
+              <p class="mc-muted" id="mc-plan-fit">Enter your remaining allowance, trade risk budget and stop distance to check the trade.</p>
+              <dl id="mc-plan-metrics" hidden>
+                <div><dt>Risk per contract</dt><dd id="mc-result-unit"></dd></div>
+                <div><dt>Whole contracts within limits</dt><dd id="mc-result-max"></dd></div>
+                <div><dt>Risk at planned size</dt><dd id="mc-result-total"></dd></div>
+                <div><dt>Daily allowance after a stop</dt><dd id="mc-result-left"></dd></div>
+              </dl>
+            </div>
+          </div>
+          <div class="mc-plan-actions">
+            <button type="submit" class="pillbtn">Save session plan</button>
+            <p class="mc-muted" id="mc-plan-status" role="status"></p>
+          </div>
+        </fieldset>
+        <p class="mc-muted mc-plan-note">Plans stay on this device. Enter the allowance from your account and leave room for execution costs and drawdown rules.</p>
+      </form>
+    </section>
     <p class="mc-foot">Up or down? Our tests find no reliable daily direction edge, so we don't call one. <a href="research-hub.html">Why</a> · <a href="#bias">All 8 markets</a> · <span id="mc-made"></span></p>
   </div>
 </section>
@@ -4023,6 +4063,7 @@ Promise.all([get("macro/current"),get("signals/current").catch(function(){return
   document.getElementById("ms-note").textContent="Scores out of 100, ranked against years of history; higher means more of the named condition. "+(act!=null?act+" macro warning"+(act===1?" is":"s are")+" active. ":"")+"Background, not a forecast. Updated "+m.asof+".";
   box.hidden=false;}).catch(function(){});})();
 </script>
-<script src="assets/morning.js?v=20261125b" defer></script>
+<script src="assets/session-planner.js?v=20261125c" defer></script>
+<script src="assets/morning.js?v=20261125c" defer></script>
 </body>
 </html>
