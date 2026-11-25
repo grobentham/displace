@@ -442,11 +442,22 @@
    "components": [
     {
      "label": "New home sales",
-     "previous": "676K"
+     "actual": "701K",
+     "previous": "614K"
     }
    ],
    "forecast": "650K",
-   "fsrc": "ForexFactory consensus"
+   "fsrc": "ForexFactory consensus",
+   "revised": "614K",
+   "actual": "701K",
+   "provenance": {
+    "via": "ALFRED",
+    "series": "HSN1F",
+    "asof": "2026-11-25"
+   },
+   "facts": [
+    "The new home sales reading was the highest since Dec 2025."
+   ]
   },
   {
    "date": "2026-11-25",
@@ -919,7 +930,7 @@
    "components": [
     {
      "label": "New home sales",
-     "previous": "676K"
+     "previous": "701K"
     }
    ]
   },

@@ -1,59 +1,59 @@
 {
- "lastRun": "2026-11-25T09:23-05:00",
+ "lastRun": "2026-11-25T10:24-05:00",
  "source": "public FRED and agency data",
  "fredCalls": 81,
  "fred": true,
  "sources": {
   "fred": {
    "state": "available",
-   "checkedAt": "2026-11-25T09:23-05:00",
-   "lastSuccessAt": "2026-11-25T09:23-05:00"
+   "checkedAt": "2026-11-25T10:24-05:00",
+   "lastSuccessAt": "2026-11-25T10:24-05:00"
   },
   "alfred": {
    "state": "available",
-   "checkedAt": "2026-11-25T09:23-05:00",
-   "lastSuccessAt": "2026-11-25T09:23-05:00"
+   "checkedAt": "2026-11-25T10:24-05:00",
+   "lastSuccessAt": "2026-11-25T10:24-05:00"
   },
   "bls": {
    "state": "available",
-   "checkedAt": "2026-11-25T09:23-05:00",
-   "lastSuccessAt": "2026-11-25T09:23-05:00"
+   "checkedAt": "2026-11-25T10:24-05:00",
+   "lastSuccessAt": "2026-11-25T10:24-05:00"
   },
   "bea": {
    "state": "partial",
-   "checkedAt": "2026-11-25T09:23-05:00",
-   "lastSuccessAt": "2026-11-25T09:23-05:00"
+   "checkedAt": "2026-11-25T10:24-05:00",
+   "lastSuccessAt": "2026-11-25T10:24-05:00"
   },
   "census": {
    "state": "available",
-   "checkedAt": "2026-11-25T09:23-05:00",
-   "lastSuccessAt": "2026-11-25T09:23-05:00"
+   "checkedAt": "2026-11-25T10:24-05:00",
+   "lastSuccessAt": "2026-11-25T10:24-05:00"
   },
   "treasury": {
    "state": "available",
-   "checkedAt": "2026-11-25T09:23-05:00",
-   "lastSuccessAt": "2026-11-25T09:23-05:00"
+   "checkedAt": "2026-11-25T10:24-05:00",
+   "lastSuccessAt": "2026-11-25T10:24-05:00"
   },
   "nyFed": {
    "state": "available",
-   "checkedAt": "2026-11-25T09:23-05:00",
-   "lastSuccessAt": "2026-11-25T09:23-05:00"
+   "checkedAt": "2026-11-25T10:24-05:00",
+   "lastSuccessAt": "2026-11-25T10:24-05:00"
   },
   "fedStatements": {
    "state": "available",
-   "checkedAt": "2026-11-25T09:23-05:00",
-   "lastSuccessAt": "2026-11-25T09:23-05:00"
+   "checkedAt": "2026-11-25T10:24-05:00",
+   "lastSuccessAt": "2026-11-25T10:24-05:00"
   },
   "nasdaqCalendar": {
    "state": "available",
-   "checkedAt": "2026-11-25T09:23-05:00",
-   "lastSuccessAt": "2026-11-25T09:23-05:00"
+   "checkedAt": "2026-11-25T10:24-05:00",
+   "lastSuccessAt": "2026-11-25T10:24-05:00"
   }
  },
  "freshness": {
   "calendarUpdatedOn": "2026-11-25",
   "latestActual": {
-   "title": "Durable goods orders (Oct)",
+   "title": "New home sales (Oct)",
    "date": "2026-11-25"
   },
   "marketDates": {
@@ -75,8 +75,8 @@
  "upcoming": 81,
  "warnings": [],
  "log": [
-  "engine run 2026-11-25T09:23-05:00 using public FRED and agency data",
-  "actual 20261125-gdp-second-estimate-q3 4.3%",
+  "engine run 2026-11-25T10:24-05:00 using public FRED and agency data",
+  "actual 20261125-new-home-sales-oct 701K",
   "calendar saved",
   "quality: 28/29 checks passed, 0 held, 0 rejected"
  ]

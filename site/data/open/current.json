@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "asof": "2026-11-25T14:25:11.188622+00:00",
+  "asof": "2026-11-25T15:25:23.984377+00:00",
   "scope": "Recorded forecasts only; not all possible scheduled forecasts. No receipt before the target start means no prospective credit.",
   "forecast_counts": {
     "void": 2,

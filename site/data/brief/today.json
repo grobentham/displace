@@ -1,6 +1,6 @@
 {
  "date": "2026-11-25",
- "asof": "2026-11-25T09:23-05:00",
+ "asof": "2026-11-25T10:24-05:00",
  "headline": "GDP, second estimate at 08:30 NY, plus 5 more",
  "overnight": "At the Tue Nov 24 close, the 10-year Treasury yield was 4.91% (down 1 bp), the 2-year 4.63%, the Fed's broad dollar index 123.6 (up 0.1%) and WTI crude $89.53 (up 0.3%).",
  "overnightLabel": "Latest close",
@@ -23,7 +23,7 @@
   },
   {
    "time": "10:00",
-   "item": "New home sales (Oct) · forecast 650K · previous 676K"
+   "item": "New home sales (Oct) · actual 701K · forecast 650K · previous 676K"
   },
   {
    "time": "14:00",
@@ -31,10 +31,6 @@
   }
  ],
  "recent": [
-  {
-   "title": "Durable goods orders (Oct)",
-   "line": "Durable goods orders: 0.2%"
-  },
   {
    "title": "GDP, second estimate (Q3)",
    "line": "GDP came in at 4.3% against a 3.5% forecast, above expectations. The previous reading was 3.4%. The real GDP, annualized reading was the highest since Q3 2023."
@@ -46,6 +42,10 @@
   {
    "title": "PCE inflation · Personal income and outlays (Oct)",
    "line": "Core PCE came in at 0.3% against a 0.3% forecast, in line with expectations. The previous reading was 0.3%. PCE m/m 0.3% (previous 0.5%); Core PCE y/y 3.3% (previous 3.1%); Personal spending m/m 0.3% (previous 0.6%)."
+  },
+  {
+   "title": "New home sales (Oct)",
+   "line": "New home sales: 701K"
   }
  ],
  "focus": "GDP, second estimate: It's the broadest read on how fast the economy is growing. PCE inflation: PCE is the Fed's preferred inflation gauge, measured against its 2% target. The next Fed decision is Dec 8–9, 14 days away.",

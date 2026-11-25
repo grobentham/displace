@@ -1,5 +1,5 @@
 {
- "asof": "2026-11-25T09:24-05:00",
+ "asof": "2026-11-25T10:25-05:00",
  "version": 4,
  "assets": {
   "gold": "Gold, close",
@@ -1059,7 +1059,7 @@
     "historical_candidate": true
    },
    "gold2h": {
-    "b": -0.4153,
+    "b": -0.4152,
     "k": 0.95,
     "n": 205,
     "since": "2024-07-02",
@@ -1133,7 +1133,7 @@
     "historical_candidate": false
    },
    "nq": {
-    "b": 0.0672,
+    "b": 0.0671,
     "k": 0.3,
     "n": 1179,
     "since": "2011-01-03",
@@ -1157,7 +1157,7 @@
     "historical_candidate": false
    },
    "usd": {
-    "b": 0.1681,
+    "b": 0.168,
     "k": 0.85,
     "n": 1176,
     "since": "2011-01-03",
@@ -1205,7 +1205,7 @@
     "historical_candidate": false
    },
    "gold2h": {
-    "b": -0.1812,
+    "b": -0.1811,
     "k": 0.6,
     "n": 182,
     "since": "2024-07-01",
@@ -1375,7 +1375,7 @@
     "historical_candidate": false
    },
    "nq2h": {
-    "b": 0.2008,
+    "b": 0.2007,
     "k": 0.35,
     "n": 87,
     "since": "2024-06-28",
@@ -3875,12 +3875,14 @@
    "consensus": {
     "title": "New Home Sales",
     "forecast": 0.65,
-    "actual": null,
+    "actual": 0.701,
     "unit": null,
     "scale": "M"
    },
-   "stage": "pre",
-   "hot": {
+   "stage": "post",
+   "z": 1.38,
+   "bin": "hot",
+   "calls": {
     "gold": {
      "none": true,
      "n": 6,
@@ -3900,47 +3902,17 @@
      "none": true,
      "n": 5,
      "why": "too few tested calls"
+    },
+    "gold15m": {
+     "none": true,
+     "why": "the first 15m have passed"
+    },
+    "nq15m": {
+     "none": true,
+     "why": "the first 15m have passed"
     }
    },
-   "cool": {
-    "gold": {
-     "none": true,
-     "n": 6,
-     "why": "too few tested calls"
-    },
-    "nq": {
-     "none": true,
-     "n": 3,
-     "why": "too few tested calls"
-    },
-    "usd": {
-     "none": true,
-     "n": 20,
-     "why": "too few tested calls"
-    },
-    "y2": {
-     "none": true,
-     "n": 5,
-     "why": "too few tested calls"
-    }
-   },
-   "hist": {
-    "hot": {},
-    "inline": {
-     "gold": {
-      "dir": "up",
-      "p": 0.642,
-      "n": 53
-     }
-    },
-    "cool": {
-     "y2": {
-      "dir": "down",
-      "p": 0.627,
-      "n": 51
-     }
-    }
-   },
+   "hist": {},
    "move": {
     "gold": {
      "pct": 1.91,
@@ -5531,8 +5503,8 @@
   }
  },
  "log": [
-  "tv: 3 month(s) refreshed, 3596 releases with a consensus surprise",
+  "tv: 3 month(s) refreshed, 3597 releases with a consensus surprise",
   "markets: gold, nq, usd, y2, gold15m, gold2h, nq15m, nq2h",
-  "model: fit in 2s; proven: labor:y2"
+  "model: fit in 1s; proven: labor:y2"
  ]
 }
