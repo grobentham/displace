@@ -4,21 +4,19 @@
 (function () {
   "use strict";
   var MARKETS = [["nq", "NQ"], ["es", "ES"], ["gold", "Gold"]];
-  var MICRO = { nq: "MNQ", es: "MES", gold: "MGC" }, MINI = { nq: "NQ", es: "ES", gold: "GC" };
   var root = document.getElementById("mc");
   if (!root) return;
   var $ = function (id) { return document.getElementById(id); };
   var B = null, EV = [], evidence, highImpact = [];
   var outlook = window.DisplaceOutlook, calendar = window.ECON;
   var store = {
-    get: function (k, d) { try { var v = localStorage.getItem("mc." + k); return v === null ? d : v; } catch (e) { return d; } },
-    set: function (k, v) { try { localStorage.setItem("mc." + k, v); } catch (e) {} }
+    get: function () { try { return localStorage.getItem("mc.m") || "nq"; } catch (e) { return "nq"; } },
+    set: function (market) { try { localStorage.setItem("mc.m", market); } catch (e) {} }
   };
-  var mk = store.get("m", "nq");
+  var mk = store.get();
 
   function num(x, dp) { return Number(x).toLocaleString("en-US", { minimumFractionDigits: dp, maximumFractionDigits: dp }); }
   function pts(x, market) { return outlook.formatPoints(x, market); }
-  function usd(x) { return "$" + Math.round(x).toLocaleString("en-US"); }
   function pc(p) { return Math.round(100 * p) + "%"; }
 
   function dayName(iso) { return new Date(iso + "T12:00:00Z").toLocaleDateString("en-US", { weekday: "long", day: "numeric", month: "short", timeZone: "UTC" }); }
@@ -82,7 +80,7 @@
 
     // 2. yesterday's levels
     var lv = $("mc-levels"); lv.replaceChildren();
-    [["high", "Yesterday's high"], ["low", "Yesterday's low"]].forEach(function (s) {
+    [["high", "Prior session high"], ["low", "Prior session low"]].forEach(function (s) {
       var t = m.takes[s[0]], row = el("div", "mc-row");
       var p = el("div", "mc-p", pc(t.p)); p.classList.add(t.p >= t.base + 0.1 ? "up" : t.p <= t.base - 0.1 ? "dn" : "eq");
       var tx = el("div", "mc-rt");
@@ -109,46 +107,45 @@
     });
 
     renderReminder();
-    account(m, r);
+    window.DisplaceSessionPlanner.setMarket(mk, m, day, dayName(day));
     var made = new Date(B.asof), age = (Date.now() - made) / 36e5;
     $("mc-made").textContent = "Forecast made " + made.toLocaleString([], { weekday: "short", hour: "numeric", minute: "2-digit" }) + " your time" +
       (age > 40 ? " — older than usual; the next update may be late." : ".");
-  }
-
-  // 4. your account: the expected range in dollars against your daily loss limit
-  function account(m, r) {
-    var limit = parseFloat(store.get("limit", "")), n = Math.max(1, parseInt(store.get("n", "1"), 10) || 1);
-    var size = store.get("size", "micro"), per = size === "mini" ? m.pv : m.micro, sym = size === "mini" ? MINI[mk] : MICRO[mk];
-    $("mc-sym-micro").textContent = MICRO[mk]; $("mc-sym-mini").textContent = MINI[mk];
-    var out = $("mc-acct"); out.replaceChildren();
-    var full = r.points * per * n, stop = full / 4;
-    out.append(el("p", "", "Today's expected range is worth " + usd(full) + " on " + n + " " + sym + "."));
-    if (!(limit > 0)) { out.append(el("p", "mc-muted", "Enter your daily loss limit to see how much of it one loss could use.")); return; }
-    var share = stop / limit, safe = Math.floor(limit / (r.points * per));
-    var p = el("p", share > 0.5 ? "mc-warn" : "");
-    p.textContent = "A stop a quarter of the range away (" + usd(stop) + ") would use " + pc(share) + " of your " + usd(limit) + " limit in one loss.";
-    out.append(p);
-    out.append(el("p", "mc-muted", safe >= 1
-      ? "To keep one such loss under a quarter of your limit: " + safe + " " + sym + " or fewer."
-      : "Even 1 " + sym + " risks more than a quarter of your limit on that stop today. A smaller contract, a tighter plan or a day off are all reasonable."));
   }
 
   function bind() {
     var tabs = $("mc-tabs");
     MARKETS.forEach(function (x) {
       var b = el("button", "", x[1]); b.type = "button"; b.id = "mc-t-" + x[0]; b.setAttribute("role", "tab");
-      b.addEventListener("click", function () { mk = x[0]; store.set("m", mk); render(); });
+      b.addEventListener("click", function () { mk = x[0]; store.set(mk); render(); });
       tabs.append(b);
     });
-    var lim = $("mc-limit"), n = $("mc-n");
-    lim.value = store.get("limit", ""); n.value = store.get("n", "1");
-    var sz = store.get("size", "micro");
-    root.querySelectorAll('input[name="mc-size"]').forEach(function (i) {
-      i.checked = i.value === sz;
-      i.addEventListener("change", function () { store.set("size", i.value); render(); });
+  }
+
+  function setupShare() {
+    var button = $("mc-share"), panel = $("mc-share-panel"), input = $("mc-share-url"), status = $("mc-share-status");
+    var market = B.markets.nq, day = market && (market.session ? market.session.date : B["for"]);
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(day || "")) return;
+    var link = new URL("mnq-brief.html", document.baseURI);
+    link.searchParams.set("date", day);
+    input.value = link.href;
+    $("mc-share-preview").href = link.href;
+    button.hidden = false;
+
+    button.addEventListener("click", function () {
+      panel.hidden = !panel.hidden;
+      button.setAttribute("aria-expanded", String(!panel.hidden));
     });
-    lim.addEventListener("input", function () { store.set("limit", lim.value); render(); });
-    n.addEventListener("input", function () { store.set("n", n.value); render(); });
+    $("mc-copy").addEventListener("click", async function () {
+      try {
+        await navigator.clipboard.writeText(link.href);
+        status.textContent = "Public brief link copied.";
+      } catch (error) {
+        input.focus();
+        input.select();
+        status.textContent = "Link selected. Copy it to share.";
+      }
+    });
   }
 
   bind();
@@ -163,6 +160,9 @@
     var available = MARKETS.find(function (market) { return B.markets[market[0]]; });
     if (!available) throw Error("No markets available");
     if (!B.markets[mk]) mk = available[0];
-    root.classList.add("ready"); render();
-  }).catch(function () { $("mc-for").textContent = "Today's numbers are unavailable right now. Try again in a minute."; });
+    root.classList.add("ready"); render(); setupShare();
+  }).catch(function () {
+    $("mc-for").textContent = "Today's numbers are unavailable right now. Try again in a minute.";
+    $("mc-plan-session").textContent = "Session data unavailable. Try refreshing.";
+  });
 })();

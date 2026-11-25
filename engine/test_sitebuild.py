@@ -15,12 +15,31 @@ def main():
         cat=P.catalog([r])
         P.jsonwrite(root/"index.json",cat)
         P.write(root/"feed.xml",P.rss(cat))
+        nq={"session":{"date":"2026-11-25","open":"2026-11-24T18:00:00-05:00","close":"2026-11-25T17:00:00-05:00","halts":[]},
+            "range":{"points":776,"lo":456,"hi":1328},"levels":{"high":26350.75,"low":25905.25},
+            "takes":{"high":{"p":0.64},"low":{"p":0.73}},"private_placeholder":"excluded"}
+        bias={"for":"2026-11-25","asof":"2026-11-25T10:00:00+00:00","markets":{"nq":nq}}
+        events=[{"date":"2026-11-25","time":"14:00","impact":"medium","title":"Beige Book"},
+                {"date":"2026-11-26","time":"08:30","impact":"high","title":"Other day"},
+                {"date":"2026-11-25","time":"invalid","impact":"high","title":"Bad time"}]
+        P.jsonwrite(site/"data/bias/current.json",bias)
+        P.jsonwrite(site/"data/calendar/events.json",{"events":events})
+        P.jsonwrite(site/"data/open/current.json",{"by_market":{"nq":{"n":3}}})
         assert S.build(site)==1
+        brief_root=site/"data/briefs/mnq"
+        dated=P.load(brief_root/"2026-11-25.json")
+        assert dated==P.load(brief_root/"latest.json")
+        assert dated["news"]==[{"title":"Beige Book","instant":"2026-11-25T14:00:00-05:00","time_ny":"14:00","impact":"medium"}]
+        assert dated["live_count"]==3 and "private_placeholder" not in str(dated)
         content=(site/"reports"/(r["id"]+".html")).read_text()
         assert "&lt;script&gt;" in content and "<script>" not in content
         assert S.BASE+"reports/"+r["id"]+".html" in content
         assert len(ET.parse(site/"sitemap.xml").getroot())==len(S.PAGES)+2
+        nq["session"]["date"]="2026-11-27"
+        P.jsonwrite(site/"data/bias/current.json",bias)
         assert S.build(site)==1
+        assert P.load(brief_root/"2026-11-25.json")==dated
+        assert P.load(brief_root/"latest.json")["date"]=="2026-11-27"
     print("static site build tests passed")
 if __name__=="__main__":
     main()

@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MNQ session brief · Displace</title>
+  <meta name="description" content="A public Nasdaq futures session brief with the expected range, prior session levels, and scheduled news in your local time.">
+  <meta name="theme-color" content="#101013">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="MNQ session brief · Displace">
+  <meta property="og:description" content="Expected session range, key levels, and scheduled news in your local time.">
+  <meta property="og:image" content="https://grobentham.github.io/displace/og.png">
+  <link rel="canonical" href="https://grobentham.github.io/displace/mnq-brief.html">
+  <link rel="stylesheet" href="assets/morning.css?v=20261125c">
+  <script src="assets/outlook.js?v=20261125b" defer></script>
+  <script src="assets/mnq-brief.js?v=20261125c" defer></script>
+</head>
+<body class="mnq-brief">
+  <header class="mnq-brief-nav"><div class="wide">
+    <a class="mnq-brief-brand" href="index.html#top">Displace</a>
+    <a href="index.html#calendar">Economic calendar</a>
+  </div></header>
+  <main class="mc">
+    <div class="wide">
+      <header class="mnq-brief-heading">
+        <p class="mc-for" id="brief-date"></p>
+        <h1 class="mc-q">MNQ session brief</h1>
+      </header>
+      <p id="brief-state" class="mc-muted" role="status">Loading the public brief…</p>
+      <p id="brief-recovery" hidden><a href="mnq-brief.html">Open the latest MNQ brief</a></p>
+      <div id="brief-content" hidden>
+        <div class="mc-answer">
+          <div class="mc-big"><span id="brief-range"></span><small>points, expected high-to-low</small></div>
+          <p class="mc-range" id="brief-band"></p>
+          <p class="mc-evidence"><b>Historical estimates</b> · <span id="brief-evidence"></span> · <a href="open.html#performance">Forecast record</a></p>
+          <p class="mc-window" id="brief-hours"></p>
+        </div>
+        <div class="mc-grid">
+          <section class="mc-card" aria-labelledby="brief-levels-title">
+            <h2 id="brief-levels-title">Prior session levels</h2>
+            <div id="brief-levels"></div>
+          </section>
+          <section class="mc-card" aria-labelledby="brief-news-title">
+            <h2 id="brief-news-title">Scheduled news <span class="mc-muted">(your time)</span></h2>
+            <div id="brief-news"></div>
+          </section>
+        </div>
+        <p class="mc-foot" id="brief-asof"></p>
+      </div>
+      <p class="mnq-brief-action"><a class="mnq-brief-button" href="index.html#session-plan">Plan my session</a></p>
+    </div>
+  </main>
+</body>
+</html>
