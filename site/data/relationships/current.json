@@ -316,23 +316,23 @@
       "a": "nq",
       "b": "DGS2",
       "status": "available",
-      "latest": "2026-11-20",
-      "age_days": 4,
-      "paired_n": 4772,
+      "latest": "2026-11-23",
+      "age_days": 1,
+      "paired_n": 4773,
       "correlations": {
-        "20": 0.5611,
-        "60": 0.3546,
-        "252": 0.1933
+        "20": 0.4834,
+        "60": 0.3181,
+        "252": 0.1842
       },
-      "prior60": 0.1047,
-      "shift60": 0.2499,
+      "prior60": 0.1072,
+      "shift60": 0.2109,
       "divergence": {
-        "z": -1.1963,
-        "observed": -13.0,
-        "fitted": -6.169924,
-        "beta": 1.06061,
+        "z": -1.3697,
+        "observed": 0.0,
+        "fitted": 7.827657,
+        "beta": 1.250219,
         "training_n": 60,
-        "training_end": "2026-11-19"
+        "training_end": "2026-11-20"
       },
       "flags": []
     },
@@ -562,23 +562,23 @@
       "a": "es",
       "b": "DGS2",
       "status": "available",
-      "latest": "2026-11-20",
-      "age_days": 4,
-      "paired_n": 4772,
+      "latest": "2026-11-23",
+      "age_days": 1,
+      "paired_n": 4773,
       "correlations": {
-        "20": 0.5838,
-        "60": 0.3914,
-        "252": 0.1836
+        "20": 0.4935,
+        "60": 0.3478,
+        "252": 0.1749
       },
-      "prior60": 0.073,
-      "shift60": 0.3184,
+      "prior60": 0.0756,
+      "shift60": 0.2722,
       "divergence": {
-        "z": -1.0771,
-        "observed": -13.0,
-        "fitted": -6.91377,
-        "beta": 1.822741,
+        "z": -1.6475,
+        "observed": 0.0,
+        "fitted": 9.265786,
+        "beta": 2.124892,
         "training_n": 60,
-        "training_end": "2026-11-19"
+        "training_end": "2026-11-20"
       },
       "flags": []
     },
@@ -783,23 +783,23 @@
       "a": "ym",
       "b": "DGS2",
       "status": "available",
-      "latest": "2026-11-20",
-      "age_days": 4,
-      "paired_n": 4457,
+      "latest": "2026-11-23",
+      "age_days": 1,
+      "paired_n": 4458,
       "correlations": {
-        "20": 0.4982,
-        "60": 0.3537,
-        "252": 0.1404
+        "20": 0.4491,
+        "60": 0.3336,
+        "252": 0.1378
       },
-      "prior60": 0.0157,
-      "shift60": 0.338,
+      "prior60": 0.0168,
+      "shift60": 0.3168,
       "divergence": {
-        "z": -1.6891,
-        "observed": -13.0,
-        "fitted": -3.384623,
-        "beta": 1.654521,
+        "z": -0.998,
+        "observed": 0.0,
+        "fitted": 5.705524,
+        "beta": 2.02343,
         "training_n": 60,
-        "training_end": "2026-11-19"
+        "training_end": "2026-11-20"
       },
       "flags": []
     },
@@ -978,23 +978,23 @@
       "a": "rty",
       "b": "DGS2",
       "status": "available",
-      "latest": "2026-11-20",
-      "age_days": 4,
-      "paired_n": 1677,
+      "latest": "2026-11-23",
+      "age_days": 1,
+      "paired_n": 1678,
       "correlations": {
-        "20": 0.5468,
-        "60": 0.3574,
-        "252": 0.145
+        "20": 0.5001,
+        "60": 0.3354,
+        "252": 0.1436
       },
-      "prior60": 0.0953,
-      "shift60": 0.2621,
+      "prior60": 0.0971,
+      "shift60": 0.2383,
       "divergence": {
-        "z": -1.5088,
-        "observed": -13.0,
-        "fitted": -4.39651,
-        "beta": 1.471347,
+        "z": -0.9842,
+        "observed": 0.0,
+        "fitted": 5.618127,
+        "beta": 1.809011,
         "training_n": 60,
-        "training_end": "2026-11-19"
+        "training_end": "2026-11-20"
       },
       "flags": []
     },
@@ -1148,23 +1148,23 @@
       "a": "gold",
       "b": "DGS2",
       "status": "available",
-      "latest": "2026-11-20",
-      "age_days": 4,
-      "paired_n": 2367,
+      "latest": "2026-11-23",
+      "age_days": 1,
+      "paired_n": 2368,
       "correlations": {
-        "20": 0.1224,
-        "60": 0.1395,
-        "252": 0.0478
+        "20": 0.1009,
+        "60": 0.1323,
+        "252": 0.0469
       },
-      "prior60": -0.1141,
-      "shift60": 0.2536,
+      "prior60": -0.1116,
+      "shift60": 0.2439,
       "divergence": {
-        "z": -2.0574,
-        "observed": -13.0,
-        "fitted": -0.75852,
-        "beta": 0.079651,
+        "z": -0.2164,
+        "observed": 0.0,
+        "fitted": 1.309569,
+        "beta": 0.520739,
         "training_n": 60,
-        "training_end": "2026-11-19"
+        "training_end": "2026-11-20"
       },
       "flags": []
     },
@@ -1294,23 +1294,23 @@
       "a": "cl",
       "b": "DGS2",
       "status": "available",
-      "latest": "2026-11-20",
-      "age_days": 4,
-      "paired_n": 4757,
+      "latest": "2026-11-23",
+      "age_days": 1,
+      "paired_n": 4758,
       "correlations": {
-        "20": -0.2774,
-        "60": -0.0322,
-        "252": 0.0722
+        "20": -0.3249,
+        "60": -0.0291,
+        "252": 0.0724
       },
-      "prior60": 0.2262,
-      "shift60": -0.2584,
+      "prior60": 0.2245,
+      "shift60": -0.2536,
       "divergence": {
-        "z": -2.1205,
-        "observed": -13.0,
-        "fitted": -0.380663,
-        "beta": 0.004455,
+        "z": 0.0578,
+        "observed": 0.0,
+        "fitted": -0.353147,
+        "beta": -0.070663,
         "training_n": 60,
-        "training_end": "2026-11-19"
+        "training_end": "2026-11-20"
       },
       "flags": []
     },
@@ -1416,23 +1416,23 @@
       "a": "6e",
       "b": "DGS2",
       "status": "available",
-      "latest": "2026-11-20",
-      "age_days": 4,
-      "paired_n": 4761,
+      "latest": "2026-11-23",
+      "age_days": 1,
+      "paired_n": 4762,
       "correlations": {
-        "20": -0.1424,
-        "60": -0.1095,
-        "252": -0.0957
+        "20": -0.2175,
+        "60": -0.1124,
+        "252": -0.0974
       },
-      "prior60": -0.2098,
-      "shift60": 0.1003,
+      "prior60": -0.2088,
+      "shift60": 0.0964,
       "divergence": {
-        "z": -2.139,
-        "observed": -13.0,
-        "fitted": -0.347839,
-        "beta": -1.915034,
+        "z": -0.0727,
+        "observed": 0.0,
+        "fitted": 0.441891,
+        "beta": -1.957003,
         "training_n": 60,
-        "training_end": "2026-11-19"
+        "training_end": "2026-11-20"
       },
       "flags": []
     },
@@ -1514,23 +1514,23 @@
       "a": "btc",
       "b": "DGS2",
       "status": "available",
-      "latest": "2026-11-20",
-      "age_days": 4,
-      "paired_n": 1599,
+      "latest": "2026-11-23",
+      "age_days": 1,
+      "paired_n": 1600,
       "correlations": {
-        "20": 0.3461,
-        "60": 0.1561,
-        "252": 0.0929
+        "20": 0.3107,
+        "60": 0.1511,
+        "252": 0.093
       },
-      "prior60": 0.1761,
-      "shift60": -0.02,
+      "prior60": 0.1778,
+      "shift60": -0.0267,
       "divergence": {
-        "z": -1.9703,
-        "observed": -13.0,
-        "fitted": -1.298672,
-        "beta": 0.151623,
+        "z": -0.1859,
+        "observed": 0.0,
+        "fitted": 1.122082,
+        "beta": 0.361532,
         "training_n": 60,
-        "training_end": "2026-11-19"
+        "training_end": "2026-11-20"
       },
       "flags": []
     },
@@ -1586,23 +1586,23 @@
       "a": "VIXCLS",
       "b": "DGS2",
       "status": "available",
-      "latest": "2026-11-20",
-      "age_days": 4,
-      "paired_n": 4145,
+      "latest": "2026-11-23",
+      "age_days": 1,
+      "paired_n": 4146,
       "correlations": {
-        "20": -0.6064,
-        "60": -0.3476,
-        "252": -0.0249
+        "20": -0.5655,
+        "60": -0.3011,
+        "252": -0.0221
       },
-      "prior60": 0.3319,
-      "shift60": -0.6795,
+      "prior60": 0.3267,
+      "shift60": -0.6278,
       "divergence": {
-        "z": -1.3613,
-        "observed": -13.0,
-        "fitted": -4.810562,
-        "beta": -0.763588,
+        "z": -1.5551,
+        "observed": 0.0,
+        "fitted": 9.479058,
+        "beta": -0.936587,
         "training_n": 60,
-        "training_end": "2026-11-19"
+        "training_end": "2026-11-20"
       },
       "flags": [
         "correlation_shift"
@@ -1636,23 +1636,23 @@
       "a": "BAMLH0A0HYM2",
       "b": "DGS2",
       "status": "available",
-      "latest": "2026-11-20",
-      "age_days": 4,
-      "paired_n": 710,
+      "latest": "2026-11-23",
+      "age_days": 1,
+      "paired_n": 711,
       "correlations": {
-        "20": -0.7135,
-        "60": -0.4937,
-        "252": -0.3101
+        "20": -0.6722,
+        "60": -0.4705,
+        "252": -0.3003
       },
-      "prior60": -0.2259,
-      "shift60": -0.2678,
+      "prior60": -0.3138,
+      "shift60": -0.1567,
       "divergence": {
-        "z": -0.8555,
-        "observed": -13.0,
-        "fitted": -8.188835,
-        "beta": -0.39434,
+        "z": -1.2049,
+        "observed": 0.0,
+        "fitted": 6.811201,
+        "beta": -0.426913,
         "training_n": 60,
-        "training_end": "2026-11-19"
+        "training_end": "2026-11-20"
       },
       "flags": []
     },
