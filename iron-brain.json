@@ -1,6 +1,68 @@
 {
- "last_seen": "2026-11-25T02:19:49+00:00",
- "records": {},
+ "last_seen": "2026-11-25T22:01:58+00:00",
+ "records": {
+  "2026-11-25|nq|drive-v2": {
+   "date": "2026-11-25",
+   "first_seen": "2026-11-25T22:01:58+00:00",
+   "id": "drive-v2",
+   "lock": {
+    "lockedAt": "2026-11-25 10:18"
+   },
+   "market": "nq",
+   "name": "drive-v2",
+   "note": "No trade today: the setup's conditions weren't met.",
+   "state": "none"
+  },
+  "2026-11-25|nq|orb-0930": {
+   "date": "2026-11-25",
+   "first_seen": "2026-11-25T22:01:58+00:00",
+   "id": "orb-0930",
+   "lock": {
+    "at": "09:45",
+    "buyStop": 25439.75,
+    "dir": "SHORT",
+    "entry": 25058.75,
+    "lockedAt": "2026-11-25 09:53",
+    "sellStop": 25058.75,
+    "stop": 25162.85
+   },
+   "market": "nq",
+   "name": "ORB 09:30 (15-min range)",
+   "result": {
+    "exit": 25162.85,
+    "resolvedAt": "2026-11-25 09:53",
+    "resultPts": -104.1,
+    "stage": "stopped"
+   },
+   "result_seen": "2026-11-25T22:01:58+00:00",
+   "state": "signal"
+  },
+  "2026-11-25|nq|orb-prop": {
+   "date": "2026-11-25",
+   "first_seen": "2026-11-25T22:01:58+00:00",
+   "id": "orb-prop",
+   "lock": {
+    "at": "10:00",
+    "buyStop": 25477.25,
+    "dir": "LONG",
+    "entry": 25477.25,
+    "filledAt": "2026-11-25 11:14",
+    "lockedAt": "2026-11-25 10:18",
+    "sellStop": 25027.5,
+    "stop": 25252.38
+   },
+   "market": "nq",
+   "name": "orb-prop",
+   "result": {
+    "exit": 25252.38,
+    "resolvedAt": "2026-11-25 11:14",
+    "resultPts": -224.88,
+    "stage": "stopped"
+   },
+   "result_seen": "2026-11-25T22:01:58+00:00",
+   "state": "signal"
+  }
+ },
  "source": "https://grobentham.github.io/iron-brain/data/desk.json",
  "version": 1
 }
