@@ -1,10 +1,10 @@
 {
   "version": 1,
-  "asof": "2026-11-25T00:00:36.840735+00:00",
+  "asof": "2026-11-25T03:09:45.708787+00:00",
   "scope": "Recorded forecasts only; not all possible scheduled forecasts. No receipt before the target start means no prospective credit.",
   "forecast_counts": {
     "void": 2,
-    "late": 8,
+    "late": 9,
     "unknown_eligibility": 0,
     "unverified": 22,
     "verified_pending": 7,
@@ -12,7 +12,7 @@
     "verified_invalid_outcome": 0,
     "verified_overdue": 0
   },
-  "total": 39,
+  "total": 40,
   "by_market": {
     "6e": {
       "n": 0,
@@ -795,11 +795,11 @@
       "p_low": 0.66,
       "range_lo": 353.774736,
       "range_hi": 1161.894643,
-      "up": null,
-      "highTaken": null,
-      "lowTaken": null,
-      "inRange": null,
-      "day": null,
+      "up": 0,
+      "highTaken": 0,
+      "lowTaken": 1,
+      "inRange": 1,
+      "day": "2026-11-24",
       "correction": null,
       "id": "ad06c2a6868e609f829bbaed00bdf6bcf3dc25dd65b63018d3b395f7a3e3761c",
       "status": "unverified",
@@ -1004,6 +1004,31 @@
         "published_at": "2026-11-24T22:25:55.181194+00:00",
         "run": "45500243990"
       },
+      "target_start": "2026-11-24T18:00:00-05:00"
+    },
+    {
+      "market": "btc",
+      "candle": "2026-11-24",
+      "for": "2026-11-25",
+      "logged": "2026-11-25T03:09+00:00",
+      "tier": "base",
+      "bias": "neutral",
+      "p_up": 0.493,
+      "base_up": 0.493,
+      "p_high": 0.302,
+      "p_low": 0.597,
+      "range_lo": 522.815988,
+      "range_hi": 1735.705903,
+      "up": null,
+      "highTaken": null,
+      "lowTaken": null,
+      "inRange": null,
+      "day": null,
+      "correction": null,
+      "id": "051e1da9dc9fb36ad9f7238b4d878f5d65f0ba2b8c8e4b88d131e1bb2eb5fbdb",
+      "status": "late",
+      "source": "bias/log.json",
+      "receipt": null,
       "target_start": "2026-11-24T18:00:00-05:00"
     },
     {
