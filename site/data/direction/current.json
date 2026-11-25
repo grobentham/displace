@@ -1,5 +1,5 @@
 {
- "asof": "2026-11-25T08:25-05:00",
+ "asof": "2026-11-25T08:55-05:00",
  "version": 4,
  "assets": {
   "gold": "Gold, close",
@@ -937,7 +937,7 @@
     "historical_candidate": false
    },
    "nq2h": {
-    "b": -0.6022,
+    "b": -0.6021,
     "k": 1.25,
     "n": 85,
     "since": "2024-06-28",
@@ -963,7 +963,7 @@
   },
   "labor": {
    "gold": {
-    "b": 0.0092,
+    "b": 0.009,
     "k": 0.4,
     "n": 1218,
     "since": "2010-04-08",
@@ -987,7 +987,7 @@
     "historical_candidate": false
    },
    "nq": {
-    "b": -0.0241,
+    "b": -0.0242,
     "k": 0.0,
     "n": 1364,
     "since": "2010-04-01",
@@ -1011,7 +1011,7 @@
     "historical_candidate": false
    },
    "usd": {
-    "b": 0.0855,
+    "b": 0.0856,
     "k": 0.55,
     "n": 1366,
     "since": "2010-04-01",
@@ -1035,7 +1035,7 @@
     "historical_candidate": false
    },
    "y2": {
-    "b": 0.1792,
+    "b": 0.179,
     "k": 0.65,
     "n": 1099,
     "since": "2010-04-01",
@@ -1059,7 +1059,7 @@
     "historical_candidate": true
    },
    "gold2h": {
-    "b": -0.4677,
+    "b": -0.4697,
     "k": 1.2,
     "n": 205,
     "since": "2024-07-02",
@@ -1069,7 +1069,7 @@
      "rate": 0.536,
      "pval": 0.4252770096063614,
      "brierSkill": 0.011,
-     "brierSkillBase": 0.0354,
+     "brierSkillBase": 0.0356,
      "baseBrier": 0.256354,
      "halves": [
       0.357,
@@ -1083,7 +1083,7 @@
     "historical_candidate": false
    },
    "nq2h": {
-    "b": -0.2387,
+    "b": -0.2404,
     "k": 0.0,
     "n": 206,
     "since": "2024-07-02",
@@ -1133,7 +1133,7 @@
     "historical_candidate": false
    },
    "nq": {
-    "b": 0.0671,
+    "b": 0.0672,
     "k": 0.3,
     "n": 1179,
     "since": "2011-01-03",
@@ -1157,7 +1157,7 @@
     "historical_candidate": false
    },
    "usd": {
-    "b": 0.168,
+    "b": 0.1681,
     "k": 0.85,
     "n": 1176,
     "since": "2011-01-03",
@@ -1205,7 +1205,7 @@
     "historical_candidate": false
    },
    "gold2h": {
-    "b": -0.1811,
+    "b": -0.1812,
     "k": 0.6,
     "n": 182,
     "since": "2024-07-01",
@@ -1514,7 +1514,7 @@
    "calls": 0,
    "hits": 0,
    "open": 0,
-   "historicalOnly": 2,
+   "historicalOnly": 5,
    "byAsset": {},
    "recent": []
   }
@@ -3612,12 +3612,14 @@
    "consensus": {
     "title": "Durable Goods Orders MoM",
     "forecast": 0.6,
-    "actual": null,
+    "actual": 0.2,
     "unit": "%",
     "scale": null
    },
-   "stage": "pre",
-   "hot": {
+   "stage": "post",
+   "z": -0.15,
+   "bin": "inline",
+   "calls": {
     "gold": {
      "none": true,
      "n": 1,
@@ -3638,42 +3640,18 @@
      "n": 159,
      "why": "not significant after correcting for the number of rules tested"
     },
-    "gold2h": {
+    "gold15m": {
      "none": true,
-     "n": 55,
-     "why": "right less than 55% of the time on unseen releases"
-    },
-    "nq2h": {
-     "none": true,
-     "n": 22,
-     "why": "right less than 55% of the time on unseen releases"
-    }
-   },
-   "cool": {
-    "gold": {
-     "none": true,
-     "n": 1,
-     "why": "too few tested calls"
-    },
-    "nq": {
-     "none": true,
-     "n": 66,
-     "why": "right less than 55% of the time on unseen releases"
-    },
-    "usd": {
-     "none": true,
-     "n": 130,
-     "why": "not significant after correcting for the number of rules tested"
-    },
-    "y2": {
-     "none": true,
-     "n": 159,
-     "why": "not significant after correcting for the number of rules tested"
+     "why": "the first 15m have passed"
     },
     "gold2h": {
      "none": true,
      "n": 55,
      "why": "right less than 55% of the time on unseen releases"
+    },
+    "nq15m": {
+     "none": true,
+     "why": "the first 15m have passed"
     },
     "nq2h": {
      "none": true,
@@ -3682,26 +3660,16 @@
     }
    },
    "hist": {
-    "hot": {
-     "nq": {
-      "dir": "up",
-      "p": 0.673,
-      "n": 55
-     }
+    "nq": {
+     "dir": "up",
+     "p": 0.626,
+     "n": 99
     },
-    "inline": {
-     "nq": {
-      "dir": "up",
-      "p": 0.626,
-      "n": 99
-     },
-     "y2": {
-      "dir": "up",
-      "p": 0.667,
-      "n": 81
-     }
-    },
-    "cool": {}
+    "y2": {
+     "dir": "up",
+     "p": 0.667,
+     "n": 81
+    }
    },
    "move": {
     "gold": {
@@ -3737,12 +3705,14 @@
    "consensus": {
     "title": "Initial Jobless Claims",
     "forecast": 200.0,
-    "actual": null,
+    "actual": 189.0,
     "unit": null,
     "scale": "K"
    },
-   "stage": "pre",
-   "hot": {
+   "stage": "post",
+   "z": 0.82,
+   "bin": "hot",
+   "calls": {
     "gold": {
      "none": true,
      "n": 150,
@@ -3763,42 +3733,18 @@
      "n": 377,
      "why": "Historical candidate; qualification suspended pending point-in-time and prospective validation"
     },
-    "gold2h": {
+    "gold15m": {
      "none": true,
-     "n": 28,
-     "why": "right less than 55% of the time on unseen releases"
-    },
-    "nq2h": {
-     "none": true,
-     "n": 5,
-     "why": "too few tested calls"
-    }
-   },
-   "cool": {
-    "gold": {
-     "none": true,
-     "n": 150,
-     "why": "right less than 55% of the time on unseen releases"
-    },
-    "nq": {
-     "none": true,
-     "n": 16,
-     "why": "too few tested calls"
-    },
-    "usd": {
-     "none": true,
-     "n": 176,
-     "why": "not significant after correcting for the number of rules tested"
-    },
-    "y2": {
-     "none": true,
-     "n": 377,
-     "why": "Historical candidate; qualification suspended pending point-in-time and prospective validation"
+     "why": "the first 15m have passed"
     },
     "gold2h": {
      "none": true,
      "n": 28,
      "why": "right less than 55% of the time on unseen releases"
+    },
+    "nq15m": {
+     "none": true,
+     "why": "the first 15m have passed"
     },
     "nq2h": {
      "none": true,
@@ -3807,15 +3753,11 @@
     }
    },
    "hist": {
-    "hot": {
-     "nq2h": {
-      "dir": "down",
-      "p": 0.727,
-      "n": 33
-     }
-    },
-    "inline": {},
-    "cool": {}
+    "nq2h": {
+     "dir": "down",
+     "p": 0.727,
+     "n": 33
+    }
    },
    "move": {
     "gold": {
@@ -3851,12 +3793,14 @@
    "consensus": {
     "title": "Core PCE Price Index MoM",
     "forecast": 0.3,
-    "actual": null,
+    "actual": 0.3,
     "unit": "%",
     "scale": null
    },
-   "stage": "pre",
-   "hot": {
+   "stage": "post",
+   "z": 0.0,
+   "bin": "inline",
+   "calls": {
     "gold": {
      "none": true,
      "n": 15,
@@ -3877,10 +3821,18 @@
      "n": 17,
      "why": "too few tested calls"
     },
+    "gold15m": {
+     "none": true,
+     "why": "the first 15m have passed"
+    },
     "gold2h": {
      "none": true,
      "n": 25,
      "why": "not significant after correcting for the number of rules tested"
+    },
+    "nq15m": {
+     "none": true,
+     "why": "the first 15m have passed"
     },
     "nq2h": {
      "none": true,
@@ -3888,43 +3840,7 @@
      "why": "not significant after correcting for the number of rules tested"
     }
    },
-   "cool": {
-    "gold": {
-     "none": true,
-     "n": 15,
-     "why": "too few tested calls"
-    },
-    "nq": {
-     "none": true,
-     "n": 1,
-     "why": "too few tested calls"
-    },
-    "usd": {
-     "none": true,
-     "n": 5,
-     "why": "too few tested calls"
-    },
-    "y2": {
-     "none": true,
-     "n": 17,
-     "why": "too few tested calls"
-    },
-    "gold2h": {
-     "none": true,
-     "n": 25,
-     "why": "not significant after correcting for the number of rules tested"
-    },
-    "nq2h": {
-     "none": true,
-     "n": 23,
-     "why": "not significant after correcting for the number of rules tested"
-    }
-   },
-   "hist": {
-    "hot": {},
-    "inline": {},
-    "cool": {}
-   },
+   "hist": {},
    "move": {
     "gold": {
      "pct": 2.16,
@@ -5615,8 +5531,8 @@
   }
  },
  "log": [
-  "tv: 3 month(s) refreshed, 3593 releases with a consensus surprise",
+  "tv: 3 month(s) refreshed, 3596 releases with a consensus surprise",
   "markets: gold, nq, usd, y2, gold15m, gold2h, nq15m, nq2h",
-  "model: fit in 3s; proven: labor:y2"
+  "model: fit in 2s; proven: labor:y2"
  ]
 }

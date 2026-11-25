@@ -5,7 +5,26 @@
    "date": "2026-11-25",
    "opensAt": "2026-11-25T07:00+08:00",
    "generatedAt": "2026-11-25T06:45:04+08:00",
-   "updates": [],
+   "updates": [
+    {
+     "id": "20261125-initial-jobless-claims-moved-to-wednesda",
+     "title": "Initial jobless claims (moved to Wednesday for Thanksgiving)",
+     "url": "https://alfred.stlouisfed.org/series?seid=ICSA&vintage_date=2026-11-25",
+     "source": "Dept. of Labor",
+     "analysis": "Jobless claims came in at 189K against a 201K forecast, below expectations. The previous reading was 203K, revised to 202K. 4-week average 196K (previous 198K); Continuing claims 1.70M (previous 1.79M). The initial claims reading was the lowest since week to Jul 18.",
+     "context": "Initial claims count new unemployment insurance applications. The four-week average smooths weekly swings.",
+     "published": "2026-11-25T21:30:00+08:00"
+    },
+    {
+     "id": "20261125-pce-inflation-personal-income-and-outlay",
+     "title": "PCE inflation · Personal income and outlays (Oct)",
+     "url": "https://alfred.stlouisfed.org/series?seid=PCEPILFE&vintage_date=2026-11-25",
+     "source": "BEA",
+     "analysis": "Core PCE came in at 0.3% against a 0.3% forecast, in line with expectations. The previous reading was 0.3%. PCE m/m 0.3% (previous 0.5%); Core PCE y/y 3.3% (previous 3.1%); Personal spending m/m 0.3% (previous 0.6%).",
+     "context": "The Fed measures its inflation target using headline PCE. Core PCE helps identify the underlying trend.",
+     "published": "2026-11-25T21:30:00+08:00"
+    }
+   ],
    "upcoming": [
     {
      "at": "2026-11-25T21:30+08:00",
@@ -25,7 +44,25 @@
      "metric": "core PCE price index month-on-month",
      "forecast": "0.3%",
      "previous": "0.3%",
-     "forecastSource": "ForexFactory consensus"
+     "forecastSource": "ForexFactory consensus",
+     "actual": "0.3%",
+     "components": [
+      {
+       "label": "PCE m/m",
+       "actual": "0.3%",
+       "previous": "0.5%"
+      },
+      {
+       "label": "Core PCE y/y",
+       "actual": "3.3%",
+       "previous": "3.1%"
+      },
+      {
+       "label": "Personal spending m/m",
+       "actual": "0.3%",
+       "previous": "0.6%"
+      }
+     ]
     },
     {
      "at": "2026-11-25T21:30+08:00",
@@ -34,7 +71,16 @@
      "metric": "durable goods orders month-on-month",
      "forecast": "0.7%",
      "previous": "1.8%",
-     "forecastSource": "ForexFactory consensus"
+     "forecastSource": "ForexFactory consensus",
+     "actual": "0.2%",
+     "revised": "2.0%",
+     "components": [
+      {
+       "label": "Ex transportation m/m",
+       "actual": "0.5%",
+       "previous": "0.5%"
+      }
+     ]
     }
    ],
    "moreReleases": [
@@ -46,7 +92,21 @@
      "metric": "initial claims",
      "forecast": "201K",
      "previous": "203K",
-     "forecastSource": "ForexFactory consensus"
+     "forecastSource": "ForexFactory consensus",
+     "actual": "189K",
+     "revised": "202K",
+     "components": [
+      {
+       "label": "4-week average",
+       "actual": "196K",
+       "previous": "198K"
+      },
+      {
+       "label": "Continuing claims",
+       "actual": "1.70M",
+       "previous": "1.79M"
+      }
+     ]
     },
     {
      "at": "2026-11-25T23:00+08:00",
@@ -64,8 +124,8 @@
     }
    ],
    "focus": {
-    "title": "GDP, second estimate",
-    "at": "2026-11-25T21:30+08:00"
+    "title": "New home sales",
+    "at": "2026-11-25T23:00+08:00"
    },
    "nextFed": "Dec 8–9",
    "otherCloses": [
@@ -96,7 +156,8 @@
    },
    "calendarCovered": true,
    "feedsChecked": true,
-   "feedIssues": false
+   "feedIssues": false,
+   "refreshedAt": "2026-11-25T21:55:04+08:00"
   },
   {
    "date": "2026-11-24",

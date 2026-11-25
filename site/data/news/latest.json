@@ -1,5 +1,5 @@
 {
- "checkedAt": "2026-11-25T13:25:09+00:00",
+ "checkedAt": "2026-11-25T13:55:03+00:00",
  "sources": {
   "Federal Reserve": true,
   "European Central Bank": true,
@@ -8,21 +8,39 @@
  "sourceHealth": {
   "Federal Reserve": {
    "state": "available",
-   "checkedAt": "2026-11-25T13:25:09+00:00",
-   "lastSuccessAt": "2026-11-25T13:25:09+00:00"
+   "checkedAt": "2026-11-25T13:55:03+00:00",
+   "lastSuccessAt": "2026-11-25T13:55:03+00:00"
   },
   "European Central Bank": {
    "state": "available",
-   "checkedAt": "2026-11-25T13:25:09+00:00",
-   "lastSuccessAt": "2026-11-25T13:25:09+00:00"
+   "checkedAt": "2026-11-25T13:55:03+00:00",
+   "lastSuccessAt": "2026-11-25T13:55:03+00:00"
   },
   "Bank of England": {
    "state": "available",
-   "checkedAt": "2026-11-25T13:25:09+00:00",
-   "lastSuccessAt": "2026-11-25T13:25:09+00:00"
+   "checkedAt": "2026-11-25T13:55:03+00:00",
+   "lastSuccessAt": "2026-11-25T13:55:03+00:00"
   }
  },
  "items": [
+  {
+   "id": "20261125-initial-jobless-claims-moved-to-wednesda",
+   "title": "Initial jobless claims (moved to Wednesday for Thanksgiving)",
+   "source": "Dept. of Labor",
+   "url": "https://alfred.stlouisfed.org/series?seid=ICSA&vintage_date=2026-11-25",
+   "published": "2026-11-25T13:30:00+00:00",
+   "analysis": "Jobless claims came in at 189K against a 201K forecast, below expectations. The previous reading was 203K, revised to 202K. 4-week average 196K (previous 198K); Continuing claims 1.70M (previous 1.79M). The initial claims reading was the lowest since week to Jul 18.",
+   "context": "Initial claims count new unemployment insurance applications. The four-week average smooths weekly swings."
+  },
+  {
+   "id": "20261125-pce-inflation-personal-income-and-outlay",
+   "title": "PCE inflation · Personal income and outlays (Oct)",
+   "source": "BEA",
+   "url": "https://alfred.stlouisfed.org/series?seid=PCEPILFE&vintage_date=2026-11-25",
+   "published": "2026-11-25T13:30:00+00:00",
+   "analysis": "Core PCE came in at 0.3% against a 0.3% forecast, in line with expectations. The previous reading was 0.3%. PCE m/m 0.3% (previous 0.5%); Core PCE y/y 3.3% (previous 3.1%); Personal spending m/m 0.3% (previous 0.6%).",
+   "context": "The Fed measures its inflation target using headline PCE. Core PCE helps identify the underlying trend."
+  },
   {
    "id": "20261119-initial-jobless-claims",
    "title": "Initial jobless claims",

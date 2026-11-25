@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-24",
+ "updated": "2026-11-25",
  "through": "2027-04-07",
  "events": [
   {
@@ -276,15 +276,27 @@
    "components": [
     {
      "label": "Durable goods m/m",
-     "previous": "1.9%"
+     "actual": "0.2%",
+     "previous": "2.0%"
     },
     {
      "label": "Ex transportation m/m",
+     "actual": "0.5%",
      "previous": "0.5%"
     }
    ],
    "forecast": "0.7%",
-   "fsrc": "ForexFactory consensus"
+   "fsrc": "ForexFactory consensus",
+   "revised": "2.0%",
+   "actual": "0.2%",
+   "provenance": {
+    "via": "ALFRED",
+    "series": "DGORDER",
+    "asof": "2026-11-25"
+   },
+   "facts": [
+    "It was the fifth monthly increase in a row."
+   ]
   },
   {
    "date": "2026-11-25",
@@ -304,7 +316,7 @@
    "components": [
     {
      "label": "Real GDP, annualized",
-     "previous": "2.2%"
+     "previous": "3.4%"
     }
    ],
    "forecast": "3.5%",
@@ -324,19 +336,33 @@
    "components": [
     {
      "label": "Initial claims",
-     "previous": "203K"
+     "actual": "189K",
+     "previous": "202K"
     },
     {
      "label": "4-week average",
+     "actual": "196K",
      "previous": "198K"
     },
     {
      "label": "Continuing claims",
-     "previous": "1.76M"
+     "actual": "1.70M",
+     "previous": "1.79M"
     }
    ],
    "forecast": "201K",
-   "fsrc": "ForexFactory consensus"
+   "fsrc": "ForexFactory consensus",
+   "revised": "202K",
+   "actual": "189K",
+   "provenance": {
+    "via": "ALFRED",
+    "series": "ICSA",
+    "asof": "2026-11-25"
+   },
+   "facts": [
+    "The initial claims reading was the lowest since week to Jul 18."
+   ],
+   "recap": "Jobless claims came in at 189K against a 201K forecast, below expectations. The previous reading was 203K, revised to 202K. 4-week average 196K (previous 198K); Continuing claims 1.70M (previous 1.79M). The initial claims reading was the lowest since week to Jul 18."
   },
   {
    "date": "2026-11-25",
@@ -356,27 +382,40 @@
    "components": [
     {
      "label": "Core PCE m/m",
+     "actual": "0.3%",
      "previous": "0.3%"
     },
     {
      "label": "PCE m/m",
+     "actual": "0.3%",
      "previous": "0.5%"
     },
     {
      "label": "Core PCE y/y",
+     "actual": "3.3%",
      "previous": "3.1%"
     },
     {
      "label": "Personal spending m/m",
-     "previous": "0.5%"
+     "actual": "0.3%",
+     "previous": "0.6%"
     },
     {
      "label": "Personal income m/m",
-     "previous": "0.2%"
+     "actual": "0.7%",
+     "previous": "0.3%"
     }
    ],
    "forecast": "0.3%",
-   "fsrc": "ForexFactory consensus"
+   "fsrc": "ForexFactory consensus",
+   "actual": "0.3%",
+   "provenance": {
+    "via": "ALFRED",
+    "series": "PCEPILFE",
+    "asof": "2026-11-25"
+   },
+   "facts": [],
+   "recap": "Core PCE came in at 0.3% against a 0.3% forecast, in line with expectations. The previous reading was 0.3%. PCE m/m 0.3% (previous 0.5%); Core PCE y/y 3.3% (previous 3.1%); Personal spending m/m 0.3% (previous 0.6%)."
   },
   {
    "date": "2026-11-25",
@@ -501,7 +540,7 @@
    "components": [
     {
      "label": "Durable goods m/m",
-     "previous": "1.9%"
+     "previous": "0.2%"
     },
     {
      "label": "Ex transportation m/m",
@@ -518,7 +557,8 @@
    "src": "Dept. of Labor",
    "note": "Weekly initial claims for unemployment insurance.",
    "id": "20261203-initial-jobless-claims",
-   "metric": "initial claims"
+   "metric": "initial claims",
+   "previous": "189K"
   },
   {
    "date": "2026-12-03",
@@ -780,7 +820,7 @@
    "components": [
     {
      "label": "Durable goods m/m",
-     "previous": "1.9%"
+     "previous": "0.2%"
     },
     {
      "label": "Ex transportation m/m",
@@ -824,19 +864,19 @@
     },
     {
      "label": "PCE m/m",
-     "previous": "0.5%"
+     "previous": "0.3%"
     },
     {
      "label": "Core PCE y/y",
-     "previous": "3.1%"
+     "previous": "3.3%"
     },
     {
      "label": "Personal spending m/m",
-     "previous": "0.5%"
+     "previous": "0.3%"
     },
     {
      "label": "Personal income m/m",
-     "previous": "0.2%"
+     "previous": "0.7%"
     }
    ]
   },

@@ -1,60 +1,60 @@
 {
- "lastRun": "2026-11-25T08:24-05:00",
+ "lastRun": "2026-11-25T08:54-05:00",
  "source": "public FRED and agency data",
- "fredCalls": 79,
+ "fredCalls": 93,
  "fred": true,
  "sources": {
   "fred": {
    "state": "available",
-   "checkedAt": "2026-11-25T08:24-05:00",
-   "lastSuccessAt": "2026-11-25T08:24-05:00"
+   "checkedAt": "2026-11-25T08:54-05:00",
+   "lastSuccessAt": "2026-11-25T08:54-05:00"
   },
   "alfred": {
    "state": "available",
-   "checkedAt": "2026-11-25T08:24-05:00",
-   "lastSuccessAt": "2026-11-25T08:24-05:00"
+   "checkedAt": "2026-11-25T08:54-05:00",
+   "lastSuccessAt": "2026-11-25T08:54-05:00"
   },
   "bls": {
    "state": "available",
-   "checkedAt": "2026-11-25T08:24-05:00",
-   "lastSuccessAt": "2026-11-25T08:24-05:00"
+   "checkedAt": "2026-11-25T08:54-05:00",
+   "lastSuccessAt": "2026-11-25T08:54-05:00"
   },
   "bea": {
-   "state": "available",
-   "checkedAt": "2026-11-25T08:24-05:00",
-   "lastSuccessAt": "2026-11-25T08:24-05:00"
+   "state": "partial",
+   "checkedAt": "2026-11-25T08:54-05:00",
+   "lastSuccessAt": "2026-11-25T08:54-05:00"
   },
   "census": {
    "state": "available",
-   "checkedAt": "2026-11-25T08:24-05:00",
-   "lastSuccessAt": "2026-11-25T08:24-05:00"
+   "checkedAt": "2026-11-25T08:54-05:00",
+   "lastSuccessAt": "2026-11-25T08:54-05:00"
   },
   "treasury": {
    "state": "available",
-   "checkedAt": "2026-11-25T08:24-05:00",
-   "lastSuccessAt": "2026-11-25T08:24-05:00"
+   "checkedAt": "2026-11-25T08:54-05:00",
+   "lastSuccessAt": "2026-11-25T08:54-05:00"
   },
   "nyFed": {
    "state": "available",
-   "checkedAt": "2026-11-25T08:24-05:00",
-   "lastSuccessAt": "2026-11-25T08:24-05:00"
+   "checkedAt": "2026-11-25T08:54-05:00",
+   "lastSuccessAt": "2026-11-25T08:54-05:00"
   },
   "fedStatements": {
    "state": "available",
-   "checkedAt": "2026-11-25T08:24-05:00",
-   "lastSuccessAt": "2026-11-25T08:24-05:00"
+   "checkedAt": "2026-11-25T08:54-05:00",
+   "lastSuccessAt": "2026-11-25T08:54-05:00"
   },
   "nasdaqCalendar": {
    "state": "available",
-   "checkedAt": "2026-11-25T08:24-05:00",
-   "lastSuccessAt": "2026-11-25T08:24-05:00"
+   "checkedAt": "2026-11-25T08:54-05:00",
+   "lastSuccessAt": "2026-11-25T08:54-05:00"
   }
  },
  "freshness": {
-  "calendarUpdatedOn": "2026-11-24",
+  "calendarUpdatedOn": "2026-11-25",
   "latestActual": {
-   "title": "Initial jobless claims",
-   "date": "2026-11-19"
+   "title": "Durable goods orders (Oct)",
+   "date": "2026-11-25"
   },
   "marketDates": {
    "y2": "2026-11-24",
@@ -63,8 +63,8 @@
   }
  },
  "quality": {
-  "passed": 27,
-  "total": 28,
+  "passed": 43,
+  "total": 44,
   "held": 0,
   "rejected": 0,
   "critical": 0
@@ -75,7 +75,11 @@
  "upcoming": 81,
  "warnings": [],
  "log": [
-  "engine run 2026-11-25T08:24-05:00 using public FRED and agency data",
-  "quality: 27/28 checks passed, 0 held, 0 rejected"
+  "engine run 2026-11-25T08:54-05:00 using public FRED and agency data",
+  "actual 20261125-durable-goods-orders-oct 0.2%",
+  "actual 20261125-initial-jobless-claims-moved-to-wednesda 189K",
+  "actual 20261125-pce-inflation-personal-income-and-outlay 0.3%",
+  "calendar saved",
+  "quality: 43/44 checks passed, 0 held, 0 rejected"
  ]
 }

@@ -1,5 +1,5 @@
 {
- "asof": "2026-11-18",
+ "asof": "2026-11-25",
  "series": {
   "cpi": {
    "name": "Core CPI",
@@ -240,12 +240,6 @@
    "metric": "core PCE price index month-on-month",
    "rows": [
     {
-     "period": "Oct 2025",
-     "date": "2026-01-22",
-     "actual": "0.2%",
-     "forecast": "0.2%"
-    },
-    {
      "period": "Nov 2025",
      "date": "2026-01-22",
      "actual": "0.2%",
@@ -308,6 +302,12 @@
     {
      "period": "Sep 2026",
      "date": "2026-10-29",
+     "actual": "0.3%",
+     "forecast": "0.3%"
+    },
+    {
+     "period": "Oct 2026",
+     "date": "2026-11-25",
      "actual": "0.3%",
      "forecast": "0.3%"
     }

@@ -34,6 +34,51 @@
    "evaluation_basis": "release-window historical observation",
    "move": -2.566,
    "hit": true
+  },
+  {
+   "id": "20261125-durable-goods-orders-oct",
+   "date": "2026-11-25",
+   "when": "2026-11-25T08:30:00-05:00",
+   "kind": "durables",
+   "group": "activity",
+   "asset": "nq",
+   "dir": "up",
+   "p": 0.626,
+   "z": -0.15,
+   "tier": "hist",
+   "logged": "2026-11-25T08:55-05:00",
+   "eligible": false,
+   "evaluation_basis": "release-window historical observation"
+  },
+  {
+   "id": "20261125-durable-goods-orders-oct",
+   "date": "2026-11-25",
+   "when": "2026-11-25T08:30:00-05:00",
+   "kind": "durables",
+   "group": "activity",
+   "asset": "y2",
+   "dir": "up",
+   "p": 0.667,
+   "z": -0.15,
+   "tier": "hist",
+   "logged": "2026-11-25T08:55-05:00",
+   "eligible": false,
+   "evaluation_basis": "release-window historical observation"
+  },
+  {
+   "id": "20261125-initial-jobless-claims-moved-to-wednesda",
+   "date": "2026-11-25",
+   "when": "2026-11-25T08:30:00-05:00",
+   "kind": "claims",
+   "group": "labor",
+   "asset": "nq2h",
+   "dir": "down",
+   "p": 0.727,
+   "z": 0.82,
+   "tier": "hist",
+   "logged": "2026-11-25T08:55-05:00",
+   "eligible": false,
+   "evaluation_basis": "release-window historical observation"
   }
  ]
 }
