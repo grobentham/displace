@@ -1748,7 +1748,7 @@ svg.cd line.wick{animation:fadein .5s ease-out both}
 .ms-grid small{display:block;color:var(--muted);font-size:.8rem}.ms-grid b{font-size:1.5rem;letter-spacing:-.03em;font-variant-numeric:tabular-nums}
 .ms-note{color:var(--muted);font-size:.82rem;margin-top:12px}
 </style>
-<link rel="canonical" href="https://grobentham.github.io/displace/"><link rel="stylesheet" href="assets/morning.css?v=20261125e">
+<link rel="canonical" href="https://grobentham.github.io/displace/"><link rel="stylesheet" href="assets/morning.css?v=20261125g">
 </head>
 <body>
 
@@ -1849,18 +1849,20 @@ svg.cd line.wick{animation:fadein .5s ease-out both}
 <!-- IRON BRAIN BIAS -->
 <section class="iron-bias-page dark mc" id="intraday-bias" aria-labelledby="ib-outlook-title">
   <div class="wide">
-    <section class="mc-card ib-outlook" aria-labelledby="ib-outlook-title">
-      <div class="ib-outlook-top">
-        <div><h1 id="ib-outlook-title">Iron Brain market outlook</h1><p id="ib-outlook-stamp" class="mc-muted">Loading delayed market data…</p></div>
-        <div class="mc-tabs ib-outlook-tabs" role="group" aria-label="Iron Brain market">
-          <button type="button" data-ib-market="nq" aria-pressed="true">NQ</button>
-          <button type="button" data-ib-market="es" aria-pressed="false">ES</button>
-          <button type="button" data-ib-market="xauusd" aria-pressed="false">XAUUSD</button>
+    <div class="ib-outlook">
+      <header class="ib-outlook-top">
+        <h1 id="ib-outlook-title">Intraday bias</h1>
+        <div class="mc-tabs ib-outlook-tabs" role="group" aria-label="Select market">
+          <button type="button" data-ib-market="nq" aria-pressed="true" aria-controls="ib-outlook-body">NQ</button>
+          <button type="button" data-ib-market="es" aria-pressed="false" aria-controls="ib-outlook-body">ES</button>
+          <button type="button" data-ib-market="xauusd" aria-pressed="false" aria-controls="ib-outlook-body">XAUUSD</button>
         </div>
+      </header>
+      <div id="ib-outlook-body" aria-live="polite">
+        <div class="ib-outlook-snapshot">Loading the NQ outlook…</div>
       </div>
-      <div id="ib-outlook-body" aria-live="polite"></div>
-      <footer class="ib-outlook-footer"><span>Intraday market conditions · delayed data</span><a href="/iron-brain/">Open Iron Brain</a></footer>
-    </section>
+      <div class="ib-outlook-footer"><a href="/iron-brain/">Open Iron Brain</a></div>
+    </div>
   </div>
 </section>
 
@@ -4086,6 +4088,6 @@ Promise.all([get("macro/current"),get("signals/current").catch(function(){return
 </script>
 <script src="assets/session-planner.js?v=20261125c" defer></script>
 <script src="assets/morning.js?v=20261125c" defer></script>
-<script src="assets/iron-outlook.js?v=20261125f" defer></script>
+<script src="assets/iron-outlook.js?v=20261125g" defer></script>
 </body>
 </html>
