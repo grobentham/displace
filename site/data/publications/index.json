@@ -2,6 +2,14 @@
   "version": 1,
   "reports": [
     {
+      "id": "daily-2026-11-25",
+      "kind": "daily",
+      "title": "Daily financial intelligence — 2026-11-25",
+      "generated_at": "2026-11-25T12:15:45+00:00",
+      "sha256": "262f9b8ec6e454692c8aa099508d31f918ba7e157dc2534c4f3ce0fb4050180f",
+      "path": "reports/daily-2026-11-25.json"
+    },
+    {
       "id": "signal-c95b26a59dfac12545ca43a8b20a9b9690103969312d87679677f24c745eeac5",
       "kind": "signal",
       "title": "Weak risk appetite proxy — severity changed",

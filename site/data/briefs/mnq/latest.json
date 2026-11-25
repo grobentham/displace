@@ -1,0 +1,63 @@
+{
+  "date": "2026-11-25",
+  "asof": "2026-11-25T12:15+00:00",
+  "session": {
+    "open": "2026-11-24T18:00:00-05:00",
+    "close": "2026-11-25T17:00:00-05:00",
+    "halts": []
+  },
+  "range": {
+    "points": 943.162669,
+    "lo": 554.55247,
+    "hi": 1618.32277
+  },
+  "levels": {
+    "high": {
+      "price": 27036.0,
+      "probability": 0.291
+    },
+    "low": {
+      "price": 25998.0,
+      "probability": 0.619
+    }
+  },
+  "news": [
+    {
+      "title": "Durable goods orders (Oct)",
+      "instant": "2026-11-25T08:30:00-05:00",
+      "time_ny": "08:30",
+      "impact": "medium"
+    },
+    {
+      "title": "GDP, second estimate (Q3)",
+      "instant": "2026-11-25T08:30:00-05:00",
+      "time_ny": "08:30",
+      "impact": "high"
+    },
+    {
+      "title": "Initial jobless claims (moved to Wednesday for Thanksgiving)",
+      "instant": "2026-11-25T08:30:00-05:00",
+      "time_ny": "08:30",
+      "impact": "medium"
+    },
+    {
+      "title": "PCE inflation · Personal income and outlays (Oct)",
+      "instant": "2026-11-25T08:30:00-05:00",
+      "time_ny": "08:30",
+      "impact": "high"
+    },
+    {
+      "title": "New home sales (Oct)",
+      "instant": "2026-11-25T10:00:00-05:00",
+      "time_ny": "10:00",
+      "impact": "medium"
+    },
+    {
+      "title": "Beige Book",
+      "instant": "2026-11-25T14:00:00-05:00",
+      "time_ny": "14:00",
+      "impact": "medium"
+    }
+  ],
+  "live_count": 0
+}
