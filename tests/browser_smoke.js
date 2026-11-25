@@ -29,7 +29,26 @@ async function checkOutlook(page, width) {
  await page.addInitScript(()=>Object.defineProperty(navigator,'clipboard',{
   configurable:true,value:{writeText:async url=>{window.copiedBriefUrl=url;}}
  }));
+ const snapshot=(symbol,time=day+'T09:55:00Z')=>({
+  symbol,time,barTime:day+'T09:45:00Z',phaseText:'London fixture',lean:'bearish',
+  leanText:symbol+' bearish fixture',lines:[symbol+' bearish fixture',symbol+' price line'],
+  levels:{above:[{name:'Prior high',price:123.45}],below:[]}
+ });
+ await page.route('https://raw.githubusercontent.com/grobentham/iron-brain/quotes/quotes.json*',route=>route.fulfill({
+  json:{outlook:{...snapshot('NQ'),markets:{es:snapshot('ES'),xauusd:snapshot('XAUUSD',day+'T09:00:00Z')}}},
+  headers:{'access-control-allow-origin':'*'}
+ }));
  await page.goto(base+'index.html#top');
+ const outlook=page.locator('.ib-outlook');
+ await outlook.getByText('NQ price line',{exact:true}).waitFor();
+ assert.deepEqual(await outlook.locator('[data-ib-market]').allTextContents(),['NQ','ES','XAUUSD']);
+ assert.equal(await outlook.locator('.ib-outlook-lean strong').innerText(),'Bearish');
+ await outlook.getByRole('button',{name:'ES',exact:true}).click();
+ assert.equal(await outlook.locator('.ib-outlook-lines').innerText(),'ES price line');
+ await outlook.getByRole('button',{name:'XAUUSD',exact:true}).click();
+ assert.equal(await outlook.locator('.ib-outlook-lines').innerText(),'XAUUSD price line');
+ assert.match(await outlook.locator('#ib-outlook-stamp').innerText(),/Dukascopy spot gold bid.*Last available snapshot/);
+ await outlook.getByRole('button',{name:'NQ',exact:true}).click();
  await page.waitForFunction(()=>document.querySelector('#mc-pts').textContent==='776');
  await page.waitForFunction(()=>document.querySelector('#mc-evidence').textContent==='Live scoring pending');
  assert.match(await page.locator('#mc-window').innerText(),/Nov 24, 18:00.*Nov 25, 17:00 New York/);
