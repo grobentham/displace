@@ -34,12 +34,24 @@ async function checkOutlook(page, width) {
   leanText:symbol+' bearish fixture',lines:[symbol+' bearish fixture',symbol+' price line'],
   levels:{above:[{name:'Prior high',price:123.45}],below:[]}
  });
- await page.route('https://raw.githubusercontent.com/grobentham/iron-brain/quotes/quotes.json*',route=>route.fulfill({
-  json:{outlook:{...snapshot('NQ'),markets:{es:snapshot('ES'),xauusd:snapshot('XAUUSD',day+'T09:00:00Z')}}},
-  headers:{'access-control-allow-origin':'*'}
- }));
+ let ironRequests=0;
+ await page.route('https://raw.githubusercontent.com/grobentham/iron-brain/quotes/quotes.json*',route=>{
+  ironRequests++;
+  return route.fulfill({
+   json:{outlook:{...snapshot('NQ'),markets:{es:snapshot('ES'),xauusd:snapshot('XAUUSD',day+'T09:00:00Z')}}},
+   headers:{'access-control-allow-origin':'*'}
+  });
+ });
  await page.goto(base+'index.html#top');
  const outlook=page.locator('.ib-outlook');
+ await page.waitForFunction(()=>document.querySelector('#mc-pts').textContent==='776');
+ assert.equal(await outlook.isVisible(),false,'Iron Brain has its own page');
+ assert.equal(ironRequests,0,'homepage does not fetch the Iron Brain feed');
+ const biasTab=page.locator('#navlinks').getByRole('link',{name:'Bias',exact:true});
+ if (!await biasTab.isVisible()) await page.getByRole('button',{name:'Open menu'}).click();
+ await biasTab.click();
+ await page.waitForURL('**/index.html#intraday-bias');
+ assert.equal(await biasTab.getAttribute('aria-current'),'page');
  await outlook.getByText('NQ price line',{exact:true}).waitFor();
  assert.deepEqual(await outlook.locator('[data-ib-market]').allTextContents(),['NQ','ES','XAUUSD']);
  assert.equal(await outlook.locator('.ib-outlook-lean strong').innerText(),'Bearish');
@@ -49,6 +61,12 @@ async function checkOutlook(page, width) {
  assert.equal(await outlook.locator('.ib-outlook-lines').innerText(),'XAUUSD price line');
  assert.match(await outlook.locator('#ib-outlook-stamp').innerText(),/Dukascopy spot gold bid.*Last available snapshot/);
  await outlook.getByRole('button',{name:'NQ',exact:true}).click();
+ await page.reload();
+ await outlook.getByText('NQ price line',{exact:true}).waitFor();
+ assert.match(await page.title(),/^Bias · Displace$/);
+ await page.getByRole('link',{name:'Displace',exact:true}).click();
+ await page.waitForURL('**/index.html#top');
+ assert.equal(await outlook.isVisible(),false);
  await page.waitForFunction(()=>document.querySelector('#mc-pts').textContent==='776');
  await page.waitForFunction(()=>document.querySelector('#mc-evidence').textContent==='Live scoring pending');
  assert.match(await page.locator('#mc-window').innerText(),/Nov 24, 18:00.*Nov 25, 17:00 New York/);
@@ -137,6 +155,7 @@ async function checkOutlook(page, width) {
     const response=await page.goto(base+name+'.html',{waitUntil:'networkidle'});
     assert.equal(response.status(),200,name);
     assert(await page.locator('h1').first().isVisible(),name+' heading');
+    assert.equal(await page.locator('nav[aria-label="Site"] a[href="index.html#intraday-bias"]').count(),1,name+' Bias link');
     const dims=await page.evaluate(()=>({scroll:document.documentElement.scrollWidth,inner:innerWidth}));
     assert(dims.scroll<=dims.inner+2,name+' horizontal overflow at '+width+': '+JSON.stringify(dims));
     if(name==='atlas'){

@@ -14,6 +14,7 @@
   const local = new Intl.DateTimeFormat(undefined, { weekday: "short", hour: "numeric", minute: "2-digit", timeZoneName: "short" });
   let selected = "nq";
   let feed, failed = false, busy = false;
+  let lastAttempt = -Infinity;
 
   function node(tag, cls, text) {
     const value = document.createElement(tag);
@@ -26,7 +27,7 @@
     const grid = node("div", "ib-outlook-levels");
     for (const [key, label] of [["above", "Above"], ["below", "Below"]]) {
       const col = node("div");
-      col.append(node("h4", "", label));
+      col.append(node("h3", "", label));
       const list = node("dl");
       const entries = Array.isArray(market.levels?.[key]) ? market.levels[key] : [];
       for (const entry of entries) {
@@ -45,7 +46,7 @@
   function render() {
     for (const button of buttons) button.setAttribute("aria-pressed", String(button.dataset.ibMarket === selected));
     const market = selected === "nq" ? feed : feed?.markets?.[selected];
-    const title = node("h3", "ib-outlook-heading", names[selected] + " market outlook");
+    const title = node("h2", "ib-outlook-heading", names[selected] + " market outlook");
     body.replaceChildren(title);
     if (!market || !Number.isFinite(Date.parse(market.barTime)) || !Number.isFinite(Date.parse(market.time))) {
       stamp.textContent = failed ? "Iron Brain feed unavailable" : "Source: Iron Brain";
@@ -77,7 +78,9 @@
   }
 
   async function refresh() {
-    if (busy) return;
+    if (busy || document.hidden || window.__page !== "intraday-bias") return;
+    if (Date.now() - lastAttempt < 60000) return;
+    lastAttempt = Date.now();
     busy = true;
     try {
       const url = source + "?minute=" + Math.floor(Date.now() / 60000);
@@ -101,6 +104,7 @@
   });
   render();
   refresh();
-  setInterval(() => { if (!document.hidden) refresh(); }, 60000);
-  document.addEventListener("visibilitychange", () => { if (!document.hidden) refresh(); });
+  setInterval(refresh, 60000);
+  window.addEventListener("displace:route", refresh);
+  document.addEventListener("visibilitychange", refresh);
 })();
