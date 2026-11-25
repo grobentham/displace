@@ -30,7 +30,7 @@ async function checkOutlook(page, width) {
   configurable:true,value:{writeText:async url=>{window.copiedBriefUrl=url;}}
  }));
  const snapshot=(symbol,time=day+'T09:55:00Z')=>({
-  symbol,time,barTime:day+'T09:45:00Z',phaseText:'London fixture',lean:'bearish',
+  symbol,time,last:123.45,barTime:day+'T09:45:00Z',phaseText:'London fixture',lean:'bearish',
   leanText:symbol+' bearish fixture',lines:[symbol+' bearish fixture',symbol+' price line'],
   levels:{above:[{name:'Prior high',price:123.45}],below:[]}
  });
@@ -55,11 +55,16 @@ async function checkOutlook(page, width) {
  assert.equal(await biasTab.getAttribute('aria-current'),'page');
  assert.deepEqual(await outlook.locator('[data-ib-market]').allTextContents(),['NQ','ES','XAUUSD']);
  assert.equal(await outlook.locator('.ib-outlook-lean strong').innerText(),'Bearish');
+ assert.equal(await outlook.locator('.ib-outlook-price').innerText(),'123.45');
+ assert.equal(await outlook.getByRole('heading',{name:'Nearby levels'}).count(),1);
+ assert.equal(await outlook.locator('#ib-outlook-stamp time').getAttribute('datetime'),day+'T09:45:00Z');
  await outlook.getByRole('button',{name:'ES',exact:true}).click();
  assert.equal(await outlook.locator('.ib-outlook-lines').innerText(),'ES price line');
  await outlook.getByRole('button',{name:'XAUUSD',exact:true}).click();
  assert.equal(await outlook.locator('.ib-outlook-lines').innerText(),'XAUUSD price line');
- assert.match(await outlook.locator('#ib-outlook-stamp').innerText(),/XAUS indicative spot.*Last available snapshot/);
+ assert.equal(await outlook.locator('#ib-outlook-stamp [data-stale="true"]').innerText(),'Last available snapshot');
+ assert.equal(await outlook.locator('.ib-outlook-unit').innerText(),'USD per troy ounce');
+ assert.equal(await outlook.evaluate(el=>el.scrollWidth<=el.clientWidth),true,'Bias layout fits the viewport');
  assert.equal(await outlook.getByRole('link',{name:'XAUS indicative spot'}).getAttribute('href'),'https://xaus.com/api/');
  await outlook.getByRole('button',{name:'NQ',exact:true}).click();
  await page.reload();
