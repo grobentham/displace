@@ -1,5 +1,5 @@
 {
- "asof": "2026-11-24T22:09-05:00",
+ "asof": "2026-11-24T23:38-05:00",
  "version": 4,
  "assets": {
   "gold": "Gold, close",
@@ -1255,7 +1255,7 @@
   },
   "sentiment": {
    "gold": {
-    "b": -0.3041,
+    "b": -0.3043,
     "k": 0.65,
     "n": 277,
     "since": "2011-01-25",
@@ -1279,7 +1279,7 @@
     "historical_candidate": false
    },
    "nq": {
-    "b": -0.0573,
+    "b": -0.057,
     "k": 0.0,
     "n": 467,
     "since": "2011-01-25",
@@ -1303,7 +1303,7 @@
     "historical_candidate": false
    },
    "usd": {
-    "b": 0.2238,
+    "b": 0.224,
     "k": 0.6,
     "n": 460,
     "since": "2011-01-25",
@@ -1313,7 +1313,7 @@
      "rate": 0.324,
      "pval": 0.9878467449452728,
      "brierSkill": -0.007,
-     "brierSkillBase": -0.0012,
+     "brierSkillBase": -0.0011,
      "baseBrier": 0.251491,
      "halves": [
       0.353,
@@ -1327,7 +1327,7 @@
     "historical_candidate": false
    },
    "y2": {
-    "b": 0.1601,
+    "b": 0.1604,
     "k": 0.45,
     "n": 382,
     "since": "2011-01-25",
@@ -1351,7 +1351,7 @@
     "historical_candidate": false
    },
    "gold2h": {
-    "b": -0.035,
+    "b": -0.0341,
     "k": 0.0,
     "n": 88,
     "since": "2024-06-28",
@@ -1375,7 +1375,7 @@
     "historical_candidate": false
    },
    "nq2h": {
-    "b": 0.2002,
+    "b": 0.2008,
     "k": 0.35,
     "n": 87,
     "since": "2024-06-28",
@@ -4933,7 +4933,7 @@
   "markets": {
    "gold": {
     "baseline": 1.96,
-    "close": 3549.89990234375,
+    "close": 3550.699951171875,
     "asof": "2026-11-24"
    },
    "nq": {
@@ -5291,14 +5291,14 @@
      "since": "2011-01-25",
      "mult": 0.954,
      "lo": 0.626,
-     "hi": 1.539,
+     "hi": 1.58,
      "medRange": 1.41,
      "bt": {
       "tests": 178,
       "skill": -0.005,
       "beatNaive": 0.506,
       "pval": 0.4701399793510233,
-      "coverage": 0.809
+      "coverage": 0.803
      },
      "proven": false,
      "why": "Historical range diagnostic; qualification suspended pending point-in-time validation",
@@ -5594,6 +5594,6 @@
  "log": [
   "tv: 3 month(s) refreshed, 3593 releases with a consensus surprise",
   "markets: gold, nq, usd, y2, gold15m, gold2h, nq15m, nq2h",
-  "model: fit in 3s; proven: labor:y2"
+  "model: fit in 1s; proven: labor:y2"
  ]
 }
