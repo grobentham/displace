@@ -2,6 +2,67 @@
  "version": 2,
  "editions": [
   {
+   "date": "2026-11-26",
+   "opensAt": "2026-11-26T07:00+08:00",
+   "generatedAt": "2026-11-26T06:44:53+08:00",
+   "updates": [
+    {
+     "id": "20261125-gdp-second-estimate-q3",
+     "title": "GDP, second estimate (Q3)",
+     "url": "https://alfred.stlouisfed.org/series?seid=A191RL1Q225SBEA&vintage_date=2026-11-25",
+     "source": "BEA",
+     "analysis": "GDP came in at 4.3% against a 3.5% forecast, above expectations. The previous reading was 3.4%. The real GDP, annualized reading was the highest since Q3 2023.",
+     "context": "Headline U.S. GDP growth is annualized. Subsequent estimates add data and may revise the same quarter.",
+     "published": "2026-11-25T21:30:00+08:00"
+    },
+    {
+     "id": "20261125-initial-jobless-claims-moved-to-wednesda",
+     "title": "Initial jobless claims (moved to Wednesday for Thanksgiving)",
+     "url": "https://alfred.stlouisfed.org/series?seid=ICSA&vintage_date=2026-11-25",
+     "source": "Dept. of Labor",
+     "analysis": "Jobless claims came in at 189K against a 201K forecast, below expectations. The previous reading was 203K, revised to 202K. 4-week average 196K (previous 198K); Continuing claims 1.70M (previous 1.79M). The initial claims reading was the lowest since week to Jul 18.",
+     "context": "Initial claims count new unemployment insurance applications. The four-week average smooths weekly swings.",
+     "published": "2026-11-25T21:30:00+08:00"
+    },
+    {
+     "id": "20261125-pce-inflation-personal-income-and-outlay",
+     "title": "PCE inflation · Personal income and outlays (Oct)",
+     "url": "https://alfred.stlouisfed.org/series?seid=PCEPILFE&vintage_date=2026-11-25",
+     "source": "BEA",
+     "analysis": "Core PCE came in at 0.3% against a 0.3% forecast, in line with expectations. The previous reading was 0.3%. PCE m/m 0.3% (previous 0.5%); Core PCE y/y 3.3% (previous 3.1%); Personal spending m/m 0.3% (previous 0.6%).",
+     "context": "The Fed measures its inflation target using headline PCE. Core PCE helps identify the underlying trend.",
+     "published": "2026-11-25T21:30:00+08:00"
+    }
+   ],
+   "upcoming": [],
+   "moreReleases": [],
+   "focus": null,
+   "nextFed": "Dec 8–9",
+   "otherCloses": [
+    "At the Tue Nov 24 close, WTI crude $82.24 (up 1.0%)."
+   ],
+   "treasury": {
+    "date": "2026-11-25",
+    "yield": 4.61,
+    "changeBp": -2
+   },
+   "outlook": {
+    "label": "No U.S. session",
+    "reason": "U.S. cash equities are closed during this edition’s window.",
+    "rates": null,
+    "thresholdBp": 3
+   },
+   "earnings": {
+    "reports": [],
+    "upcoming": [],
+    "sourcesRead": 6,
+    "sourcesTotal": 6
+   },
+   "calendarCovered": true,
+   "feedsChecked": true,
+   "feedIssues": false
+  },
+  {
    "date": "2026-11-25",
    "opensAt": "2026-11-25T07:00+08:00",
    "generatedAt": "2026-11-25T06:45:04+08:00",
@@ -158,56 +219,6 @@
    "feedsChecked": true,
    "feedIssues": false,
    "refreshedAt": "2026-11-26T03:35:01+08:00"
-  },
-  {
-   "date": "2026-11-24",
-   "opensAt": "2026-11-24T07:00+08:00",
-   "generatedAt": "2026-11-24T06:44:42+08:00",
-   "updates": [],
-   "upcoming": [
-    {
-     "at": "2026-11-24T23:00+08:00",
-     "title": "Consumer confidence (Nov)",
-     "source": "Conference Board",
-     "metric": "Conference Board consumer confidence index",
-     "forecast": "92.4",
-     "previous": "91.7",
-     "forecastSource": "ForexFactory consensus"
-    }
-   ],
-   "moreReleases": [],
-   "focus": null,
-   "nextFed": "Dec 8–9",
-   "otherCloses": [
-    "At the Fri Nov 20 close, the Fed's broad dollar index 123.6 (up 0.1%)."
-   ],
-   "treasury": {
-    "date": "2026-11-23",
-    "yield": 4.63,
-    "changeBp": 0
-   },
-   "outlook": {
-    "label": "Neutral",
-    "reason": "Neither yield moved by the 3 bp needed for a rates tilt.",
-    "rates": {
-     "date": "2026-11-23",
-     "twoYearBp": 0,
-     "tenYearBp": 0,
-     "twoYearYield": 4.63,
-     "tenYearYield": 4.92
-    },
-    "thresholdBp": 3
-   },
-   "earnings": {
-    "reports": [],
-    "upcoming": [],
-    "sourcesRead": 6,
-    "sourcesTotal": 6
-   },
-   "calendarCovered": true,
-   "feedsChecked": true,
-   "feedIssues": false,
-   "refreshedAt": "2026-11-24T23:00:08+08:00"
   }
  ]
 }
