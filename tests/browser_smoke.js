@@ -51,8 +51,8 @@ async function checkOutlook(page, width) {
  if (!await biasTab.isVisible()) await page.getByRole('button',{name:'Open menu'}).click();
  await biasTab.click();
  await page.waitForURL('**/index.html#intraday-bias');
- assert.equal(await biasTab.getAttribute('aria-current'),'page');
  await outlook.getByText('NQ price line',{exact:true}).waitFor();
+ assert.equal(await biasTab.getAttribute('aria-current'),'page');
  assert.deepEqual(await outlook.locator('[data-ib-market]').allTextContents(),['NQ','ES','XAUUSD']);
  assert.equal(await outlook.locator('.ib-outlook-lean strong').innerText(),'Bearish');
  await outlook.getByRole('button',{name:'ES',exact:true}).click();
