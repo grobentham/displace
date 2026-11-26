@@ -1,5 +1,5 @@
 {
- "asof": "2026-11-26T07:49-05:00",
+ "asof": "2026-11-26T08:54-05:00",
  "version": 4,
  "assets": {
   "gold": "Gold, close",
@@ -1059,7 +1059,7 @@
     "historical_candidate": true
    },
    "gold2h": {
-    "b": -0.4303,
+    "b": -0.4304,
     "k": 1.05,
     "n": 206,
     "since": "2024-07-02",
@@ -1133,7 +1133,7 @@
     "historical_candidate": false
    },
    "nq": {
-    "b": 0.0675,
+    "b": 0.0676,
     "k": 0.3,
     "n": 1180,
     "since": "2011-01-03",
@@ -1157,7 +1157,7 @@
     "historical_candidate": false
    },
    "usd": {
-    "b": 0.168,
+    "b": 0.1681,
     "k": 0.85,
     "n": 1176,
     "since": "2011-01-03",
@@ -1229,7 +1229,7 @@
     "historical_candidate": false
    },
    "nq2h": {
-    "b": -0.138,
+    "b": -0.1379,
     "k": 0.05,
     "n": 181,
     "since": "2024-07-01",
@@ -5414,6 +5414,6 @@
  "log": [
   "tv: 3 month(s) refreshed, 3597 releases with a consensus surprise",
   "markets: gold, nq, usd, y2, gold15m, gold2h, nq15m, nq2h",
-  "model: fit in 4s; proven: labor:y2"
+  "model: fit in 3s; proven: labor:y2"
  ]
 }
