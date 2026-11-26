@@ -82,6 +82,12 @@ def test_run_end_to_end():
     assert doc["order"] == ["nq", "es"] and doc["for"] == B.next_session(last)
     nq = doc["markets"]["nq"]
     assert nq["pv"] == 20 and nq["micro"] == 2 and len(nq["calendar"]) == len(B.EVENTS)
+    new_session = {**data, last: [100, 110, 99, 102]}
+    assert B.run(now + dt.timedelta(hours=2), fetch=lambda *args: new_session.copy(),
+                 fetch_series=series_fake, markets=["nq", "es"]) == 0
+    assert json.load(open(B.OUT))["markets"]["nq"] == nq
+    row = next(row for row in json.load(open(B.LOG))["entries"] if row["market"] == "nq")
+    assert B.PUB.matches(row, nq) and B.PUB.identity(row) == nq["forecast_id"]
     nd = B.next_session(last)
     data[nd] = [1, data[last][1] * 2, data[last][2] / 2, data[last][3] * 1.01]
     now2 = dt.datetime.combine(dt.date.fromisoformat(nd), dt.time(17, 30), B.NY).astimezone(dt.timezone.utc)
@@ -118,6 +124,18 @@ def test_fixes():
     B.decide(T, 5.0, 3.0)
     assert not T["nq"]["signals"]["mom20"]["tested"]
     assert Q.z_needed(40) > 3.2
+
+
+def test_completed_session_and_bars():
+    from bars import completed
+    now = dt.datetime.fromisoformat("2026-11-25T23:45:00+00:00")
+    days = {"2026-11-24": [100, 104, 99, 102], "2026-11-25": [102, 104, 101, 103]}
+    cache = {"days": days, "fetched": now.isoformat()}
+    assert [day for day, _ in B.settled_rows("nq", cache, {}, now)[0]] == ["2026-11-24"]
+    real = {"2026-11-25": {"complete": True, "full": True, "o": 104, "h": 108, "l": 100, "c": 101}}
+    assert B.settled_rows("nq", cache, real, now)[0][-1] == ("2026-11-25", [104, 108, 100, 101])
+    rows = {f"2026-11-25T23:{minute}:00+00:00": days["2026-11-25"] for minute in (30, 34, 40, 45)}
+    assert set(completed(rows, "5m", now)) == {"2026-11-25T23:30:00+00:00", "2026-11-25T23:40:00+00:00"}
 
 
 def test_sessions_keep_mondays():
@@ -193,6 +211,7 @@ if __name__ == "__main__":
     test_random_walk_finds_no_direction_but_real_volatility()
     test_run_end_to_end()
     test_fixes()
+    test_completed_session_and_bars()
     test_sessions_keep_mondays()
     test_despike_days_from_iron_brain()
     test_nyse_holidays_and_preholiday()

@@ -18,6 +18,7 @@ NY = ZoneInfo("America/New_York")
 SYMBOLS = {"gold": "GC%3DF", "nq": "NQ%3DF"}
 UA = {"User-Agent": "Mozilla/5.0 (Displace data engine; +https://github.com/grobentham/displace)"}
 INTERVALS = {"1h": "730d", "5m": "60d"}
+BAR_SECONDS = {"1h": 3600, "5m": 300}
 REFRESH = dt.timedelta(minutes=50)
 
 
@@ -25,9 +26,25 @@ def _path(m, interval="1h"):
     return os.path.join(CACHE_DIR, f"{m}_{interval}.json")
 
 
+def completed(rows, interval, fetched):
+    """Drop provider quote markers and incomplete bars rather than rounding them onto real bars."""
+    seconds = BAR_SECONDS[interval]
+    boundary = fetched.timestamp()
+    valid = {}
+    for stamp, bar in rows.items():
+        start = dt.datetime.fromisoformat(stamp).timestamp()
+        if start % seconds == 0 and start + seconds <= boundary:
+            valid[stamp] = bar
+    return valid
+
+
 def _load(m, interval="1h"):
     try:
-        return json.load(open(_path(m, interval)))
+        with open(_path(m, interval)) as fh:
+            data = json.load(fh)
+        if data.get("fetched"):
+            data["bars"] = completed(data["bars"], interval, dt.datetime.fromisoformat(data["fetched"]))
+        return data
     except (OSError, ValueError):
         return {"fetched": "", "bars": {}}
 
@@ -42,7 +59,7 @@ def _download(symbol, interval="1h", tries=3):
             out = {}
             vols = q.get("volume") or [None] * len(res["timestamp"])
             for t, o, h, lo, c, v in zip(res["timestamp"], q["open"], q["high"], q["low"], q["close"], vols):
-                if o and h and lo and c:
+                if t % BAR_SECONDS[interval] == 0 and o and h and lo and c:
                     out[dt.datetime.fromtimestamp(t, dt.timezone.utc).isoformat(timespec="minutes")] = [o, h, lo, c, v or 0]
             return out
         except Exception:
@@ -64,12 +81,13 @@ def sync(now, log=print, download=_download):
                 pass
             try:
                 got = download(sym, interval) if download is _download else download(sym)
+                got = completed(got, interval, now)
             except Exception as e:
                 log(f"bars: {m} {interval} bars unavailable ({e!r}); using the archive")
                 continue
             if len(got) < 100:
                 continue
-            # the newest bar may still be forming: always replace it with the latest download
+            # Later downloads may correct bars that have already closed.
             c["bars"].update(got)
             c["fetched"] = now.isoformat(timespec="minutes")
             with open(_path(m, interval), "w") as fh:

@@ -3,6 +3,8 @@ from pathlib import Path
 from xml.etree import ElementTree as ET
 import sitebuild as S
 import publisher as P
+import publication
+from gate import forecast_view_errors
 
 def main():
     r={"version":1,"id":"daily-2026-11-24","kind":"daily","title":"Test <script>","generated_at":"2026-11-24T12:00:00+00:00",
@@ -18,17 +20,27 @@ def main():
         nq={"session":{"date":"2026-11-25","open":"2026-11-24T18:00:00-05:00","close":"2026-11-25T17:00:00-05:00","halts":[]},
             "range":{"points":776,"lo":456,"hi":1328},"levels":{"high":26350.75,"low":25905.25},
             "takes":{"high":{"p":0.64},"low":{"p":0.73}},"private_placeholder":"excluded"}
+        nq.update(candle="2026-11-24", forecast_at="2026-11-24T22:30:00+00:00", touch=[],
+                  tier="base", bias="long", p_up=.54, base_up=.54)
+        row = {"market": "nq", "candle": nq["candle"], "for": "2026-11-25", "logged": nq["forecast_at"],
+               **publication.forecast_values(nq)}
+        nq["forecast_id"] = publication.identity(row)
         bias={"for":"2026-11-25","asof":"2026-11-25T10:00:00+00:00","markets":{"nq":nq}}
         events=[{"date":"2026-11-25","time":"14:00","impact":"medium","title":"Beige Book"},
                 {"date":"2026-11-26","time":"08:30","impact":"high","title":"Other day"},
                 {"date":"2026-11-25","time":"invalid","impact":"high","title":"Bad time"}]
         P.jsonwrite(site/"data/bias/current.json",bias)
+        P.jsonwrite(site/"data/bias/log.json", {"entries": [row]})
         P.jsonwrite(site/"data/calendar/events.json",{"events":events})
         P.jsonwrite(site/"data/open/current.json",{"by_market":{"nq":{"n":3}}})
         assert S.build(site)==1
         brief_root=site/"data/briefs/mnq"
         dated=P.load(brief_root/"2026-11-25.json")
         assert dated==P.load(brief_root/"latest.json")
+        assert dated["asof"] == nq["forecast_at"] and dated["forecast_id"] == nq["forecast_id"]
+        assert forecast_view_errors(site / "data") == []
+        P.jsonwrite(brief_root / "latest.json", {**dated, "asof": bias["asof"]})
+        assert forecast_view_errors(site / "data") == ["latest.json differs from the published NQ forecast"]
         assert dated["news"]==[{"title":"Beige Book","instant":"2026-11-25T14:00:00-05:00","time_ny":"14:00","impact":"medium"}]
         assert dated["live_count"]==3 and "private_placeholder" not in str(dated)
         content=(site/"reports"/(r["id"]+".html")).read_text()

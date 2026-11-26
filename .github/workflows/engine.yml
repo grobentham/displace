@@ -147,11 +147,11 @@ jobs:
           python engine/guard.py validation engine/validation.py
           python engine/guard.py modelaudit engine/modelaudit.py
 
-      - name: Final check before publishing (block invalid candidate snapshot)
-        run: python engine/gate.py --strict
-
       - name: Build static research articles and sitemap
         run: python engine/sitebuild.py
+
+      - name: Final check before publishing (block invalid candidate snapshot)
+        run: python engine/gate.py --strict
 
       - name: Save new data
         run: |

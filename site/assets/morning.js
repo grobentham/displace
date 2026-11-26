@@ -108,9 +108,11 @@
 
     renderReminder();
     window.DisplaceSessionPlanner.setMarket(mk, m, day, dayName(day));
-    var made = new Date(B.asof), age = (Date.now() - made) / 36e5;
+    var made = new Date(m.forecast_at || B.asof), age = (Date.now() - made) / 36e5;
+    var ended = m.session && m.session.close ? Date.now() >= Date.parse(m.session.close) : age > 40;
     $("mc-made").textContent = "Forecast made " + made.toLocaleString([], { weekday: "short", hour: "numeric", minute: "2-digit" }) + " your time" +
-      (age > 40 ? " — older than usual; the next update may be late." : ".");
+      (outlook.afterOpen(made, m.session) ? ". Generated after the open and excluded from prospective scoring." : ".") +
+      (ended ? " This outlook is for a past session." : "");
   }
 
   function bind() {

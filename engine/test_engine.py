@@ -147,7 +147,34 @@ def main():
     shutil.rmtree(tmp)
     quality_tests()
     edge_tests()
+    test_release_schedule_and_previous()
     print("engine self-test passed")
+
+
+def test_release_schedule_and_previous():
+    from unittest.mock import patch
+    import engine as eng
+
+    def release(kind, date, title, **values):
+        return {**eng.make_event(eng.d_(date), kind, eng.RELEASES[kind], title), **values}
+
+    wrong = release("durables", "2026-12-03", "Durable goods orders (Nov)", auto="public")
+    confirmed = release("durables", "2026-12-23", "Durable goods orders (Nov)", auto=None)
+    october = release("homes", "2026-11-25", "New home sales (Oct)", actual="701K", previous="676K", revised="614K")
+    november = release("homes", "2026-12-23", "New home sales (Nov)", previous="676K")
+    events = [wrong, october, november]
+    with patch.object(eng, "load", return_value={"events": [confirmed]}):
+        eng.merge_schedule(events)
+    assert [e["date"] for e in events if eng.event_key(e) == "durables"] == ["2026-12-23"]
+
+    now = dt.datetime(2026, 11, 26, 9, tzinfo=eng.NY)
+    with (patch.object(eng, "NOW", now), patch.object(eng, "TODAY", now.date()),
+          patch.object(eng.fredapi, "KEY", None), patch.object(eng.publicdata, "prefetch_observations"),
+          patch.object(eng, "series_obs", return_value=[("2026-09-01", 676, "2026-10-27")]),
+          patch.object(eng, "agency_figures", return_value=(None, None, None, None))):
+        eng.update_figures(events, {}, {})
+    assert november["previous"] == "701K"
+    assert october["previous"] == "676K" and october["revised"] == "614K"
 
 
 def fresh_copy():

@@ -73,6 +73,38 @@ def check_log(doc):
     return bad
 
 
+def forecast_view_errors(data):
+    """Check the served forecast against the ledger and its shareable brief."""
+    from pathlib import Path
+    import publication as P
+
+    root = Path(data)
+    bias = json.loads((root / "bias/current.json").read_text(encoding="utf-8"))
+    markets = bias["markets"]
+    entries = json.loads((root / "bias/log.json").read_text(encoding="utf-8"))["entries"]
+    rows = {(row["market"], row["candle"]): row for row in entries}
+    errors = []
+    for market, view in markets.items():
+        row = rows.get((market, view["candle"]))
+        if (not row or not P.matches(row, view) or view.get("forecast_at") != row["logged"] or
+                view.get("forecast_id") != P.identity(row)):
+            errors.append(f"{market} outlook differs from its forecast ledger record")
+    nq = markets.get("nq")
+    if nq:
+        day = nq["session"]["date"]
+        brief_dir = root / "briefs/mnq"
+        for path in (brief_dir / f"{day}.json", brief_dir / "latest.json"):
+            brief = json.loads(path.read_text(encoding="utf-8"))
+            if (brief["date"] != day or brief["asof"] != nq["forecast_at"] or
+                    brief.get("forecast_id") != nq["forecast_id"] or
+                    any(brief["range"][key] != nq["range"][key] for key in ("points", "lo", "hi")) or
+                    any(brief["levels"][side] != {"price": nq["levels"][side], "probability": nq["takes"][side]["p"]}
+                        for side in ("high", "low")) or
+                    any(brief["session"][key] != nq["session"][key] for key in ("open", "close", "halts"))):
+                errors.append(f"{path.name} differs from the published NQ forecast")
+    return errors
+
+
 CHECKS = {os.path.join("bias", "current.json"): check_bias, os.path.join("bias", "log.json"): check_log}
 
 # Minimum public contracts. Additional fields remain backward-compatible.
@@ -112,7 +144,7 @@ def strict_validate(data=DATA):
     for rel, fields in CONTRACTS.items():
         path = os.path.join(data, rel)
         try:
-            with open(path) as fh:
+            with open(path, encoding="utf-8") as fh:
                 obj = json.load(fh)
             if not isinstance(obj, dict):
                 raise ValueError("expected object")
@@ -186,17 +218,24 @@ def strict_validate(data=DATA):
         except (OSError, ValueError, TypeError, KeyError, AttributeError) as exc:
             failures[rel] = [str(exc)]
     for path in sorted(glob.glob(os.path.join(data, "**", "*.json"), recursive=True)):
-        rel = os.path.relpath(path, data)
+        local_rel = os.path.relpath(path, data)
+        rel = local_rel.replace(os.sep, "/")
         try:
-            with open(path) as fh:
+            with open(path, encoding="utf-8") as fh:
                 obj = json.load(fh)
             bad = finite(obj)
-            if rel in CHECKS:
-                bad += CHECKS[rel](obj)
+            if local_rel in CHECKS:
+                bad += CHECKS[local_rel](obj)
             if bad:
                 failures.setdefault(rel, []).extend(bad[:10])
         except (OSError, ValueError, TypeError, KeyError, AttributeError) as exc:
             failures[rel] = [str(exc)]
+    try:
+        bad = forecast_view_errors(data)
+        if bad:
+            failures["forecast views"] = bad
+    except (OSError, ValueError, TypeError, KeyError, AttributeError) as exc:
+        failures["forecast views"] = [str(exc)]
     return failures
 
 def strict_main():

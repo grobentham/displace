@@ -21,6 +21,14 @@ def main():
     assert E.ledger([(row,"archive")],{},now)[0]["status"]=="unverified"
     late=P.record([row],{},E.cutoff(row),"run2")
     assert E.ledger([(row,"archive")],late,now)[0]["status"]=="unverified"
+    holiday = dict(row, candle="2026-11-25", logged="2026-11-25T22:02:00+00:00", scored=0,
+                   **{"for": "2026-11-27"})
+    open_time = dt.datetime(2026, 11, 25, 23, tzinfo=dt.timezone.utc)
+    assert E.cutoff(holiday) == open_time
+    timely = P.record([holiday], {}, open_time - dt.timedelta(minutes=1), "holiday")
+    assert E.ledger([(holiday, "active")], timely, open_time)[0]["status"] == "verified_pending"
+    late = P.record([holiday], {}, open_time + dt.timedelta(minutes=1), "holiday")
+    assert E.ledger([(holiday, "active")], late, open_time)[0]["status"] == "unverified"
     assert E.ledger([(dict(row,scored=0),"archive")],receipts,now)[0]["status"]=="verified_overdue"
     tampered=copy.deepcopy(doc)
     tampered["by_market"]["nq"]["brier"]=0

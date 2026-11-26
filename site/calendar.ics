@@ -206,20 +206,6 @@ DESCRIPTION:ADP uses private payroll data. The BLS publishes the official j
  .
 END:VEVENT
 BEGIN:VEVENT
-UID:20261203-durable-goods-orders-nov@displace
-DTSTAMP:20261125T234351Z
-DTSTART;TZID=America/New_York:20261203T083000
-DTEND;TZID=America/New_York:20261203T084500
-BEGIN:VALARM
-ACTION:DISPLAY
-DESCRIPTION:Durable goods orders (Nov)
-TRIGGER:-PT15M
-END:VALARM
-SUMMARY:🟠 Durable goods orders (Nov)
-DESCRIPTION:Scheduled one hour before the U.S. stock market opens. Previous
- : 1.9% Education only\, not financial advice.
-END:VEVENT
-BEGIN:VEVENT
 UID:20261203-initial-jobless-claims@displace
 DTSTAMP:20261125T234351Z
 DTSTART;TZID=America/New_York:20261203T083000
@@ -414,7 +400,7 @@ TRIGGER:-PT15M
 END:VALARM
 SUMMARY:🟠 Durable goods orders (Nov)
 DESCRIPTION:Scheduled one hour before the U.S. stock market opens. Previous
- : 1.9% Education only\, not financial advice.
+ : 0.2% Education only\, not financial advice.
 END:VEVENT
 BEGIN:VEVENT
 UID:20261223-gdp-third-estimate-q3@displace
@@ -455,7 +441,7 @@ DESCRIPTION:New home sales (Nov)
 TRIGGER:-PT15M
 END:VALARM
 SUMMARY:🟠 New home sales (Nov)
-DESCRIPTION:Previous: 676K Education only\, not financial advice.
+DESCRIPTION:Previous: 701K Education only\, not financial advice.
 END:VEVENT
 BEGIN:VEVENT
 UID:20261224-christmas-eve-shortened-session@displace

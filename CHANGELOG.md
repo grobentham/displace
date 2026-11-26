@@ -1,5 +1,15 @@
 # Changelog
 
+## 2026-11-26 forecast and calendar correction
+
+- Restored the eight November 27 outlooks from the verified pre-open deployment. The NQ range band is 590–1,723
+  points. A later update briefly showed 337–979 points on the homepage and shared brief. The ledger retained the
+  original band. Outlooks now keep their recorded values and timestamps through the session.
+- Displace Open now uses the exchange session open as the receipt cutoff. The publish job checks that the homepage,
+  ledger, and MNQ brief agree. The replay export filters out off-grid and unfinished bars.
+- Removed the duplicate December 3 durable goods entry and refreshed the prior values for new home sales and durable
+  goods. Historical event research is presented as observed market reactions with sample sizes and time windows.
+
 ## 2026-11-25: the homepage answers a trader's morning questions
 
 - The first screen is now a morning check for NQ, ES and gold: the expected high-to-low range for the session

@@ -76,7 +76,7 @@ def build_mnq_brief(data):
                 if evidence_path.is_file() else None)
     brief={
         "date":day,
-        "asof":bias["asof"],
+        "asof":nq.get("forecast_at", bias["asof"]),
         "session":{key:session.get(key) for key in ("open","close","halts")},
         "range":{key:nq["range"].get(key) for key in ("points","lo","hi")},
         "levels":{key:{"price":nq["levels"].get(key),"probability":nq["takes"][key].get("p")}
@@ -84,6 +84,8 @@ def build_mnq_brief(data):
         "news":news,
         "live_count":live_count,
     }
+    if nq.get("forecast_id"):
+        brief["forecast_id"] = nq["forecast_id"]
     folder=data/"briefs/mnq"
     publisher.jsonwrite(folder/(day+".json"),brief)
     publisher.jsonwrite(folder/"latest.json",brief)
