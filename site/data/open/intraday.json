@@ -1,6 +1,6 @@
 {
- "asof": "2026-11-25T23:45:23+00:00",
- "last_seen": "2026-11-25T22:01:58+00:00",
+ "asof": "2026-11-26T02:06:50+00:00",
+ "last_seen": "2026-11-26T01:45:06+00:00",
  "limitations": [
   "The witness reads every 10 minutes from 09:20 to 13:00 New York, then hourly to 17:00; a trade that starts and finishes between two readings is unwitnessed, not counted.",
   "Lock and fill times are Iron Brain's own clock; the witness proves only that a decision was public no later than the commit that recorded it.",
@@ -8,6 +8,36 @@
  ],
  "policy": "A finished trade counts only if it was locked before entry, Displace saw it live before the result, and its locked levels never changed. Trades locked after their entry minute are scored separately, with the lag, because a follower could not have had that entry. Results in NQ points and R (points / locked risk), before costs. Fewer than 30 counted trades: no claim either way.",
  "records": [
+  {
+   "date": "2026-11-26",
+   "first_seen": "2026-11-26T01:45:06+00:00",
+   "id": "orb-prop",
+   "lag": null,
+   "lock": {
+    "lockedAt": "2026-11-25 18:09"
+   },
+   "market": "nq",
+   "name": "orb-prop",
+   "note": "No trade today: Thanksgiving, no CME trading date. Iron Brain's tests leave out market holidays and shortened sessions, so the plan doesn't trade them.",
+   "r": null,
+   "state": "none",
+   "status": "no_trade"
+  },
+  {
+   "date": "2026-11-26",
+   "first_seen": "2026-11-26T01:45:06+00:00",
+   "id": "drive-v2",
+   "lag": null,
+   "lock": {
+    "lockedAt": "2026-11-25 18:09"
+   },
+   "market": "nq",
+   "name": "drive-v2",
+   "note": "No trade today: Thanksgiving, no CME trading date. Iron Brain's tests leave out market holidays and shortened sessions, so the plan doesn't trade them.",
+   "r": null,
+   "state": "none",
+   "status": "no_trade"
+  },
   {
    "date": "2026-11-25",
    "first_seen": "2026-11-25T22:01:58+00:00",
@@ -88,7 +118,7 @@
     "counted": 0,
     "expired": 0,
     "late_lock": 0,
-    "no_trade": 1,
+    "no_trade": 2,
     "pending": 0,
     "unwitnessed": 0
    },
@@ -140,7 +170,7 @@
     "counted": 0,
     "expired": 0,
     "late_lock": 0,
-    "no_trade": 0,
+    "no_trade": 1,
     "pending": 0,
     "unwitnessed": 1
    },

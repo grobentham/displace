@@ -637,7 +637,7 @@
    "note": "",
    "id": "20261204-umich-consumer-sentiment-preliminary-dec",
    "metric": "UMich consumer sentiment index",
-   "previous": "48.1",
+   "previous": "48.0",
    "components": [
     {
      "label": "Consumer sentiment",
@@ -688,14 +688,6 @@
     {
      "label": "CPI m/m",
      "previous": "0.4%"
-    },
-    {
-     "label": "Core CPI y/y",
-     "previous": "2.6%"
-    },
-    {
-     "label": "CPI y/y",
-     "previous": "3.7%"
     }
    ]
   },
@@ -807,7 +799,7 @@
    "note": "",
    "id": "20261218-umich-consumer-sentiment-final-dec",
    "metric": "UMich consumer sentiment index",
-   "previous": "48.1",
+   "previous": "48.0",
    "components": [
     {
      "label": "Consumer sentiment",

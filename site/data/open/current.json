@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "asof": "2026-11-26T01:43:08.930969+00:00",
+  "asof": "2026-11-26T02:06:50.658011+00:00",
   "scope": "Recorded forecasts only; not all possible scheduled forecasts. No receipt before the target start means no prospective credit.",
   "forecast_counts": {
     "void": 2,
@@ -1574,7 +1574,7 @@
     {
       "name": "Daily market bias and range",
       "code": "engine/bias.py",
-      "code_sha256": "4029010959478bb79bf96160c5b99f46896f2d19cb5a2f736608947512b98ab8",
+      "code_sha256": "31e1a7bf3aeb19231ac4060c9032d05da14781d255335f92a558393084565254",
       "plan": null,
       "plan_hash": null,
       "classification": "Base-rate or tested by market; live evidence counted separately"
@@ -1582,7 +1582,7 @@
     {
       "name": "Economic event reactions",
       "code": "engine/surprise.py",
-      "code_sha256": "0d924fc228390f33d59e1fb7ffeb60c55e753211b6540469793c4c9924727a48",
+      "code_sha256": "e43147e8b7679bbf16a230f3a767d0a3d7aedc2ca36fb47d4cb6c9c209b7d915",
       "plan": null,
       "plan_hash": null,
       "classification": "Historical reaction window; not prospective"
@@ -1590,7 +1590,7 @@
     {
       "name": "Discovery v1",
       "code": "engine/discovery.py",
-      "code_sha256": "8242dd67b2a9480181c9b4d370ed6dcecedd29da12257f107492e8bfa1b4ec92",
+      "code_sha256": "b3d3bcea833e97599c719bc81c41163bb39172761700c80dfd1d1a392c4cc18c",
       "plan": "research/discovery-plan-v1.json",
       "plan_hash": "070e1fed7b67a8d7cbcfc9b08945e71258e02154c3a697f1c41e799651f327c5",
       "classification": "Retired 24 Nov 2026: biased within-week estimator; results kept"
@@ -1598,7 +1598,7 @@
     {
       "name": "Discovery v2",
       "code": "engine/discovery_v2.py",
-      "code_sha256": "329c2e59858bd0362bc1fbd59342b1e4e9170aeb0a985028ddf9fb6515b3c6e2",
+      "code_sha256": "e538f381ff743f6b35456a390fb9037a60e798bf6e3ba6ef5a543980ad56e9ce",
       "plan": "research/discovery-plan-v2.json",
       "plan_hash": "1c8cd80a76c86cea2d531433a51f8a3c5c362975db8d1c8059a1ec5535b05235",
       "classification": "Retired 24 Nov 2026: biased within-week estimator; results kept"
@@ -1606,7 +1606,7 @@
     {
       "name": "Discovery v3",
       "code": "engine/discovery_v3.py",
-      "code_sha256": "3017681196c0d455831aa1d86ededaa95a6585b03d7758c5bd34e597ac511b9e",
+      "code_sha256": "6791434d81b652f643b7e082c0ca0ccbf74922aee7bd9ad61233612c992a597b",
       "plan": "research/discovery-plan-v3.json",
       "plan_hash": "b0fa21ccff595c0c6c9d85272eeeb0c2631b71fea52d75bf385e374a941080d8",
       "classification": "History descriptive only; prospective from Dec 2026, candidates need 30 blocks"
@@ -1614,7 +1614,7 @@
     {
       "name": "Macro indices",
       "code": "engine/macro.py",
-      "code_sha256": "4be1d84a243c8e246742f56c1bb94b872ac5fac235ce5dfae254eddf68ed79ed",
+      "code_sha256": "8dc7cb482a47e10313c3ead43cad23095b52d684a04c528aa811600979db68c1",
       "plan": "research/macro-plan-v2.json",
       "plan_hash": "d42fd15963dbe516630a73b1172411109885eb59b1148f814dae8dc1817cfebb",
       "classification": "Descriptive current-vintage indicators"
@@ -1622,7 +1622,7 @@
     {
       "name": "Early warnings",
       "code": "engine/signals.py",
-      "code_sha256": "77863ec4ffa8224e497a55813b94c40367018c8d5a07fa04ad2825af0b66895f",
+      "code_sha256": "953a8552a68fe6c3afb97d98f3decbc967c4ed03aa756b1d9289797e9be31e1b",
       "plan": "research/signals-plan-v1.json",
       "plan_hash": "0df5c39c6368d3795ef4e33ce5579e538d37614c520ed17d5c883231cfa8a93d",
       "classification": "Descriptive threshold monitoring"
@@ -1630,7 +1630,7 @@
     {
       "name": "Financial relationships",
       "code": "engine/relationships.py",
-      "code_sha256": "c65cedc85e1117ffdeb3a58bb7707f4e19d043af93bb59105e6aabe57548006b",
+      "code_sha256": "bdc4ef627068f4bb5d4d08cd1fbfc171d0a5cd07ae4c24d40167c13bb881484c",
       "plan": "research/relationships-plan-v1.json",
       "plan_hash": "a8dc61414d06615434a79f48a5b0462827637614f1e8ba1b72be36995de28b4c",
       "classification": "Descriptive correlations and residuals"
@@ -1638,7 +1638,7 @@
     {
       "name": "Iron Brain live plans",
       "code": "engine/intraday.py",
-      "code_sha256": "921b708b82e1fb7d4f70f0c03f87dcce6af96176676240ddc58923f97b8884b8",
+      "code_sha256": "9d07db4ba964d035866f55c8414becd6480523da0769562beea9e13aa1122035",
       "plan": null,
       "plan_hash": null,
       "classification": "Live intraday plans witnessed from 25 Nov 2026; counted only if locked before entry, seen live and unchanged"
