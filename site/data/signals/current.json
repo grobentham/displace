@@ -1,7 +1,7 @@
 {
   "version": 1,
   "plan_hash": "0df5c39c6368d3795ef4e33ce5579e538d37614c520ed17d5c883231cfa8a93d",
-  "asof": "2026-11-26T02:42:26+00:00",
+  "asof": "2026-11-26T03:49:19+00:00",
   "macro_asof": "2026-11-26",
   "policy": "Descriptive monitoring only, not a forecast. Trigger on a fresh available macro index reaching a specified score; clear only after the separate exit threshold. First observation already beyond the threshold is an initial detection, not evidence of a new crossing. Missing or stale input suspends evaluation without clearing an active condition. All transitions recorded at observation time in UTC; current-vintage revisions can alter scores. Thresholds are policy choices, not empirically validated probabilities.",
   "states": [
@@ -83,10 +83,10 @@
       "extreme": 90,
       "active": false,
       "first_detected": null,
-      "last_evaluated": "2026-11-25T23:45:22+00:00",
-      "last_fingerprint": "0622c53454e719d16e03dcb7dcdadd64cbc99932d16ce5f8ea0dc72216db40a6",
+      "last_evaluated": "2026-11-26T03:49:19+00:00",
+      "last_fingerprint": "cf7558c2f5a552d7b90b5a19aa483eea8f1c849b64ab5c1c1623ce34eb0e9ca7",
       "severity": null,
-      "score": 23.27,
+      "score": 65.97,
       "status": "normal",
       "evidence": [
         {
@@ -98,9 +98,9 @@
         },
         {
           "id": "STLFSI4",
-          "observation_date": "2026-11-13",
-          "value": -0.8655,
-          "score": 4.23,
+          "observation_date": "2026-11-20",
+          "value": -0.0697,
+          "score": 89.62,
           "source": "https://fred.stlouisfed.org/series/STLFSI4"
         }
       ]

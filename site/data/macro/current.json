@@ -74,7 +74,7 @@
     {
       "id": "D-STRESS",
       "name": "Financial stress",
-      "score": 23.27,
+      "score": 65.97,
       "status": "available",
       "components": [
         {
@@ -96,11 +96,11 @@
           "frequency": "weekly",
           "sign": 1,
           "source": "https://fred.stlouisfed.org/series/STLFSI4",
-          "score": 4.23,
+          "score": 89.62,
           "status": "available",
-          "observation_date": "2026-11-13",
-          "value": -0.8655,
-          "age_days": 13,
+          "observation_date": "2026-11-20",
+          "value": -0.0697,
+          "age_days": 6,
           "history_n": 260
         }
       ]
