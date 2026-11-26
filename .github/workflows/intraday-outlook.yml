@@ -1,0 +1,57 @@
+name: ES and Gold outlook
+
+on:
+  schedule:
+    - cron: "3-58/5 * * * 0-5"
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/intraday-outlook.yml"
+      - "engine/es_outlook.py"
+      - "engine/gold_sessions.py"
+      - "engine/spot_outlook.py"
+      - "engine/intraday_outlook.py"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: displace-intraday-outlook
+  cancel-in-progress: false
+
+jobs:
+  update:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - name: Refresh the independent Displace feed
+        shell: bash
+        run: |
+          set -euo pipefail
+          ref=refs/heads/intraday-outlook
+          output="$RUNNER_TEMP/displace-outlook"
+          if git ls-remote --exit-code --heads origin "$ref" >/dev/null; then
+            git fetch -q --depth 1 origin "+$ref:refs/remotes/origin/intraday-outlook"
+            git worktree add -q --detach "$output" origin/intraday-outlook
+          else
+            status=$?
+            if [ "$status" -ne 2 ]; then
+              exit "$status"
+            fi
+            git worktree add -q --orphan -b intraday-outlook "$output"
+          fi
+          python engine/intraday_outlook.py "$output/outlook.json"
+          if [ -f "$output/outlook.json" ]; then
+            git -C "$output" add outlook.json
+            if ! git -C "$output" diff --cached --quiet; then
+              git -C "$output" -c user.name=displace -c user.email=displace@users.noreply.github.com \
+                commit -qm "Refresh the independent intraday outlook"
+              git -C "$output" push -q origin "HEAD:$ref"
+            fi
+          fi

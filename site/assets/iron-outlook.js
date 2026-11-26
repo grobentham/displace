@@ -1,11 +1,12 @@
-/* Read Iron Brain's public market summaries. Each card keeps the source's own timestamps. */
+/* Read each market from its publisher. Cards retain the source's own timestamps. */
 (function () {
   "use strict";
   const body = document.getElementById("ib-outlook-body");
   const buttons = document.querySelectorAll("[data-ib-market]");
   if (!body) return;
 
-  const source = "https://raw.githubusercontent.com/grobentham/iron-brain/quotes/quotes.json";
+  const nqSource = "https://raw.githubusercontent.com/grobentham/iron-brain/quotes/quotes.json";
+  const displaceSource = "https://raw.githubusercontent.com/grobentham/displace/intraday-outlook/outlook.json";
   const names = { nq: "NQ", es: "ES", xauusd: "XAUUSD" };
   const instruments = { nq: "Nasdaq-100 futures", es: "S&P 500 futures", xauusd: "Spot gold" };
   const labels = { bullish: "Bullish", bearish: "Bearish", consolidating: "Consolidating", mixed: "Mixed" };
@@ -13,7 +14,7 @@
   const prices = new Intl.NumberFormat("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
   const local = new Intl.DateTimeFormat(undefined, { weekday: "short", hour: "numeric", minute: "2-digit", timeZoneName: "short" });
   let selected = "nq";
-  let feed, failed = false, busy = false;
+  let feeds = {}, failed = {}, busy = {};
   let lastAttempt = -Infinity;
 
   function node(tag, cls, text) {
@@ -45,13 +46,15 @@
 
   function render() {
     for (const button of buttons) button.setAttribute("aria-pressed", String(button.dataset.ibMarket === selected));
-    const market = selected === "nq" ? feed : feed?.markets?.[selected];
+    const provider = selected === "nq" ? "nq" : "displace";
+    const feed = feeds[provider];
+    const market = selected === "nq" ? feed : feed?.[selected];
     const snapshot = node("div", "ib-outlook-snapshot");
     const title = node("h2", "ib-outlook-heading", instruments[selected]);
     body.replaceChildren(snapshot);
     if (!market || !Number.isFinite(Date.parse(market.barTime)) || !Number.isFinite(Date.parse(market.time))) {
-      const message = node("p", "ib-outlook-message", failed
-        ? "Iron Brain’s market feed is temporarily unavailable."
+      const message = node("p", "ib-outlook-message", failed[provider]
+        ? names[selected] + " market feed is temporarily unavailable."
         : feed ? names[selected] + " outlook is currently unavailable."
           : "Loading the " + names[selected] + " outlook…");
       message.setAttribute("role", "status");
@@ -78,7 +81,7 @@
     const age = Math.max(0, Math.floor((Date.now() - Date.parse(market.time)) / 60000));
     const barAge = (Date.now() - Date.parse(market.barTime)) / 60000;
     const sampledGold = selected === "xauusd" && market.source === "xaus";
-    const stale = failed || age > 20 || barAge > (sampledGold ? 15 : 35);
+    const stale = failed[provider] || age > 20 || barAge > (sampledGold ? 15 : 35);
     const stamp = node("div", "ib-outlook-meta");
     stamp.id = "ib-outlook-stamp";
     if (sampledGold) {
@@ -113,25 +116,31 @@
     body.append(detail);
   }
 
-  async function refresh() {
-    if (busy || document.hidden || window.__page !== "intraday-bias") return;
-    if (Date.now() - lastAttempt < 60000) return;
-    lastAttempt = Date.now();
-    busy = true;
+  async function update(provider, source, field) {
+    if (busy[provider]) return;
+    busy[provider] = true;
     try {
       const url = source + "?minute=" + Math.floor(Date.now() / 60000);
       const response = await fetch(url, { cache: "no-store", signal: AbortSignal.timeout(8000) });
-      if (!response.ok) throw Error("Iron Brain feed unavailable");
-      const payload = await response.json();
-      if (!payload.outlook) throw Error("Iron Brain outlook missing");
-      feed = payload.outlook;
-      failed = false;
-    } catch (error) {
-      failed = true;
+      if (!response.ok) throw Error("Market feed unavailable");
+      const data = (await response.json())[field];
+      if (!data) throw Error("Outlook missing");
+      feeds[provider] = data;
+      failed[provider] = false;
+    } catch {
+      failed[provider] = true;
     } finally {
-      busy = false;
+      busy[provider] = false;
       render();
     }
+  }
+
+  function refresh() {
+    if (document.hidden || window.__page !== "intraday-bias") return;
+    if (Date.now() - lastAttempt < 60000) return;
+    lastAttempt = Date.now();
+    update("nq", nqSource, "outlook");
+    update("displace", displaceSource, "markets");
   }
 
   for (const button of buttons) button.addEventListener("click", () => {

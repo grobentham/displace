@@ -166,18 +166,25 @@ def sync(m, now, fetch=download):
 
 
 IRON_BRAIN = "https://raw.githubusercontent.com/grobentham/iron-brain/quotes/quotes.json"
+DISPLACE_OUTLOOK = "https://raw.githubusercontent.com/grobentham/displace/intraday-outlook/outlook.json"
 PATCHES = os.path.join(CACHE_DIR, "patches.json")
 
 
-def iron_brain_sessions(url=IRON_BRAIN):
-    """Clean daily candles from Iron Brain (its engine/sessions.py): NQ and gold Globex sessions rebuilt every 5 minutes
-    from spike-filtered 1-minute bars. {} when unreachable: the Yahoo candles then stand as they are."""
+def clean_sessions(url, wrapped=False):
+    """Clean daily candles rebuilt from one-minute bars. The regular bars remain the source during outages."""
     try:
         with urllib.request.urlopen(urllib.request.Request(url, headers=UA), timeout=20) as r:
-            return (json.load(r).get("outlook") or {}).get("sessions") or {}
+            doc = json.load(r)
+            if wrapped:
+                doc = doc.get("outlook") or {}
+            return doc.get("sessions") or {}
     except Exception as e:
-        log(f"bias: Iron Brain sessions unavailable ({e!r})")
+        log(f"bias: clean sessions unavailable ({e!r})")
         return {}
+
+
+def iron_brain_sessions(url=IRON_BRAIN):
+    return clean_sessions(url, wrapped=True)
 
 
 def load_patches():
@@ -986,7 +993,7 @@ def run(now=None, fetch=download, fetch_series=fred_download, markets=None):
     series = {sid: sync_series(sid, now, fetch_series) for sid in SERIES}
     tiers, fomc = calendar_tiers()
     ctxs, rows_by, notes, candle_sources = {}, {}, {}, {}
-    ib = iron_brain_sessions() if fetch is download else {}
+    ib = {} if fetch is not download else {**iron_brain_sessions(), **clean_sessions(DISPLACE_OUTLOOK)}
     patches = load_patches()
     for m in markets:
         try:

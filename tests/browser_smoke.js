@@ -38,11 +38,18 @@ async function checkOutlook(page, width) {
   leanText:symbol+' bearish fixture',lines:[symbol+' bearish fixture',symbol+' price line'],
   levels:{above:[{name:'Prior high',price:123.45}],below:[]}
  });
- let ironRequests=0;
+ let ironRequests=0, displaceRequests=0;
  await page.route('https://raw.githubusercontent.com/grobentham/iron-brain/quotes/quotes.json*',route=>{
   ironRequests++;
   return route.fulfill({
-   json:{outlook:{...snapshot('NQ'),markets:{es:snapshot('ES'),xauusd:{...snapshot('XAUUSD',day+'T09:00:00Z'),source:'xaus'}}}},
+   json:{outlook:snapshot('NQ')},
+   headers:{'access-control-allow-origin':'*'}
+  });
+ });
+ await page.route('https://raw.githubusercontent.com/grobentham/displace/intraday-outlook/outlook.json*',route=>{
+  displaceRequests++;
+  return route.fulfill({
+   json:{markets:{es:snapshot('ES'),xauusd:{...snapshot('XAUUSD',day+'T09:00:00Z'),source:'xaus'}}},
    headers:{'access-control-allow-origin':'*'}
   });
  });
@@ -52,6 +59,7 @@ async function checkOutlook(page, width) {
  assert.match(await page.locator('#mc-lean').innerText(),/Bullish lean.*Historical base rate.*54\.2%/);
  assert.equal(await outlook.isVisible(),false,'Iron Brain has its own page');
  assert.equal(ironRequests,0,'homepage does not fetch the Iron Brain feed');
+ assert.equal(displaceRequests,0,'homepage does not fetch the Displace intraday feed');
  const biasTab=page.locator('#navlinks a[href="#intraday-bias"]');
  if (!await biasTab.isVisible()) await page.getByRole('button',{name:'Open menu'}).click();
  await biasTab.click();
