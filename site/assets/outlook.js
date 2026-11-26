@@ -28,6 +28,19 @@ window.DisplaceOutlook = (function () {
     return !!(session && session.open && Date.parse(asof) >= Date.parse(session.open));
   }
 
+  function directionLean(market) {
+    var probability = market.p_up;
+    if (!Number.isFinite(probability) || probability < 0 || probability > 1) return null;
+    var direction = market.bias === "long" || market.bias === "short" ? market.bias : "neutral";
+    var label = { long: "Bullish lean", short: "Bearish lean", neutral: "Neutral lean" }[direction];
+    return {
+      direction: direction,
+      label: label,
+      percent: probability.toLocaleString("en-US", { style: "percent", maximumFractionDigits: 1 }),
+      historical: market.tier !== "tested"
+    };
+  }
+
   function sessionPhase(session, now = Date.now()) {
     if (!session?.open) return "Hours unavailable";
     if (now < Date.parse(session.open)) return "Upcoming";
@@ -56,5 +69,5 @@ window.DisplaceOutlook = (function () {
     return market.n.toLocaleString("en-US") + (market.n === 1 ? " verified forecast scored" : " verified forecasts scored");
   }
 
-  return { formatPoints: formatPoints, sessionWindow: sessionWindow, afterOpen: afterOpen, sessionPhase: sessionPhase, evidence: evidence, scoringStatus: scoringStatus };
+  return { formatPoints: formatPoints, sessionWindow: sessionWindow, afterOpen: afterOpen, directionLean: directionLean, sessionPhase: sessionPhase, evidence: evidence, scoringStatus: scoringStatus };
 })();

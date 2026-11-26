@@ -13,6 +13,8 @@
 .mc-big #mc-pts{font-size:clamp(4rem,12vw,7.5rem);font-weight:700;letter-spacing:-.05em;line-height:.9;color:#f5f5f7;font-variant-numeric:tabular-nums}
 .mc-big small{font-size:1.25rem;color:#a1a1a6}
 .mc-range{margin:16px 0 4px;font-size:1.1rem;color:#f5f5f7}
+.mc-lean{margin:12px 0 4px;color:#a1a1a6;font-size:.95rem}
+.mc-lean strong{color:#f5f5f7}
 .mc-cmp{margin:0;color:#a1a1a6}
 .mc-evidence,.mc-window{margin:10px 0 0;color:#a1a1a6;font-size:.9rem}
 .mc-evidence b{color:#f5f5f7;font-weight:600}
