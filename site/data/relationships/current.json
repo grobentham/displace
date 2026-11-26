@@ -1,7 +1,7 @@
 {
   "version": 1,
   "plan_hash": "a8dc61414d06615434a79f48a5b0462827637614f1e8ba1b72be36995de28b4c",
-  "asof": "2026-11-25",
+  "asof": "2026-11-26",
   "series": [
     {
       "id": "nq",
@@ -95,19 +95,19 @@
       "b": "es",
       "status": "available",
       "latest": "2026-11-25",
-      "age_days": 0,
+      "age_days": 1,
       "paired_n": 5614,
       "correlations": {
-        "20": 0.9734,
-        "60": 0.96,
+        "20": 0.9733,
+        "60": 0.9601,
         "252": 0.9459
       },
       "prior60": 0.922,
-      "shift60": 0.038,
+      "shift60": 0.0381,
       "divergence": {
-        "z": 0.4275,
-        "observed": 0.304351,
-        "fitted": 0.146312,
+        "z": 0.247,
+        "observed": -0.301806,
+        "fitted": -0.3931,
         "beta": 0.619508,
         "training_n": 60,
         "training_end": "2026-11-24"
@@ -119,19 +119,19 @@
       "b": "ym",
       "status": "available",
       "latest": "2026-11-25",
-      "age_days": 0,
+      "age_days": 1,
       "paired_n": 5260,
       "correlations": {
-        "20": 0.7933,
-        "60": 0.7182,
-        "252": 0.6993
+        "20": 0.7903,
+        "60": 0.7163,
+        "252": 0.6986
       },
       "prior60": 0.6201,
-      "shift60": 0.0981,
+      "shift60": 0.0962,
       "divergence": {
-        "z": 0.729,
-        "observed": 0.653064,
-        "fitted": 0.077413,
+        "z": 0.7636,
+        "observed": 0.333038,
+        "fitted": -0.269949,
         "beta": 0.39894,
         "training_n": 60,
         "training_end": "2026-11-24"
@@ -143,19 +143,19 @@
       "b": "rty",
       "status": "available",
       "latest": "2026-11-25",
-      "age_days": 0,
+      "age_days": 1,
       "paired_n": 1993,
       "correlations": {
-        "20": 0.888,
-        "60": 0.8192,
-        "252": 0.7632
+        "20": 0.8857,
+        "60": 0.8173,
+        "252": 0.7624
       },
       "prior60": 0.7734,
-      "shift60": 0.0458,
+      "shift60": 0.0439,
       "divergence": {
-        "z": 1.3231,
-        "observed": 1.087285,
-        "fitted": 0.049419,
+        "z": 1.3428,
+        "observed": 0.622757,
+        "fitted": -0.430565,
         "beta": 0.551255,
         "training_n": 60,
         "training_end": "2026-11-24"
@@ -167,19 +167,19 @@
       "b": "gold",
       "status": "available",
       "latest": "2026-11-25",
-      "age_days": 0,
+      "age_days": 1,
       "paired_n": 2804,
       "correlations": {
-        "20": 0.5007,
-        "60": 0.4405,
-        "252": 0.2994
+        "20": 0.4979,
+        "60": 0.4409,
+        "252": 0.2998
       },
       "prior60": 0.3027,
-      "shift60": 0.1378,
+      "shift60": 0.1382,
       "divergence": {
-        "z": 0.8656,
-        "observed": 1.158373,
-        "fitted": -0.194694,
+        "z": -0.1374,
+        "observed": -0.735449,
+        "fitted": -0.520739,
         "beta": 0.374458,
         "training_n": 60,
         "training_end": "2026-11-24"
@@ -191,19 +191,19 @@
       "b": "cl",
       "status": "available",
       "latest": "2026-11-25",
-      "age_days": 0,
+      "age_days": 1,
       "paired_n": 5584,
       "correlations": {
-        "20": -0.4275,
-        "60": -0.4177,
-        "252": -0.3097
+        "20": -0.4513,
+        "60": -0.4242,
+        "252": -0.3109
       },
       "prior60": -0.3093,
-      "shift60": -0.1084,
+      "shift60": -0.1149,
       "divergence": {
-        "z": 1.0374,
-        "observed": 2.705305,
-        "fitted": -0.350442,
+        "z": 0.5883,
+        "observed": 1.967115,
+        "fitted": 0.234065,
         "beta": -0.671299,
         "training_n": 60,
         "training_end": "2026-11-24"
@@ -215,19 +215,19 @@
       "b": "6e",
       "status": "available",
       "latest": "2026-11-25",
-      "age_days": 0,
+      "age_days": 1,
       "paired_n": 5598,
       "correlations": {
-        "20": -0.259,
-        "60": -0.1523,
-        "252": 0.115
+        "20": -0.258,
+        "60": -0.1543,
+        "252": 0.1141
       },
       "prior60": 0.3205,
-      "shift60": -0.4728,
+      "shift60": -0.4748,
       "divergence": {
-        "z": 0.0652,
-        "observed": -0.07292,
-        "fitted": -0.095837,
+        "z": 0.5707,
+        "observed": 0.127481,
+        "fitted": -0.073099,
         "beta": -0.026114,
         "training_n": 60,
         "training_end": "2026-11-24"
@@ -241,19 +241,19 @@
       "b": "btc",
       "status": "available",
       "latest": "2026-11-25",
-      "age_days": 0,
+      "age_days": 1,
       "paired_n": 1898,
       "correlations": {
-        "20": 0.7946,
-        "60": 0.613,
-        "252": 0.5044
+        "20": 0.7894,
+        "60": 0.611,
+        "252": 0.5036
       },
       "prior60": 0.3603,
-      "shift60": 0.2527,
+      "shift60": 0.2507,
       "divergence": {
-        "z": 0.5235,
-        "observed": 1.512788,
-        "fitted": 0.30491,
+        "z": 0.5518,
+        "observed": 0.817421,
+        "fitted": -0.455899,
         "beta": 0.873779,
         "training_n": 60,
         "training_end": "2026-11-24"
@@ -265,7 +265,7 @@
       "b": "VIXCLS",
       "status": "available",
       "latest": "2026-11-24",
-      "age_days": 1,
+      "age_days": 2,
       "paired_n": 3067,
       "correlations": {
         "20": -0.9129,
@@ -291,7 +291,7 @@
       "b": "BAMLH0A0HYM2",
       "status": "available",
       "latest": "2026-11-24",
-      "age_days": 1,
+      "age_days": 2,
       "paired_n": 529,
       "correlations": {
         "20": -0.7893,
@@ -317,7 +317,7 @@
       "b": "DGS2",
       "status": "available",
       "latest": "2026-11-24",
-      "age_days": 1,
+      "age_days": 2,
       "paired_n": 4774,
       "correlations": {
         "20": 0.4682,
@@ -341,7 +341,7 @@
       "b": "DTWEXBGS",
       "status": "available",
       "latest": "2026-11-20",
-      "age_days": 5,
+      "age_days": 6,
       "paired_n": 3701,
       "correlations": {
         "20": -0.0224,
@@ -365,19 +365,19 @@
       "b": "ym",
       "status": "available",
       "latest": "2026-11-25",
-      "age_days": 0,
+      "age_days": 1,
       "paired_n": 5260,
       "correlations": {
-        "20": 0.9024,
-        "60": 0.8673,
-        "252": 0.8608
+        "20": 0.9002,
+        "60": 0.8656,
+        "252": 0.8601
       },
       "prior60": 0.8331,
-      "shift60": 0.0342,
+      "shift60": 0.0325,
       "divergence": {
-        "z": 0.7629,
-        "observed": 0.653064,
-        "fitted": 0.222365,
+        "z": 0.9974,
+        "observed": 0.333038,
+        "fitted": -0.230071,
         "beta": 0.7464,
         "training_n": 60,
         "training_end": "2026-11-24"
@@ -389,19 +389,19 @@
       "b": "rty",
       "status": "available",
       "latest": "2026-11-25",
-      "age_days": 0,
+      "age_days": 1,
       "paired_n": 1993,
       "correlations": {
-        "20": 0.9361,
-        "60": 0.8796,
-        "252": 0.8406
+        "20": 0.9342,
+        "60": 0.8776,
+        "252": 0.8398
       },
       "prior60": 0.8305,
-      "shift60": 0.0491,
+      "shift60": 0.0471,
       "divergence": {
-        "z": 1.3551,
-        "observed": 1.087285,
-        "fitted": 0.200635,
+        "z": 1.4928,
+        "observed": 0.622757,
+        "fitted": -0.353965,
         "beta": 0.914945,
         "training_n": 60,
         "training_end": "2026-11-24"
@@ -413,19 +413,19 @@
       "b": "gold",
       "status": "available",
       "latest": "2026-11-25",
-      "age_days": 0,
+      "age_days": 1,
       "paired_n": 2804,
       "correlations": {
-        "20": 0.5529,
-        "60": 0.5154,
+        "20": 0.5493,
+        "60": 0.5147,
         "252": 0.3336
       },
       "prior60": 0.3868,
-      "shift60": 0.1286,
+      "shift60": 0.1279,
       "divergence": {
-        "z": 0.8213,
-        "observed": 1.158373,
-        "fitted": -0.068771,
+        "z": -0.1717,
+        "observed": -0.735449,
+        "fitted": -0.47887,
         "beta": 0.676556,
         "training_n": 60,
         "training_end": "2026-11-24"
@@ -437,19 +437,19 @@
       "b": "cl",
       "status": "available",
       "latest": "2026-11-25",
-      "age_days": 0,
+      "age_days": 1,
       "paired_n": 5584,
       "correlations": {
-        "20": -0.4841,
-        "60": -0.4216,
-        "252": -0.3723
+        "20": -0.5102,
+        "60": -0.4293,
+        "252": -0.3738
       },
       "prior60": -0.4808,
-      "shift60": 0.0592,
+      "shift60": 0.0515,
       "divergence": {
-        "z": 1.0954,
-        "observed": 2.705305,
-        "fitted": -0.510324,
+        "z": 0.6258,
+        "observed": 1.967115,
+        "fitted": 0.130159,
         "beta": -1.056629,
         "training_n": 60,
         "training_end": "2026-11-24"
@@ -461,19 +461,19 @@
       "b": "6e",
       "status": "available",
       "latest": "2026-11-25",
-      "age_days": 0,
+      "age_days": 1,
       "paired_n": 5598,
       "correlations": {
-        "20": -0.1462,
-        "60": -0.0272,
-        "252": 0.1839
+        "20": -0.1449,
+        "60": -0.0289,
+        "252": 0.1834
       },
       "prior60": 0.3818,
-      "shift60": -0.409,
+      "shift60": -0.4107,
       "divergence": {
-        "z": 0.0424,
-        "observed": -0.07292,
-        "fitted": -0.088,
+        "z": 0.5931,
+        "observed": 0.127481,
+        "fitted": -0.083298,
         "beta": -0.007758,
         "training_n": 60,
         "training_end": "2026-11-24"
@@ -487,19 +487,19 @@
       "b": "btc",
       "status": "available",
       "latest": "2026-11-25",
-      "age_days": 0,
+      "age_days": 1,
       "paired_n": 1898,
       "correlations": {
-        "20": 0.8116,
-        "60": 0.6149,
-        "252": 0.5281
+        "20": 0.8063,
+        "60": 0.6127,
+        "252": 0.5272
       },
       "prior60": 0.4237,
-      "shift60": 0.1912,
+      "shift60": 0.189,
       "divergence": {
-        "z": 0.4372,
-        "observed": 1.512788,
-        "fitted": 0.505558,
+        "z": 0.4926,
+        "observed": 0.817421,
+        "fitted": -0.317386,
         "beta": 1.357641,
         "training_n": 60,
         "training_end": "2026-11-24"
@@ -511,7 +511,7 @@
       "b": "VIXCLS",
       "status": "available",
       "latest": "2026-11-24",
-      "age_days": 1,
+      "age_days": 2,
       "paired_n": 3067,
       "correlations": {
         "20": -0.9615,
@@ -537,7 +537,7 @@
       "b": "BAMLH0A0HYM2",
       "status": "available",
       "latest": "2026-11-24",
-      "age_days": 1,
+      "age_days": 2,
       "paired_n": 529,
       "correlations": {
         "20": -0.8077,
@@ -563,7 +563,7 @@
       "b": "DGS2",
       "status": "available",
       "latest": "2026-11-24",
-      "age_days": 1,
+      "age_days": 2,
       "paired_n": 4774,
       "correlations": {
         "20": 0.4886,
@@ -587,7 +587,7 @@
       "b": "DTWEXBGS",
       "status": "available",
       "latest": "2026-11-20",
-      "age_days": 5,
+      "age_days": 6,
       "paired_n": 3701,
       "correlations": {
         "20": -0.1222,
@@ -611,19 +611,19 @@
       "b": "rty",
       "status": "available",
       "latest": "2026-11-25",
-      "age_days": 0,
+      "age_days": 1,
       "paired_n": 1993,
       "correlations": {
-        "20": 0.8913,
-        "60": 0.8389,
-        "252": 0.8208
+        "20": 0.8903,
+        "60": 0.838,
+        "252": 0.8205
       },
       "prior60": 0.759,
-      "shift60": 0.0799,
+      "shift60": 0.079,
       "divergence": {
-        "z": 0.6873,
-        "observed": 1.087285,
-        "fitted": 0.567641,
+        "z": 0.5004,
+        "observed": 0.622757,
+        "fitted": 0.244457,
         "beta": 1.009869,
         "training_n": 60,
         "training_end": "2026-11-24"
@@ -635,19 +635,19 @@
       "b": "gold",
       "status": "available",
       "latest": "2026-11-25",
-      "age_days": 0,
+      "age_days": 1,
       "paired_n": 2804,
       "correlations": {
-        "20": 0.5685,
-        "60": 0.536,
-        "252": 0.3379
+        "20": 0.5572,
+        "60": 0.5296,
+        "252": 0.3363
       },
       "prior60": 0.4013,
-      "shift60": 0.1347,
+      "shift60": 0.1283,
       "divergence": {
-        "z": 0.6144,
-        "observed": 1.158373,
-        "fitted": 0.251467,
+        "z": -0.4925,
+        "observed": -0.735449,
+        "fitted": -0.008489,
         "beta": 0.812295,
         "training_n": 60,
         "training_end": "2026-11-24"
@@ -659,19 +659,19 @@
       "b": "cl",
       "status": "available",
       "latest": "2026-11-25",
-      "age_days": 0,
+      "age_days": 1,
       "paired_n": 5238,
       "correlations": {
-        "20": -0.5688,
-        "60": -0.4355,
-        "252": -0.4574
+        "20": -0.5936,
+        "60": -0.4433,
+        "252": -0.4591
       },
       "prior60": -0.6225,
-      "shift60": 0.187,
+      "shift60": 0.1792,
       "divergence": {
-        "z": 1.2845,
-        "observed": 2.705305,
-        "fitted": -1.023826,
+        "z": 0.8884,
+        "observed": 1.967115,
+        "fitted": -0.612097,
         "beta": -1.286552,
         "training_n": 60,
         "training_end": "2026-11-24"
@@ -683,19 +683,19 @@
       "b": "6e",
       "status": "available",
       "latest": "2026-11-25",
-      "age_days": 0,
+      "age_days": 1,
       "paired_n": 5260,
       "correlations": {
-        "20": 0.1091,
-        "60": 0.2128,
-        "252": 0.2486
+        "20": 0.1176,
+        "60": 0.216,
+        "252": 0.2495
       },
       "prior60": 0.3528,
-      "shift60": -0.14,
+      "shift60": -0.1368,
       "divergence": {
-        "z": -0.1057,
-        "observed": -0.07292,
-        "fitted": -0.036162,
+        "z": 0.5306,
+        "observed": 0.127481,
+        "fitted": -0.057016,
         "beta": 0.065163,
         "training_n": 60,
         "training_end": "2026-11-24"
@@ -707,19 +707,19 @@
       "b": "btc",
       "status": "available",
       "latest": "2026-11-25",
-      "age_days": 0,
+      "age_days": 1,
       "paired_n": 1898,
       "correlations": {
-        "20": 0.7066,
-        "60": 0.5105,
-        "252": 0.4366
+        "20": 0.7031,
+        "60": 0.5086,
+        "252": 0.436
       },
       "prior60": 0.3174,
-      "shift60": 0.1931,
+      "shift60": 0.1912,
       "divergence": {
-        "z": 0.2413,
-        "observed": 1.512788,
-        "fitted": 0.906238,
+        "z": 0.1308,
+        "observed": 0.817421,
+        "fitted": 0.488469,
         "beta": 1.305422,
         "training_n": 60,
         "training_end": "2026-11-24"
@@ -731,7 +731,7 @@
       "b": "VIXCLS",
       "status": "available",
       "latest": "2026-11-24",
-      "age_days": 1,
+      "age_days": 2,
       "paired_n": 3067,
       "correlations": {
         "20": -0.901,
@@ -757,7 +757,7 @@
       "b": "BAMLH0A0HYM2",
       "status": "available",
       "latest": "2026-11-24",
-      "age_days": 1,
+      "age_days": 2,
       "paired_n": 529,
       "correlations": {
         "20": -0.7162,
@@ -783,7 +783,7 @@
       "b": "DGS2",
       "status": "available",
       "latest": "2026-11-24",
-      "age_days": 1,
+      "age_days": 2,
       "paired_n": 4459,
       "correlations": {
         "20": 0.4522,
@@ -807,7 +807,7 @@
       "b": "DTWEXBGS",
       "status": "available",
       "latest": "2026-11-20",
-      "age_days": 5,
+      "age_days": 6,
       "paired_n": 3701,
       "correlations": {
         "20": -0.2759,
@@ -831,19 +831,19 @@
       "b": "gold",
       "status": "available",
       "latest": "2026-11-25",
-      "age_days": 0,
+      "age_days": 1,
       "paired_n": 1884,
       "correlations": {
-        "20": 0.4758,
-        "60": 0.4756,
-        "252": 0.325
+        "20": 0.457,
+        "60": 0.4646,
+        "252": 0.3228
       },
       "prior60": 0.3041,
-      "shift60": 0.1715,
+      "shift60": 0.1605,
       "divergence": {
-        "z": 0.4909,
-        "observed": 1.158373,
-        "fitted": 0.404174,
+        "z": -0.5616,
+        "observed": -0.735449,
+        "fitted": 0.127378,
         "beta": 0.595864,
         "training_n": 60,
         "training_end": "2026-11-24"
@@ -855,19 +855,19 @@
       "b": "cl",
       "status": "available",
       "latest": "2026-11-25",
-      "age_days": 0,
+      "age_days": 1,
       "paired_n": 1991,
       "correlations": {
-        "20": -0.4814,
-        "60": -0.3761,
-        "252": -0.3496
+        "20": -0.5102,
+        "60": -0.386,
+        "252": -0.3515
       },
       "prior60": -0.4813,
-      "shift60": 0.1052,
+      "shift60": 0.0953,
       "divergence": {
-        "z": 1.3173,
-        "observed": 2.705305,
-        "fitted": -1.237717,
+        "z": 0.9276,
+        "observed": 1.967115,
+        "fitted": -0.809527,
         "beta": -0.921771,
         "training_n": 60,
         "training_end": "2026-11-24"
@@ -879,19 +879,19 @@
       "b": "6e",
       "status": "available",
       "latest": "2026-11-25",
-      "age_days": 0,
+      "age_days": 1,
       "paired_n": 1993,
       "correlations": {
-        "20": 0.0109,
-        "60": 0.1217,
-        "252": 0.237
+        "20": 0.0224,
+        "60": 0.1273,
+        "252": 0.2383
       },
       "prior60": 0.3563,
-      "shift60": -0.2346,
+      "shift60": -0.229,
       "divergence": {
-        "z": -0.0876,
-        "observed": -0.07292,
-        "fitted": -0.042036,
+        "z": 0.5251,
+        "observed": 0.127481,
+        "fitted": -0.057624,
         "beta": 0.033556,
         "training_n": 60,
         "training_end": "2026-11-24"
@@ -903,19 +903,19 @@
       "b": "btc",
       "status": "available",
       "latest": "2026-11-25",
-      "age_days": 0,
+      "age_days": 1,
       "paired_n": 1898,
       "correlations": {
-        "20": 0.751,
-        "60": 0.491,
-        "252": 0.4935
+        "20": 0.7463,
+        "60": 0.4885,
+        "252": 0.493
       },
       "prior60": 0.4504,
-      "shift60": 0.0406,
+      "shift60": 0.0381,
       "divergence": {
-        "z": 0.1061,
-        "observed": 1.512788,
-        "fitted": 1.241751,
+        "z": 0.0209,
+        "observed": 0.817421,
+        "fitted": 0.764022,
         "beta": 1.028416,
         "training_n": 60,
         "training_end": "2026-11-24"
@@ -927,7 +927,7 @@
       "b": "VIXCLS",
       "status": "available",
       "latest": "2026-11-24",
-      "age_days": 1,
+      "age_days": 2,
       "paired_n": 1691,
       "correlations": {
         "20": -0.9518,
@@ -953,7 +953,7 @@
       "b": "BAMLH0A0HYM2",
       "status": "available",
       "latest": "2026-11-24",
-      "age_days": 1,
+      "age_days": 2,
       "paired_n": 529,
       "correlations": {
         "20": -0.7163,
@@ -977,7 +977,7 @@
       "b": "DGS2",
       "status": "available",
       "latest": "2026-11-24",
-      "age_days": 1,
+      "age_days": 2,
       "paired_n": 1679,
       "correlations": {
         "20": 0.4933,
@@ -1001,7 +1001,7 @@
       "b": "DTWEXBGS",
       "status": "available",
       "latest": "2026-11-20",
-      "age_days": 5,
+      "age_days": 6,
       "paired_n": 1655,
       "correlations": {
         "20": 0.0203,
@@ -1025,19 +1025,19 @@
       "b": "cl",
       "status": "available",
       "latest": "2026-11-25",
-      "age_days": 0,
+      "age_days": 1,
       "paired_n": 2802,
       "correlations": {
-        "20": -0.5663,
-        "60": -0.3217,
-        "252": -0.1759
+        "20": -0.6344,
+        "60": -0.3397,
+        "252": -0.1785
       },
       "prior60": -0.3198,
-      "shift60": -0.0019,
+      "shift60": -0.0199,
       "divergence": {
-        "z": 1.2124,
-        "observed": 2.705305,
-        "fitted": -1.008531,
+        "z": 0.5857,
+        "observed": 1.967115,
+        "fitted": 0.173108,
         "beta": -0.623944,
         "training_n": 60,
         "training_end": "2026-11-24"
@@ -1049,19 +1049,19 @@
       "b": "6e",
       "status": "available",
       "latest": "2026-11-25",
-      "age_days": 0,
+      "age_days": 1,
       "paired_n": 2804,
       "correlations": {
-        "20": 0.1149,
-        "60": 0.2914,
-        "252": 0.3428
+        "20": 0.1137,
+        "60": 0.2892,
+        "252": 0.3425
       },
       "prior60": 0.504,
-      "shift60": -0.2126,
+      "shift60": -0.2148,
       "divergence": {
-        "z": -0.2356,
-        "observed": -0.07292,
-        "fitted": 0.007047,
+        "z": 0.6933,
+        "observed": 0.127481,
+        "fitted": -0.107881,
         "beta": 0.060686,
         "training_n": 60,
         "training_end": "2026-11-24"
@@ -1073,19 +1073,19 @@
       "b": "btc",
       "status": "available",
       "latest": "2026-11-25",
-      "age_days": 0,
+      "age_days": 1,
       "paired_n": 1805,
       "correlations": {
-        "20": 0.657,
-        "60": 0.5974,
-        "252": 0.2649
+        "20": 0.6292,
+        "60": 0.593,
+        "252": 0.2631
       },
       "prior60": 0.409,
-      "shift60": 0.1884,
+      "shift60": 0.184,
       "divergence": {
-        "z": 0.0337,
-        "observed": 1.512788,
-        "fitted": 1.433467,
+        "z": 0.5366,
+        "observed": 0.817421,
+        "fitted": -0.44516,
         "beta": 0.991976,
         "training_n": 60,
         "training_end": "2026-11-24"
@@ -1097,7 +1097,7 @@
       "b": "VIXCLS",
       "status": "available",
       "latest": "2026-11-24",
-      "age_days": 1,
+      "age_days": 2,
       "paired_n": 2390,
       "correlations": {
         "20": -0.447,
@@ -1121,7 +1121,7 @@
       "b": "BAMLH0A0HYM2",
       "status": "available",
       "latest": "2026-11-24",
-      "age_days": 1,
+      "age_days": 2,
       "paired_n": 529,
       "correlations": {
         "20": -0.4909,
@@ -1145,7 +1145,7 @@
       "b": "DGS2",
       "status": "available",
       "latest": "2026-11-24",
-      "age_days": 1,
+      "age_days": 2,
       "paired_n": 2369,
       "correlations": {
         "20": 0.1017,
@@ -1169,7 +1169,7 @@
       "b": "DTWEXBGS",
       "status": "available",
       "latest": "2026-11-20",
-      "age_days": 5,
+      "age_days": 6,
       "paired_n": 2325,
       "correlations": {
         "20": -0.377,
@@ -1193,19 +1193,19 @@
       "b": "6e",
       "status": "available",
       "latest": "2026-11-25",
-      "age_days": 0,
+      "age_days": 1,
       "paired_n": 5571,
       "correlations": {
-        "20": -0.1952,
-        "60": 0.071,
-        "252": -0.1928
+        "20": -0.1721,
+        "60": 0.0768,
+        "252": -0.1916
       },
       "prior60": -0.247,
-      "shift60": 0.318,
+      "shift60": 0.3238,
       "divergence": {
-        "z": -0.0339,
-        "observed": -0.07292,
-        "fitted": -0.060906,
+        "z": 0.5494,
+        "observed": 0.127481,
+        "fitted": -0.067255,
         "beta": 0.0086,
         "training_n": 60,
         "training_end": "2026-11-24"
@@ -1217,19 +1217,19 @@
       "b": "btc",
       "status": "available",
       "latest": "2026-11-25",
-      "age_days": 0,
+      "age_days": 1,
       "paired_n": 1896,
       "correlations": {
-        "20": -0.4152,
-        "60": -0.2255,
-        "252": -0.1705
+        "20": -0.4488,
+        "60": -0.2312,
+        "252": -0.1715
       },
       "prior60": -0.3249,
-      "shift60": 0.0994,
+      "shift60": 0.0937,
       "divergence": {
-        "z": 0.7648,
-        "observed": 1.512788,
-        "fitted": -0.655754,
+        "z": 0.4642,
+        "observed": 0.817421,
+        "fitted": -0.498796,
         "beta": -0.212625,
         "training_n": 60,
         "training_end": "2026-11-24"
@@ -1241,7 +1241,7 @@
       "b": "VIXCLS",
       "status": "available",
       "latest": "2026-11-24",
-      "age_days": 1,
+      "age_days": 2,
       "paired_n": 3066,
       "correlations": {
         "20": 0.5547,
@@ -1265,7 +1265,7 @@
       "b": "BAMLH0A0HYM2",
       "status": "available",
       "latest": "2026-11-24",
-      "age_days": 1,
+      "age_days": 2,
       "paired_n": 529,
       "correlations": {
         "20": 0.3954,
@@ -1289,7 +1289,7 @@
       "b": "DGS2",
       "status": "available",
       "latest": "2026-11-24",
-      "age_days": 1,
+      "age_days": 2,
       "paired_n": 4759,
       "correlations": {
         "20": -0.2906,
@@ -1313,7 +1313,7 @@
       "b": "DTWEXBGS",
       "status": "available",
       "latest": "2026-11-20",
-      "age_days": 5,
+      "age_days": 6,
       "paired_n": 3699,
       "correlations": {
         "20": 0.2115,
@@ -1337,19 +1337,19 @@
       "b": "btc",
       "status": "available",
       "latest": "2026-11-25",
-      "age_days": 0,
+      "age_days": 1,
       "paired_n": 1898,
       "correlations": {
-        "20": -0.154,
-        "60": 0.1574,
-        "252": 0.1676
+        "20": -0.1335,
+        "60": 0.1598,
+        "252": 0.1686
       },
       "prior60": 0.3904,
-      "shift60": -0.233,
+      "shift60": -0.2306,
       "divergence": {
-        "z": 0.5424,
-        "observed": 1.512788,
-        "fitted": -0.052128,
+        "z": 0.2155,
+        "observed": 0.817421,
+        "fitted": 0.195742,
         "beta": 1.236869,
         "training_n": 60,
         "training_end": "2026-11-24"
@@ -1361,7 +1361,7 @@
       "b": "VIXCLS",
       "status": "available",
       "latest": "2026-11-24",
-      "age_days": 1,
+      "age_days": 2,
       "paired_n": 3067,
       "correlations": {
         "20": 0.093,
@@ -1385,7 +1385,7 @@
       "b": "BAMLH0A0HYM2",
       "status": "available",
       "latest": "2026-11-24",
-      "age_days": 1,
+      "age_days": 2,
       "paired_n": 529,
       "correlations": {
         "20": 0.1357,
@@ -1409,7 +1409,7 @@
       "b": "DGS2",
       "status": "available",
       "latest": "2026-11-24",
-      "age_days": 1,
+      "age_days": 2,
       "paired_n": 4763,
       "correlations": {
         "20": -0.1658,
@@ -1433,7 +1433,7 @@
       "b": "DTWEXBGS",
       "status": "available",
       "latest": "2026-11-20",
-      "age_days": 5,
+      "age_days": 6,
       "paired_n": 3701,
       "correlations": {
         "20": -0.409,
@@ -1457,7 +1457,7 @@
       "b": "VIXCLS",
       "status": "available",
       "latest": "2026-11-24",
-      "age_days": 1,
+      "age_days": 2,
       "paired_n": 1612,
       "correlations": {
         "20": -0.7396,
@@ -1481,7 +1481,7 @@
       "b": "BAMLH0A0HYM2",
       "status": "available",
       "latest": "2026-11-24",
-      "age_days": 1,
+      "age_days": 2,
       "paired_n": 529,
       "correlations": {
         "20": -0.682,
@@ -1505,7 +1505,7 @@
       "b": "DGS2",
       "status": "available",
       "latest": "2026-11-24",
-      "age_days": 1,
+      "age_days": 2,
       "paired_n": 1601,
       "correlations": {
         "20": 0.3101,
@@ -1529,7 +1529,7 @@
       "b": "DTWEXBGS",
       "status": "available",
       "latest": "2026-11-20",
-      "age_days": 5,
+      "age_days": 6,
       "paired_n": 1579,
       "correlations": {
         "20": -0.11,
@@ -1553,7 +1553,7 @@
       "b": "BAMLH0A0HYM2",
       "status": "available",
       "latest": "2026-11-24",
-      "age_days": 1,
+      "age_days": 2,
       "paired_n": 760,
       "correlations": {
         "20": 0.7755,
@@ -1577,7 +1577,7 @@
       "b": "DGS2",
       "status": "available",
       "latest": "2026-11-24",
-      "age_days": 1,
+      "age_days": 2,
       "paired_n": 4147,
       "correlations": {
         "20": -0.5745,
@@ -1603,7 +1603,7 @@
       "b": "DTWEXBGS",
       "status": "available",
       "latest": "2026-11-20",
-      "age_days": 5,
+      "age_days": 6,
       "paired_n": 4081,
       "correlations": {
         "20": 0.0867,
@@ -1627,7 +1627,7 @@
       "b": "DGS2",
       "status": "available",
       "latest": "2026-11-24",
-      "age_days": 1,
+      "age_days": 2,
       "paired_n": 712,
       "correlations": {
         "20": -0.6569,
@@ -1651,7 +1651,7 @@
       "b": "DTWEXBGS",
       "status": "available",
       "latest": "2026-11-20",
-      "age_days": 5,
+      "age_days": 6,
       "paired_n": 709,
       "correlations": {
         "20": -0.0716,
@@ -1675,7 +1675,7 @@
       "b": "DTWEXBGS",
       "status": "available",
       "latest": "2026-11-20",
-      "age_days": 5,
+      "age_days": 6,
       "paired_n": 5123,
       "correlations": {
         "20": 0.3095,

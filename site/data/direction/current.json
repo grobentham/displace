@@ -1,5 +1,5 @@
 {
- "asof": "2026-11-25T23:24-05:00",
+ "asof": "2026-11-26T06:50-05:00",
  "version": 4,
  "assets": {
   "gold": "Gold, close",
@@ -286,35 +286,35 @@
    "group": "labor"
   },
   "nfp:gold2h": {
-   "calls": 29,
-   "hits": 16,
+   "calls": 23,
+   "hits": 11,
    "proven": false,
-   "why": "not significant after correcting for the number of rules tested",
-   "brierSkill": 0.013,
+   "why": "right less than 55% of the time on unseen releases",
+   "brierSkill": 0.003,
    "group": "labor"
   },
   "claims:gold2h": {
-   "calls": 29,
-   "hits": 16,
+   "calls": 23,
+   "hits": 11,
    "proven": false,
-   "why": "not significant after correcting for the number of rules tested",
-   "brierSkill": 0.013,
+   "why": "right less than 55% of the time on unseen releases",
+   "brierSkill": 0.003,
    "group": "labor"
   },
   "jolts:gold2h": {
-   "calls": 29,
-   "hits": 16,
+   "calls": 23,
+   "hits": 11,
    "proven": false,
-   "why": "not significant after correcting for the number of rules tested",
-   "brierSkill": 0.013,
+   "why": "right less than 55% of the time on unseen releases",
+   "brierSkill": 0.003,
    "group": "labor"
   },
   "adp:gold2h": {
-   "calls": 29,
-   "hits": 16,
+   "calls": 23,
+   "hits": 11,
    "proven": false,
-   "why": "not significant after correcting for the number of rules tested",
-   "brierSkill": 0.013,
+   "why": "right less than 55% of the time on unseen releases",
+   "brierSkill": 0.003,
    "group": "labor"
   },
   "nfp:nq2h": {
@@ -827,8 +827,8 @@
      "rate": 0.333,
      "pval": 0.940765380859375,
      "brierSkill": -0.017,
-     "brierSkillBase": -0.0185,
-     "baseBrier": 0.249518,
+     "brierSkillBase": -0.0172,
+     "baseBrier": 0.249852,
      "halves": [
       0.429,
       0.25
@@ -963,7 +963,7 @@
   },
   "labor": {
    "gold": {
-    "b": 0.0108,
+    "b": 0.0073,
     "k": 0.4,
     "n": 1219,
     "since": "2010-04-08",
@@ -973,8 +973,8 @@
      "rate": 0.527,
      "pval": 0.283887743837664,
      "brierSkill": -0.0,
-     "brierSkillBase": -0.0004,
-     "baseBrier": 0.24999,
+     "brierSkillBase": -0.0002,
+     "baseBrier": 0.25005,
      "halves": [
       0.587,
       0.467
@@ -987,7 +987,7 @@
     "historical_candidate": false
    },
    "nq": {
-    "b": -0.0259,
+    "b": -0.0258,
     "k": 0.0,
     "n": 1365,
     "since": "2010-04-01",
@@ -1059,27 +1059,27 @@
     "historical_candidate": true
    },
    "gold2h": {
-    "b": -0.4847,
-    "k": 1.3,
+    "b": -0.4303,
+    "k": 1.05,
     "n": 206,
     "since": "2024-07-02",
     "bt": {
-     "calls": 29,
-     "hits": 16,
-     "rate": 0.552,
-     "pval": 0.355535551905632,
-     "brierSkill": 0.013,
-     "brierSkillBase": 0.0386,
-     "baseBrier": 0.256544,
+     "calls": 23,
+     "hits": 11,
+     "rate": 0.478,
+     "pval": 0.6611802577972412,
+     "brierSkill": 0.003,
+     "brierSkillBase": 0.0269,
+     "baseBrier": 0.256015,
      "halves": [
-      0.357,
-      0.733
+      0.273,
+      0.667
      ],
-     "recent": 0.7,
+     "recent": 0.5,
      "tested": 181
     },
     "proven": false,
-    "why": "not significant after correcting for the number of rules tested",
+    "why": "right less than 55% of the time on unseen releases",
     "historical_candidate": false
    },
    "nq2h": {
@@ -1109,7 +1109,7 @@
   },
   "activity": {
    "gold": {
-    "b": 0.0592,
+    "b": 0.0601,
     "k": 0.0,
     "n": 1051,
     "since": "2011-01-03",
@@ -1119,8 +1119,8 @@
      "rate": 0.0,
      "pval": 1.0,
      "brierSkill": -0.001,
-     "brierSkillBase": -0.0016,
-     "baseBrier": 0.249845,
+     "brierSkillBase": -0.0014,
+     "baseBrier": 0.249909,
      "halves": [
       0,
       0.0
@@ -1401,7 +1401,7 @@
   },
   "housing": {
    "gold": {
-    "b": 0.0027,
+    "b": -0.0313,
     "k": 0.0,
     "n": 172,
     "since": "2011-02-24",
@@ -1411,8 +1411,8 @@
      "rate": 0.167,
      "pval": 0.984375,
      "brierSkill": -0.009,
-     "brierSkillBase": -0.0015,
-     "baseBrier": 0.251959,
+     "brierSkillBase": -0.0002,
+     "baseBrier": 0.252274,
      "halves": [
       0.0,
       0.333
@@ -1715,7 +1715,7 @@
      "inline": {
       "n": 8,
       "up": 0.375,
-      "med": -0.043
+      "med": -0.039
      },
      "cool": {
       "n": 8,
@@ -1737,7 +1737,7 @@
      "cool": {
       "n": 8,
       "up": 0.625,
-      "med": 0.022
+      "med": 0.023
      }
     }
    }
@@ -1757,8 +1757,8 @@
      },
      "inline": {
       "n": 9,
-      "up": 0.667,
-      "med": 0.23
+      "up": 0.556,
+      "med": 0.168
      },
      "cool": {
       "n": 7,
@@ -1831,7 +1831,7 @@
      "cool": {
       "n": 8,
       "up": 0.75,
-      "med": 0.542
+      "med": 0.539
      }
     },
     "nq2h": {
@@ -1932,7 +1932,7 @@
      "hot": {
       "n": 4,
       "up": 0.25,
-      "med": -0.348
+      "med": -0.377
      },
      "inline": {
       "n": 11,
@@ -1942,7 +1942,7 @@
      "cool": {
       "n": 12,
       "up": 0.75,
-      "med": 0.551
+      "med": 0.547
      }
     },
     "nq2h": {
@@ -1959,7 +1959,7 @@
      "cool": {
       "n": 12,
       "up": 0.667,
-      "med": 0.197
+      "med": 0.195
      }
     }
    }
@@ -2070,7 +2070,7 @@
      "cool": {
       "n": 7,
       "up": 0.429,
-      "med": -0.126
+      "med": -0.121
      }
     }
    }
@@ -2085,8 +2085,8 @@
     "gold": {
      "hot": {
       "n": 273,
-      "up": 0.516,
-      "med": 0.027
+      "up": 0.513,
+      "med": 0.026
      },
      "inline": {
       "n": 343,
@@ -2181,7 +2181,7 @@
      "cool": {
       "n": 22,
       "up": 0.5,
-      "med": 0.031
+      "med": 0.03
      }
     },
     "nq15m": {
@@ -2198,7 +2198,7 @@
      "cool": {
       "n": 1,
       "up": 1.0,
-      "med": 0.218
+      "med": 0.221
      }
     },
     "nq2h": {
@@ -2215,7 +2215,7 @@
      "cool": {
       "n": 22,
       "up": 0.364,
-      "med": -0.112
+      "med": -0.114
      }
     }
    }
@@ -2298,8 +2298,8 @@
     "gold2h": {
      "hot": {
       "n": 3,
-      "up": 0.0,
-      "med": -0.422
+      "up": 0.333,
+      "med": -0.417
      },
      "inline": {
       "n": 16,
@@ -2316,7 +2316,7 @@
      "hot": {
       "n": 3,
       "up": 0.667,
-      "med": 0.265
+      "med": 0.252
      },
      "inline": {
       "n": 16,
@@ -2563,8 +2563,8 @@
      },
      "inline": {
       "n": 86,
-      "up": 0.558,
-      "med": 0.056
+      "up": 0.547,
+      "med": 0.045
      },
      "cool": {
       "n": 32,
@@ -2743,7 +2743,7 @@
      "inline": {
       "n": 13,
       "up": 0.538,
-      "med": 0.093
+      "med": 0.098
      },
      "cool": {
       "n": 8,
@@ -2871,7 +2871,7 @@
      "inline": {
       "n": 12,
       "up": 0.583,
-      "med": 0.107
+      "med": 0.108
      },
      "cool": {
       "n": 7,
@@ -3192,7 +3192,7 @@
      "cool": {
       "n": 20,
       "up": 0.65,
-      "med": 0.152
+      "med": 0.156
      }
     },
     "nq2h": {
@@ -3320,7 +3320,7 @@
      "cool": {
       "n": 5,
       "up": 0.8,
-      "med": 0.306
+      "med": 0.308
      }
     }
    }
@@ -3335,8 +3335,8 @@
     "gold": {
      "hot": {
       "n": 52,
-      "up": 0.462,
-      "med": -0.09
+      "up": 0.442,
+      "med": -0.106
      },
      "inline": {
       "n": 53,
@@ -3404,7 +3404,7 @@
      "hot": {
       "n": 8,
       "up": 0.5,
-      "med": -0.017
+      "med": -0.011
      },
      "inline": {
       "n": 11,
@@ -3550,14 +3550,14 @@
      "hold": {
       "n": 1,
       "up": 0.0,
-      "med": -0.168
+      "med": -0.16
      }
     },
     "gold2h": {
      "hold": {
       "n": 12,
       "up": 0.5,
-      "med": 0.02
+      "med": 0.021
      },
      "cut": {
       "n": 6,
@@ -3726,7 +3726,7 @@
      "hi": 3.78,
      "normal": 1.96,
      "mult": 1.17,
-     "pts": 82.7,
+     "pts": 81.1,
      "n": 169,
      "proven": false,
      "why": "Historical range diagnostic; qualification suspended pending point-in-time validation"
@@ -3781,8 +3781,8 @@
     },
     "gold2h": {
      "none": true,
-     "n": 29,
-     "why": "not significant after correcting for the number of rules tested"
+     "n": 23,
+     "why": "right less than 55% of the time on unseen releases"
     },
     "nq2h": {
      "none": true,
@@ -3813,8 +3813,8 @@
     },
     "gold2h": {
      "none": true,
-     "n": 29,
-     "why": "not significant after correcting for the number of rules tested"
+     "n": 23,
+     "why": "right less than 55% of the time on unseen releases"
     },
     "nq2h": {
      "none": true,
@@ -3852,7 +3852,7 @@
      "hi": 3.14,
      "normal": 1.96,
      "mult": 1.02,
-     "pts": 72.1,
+     "pts": 70.7,
      "n": 119,
      "proven": false,
      "why": "Historical range diagnostic; qualification suspended pending point-in-time validation"
@@ -3907,8 +3907,8 @@
     },
     "gold2h": {
      "none": true,
-     "n": 29,
-     "why": "not significant after correcting for the number of rules tested"
+     "n": 23,
+     "why": "right less than 55% of the time on unseen releases"
     },
     "nq2h": {
      "none": true,
@@ -3939,8 +3939,8 @@
     },
     "gold2h": {
      "none": true,
-     "n": 29,
-     "why": "not significant after correcting for the number of rules tested"
+     "n": 23,
+     "why": "right less than 55% of the time on unseen releases"
     },
     "nq2h": {
      "none": true,
@@ -3977,7 +3977,7 @@
      "hi": 3.51,
      "normal": 1.96,
      "mult": 1.02,
-     "pts": 72.1,
+     "pts": 70.7,
      "n": 187,
      "proven": false,
      "why": "Historical range diagnostic; qualification suspended pending point-in-time validation"
@@ -4032,8 +4032,8 @@
     },
     "gold2h": {
      "none": true,
-     "n": 29,
-     "why": "not significant after correcting for the number of rules tested"
+     "n": 23,
+     "why": "right less than 55% of the time on unseen releases"
     },
     "nq2h": {
      "none": true,
@@ -4064,8 +4064,8 @@
     },
     "gold2h": {
      "none": true,
-     "n": 29,
-     "why": "not significant after correcting for the number of rules tested"
+     "n": 23,
+     "why": "right less than 55% of the time on unseen releases"
     },
     "nq2h": {
      "none": true,
@@ -4088,10 +4088,10 @@
     "gold": {
      "pct": 2.02,
      "lo": 1.1,
-     "hi": 3.75,
+     "hi": 3.77,
      "normal": 1.96,
      "mult": 1.029,
-     "pts": 72.7,
+     "pts": 71.3,
      "n": 837,
      "proven": false,
      "why": "Historical range diagnostic; qualification suspended pending point-in-time validation"
@@ -4211,7 +4211,7 @@
      "hi": 3.96,
      "normal": 1.96,
      "mult": 1.04,
-     "pts": 73.5,
+     "pts": 72.1,
      "n": 177,
      "proven": false,
      "why": "Historical range diagnostic; qualification suspended pending point-in-time validation"
@@ -4266,8 +4266,8 @@
     },
     "gold2h": {
      "none": true,
-     "n": 29,
-     "why": "not significant after correcting for the number of rules tested"
+     "n": 23,
+     "why": "right less than 55% of the time on unseen releases"
     },
     "nq2h": {
      "none": true,
@@ -4298,8 +4298,8 @@
     },
     "gold2h": {
      "none": true,
-     "n": 29,
-     "why": "not significant after correcting for the number of rules tested"
+     "n": 23,
+     "why": "right less than 55% of the time on unseen releases"
     },
     "nq2h": {
      "none": true,
@@ -4330,7 +4330,7 @@
      "hi": 4.59,
      "normal": 1.96,
      "mult": 1.325,
-     "pts": 93.6,
+     "pts": 91.8,
      "n": 72,
      "proven": false,
      "why": "Historical range diagnostic; qualification suspended pending point-in-time validation"
@@ -4450,7 +4450,7 @@
      "hi": 4.04,
      "normal": 1.96,
      "mult": 1.006,
-     "pts": 71.1,
+     "pts": 69.7,
      "n": 91,
      "proven": false,
      "why": "Historical range diagnostic; qualification suspended pending point-in-time validation"
@@ -4490,6 +4490,250 @@
     "cool": {}
    },
    "move": {}
+  },
+  "20261210-cpi-inflation-nov": {
+   "kind": "cpi",
+   "group": "inflation",
+   "date": "2026-12-10",
+   "when": "2026-12-10T08:30:00-05:00",
+   "basis": "consensus",
+   "consensus": {
+    "title": "Core Inflation Rate MoM",
+    "forecast": null,
+    "actual": null,
+    "unit": "%",
+    "scale": null
+   },
+   "stage": "pre",
+   "hot": {
+    "gold": {
+     "none": true,
+     "n": 15,
+     "why": "too few tested calls"
+    },
+    "nq": {
+     "none": true,
+     "n": 1,
+     "why": "too few tested calls"
+    },
+    "usd": {
+     "none": true,
+     "n": 5,
+     "why": "too few tested calls"
+    },
+    "y2": {
+     "none": true,
+     "n": 17,
+     "why": "too few tested calls"
+    },
+    "gold2h": {
+     "none": true,
+     "n": 25,
+     "why": "not significant after correcting for the number of rules tested"
+    },
+    "nq2h": {
+     "none": true,
+     "n": 23,
+     "why": "not significant after correcting for the number of rules tested"
+    }
+   },
+   "cool": {
+    "gold": {
+     "none": true,
+     "n": 15,
+     "why": "too few tested calls"
+    },
+    "nq": {
+     "none": true,
+     "n": 1,
+     "why": "too few tested calls"
+    },
+    "usd": {
+     "none": true,
+     "n": 5,
+     "why": "too few tested calls"
+    },
+    "y2": {
+     "none": true,
+     "n": 17,
+     "why": "too few tested calls"
+    },
+    "gold2h": {
+     "none": true,
+     "n": 25,
+     "why": "not significant after correcting for the number of rules tested"
+    },
+    "nq2h": {
+     "none": true,
+     "n": 23,
+     "why": "not significant after correcting for the number of rules tested"
+    }
+   },
+   "hist": {
+    "hot": {},
+    "inline": {
+     "nq": {
+      "dir": "up",
+      "p": 0.602,
+      "n": 88
+     },
+     "nq2h": {
+      "dir": "up",
+      "p": 0.722,
+      "n": 18
+     }
+    },
+    "cool": {
+     "usd": {
+      "dir": "down",
+      "p": 0.733,
+      "n": 45
+     },
+     "y2": {
+      "dir": "down",
+      "p": 0.667,
+      "n": 36
+     }
+    }
+   },
+   "move": {
+    "gold": {
+     "pct": 2.34,
+     "lo": 1.23,
+     "hi": 3.84,
+     "normal": 1.96,
+     "mult": 1.193,
+     "pts": 82.7,
+     "n": 164,
+     "proven": false,
+     "why": "Historical range diagnostic; qualification suspended pending point-in-time validation"
+    },
+    "nq": {
+     "pct": 1.96,
+     "lo": 1.24,
+     "hi": 3.63,
+     "normal": 1.62,
+     "mult": 1.21,
+     "pts": 511.5,
+     "n": 187,
+     "proven": false,
+     "why": "Historical range diagnostic; qualification suspended pending point-in-time validation"
+    }
+   }
+  },
+  "20261210-initial-jobless-claims": {
+   "kind": "claims",
+   "group": "labor",
+   "date": "2026-12-10",
+   "when": "2026-12-10T08:30:00-05:00",
+   "basis": "consensus",
+   "consensus": {
+    "title": "Initial Jobless Claims",
+    "forecast": null,
+    "actual": null,
+    "unit": null,
+    "scale": "K"
+   },
+   "stage": "pre",
+   "hot": {
+    "gold": {
+     "none": true,
+     "n": 150,
+     "why": "right less than 55% of the time on unseen releases"
+    },
+    "nq": {
+     "none": true,
+     "n": 16,
+     "why": "too few tested calls"
+    },
+    "usd": {
+     "none": true,
+     "n": 176,
+     "why": "not significant after correcting for the number of rules tested"
+    },
+    "y2": {
+     "none": true,
+     "n": 377,
+     "why": "Historical candidate; qualification suspended pending point-in-time and prospective validation"
+    },
+    "gold2h": {
+     "none": true,
+     "n": 23,
+     "why": "right less than 55% of the time on unseen releases"
+    },
+    "nq2h": {
+     "none": true,
+     "n": 5,
+     "why": "too few tested calls"
+    }
+   },
+   "cool": {
+    "gold": {
+     "none": true,
+     "n": 150,
+     "why": "right less than 55% of the time on unseen releases"
+    },
+    "nq": {
+     "none": true,
+     "n": 16,
+     "why": "too few tested calls"
+    },
+    "usd": {
+     "none": true,
+     "n": 176,
+     "why": "not significant after correcting for the number of rules tested"
+    },
+    "y2": {
+     "none": true,
+     "n": 377,
+     "why": "Historical candidate; qualification suspended pending point-in-time and prospective validation"
+    },
+    "gold2h": {
+     "none": true,
+     "n": 23,
+     "why": "right less than 55% of the time on unseen releases"
+    },
+    "nq2h": {
+     "none": true,
+     "n": 5,
+     "why": "too few tested calls"
+    }
+   },
+   "hist": {
+    "hot": {
+     "nq2h": {
+      "dir": "down",
+      "p": 0.735,
+      "n": 34
+     }
+    },
+    "inline": {},
+    "cool": {}
+   },
+   "move": {
+    "gold": {
+     "pct": 2.02,
+     "lo": 1.1,
+     "hi": 3.77,
+     "normal": 1.96,
+     "mult": 1.029,
+     "pts": 71.3,
+     "n": 837,
+     "proven": false,
+     "why": "Historical range diagnostic; qualification suspended pending point-in-time validation"
+    },
+    "nq": {
+     "pct": 1.86,
+     "lo": 1.13,
+     "hi": 3.66,
+     "normal": 1.62,
+     "mult": 1.143,
+     "pts": 483.2,
+     "n": 859,
+     "proven": false,
+     "why": "Historical range diagnostic; qualification suspended pending point-in-time validation"
+    }
+   }
   }
  },
  "disclaimer": "Historical current-vintage research, under methodological review. No event rule is prospectively validated. Release-window movements can begin before the actual surprise is known; no trading recommendations.",
@@ -4505,16 +4749,16 @@
   ]
  },
  "moves": {
-  "asof": "2026-11-25",
+  "asof": "2026-11-26",
   "markets": {
    "gold": {
     "baseline": 1.96,
-    "close": 3604.300048828125,
+    "close": 3535.800048828125,
     "asof": "2026-11-25"
    },
    "nq": {
     "baseline": 1.623,
-    "close": 26046.896484375,
+    "close": 26046.900390625,
     "asof": "2026-11-25"
    }
   },
@@ -4525,14 +4769,14 @@
      "since": "2010-04-08",
      "mult": 1.029,
      "lo": 0.561,
-     "hi": 1.913,
-     "medRange": 2.081,
+     "hi": 1.925,
+     "medRange": 2.149,
      "bt": {
       "tests": 825,
       "skill": -0.013,
       "beatNaive": 0.493,
       "pval": 0.6619355800733011,
-      "coverage": 0.781
+      "coverage": 0.779
      },
      "proven": false,
      "why": "Historical range diagnostic; qualification suspended pending point-in-time validation",
@@ -4905,14 +5149,14 @@
      "since": "2011-01-27",
      "mult": 0.962,
      "lo": 0.619,
-     "hi": 1.503,
+     "hi": 1.585,
      "medRange": 1.394,
      "bt": {
       "tests": 154,
       "skill": -0.023,
       "beatNaive": 0.474,
       "pval": 0.7657896110736153,
-      "coverage": 0.818
+      "coverage": 0.812
      },
      "proven": false,
      "why": "Historical range diagnostic; qualification suspended pending point-in-time validation",
@@ -4943,14 +5187,14 @@
      "since": "2011-02-24",
      "mult": 0.972,
      "lo": 0.602,
-     "hi": 1.834,
+     "hi": 1.914,
      "medRange": 1.41,
      "bt": {
       "tests": 159,
       "skill": -0.016,
       "beatNaive": 0.503,
       "pval": 0.5,
-      "coverage": 0.824
+      "coverage": 0.818
      },
      "proven": false,
      "why": "Historical range diagnostic; qualification suspended pending point-in-time validation",
@@ -5131,16 +5375,16 @@
     "gold": {
      "n": 19,
      "since": "2024-10-31",
-     "mult": 1.061,
+     "mult": 1.141,
      "lo": 0.71,
-     "hi": 2.017,
-     "medRange": 2.044,
+     "hi": 2.131,
+     "medRange": 2.225,
      "bt": {
       "tests": 7,
-      "skill": -0.127,
-      "beatNaive": 0.286,
-      "pval": 0.9375,
-      "coverage": 0.714
+      "skill": -0.044,
+      "beatNaive": 0.429,
+      "pval": 0.7734375,
+      "coverage": 0.571
      },
      "proven": false,
      "why": "Historical range diagnostic; qualification suspended pending point-in-time validation",

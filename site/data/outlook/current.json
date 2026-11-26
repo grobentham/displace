@@ -1,20 +1,8 @@
 {
- "week": "Nov 23–27",
- "asof": "2026-11-25",
- "summary": "2 high-impact releases: GDP, second estimate (Wed), PCE inflation (Wed). The next Fed decision is Dec 8–9, 14 days from today.",
+ "week": "Nov 26–Dec 4",
+ "asof": "2026-11-26",
+ "summary": "3 high-impact releases: ISM Manufacturing PMI (Tue), ISM Services PMI (Thu), Non-farm payrolls (Fri). The next Fed decision is Dec 8–9, 13 days from today.",
  "days": [
-  {
-   "d": "Mon Nov 23",
-   "t": "No major US releases scheduled."
-  },
-  {
-   "d": "Tue Nov 24",
-   "t": "Consumer confidence (Nov) at 10:00 NY (previous 91.7, forecast 92.4)."
-  },
-  {
-   "d": "Wed Nov 25",
-   "t": "Durable goods orders (Oct) at 08:30 NY (previous 1.8%, forecast 0.7%). GDP, second estimate (Q3) at 08:30 NY (previous 3.4%, forecast 3.5%). It's the broadest read on how fast the economy is growing. Initial jobless claims (moved to Wednesday for Thanksgiving) at 08:30 NY (previous 203K, forecast 201K). PCE inflation · Personal income and outlays (Oct) at 08:30 NY (previous 0.3%, forecast 0.3%). New home sales (Oct) at 10:00 NY (previous 676K, forecast 650K). Beige Book at 14:00 NY."
-  },
   {
    "d": "Thu Nov 26",
    "t": "Thanksgiving: US markets closed."
@@ -22,6 +10,26 @@
   {
    "d": "Fri Nov 27",
    "t": "Day after Thanksgiving: shortened session."
+  },
+  {
+   "d": "Mon Nov 30",
+   "t": "No major US releases scheduled."
+  },
+  {
+   "d": "Tue Dec 1",
+   "t": "ISM Manufacturing PMI (Nov) at 10:00 NY (previous 55.5, forecast 55.2). Factory activity is one of the first readings of each month. JOLTS job openings (Oct) at 10:00 NY (previous 7.52M)."
+  },
+  {
+   "d": "Wed Dec 2",
+   "t": "ADP private payrolls (Nov) at 08:15 NY (previous 86K)."
+  },
+  {
+   "d": "Thu Dec 3",
+   "t": "Initial jobless claims at 08:30 NY (previous 189K). ISM Services PMI (Nov) at 10:00 NY (previous 54.5, forecast 54.5). Services make up most of the US economy, and its prices index tracks sticky inflation."
+  },
+  {
+   "d": "Fri Dec 4",
+   "t": "Non-farm payrolls · Employment situation (Nov) at 08:30 NY (previous 165K, forecast 93K). Jobs and wages are half of the Fed's mandate, and payrolls are often the most volatile release of the month. UMich consumer sentiment, preliminary (Dec) at 10:00 NY (previous 48.0, forecast 51.8)."
   }
  ]
 }
