@@ -1,0 +1,39 @@
+{
+  "releases": [
+    {
+      "id": "20261125-gdp-second-estimate-q3",
+      "title": "GDP, second estimate (Q3)",
+      "at": "2026-11-25T08:30:00-05:00",
+      "start": 1795611600,
+      "end": 1795620600
+    },
+    {
+      "id": "20261125-pce-inflation-personal-income-and-outlay",
+      "title": "PCE inflation · Personal income and outlays (Oct)",
+      "at": "2026-11-25T08:30:00-05:00",
+      "start": 1795611600,
+      "end": 1795620600
+    },
+    {
+      "id": "20261117-retail-sales-oct",
+      "title": "Retail sales (Oct)",
+      "at": "2026-11-17T08:30:00-05:00",
+      "start": 1794920400,
+      "end": 1794929400
+    },
+    {
+      "id": "20261110-cpi-inflation-oct",
+      "title": "CPI inflation (Oct)",
+      "at": "2026-11-10T08:30:00-05:00",
+      "start": 1794315600,
+      "end": 1794324600
+    },
+    {
+      "id": "20261106-non-farm-payrolls-employment-situation-o",
+      "title": "Non-farm payrolls · Employment situation (Oct)",
+      "at": "2026-11-06T08:30:00-05:00",
+      "start": 1793970000,
+      "end": 1793979000
+    }
+  ]
+}

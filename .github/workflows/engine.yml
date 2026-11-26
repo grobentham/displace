@@ -157,7 +157,7 @@ jobs:
         run: |
           git config user.name "displace-engine"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -- site/data site/reports site/sitemap.xml site/calendar.ics site/calendar-high.ics engine/pending.json engine/cache
+          git add -- site/data site/reports site/sessions site/sitemap.xml site/calendar.ics site/calendar-high.ics engine/pending.json engine/cache
           if ! git diff --cached --quiet; then
             git commit -m "Engine update $(date -u +%Y-%m-%dT%H:%MZ)"
             # another run or a code push may have landed meanwhile: rebase onto it and retry

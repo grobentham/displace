@@ -1,5 +1,11 @@
 # Changelog
 
+## 2026-11-26 session planning and replay
+
+- The homepage shows session status, the next high-impact release, and a link back to saved plans. Traders can review the latest verified outcome and save a private note on their device.
+- NQ, ES, and Gold have dated share links and previews. The new release replay page opens archived NQ data before the selected event. Holiday hours and MNQ sizing have dedicated pages.
+- The public health workflow checks for stale snapshots and compares the published forecast, ledger, and MNQ brief.
+
 ## 2026-11-26 forecast and calendar correction
 
 - Restored the eight November 27 outlooks from the verified pre-open deployment. The NQ range band is 590–1,723

@@ -12,7 +12,8 @@ async function checkOutlook(page, width) {
  ];
  await page.clock.setFixedTime(new Date(day+'T10:00:00Z'));
  await page.route('**/data/calendar/events.json*',route=>route.fulfill({json:{updated:'2099-01-01',through:day,events:news}}));
- await page.route('**/data/open/current.json*',route=>route.fulfill({json:{by_market:{nq:{n:0},es:{n:1},gold:{n:3}}}}));
+ await page.route('**/data/open/current.json*',route=>route.fulfill({json:{by_market:{nq:{n:0},es:{n:1},gold:{n:3}},
+  forecasts:[{id:'f1',market:'nq',for:'2026-11-24',status:'verified_resolved',range_lo:456,range_hi:1328,actual_range:600,highTaken:1,lowTaken:0}]}}));
  await page.route('**/data/bias/current.json*',async route=>{
   const response=await route.fetch();
   const bias=await response.json();
@@ -87,7 +88,14 @@ async function checkOutlook(page, width) {
  assert.equal(await reminder.getAttribute('aria-pressed'),'false');
  await page.locator('#mc-t-es').click();
  assert.equal(await page.locator('#mc-evidence').innerText(),'1 verified forecast scored');
+ await page.getByRole('button',{name:'Share ES brief'}).click();
+ assert.match(await page.locator('#mc-share-url').inputValue(),/sessions\/es\//);
+ await page.getByRole('button',{name:'Share ES brief'}).click();
  await page.locator('#mc-t-nq').click();
+ await page.getByRole('link',{name:'Review the last session'}).click();
+ assert.match(await page.locator('#mc-review-results').innerText(),/600 points/);
+ await page.getByLabel('One thing to carry into the next session').fill('Compare the next release window.');
+ await page.getByRole('button',{name:'Save note on this device'}).click();
  await page.getByRole('link',{name:'Plan my session',exact:true}).click();
  await page.waitForURL('**/index.html#session-plan');
  await page.locator('#mc-allowance').fill('250');
@@ -108,16 +116,20 @@ async function checkOutlook(page, width) {
  assert.match(await page.locator('#mc-plan-fit').innerText(),/fits/);
  await page.getByRole('button',{name:'Save session plan'}).click();
  assert.match(await page.locator('#mc-plan-status').innerText(),/Plan saved on this device/);
+ assert(await page.getByRole('link',{name:'Subscribe to the high-impact calendar'}).isVisible());
  await page.reload();
  await page.waitForFunction(()=>document.querySelector('#mc-plan-status').textContent.includes('Saved plan loaded'));
  assert.equal(await page.locator('#mc-stop').inputValue(),'25');
  assert.equal(await page.locator('#mc-budget').inputValue(),'110');
+ assert.equal(await page.locator('#mc-review-note').inputValue(),'Compare the next release window.');
+ assert(await page.getByRole('link',{name:'Review my session plan'}).isVisible());
  await page.getByRole('button',{name:'Share MNQ brief'}).click();
  await page.getByRole('button',{name:'Copy link',exact:true}).click();
  await page.waitForFunction(()=>document.querySelector('#mc-share-status').textContent.includes('copied'));
  const briefUrl=base+'mnq-brief.html?date='+day;
- assert.equal(await page.locator('#mc-share-url').inputValue(),briefUrl);
- assert.equal(await page.evaluate(()=>window.copiedBriefUrl),briefUrl);
+ const shareUrl=base+'sessions/nq/'+day+'.html';
+ assert.equal(await page.locator('#mc-share-url').inputValue(),shareUrl);
+ assert.equal(await page.evaluate(()=>window.copiedBriefUrl),shareUrl);
  const dims=await page.evaluate(()=>({scroll:document.documentElement.scrollWidth,inner:innerWidth}));
  assert(dims.scroll<=dims.inner+2,'home horizontal overflow at '+width+': '+JSON.stringify(dims));
 
