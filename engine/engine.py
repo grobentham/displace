@@ -280,6 +280,9 @@ def merge(events, autos, answered):
 
 def merge_schedule(events):
     sched = load(os.path.join(ENG, "schedule.json"), {"events": []}).get("events", [])
+    official = {release_slot(e): e["date"] for e in sched if e.get("date") and release_slot(e)}
+    events[:] = [e for e in events if not (e.get("auto") and not e.get("actual") and
+                 official.get(release_slot(e), e["date"]) != e["date"])]
     have = {e["id"]: e for e in events}
     for s in sched:
         if not s.get("date") or not s.get("title"):
@@ -381,6 +384,25 @@ def title_period(e, k):
     return dt.date(d.year if mo <= d.month else d.year - 1, mo, 1)
 
 
+def release_slot(event):
+    """A reporting period can have separate editions, such as advance and final GDP."""
+    kind = event_key(event)
+    period = title_period(event, kind) if kind else None
+    if period is None:
+        return None
+    title = event["title"].lower()
+    stages = {"gdp": ("advance", "second", "third"), "umich": ("preliminary", "final")}
+    stage = next((label for label in stages.get(kind, ()) if label in title), None)
+    return kind, period, stage
+
+
+def prior_month(event, kind):
+    period = title_period(event, kind)
+    if period and isinstance(RELEASES[kind].get("lag"), int) and kind != "umich":
+        return (period - dt.timedelta(days=1)).replace(day=1)
+    return None
+
+
 def component_figures(e, k, label, series, mode, released):
     """(actual, previous, history list) for one component."""
     obs = series_obs(series)
@@ -446,7 +468,8 @@ def public_figures(e, kind, series, mode, released):
     if not released:
         # The most recent earlier observation is a prior reading, never an actual.
         current = transformed(series_obs(series) or [], mode)
-        earlier = [row for row in current if row[0] < target]
+        prior = prior_month(e, kind)
+        earlier = [row for row in current if row[0] == prior.isoformat()] if prior else [row for row in current if row[0] < target]
         return None, fmt(mode, earlier[-1][1]) if earlier else None, None
 
     before_date, after_date = snapshot_dates(release)
@@ -651,9 +674,14 @@ def update_figures(events, hist, pending):
     fc = load(os.path.join(ENG, "forecasts.json"), {}).get("forecasts", {})
     run_key = NOW.isoformat(timespec="minutes")
     ordered = sorted(events, key=when)
+    published = {}
+    for event in ordered:
+        slot = release_slot(event)
+        if slot and event.get("actual") and when(event) <= NOW:
+            published[slot] = event["actual"]
     claims_next = next((e["id"] for e in ordered if kind_of(e) == "claims" and not e.get("actual") and when(e) > NOW - dt.timedelta(hours=6)), None)
     candidates = []
-    for e in events:
+    for e in ordered:
         k = kind_of(e)
         if k in (None, "holiday", "minutes", "beige"):
             continue
@@ -692,6 +720,8 @@ def update_figures(events, hist, pending):
                     act = direct
                     prev = earlier if earlier is not None else prev
                     h = direct_history if direct else h
+            if i == 0 and not prev and not released and when(e) > NOW:
+                prev = published.get((rk, prior_month(e, rk), None))
             if prev and not qa.plausible(series, mode, prev):
                 QA.check(f"plausible previous: {e['id']} {label}", False, f"{prev} rejected", critical=True)
                 prev = None
@@ -703,12 +733,15 @@ def update_figures(events, hist, pending):
                         head_ok = False
             if i == 0:
                 head_hist = h
-                if prev and not e.get("previous"):
+                if prev and (when(e) > NOW or not e.get("previous")):
                     e["previous"] = prev
                 elif prev and e.get("previous") and prev != e["previous"] and act:
                     e["revised"] = prev
                 if act and head_ok:
                     e["actual"] = act
+                    slot = release_slot(e)
+                    if slot:
+                        published[slot] = act
                     e["provenance"] = provenance or ({"via": "FRED", "series": series, "published": h[-1][2]} if fredapi.KEY else {
                         "via": "ALFRED", "series": series, "asof": h[-1][2]})
             if act or prev:
@@ -1146,6 +1179,9 @@ def main():
     for e in events:
         qa.lint_event(QA, e)
     qa.check_calendar(QA, events, kind_of, TODAY)
+    slots = [slot for e in events if e["date"] >= TODAY.isoformat() and (slot := release_slot(e))]
+    QA.check("calendar: one date per reporting period and edition", len(slots) == len(set(slots)),
+             "the same report and edition has multiple dates", critical=True)
     calendar_ok = not any(c["name"].startswith(("calendar:", "figure format")) for c in QA.critical_fail)
     body = {"through": events[-1]["date"] if events else TODAY.isoformat(), "events": events}
     old = load(os.path.join(DATA, "calendar", "events.json"), {})

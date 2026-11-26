@@ -146,6 +146,10 @@ async function checkOutlook(page, width) {
  assert.equal(await page.locator('#mc-stop').inputValue(),'');
  assert.equal(await page.locator('#mc-budget').inputValue(),'110');
  assert.equal(await page.locator('#mc-cost').inputValue(),'2.50');
+ await page.goto(base+'index.html#pro');
+ const pro=page.locator('#pro');
+ await pro.getByText('Historical market reactions',{exact:true}).waitFor();
+ assert.equal(await pro.getByText('Direction engine',{exact:true}).count(),0);
 }
 
 (async()=>{

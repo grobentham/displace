@@ -24,6 +24,10 @@ window.DisplaceOutlook = (function () {
     return label;
   }
 
+  function afterOpen(asof, session) {
+    return !!(session && session.open && Date.parse(asof) >= Date.parse(session.open));
+  }
+
   function evidence() {
     if (!snapshot) {
       snapshot = fetch("data/open/current.json", { cache: "no-cache" })
@@ -41,5 +45,5 @@ window.DisplaceOutlook = (function () {
     return market.n.toLocaleString("en-US") + (market.n === 1 ? " verified forecast scored" : " verified forecasts scored");
   }
 
-  return { formatPoints: formatPoints, sessionWindow: sessionWindow, evidence: evidence, scoringStatus: scoringStatus };
+  return { formatPoints: formatPoints, sessionWindow: sessionWindow, afterOpen: afterOpen, evidence: evidence, scoringStatus: scoringStatus };
 })();

@@ -6,18 +6,14 @@ import math
 import os
 from collections import Counter
 from pathlib import Path
-from zoneinfo import ZoneInfo
 import publication as P
+from publication import cutoff
 import discovery as D
 
 ROOT=Path(__file__).resolve().parent.parent
 DATA=ROOT/"site/data"
 OUT=DATA/"open/current.json"
-NY=ZoneInfo("America/New_York")
 STATES=("void","late","unknown_eligibility","unverified","verified_pending","verified_resolved","verified_invalid_outcome","verified_overdue")
-
-def cutoff(row):
-    return dt.datetime.combine(dt.date.fromisoformat(row["for"])-dt.timedelta(days=1),dt.time(18),NY)
 
 def numeric_prob(x):
     return type(x) in (int,float) and math.isfinite(x) and 0<=x<=1
@@ -60,6 +56,7 @@ def ledger(rows,receipts,now):
         else:
             status="verified_pending"
         item={k:row.get(k) for k in ("market","candle","for","logged","tier","bias","p_up","base_up","p_high","p_low","range_lo","range_hi","up","highTaken","lowTaken","inRange","day","correction")}
+        item.update({k: row[k] for k in ("range_points", "prior_levels") if k in row})
         item.update(id=identity,status=status,source=path,receipt=rec,target_start=start.isoformat() if start else None)
         out.append(item)
     return sorted(out,key=lambda r:(r["for"],r["market"],r["candle"]))
@@ -110,7 +107,7 @@ def make(rows,receipts,events,research,now,models,legacy=None):
                                   "source":"direction/log.json","policy":"Post-release reaction windows are historical observations, excluded from prospective accuracy."},
             "research":research_summary(research),"legacy_research":legacy or {},
             "models":models,"limitations":["Publication receipts certify a successful Pages deployment timestamp, not delivery to every browser.",
-            "Target start uses the existing 18:00 New York convention; exact exchange-specific holiday and session calendars are not yet complete.",
+            "The publication cutoff uses exchange session opens, including holiday schedules. Special session hours can change by exchange advisory.",
             "Overdue means target date plus three calendar days; it is a monitoring heuristic, not proof of a missing settlement.",
             "Prospective scores exclude invalid, late, unverified and unresolved records. Small samples do not establish an edge.",
             "Historical research, descriptive macro indicators and monitoring thresholds are not prospective predictions.",
@@ -140,7 +137,7 @@ def load(path):
 
 def main():
     paths=[DATA/"bias/log.json"]+sorted((DATA/"bias/archive").glob("log-*.json"))
-    rows=[(r,str(path.relative_to(DATA))) for path in paths for r in load(path)["entries"]]
+    rows=[(r,path.relative_to(DATA).as_posix()) for path in paths for r in load(path)["entries"]]
     research=[("Discovery v1","research/discovery.json",load(DATA/"research/discovery.json")),
               ("Discovery v2","research/discovery-v2.json",load(DATA/"research/discovery-v2.json")),
               ("Discovery v3","research/discovery-v3.json",load(DATA/"research/discovery-v3.json")

@@ -548,29 +548,6 @@
    ]
   },
   {
-   "id": "20261203-durable-goods-orders-nov",
-   "date": "2026-12-03",
-   "time": "08:30",
-   "title": "Durable goods orders (Nov)",
-   "cur": "USD",
-   "impact": "medium",
-   "src": "Census Bureau",
-   "note": "Scheduled one hour before the U.S. stock market opens.",
-   "auto": "public",
-   "metric": "Durable goods m/m",
-   "previous": "1.9%",
-   "components": [
-    {
-     "label": "Durable goods m/m",
-     "previous": "0.2%"
-    },
-    {
-     "label": "Ex transportation m/m",
-     "previous": "0.5%"
-    }
-   ]
-  },
-  {
    "date": "2026-12-03",
    "time": "08:30",
    "title": "Initial jobless claims",
@@ -852,7 +829,7 @@
    "note": "Scheduled one hour before the U.S. stock market opens.",
    "id": "20261223-durable-goods-orders-nov",
    "metric": "durable goods orders month-on-month",
-   "previous": "1.9%",
+   "previous": "0.2%",
    "components": [
     {
      "label": "Durable goods m/m",
@@ -926,7 +903,7 @@
    "note": "",
    "id": "20261223-new-home-sales-nov",
    "metric": "new home sales, annualized rate",
-   "previous": "676K",
+   "previous": "701K",
    "components": [
     {
      "label": "New home sales",

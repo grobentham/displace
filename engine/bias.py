@@ -279,6 +279,40 @@ def finished(days, now_ny):
     return [(d, v) for d, v in sorted(days.items()) if dt.date.fromisoformat(d) <= cut]
 
 
+def settled_rows(market, cache, minute_sessions, now):
+    """A Yahoo daily row can switch to the new session after 18:00 while keeping today's date."""
+    now_ny = now.astimezone(NY)
+    today = now_ny.date().isoformat()
+    session = X.session(market, today)
+    days = dict(finished(cache["days"], now_ny))
+    if session and session["close"] and now >= session["close"] and today in cache["days"]:
+        days[today] = cache["days"][today]
+    try:
+        fetched = dt.datetime.fromisoformat(cache["fetched"]).astimezone(NY)
+    except (KeyError, TypeError, ValueError):
+        fetched = None
+    if (fetched and X.is_trade_date(fetched.date()) and
+            fetched >= window_start(target_session(fetched.date().isoformat()), market)):
+        days.pop(fetched.date().isoformat(), None)
+
+    days = dict(clean(market, sorted(days.items())))
+    sources = {}
+    for day, bar in sorted(minute_sessions.items()):
+        session = X.session(market, day)
+        if not session or session["close"] is None or now < session["close"]:
+            continue
+        if not (bar.get("complete") and bar.get("full")):
+            continue
+        values = [bar.get(key) for key in ("o", "h", "l", "c")]
+        if any(type(x) not in (int, float) or not math.isfinite(x) or x <= 0 for x in values):
+            continue
+        o, h, lo, c = values
+        if lo <= min(o, c) <= max(o, c) <= h and lo < h:
+            days[day] = values
+            sources[day] = "Iron Brain completed Globex session"
+    return sorted(days.items()), sources
+
+
 def next_session(last_iso):
     d = dt.date.fromisoformat(last_iso) + dt.timedelta(days=1)
     while d.weekday() >= 5:
@@ -751,11 +785,11 @@ def window_start(day_iso, market="nq"):
     """When the futures session a forecast is for opens (engine/exchange.py: 18:00 New York after the previous
     trading date, so Friday 27 Nov 2026 opens Wednesday 25 Nov; Monday opens Sunday). A date with no session
     (a holiday) falls back to 18:00 the evening before, and problems() voids such a forecast anyway."""
-    s = X.session(market if market in X.GROUP else "nq", day_iso)
-    if s:
-        return s["open"]
-    d = dt.date.fromisoformat(day_iso) - dt.timedelta(days=1)
-    return dt.datetime.combine(d, dt.time(18, 0), NY)
+    try:
+        return PUB.cutoff({"market": market, "for": day_iso})
+    except ValueError:
+        d = dt.date.fromisoformat(day_iso) - dt.timedelta(days=1)
+        return dt.datetime.combine(d, dt.time(18, 0), NY)
 
 
 def target_session(candle_iso):
@@ -804,7 +838,7 @@ def audit(entries, now):
             e["eligibility_checked"] = "exchange " + __import__("exchange").EXCHANGE_VERSION
         if "eligible" not in e and e.get("logged") and e.get("for"):
             try:
-                e["eligible"] = dt.datetime.fromisoformat(e["logged"]) < window_start(e["for"])
+                e["eligible"] = dt.datetime.fromisoformat(e["logged"]) < window_start(e["for"], e["market"])
             except (ValueError, TypeError):
                 e["eligible"] = False
         if "eligible" not in e:
@@ -845,22 +879,32 @@ def write_json(path, doc, **kw):
     os.replace(tmp, path)
 
 
-def score_log(rows_by, entries):
+def score_log(rows_by, entries, published_views=None):
     for e in entries:
         if e.get("scored") or e.get("void"):
             continue
         rows = rows_by.get(e["market"]) or []
         days = dict(rows)
         nxt = e.get("for")
-        if not nxt or nxt not in days or e["candle"] not in days or nxt <= e["candle"]:
+        if not nxt or nxt not in days or nxt <= e["candle"]:
             continue
-        a, b = days[e["candle"]], days[nxt]
-        up = 1 if b[3] > a[3] else 0
+        prior = e.get("prior_levels")
+        if prior is None:
+            view = (published_views or {}).get(e["market"])
+            if view and PUB.matches(e, view):
+                prior = view["levels"]
+            elif e["candle"] in days:
+                a = days[e["candle"]]
+                prior = {"high": a[1], "low": a[2], "close": a[3]}
+        if prior is None:
+            continue
+        b = days[nxt]
+        up = 1 if b[3] > prior["close"] else 0
         import rolls
         if rolls.is_roll(e["market"], nxt):
             e["roll"] = True                             # contract switch day: kept, not counted (rolls.py)
         e.update({"day": nxt, "scored": 1, "up": up, "brier": round((e["p_up"] - up) ** 2, 4),
-                  "highTaken": int(b[1] > a[1]), "lowTaken": int(b[2] < a[2]),
+                  "highTaken": int(b[1] > prior["high"]), "lowTaken": int(b[2] < prior["low"]),
                   "inRange": int(e["range_lo"] <= b[1] - b[2] <= e["range_hi"])})
         if e.get("up1") is not None:
             e["up1Hit"], e["dn1Hit"] = int(b[1] >= e["up1"]), int(b[2] <= e["dn1"])
@@ -915,27 +959,44 @@ def _clean_json(o):
 
 def run(now=None, fetch=download, fetch_series=fred_download, markets=None):
     now = now or dt.datetime.now(dt.timezone.utc)
-    now_ny = now.astimezone(NY)
     t0 = time.time()
     try:
         entries = json.load(open(LOG)).get("entries", [])
     except (OSError, ValueError):
         entries = []
     entries = [e for e in entries if "p_up" in e]
+    audit(entries, now)
+    registered = {(e["market"], e["candle"]): e for e in entries}
+    try:
+        with open(OUT) as fh:
+            previous = json.load(fh).get("markets", {})
+    except (OSError, ValueError):
+        previous = {}
+    markets = markets or MARKETS
+    out = {}
+    for market in markets:
+        view = previous.get(market)
+        if view:
+            row = registered.get((market, view.get("candle")))
+            if row and PUB.matches(row, view):
+                out[market] = {**view, "forecast_at": row["logged"], "forecast_id": PUB.identity(row)}
+
     series = {sid: sync_series(sid, now, fetch_series) for sid in SERIES}
     tiers, fomc = calendar_tiers()
-    ctxs, rows_by, notes = {}, {}, {}
+    ctxs, rows_by, notes, candle_sources = {}, {}, {}, {}
     ib = iron_brain_sessions() if fetch is download else {}
     patches = load_patches()
-    for m in markets or MARKETS:
+    for m in markets:
         try:
             c = sync(m, now, fetch)
             notes[m] = despike_days(m, c["days"], ib, patches)
-            rows = clean(m, finished(c["days"], now_ny))
+            rows, sources = settled_rows(m, c, ib.get(m, {}), now)
             rows_by[m] = rows
             if len(rows) < 800:
                 log(f"bias: not enough {m} history yet ({len(rows)} days)")
                 continue
+            candle = rows[-1][0]
+            candle_sources[m] = sources.get(candle, "Yahoo Finance daily candle")
             ctxs[m] = prepare(m, rows, series, tiers, fomc)
         except Exception as e:  # one market failing never blocks the others
             log(f"bias: {m} failed ({e!r})")
@@ -946,13 +1007,14 @@ def run(now=None, fetch=download, fetch_series=fred_download, markets=None):
     for m, n in notes.items():
         for x in n:
             log(f"bias: {m} {x}")
-    if not ctxs:
+    if not ctxs and not out:
         log("bias: nothing to publish; the last file stays live")
         return 1
     # one bar for every direction test on the site, and one for every calendar test
     n_sig = sum(len(x["sigs"]) for x in ctxs.values())
-    t_bar, z_bar = Q.t_needed(n_sig), Q.z_needed(len(EVENTS) * len(ctxs))
-    decide({m: x["T"] for m, x in ctxs.items()}, t_bar, z_bar)
+    t_bar, z_bar = Q.t_needed(max(1, n_sig)), Q.z_needed(max(1, len(EVENTS) * len(ctxs)))
+    if ctxs:
+        decide({m: x["T"] for m, x in ctxs.items()}, t_bar, z_bar)
     # Selection and combined-model performance need a separate untouched evaluation.
     # Preserve candidate diagnostics, but prevent automatic deployment of selected directions.
     for ctx in ctxs.values():
@@ -960,8 +1022,10 @@ def run(now=None, fetch=download, fetch_series=fred_download, markets=None):
             for result in ctx["T"][group].values():
                 result["historical_candidate"] = bool(result.get("tested"))
                 result["tested"] = False
-    out = {}
     for m, ctx in ctxs.items():
+        candle = rows_by[m][-1][0]
+        if (m, candle) in registered or (m in out and candle <= out[m]["candle"]):
+            continue
         try:
             r = finish(m, ctx, tiers, t_bar, z_bar)
         except Exception as e:
@@ -969,29 +1033,26 @@ def run(now=None, fetch=download, fetch_series=fred_download, markets=None):
             continue
         r["tests"] = {"signals": n_sig, "calendar": len(EVENTS) * len(ctxs)}
         r["dataNotes"] = notes.get(m, [])[-3:]
+        r["candle_source"] = candle_sources[m]
         target = target_session(r["candle"])
         session = X.session(m, target)
         if session:
             r["session"] = {"date": target, "open": session["open"].isoformat(),
                             "close": session["close"].isoformat() if session["close"] else None,
                             "halts": [halt["halt_at"] for halt in session["includes_halt_days"]]}
-        out[m] = r
-        if not any(e["market"] == m and e["candle"] == r["candle"] for e in entries):
-            t1 = next((t for t in r["touch"] if t["k"] == 1.0), None)
-            entries.append({"market": m, "candle": r["candle"], "for": target, "bias": r["bias"],
-                            "p_up": r["p_up"], "base_up": r["base_up"], "tier": r["tier"],
-                            "p_high": r["takes"]["high"]["p"], "p_low": r["takes"]["low"]["p"],
-                            "range_lo": r["range"]["lo"], "range_hi": r["range"]["hi"],
-                            "up1": t1["up"] if t1 else None, "dn1": t1["dn"] if t1 else None,
-                            "p_up1": t1["up_p"] if t1 else None, "p_dn1": t1["dn_p"] if t1 else None,
-                            "logged": now.isoformat(timespec="minutes"),
-                            "eligible": now < window_start(target, m)})
+        r["forecast_at"] = now.isoformat(timespec="minutes")
+        row = {"market": m, "candle": r["candle"], "for": target, **PUB.forecast_values(r),
+               "logged": r["forecast_at"], "eligible": now < window_start(target, m)}
+        entries.append(row)
+        if not problems(row):
+            r["forecast_id"] = PUB.identity(row)
+            out[m] = r
     if not out:
         log("bias: nothing to publish; the last file stays live")
         return 1
     audit(entries, now)
-    score_log(rows_by, entries)
-    day = max(target_session(v["candle"]) for v in out.values())
+    score_log(rows_by, entries, previous)
+    day = max(v["session"]["date"] for v in out.values())
     # Lifetime summaries include archived records; do not count duplicates.
     lifetime = {}
     for path in sorted(glob.glob(os.path.join(ARCHIVE_DIR, "log-*.json"))):
@@ -1002,14 +1063,15 @@ def run(now=None, fetch=download, fetch_series=fred_download, markets=None):
     receipts = PUB.load()
     for e in lifetime.values():
         try:
-            e["publication_verified"] = PUB.verified(e, receipts, window_start(e["for"]))
+            e["publication_verified"] = PUB.verified(e, receipts, PUB.cutoff(e))
         except (KeyError, ValueError, TypeError):
             e["publication_verified"] = False
     live = {m: summary([e for e in lifetime.values() if e["market"] == m]) for m in out}
     doc = {"asof": now.isoformat(timespec="minutes"), "for": day, "markets": out, "order": [m for m in MARKETS if m in out],
            "news": news_today(day), "live": live,
            "method": {"first_test_year": FIRST_TEST_YEAR, "lean": LEAN, "t_bar": round(t_bar, 2), "z_bar": round(z_bar, 2),
-                      "signal_tests": n_sig, "calendar_tests": len(EVENTS) * len(ctxs),
+                      "signal_tests": max(v["tests"]["signals"] for v in out.values()),
+                      "calendar_tests": max(v["tests"]["calendar"] for v in out.values()),
                       "directionQualification": "base_rate_only_pending_validation",
                       "rangeSkillMetric": "historical walk-forward squared error in log log-range, not points",
                       "limitations": ["Current-vintage cross series and retrospective calendar; publication availability not verified.",

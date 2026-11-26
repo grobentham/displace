@@ -29,7 +29,8 @@
     const hours = outlook.sessionWindow(data.session);
     $("brief-hours").textContent = hours ? "Session hours · " + hours : "";
     $("brief-hours").hidden = !hours;
-    $("brief-asof").textContent = "Forecast made " + localLabel.format(new Date(data.asof)) + ". Estimates for the full session.";
+    $("brief-asof").textContent = "Forecast made " + localLabel.format(new Date(data.asof)) + ". Estimates for the full session." +
+      (outlook.afterOpen(data.asof, data.session) ? " Generated after the open and excluded from prospective scoring." : "");
 
     const levels = $("brief-levels");
     for (const key of ["high", "low"]) {
