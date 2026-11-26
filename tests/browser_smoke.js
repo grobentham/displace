@@ -2,7 +2,7 @@
 const assert=require('node:assert/strict');
 const {chromium}=require('playwright');
 const base='http://127.0.0.1:8765/';
-const pages=['research-hub','macro','signals','relationships','atlas','research','research-v2','research-v3','publications','open','search','validation'];
+const pages=['research-hub','macro','signals','relationships','atlas','research','research-v2','research-v3','publications','open','search','validation','smt'];
 async function checkOutlook(page, width) {
  const day='2026-11-25';
  let sessionDay=day;

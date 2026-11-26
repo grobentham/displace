@@ -127,6 +127,7 @@ CONTRACTS = {
     "direction/current.json": {"assets": dict, "groups": dict, "events": dict, "live": dict, "scenarios": dict},
     "direction/log.json": {"rows": list},
     "calendar/events.json": {"updated": str, "through": str, "events": list},
+    "smt/current.json": {"version": int, "asof": str, "timeframes": dict, "policy": str},
     "calendar/earnings.json": {"updated": str, "events": list},
     "brief/morning.json": {"editions": list}, "brief/today.json": {"asof": str, "today": list, "recent": list},
     "engine/status.json": {"lastRun": str, "quality": dict, "sources": dict},
@@ -181,6 +182,11 @@ def strict_validate(data=DATA):
             elif rel == "relationships/current.json":
                 import relationships
                 problems = relationships.check(obj, json.loads(relationships.PLAN.read_text()))
+                if problems:
+                    failures[rel] = problems
+            elif rel == "smt/current.json":
+                import smt
+                problems = smt.check(obj)
                 if problems:
                     failures[rel] = problems
             elif rel == "signals/current.json":
