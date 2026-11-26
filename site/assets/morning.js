@@ -125,6 +125,14 @@
     $("mc-heading").textContent = "Plan your " + m.name + " session in 60 seconds";
     $("mc-pts").textContent = pts(r.points, m);
     $("mc-range").textContent = "80% range band: " + pts(r.lo, m) + "–" + pts(r.hi, m) + " points.";
+    var lean = outlook.directionLean(m);
+    $("mc-lean").hidden = !lean;
+    if (lean) {
+      $("mc-lean-label").textContent = lean.label;
+      $("mc-lean-context").textContent = lean.historical
+        ? "Historical base rate · " + lean.percent + " of sessions closed above their prior close."
+        : "Model estimate · " + lean.percent + " chance of closing above the prior close.";
+    }
     var windowLabel = outlook.sessionWindow(m.session), session = $("mc-window");
     session.hidden = !windowLabel;
     session.textContent = windowLabel ? "Session hours · " + windowLabel : "";

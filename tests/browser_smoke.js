@@ -17,6 +17,9 @@ async function checkOutlook(page, width) {
  await page.route('**/data/bias/current.json*',async route=>{
   const response=await route.fetch();
   const bias=await response.json();
+  for (const [symbol, probability, direction] of [['nq',0.542,'long'],['es',0.477,'short'],['gold',0.506,'neutral']]) {
+   Object.assign(bias.markets[symbol],{p_up:probability,base_up:probability,bias:direction,tier:'base'});
+  }
   bias.for=sessionDay;
   bias.markets.nq.range.points=775.926804;
   bias.markets.nq.session={date:sessionDay,open:'2026-11-24T18:00:00-05:00',close:'2026-11-25T17:00:00-05:00',halts:[]};
@@ -46,6 +49,7 @@ async function checkOutlook(page, width) {
  await page.goto(base+'index.html#top');
  const outlook=page.locator('.ib-outlook');
  await page.waitForFunction(()=>document.querySelector('#mc-pts').textContent==='776');
+ assert.match(await page.locator('#mc-lean').innerText(),/Bullish lean.*Historical base rate.*54\.2%/);
  assert.equal(await outlook.isVisible(),false,'Iron Brain has its own page');
  assert.equal(ironRequests,0,'homepage does not fetch the Iron Brain feed');
  const biasTab=page.locator('#navlinks a[href="#intraday-bias"]');
@@ -87,10 +91,13 @@ async function checkOutlook(page, width) {
  await reminder.click();
  assert.equal(await reminder.getAttribute('aria-pressed'),'false');
  await page.locator('#mc-t-es').click();
+ assert.match(await page.locator('#mc-lean').innerText(),/Bearish lean.*47\.7%/);
  assert.equal(await page.locator('#mc-evidence').innerText(),'1 verified forecast scored');
  await page.getByRole('button',{name:'Share ES brief'}).click();
  assert.match(await page.locator('#mc-share-url').inputValue(),/sessions\/es\//);
  await page.getByRole('button',{name:'Share ES brief'}).click();
+ await page.locator('#mc-t-gold').click();
+ assert.match(await page.locator('#mc-lean').innerText(),/Neutral lean.*50\.6%/);
  await page.locator('#mc-t-nq').click();
  await page.getByRole('link',{name:'Review the last session'}).click();
  assert.match(await page.locator('#mc-review-results').innerText(),/600 points/);
@@ -136,6 +143,9 @@ async function checkOutlook(page, width) {
  await page.locator('.navr .pillbtn').click();
  await page.waitForSelector('#bias-evidence',{state:'visible'});
  assert.equal(await page.locator('#bias-evidence').innerText(),'Live scoring pending');
+ assert.equal(await page.locator('#bias-day .bq-top .bias-tag').innerText(),'Bullish lean');
+ assert.equal(await page.locator('#bias-day .bq-n b').innerText(),'54.2%');
+ assert.match(await page.locator('#bias-day .bias-why').first().innerText(),/Daily directional signal qualification is suspended/);
  assert.equal(await page.locator('.bo-t tr[data-go="nq"] td:nth-child(4)').innerText(),'776 pts');
  assert(await page.getByRole('heading',{name:'Historical scorecard'}).isVisible());
  await page.goto(base+'index.html#calendar');

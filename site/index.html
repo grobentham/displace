@@ -1748,7 +1748,7 @@ svg.cd line.wick{animation:fadein .5s ease-out both}
 .ms-grid small{display:block;color:var(--muted);font-size:.8rem}.ms-grid b{font-size:1.5rem;letter-spacing:-.03em;font-variant-numeric:tabular-nums}
 .ms-note{color:var(--muted);font-size:.82rem;margin-top:12px}
 </style>
-<link rel="canonical" href="https://grobentham.github.io/displace/"><link rel="stylesheet" href="assets/morning.css?v=20261126">
+<link rel="canonical" href="https://grobentham.github.io/displace/"><link rel="stylesheet" href="assets/morning.css?v=20261126a">
 </head>
 <body>
 
@@ -1794,6 +1794,7 @@ svg.cd line.wick{animation:fadein .5s ease-out both}
       <div class="mc-big"><span id="mc-pts">—</span><small>points, expected high-to-low</small></div>
       <p class="mc-range" id="mc-range">Loading today's numbers…</p>
       <p class="mc-cmp" id="mc-cmp"></p>
+      <p class="mc-lean" id="mc-lean" hidden><strong id="mc-lean-label"></strong> · <span id="mc-lean-context"></span></p>
       <p class="mc-next" id="mc-next" hidden></p>
       <p class="mc-muted" id="mc-change" hidden></p>
       <p class="mc-evidence"><b>Historical estimates</b> · <span id="mc-evidence">Checking live scoring…</span> · <a href="open.html#performance">Forecast record</a></p>
@@ -1858,7 +1859,7 @@ svg.cd line.wick{animation:fadein .5s ease-out both}
         <div class="mc-plan-actions"><button type="submit" class="mc-secondary">Save note on this device</button><span class="mc-muted" id="mc-review-status" role="status"></span></div>
       </form>
     </section>
-    <p class="mc-foot">Up or down? Our tests find no reliable daily direction edge, so we don't call one. <a href="research-hub.html">Why</a> · <a href="#bias">All 8 markets</a> · <span id="mc-made"></span></p>
+    <p class="mc-foot"><a href="research-hub.html">Directional research</a> · <a href="#bias">All 8 markets</a> · <span id="mc-made"></span></p>
   </div>
 </section>
 
@@ -2511,7 +2512,7 @@ svg.cd line.wick{animation:fadein .5s ease-out both}
   </div>
 </footer>
 
-<script src="assets/outlook.js?v=20261126"></script>
+<script src="assets/outlook.js?v=20261126a"></script>
 <script>
 /* Static mode (GitHub Pages): when the page isn't running on Claude, read the same documents from data/*.json. */
 (function(){if(window.claude)return;
@@ -3932,7 +3933,6 @@ window.addEventListener("hashchange",function(){if(B1.on())B1.stop();calmOff();a
   var box=document.getElementById("bias-day"),board=document.getElementById("bias-board"),liveEl=document.getElementById("bias-live"),strip=document.getElementById("bias-strip"),hx=document.getElementById("hx-bias");
   var WD=["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],MO=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
   var TAG={long:"LONG",short:"SHORT",neutral:"NO LEAN"},D=null,E,cur="nq";
-  function tagOf(v){return v.tier==="tested"?'<span class="bias-tag '+v.bias+'">'+TAG[v.bias]+'</span>':'<span class="bias-tag neutral" title="No signal passed testing">BASE RATE</span>';}
   function tagSm(v){return v.tier==="tested"?'<span class="bias-tag sm '+v.bias+'">'+TAG[v.bias]+'</span>':'<span class="bias-tag sm neutral">BASE</span>';}
   try{cur=localStorage.getItem("displace-bias-m")||"nq";}catch(e){}
   function esc(t){return String(t==null?"":t).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];});}
@@ -3945,13 +3945,15 @@ window.addEventListener("hashchange",function(){if(B1.on())B1.stop();calmOff();a
   var LAB={};
   function dirCard(k,v){
     (v.signals||[]).concat(v.calendar||[]).forEach(function(s){LAB[s.key]=s.label;});
-    var why=v.tier==="tested"?'Moved from the '+pc(v.base_up)+' base rate by: '+(v.drivers||[]).map(function(x){return esc(LAB[x]||x);}).join(", ")+'.':'No tested lean. No direction signal passed testing, so this is simply how often '+esc(v.name)+' has closed higher on any day since '+esc((v.history||{}).since)+'. Don’t read it as a call.';
-    var p=Math.round(v.p_up*100),b=Math.round(v.base_up*100),S=v.sessions,ses="";
+    var lean=DisplaceOutlook.directionLean(v);
+    if(!lean)return '<p class="bias-why">Session direction is unavailable.</p>';
+    var why=lean.historical?'The lean reflects how often '+esc(v.name)+' has closed above the prior close. Daily directional signal qualification is suspended.':'Model inputs moved the estimate from the '+pc(v.base_up)+' base rate: '+(v.drivers||[]).map(function(x){return esc(LAB[x]||x);}).join(", ")+'.';
+    var b=Math.round(v.base_up*100),S=v.sessions,ses="";
     if(S&&S.overnight){var O=S.overnight,Y=S.day;
       ses='<div class="bs-ses"><b>By session</b> ('+S.days+' days, '+esc(S.from.slice(0,4))+'–'+esc(S.to.slice(0,4))+'): overnight 16:00→09:00 closed higher '+pc(O.up)+' ('+(O.bp>=0?'+':'')+O.bp+' bp on average) '+(O.passed?'<span class="bb-pass">passed</span>':O.frequent?'<span class="bb-mid">more often up, average not significant</span>':'')+'; New York 09:00→16:00 '+pc(Y.up)+'. A short sample from one market regime.</div>';}
-    return'<div class="bq-top">'+tagOf(v)+'<small>Direction · next session</small></div>'+
-      '<div class="bq"><div class="bq-n"><b>'+p+'%</b><span>chance of closing above '+px(v.levels.close,v)+'</span></div>'+
-      '<div class="bq-bar" role="img" aria-label="Probability of an up day '+p+'%, base rate '+b+'%"><i style="width:'+p+'%"></i><em style="left:'+b+'%"></em><span>0</span><span>50</span><span>100</span></div></div>'+
+    return'<div class="bq-top"><span class="bias-tag '+lean.direction+'">'+lean.label+'</span><small>'+(lean.historical?'Historical base rate':'Model estimate')+'</small></div>'+
+      '<div class="bq"><div class="bq-n"><b>'+lean.percent+'</b><span>'+(lean.historical?'of past sessions closed above their prior close':'chance of closing above '+px(v.levels.close,v))+'</span></div>'+
+      '<div class="bq-bar" role="img" aria-label="Up-close estimate '+lean.percent+', base rate '+b+'%"><i style="width:'+lean.percent+'"></i><em style="left:'+b+'%"></em><span>0</span><span>50</span><span>100</span></div></div>'+
       '<p class="bias-why">'+why+'</p>'+ses;
   }
   function volCard(k,v){
@@ -4074,7 +4076,7 @@ Promise.all([get("macro/current"),get("signals/current").catch(function(){return
   box.hidden=false;}).catch(function(){});})();
 </script>
 <script src="assets/session-planner.js?v=20261126" defer></script>
-<script src="assets/morning.js?v=20261126" defer></script>
+<script src="assets/morning.js?v=20261126a" defer></script>
 <script src="assets/iron-outlook.js?v=20261125g" defer></script>
 </body>
 </html>
