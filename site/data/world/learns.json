@@ -1,0 +1,55 @@
+{
+ "generated": "2026-11-26T16:26:47Z",
+ "principles": [
+  {
+   "principle": "A claim is only useful if a stranger could grade it from public data.",
+   "practice": "Every Displace World claim stores the exact rule that grades it."
+  },
+  {
+   "principle": "Freeze the claim before the outcome is known, and never edit it.",
+   "practice": "Each claim carries a SHA-256 hash; the engine refuses to save a changed one."
+  },
+  {
+   "principle": "Date the event, the report and the check separately.",
+   "practice": "Signals show when something happened, when Displace published it, and when it was graded."
+  },
+  {
+   "principle": "Coverage measures attention, not truth.",
+   "practice": "A coverage spike says many outlets wrote about a topic, not that the story is right."
+  },
+  {
+   "principle": "Many articles can be one source.",
+   "practice": "Repeated wire copies are grouped before Displace counts outlets."
+  },
+  {
+   "principle": "A probability needs comparable past cases.",
+   "practice": "Displace only prints a probability when at least 20 earlier cases exist, and shows the count."
+  },
+  {
+   "principle": "Count misses as loudly as hits.",
+   "practice": "Misses are listed on the Trust page next to the hits."
+  },
+  {
+   "principle": "A listed source is not a verified outcome.",
+   "practice": "Grades come from data (prices, counts, official records), never from a headline."
+  },
+  {
+   "principle": "Big moves come in clusters.",
+   "practice": "After a large daily move, the next week's moves are usually larger than normal; Displace measures how often."
+  },
+  {
+   "principle": "A filing's item code says what kind of news it is, not whether it is good.",
+   "practice": "Displace reads SEC item numbers, not the filing's text."
+  },
+  {
+   "principle": "Effective dates move.",
+   "practice": "Rule checkpoints are graded on whether the stated date held."
+  },
+  {
+   "principle": "Keyword matches can be wrong.",
+   "practice": "Every keyword-based link is labelled as such."
+  }
+ ],
+ "lessons": [],
+ "cases": []
+}

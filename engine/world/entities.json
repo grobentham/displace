@@ -1,0 +1,1293 @@
+{
+ "version": 1,
+ "companies": [
+  {
+   "ticker": "AAPL",
+   "name": "Apple",
+   "aliases": [
+    "apple inc",
+    "iphone maker"
+   ],
+   "categories": [
+    "technology",
+    "equities"
+   ]
+  },
+  {
+   "ticker": "MSFT",
+   "name": "Microsoft",
+   "aliases": [
+    "microsoft"
+   ],
+   "categories": [
+    "technology",
+    "ai",
+    "equities"
+   ]
+  },
+  {
+   "ticker": "NVDA",
+   "name": "Nvidia",
+   "aliases": [
+    "nvidia"
+   ],
+   "categories": [
+    "semiconductors",
+    "ai",
+    "equities"
+   ]
+  },
+  {
+   "ticker": "AMZN",
+   "name": "Amazon",
+   "aliases": [
+    "amazon"
+   ],
+   "categories": [
+    "technology",
+    "consumer",
+    "equities"
+   ]
+  },
+  {
+   "ticker": "GOOGL",
+   "name": "Alphabet",
+   "aliases": [
+    "alphabet",
+    "google"
+   ],
+   "categories": [
+    "technology",
+    "ai",
+    "equities"
+   ]
+  },
+  {
+   "ticker": "META",
+   "name": "Meta Platforms",
+   "aliases": [
+    "meta platforms",
+    "facebook parent",
+    "meta"
+   ],
+   "categories": [
+    "technology",
+    "social-media",
+    "equities"
+   ]
+  },
+  {
+   "ticker": "TSLA",
+   "name": "Tesla",
+   "aliases": [
+    "tesla"
+   ],
+   "categories": [
+    "transportation",
+    "equities"
+   ]
+  },
+  {
+   "ticker": "AVGO",
+   "name": "Broadcom",
+   "aliases": [
+    "broadcom"
+   ],
+   "categories": [
+    "semiconductors",
+    "equities"
+   ]
+  },
+  {
+   "ticker": "AMD",
+   "name": "AMD",
+   "aliases": [
+    "advanced micro devices",
+    "amd"
+   ],
+   "categories": [
+    "semiconductors",
+    "equities"
+   ]
+  },
+  {
+   "ticker": "INTC",
+   "name": "Intel",
+   "aliases": [
+    "intel"
+   ],
+   "categories": [
+    "semiconductors",
+    "equities"
+   ]
+  },
+  {
+   "ticker": "MU",
+   "name": "Micron",
+   "aliases": [
+    "micron"
+   ],
+   "categories": [
+    "semiconductors",
+    "equities"
+   ]
+  },
+  {
+   "ticker": "QCOM",
+   "name": "Qualcomm",
+   "aliases": [
+    "qualcomm"
+   ],
+   "categories": [
+    "semiconductors",
+    "equities"
+   ]
+  },
+  {
+   "ticker": "NFLX",
+   "name": "Netflix",
+   "aliases": [
+    "netflix"
+   ],
+   "categories": [
+    "technology",
+    "equities"
+   ]
+  },
+  {
+   "ticker": "COST",
+   "name": "Costco",
+   "aliases": [
+    "costco"
+   ],
+   "categories": [
+    "consumer",
+    "equities"
+   ]
+  },
+  {
+   "ticker": "ORCL",
+   "name": "Oracle",
+   "aliases": [
+    "oracle"
+   ],
+   "categories": [
+    "technology",
+    "ai",
+    "equities"
+   ]
+  },
+  {
+   "ticker": "CRM",
+   "name": "Salesforce",
+   "aliases": [
+    "salesforce"
+   ],
+   "categories": [
+    "technology",
+    "equities"
+   ]
+  },
+  {
+   "ticker": "ADBE",
+   "name": "Adobe",
+   "aliases": [
+    "adobe"
+   ],
+   "categories": [
+    "technology",
+    "equities"
+   ]
+  },
+  {
+   "ticker": "PLTR",
+   "name": "Palantir",
+   "aliases": [
+    "palantir"
+   ],
+   "categories": [
+    "ai",
+    "defence",
+    "equities"
+   ]
+  },
+  {
+   "ticker": "AMAT",
+   "name": "Applied Materials",
+   "aliases": [
+    "applied materials"
+   ],
+   "categories": [
+    "semiconductors",
+    "equities"
+   ]
+  },
+  {
+   "ticker": "LRCX",
+   "name": "Lam Research",
+   "aliases": [
+    "lam research"
+   ],
+   "categories": [
+    "semiconductors",
+    "equities"
+   ]
+  },
+  {
+   "ticker": "PEP",
+   "name": "PepsiCo",
+   "aliases": [
+    "pepsico"
+   ],
+   "categories": [
+    "consumer",
+    "equities"
+   ]
+  },
+  {
+   "ticker": "CSCO",
+   "name": "Cisco",
+   "aliases": [
+    "cisco"
+   ],
+   "categories": [
+    "technology",
+    "cybersecurity",
+    "equities"
+   ]
+  },
+  {
+   "ticker": "PANW",
+   "name": "Palo Alto Networks",
+   "aliases": [
+    "palo alto networks"
+   ],
+   "categories": [
+    "cybersecurity",
+    "equities"
+   ]
+  },
+  {
+   "ticker": "CRWD",
+   "name": "CrowdStrike",
+   "aliases": [
+    "crowdstrike"
+   ],
+   "categories": [
+    "cybersecurity",
+    "equities"
+   ]
+  },
+  {
+   "ticker": "COIN",
+   "name": "Coinbase",
+   "aliases": [
+    "coinbase"
+   ],
+   "categories": [
+    "crypto",
+    "equities"
+   ]
+  },
+  {
+   "ticker": "MSTR",
+   "name": "Strategy",
+   "aliases": [
+    "microstrategy",
+    "strategy inc"
+   ],
+   "categories": [
+    "crypto",
+    "equities"
+   ]
+  },
+  {
+   "ticker": "BA",
+   "name": "Boeing",
+   "aliases": [
+    "boeing"
+   ],
+   "categories": [
+    "transportation",
+    "defence",
+    "equities"
+   ]
+  },
+  {
+   "ticker": "LMT",
+   "name": "Lockheed Martin",
+   "aliases": [
+    "lockheed"
+   ],
+   "categories": [
+    "defence",
+    "equities"
+   ]
+  },
+  {
+   "ticker": "XOM",
+   "name": "Exxon Mobil",
+   "aliases": [
+    "exxon"
+   ],
+   "categories": [
+    "energy",
+    "equities"
+   ]
+  },
+  {
+   "ticker": "CVX",
+   "name": "Chevron",
+   "aliases": [
+    "chevron"
+   ],
+   "categories": [
+    "energy",
+    "equities"
+   ]
+  },
+  {
+   "ticker": "JPM",
+   "name": "JPMorgan Chase",
+   "aliases": [
+    "jpmorgan"
+   ],
+   "categories": [
+    "economics",
+    "equities"
+   ]
+  },
+  {
+   "ticker": "WMT",
+   "name": "Walmart",
+   "aliases": [
+    "walmart"
+   ],
+   "categories": [
+    "consumer",
+    "equities"
+   ]
+  },
+  {
+   "ticker": "LLY",
+   "name": "Eli Lilly",
+   "aliases": [
+    "eli lilly",
+    "lilly"
+   ],
+   "categories": [
+    "healthcare",
+    "equities"
+   ]
+  },
+  {
+   "ticker": "NVO",
+   "name": "Novo Nordisk",
+   "aliases": [
+    "novo nordisk"
+   ],
+   "categories": [
+    "healthcare"
+   ]
+  },
+  {
+   "ticker": "TSM",
+   "name": "TSMC",
+   "aliases": [
+    "tsmc",
+    "taiwan semiconductor"
+   ],
+   "categories": [
+    "semiconductors"
+   ]
+  },
+  {
+   "ticker": "ASML",
+   "name": "ASML",
+   "aliases": [
+    "asml"
+   ],
+   "categories": [
+    "semiconductors"
+   ]
+  },
+  {
+   "ticker": "SMCI",
+   "name": "Super Micro Computer",
+   "aliases": [
+    "supermicro",
+    "super micro"
+   ],
+   "categories": [
+    "ai",
+    "semiconductors",
+    "equities"
+   ]
+  },
+  {
+   "ticker": "ARM",
+   "name": "Arm Holdings",
+   "aliases": [
+    "arm holdings"
+   ],
+   "categories": [
+    "semiconductors",
+    "equities"
+   ]
+  },
+  {
+   "ticker": "UBER",
+   "name": "Uber",
+   "aliases": [
+    "uber"
+   ],
+   "categories": [
+    "transportation",
+    "equities"
+   ]
+  },
+  {
+   "ticker": "DIS",
+   "name": "Disney",
+   "aliases": [
+    "disney"
+   ],
+   "categories": [
+    "consumer",
+    "equities"
+   ]
+  }
+ ],
+ "countries": [
+  {
+   "code": "US",
+   "name": "United States",
+   "aliases": [
+    "united states",
+    "u.s.",
+    "us ",
+    "america",
+    "washington"
+   ],
+   "currency": "USD"
+  },
+  {
+   "code": "CN",
+   "name": "China",
+   "aliases": [
+    "china",
+    "chinese",
+    "beijing"
+   ],
+   "currency": "CNY"
+  },
+  {
+   "code": "JP",
+   "name": "Japan",
+   "aliases": [
+    "japan",
+    "japanese",
+    "tokyo"
+   ],
+   "currency": "JPY"
+  },
+  {
+   "code": "DE",
+   "name": "Germany",
+   "aliases": [
+    "germany",
+    "german",
+    "berlin"
+   ],
+   "currency": "EUR"
+  },
+  {
+   "code": "GB",
+   "name": "United Kingdom",
+   "aliases": [
+    "britain",
+    "british",
+    "uk ",
+    "united kingdom",
+    "london"
+   ],
+   "currency": "GBP"
+  },
+  {
+   "code": "FR",
+   "name": "France",
+   "aliases": [
+    "france",
+    "french",
+    "paris"
+   ],
+   "currency": "EUR"
+  },
+  {
+   "code": "IN",
+   "name": "India",
+   "aliases": [
+    "india",
+    "indian",
+    "new delhi"
+   ],
+   "currency": "INR"
+  },
+  {
+   "code": "SG",
+   "name": "Singapore",
+   "aliases": [
+    "singapore"
+   ],
+   "currency": "SGD"
+  },
+  {
+   "code": "MY",
+   "name": "Malaysia",
+   "aliases": [
+    "malaysia",
+    "malaysian",
+    "kuala lumpur"
+   ],
+   "currency": "MYR"
+  },
+  {
+   "code": "ID",
+   "name": "Indonesia",
+   "aliases": [
+    "indonesia",
+    "indonesian",
+    "jakarta"
+   ],
+   "currency": "IDR"
+  },
+  {
+   "code": "VN",
+   "name": "Vietnam",
+   "aliases": [
+    "vietnam",
+    "vietnamese",
+    "hanoi"
+   ],
+   "currency": "VND"
+  },
+  {
+   "code": "TH",
+   "name": "Thailand",
+   "aliases": [
+    "thailand",
+    "thai",
+    "bangkok"
+   ],
+   "currency": "THB"
+  },
+  {
+   "code": "PH",
+   "name": "Philippines",
+   "aliases": [
+    "philippines",
+    "philippine",
+    "manila"
+   ],
+   "currency": "PHP"
+  },
+  {
+   "code": "KR",
+   "name": "South Korea",
+   "aliases": [
+    "south korea",
+    "korean",
+    "seoul"
+   ],
+   "currency": "KRW"
+  },
+  {
+   "code": "TW",
+   "name": "Taiwan",
+   "aliases": [
+    "taiwan",
+    "taiwanese",
+    "taipei"
+   ],
+   "currency": "TWD"
+  },
+  {
+   "code": "AU",
+   "name": "Australia",
+   "aliases": [
+    "australia",
+    "australian",
+    "canberra"
+   ],
+   "currency": "AUD"
+  },
+  {
+   "code": "RU",
+   "name": "Russia",
+   "aliases": [
+    "russia",
+    "russian",
+    "moscow",
+    "kremlin"
+   ],
+   "currency": "RUB"
+  },
+  {
+   "code": "UA",
+   "name": "Ukraine",
+   "aliases": [
+    "ukraine",
+    "ukrainian",
+    "kyiv"
+   ],
+   "currency": "UAH"
+  },
+  {
+   "code": "IL",
+   "name": "Israel",
+   "aliases": [
+    "israel",
+    "israeli"
+   ],
+   "currency": "ILS"
+  },
+  {
+   "code": "IR",
+   "name": "Iran",
+   "aliases": [
+    "iran",
+    "iranian",
+    "tehran"
+   ],
+   "currency": "IRR"
+  },
+  {
+   "code": "SA",
+   "name": "Saudi Arabia",
+   "aliases": [
+    "saudi"
+   ],
+   "currency": "SAR"
+  },
+  {
+   "code": "AE",
+   "name": "United Arab Emirates",
+   "aliases": [
+    "uae",
+    "emirates",
+    "dubai",
+    "abu dhabi"
+   ],
+   "currency": "AED"
+  },
+  {
+   "code": "TR",
+   "name": "Turkey",
+   "aliases": [
+    "turkey",
+    "turkish",
+    "ankara"
+   ],
+   "currency": "TRY"
+  },
+  {
+   "code": "BR",
+   "name": "Brazil",
+   "aliases": [
+    "brazil",
+    "brazilian"
+   ],
+   "currency": "BRL"
+  },
+  {
+   "code": "MX",
+   "name": "Mexico",
+   "aliases": [
+    "mexico",
+    "mexican"
+   ],
+   "currency": "MXN"
+  },
+  {
+   "code": "CA",
+   "name": "Canada",
+   "aliases": [
+    "canada",
+    "canadian",
+    "ottawa"
+   ],
+   "currency": "CAD"
+  },
+  {
+   "code": "ZA",
+   "name": "South Africa",
+   "aliases": [
+    "south africa"
+   ],
+   "currency": "ZAR"
+  },
+  {
+   "code": "NG",
+   "name": "Nigeria",
+   "aliases": [
+    "nigeria",
+    "nigerian"
+   ],
+   "currency": "NGN"
+  },
+  {
+   "code": "EG",
+   "name": "Egypt",
+   "aliases": [
+    "egypt",
+    "egyptian"
+   ],
+   "currency": "EGP"
+  },
+  {
+   "code": "IT",
+   "name": "Italy",
+   "aliases": [
+    "italy",
+    "italian",
+    "rome"
+   ],
+   "currency": "EUR"
+  },
+  {
+   "code": "ES",
+   "name": "Spain",
+   "aliases": [
+    "spain",
+    "spanish",
+    "madrid"
+   ],
+   "currency": "EUR"
+  },
+  {
+   "code": "NL",
+   "name": "Netherlands",
+   "aliases": [
+    "netherlands",
+    "dutch"
+   ],
+   "currency": "EUR"
+  },
+  {
+   "code": "CH",
+   "name": "Switzerland",
+   "aliases": [
+    "switzerland",
+    "swiss"
+   ],
+   "currency": "CHF"
+  },
+  {
+   "code": "PK",
+   "name": "Pakistan",
+   "aliases": [
+    "pakistan"
+   ],
+   "currency": "PKR"
+  },
+  {
+   "code": "AR",
+   "name": "Argentina",
+   "aliases": [
+    "argentina"
+   ],
+   "currency": "ARS"
+  },
+  {
+   "code": "VE",
+   "name": "Venezuela",
+   "aliases": [
+    "venezuela"
+   ],
+   "currency": "VES"
+  },
+  {
+   "code": "KP",
+   "name": "North Korea",
+   "aliases": [
+    "north korea",
+    "pyongyang"
+   ],
+   "currency": "KPW"
+  },
+  {
+   "code": "EU",
+   "name": "European Union",
+   "aliases": [
+    "european union",
+    "eu ",
+    "brussels",
+    "european commission"
+   ],
+   "currency": "EUR"
+  }
+ ],
+ "markets": {
+  "gold": {
+   "name": "Gold",
+   "categories": [
+    "commodities",
+    "geopolitics",
+    "economics"
+   ]
+  },
+  "nq": {
+   "name": "Nasdaq-100",
+   "categories": [
+    "technology",
+    "ai",
+    "semiconductors",
+    "equities"
+   ]
+  },
+  "cl": {
+   "name": "WTI crude oil",
+   "categories": [
+    "energy",
+    "supply-chains",
+    "geopolitics"
+   ]
+  },
+  "btc": {
+   "name": "Bitcoin",
+   "categories": [
+    "crypto"
+   ]
+  },
+  "rty": {
+   "name": "Russell 2000",
+   "categories": [
+    "equities",
+    "economics"
+   ]
+  },
+  "6e": {
+   "name": "Euro / US dollar",
+   "categories": [
+    "economics"
+   ]
+  }
+ },
+ "relations": [
+  {
+   "a": "category:semiconductors",
+   "b": "market:nq",
+   "basis": "Semiconductor companies are a large share of the Nasdaq-100 index by weight."
+  },
+  {
+   "a": "category:ai",
+   "b": "category:semiconductors",
+   "basis": "AI model training and serving run on GPUs and accelerators made by semiconductor firms."
+  },
+  {
+   "a": "category:ai",
+   "b": "category:energy",
+   "basis": "Data centres that run AI draw electricity from power grids."
+  },
+  {
+   "a": "category:energy",
+   "b": "market:cl",
+   "basis": "WTI crude futures price US oil."
+  },
+  {
+   "a": "category:supply-chains",
+   "b": "category:energy",
+   "basis": "Shipping fuel and route disruptions change freight costs."
+  },
+  {
+   "a": "category:geopolitics",
+   "b": "market:gold",
+   "basis": "Gold is held as a reserve asset by central banks."
+  },
+  {
+   "a": "category:crypto",
+   "b": "market:btc",
+   "basis": "Bitcoin futures price bitcoin."
+  },
+  {
+   "a": "category:economics",
+   "b": "market:6e",
+   "basis": "EUR/USD is the exchange rate between the euro and US dollar."
+  },
+  {
+   "a": "category:policy",
+   "b": "category:supply-chains",
+   "basis": "Tariffs and export controls change what can be imported and at what cost."
+  },
+  {
+   "a": "category:weather",
+   "b": "category:agriculture",
+   "basis": "Crop yields depend on rainfall and temperature."
+  },
+  {
+   "a": "category:weather",
+   "b": "category:supply-chains",
+   "basis": "Storms can close ports and shipping lanes."
+  },
+  {
+   "a": "category:singapore",
+   "b": "category:supply-chains",
+   "basis": "Singapore operates one of the world's busiest container ports."
+  },
+  {
+   "a": "category:defence",
+   "b": "category:geopolitics",
+   "basis": "Defence spending decisions follow security threats."
+  },
+  {
+   "a": "category:employment",
+   "b": "category:economics",
+   "basis": "Payrolls and unemployment are inputs to central-bank decisions."
+  },
+  {
+   "a": "category:equities",
+   "b": "market:nq",
+   "basis": "The Nasdaq-100 is an equity index."
+  },
+  {
+   "a": "category:equities",
+   "b": "market:rty",
+   "basis": "The Russell 2000 is an equity index of smaller US companies."
+  },
+  {
+   "a": "category:manufacturing",
+   "b": "category:supply-chains",
+   "basis": "Factories depend on component and material deliveries."
+  },
+  {
+   "a": "category:transportation",
+   "b": "category:energy",
+   "basis": "Fuel is a major cost for airlines and logistics."
+  },
+  {
+   "a": "category:cybersecurity",
+   "b": "category:technology",
+   "basis": "Outages and breaches hit technology platforms and their users."
+  },
+  {
+   "a": "category:real-estate",
+   "b": "category:economics",
+   "basis": "Mortgage rates move with central-bank policy and bond yields."
+  },
+  {
+   "a": "company:AAPL",
+   "b": "category:technology",
+   "basis": "Apple is classified by Displace under technology."
+  },
+  {
+   "a": "company:MSFT",
+   "b": "category:technology",
+   "basis": "Microsoft is classified by Displace under technology."
+  },
+  {
+   "a": "company:NVDA",
+   "b": "category:semiconductors",
+   "basis": "Nvidia is classified by Displace under semiconductors."
+  },
+  {
+   "a": "company:AMZN",
+   "b": "category:technology",
+   "basis": "Amazon is classified by Displace under technology."
+  },
+  {
+   "a": "company:GOOGL",
+   "b": "category:technology",
+   "basis": "Alphabet is classified by Displace under technology."
+  },
+  {
+   "a": "company:META",
+   "b": "category:technology",
+   "basis": "Meta Platforms is classified by Displace under technology."
+  },
+  {
+   "a": "company:TSLA",
+   "b": "category:transportation",
+   "basis": "Tesla is classified by Displace under transportation."
+  },
+  {
+   "a": "company:AVGO",
+   "b": "category:semiconductors",
+   "basis": "Broadcom is classified by Displace under semiconductors."
+  },
+  {
+   "a": "company:AMD",
+   "b": "category:semiconductors",
+   "basis": "AMD is classified by Displace under semiconductors."
+  },
+  {
+   "a": "company:INTC",
+   "b": "category:semiconductors",
+   "basis": "Intel is classified by Displace under semiconductors."
+  },
+  {
+   "a": "company:MU",
+   "b": "category:semiconductors",
+   "basis": "Micron is classified by Displace under semiconductors."
+  },
+  {
+   "a": "company:QCOM",
+   "b": "category:semiconductors",
+   "basis": "Qualcomm is classified by Displace under semiconductors."
+  },
+  {
+   "a": "company:NFLX",
+   "b": "category:technology",
+   "basis": "Netflix is classified by Displace under technology."
+  },
+  {
+   "a": "company:COST",
+   "b": "category:consumer",
+   "basis": "Costco is classified by Displace under consumer."
+  },
+  {
+   "a": "company:ORCL",
+   "b": "category:technology",
+   "basis": "Oracle is classified by Displace under technology."
+  },
+  {
+   "a": "company:CRM",
+   "b": "category:technology",
+   "basis": "Salesforce is classified by Displace under technology."
+  },
+  {
+   "a": "company:ADBE",
+   "b": "category:technology",
+   "basis": "Adobe is classified by Displace under technology."
+  },
+  {
+   "a": "company:PLTR",
+   "b": "category:ai",
+   "basis": "Palantir is classified by Displace under ai."
+  },
+  {
+   "a": "company:AMAT",
+   "b": "category:semiconductors",
+   "basis": "Applied Materials is classified by Displace under semiconductors."
+  },
+  {
+   "a": "company:LRCX",
+   "b": "category:semiconductors",
+   "basis": "Lam Research is classified by Displace under semiconductors."
+  },
+  {
+   "a": "company:PEP",
+   "b": "category:consumer",
+   "basis": "PepsiCo is classified by Displace under consumer."
+  },
+  {
+   "a": "company:CSCO",
+   "b": "category:technology",
+   "basis": "Cisco is classified by Displace under technology."
+  },
+  {
+   "a": "company:PANW",
+   "b": "category:cybersecurity",
+   "basis": "Palo Alto Networks is classified by Displace under cybersecurity."
+  },
+  {
+   "a": "company:CRWD",
+   "b": "category:cybersecurity",
+   "basis": "CrowdStrike is classified by Displace under cybersecurity."
+  },
+  {
+   "a": "company:COIN",
+   "b": "category:crypto",
+   "basis": "Coinbase is classified by Displace under crypto."
+  },
+  {
+   "a": "company:MSTR",
+   "b": "category:crypto",
+   "basis": "Strategy is classified by Displace under crypto."
+  },
+  {
+   "a": "company:BA",
+   "b": "category:transportation",
+   "basis": "Boeing is classified by Displace under transportation."
+  },
+  {
+   "a": "company:LMT",
+   "b": "category:defence",
+   "basis": "Lockheed Martin is classified by Displace under defence."
+  },
+  {
+   "a": "company:XOM",
+   "b": "category:energy",
+   "basis": "Exxon Mobil is classified by Displace under energy."
+  },
+  {
+   "a": "company:CVX",
+   "b": "category:energy",
+   "basis": "Chevron is classified by Displace under energy."
+  },
+  {
+   "a": "company:JPM",
+   "b": "category:economics",
+   "basis": "JPMorgan Chase is classified by Displace under economics."
+  },
+  {
+   "a": "company:WMT",
+   "b": "category:consumer",
+   "basis": "Walmart is classified by Displace under consumer."
+  },
+  {
+   "a": "company:LLY",
+   "b": "category:healthcare",
+   "basis": "Eli Lilly is classified by Displace under healthcare."
+  },
+  {
+   "a": "company:NVO",
+   "b": "category:healthcare",
+   "basis": "Novo Nordisk is classified by Displace under healthcare."
+  },
+  {
+   "a": "company:TSM",
+   "b": "category:semiconductors",
+   "basis": "TSMC is classified by Displace under semiconductors."
+  },
+  {
+   "a": "company:ASML",
+   "b": "category:semiconductors",
+   "basis": "ASML is classified by Displace under semiconductors."
+  },
+  {
+   "a": "company:SMCI",
+   "b": "category:ai",
+   "basis": "Super Micro Computer is classified by Displace under ai."
+  },
+  {
+   "a": "company:ARM",
+   "b": "category:semiconductors",
+   "basis": "Arm Holdings is classified by Displace under semiconductors."
+  },
+  {
+   "a": "company:UBER",
+   "b": "category:transportation",
+   "basis": "Uber is classified by Displace under transportation."
+  },
+  {
+   "a": "company:DIS",
+   "b": "category:consumer",
+   "basis": "Disney is classified by Displace under consumer."
+  },
+  {
+   "a": "company:AAPL",
+   "b": "market:nq",
+   "basis": "Apple is in the Nasdaq-100 (Displace's list, Nov 2026; membership changes each December)."
+  },
+  {
+   "a": "company:ADBE",
+   "b": "market:nq",
+   "basis": "Adobe is in the Nasdaq-100 (Displace's list, Nov 2026; membership changes each December)."
+  },
+  {
+   "a": "company:AMAT",
+   "b": "market:nq",
+   "basis": "Applied Materials is in the Nasdaq-100 (Displace's list, Nov 2026; membership changes each December)."
+  },
+  {
+   "a": "company:AMD",
+   "b": "market:nq",
+   "basis": "AMD is in the Nasdaq-100 (Displace's list, Nov 2026; membership changes each December)."
+  },
+  {
+   "a": "company:AMZN",
+   "b": "market:nq",
+   "basis": "Amazon is in the Nasdaq-100 (Displace's list, Nov 2026; membership changes each December)."
+  },
+  {
+   "a": "company:ASML",
+   "b": "market:nq",
+   "basis": "ASML is in the Nasdaq-100 (Displace's list, Nov 2026; membership changes each December)."
+  },
+  {
+   "a": "company:AVGO",
+   "b": "market:nq",
+   "basis": "Broadcom is in the Nasdaq-100 (Displace's list, Nov 2026; membership changes each December)."
+  },
+  {
+   "a": "company:COST",
+   "b": "market:nq",
+   "basis": "Costco is in the Nasdaq-100 (Displace's list, Nov 2026; membership changes each December)."
+  },
+  {
+   "a": "company:CRWD",
+   "b": "market:nq",
+   "basis": "CrowdStrike is in the Nasdaq-100 (Displace's list, Nov 2026; membership changes each December)."
+  },
+  {
+   "a": "company:CSCO",
+   "b": "market:nq",
+   "basis": "Cisco is in the Nasdaq-100 (Displace's list, Nov 2026; membership changes each December)."
+  },
+  {
+   "a": "company:GOOGL",
+   "b": "market:nq",
+   "basis": "Alphabet is in the Nasdaq-100 (Displace's list, Nov 2026; membership changes each December)."
+  },
+  {
+   "a": "company:INTC",
+   "b": "market:nq",
+   "basis": "Intel is in the Nasdaq-100 (Displace's list, Nov 2026; membership changes each December)."
+  },
+  {
+   "a": "company:LRCX",
+   "b": "market:nq",
+   "basis": "Lam Research is in the Nasdaq-100 (Displace's list, Nov 2026; membership changes each December)."
+  },
+  {
+   "a": "company:META",
+   "b": "market:nq",
+   "basis": "Meta Platforms is in the Nasdaq-100 (Displace's list, Nov 2026; membership changes each December)."
+  },
+  {
+   "a": "company:MSFT",
+   "b": "market:nq",
+   "basis": "Microsoft is in the Nasdaq-100 (Displace's list, Nov 2026; membership changes each December)."
+  },
+  {
+   "a": "company:MU",
+   "b": "market:nq",
+   "basis": "Micron is in the Nasdaq-100 (Displace's list, Nov 2026; membership changes each December)."
+  },
+  {
+   "a": "company:NFLX",
+   "b": "market:nq",
+   "basis": "Netflix is in the Nasdaq-100 (Displace's list, Nov 2026; membership changes each December)."
+  },
+  {
+   "a": "company:NVDA",
+   "b": "market:nq",
+   "basis": "Nvidia is in the Nasdaq-100 (Displace's list, Nov 2026; membership changes each December)."
+  },
+  {
+   "a": "company:PANW",
+   "b": "market:nq",
+   "basis": "Palo Alto Networks is in the Nasdaq-100 (Displace's list, Nov 2026; membership changes each December)."
+  },
+  {
+   "a": "company:PEP",
+   "b": "market:nq",
+   "basis": "PepsiCo is in the Nasdaq-100 (Displace's list, Nov 2026; membership changes each December)."
+  },
+  {
+   "a": "company:PLTR",
+   "b": "market:nq",
+   "basis": "Palantir is in the Nasdaq-100 (Displace's list, Nov 2026; membership changes each December)."
+  },
+  {
+   "a": "company:QCOM",
+   "b": "market:nq",
+   "basis": "Qualcomm is in the Nasdaq-100 (Displace's list, Nov 2026; membership changes each December)."
+  },
+  {
+   "a": "company:TSLA",
+   "b": "market:nq",
+   "basis": "Tesla is in the Nasdaq-100 (Displace's list, Nov 2026; membership changes each December)."
+  }
+ ]
+}

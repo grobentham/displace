@@ -23,6 +23,27 @@ Everything here is education. The engine never writes entries, targets or trade 
 | `engine/manual.json` | Optional notes for the Fed tracker (market pricing, Fed commentary). |
 | `.github/workflows/engine.yml` | Runs the engine on a schedule and publishes the site. |
 
+## Displace World
+
+A global intelligence division built on one rule: **every claim is frozen when it is published and graded later by a rule stored inside it.** Pages at `site/world/`, engine in `engine/world*.py`, settings in `engine/world/`.
+
+| Path | What it is |
+|---|---|
+| `engine/world.py` | `run` collects, publishes and grades (World workflow, every 3 hours); `build` grades and rebuilds pages without network (Engine workflow). |
+| `engine/world_sources.py` | Free, keyless sources: GDELT (worldwide news volume and articles), SEC EDGAR, Federal Register, USGS, data.gov.sg PSI, Yahoo daily closes. |
+| `engine/world_nlp.py` | Keyword classification into 30 categories / 101 research areas, entities, de-duplication of repeated reports, coverage spikes. |
+| `engine/world_signals.py` | Fixed templates for each signal kind: coverage spikes, unusual market moves, company filings, US rules, earthquakes, Singapore haze, economic releases, long-term base rates. |
+| `engine/world_ledger.py` | The ledger: signals never rewritten, claims hashed with SHA-256 and refused if changed, grades only appended. |
+| `engine/world_resolve.py` | One grader per rule type; data only, no judgement. Claims with no data 30 days after their due date become "not assessable". |
+| `engine/world_publish.py` | Every view: Signals feed, Early (once a day, never edited), Connections, Long Term, Before the Headlines, Came True, Learns, Trust, Topics, RSS per topic, static signal pages, sitemap URLs. |
+| `engine/world/taxonomy.json`, `entities.json` | Categories, research areas, keywords and GDELT queries; watch-list companies, countries and documented topic relations. Edit these to change coverage. |
+| `engine/world/corrections.json` | Corrections entered by hand. They are published on the Trust page and never deleted. |
+| `.github/workflows/world.yml` | Runs the collector every 3 hours, saves the ledger and starts the Engine workflow to deploy. |
+
+**Probabilities.** A claim carries a probability only when at least 20 comparable past cases exist (same rule, earlier data); it is that historical frequency, shown with its count. Everything else is graded as came true / did not happen without a probability.
+
+**No AI, no keys, no accounts.** All text comes from templates. My Displace (followed topics, saved signals) is stored in the visitor's browser; settings can be copied to another device as text. Each category has an RSS feed for alerts.
+
 ## What the engine does
 
 GitHub Actions checks sources around the New York release windows on weekdays and refreshes the weekly outlook on Sunday. Public downloads and RSS feeds require zero API keys; nothing in this repo needs an account or a secret. Every download retries, because GitHub's runners sometimes take several seconds to look up a host name. Text is generated with fixed templates.

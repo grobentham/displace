@@ -5,6 +5,16 @@ CHANGELOG.md.
 
 ## Open
 
+- **World sources are untested against live responses from this repo.** Parsers follow each source's documented format
+  and are tested on fixtures; the first World workflow runs will show in site/data/world/health.json whether GDELT,
+  SEC, the Federal Register, USGS and data.gov.sg answer GitHub's runners. GDELT allows one request every 5 seconds,
+  so a run takes about 6 minutes.
+- **World coverage spikes need history.** GDELT gives about 90 days on the first run; spike signals start once each
+  category has 21 days, and spike probabilities need 20 earlier spikes (pooled across categories).
+- **World text is formulaic.** Signals are templates, not written analysis; links between signals are documented topic
+  relations or shared names, never causes. Matching by keywords can be wrong and says so on each page.
+- **Business requests open public GitHub issues.** Replace with an email address before promoting Displace Business.
+
 - **No tested daily direction.** Every daily bias is the base rate ("NQ rose on 54% of past days"); 138 direction tests
   (82 signals, 56 calendar events, including the announcement-day and pre-holiday effects registered on 24 Nov 2026)
   and none passes its bar. The site says so. Direction research has a low prior; the range and level-touch forecasts
