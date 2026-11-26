@@ -1,0 +1,868 @@
+{
+ "generated": "2026-11-26T16:26:47Z",
+ "categories": [
+  {
+   "id": "economics",
+   "name": "Economics",
+   "description": "Growth, inflation, rates, jobs and public finances.",
+   "count": 3,
+   "markets": [
+    "nq",
+    "gold",
+    "6e"
+   ],
+   "areas": [
+    {
+     "id": "inflation",
+     "name": "Inflation & living costs",
+     "count": 0
+    },
+    {
+     "id": "rates",
+     "name": "Interest rates & central banks",
+     "count": 0
+    },
+    {
+     "id": "growth",
+     "name": "Growth & recession",
+     "count": 0
+    },
+    {
+     "id": "debt",
+     "name": "Public budgets & debt",
+     "count": 0
+    },
+    {
+     "id": "fx",
+     "name": "Currencies & exchange rates",
+     "count": 0
+    }
+   ],
+   "latest": [
+    "W20261125-release-ae5cce99",
+    "W20261125-release-4700ba79",
+    "W20261125-release-a90e57b8"
+   ]
+  },
+  {
+   "id": "geopolitics",
+   "name": "Geopolitics",
+   "description": "Conflicts, diplomacy, elections and sanctions.",
+   "count": 0,
+   "markets": [
+    "gold",
+    "cl"
+   ],
+   "areas": [
+    {
+     "id": "conflict",
+     "name": "War & peace talks",
+     "count": 0
+    },
+    {
+     "id": "sanctions",
+     "name": "Sanctions",
+     "count": 0
+    },
+    {
+     "id": "elections",
+     "name": "Elections & leadership",
+     "count": 0
+    },
+    {
+     "id": "diplomacy",
+     "name": "Summits & treaties",
+     "count": 0
+    }
+   ],
+   "latest": []
+  },
+  {
+   "id": "ai",
+   "name": "Artificial intelligence",
+   "description": "Models, adoption, regulation and compute.",
+   "count": 0,
+   "markets": [
+    "nq"
+   ],
+   "areas": [
+    {
+     "id": "models",
+     "name": "AI models & labs",
+     "count": 0
+    },
+    {
+     "id": "adoption",
+     "name": "AI adoption & productivity",
+     "count": 0
+    },
+    {
+     "id": "ai-policy",
+     "name": "AI rules & copyright",
+     "count": 0
+    },
+    {
+     "id": "compute",
+     "name": "Data centres & compute",
+     "count": 0
+    }
+   ],
+   "latest": []
+  },
+  {
+   "id": "semiconductors",
+   "name": "Semiconductors",
+   "description": "Chips, foundries, equipment and export controls.",
+   "count": 0,
+   "markets": [
+    "nq"
+   ],
+   "areas": [
+    {
+     "id": "foundry",
+     "name": "Foundries & capacity",
+     "count": 0
+    },
+    {
+     "id": "memory",
+     "name": "Memory chips",
+     "count": 0
+    },
+    {
+     "id": "equipment",
+     "name": "Chip equipment & supply",
+     "count": 0
+    },
+    {
+     "id": "export",
+     "name": "Chip export controls",
+     "count": 0
+    }
+   ],
+   "latest": []
+  },
+  {
+   "id": "technology",
+   "name": "Technology",
+   "description": "Big tech, software, devices and platforms.",
+   "count": 0,
+   "markets": [
+    "nq"
+   ],
+   "areas": [
+    {
+     "id": "bigtech",
+     "name": "Big tech",
+     "count": 0
+    },
+    {
+     "id": "software",
+     "name": "Software & cloud",
+     "count": 0
+    },
+    {
+     "id": "devices",
+     "name": "Devices",
+     "count": 0
+    },
+    {
+     "id": "antitrust",
+     "name": "Competition & antitrust",
+     "count": 0
+    }
+   ],
+   "latest": []
+  },
+  {
+   "id": "healthcare",
+   "name": "Healthcare",
+   "description": "Drugs, approvals, outbreaks and health systems.",
+   "count": 0,
+   "markets": [
+    "nq"
+   ],
+   "areas": [
+    {
+     "id": "approvals",
+     "name": "Drug approvals & trials",
+     "count": 0
+    },
+    {
+     "id": "outbreaks",
+     "name": "Diseases & public health",
+     "count": 0
+    },
+    {
+     "id": "pharma",
+     "name": "Pharma & biotech",
+     "count": 0
+    }
+   ],
+   "latest": []
+  },
+  {
+   "id": "science",
+   "name": "Scientific discoveries",
+   "description": "Research results, materials and replication.",
+   "count": 0,
+   "markets": [],
+   "areas": [
+    {
+     "id": "discoveries",
+     "name": "New findings",
+     "count": 0
+    },
+    {
+     "id": "materials",
+     "name": "Advanced materials",
+     "count": 0
+    },
+    {
+     "id": "quantum",
+     "name": "Quantum computing",
+     "count": 0
+    }
+   ],
+   "latest": []
+  },
+  {
+   "id": "energy",
+   "name": "Energy",
+   "description": "Oil, gas, power grids and renewables.",
+   "count": 0,
+   "markets": [
+    "cl"
+   ],
+   "areas": [
+    {
+     "id": "oil",
+     "name": "Oil & OPEC",
+     "count": 0
+    },
+    {
+     "id": "gas",
+     "name": "Gas & LNG",
+     "count": 0
+    },
+    {
+     "id": "power",
+     "name": "Power grids & capacity",
+     "count": 0
+    },
+    {
+     "id": "renewables",
+     "name": "Renewable energy",
+     "count": 0
+    }
+   ],
+   "latest": []
+  },
+  {
+   "id": "commodities",
+   "name": "Commodities",
+   "description": "Metals, inventories and raw materials.",
+   "count": 0,
+   "markets": [
+    "gold",
+    "cl"
+   ],
+   "areas": [
+    {
+     "id": "gold",
+     "name": "Gold & precious metals",
+     "count": 0
+    },
+    {
+     "id": "industrial",
+     "name": "Industrial metals",
+     "count": 0
+    },
+    {
+     "id": "critical",
+     "name": "Critical minerals",
+     "count": 0
+    }
+   ],
+   "latest": []
+  },
+  {
+   "id": "supply-chains",
+   "name": "Supply chains",
+   "description": "Shipping, ports, shortages and trade routes.",
+   "count": 0,
+   "markets": [
+    "cl"
+   ],
+   "areas": [
+    {
+     "id": "shipping",
+     "name": "Shipping & ports",
+     "count": 0
+    },
+    {
+     "id": "shortages",
+     "name": "Shortages",
+     "count": 0
+    },
+    {
+     "id": "trade",
+     "name": "Tariffs & trade",
+     "count": 0
+    }
+   ],
+   "latest": []
+  },
+  {
+   "id": "consumer",
+   "name": "Consumer trends",
+   "description": "Spending, retail, brands and prices people pay.",
+   "count": 0,
+   "markets": [
+    "nq"
+   ],
+   "areas": [
+    {
+     "id": "spending",
+     "name": "Consumer spending",
+     "count": 0
+    },
+    {
+     "id": "prices",
+     "name": "Prices people pay",
+     "count": 0
+    },
+    {
+     "id": "brands",
+     "name": "Brands & retail",
+     "count": 0
+    }
+   ],
+   "latest": []
+  },
+  {
+   "id": "business",
+   "name": "Business opportunities",
+   "description": "Deals, funding, launches and new markets.",
+   "count": 0,
+   "markets": [
+    "nq",
+    "rty"
+   ],
+   "areas": [
+    {
+     "id": "deals",
+     "name": "Mergers & takeovers",
+     "count": 0
+    },
+    {
+     "id": "funding",
+     "name": "Business funding",
+     "count": 0
+    },
+    {
+     "id": "ipo",
+     "name": "Listings & IPOs",
+     "count": 0
+    },
+    {
+     "id": "expansion",
+     "name": "Expansion & launches",
+     "count": 0
+    }
+   ],
+   "latest": []
+  },
+  {
+   "id": "cybersecurity",
+   "name": "Cybersecurity",
+   "description": "Breaches, ransomware and outages.",
+   "count": 0,
+   "markets": [
+    "nq"
+   ],
+   "areas": [
+    {
+     "id": "breaches",
+     "name": "Breaches & leaks",
+     "count": 0
+    },
+    {
+     "id": "ransomware",
+     "name": "Ransomware",
+     "count": 0
+    },
+    {
+     "id": "outages",
+     "name": "Outages",
+     "count": 0
+    }
+   ],
+   "latest": []
+  },
+  {
+   "id": "social-media",
+   "name": "Social media",
+   "description": "Platforms, creators, moderation and online safety.",
+   "count": 0,
+   "markets": [],
+   "areas": [
+    {
+     "id": "platforms",
+     "name": "Platforms",
+     "count": 0
+    },
+    {
+     "id": "safety",
+     "name": "Online safety & moderation",
+     "count": 0
+    },
+    {
+     "id": "creators",
+     "name": "Creators & audiences",
+     "count": 0
+    }
+   ],
+   "latest": []
+  },
+  {
+   "id": "policy",
+   "name": "Government policies",
+   "description": "Laws, regulation, rules and executive actions.",
+   "count": 0,
+   "markets": [
+    "nq",
+    "gold"
+   ],
+   "areas": [
+    {
+     "id": "laws",
+     "name": "Laws & bills",
+     "count": 0
+    },
+    {
+     "id": "regulators",
+     "name": "Regulators",
+     "count": 0
+    },
+    {
+     "id": "executive",
+     "name": "Executive actions",
+     "count": 0
+    }
+   ],
+   "latest": []
+  },
+  {
+   "id": "singapore",
+   "name": "Singapore",
+   "description": "Singapore life, policy, business and markets.",
+   "count": 0,
+   "markets": [
+    "6e"
+   ],
+   "areas": [
+    {
+     "id": "sg-policy",
+     "name": "Singapore life & policy",
+     "count": 0
+    },
+    {
+     "id": "sg-business",
+     "name": "Singapore business",
+     "count": 0
+    },
+    {
+     "id": "sg-grants",
+     "name": "Grants & opportunities",
+     "count": 0
+    },
+    {
+     "id": "sg-haze",
+     "name": "Haze & air quality",
+     "count": 0
+    }
+   ],
+   "latest": []
+  },
+  {
+   "id": "crypto",
+   "name": "Cryptocurrency",
+   "description": "Bitcoin, stablecoins, exchanges and crypto rules.",
+   "count": 0,
+   "markets": [
+    "btc"
+   ],
+   "areas": [
+    {
+     "id": "btc",
+     "name": "Bitcoin & majors",
+     "count": 0
+    },
+    {
+     "id": "stablecoins",
+     "name": "Stablecoins & peg risks",
+     "count": 0
+    },
+    {
+     "id": "crypto-rules",
+     "name": "Crypto rules & ETFs",
+     "count": 0
+    },
+    {
+     "id": "hacks",
+     "name": "Hacks & exchange failures",
+     "count": 0
+    }
+   ],
+   "latest": []
+  },
+  {
+   "id": "equities",
+   "name": "Equities",
+   "description": "Earnings, guidance, buybacks and market structure.",
+   "count": 0,
+   "markets": [
+    "nq",
+    "rty"
+   ],
+   "areas": [
+    {
+     "id": "earnings",
+     "name": "Company health & earnings",
+     "count": 0
+    },
+    {
+     "id": "buybacks",
+     "name": "Share issues & buybacks",
+     "count": 0
+    },
+    {
+     "id": "market",
+     "name": "Market moves",
+     "count": 0
+    }
+   ],
+   "latest": []
+  },
+  {
+   "id": "real-estate",
+   "name": "Real estate",
+   "description": "Housing, property prices, mortgages and REITs.",
+   "count": 0,
+   "markets": [
+    "rty"
+   ],
+   "areas": [
+    {
+     "id": "housing",
+     "name": "Housing & property",
+     "count": 0
+    },
+    {
+     "id": "mortgages",
+     "name": "Mortgages",
+     "count": 0
+    },
+    {
+     "id": "commercial",
+     "name": "Commercial property",
+     "count": 0
+    }
+   ],
+   "latest": []
+  },
+  {
+   "id": "environment",
+   "name": "Environment",
+   "description": "Climate policy, emissions and pollution.",
+   "count": 0,
+   "markets": [],
+   "areas": [
+    {
+     "id": "climate",
+     "name": "Climate policy",
+     "count": 0
+    },
+    {
+     "id": "carbon",
+     "name": "Carbon markets",
+     "count": 0
+    },
+    {
+     "id": "pollution",
+     "name": "Pollution",
+     "count": 0
+    }
+   ],
+   "latest": []
+  },
+  {
+   "id": "weather",
+   "name": "Weather",
+   "description": "Storms, heat, floods, droughts and disasters.",
+   "count": 0,
+   "markets": [
+    "cl"
+   ],
+   "areas": [
+    {
+     "id": "storms",
+     "name": "Storms",
+     "count": 0
+    },
+    {
+     "id": "floods",
+     "name": "Floods & droughts",
+     "count": 0
+    },
+    {
+     "id": "heat",
+     "name": "Heat & wildfires",
+     "count": 0
+    },
+    {
+     "id": "quakes",
+     "name": "Earthquakes & disasters",
+     "count": 0
+    }
+   ],
+   "latest": []
+  },
+  {
+   "id": "agriculture",
+   "name": "Agriculture",
+   "description": "Crops, food prices and farm policy.",
+   "count": 0,
+   "markets": [],
+   "areas": [
+    {
+     "id": "crops",
+     "name": "Food & crop markets",
+     "count": 0
+    },
+    {
+     "id": "food-prices",
+     "name": "Food prices",
+     "count": 0
+    },
+    {
+     "id": "inputs",
+     "name": "Farm inputs",
+     "count": 0
+    }
+   ],
+   "latest": []
+  },
+  {
+   "id": "education",
+   "name": "Education",
+   "description": "Schools, universities, skills and student AI.",
+   "count": 0,
+   "markets": [],
+   "areas": [
+    {
+     "id": "schools",
+     "name": "Schools",
+     "count": 0
+    },
+    {
+     "id": "universities",
+     "name": "Universities",
+     "count": 0
+    },
+    {
+     "id": "skills",
+     "name": "Skills & changing work",
+     "count": 0
+    }
+   ],
+   "latest": []
+  },
+  {
+   "id": "employment",
+   "name": "Employment",
+   "description": "Jobs, layoffs, wages and labour action.",
+   "count": 0,
+   "markets": [
+    "nq"
+   ],
+   "areas": [
+    {
+     "id": "layoffs",
+     "name": "Layoffs & job cuts",
+     "count": 0
+    },
+    {
+     "id": "hiring",
+     "name": "Hiring & wages",
+     "count": 0
+    },
+    {
+     "id": "strikes",
+     "name": "Protests & strikes",
+     "count": 0
+    }
+   ],
+   "latest": []
+  },
+  {
+   "id": "manufacturing",
+   "name": "Manufacturing",
+   "description": "Factories, orders, output and reshoring.",
+   "count": 0,
+   "markets": [
+    "cl",
+    "rty"
+   ],
+   "areas": [
+    {
+     "id": "output",
+     "name": "Factory output & PMIs",
+     "count": 0
+    },
+    {
+     "id": "orders",
+     "name": "Orders & backlogs",
+     "count": 0
+    },
+    {
+     "id": "reshoring",
+     "name": "Reshoring & new plants",
+     "count": 0
+    }
+   ],
+   "latest": []
+  },
+  {
+   "id": "transportation",
+   "name": "Transportation",
+   "description": "Airlines, autos, EVs, rail and logistics.",
+   "count": 0,
+   "markets": [
+    "cl"
+   ],
+   "areas": [
+    {
+     "id": "aviation",
+     "name": "Aviation & travel",
+     "count": 0
+    },
+    {
+     "id": "autos",
+     "name": "Autos & EVs",
+     "count": 0
+    },
+    {
+     "id": "logistics",
+     "name": "Logistics & rail",
+     "count": 0
+    }
+   ],
+   "latest": []
+  },
+  {
+   "id": "defence",
+   "name": "Defence",
+   "description": "Military spending, contracts and security.",
+   "count": 0,
+   "markets": [
+    "gold"
+   ],
+   "areas": [
+    {
+     "id": "spending",
+     "name": "Defence spending",
+     "count": 0
+    },
+    {
+     "id": "contracts",
+     "name": "Defence contracts",
+     "count": 0
+    },
+    {
+     "id": "security",
+     "name": "Security & alliances",
+     "count": 0
+    }
+   ],
+   "latest": []
+  },
+  {
+   "id": "space",
+   "name": "Space technology",
+   "description": "Launches, satellites and space business.",
+   "count": 0,
+   "markets": [],
+   "areas": [
+    {
+     "id": "launches",
+     "name": "Launches",
+     "count": 0
+    },
+    {
+     "id": "satellites",
+     "name": "Satellites",
+     "count": 0
+    },
+    {
+     "id": "exploration",
+     "name": "Exploration",
+     "count": 0
+    }
+   ],
+   "latest": []
+  },
+  {
+   "id": "grants",
+   "name": "Grants and funding",
+   "description": "Public grants, subsidies and competitions.",
+   "count": 0,
+   "markets": [],
+   "areas": [
+    {
+     "id": "public-grants",
+     "name": "Grants & opportunities",
+     "count": 0
+    },
+    {
+     "id": "eligibility",
+     "name": "Grant access & eligibility",
+     "count": 0
+    },
+    {
+     "id": "competitions",
+     "name": "Competitions & prizes",
+     "count": 0
+    }
+   ],
+   "latest": []
+  },
+  {
+   "id": "emerging",
+   "name": "Emerging industries",
+   "description": "Robotics, drones, fusion, biotech and new markets.",
+   "count": 0,
+   "markets": [
+    "nq"
+   ],
+   "areas": [
+    {
+     "id": "robotics",
+     "name": "Robotics & drones",
+     "count": 0
+    },
+    {
+     "id": "fusion",
+     "name": "Fusion & nuclear",
+     "count": 0
+    },
+    {
+     "id": "new-markets",
+     "name": "New markets",
+     "count": 0
+    }
+   ],
+   "latest": []
+  }
+ ]
+}

@@ -1,0 +1,4 @@
+{
+ "how_to": "Add a correction as an object in the list below: {\"date\": \"YYYY-MM-DD\", \"target\": \"<signal or claim id>\", \"reason\": \"what was wrong and the dated source\", \"old\": \"wording before\", \"new\": \"wording after\", \"label\": \"not_assessable\" (optional: overrides a claim's grade)}. Never delete an entry.",
+ "corrections": []
+}

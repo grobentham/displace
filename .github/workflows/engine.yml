@@ -65,6 +65,8 @@ jobs:
           python engine/test_validation.py
           python engine/test_model_safeguards.py
           python engine/test_modelaudit.py
+          python engine/test_world.py
+          node --check site/assets/world.js
           node --check site/assets/terminal.js
           node tests/test_terminal.js
           node --check site/assets/validation.js
@@ -146,6 +148,7 @@ jobs:
           python engine/guard.py atlas engine/atlas.py
           python engine/guard.py validation engine/validation.py
           python engine/guard.py modelaudit engine/modelaudit.py
+          python engine/guard.py world engine/world.py build   # Displace World: grade claims and rebuild pages (no network)
 
       - name: Build static research articles and sitemap
         run: python engine/sitebuild.py
@@ -157,7 +160,7 @@ jobs:
         run: |
           git config user.name "displace-engine"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -- site/data site/reports site/sessions site/sitemap.xml site/calendar.ics site/calendar-high.ics engine/pending.json engine/cache
+          git add -- site/data site/reports site/sessions site/world site/sitemap.xml site/calendar.ics site/calendar-high.ics engine/pending.json engine/cache
           if ! git diff --cached --quiet; then
             git commit -m "Engine update $(date -u +%Y-%m-%dT%H:%MZ)"
             # another run or a code push may have landed meanwhile: rebase onto it and retry

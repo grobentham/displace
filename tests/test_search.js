@@ -7,4 +7,5 @@ assert.equal(S.search(rows,'gold','country').length,0);
 assert.equal(S.search(rows,'GDP','').length,1);
 assert.equal(S.reportEntries({reports:[{id:'../bad'},{id:'daily-2026-11-24',title:'Report',kind:'daily',generated_at:'2026-11-24'}]}).length,1);
 assert.equal(S.countryEntries({countries:[{id:'SGP',name:'Singapore'}]})[0].url,'atlas.html?country=SGP');
+assert.equal(S.worldEntries({signals:[{id:'W20261127-move-nq',title:'t',category:'equities',lead:'x'},{id:'../x',title:'bad',category:'',lead:''}]}).length,1);
 console.log('global search tests passed');

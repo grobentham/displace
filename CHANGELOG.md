@@ -1,5 +1,14 @@
 # Changelog
 
+## 2026-11-27: Displace World
+
+- New World division (menu item "World") with Signals, Early, Connections, Long Term, Before the Headlines, Came True,
+  Learns, Trust, Topics, My Displace and Business. 30 categories and 101 research areas.
+- Signals come from free public sources (GDELT, SEC EDGAR, Federal Register, USGS, data.gov.sg and Displace's own
+  market caches) through fixed templates. Claims are frozen with a SHA-256 hash and graded automatically by their rule.
+- World workflow every 3 hours; the Engine workflow grades and rebuilds World pages on every run. Search covers World
+  signals. Gate checks the World scorecard and ledger integrity.
+
 ## 2026-11-26 session planning and replay
 
 - The homepage shows session status, the next high-impact release, and a link back to saved plans. Traders can review the latest verified outcome and save a private note on their device.

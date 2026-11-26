@@ -1,0 +1,1332 @@
+{
+ "version": 1,
+ "categories": [
+  {
+   "id": "economics",
+   "name": "Economics",
+   "description": "Growth, inflation, rates, jobs and public finances.",
+   "query": "(inflation OR \"interest rate\" OR recession OR GDP OR \"central bank\")",
+   "markets": [
+    "nq",
+    "gold",
+    "6e"
+   ],
+   "areas": [
+    {
+     "id": "inflation",
+     "name": "Inflation & living costs",
+     "keywords": [
+      "inflation",
+      "consumer prices",
+      "cost of living",
+      "cpi"
+     ]
+    },
+    {
+     "id": "rates",
+     "name": "Interest rates & central banks",
+     "keywords": [
+      "interest rate",
+      "rate cut",
+      "rate hike",
+      "central bank",
+      "federal reserve",
+      "ecb",
+      "bank of england",
+      "bank of japan"
+     ]
+    },
+    {
+     "id": "growth",
+     "name": "Growth & recession",
+     "keywords": [
+      "gdp",
+      "recession",
+      "economic growth",
+      "contraction"
+     ]
+    },
+    {
+     "id": "debt",
+     "name": "Public budgets & debt",
+     "keywords": [
+      "budget deficit",
+      "public debt",
+      "bond auction",
+      "sovereign debt"
+     ]
+    },
+    {
+     "id": "fx",
+     "name": "Currencies & exchange rates",
+     "keywords": [
+      "currency",
+      "exchange rate",
+      "yen",
+      "yuan",
+      "dollar index"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "geopolitics",
+   "name": "Geopolitics",
+   "description": "Conflicts, diplomacy, elections and sanctions.",
+   "query": "(sanctions OR ceasefire OR \"peace talks\" OR election OR invasion OR summit)",
+   "markets": [
+    "gold",
+    "cl"
+   ],
+   "areas": [
+    {
+     "id": "conflict",
+     "name": "War & peace talks",
+     "keywords": [
+      "ceasefire",
+      "peace talks",
+      "invasion",
+      "airstrike",
+      "offensive"
+     ]
+    },
+    {
+     "id": "sanctions",
+     "name": "Sanctions",
+     "keywords": [
+      "sanctions",
+      "sanctioned",
+      "embargo"
+     ]
+    },
+    {
+     "id": "elections",
+     "name": "Elections & leadership",
+     "keywords": [
+      "election",
+      "prime minister",
+      "president-elect",
+      "coalition"
+     ]
+    },
+    {
+     "id": "diplomacy",
+     "name": "Summits & treaties",
+     "keywords": [
+      "summit",
+      "treaty",
+      "bilateral",
+      "diplomatic"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "ai",
+   "name": "Artificial intelligence",
+   "description": "Models, adoption, regulation and compute.",
+   "query": "(\"artificial intelligence\" OR \"AI model\" OR \"generative AI\" OR \"large language model\" OR OpenAI OR Anthropic)",
+   "markets": [
+    "nq"
+   ],
+   "areas": [
+    {
+     "id": "models",
+     "name": "AI models & labs",
+     "keywords": [
+      "openai",
+      "anthropic",
+      "google deepmind",
+      "large language model",
+      "ai model",
+      "gemini",
+      "llama"
+     ]
+    },
+    {
+     "id": "adoption",
+     "name": "AI adoption & productivity",
+     "keywords": [
+      "ai adoption",
+      "copilot",
+      "ai agents",
+      "automation"
+     ]
+    },
+    {
+     "id": "ai-policy",
+     "name": "AI rules & copyright",
+     "keywords": [
+      "ai act",
+      "ai regulation",
+      "ai copyright",
+      "ai safety"
+     ]
+    },
+    {
+     "id": "compute",
+     "name": "Data centres & compute",
+     "keywords": [
+      "data center",
+      "data centre",
+      "gpu",
+      "compute capacity"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "semiconductors",
+   "name": "Semiconductors",
+   "description": "Chips, foundries, equipment and export controls.",
+   "query": "(semiconductor OR chipmaker OR TSMC OR Nvidia OR \"chip export\")",
+   "markets": [
+    "nq"
+   ],
+   "areas": [
+    {
+     "id": "foundry",
+     "name": "Foundries & capacity",
+     "keywords": [
+      "tsmc",
+      "foundry",
+      "fab ",
+      "wafer",
+      "samsung foundry",
+      "intel foundry"
+     ]
+    },
+    {
+     "id": "memory",
+     "name": "Memory chips",
+     "keywords": [
+      "dram",
+      "nand",
+      "hbm",
+      "memory chip",
+      "micron",
+      "sk hynix"
+     ]
+    },
+    {
+     "id": "equipment",
+     "name": "Chip equipment & supply",
+     "keywords": [
+      "asml",
+      "lithography",
+      "chip equipment",
+      "applied materials"
+     ]
+    },
+    {
+     "id": "export",
+     "name": "Chip export controls",
+     "keywords": [
+      "export controls",
+      "chip export",
+      "entity list"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "technology",
+   "name": "Technology",
+   "description": "Big tech, software, devices and platforms.",
+   "query": "(Apple OR Microsoft OR Google OR Amazon OR Meta OR software OR smartphone)",
+   "markets": [
+    "nq"
+   ],
+   "areas": [
+    {
+     "id": "bigtech",
+     "name": "Big tech",
+     "keywords": [
+      "apple",
+      "microsoft",
+      "alphabet",
+      "google",
+      "amazon",
+      "meta platforms"
+     ]
+    },
+    {
+     "id": "software",
+     "name": "Software & cloud",
+     "keywords": [
+      "cloud",
+      "saas",
+      "software",
+      "azure",
+      "aws"
+     ]
+    },
+    {
+     "id": "devices",
+     "name": "Devices",
+     "keywords": [
+      "smartphone",
+      "iphone",
+      "laptop",
+      "wearable"
+     ]
+    },
+    {
+     "id": "antitrust",
+     "name": "Competition & antitrust",
+     "keywords": [
+      "antitrust",
+      "competition authority",
+      "monopoly",
+      "dma"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "healthcare",
+   "name": "Healthcare",
+   "description": "Drugs, approvals, outbreaks and health systems.",
+   "query": "(FDA OR \"drug approval\" OR outbreak OR vaccine OR \"clinical trial\" OR pharmaceutical)",
+   "markets": [
+    "nq"
+   ],
+   "areas": [
+    {
+     "id": "approvals",
+     "name": "Drug approvals & trials",
+     "keywords": [
+      "fda",
+      "approval",
+      "clinical trial",
+      "phase 3"
+     ]
+    },
+    {
+     "id": "outbreaks",
+     "name": "Diseases & public health",
+     "keywords": [
+      "outbreak",
+      "pandemic",
+      "virus",
+      "cases rise",
+      "who "
+     ]
+    },
+    {
+     "id": "pharma",
+     "name": "Pharma & biotech",
+     "keywords": [
+      "pharmaceutical",
+      "biotech",
+      "drugmaker",
+      "glp-1",
+      "obesity drug"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "science",
+   "name": "Scientific discoveries",
+   "description": "Research results, materials and replication.",
+   "query": "(scientists OR researchers OR \"new study\" OR breakthrough OR \"Nature journal\")",
+   "markets": [],
+   "areas": [
+    {
+     "id": "discoveries",
+     "name": "New findings",
+     "keywords": [
+      "discovery",
+      "breakthrough",
+      "researchers found",
+      "new study"
+     ]
+    },
+    {
+     "id": "materials",
+     "name": "Advanced materials",
+     "keywords": [
+      "superconductor",
+      "battery chemistry",
+      "graphene",
+      "materials"
+     ]
+    },
+    {
+     "id": "quantum",
+     "name": "Quantum computing",
+     "keywords": [
+      "quantum computer",
+      "qubit",
+      "quantum computing"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "energy",
+   "name": "Energy",
+   "description": "Oil, gas, power grids and renewables.",
+   "query": "(oil OR OPEC OR \"natural gas\" OR LNG OR \"power grid\" OR electricity OR renewable)",
+   "markets": [
+    "cl"
+   ],
+   "areas": [
+    {
+     "id": "oil",
+     "name": "Oil & OPEC",
+     "keywords": [
+      "opec",
+      "crude",
+      "oil price",
+      "barrel",
+      "brent",
+      "wti"
+     ]
+    },
+    {
+     "id": "gas",
+     "name": "Gas & LNG",
+     "keywords": [
+      "natural gas",
+      "lng",
+      "gas price"
+     ]
+    },
+    {
+     "id": "power",
+     "name": "Power grids & capacity",
+     "keywords": [
+      "power grid",
+      "blackout",
+      "electricity demand",
+      "grid capacity"
+     ]
+    },
+    {
+     "id": "renewables",
+     "name": "Renewable energy",
+     "keywords": [
+      "solar",
+      "wind farm",
+      "renewable",
+      "battery storage"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "commodities",
+   "name": "Commodities",
+   "description": "Metals, inventories and raw materials.",
+   "query": "(gold OR copper OR \"iron ore\" OR lithium OR \"commodity prices\" OR silver)",
+   "markets": [
+    "gold",
+    "cl"
+   ],
+   "areas": [
+    {
+     "id": "gold",
+     "name": "Gold & precious metals",
+     "keywords": [
+      "gold price",
+      "bullion",
+      "silver",
+      "precious metal"
+     ]
+    },
+    {
+     "id": "industrial",
+     "name": "Industrial metals",
+     "keywords": [
+      "copper",
+      "iron ore",
+      "aluminium",
+      "aluminum",
+      "nickel"
+     ]
+    },
+    {
+     "id": "critical",
+     "name": "Critical minerals",
+     "keywords": [
+      "lithium",
+      "rare earth",
+      "cobalt",
+      "critical minerals"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "supply-chains",
+   "name": "Supply chains",
+   "description": "Shipping, ports, shortages and trade routes.",
+   "query": "(shipping OR \"supply chain\" OR port OR \"freight rates\" OR shortage OR \"Red Sea\")",
+   "markets": [
+    "cl"
+   ],
+   "areas": [
+    {
+     "id": "shipping",
+     "name": "Shipping & ports",
+     "keywords": [
+      "shipping",
+      "container",
+      "port congestion",
+      "freight rates",
+      "red sea",
+      "suez",
+      "panama canal"
+     ]
+    },
+    {
+     "id": "shortages",
+     "name": "Shortages",
+     "keywords": [
+      "shortage",
+      "supply disruption",
+      "backlog"
+     ]
+    },
+    {
+     "id": "trade",
+     "name": "Tariffs & trade",
+     "keywords": [
+      "tariff",
+      "trade deal",
+      "import duty",
+      "customs"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "consumer",
+   "name": "Consumer trends",
+   "description": "Spending, retail, brands and prices people pay.",
+   "query": "(\"consumer spending\" OR retailers OR \"black friday\" OR \"holiday sales\" OR \"consumer confidence\")",
+   "markets": [
+    "nq"
+   ],
+   "areas": [
+    {
+     "id": "spending",
+     "name": "Consumer spending",
+     "keywords": [
+      "consumer spending",
+      "retail sales",
+      "holiday sales",
+      "black friday"
+     ]
+    },
+    {
+     "id": "prices",
+     "name": "Prices people pay",
+     "keywords": [
+      "price increase",
+      "price cut",
+      "subscription price",
+      "fare"
+     ]
+    },
+    {
+     "id": "brands",
+     "name": "Brands & retail",
+     "keywords": [
+      "retailer",
+      "store closures",
+      "brand"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "business",
+   "name": "Business opportunities",
+   "description": "Deals, funding, launches and new markets.",
+   "query": "(acquisition OR merger OR \"raises funding\" OR startup OR IPO OR \"expands into\")",
+   "markets": [
+    "nq",
+    "rty"
+   ],
+   "areas": [
+    {
+     "id": "deals",
+     "name": "Mergers & takeovers",
+     "keywords": [
+      "acquisition",
+      "acquire",
+      "merger",
+      "takeover"
+     ]
+    },
+    {
+     "id": "funding",
+     "name": "Business funding",
+     "keywords": [
+      "raises",
+      "funding round",
+      "series a",
+      "series b",
+      "venture"
+     ]
+    },
+    {
+     "id": "ipo",
+     "name": "Listings & IPOs",
+     "keywords": [
+      "ipo",
+      "listing",
+      "goes public"
+     ]
+    },
+    {
+     "id": "expansion",
+     "name": "Expansion & launches",
+     "keywords": [
+      "expands",
+      "launches",
+      "opens"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "cybersecurity",
+   "name": "Cybersecurity",
+   "description": "Breaches, ransomware and outages.",
+   "query": "(cyberattack OR ransomware OR \"data breach\" OR hackers OR outage)",
+   "markets": [
+    "nq"
+   ],
+   "areas": [
+    {
+     "id": "breaches",
+     "name": "Breaches & leaks",
+     "keywords": [
+      "data breach",
+      "leak",
+      "exposed records"
+     ]
+    },
+    {
+     "id": "ransomware",
+     "name": "Ransomware",
+     "keywords": [
+      "ransomware",
+      "extortion"
+     ]
+    },
+    {
+     "id": "outages",
+     "name": "Outages",
+     "keywords": [
+      "outage",
+      "service disruption",
+      "went down"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "social-media",
+   "name": "Social media",
+   "description": "Platforms, creators, moderation and online safety.",
+   "query": "(TikTok OR Instagram OR YouTube OR \"social media\" OR influencer OR Snapchat)",
+   "markets": [],
+   "areas": [
+    {
+     "id": "platforms",
+     "name": "Platforms",
+     "keywords": [
+      "tiktok",
+      "instagram",
+      "youtube",
+      "facebook",
+      "snapchat",
+      "threads"
+     ]
+    },
+    {
+     "id": "safety",
+     "name": "Online safety & moderation",
+     "keywords": [
+      "online safety",
+      "moderation",
+      "age verification",
+      "harmful content"
+     ]
+    },
+    {
+     "id": "creators",
+     "name": "Creators & audiences",
+     "keywords": [
+      "creator",
+      "influencer",
+      "streamer"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "policy",
+   "name": "Government policies",
+   "description": "Laws, regulation, rules and executive actions.",
+   "query": "(regulation OR \"new law\" OR legislation OR \"executive order\" OR regulator OR ministry)",
+   "markets": [
+    "nq",
+    "gold"
+   ],
+   "areas": [
+    {
+     "id": "laws",
+     "name": "Laws & bills",
+     "keywords": [
+      "bill passed",
+      "legislation",
+      "new law",
+      "parliament"
+     ]
+    },
+    {
+     "id": "regulators",
+     "name": "Regulators",
+     "keywords": [
+      "regulator",
+      "watchdog",
+      "commission"
+     ]
+    },
+    {
+     "id": "executive",
+     "name": "Executive actions",
+     "keywords": [
+      "executive order",
+      "decree",
+      "proclamation"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "singapore",
+   "name": "Singapore",
+   "description": "Singapore life, policy, business and markets.",
+   "query": "(Singapore OR MAS OR \"Straits Times Index\" OR HDB OR SGX)",
+   "markets": [
+    "6e"
+   ],
+   "areas": [
+    {
+     "id": "sg-policy",
+     "name": "Singapore life & policy",
+     "keywords": [
+      "singapore",
+      "ministry",
+      "hdb",
+      "cpf",
+      "budget"
+     ]
+    },
+    {
+     "id": "sg-business",
+     "name": "Singapore business",
+     "keywords": [
+      "sgx",
+      "singapore firm",
+      "temasek",
+      "gic"
+     ]
+    },
+    {
+     "id": "sg-grants",
+     "name": "Grants & opportunities",
+     "keywords": [
+      "grant",
+      "enterprise singapore",
+      "skillsfuture",
+      "scheme"
+     ]
+    },
+    {
+     "id": "sg-haze",
+     "name": "Haze & air quality",
+     "keywords": [
+      "haze",
+      "psi",
+      "air quality"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "crypto",
+   "name": "Cryptocurrency",
+   "description": "Bitcoin, stablecoins, exchanges and crypto rules.",
+   "query": "(bitcoin OR ethereum OR stablecoin OR crypto OR cryptocurrency)",
+   "markets": [
+    "btc"
+   ],
+   "areas": [
+    {
+     "id": "btc",
+     "name": "Bitcoin & majors",
+     "keywords": [
+      "bitcoin",
+      "ethereum",
+      "btc",
+      "eth",
+      "solana"
+     ]
+    },
+    {
+     "id": "stablecoins",
+     "name": "Stablecoins & peg risks",
+     "keywords": [
+      "stablecoin",
+      "tether",
+      "usdc",
+      "depeg"
+     ]
+    },
+    {
+     "id": "crypto-rules",
+     "name": "Crypto rules & ETFs",
+     "keywords": [
+      "crypto regulation",
+      "sec crypto",
+      "bitcoin etf",
+      "mica"
+     ]
+    },
+    {
+     "id": "hacks",
+     "name": "Hacks & exchange failures",
+     "keywords": [
+      "crypto hack",
+      "exchange collapse",
+      "exploit"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "equities",
+   "name": "Equities",
+   "description": "Earnings, guidance, buybacks and market structure.",
+   "query": "(earnings OR \"stock market\" OR \"shares fell\" OR \"shares rose\" OR \"Nasdaq\" OR \"S&P 500\")",
+   "markets": [
+    "nq",
+    "rty"
+   ],
+   "areas": [
+    {
+     "id": "earnings",
+     "name": "Company health & earnings",
+     "keywords": [
+      "earnings",
+      "quarterly results",
+      "guidance",
+      "revenue"
+     ]
+    },
+    {
+     "id": "buybacks",
+     "name": "Share issues & buybacks",
+     "keywords": [
+      "buyback",
+      "share repurchase",
+      "dividend"
+     ]
+    },
+    {
+     "id": "market",
+     "name": "Market moves",
+     "keywords": [
+      "stocks fell",
+      "stocks rose",
+      "sell-off",
+      "rally",
+      "nasdaq",
+      "s&p 500"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "real-estate",
+   "name": "Real estate",
+   "description": "Housing, property prices, mortgages and REITs.",
+   "query": "(\"housing market\" OR \"home prices\" OR mortgage OR \"property market\" OR REIT)",
+   "markets": [
+    "rty"
+   ],
+   "areas": [
+    {
+     "id": "housing",
+     "name": "Housing & property",
+     "keywords": [
+      "housing market",
+      "home prices",
+      "property prices",
+      "rents"
+     ]
+    },
+    {
+     "id": "mortgages",
+     "name": "Mortgages",
+     "keywords": [
+      "mortgage rates",
+      "mortgage"
+     ]
+    },
+    {
+     "id": "commercial",
+     "name": "Commercial property",
+     "keywords": [
+      "office vacancy",
+      "commercial property",
+      "reit"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "environment",
+   "name": "Environment",
+   "description": "Climate policy, emissions and pollution.",
+   "query": "(climate OR emissions OR \"carbon price\" OR pollution OR COP)",
+   "markets": [],
+   "areas": [
+    {
+     "id": "climate",
+     "name": "Climate policy",
+     "keywords": [
+      "climate",
+      "emissions",
+      "net zero",
+      "cop"
+     ]
+    },
+    {
+     "id": "carbon",
+     "name": "Carbon markets",
+     "keywords": [
+      "carbon price",
+      "carbon credit",
+      "carbon capture",
+      "carbon storage"
+     ]
+    },
+    {
+     "id": "pollution",
+     "name": "Pollution",
+     "keywords": [
+      "pollution",
+      "air quality",
+      "toxic"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "weather",
+   "name": "Weather",
+   "description": "Storms, heat, floods, droughts and disasters.",
+   "query": "(hurricane OR typhoon OR cyclone OR flood OR drought OR heatwave OR earthquake OR wildfire)",
+   "markets": [
+    "cl"
+   ],
+   "areas": [
+    {
+     "id": "storms",
+     "name": "Storms",
+     "keywords": [
+      "hurricane",
+      "typhoon",
+      "cyclone",
+      "storm"
+     ]
+    },
+    {
+     "id": "floods",
+     "name": "Floods & droughts",
+     "keywords": [
+      "flood",
+      "drought",
+      "monsoon"
+     ]
+    },
+    {
+     "id": "heat",
+     "name": "Heat & wildfires",
+     "keywords": [
+      "heatwave",
+      "wildfire",
+      "record temperature"
+     ]
+    },
+    {
+     "id": "quakes",
+     "name": "Earthquakes & disasters",
+     "keywords": [
+      "earthquake",
+      "tsunami",
+      "volcano",
+      "eruption"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "agriculture",
+   "name": "Agriculture",
+   "description": "Crops, food prices and farm policy.",
+   "query": "(wheat OR corn OR soybeans OR \"food prices\" OR harvest OR fertilizer OR rice)",
+   "markets": [],
+   "areas": [
+    {
+     "id": "crops",
+     "name": "Food & crop markets",
+     "keywords": [
+      "wheat",
+      "corn",
+      "soybean",
+      "rice",
+      "harvest",
+      "crop"
+     ]
+    },
+    {
+     "id": "food-prices",
+     "name": "Food prices",
+     "keywords": [
+      "food prices",
+      "food inflation"
+     ]
+    },
+    {
+     "id": "inputs",
+     "name": "Farm inputs",
+     "keywords": [
+      "fertilizer",
+      "fertiliser",
+      "pesticide"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "education",
+   "name": "Education",
+   "description": "Schools, universities, skills and student AI.",
+   "query": "(university OR students OR schools OR \"education ministry\" OR tuition)",
+   "markets": [],
+   "areas": [
+    {
+     "id": "schools",
+     "name": "Schools",
+     "keywords": [
+      "school",
+      "students",
+      "teachers"
+     ]
+    },
+    {
+     "id": "universities",
+     "name": "Universities",
+     "keywords": [
+      "university",
+      "tuition",
+      "admissions"
+     ]
+    },
+    {
+     "id": "skills",
+     "name": "Skills & changing work",
+     "keywords": [
+      "skills",
+      "reskilling",
+      "training programme"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "employment",
+   "name": "Employment",
+   "description": "Jobs, layoffs, wages and labour action.",
+   "query": "(layoffs OR \"job cuts\" OR hiring OR unemployment OR strike OR wages)",
+   "markets": [
+    "nq"
+   ],
+   "areas": [
+    {
+     "id": "layoffs",
+     "name": "Layoffs & job cuts",
+     "keywords": [
+      "layoffs",
+      "job cuts",
+      "redundancies"
+     ]
+    },
+    {
+     "id": "hiring",
+     "name": "Hiring & wages",
+     "keywords": [
+      "hiring",
+      "wages",
+      "pay rise"
+     ]
+    },
+    {
+     "id": "strikes",
+     "name": "Protests & strikes",
+     "keywords": [
+      "strike",
+      "walkout",
+      "union"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "manufacturing",
+   "name": "Manufacturing",
+   "description": "Factories, orders, output and reshoring.",
+   "query": "(manufacturing OR factory OR PMI OR \"industrial output\" OR reshoring)",
+   "markets": [
+    "cl",
+    "rty"
+   ],
+   "areas": [
+    {
+     "id": "output",
+     "name": "Factory output & PMIs",
+     "keywords": [
+      "pmi",
+      "factory output",
+      "industrial production",
+      "manufacturing"
+     ]
+    },
+    {
+     "id": "orders",
+     "name": "Orders & backlogs",
+     "keywords": [
+      "orders",
+      "backlog",
+      "contract win"
+     ]
+    },
+    {
+     "id": "reshoring",
+     "name": "Reshoring & new plants",
+     "keywords": [
+      "new plant",
+      "reshoring",
+      "factory opening"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "transportation",
+   "name": "Transportation",
+   "description": "Airlines, autos, EVs, rail and logistics.",
+   "query": "(airline OR \"electric vehicle\" OR automaker OR railway OR logistics OR aviation)",
+   "markets": [
+    "cl"
+   ],
+   "areas": [
+    {
+     "id": "aviation",
+     "name": "Aviation & travel",
+     "keywords": [
+      "airline",
+      "aviation",
+      "airport",
+      "boeing",
+      "airbus"
+     ]
+    },
+    {
+     "id": "autos",
+     "name": "Autos & EVs",
+     "keywords": [
+      "electric vehicle",
+      "ev ",
+      "automaker",
+      "tesla",
+      "byd"
+     ]
+    },
+    {
+     "id": "logistics",
+     "name": "Logistics & rail",
+     "keywords": [
+      "logistics",
+      "railway",
+      "trucking",
+      "delivery"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "defence",
+   "name": "Defence",
+   "description": "Military spending, contracts and security.",
+   "query": "(defence OR defense OR military OR \"arms deal\" OR NATO OR missile)",
+   "markets": [
+    "gold"
+   ],
+   "areas": [
+    {
+     "id": "spending",
+     "name": "Defence spending",
+     "keywords": [
+      "defence budget",
+      "defense spending",
+      "military spending"
+     ]
+    },
+    {
+     "id": "contracts",
+     "name": "Defence contracts",
+     "keywords": [
+      "arms deal",
+      "defense contract",
+      "defence contract",
+      "procurement"
+     ]
+    },
+    {
+     "id": "security",
+     "name": "Security & alliances",
+     "keywords": [
+      "nato",
+      "missile",
+      "drone strike",
+      "alliance"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "space",
+   "name": "Space technology",
+   "description": "Launches, satellites and space business.",
+   "query": "(SpaceX OR NASA OR satellite OR \"rocket launch\" OR spacecraft)",
+   "markets": [],
+   "areas": [
+    {
+     "id": "launches",
+     "name": "Launches",
+     "keywords": [
+      "launch",
+      "rocket",
+      "spacex",
+      "starship"
+     ]
+    },
+    {
+     "id": "satellites",
+     "name": "Satellites",
+     "keywords": [
+      "satellite",
+      "starlink",
+      "orbit"
+     ]
+    },
+    {
+     "id": "exploration",
+     "name": "Exploration",
+     "keywords": [
+      "nasa",
+      "moon",
+      "mars",
+      "esa"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "grants",
+   "name": "Grants and funding",
+   "description": "Public grants, subsidies and competitions.",
+   "query": "(grant OR subsidy OR \"funding programme\" OR \"funding program\" OR scheme OR competition)",
+   "markets": [],
+   "areas": [
+    {
+     "id": "public-grants",
+     "name": "Grants & opportunities",
+     "keywords": [
+      "grant",
+      "subsidy",
+      "funding programme",
+      "funding program"
+     ]
+    },
+    {
+     "id": "eligibility",
+     "name": "Grant access & eligibility",
+     "keywords": [
+      "eligibility",
+      "applications open",
+      "deadline"
+     ]
+    },
+    {
+     "id": "competitions",
+     "name": "Competitions & prizes",
+     "keywords": [
+      "competition",
+      "challenge",
+      "prize"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "emerging",
+   "name": "Emerging industries",
+   "description": "Robotics, drones, fusion, biotech and new markets.",
+   "query": "(robotics OR humanoid OR drone OR \"fusion energy\" OR \"nuclear reactor\" OR \"small modular\")",
+   "markets": [
+    "nq"
+   ],
+   "areas": [
+    {
+     "id": "robotics",
+     "name": "Robotics & drones",
+     "keywords": [
+      "robot",
+      "humanoid",
+      "drone"
+     ]
+    },
+    {
+     "id": "fusion",
+     "name": "Fusion & nuclear",
+     "keywords": [
+      "fusion",
+      "small modular reactor",
+      "nuclear reactor"
+     ]
+    },
+    {
+     "id": "new-markets",
+     "name": "New markets",
+     "keywords": [
+      "emerging industry",
+      "new market",
+      "first commercial"
+     ]
+    }
+   ]
+  }
+ ]
+}

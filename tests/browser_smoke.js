@@ -204,12 +204,21 @@ async function checkOutlook(page, width) {
      await page.waitForFunction(()=>document.querySelector('#profile-note').textContent.includes('United States'));
     }
     if(name==='search'){
-     await page.waitForFunction(()=>document.querySelector('#status').textContent.includes('2/2'));
+     await page.waitForFunction(()=>document.querySelector('#status').textContent.includes('3/3'));
      await page.fill('#q','Singapore');
      assert(await page.locator('#results a[href="atlas.html?country=SGP"]').isVisible(),'country search');
      await page.locator('#results a[href="atlas.html?country=SGP"]').click();
      await page.waitForFunction(()=>document.querySelector('#country').value==='SGP');
     }
+   }
+   for(const name of ['index','early','connections','long-term','before-the-headlines','came-true','learns','trust','topics','radar','business']){
+    const response=await page.goto(base+'world/'+name+'.html',{waitUntil:'networkidle'});
+    assert.equal(response.status(),200,'world '+name);
+    assert(await page.locator('h1').first().isVisible(),'world '+name+' heading');
+    assert.equal(await page.locator('nav[aria-label="Displace World"] a[aria-current="page"]').count(),1,'world '+name+' section menu');
+    if(name!=='business')await page.waitForFunction(()=>!document.querySelector('#status').textContent.startsWith('Loading'));
+    const dims=await page.evaluate(()=>({scroll:document.documentElement.scrollWidth,inner:innerWidth}));
+    assert(dims.scroll<=dims.inner+2,'world '+name+' horizontal overflow at '+width+': '+JSON.stringify(dims));
    }
    await checkOutlook(page,width);
    assert.deepEqual(errors,[],'uncaught page errors at '+width);

@@ -1,0 +1,51 @@
+[hidden]{display:none!important}
+/* Displace World. Builds on intelligence.css (the site's tokens, header and panels); change colours there. */
+.rnav{border-bottom:1px solid var(--line);background:#fbfbfd}
+.rnav .wide{max-width:1180px;margin:0 auto;padding:0 22px;display:flex;gap:18px;overflow-x:auto;scrollbar-width:none;height:44px;align-items:center}
+.rnav .wide::-webkit-scrollbar{display:none}
+.rnav a{font-size:.8rem;color:var(--ink);opacity:.75;white-space:nowrap}
+.rnav a[aria-current=page]{color:var(--link);opacity:1}
+.wd-main{max-width:980px;margin:0 auto;padding:28px 22px 80px}
+.wd-main h1{font-size:clamp(1.7rem,3.6vw,2.5rem);margin:6px 0 10px}
+.wd-kicker{color:var(--accent);font-weight:600;font-size:.82rem;letter-spacing:0;margin:0 0 4px}
+.wd-crumbs{font-size:.82rem;color:var(--muted);margin:0}
+.wd-main .panel{background:var(--gray);border-radius:18px;padding:20px 22px;margin:16px 0}
+.wd-lines{list-style:none;padding:0;margin:0}
+.wd-lines li{margin:0 0 10px;padding-left:0}
+.wd-class{display:inline-block;font-size:.68rem;font-weight:600;border-radius:6px;padding:2px 7px;margin-right:6px;vertical-align:1px;background:#fff;border:1px solid var(--line);color:var(--muted)}
+.wd-fact{color:#1d1d1f}.wd-estimate{color:#0066cc;border-color:#b6d4f5}.wd-interpretation{color:#6e6e73}.wd-open_question{color:#b25000;border-color:#f3d2ad}
+.wd-label{display:inline-block;font-size:.72rem;font-weight:600;border-radius:980px;padding:2px 9px;white-space:nowrap}
+.wd-hit{background:#e3f5ec;color:#11734b}.wd-miss{background:#fde8e7;color:#b3261e}.wd-unresolved{background:#eef0f4;color:#4a4a50}.wd-not_assessable{background:#fff4e5;color:#8a4b00}
+.wd-claims{width:100%;border-collapse:collapse;font-size:.9rem}
+.wd-claims th,.wd-claims td{text-align:left;padding:9px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+.wd-claims th{font-size:.75rem;color:var(--muted);font-weight:600}
+.wd-hash{color:var(--muted);font-family:var(--mono);font-size:.7rem}
+.wd-sources{padding-left:20px}.wd-sources li{margin:0 0 9px}
+.wd-list{list-style:none;padding:0;margin:0}.wd-list li{padding:9px 0;border-bottom:1px solid var(--line)}.wd-list li:last-child{border:0}
+.wd-save,.wd-btn{background:#fff;border:1px solid var(--line);border-radius:980px;padding:6px 14px;font:inherit;font-size:.82rem;cursor:pointer;color:var(--ink)}
+.wd-save[aria-pressed=true],.wd-btn[aria-pressed=true]{background:var(--blue);border-color:var(--blue);color:#fff}
+.wd-filters{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:14px 0}
+.wd-filters select,.wd-filters input{font:inherit;font-size:.88rem;padding:7px 10px;border:1px solid var(--line);border-radius:10px;background:#fff;color:var(--ink)}
+.wd-cards{display:grid;gap:12px}
+.wd-card{background:var(--gray);border-radius:16px;padding:16px 18px}
+.wd-card h3{font-size:1.05rem;margin:4px 0 6px;line-height:1.25}
+.wd-card p{font-size:.9rem;margin:0 0 6px;color:#333}
+.wd-meta{font-size:.76rem;color:var(--muted);display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.wd-kind{font-weight:600;color:var(--accent)}
+.wd-tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:16px 0}
+.wd-tile{background:var(--gray);border-radius:16px;padding:14px 16px}
+.wd-tile b{display:block;font-size:1.7rem;letter-spacing:-.03em}
+.wd-tile span{font-size:.78rem;color:var(--muted)}
+.wd-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}
+.wd-route{background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px 14px;margin:10px 0}
+.wd-chain{list-style:none;margin:0;padding:0}
+.wd-chain li{position:relative;padding:6px 0 6px 18px}
+.wd-chain li::before{content:"";position:absolute;left:4px;top:13px;width:7px;height:7px;border-radius:50%;background:var(--blue)}
+.wd-edge{font-size:.78rem;color:var(--muted);padding:2px 0 2px 18px;border-left:2px solid var(--blue);margin-left:7px}
+.wd-edge.co{border-left-style:dashed;border-color:#b25000}
+.wd-svg{width:100%;height:auto;background:#fff;border:1px solid var(--line);border-radius:14px}
+.wd-more{display:block;margin:16px auto}
+.wd-empty{color:var(--muted);font-style:italic}
+.wd-foot{margin-top:28px}
+.scroll{overflow-x:auto}
+@media (max-width:640px){.wd-main{padding:20px 16px 60px}.wd-main .panel{padding:16px}}
