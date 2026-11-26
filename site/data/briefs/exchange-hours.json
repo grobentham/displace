@@ -1,0 +1,53 @@
+{
+  "asof": "2026-11-25",
+  "days": [
+    {
+      "date": "2026-11-26",
+      "status": "halt",
+      "name": "Thanksgiving",
+      "hours": "Holiday halt begins 13:00 New York"
+    },
+    {
+      "date": "2026-11-27",
+      "status": "early",
+      "name": "Day after Thanksgiving",
+      "hours": "Closes 13:15 New York"
+    },
+    {
+      "date": "2026-12-24",
+      "status": "early",
+      "name": "Christmas Eve",
+      "hours": "Closes 13:15 New York"
+    },
+    {
+      "date": "2026-12-25",
+      "status": "closed",
+      "name": "Christmas",
+      "hours": "Closed"
+    },
+    {
+      "date": "2027-01-01",
+      "status": "closed",
+      "name": "New Year's Day",
+      "hours": "Closed"
+    },
+    {
+      "date": "2027-01-18",
+      "status": "halt",
+      "name": "Martin Luther King Jr. Day",
+      "hours": "Holiday halt begins 13:00 New York"
+    },
+    {
+      "date": "2027-02-15",
+      "status": "halt",
+      "name": "Presidents Day",
+      "hours": "Holiday halt begins 13:00 New York"
+    },
+    {
+      "date": "2027-03-26",
+      "status": "closed",
+      "name": "Good Friday",
+      "hours": "Closed"
+    }
+  ]
+}

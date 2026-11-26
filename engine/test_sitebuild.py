@@ -26,11 +26,15 @@ def main():
                **publication.forecast_values(nq)}
         nq["forecast_id"] = publication.identity(row)
         bias={"for":"2026-11-25","asof":"2026-11-25T10:00:00+00:00","markets":{"nq":nq}}
+        es = {**nq, "range": {"points": 78, "lo": 45, "hi": 132}}
+        es_row = {**row, "market": "es", **publication.forecast_values(es)}
+        es["forecast_id"] = publication.identity(es_row)
+        bias["markets"]["es"] = es
         events=[{"date":"2026-11-25","time":"14:00","impact":"medium","title":"Beige Book"},
                 {"date":"2026-11-26","time":"08:30","impact":"high","title":"Other day"},
                 {"date":"2026-11-25","time":"invalid","impact":"high","title":"Bad time"}]
         P.jsonwrite(site/"data/bias/current.json",bias)
-        P.jsonwrite(site/"data/bias/log.json", {"entries": [row]})
+        P.jsonwrite(site/"data/bias/log.json", {"entries": [row, es_row]})
         P.jsonwrite(site/"data/calendar/events.json",{"events":events})
         P.jsonwrite(site/"data/open/current.json",{"by_market":{"nq":{"n":3}}})
         assert S.build(site)==1
@@ -46,7 +50,10 @@ def main():
         content=(site/"reports"/(r["id"]+".html")).read_text()
         assert "&lt;script&gt;" in content and "<script>" not in content
         assert S.BASE+"reports/"+r["id"]+".html" in content
-        assert len(ET.parse(site/"sitemap.xml").getroot())==len(S.PAGES)+2
+        assert len(ET.parse(site/"sitemap.xml").getroot())==len(S.PAGES)+4
+        es = (site / "sessions/es/2026-11-25.html").read_text(encoding="utf-8")
+        assert "ES session brief" in es and "45–132 points" in es
+        assert "?market=es#session-plan" in es and 'property="og:title"' in es
         nq["session"]["date"]="2026-11-27"
         P.jsonwrite(site/"data/bias/current.json",bias)
         assert S.build(site)==1

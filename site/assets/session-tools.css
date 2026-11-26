@@ -1,0 +1,6 @@
+.tool-intro{max-width:40rem;color:#d1d1d6;font-size:1.05rem;line-height:1.55;margin:16px 0 24px}
+.tool-list{list-style:none;padding:0;display:grid;gap:10px;margin:0}
+.tool-list li{background:#1d1d1f;border:1px solid #424245;border-radius:12px;padding:14px 16px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.tool-list strong,.tool-list small{display:block}.tool-list small{color:#a1a1a6;margin-top:4px}
+.tool-list a{white-space:nowrap;padding:8px 12px;border-radius:10px;background:#202c40;text-decoration:none}
+.tool-example{max-width:39rem}.tool-example p{margin:0;line-height:1.55;color:#d1d1d6}

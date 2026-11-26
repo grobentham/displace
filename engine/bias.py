@@ -900,12 +900,14 @@ def score_log(rows_by, entries, published_views=None):
             continue
         b = days[nxt]
         up = 1 if b[3] > prior["close"] else 0
+        actual_range = b[1] - b[2]
         import rolls
         if rolls.is_roll(e["market"], nxt):
             e["roll"] = True                             # contract switch day: kept, not counted (rolls.py)
         e.update({"day": nxt, "scored": 1, "up": up, "brier": round((e["p_up"] - up) ** 2, 4),
                   "highTaken": int(b[1] > prior["high"]), "lowTaken": int(b[2] < prior["low"]),
-                  "inRange": int(e["range_lo"] <= b[1] - b[2] <= e["range_hi"])})
+                  "inRange": int(e["range_lo"] <= actual_range <= e["range_hi"]),
+                  "actual_range": actual_range})
         if e.get("up1") is not None:
             e["up1Hit"], e["dn1Hit"] = int(b[1] >= e["up1"]), int(b[2] <= e["dn1"])
         if e["bias"] != "neutral" and e.get("tier") == "tested":

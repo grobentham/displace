@@ -1748,7 +1748,7 @@ svg.cd line.wick{animation:fadein .5s ease-out both}
 .ms-grid small{display:block;color:var(--muted);font-size:.8rem}.ms-grid b{font-size:1.5rem;letter-spacing:-.03em;font-variant-numeric:tabular-nums}
 .ms-note{color:var(--muted);font-size:.82rem;margin-top:12px}
 </style>
-<link rel="canonical" href="https://grobentham.github.io/displace/"><link rel="stylesheet" href="assets/morning.css?v=20261125g">
+<link rel="canonical" href="https://grobentham.github.io/displace/"><link rel="stylesheet" href="assets/morning.css?v=20261126">
 </head>
 <body>
 
@@ -1775,11 +1775,13 @@ svg.cd line.wick{animation:fadein .5s ease-out both}
 <section class="hero dark mc" id="hero">
   <div class="wide" id="mc">
     <div class="mc-top">
-      <div><p class="mc-for" id="mc-for">Today's session</p><h1 class="mc-q">How far could it move today?</h1></div>
+      <div><p class="mc-for" id="mc-for">Today's session</p><h1 class="mc-q" id="mc-heading">Plan your NQ session in 60 seconds</h1></div>
       <div class="mc-tabs" id="mc-tabs" role="tablist" aria-label="Market"></div>
     </div>
     <div class="mc-hero-actions">
-      <a class="pillbtn" href="#session-plan">Plan my session</a>
+      <a class="pillbtn" id="mc-plan-link" href="#session-plan">Plan my session</a>
+      <a class="mc-secondary" href="replay-a-release.html">Replay a past release</a>
+      <a class="mc-secondary" id="mc-review-link" href="#session-review" hidden>Review the last session</a>
       <button type="button" class="mc-secondary" id="mc-share" aria-expanded="false" aria-controls="mc-share-panel" hidden>Share MNQ brief</button>
     </div>
     <div class="mc-share-panel" id="mc-share-panel" hidden>
@@ -1792,6 +1794,8 @@ svg.cd line.wick{animation:fadein .5s ease-out both}
       <div class="mc-big"><span id="mc-pts">—</span><small>points, expected high-to-low</small></div>
       <p class="mc-range" id="mc-range">Loading today's numbers…</p>
       <p class="mc-cmp" id="mc-cmp"></p>
+      <p class="mc-next" id="mc-next" hidden></p>
+      <p class="mc-muted" id="mc-change" hidden></p>
       <p class="mc-evidence"><b>Historical estimates</b> · <span id="mc-evidence">Checking live scoring…</span> · <a href="open.html#performance">Forecast record</a></p>
       <p class="mc-window" id="mc-window" hidden></p>
       <div class="mc-status" id="mc-status"></div>
@@ -1801,7 +1805,7 @@ svg.cd line.wick{animation:fadein .5s ease-out both}
       <section class="mc-card" aria-labelledby="mc-h-nw">
         <h2 id="mc-h-nw">Scheduled news <span class="mc-muted">(your time)</span></h2>
         <div id="mc-news"></div>
-        <div class="mc-news-actions"><button type="button" class="mc-reminder" id="mc-reminder" hidden>Remind me</button><a href="#calendar">Full calendar</a></div>
+        <div class="mc-news-actions"><button type="button" class="mc-reminder" id="mc-reminder" hidden>Remind me</button><a href="#calendar">Full calendar</a><a href="futures-hours.html">NQ holiday hours</a></div>
       </section>
     </div>
     <section class="mc-card mc-plan" id="session-plan" aria-labelledby="mc-plan-title">
@@ -1836,10 +1840,22 @@ svg.cd line.wick{animation:fadein .5s ease-out both}
           </div>
           <div class="mc-plan-actions">
             <button type="submit" class="pillbtn">Save session plan</button>
+            <a id="mc-calendar-feed" href="webcal://grobentham.github.io/displace/calendar-high.ics" hidden>Subscribe to the high-impact calendar</a>
             <p class="mc-muted" id="mc-plan-status" role="status"></p>
           </div>
         </fieldset>
         <p class="mc-muted mc-plan-note">Plans stay on this device. Enter the allowance from your account and leave room for execution costs and drawdown rules.</p>
+      </form>
+    </section>
+    <section class="mc-card mc-plan" id="session-review" aria-labelledby="mc-review-title">
+      <h2 id="mc-review-title">Review the previous session</h2>
+      <p class="mc-muted" id="mc-review-summary" role="status">Checking for a recorded outcome…</p>
+      <dl id="mc-review-results" class="mc-review-results" hidden></dl>
+      <ul class="mc-muted" id="mc-review-news" hidden></ul>
+      <form id="mc-review-form" hidden>
+        <label for="mc-review-note">One thing to carry into the next session</label>
+        <textarea id="mc-review-note" rows="2" maxlength="700"></textarea>
+        <div class="mc-plan-actions"><button type="submit" class="mc-secondary">Save note on this device</button><span class="mc-muted" id="mc-review-status" role="status"></span></div>
       </form>
     </section>
     <p class="mc-foot">Up or down? Our tests find no reliable daily direction edge, so we don't call one. <a href="research-hub.html">Why</a> · <a href="#bias">All 8 markets</a> · <span id="mc-made"></span></p>
@@ -2432,13 +2448,23 @@ svg.cd line.wick{animation:fadein .5s ease-out both}
       <div class="plan plan-pro"><div class="plan-h"><b>Pro</b><span class="plan-p" id="pro-price">Free during launch</span></div><ul><li><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="m5 12 5 5 9-10" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>Historical reaction research</b>: market moves around previous releases, with sample sizes and time windows</span></li><li><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="m5 12 5 5 9-10" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>Fed tracker</b>: rate, next decision and market pricing</span></li><li><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="m5 12 5 5 9-10" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>Release stats</b>: a year of actual vs forecast</span></li><li><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="m5 12 5 5 9-10" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>Weekly outlook</b> and the <b>full release record</b></span></li></ul><div id="pro-cta"><button type="button" class="pillbtn lg" data-pro-up>Upgrade to Pro</button><small>Secure checkout by Stripe. Cancel any time.</small></div></div>
     </div>
     <div class="pro-show">
-      <h2>What you get with Pro</h2>
+      <h2>Available in the free Pro preview</h2>
       <div class="ps-g">
         <div class="ps"><i>↕︎</i><b>Historical market reactions</b><p>Compare historical moves in gold, Nasdaq futures, the dollar and Treasury yields around earlier releases. Each table shows the time window and sample size. <a href="validation.html#model-audit">Read the model audit</a>.</p></div>
         <div class="ps"><i>⚖︎</i><b>Fed tracker</b><p>The policy rate, the next decision date, what the 2-year yield says about where rates are heading, and the key points of the latest statement and minutes.</p><div class="ps-mock"><em>Example</em><span>Rate</span>Current target range<span>Next</span>Next decision date<span>Pricing</span>Hike / hold / cut odds, as reported</div></div>
         <div class="ps"><i>▥</i><b>Release stats</b><p>Twelve months of CPI, payrolls, retail sales, PCE, GDP and ISM: actual vs forecast, release by release, charted so you can see how each report tends to surprise.</p><div class="ps-bars"><i style="height:40%"></i><i style="height:70%"></i><i class="d" style="height:30%"></i><i style="height:55%"></i><i class="d" style="height:45%"></i><i style="height:80%"></i><i class="d" style="height:25%"></i><i style="height:60%"></i></div></div>
         <div class="ps"><i>✎</i><b>Release recaps</b><p>Shortly after each high-impact number lands: what it showed and how it compared with the consensus and the last reading.</p></div>
         <div class="ps"><i>☰</i><b>Weekly outlook and full record</b><p>The week ahead, day by day. Plus every release the calendar has tracked, with its market reaction.</p></div>
+      </div>
+    </div>
+    <div class="pro-show">
+      <h2>Planned for the paid workspace</h2>
+      <div class="ps-g">
+        <div class="ps"><b>Synced plans and risk presets</b><p>Start a plan on your phone and pick it up on desktop. Reuse risk presets for the markets and accounts you follow.</p></div>
+        <div class="ps"><b>Market-specific alerts</b><p>Choose the releases and markets you follow. Set quiet hours or receive a digest of changes.</p></div>
+        <div class="ps"><b>Weekly personal review</b><p>Review your plans and outcomes, replay sessions, and journal notes in one place.</p></div>
+        <div class="ps"><b>Saved replay and strategy comparisons</b><p>Resume practice and compare setups across the same sessions using consistent costs.</p></div>
+        <div class="ps"><b>Advanced release research</b><p>Compare historical reactions by market, surprise size, and time window.</p></div>
       </div>
     </div>
     <div class="pro-how" data-paid-only>
@@ -2485,7 +2511,7 @@ svg.cd line.wick{animation:fadein .5s ease-out both}
   </div>
 </footer>
 
-<script src="assets/outlook.js?v=20261125b"></script>
+<script src="assets/outlook.js?v=20261126"></script>
 <script>
 /* Static mode (GitHub Pages): when the page isn't running on Claude, read the same documents from data/*.json. */
 (function(){if(window.claude)return;
@@ -4047,8 +4073,8 @@ Promise.all([get("macro/current"),get("signals/current").catch(function(){return
   document.getElementById("ms-note").textContent="Scores out of 100, ranked against years of history; higher means more of the named condition. "+(act!=null?act+" macro warning"+(act===1?" is":"s are")+" active. ":"")+"Background, not a forecast. Updated "+m.asof+".";
   box.hidden=false;}).catch(function(){});})();
 </script>
-<script src="assets/session-planner.js?v=20261125c" defer></script>
-<script src="assets/morning.js?v=20261125c" defer></script>
+<script src="assets/session-planner.js?v=20261126" defer></script>
+<script src="assets/morning.js?v=20261126" defer></script>
 <script src="assets/iron-outlook.js?v=20261125g" defer></script>
 </body>
 </html>

@@ -87,6 +87,8 @@
     inputs.cost.value = saved?.cost ?? "";
     fields.disabled = false;
     status.textContent = sameDay ? "Saved plan loaded from this device." : "";
+    $("mc-plan-link").textContent = sameDay ? "Review my session plan" : "Plan my session";
+    $("mc-calendar-feed").hidden = !sameDay;
     render();
   }
 
@@ -104,6 +106,8 @@
     try {
       localStorage.setItem(storageKey(session.key), JSON.stringify(plan));
       status.textContent = "Plan saved on this device for " + session.dateLabel + ".";
+      $("mc-plan-link").textContent = "Review my session plan";
+      $("mc-calendar-feed").hidden = false;
     } catch (error) {
       status.textContent = "This browser could not save the plan.";
     }

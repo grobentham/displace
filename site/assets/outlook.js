@@ -28,6 +28,17 @@ window.DisplaceOutlook = (function () {
     return !!(session && session.open && Date.parse(asof) >= Date.parse(session.open));
   }
 
+  function sessionPhase(session, now = Date.now()) {
+    if (!session?.open) return "Hours unavailable";
+    if (now < Date.parse(session.open)) return "Upcoming";
+    if (session.close && now >= Date.parse(session.close)) return "Ended";
+    for (const halt of session.halts || []) {
+      const start = Date.parse(halt);
+      const reopen = Date.parse(halt.slice(0, 11) + "18:00:00" + halt.slice(19));
+      if (now >= start && now < reopen) return "Holiday halt";
+    }
+    return session.close ? "In session" : "Close time unconfirmed";
+  }
   function evidence() {
     if (!snapshot) {
       snapshot = fetch("data/open/current.json", { cache: "no-cache" })
@@ -45,5 +56,5 @@ window.DisplaceOutlook = (function () {
     return market.n.toLocaleString("en-US") + (market.n === 1 ? " verified forecast scored" : " verified forecasts scored");
   }
 
-  return { formatPoints: formatPoints, sessionWindow: sessionWindow, afterOpen: afterOpen, evidence: evidence, scoringStatus: scoringStatus };
+  return { formatPoints: formatPoints, sessionWindow: sessionWindow, afterOpen: afterOpen, sessionPhase: sessionPhase, evidence: evidence, scoringStatus: scoringStatus };
 })();

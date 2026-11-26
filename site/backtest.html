@@ -1158,14 +1158,17 @@ function genDemo() {
 }
 function loadDemo(session) { useDataset(finalizeDataset('Synthetic demo (1m)', genDemo(), 'demo'), session); }
 /* Real NQ futures bars, published by the Displace engine every run (Yahoo Finance NQ=F; MNQ trades the same price). */
-async function loadArchive(iv, session) {
+async function loadArchive(iv, session, episode) {
   const r = await fetch('data/bars/nq-' + iv + '.json', { cache: 'no-cache' });
   if (!r.ok) throw new Error('The bar archive answered with error ' + r.status);
   const d = await r.json();
   if (!d.rows || d.rows.length < 100) throw new Error('The bar archive is empty');
   // a bar without recorded volume counts as 1, so session VWAP falls back to a time-weighted average there
-  const rows = d.rows.map(x => [x[0], x[1], x[2], x[3], x[4], x[5] || 1]);
-  useDataset(finalizeDataset('NQ futures ' + iv + ' · real bars', rows, 'archive'), session);
+  const rows = d.rows.filter(x => !episode || (x[0] >= episode.start - 7200 && x[0] < episode.end))
+    .map(x => [x[0], x[1], x[2], x[3], x[4], x[5] || 1]);
+  if (episode && !rows.some(x => x[0] === episode.start)) throw new Error('Release window is unavailable');
+  const name = episode ? 'NQ futures ' + iv + ' · ' + episode.title : 'NQ futures ' + iv + ' · real bars';
+  useDataset(finalizeDataset(name, rows, 'archive'), session || (episode && { curT: episode.start }));
   return D;
 }
 const archiveIv = name => /\b1h\b/.test(name || '') ? '1h' : '5m';
@@ -1210,7 +1213,9 @@ function readFile(file) {
 }
 
 /* ============================== persistence ============================== */
-const LS = 'mnqreplay.v1';
+const releaseParam = new URLSearchParams(location.search).get('release');
+const replayRelease = /^[a-z0-9-]{1,80}$/.test(releaseParam || '') ? releaseParam : null;
+const LS = replayRelease ? 'mnqreplay.v1.release.' + replayRelease : 'mnqreplay.v1';
 let saveT = null;
 function scheduleSave() { clearTimeout(saveT); saveT = setTimeout(saveNow, 800); }
 function saveNow() {
@@ -2409,6 +2414,21 @@ window.addEventListener('resize', () => { if ($('#statsPane').classList.contains
   if (sess && sess.S) S = { ...DEF, ...sess.S };
   if (sess && sess.speed) { speed = sess.speed; $('#speed').value = speed; }
   $('#ctrLbl').textContent = ctrName();
+  if (replayRelease) {
+    try {
+      const response = await fetch('data/briefs/replay.json', { cache: 'no-cache' });
+      if (!response.ok) throw new Error('Release catalogue is unavailable');
+      const catalogue = await response.json();
+      const episode = catalogue.releases.find(item => item.id === replayRelease);
+      if (!episode) throw new Error('Release could not be found');
+      await loadArchive('5m', sess?.kind === 'archive' ? sess : null, episode);
+      toast(episode.title + ' · press Play to step into the release');
+    } catch (_) {
+      loadDemo();
+      toast('This historical release is unavailable. Demo data is loaded.', 'var(--warn)');
+    }
+    return;
+  }
   let ds = null;
   if (sess && sess.kind === 'csv') ds = await idbGet();
   if (ds && sess && ds.name + '|' + ds.n === sess.ds) { useDataset(ds, sess); toast('Session restored'); }
