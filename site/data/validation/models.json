@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "asof": "2026-11-26T23:06:19.194228+00:00",
+  "asof": "2026-11-26T23:57:51.266299+00:00",
   "plan_hash": "883ea066e20c4960c2c8f5afcace0852441d07e6c1a18d1e0b1c45eba76618cc",
   "markets": {
     "nq": {
@@ -477,18 +477,18 @@
       "historical_candidate": false,
       "proven": false,
       "historical_metrics": {
-        "calls": 29,
-        "hits": 16,
-        "rate": 0.552,
-        "pval": 0.355535551905632,
-        "brierSkill": 0.013,
-        "brierSkillBase": 0.0386,
-        "baseBrier": 0.256544,
+        "calls": 23,
+        "hits": 11,
+        "rate": 0.478,
+        "pval": 0.6611802577972412,
+        "brierSkill": 0.003,
+        "brierSkillBase": 0.0269,
+        "baseBrier": 0.256015,
         "halves": [
-          0.357,
-          0.733
+          0.273,
+          0.667
         ],
-        "recent": 0.7,
+        "recent": 0.5,
         "tested": 181
       }
     },
