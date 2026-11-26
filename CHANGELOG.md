@@ -1,5 +1,12 @@
 # Changelog
 
+## 2026-11-27: ES / NQ divergence (SMT)
+
+- New page `smt.html` (Tools): today's level board (previous day, Asia and London highs and lows for both markets),
+  the session chart, every recorded divergence and how NQ moved after it, tested against the base rate with 95%
+  Wilson intervals. Swing and level divergences on 5-minute and hourly bars (engine/smt.py).
+- The bar archive now includes ES futures (ES=F) alongside NQ and gold.
+
 ## 2026-11-26 session planning and replay
 
 - The homepage shows session status, the next high-impact release, and a link back to saved plans. Traders can review the latest verified outcome and save a private note on their device.

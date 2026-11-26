@@ -1,0 +1,16 @@
+/* ES / NQ divergence page. Builds on intelligence.css; colours come from its tokens. */
+.smt header{padding:34px 0 8px}
+.smt .kick{font-size:.82rem;color:var(--muted);margin:0}
+.smt .sub{font-size:1.05rem;max-width:720px}
+.smt .lead{font-size:1.1rem;font-weight:600;margin:0 0 12px}
+.smt .seg{display:inline-flex;background:var(--gray);border-radius:980px;padding:3px;margin:8px 0}
+.smt .seg button{border:0;background:none;font:inherit;font-size:.88rem;padding:7px 16px;border-radius:980px;cursor:pointer;color:var(--ink)}
+.smt .seg button[aria-pressed=true]{background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.12);font-weight:600}
+.tbl{width:100%;border-collapse:collapse;font-size:.9rem}
+.tbl th,.tbl td{text-align:left;padding:9px 8px;border-bottom:1px solid var(--line);white-space:nowrap}
+.tbl th{font-size:.74rem;color:var(--muted);font-weight:600}
+.tag{display:inline-block;font-size:.74rem;font-weight:600;border-radius:980px;padding:2px 9px}
+.bear{background:#fde8e7;color:#b3261e}.bull{background:#e3f5ec;color:#11734b}.div{background:#fff4e5;color:#8a4b00}.quiet{background:#eef0f4;color:#4a4a50}
+.ok{color:#11734b;font-weight:600}.no{color:#b3261e;font-weight:600}
+.chart svg{width:100%;height:auto;display:block}
+.smt select{font:inherit;padding:6px 10px;border:1px solid var(--line);border-radius:10px;background:#fff;color:var(--ink)}

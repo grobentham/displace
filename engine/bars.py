@@ -3,7 +3,7 @@
 Yahoo's free chart API only serves the last ~730 days of hourly bars and ~60 days of 5-minute bars, so every
 run merges what it serves into engine/cache/bars/<market>_<interval>.json (committed). Hourly bars start in
 mid-2024, 5-minute bars in November 2026; both grow from there.
-  gold  COMEX gold futures (GC=F)      nq  E-mini Nasdaq-100 futures (NQ=F)
+  gold  COMEX gold futures (GC=F)      nq  E-mini Nasdaq-100 futures (NQ=F)      es  E-mini S&P 500 futures (ES=F)
 """
 import datetime as dt
 import json
@@ -15,7 +15,8 @@ from zoneinfo import ZoneInfo
 HERE = os.path.dirname(os.path.abspath(__file__))
 CACHE_DIR = os.path.join(HERE, "cache", "bars")
 NY = ZoneInfo("America/New_York")
-SYMBOLS = {"gold": "GC%3DF", "nq": "NQ%3DF"}
+SYMBOLS = {"gold": "GC%3DF", "nq": "NQ%3DF", "es": "ES%3DF"}
+NAMES = {"gold": "GC=F", "nq": "NQ=F", "es": "ES=F"}
 UA = {"User-Agent": "Mozilla/5.0 (Displace data engine; +https://github.com/grobentham/displace)"}
 INTERVALS = {"1h": "730d", "5m": "60d"}
 BAR_SECONDS = {"1h": 3600, "5m": 300}
@@ -110,7 +111,7 @@ def export(site_data, markets=("nq",), log=print):
                     for t, v in sorted(c["bars"].items())]
             if len(rows) < 100:
                 continue
-            doc = {"market": m, "symbol": "NQ=F" if m == "nq" else m, "interval": interval, "source": "Yahoo Finance",
+            doc = {"market": m, "symbol": NAMES.get(m, m), "interval": interval, "source": "Yahoo Finance",
                    "updated": c.get("fetched", ""), "rows": rows}
             with open(os.path.join(out_dir, f"{m}-{interval}.json"), "w") as fh:
                 json.dump(doc, fh, separators=(",", ":"))

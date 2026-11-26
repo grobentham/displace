@@ -5,6 +5,10 @@ CHANGELOG.md.
 
 ## Open
 
+- **ES / NQ divergence is as fresh as the engine run.** Bars are delayed Yahoo data, refreshed about hourly when the
+  engine runs, so a divergence can appear on the page well after it formed. 5-minute history starts with the first
+  ES download (about 60 days) and most 5-minute groups will read "too few cases" for a while.
+
 - **No tested daily direction.** Every daily bias is the base rate ("NQ rose on 54% of past days"); 138 direction tests
   (82 signals, 56 calendar events, including the announcement-day and pre-holiday effects registered on 24 Nov 2026)
   and none passes its bar. The site says so. Direction research has a low prior; the range and level-touch forecasts
