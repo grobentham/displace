@@ -1,16 +1,11 @@
 {
- "date": "2026-11-26",
- "asof": "2026-11-26T15:34-05:00",
- "headline": "Thanksgiving: US markets closed",
+ "date": "2026-11-27",
+ "asof": "2026-11-26T16:43-05:00",
+ "headline": "No major US data today",
  "overnight": "At the Wed Nov 25 close, the 10-year Treasury yield was 4.85% (down 6 bp), the 2-year 4.61% (down 2 bp), the Fed's broad dollar index 123.6 (up 0.1%) and WTI crude $82.24 (up 1.0%).",
  "overnightLabel": "Latest close",
  "today": [],
- "recent": [
-  {
-   "title": "New home sales (Oct)",
-   "line": "New home sales: 701K"
-  }
- ],
- "focus": "The next Fed decision is Dec 8–9, 13 days away. Thanksgiving: US markets closed. U.S. stock markets are closed. Futures may trade shortened hours.",
+ "recent": [],
+ "focus": "The next Fed decision is Dec 8–9, 12 days away. Day after Thanksgiving: shortened session. The U.S. stock market closes at 13:00 New York time.",
  "note": "Built automatically from official release schedules and Federal Reserve data. Education only, not a forecast or financial advice."
 }
