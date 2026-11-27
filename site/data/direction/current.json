@@ -1,5 +1,5 @@
 {
- "asof": "2026-11-27T09:25-05:00",
+ "asof": "2026-11-27T10:25-05:00",
  "version": 4,
  "assets": {
   "gold": "Gold, close",
@@ -286,35 +286,35 @@
    "group": "labor"
   },
   "nfp:gold2h": {
-   "calls": 29,
-   "hits": 16,
+   "calls": 23,
+   "hits": 11,
    "proven": false,
-   "why": "not significant after correcting for the number of rules tested",
-   "brierSkill": 0.013,
+   "why": "right less than 55% of the time on unseen releases",
+   "brierSkill": 0.003,
    "group": "labor"
   },
   "claims:gold2h": {
-   "calls": 29,
-   "hits": 16,
+   "calls": 23,
+   "hits": 11,
    "proven": false,
-   "why": "not significant after correcting for the number of rules tested",
-   "brierSkill": 0.013,
+   "why": "right less than 55% of the time on unseen releases",
+   "brierSkill": 0.003,
    "group": "labor"
   },
   "jolts:gold2h": {
-   "calls": 29,
-   "hits": 16,
+   "calls": 23,
+   "hits": 11,
    "proven": false,
-   "why": "not significant after correcting for the number of rules tested",
-   "brierSkill": 0.013,
+   "why": "right less than 55% of the time on unseen releases",
+   "brierSkill": 0.003,
    "group": "labor"
   },
   "adp:gold2h": {
-   "calls": 29,
-   "hits": 16,
+   "calls": 23,
+   "hits": 11,
    "proven": false,
-   "why": "not significant after correcting for the number of rules tested",
-   "brierSkill": 0.013,
+   "why": "right less than 55% of the time on unseen releases",
+   "brierSkill": 0.003,
    "group": "labor"
   },
   "nfp:nq2h": {
@@ -841,7 +841,7 @@
     "historical_candidate": false
    },
    "nq": {
-    "b": -0.2192,
+    "b": -0.2193,
     "k": 0.65,
     "n": 374,
     "since": "2011-01-14",
@@ -987,7 +987,7 @@
     "historical_candidate": false
    },
    "nq": {
-    "b": -0.0258,
+    "b": -0.0259,
     "k": 0.0,
     "n": 1365,
     "since": "2010-04-01",
@@ -1059,27 +1059,27 @@
     "historical_candidate": true
    },
    "gold2h": {
-    "b": -0.4847,
-    "k": 1.3,
+    "b": -0.4303,
+    "k": 1.05,
     "n": 206,
     "since": "2024-07-02",
     "bt": {
-     "calls": 29,
-     "hits": 16,
-     "rate": 0.552,
-     "pval": 0.355535551905632,
-     "brierSkill": 0.013,
-     "brierSkillBase": 0.0386,
-     "baseBrier": 0.256544,
+     "calls": 23,
+     "hits": 11,
+     "rate": 0.478,
+     "pval": 0.6611802577972412,
+     "brierSkill": 0.003,
+     "brierSkillBase": 0.0269,
+     "baseBrier": 0.256015,
      "halves": [
-      0.357,
-      0.733
+      0.273,
+      0.667
      ],
-     "recent": 0.7,
+     "recent": 0.5,
      "tested": 181
     },
     "proven": false,
-    "why": "not significant after correcting for the number of rules tested",
+    "why": "right less than 55% of the time on unseen releases",
     "historical_candidate": false
    },
    "nq2h": {
@@ -1133,7 +1133,7 @@
     "historical_candidate": false
    },
    "nq": {
-    "b": 0.0676,
+    "b": 0.0675,
     "k": 0.3,
     "n": 1180,
     "since": "2011-01-03",
@@ -1157,7 +1157,7 @@
     "historical_candidate": false
    },
    "usd": {
-    "b": 0.1681,
+    "b": 0.168,
     "k": 0.85,
     "n": 1176,
     "since": "2011-01-03",
@@ -1229,7 +1229,7 @@
     "historical_candidate": false
    },
    "nq2h": {
-    "b": -0.1379,
+    "b": -0.138,
     "k": 0.05,
     "n": 181,
     "since": "2024-07-01",
@@ -1473,7 +1473,7 @@
     "historical_candidate": false
    },
    "y2": {
-    "b": 0.1556,
+    "b": 0.1555,
     "k": 0.15,
     "n": 142,
     "since": "2011-02-24",
@@ -1715,7 +1715,7 @@
      "inline": {
       "n": 8,
       "up": 0.375,
-      "med": -0.043
+      "med": -0.039
      },
      "cool": {
       "n": 8,
@@ -1737,7 +1737,7 @@
      "cool": {
       "n": 8,
       "up": 0.625,
-      "med": 0.022
+      "med": 0.023
      }
     }
    }
@@ -1831,7 +1831,7 @@
      "cool": {
       "n": 8,
       "up": 0.75,
-      "med": 0.542
+      "med": 0.539
      }
     },
     "nq2h": {
@@ -1932,7 +1932,7 @@
      "hot": {
       "n": 4,
       "up": 0.25,
-      "med": -0.348
+      "med": -0.377
      },
      "inline": {
       "n": 11,
@@ -1942,7 +1942,7 @@
      "cool": {
       "n": 12,
       "up": 0.75,
-      "med": 0.551
+      "med": 0.547
      }
     },
     "nq2h": {
@@ -1959,7 +1959,7 @@
      "cool": {
       "n": 12,
       "up": 0.667,
-      "med": 0.197
+      "med": 0.195
      }
     }
    }
@@ -2070,7 +2070,7 @@
      "cool": {
       "n": 7,
       "up": 0.429,
-      "med": -0.126
+      "med": -0.121
      }
     }
    }
@@ -2181,7 +2181,7 @@
      "cool": {
       "n": 22,
       "up": 0.5,
-      "med": 0.031
+      "med": 0.03
      }
     },
     "nq15m": {
@@ -2198,7 +2198,7 @@
      "cool": {
       "n": 1,
       "up": 1.0,
-      "med": 0.218
+      "med": 0.221
      }
     },
     "nq2h": {
@@ -2215,7 +2215,7 @@
      "cool": {
       "n": 22,
       "up": 0.364,
-      "med": -0.112
+      "med": -0.114
      }
     }
    }
@@ -2298,8 +2298,8 @@
     "gold2h": {
      "hot": {
       "n": 3,
-      "up": 0.0,
-      "med": -0.422
+      "up": 0.333,
+      "med": -0.417
      },
      "inline": {
       "n": 16,
@@ -2316,7 +2316,7 @@
      "hot": {
       "n": 3,
       "up": 0.667,
-      "med": 0.265
+      "med": 0.252
      },
      "inline": {
       "n": 16,
@@ -2743,7 +2743,7 @@
      "inline": {
       "n": 13,
       "up": 0.538,
-      "med": 0.093
+      "med": 0.098
      },
      "cool": {
       "n": 8,
@@ -2871,7 +2871,7 @@
      "inline": {
       "n": 12,
       "up": 0.583,
-      "med": 0.107
+      "med": 0.108
      },
      "cool": {
       "n": 7,
@@ -3192,7 +3192,7 @@
      "cool": {
       "n": 20,
       "up": 0.65,
-      "med": 0.152
+      "med": 0.156
      }
     },
     "nq2h": {
@@ -3320,7 +3320,7 @@
      "cool": {
       "n": 5,
       "up": 0.8,
-      "med": 0.306
+      "med": 0.308
      }
     }
    }
@@ -3404,7 +3404,7 @@
      "hot": {
       "n": 8,
       "up": 0.5,
-      "med": -0.017
+      "med": -0.011
      },
      "inline": {
       "n": 11,
@@ -3550,14 +3550,14 @@
      "hold": {
       "n": 1,
       "up": 0.0,
-      "med": -0.168
+      "med": -0.16
      }
     },
     "gold2h": {
      "hold": {
       "n": 12,
       "up": 0.5,
-      "med": 0.02
+      "med": 0.021
      },
      "cut": {
       "n": 6,
@@ -3781,8 +3781,8 @@
     },
     "gold2h": {
      "none": true,
-     "n": 29,
-     "why": "not significant after correcting for the number of rules tested"
+     "n": 23,
+     "why": "right less than 55% of the time on unseen releases"
     },
     "nq2h": {
      "none": true,
@@ -3813,8 +3813,8 @@
     },
     "gold2h": {
      "none": true,
-     "n": 29,
-     "why": "not significant after correcting for the number of rules tested"
+     "n": 23,
+     "why": "right less than 55% of the time on unseen releases"
     },
     "nq2h": {
      "none": true,
@@ -3907,8 +3907,8 @@
     },
     "gold2h": {
      "none": true,
-     "n": 29,
-     "why": "not significant after correcting for the number of rules tested"
+     "n": 23,
+     "why": "right less than 55% of the time on unseen releases"
     },
     "nq2h": {
      "none": true,
@@ -3939,8 +3939,8 @@
     },
     "gold2h": {
      "none": true,
-     "n": 29,
-     "why": "not significant after correcting for the number of rules tested"
+     "n": 23,
+     "why": "right less than 55% of the time on unseen releases"
     },
     "nq2h": {
      "none": true,
@@ -4032,8 +4032,8 @@
     },
     "gold2h": {
      "none": true,
-     "n": 29,
-     "why": "not significant after correcting for the number of rules tested"
+     "n": 23,
+     "why": "right less than 55% of the time on unseen releases"
     },
     "nq2h": {
      "none": true,
@@ -4064,8 +4064,8 @@
     },
     "gold2h": {
      "none": true,
-     "n": 29,
-     "why": "not significant after correcting for the number of rules tested"
+     "n": 23,
+     "why": "right less than 55% of the time on unseen releases"
     },
     "nq2h": {
      "none": true,
@@ -4266,8 +4266,8 @@
     },
     "gold2h": {
      "none": true,
-     "n": 29,
-     "why": "not significant after correcting for the number of rules tested"
+     "n": 23,
+     "why": "right less than 55% of the time on unseen releases"
     },
     "nq2h": {
      "none": true,
@@ -4298,8 +4298,8 @@
     },
     "gold2h": {
      "none": true,
-     "n": 29,
-     "why": "not significant after correcting for the number of rules tested"
+     "n": 23,
+     "why": "right less than 55% of the time on unseen releases"
     },
     "nq2h": {
      "none": true,
@@ -4658,8 +4658,8 @@
     },
     "gold2h": {
      "none": true,
-     "n": 29,
-     "why": "not significant after correcting for the number of rules tested"
+     "n": 23,
+     "why": "right less than 55% of the time on unseen releases"
     },
     "nq2h": {
      "none": true,
@@ -4690,8 +4690,8 @@
     },
     "gold2h": {
      "none": true,
-     "n": 29,
-     "why": "not significant after correcting for the number of rules tested"
+     "n": 23,
+     "why": "right less than 55% of the time on unseen releases"
     },
     "nq2h": {
      "none": true,
@@ -5414,6 +5414,6 @@
  "log": [
   "tv: 3 month(s) refreshed, 3597 releases with a consensus surprise",
   "markets: gold, nq, usd, y2, gold15m, gold2h, nq15m, nq2h",
-  "model: fit in 1s; proven: labor:y2"
+  "model: fit in 2s; proven: labor:y2"
  ]
 }
