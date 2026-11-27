@@ -1,13 +1,13 @@
 {
   "version": 1,
-  "asof": "2026-11-27T22:25:17.910450+00:00",
+  "asof": "2026-11-27T22:45:14.126055+00:00",
   "scope": "Recorded forecasts only; not all possible scheduled forecasts. No receipt before the target start means no prospective credit.",
   "forecast_counts": {
     "void": 2,
     "late": 9,
     "unknown_eligibility": 0,
-    "unverified": 24,
-    "verified_pending": 6,
+    "unverified": 22,
+    "verified_pending": 8,
     "verified_resolved": 15,
     "verified_invalid_outcome": 0,
     "verified_overdue": 0
@@ -1589,9 +1589,12 @@
         "close": 83.080002
       },
       "id": "d4adb2e9b3e796f0aee6dc52e690a6d58a7a0651e7ca6819947e559a0ff3aecd",
-      "status": "unverified",
+      "status": "verified_pending",
       "source": "bias/log.json",
-      "receipt": null,
+      "receipt": {
+        "published_at": "2026-11-27T22:25:33.682799+00:00",
+        "run": "46076190817"
+      },
       "target_start": "2026-11-29T18:00:00-05:00"
     },
     {
@@ -1654,9 +1657,12 @@
         "close": 3668.5
       },
       "id": "ba7fb6cf25da03fb1504dd9ae4a45bd78526aace949139dca76fbeb187329bad",
-      "status": "unverified",
+      "status": "verified_pending",
       "source": "bias/log.json",
-      "receipt": null,
+      "receipt": {
+        "published_at": "2026-11-27T22:25:33.682799+00:00",
+        "run": "46076190817"
+      },
       "target_start": "2026-11-29T18:00:00-05:00"
     },
     {
