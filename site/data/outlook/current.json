@@ -13,15 +13,15 @@
   },
   {
    "d": "Tue Dec 1",
-   "t": "ISM Manufacturing PMI (Nov) at 10:00 NY (previous 55.5, forecast 55.2). Factory activity is one of the first readings of each month. JOLTS job openings (Oct) at 10:00 NY (previous 7.52M)."
+   "t": "ISM Manufacturing PMI (Nov) at 10:00 NY (previous 55.5, forecast 55.2). Factory activity is one of the first readings of each month. JOLTS job openings (Oct) at 10:00 NY (previous 7.52M, forecast 7.5M)."
   },
   {
    "d": "Wed Dec 2",
-   "t": "ADP private payrolls (Nov) at 08:15 NY (previous 86K)."
+   "t": "ADP private payrolls (Nov) at 08:15 NY (previous 86K, forecast 82K)."
   },
   {
    "d": "Thu Dec 3",
-   "t": "Initial jobless claims at 08:30 NY (previous 189K). ISM Services PMI (Nov) at 10:00 NY (previous 54.5, forecast 54.5). Services make up most of the US economy, and its prices index tracks sticky inflation."
+   "t": "Initial jobless claims at 08:30 NY (previous 189K, forecast 195K). ISM Services PMI (Nov) at 10:00 NY (previous 54.5, forecast 54.5). Services make up most of the US economy, and its prices index tracks sticky inflation."
   },
   {
    "d": "Fri Dec 4",

@@ -1,53 +1,53 @@
 {
- "lastRun": "2026-11-27T07:49-05:00",
+ "lastRun": "2026-11-27T08:53-05:00",
  "source": "public FRED and agency data",
  "fredCalls": 79,
  "fred": true,
  "sources": {
   "fred": {
    "state": "available",
-   "checkedAt": "2026-11-27T07:49-05:00",
-   "lastSuccessAt": "2026-11-27T07:49-05:00"
+   "checkedAt": "2026-11-27T08:53-05:00",
+   "lastSuccessAt": "2026-11-27T08:53-05:00"
   },
   "alfred": {
    "state": "available",
-   "checkedAt": "2026-11-27T07:49-05:00",
-   "lastSuccessAt": "2026-11-27T07:49-05:00"
+   "checkedAt": "2026-11-27T08:53-05:00",
+   "lastSuccessAt": "2026-11-27T08:53-05:00"
   },
   "bls": {
    "state": "available",
-   "checkedAt": "2026-11-27T07:49-05:00",
-   "lastSuccessAt": "2026-11-27T07:49-05:00"
+   "checkedAt": "2026-11-27T08:53-05:00",
+   "lastSuccessAt": "2026-11-27T08:53-05:00"
   },
   "bea": {
    "state": "partial",
-   "checkedAt": "2026-11-27T07:49-05:00",
-   "lastSuccessAt": "2026-11-27T07:49-05:00"
+   "checkedAt": "2026-11-27T08:53-05:00",
+   "lastSuccessAt": "2026-11-27T08:53-05:00"
   },
   "census": {
    "state": "available",
-   "checkedAt": "2026-11-27T07:49-05:00",
-   "lastSuccessAt": "2026-11-27T07:49-05:00"
+   "checkedAt": "2026-11-27T08:53-05:00",
+   "lastSuccessAt": "2026-11-27T08:53-05:00"
   },
   "treasury": {
    "state": "available",
-   "checkedAt": "2026-11-27T07:49-05:00",
-   "lastSuccessAt": "2026-11-27T07:49-05:00"
+   "checkedAt": "2026-11-27T08:53-05:00",
+   "lastSuccessAt": "2026-11-27T08:53-05:00"
   },
   "nyFed": {
    "state": "available",
-   "checkedAt": "2026-11-27T07:49-05:00",
-   "lastSuccessAt": "2026-11-27T07:49-05:00"
+   "checkedAt": "2026-11-27T08:53-05:00",
+   "lastSuccessAt": "2026-11-27T08:53-05:00"
   },
   "fedStatements": {
    "state": "available",
-   "checkedAt": "2026-11-27T07:49-05:00",
-   "lastSuccessAt": "2026-11-27T07:49-05:00"
+   "checkedAt": "2026-11-27T08:53-05:00",
+   "lastSuccessAt": "2026-11-27T08:53-05:00"
   },
   "nasdaqCalendar": {
    "state": "available",
-   "checkedAt": "2026-11-27T07:49-05:00",
-   "lastSuccessAt": "2026-11-27T07:49-05:00"
+   "checkedAt": "2026-11-27T08:53-05:00",
+   "lastSuccessAt": "2026-11-27T08:53-05:00"
   }
  },
  "freshness": {
@@ -75,8 +75,10 @@
  "upcoming": 73,
  "warnings": [],
  "log": [
-  "engine run 2026-11-27T07:49-05:00 using public FRED and agency data",
+  "engine run 2026-11-27T08:53-05:00 using public FRED and agency data",
   "calendar: 1 added, 0 removed",
+  "consensus: 3 forecast(s) filled from TradingView",
+  "calendar saved",
   "quality: 29/29 checks passed, 0 held, 0 rejected"
  ]
 }

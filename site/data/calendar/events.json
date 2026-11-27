@@ -527,7 +527,9 @@
      "label": "Quits rate",
      "previous": "2.1%"
     }
-   ]
+   ],
+   "forecast": "7.5M",
+   "fsrc": "TradingView consensus"
   },
   {
    "date": "2026-12-02",
@@ -545,7 +547,9 @@
      "label": "ADP private payrolls",
      "previous": "86K"
     }
-   ]
+   ],
+   "forecast": "82K",
+   "fsrc": "TradingView consensus"
   },
   {
    "date": "2026-12-03",
@@ -571,7 +575,9 @@
      "label": "Continuing claims",
      "previous": "1.70M"
     }
-   ]
+   ],
+   "forecast": "195K",
+   "fsrc": "TradingView consensus"
   },
   {
    "date": "2026-12-03",
