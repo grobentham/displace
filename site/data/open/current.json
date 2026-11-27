@@ -1,18 +1,18 @@
 {
   "version": 1,
-  "asof": "2026-11-27T21:42:19.096739+00:00",
+  "asof": "2026-11-27T22:25:17.910450+00:00",
   "scope": "Recorded forecasts only; not all possible scheduled forecasts. No receipt before the target start means no prospective credit.",
   "forecast_counts": {
     "void": 2,
     "late": 9,
     "unknown_eligibility": 0,
-    "unverified": 22,
-    "verified_pending": 8,
-    "verified_resolved": 13,
+    "unverified": 24,
+    "verified_pending": 6,
+    "verified_resolved": 15,
     "verified_invalid_outcome": 0,
     "verified_overdue": 0
   },
-  "total": 54,
+  "total": 56,
   "by_market": {
     "6e": {
       "n": 2,
@@ -53,21 +53,21 @@
       ]
     },
     "cl": {
-      "n": 1,
-      "brier": 0.22372899999999998,
-      "base_brier": 0.22372899999999998,
+      "n": 2,
+      "brier": 0.2512565,
+      "base_brier": 0.2512565,
       "brier_skill": 0.0,
       "range_coverage": 1.0,
-      "level_brier": 0.0692485,
+      "level_brier": 0.04732275,
       "tested_direction_n": 0,
       "tested_direction_accuracy": null,
       "calibration": [
         {
           "lo": 0.5,
           "hi": 0.6,
-          "n": 1,
-          "mean_probability": 0.527,
-          "observed_rate": 1.0
+          "n": 2,
+          "mean_probability": 0.5275000000000001,
+          "observed_rate": 0.5
         }
       ]
     },
@@ -91,19 +91,19 @@
       ]
     },
     "gold": {
-      "n": 1,
+      "n": 2,
       "brier": 0.237169,
       "base_brier": 0.237169,
       "brier_skill": 0.0,
       "range_coverage": 1.0,
-      "level_brier": 0.073741,
+      "level_brier": 0.0683475,
       "tested_direction_n": 0,
       "tested_direction_accuracy": null,
       "calibration": [
         {
           "lo": 0.5,
           "hi": 0.6,
-          "n": 1,
+          "n": 2,
           "mean_probability": 0.513,
           "observed_rate": 1.0
         }
@@ -1334,14 +1334,15 @@
       "p_low": 0.113,
       "range_lo": 2.203849,
       "range_hi": 5.694715,
-      "up": null,
-      "highTaken": null,
-      "lowTaken": null,
-      "inRange": null,
-      "day": null,
+      "up": 0,
+      "highTaken": 1,
+      "lowTaken": 0,
+      "inRange": 1,
+      "day": "2026-11-27",
       "correction": null,
+      "actual_range": 4.029998000000006,
       "id": "87f419fc963440e7575012ae5304e823c8b93f1033e9f8034e64f5ad8101fa37",
-      "status": "verified_pending",
+      "status": "verified_resolved",
       "source": "bias/log.json",
       "receipt": {
         "published_at": "2026-11-25T22:03:32.413393+00:00",
@@ -1391,14 +1392,15 @@
       "p_low": 0.108,
       "range_lo": 57.567122,
       "range_hi": 222.309219,
-      "up": null,
-      "highTaken": null,
-      "lowTaken": null,
-      "inRange": null,
-      "day": null,
+      "up": 1,
+      "highTaken": 1,
+      "lowTaken": 0,
+      "inRange": 1,
+      "day": "2026-11-27",
       "correction": null,
+      "actual_range": 133.09985300000017,
       "id": "b1f207bb7bbdea9032880bfa2cefc499560de8694f099a5d72efad2d18bd290f",
-      "status": "verified_pending",
+      "status": "verified_resolved",
       "source": "bias/log.json",
       "receipt": {
         "published_at": "2026-11-25T22:03:32.413393+00:00",
@@ -1562,6 +1564,37 @@
       "target_start": "2026-11-29T18:00:00-05:00"
     },
     {
+      "market": "cl",
+      "candle": "2026-11-27",
+      "for": "2026-11-30",
+      "logged": "2026-11-27T22:25+00:00",
+      "tier": "base",
+      "bias": "long",
+      "p_up": 0.527,
+      "base_up": 0.527,
+      "p_high": 0.201,
+      "p_low": 0.726,
+      "range_lo": 2.324231,
+      "range_hi": 6.013532,
+      "up": null,
+      "highTaken": null,
+      "lowTaken": null,
+      "inRange": null,
+      "day": null,
+      "correction": null,
+      "range_points": 3.609243,
+      "prior_levels": {
+        "high": 86.599998,
+        "low": 82.57,
+        "close": 83.080002
+      },
+      "id": "d4adb2e9b3e796f0aee6dc52e690a6d58a7a0651e7ca6819947e559a0ff3aecd",
+      "status": "unverified",
+      "source": "bias/log.json",
+      "receipt": null,
+      "target_start": "2026-11-29T18:00:00-05:00"
+    },
+    {
       "market": "es",
       "candle": "2026-11-27",
       "for": "2026-11-30",
@@ -1593,6 +1626,37 @@
         "published_at": "2026-11-27T19:36:46.862976+00:00",
         "run": "46057363660"
       },
+      "target_start": "2026-11-29T18:00:00-05:00"
+    },
+    {
+      "market": "gold",
+      "candle": "2026-11-27",
+      "for": "2026-11-30",
+      "logged": "2026-11-27T22:25+00:00",
+      "tier": "base",
+      "bias": "neutral",
+      "p_up": 0.513,
+      "base_up": 0.513,
+      "p_high": 0.518,
+      "p_low": 0.293,
+      "range_lo": 60.560176,
+      "range_hi": 233.997411,
+      "up": null,
+      "highTaken": null,
+      "lowTaken": null,
+      "inRange": null,
+      "day": null,
+      "correction": null,
+      "range_points": 119.962536,
+      "prior_levels": {
+        "high": 3711.899902,
+        "low": 3578.800049,
+        "close": 3668.5
+      },
+      "id": "ba7fb6cf25da03fb1504dd9ae4a45bd78526aace949139dca76fbeb187329bad",
+      "status": "unverified",
+      "source": "bias/log.json",
+      "receipt": null,
       "target_start": "2026-11-29T18:00:00-05:00"
     },
     {

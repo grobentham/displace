@@ -1,5 +1,5 @@
 {
- "asof": "2026-11-27T16:42-05:00",
+ "asof": "2026-11-27T17:25-05:00",
  "version": 4,
  "assets": {
   "gold": "Gold, close",
@@ -3721,12 +3721,12 @@
    },
    "move": {
     "gold": {
-     "pct": 2.3,
-     "lo": 1.24,
-     "hi": 3.79,
-     "normal": 1.97,
+     "pct": 2.39,
+     "lo": 1.29,
+     "hi": 3.93,
+     "normal": 2.04,
      "mult": 1.17,
-     "pts": 84.3,
+     "pts": 87.5,
      "n": 169,
      "proven": false,
      "why": "Historical range diagnostic; qualification suspended pending point-in-time validation"
@@ -3737,7 +3737,7 @@
      "hi": 3.43,
      "normal": 1.62,
      "mult": 1.074,
-     "pts": 454.0,
+     "pts": 465.9,
      "n": 191,
      "proven": false,
      "why": "Historical range diagnostic; qualification suspended pending point-in-time validation"
@@ -3847,12 +3847,12 @@
    },
    "move": {
     "gold": {
-     "pct": 2.01,
-     "lo": 1.28,
-     "hi": 3.15,
-     "normal": 1.97,
+     "pct": 2.08,
+     "lo": 1.33,
+     "hi": 3.26,
+     "normal": 2.04,
      "mult": 1.02,
-     "pts": 73.5,
+     "pts": 76.3,
      "n": 119,
      "proven": false,
      "why": "Historical range diagnostic; qualification suspended pending point-in-time validation"
@@ -3863,7 +3863,7 @@
      "hi": 2.94,
      "normal": 1.62,
      "mult": 1.01,
-     "pts": 427.0,
+     "pts": 438.1,
      "n": 124,
      "proven": false,
      "why": "Historical range diagnostic; qualification suspended pending point-in-time validation"
@@ -3972,12 +3972,12 @@
    },
    "move": {
     "gold": {
-     "pct": 2.01,
-     "lo": 1.24,
-     "hi": 3.52,
-     "normal": 1.97,
+     "pct": 2.08,
+     "lo": 1.29,
+     "hi": 3.65,
+     "normal": 2.04,
      "mult": 1.02,
-     "pts": 73.5,
+     "pts": 76.3,
      "n": 187,
      "proven": false,
      "why": "Historical range diagnostic; qualification suspended pending point-in-time validation"
@@ -3988,7 +3988,7 @@
      "hi": 3.33,
      "normal": 1.62,
      "mult": 1.129,
-     "pts": 477.3,
+     "pts": 489.7,
      "n": 189,
      "proven": false,
      "why": "Historical range diagnostic; qualification suspended pending point-in-time validation"
@@ -4086,12 +4086,12 @@
    },
    "move": {
     "gold": {
-     "pct": 2.03,
-     "lo": 1.1,
-     "hi": 3.79,
-     "normal": 1.97,
+     "pct": 2.1,
+     "lo": 1.14,
+     "hi": 3.93,
+     "normal": 2.04,
      "mult": 1.029,
-     "pts": 74.1,
+     "pts": 77.0,
      "n": 837,
      "proven": false,
      "why": "Historical range diagnostic; qualification suspended pending point-in-time validation"
@@ -4102,7 +4102,7 @@
      "hi": 3.66,
      "normal": 1.62,
      "mult": 1.143,
-     "pts": 483.2,
+     "pts": 495.8,
      "n": 859,
      "proven": false,
      "why": "Historical range diagnostic; qualification suspended pending point-in-time validation"
@@ -4206,12 +4206,12 @@
    },
    "move": {
     "gold": {
-     "pct": 2.05,
-     "lo": 1.2,
-     "hi": 3.98,
-     "normal": 1.97,
+     "pct": 2.12,
+     "lo": 1.24,
+     "hi": 4.12,
+     "normal": 2.04,
      "mult": 1.04,
-     "pts": 74.9,
+     "pts": 77.8,
      "n": 177,
      "proven": false,
      "why": "Historical range diagnostic; qualification suspended pending point-in-time validation"
@@ -4222,7 +4222,7 @@
      "hi": 3.3,
      "normal": 1.62,
      "mult": 1.093,
-     "pts": 462.1,
+     "pts": 474.1,
      "n": 191,
      "proven": false,
      "why": "Historical range diagnostic; qualification suspended pending point-in-time validation"
@@ -4325,12 +4325,12 @@
    },
    "move": {
     "gold": {
-     "pct": 2.61,
-     "lo": 1.47,
-     "hi": 4.61,
-     "normal": 1.97,
+     "pct": 2.7,
+     "lo": 1.53,
+     "hi": 4.78,
+     "normal": 2.04,
      "mult": 1.325,
-     "pts": 95.4,
+     "pts": 99.1,
      "n": 72,
      "proven": false,
      "why": "Historical range diagnostic; qualification suspended pending point-in-time validation"
@@ -4341,7 +4341,7 @@
      "hi": 3.55,
      "normal": 1.62,
      "mult": 1.253,
-     "pts": 529.7,
+     "pts": 543.5,
      "n": 185,
      "proven": false,
      "why": "Historical range diagnostic; qualification suspended pending point-in-time validation"
@@ -4445,12 +4445,12 @@
    },
    "move": {
     "gold": {
-     "pct": 1.98,
-     "lo": 1.32,
-     "hi": 4.06,
-     "normal": 1.97,
+     "pct": 2.05,
+     "lo": 1.36,
+     "hi": 4.2,
+     "normal": 2.04,
      "mult": 1.006,
-     "pts": 72.5,
+     "pts": 75.2,
      "n": 91,
      "proven": false,
      "why": "Historical range diagnostic; qualification suspended pending point-in-time validation"
@@ -4461,7 +4461,7 @@
      "hi": 3.27,
      "normal": 1.62,
      "mult": 1.087,
-     "pts": 459.5,
+     "pts": 471.5,
      "n": 277,
      "proven": false,
      "why": "Historical range diagnostic; qualification suspended pending point-in-time validation"
@@ -4598,12 +4598,12 @@
    },
    "move": {
     "gold": {
-     "pct": 2.35,
-     "lo": 1.23,
-     "hi": 3.86,
-     "normal": 1.97,
+     "pct": 2.43,
+     "lo": 1.28,
+     "hi": 3.99,
+     "normal": 2.04,
      "mult": 1.193,
-     "pts": 85.9,
+     "pts": 89.2,
      "n": 164,
      "proven": false,
      "why": "Historical range diagnostic; qualification suspended pending point-in-time validation"
@@ -4614,7 +4614,7 @@
      "hi": 3.63,
      "normal": 1.62,
      "mult": 1.21,
-     "pts": 511.5,
+     "pts": 524.9,
      "n": 187,
      "proven": false,
      "why": "Historical range diagnostic; qualification suspended pending point-in-time validation"
@@ -4712,12 +4712,12 @@
    },
    "move": {
     "gold": {
-     "pct": 2.03,
-     "lo": 1.1,
-     "hi": 3.79,
-     "normal": 1.97,
+     "pct": 2.1,
+     "lo": 1.14,
+     "hi": 3.93,
+     "normal": 2.04,
      "mult": 1.029,
-     "pts": 74.1,
+     "pts": 77.0,
      "n": 837,
      "proven": false,
      "why": "Historical range diagnostic; qualification suspended pending point-in-time validation"
@@ -4728,7 +4728,7 @@
      "hi": 3.66,
      "normal": 1.62,
      "mult": 1.143,
-     "pts": 483.2,
+     "pts": 495.8,
      "n": 859,
      "proven": false,
      "why": "Historical range diagnostic; qualification suspended pending point-in-time validation"
@@ -4752,14 +4752,14 @@
   "asof": "2026-11-27",
   "markets": {
    "gold": {
-    "baseline": 1.969,
-    "close": 3657.60009765625,
-    "asof": "2026-11-26"
+    "baseline": 2.039,
+    "close": 3668.5,
+    "asof": "2026-11-27"
    },
    "nq": {
     "baseline": 1.623,
-    "close": 26046.900390625,
-    "asof": "2026-11-25"
+    "close": 26726.388671875,
+    "asof": "2026-11-27"
    }
   },
   "kinds": {
