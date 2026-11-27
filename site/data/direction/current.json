@@ -1,5 +1,5 @@
 {
- "asof": "2026-11-26T22:50-05:00",
+ "asof": "2026-11-26T23:23-05:00",
  "version": 4,
  "assets": {
   "gold": "Gold, close",
@@ -3726,7 +3726,7 @@
      "hi": 3.79,
      "normal": 1.97,
      "mult": 1.17,
-     "pts": 82.8,
+     "pts": 84.3,
      "n": 169,
      "proven": false,
      "why": "Historical range diagnostic; qualification suspended pending point-in-time validation"
@@ -3852,7 +3852,7 @@
      "hi": 3.15,
      "normal": 1.97,
      "mult": 1.02,
-     "pts": 72.2,
+     "pts": 73.5,
      "n": 119,
      "proven": false,
      "why": "Historical range diagnostic; qualification suspended pending point-in-time validation"
@@ -3977,7 +3977,7 @@
      "hi": 3.52,
      "normal": 1.97,
      "mult": 1.02,
-     "pts": 72.2,
+     "pts": 73.5,
      "n": 187,
      "proven": false,
      "why": "Historical range diagnostic; qualification suspended pending point-in-time validation"
@@ -4091,7 +4091,7 @@
      "hi": 3.79,
      "normal": 1.97,
      "mult": 1.029,
-     "pts": 72.8,
+     "pts": 74.1,
      "n": 837,
      "proven": false,
      "why": "Historical range diagnostic; qualification suspended pending point-in-time validation"
@@ -4211,7 +4211,7 @@
      "hi": 3.98,
      "normal": 1.97,
      "mult": 1.04,
-     "pts": 73.6,
+     "pts": 74.9,
      "n": 177,
      "proven": false,
      "why": "Historical range diagnostic; qualification suspended pending point-in-time validation"
@@ -4330,7 +4330,7 @@
      "hi": 4.61,
      "normal": 1.97,
      "mult": 1.325,
-     "pts": 93.8,
+     "pts": 95.4,
      "n": 72,
      "proven": false,
      "why": "Historical range diagnostic; qualification suspended pending point-in-time validation"
@@ -4450,7 +4450,7 @@
      "hi": 4.06,
      "normal": 1.97,
      "mult": 1.006,
-     "pts": 71.2,
+     "pts": 72.5,
      "n": 91,
      "proven": false,
      "why": "Historical range diagnostic; qualification suspended pending point-in-time validation"
@@ -4603,7 +4603,7 @@
      "hi": 3.86,
      "normal": 1.97,
      "mult": 1.193,
-     "pts": 84.4,
+     "pts": 85.9,
      "n": 164,
      "proven": false,
      "why": "Historical range diagnostic; qualification suspended pending point-in-time validation"
@@ -4717,7 +4717,7 @@
      "hi": 3.79,
      "normal": 1.97,
      "mult": 1.029,
-     "pts": 72.8,
+     "pts": 74.1,
      "n": 837,
      "proven": false,
      "why": "Historical range diagnostic; qualification suspended pending point-in-time validation"
@@ -4753,7 +4753,7 @@
   "markets": {
    "gold": {
     "baseline": 1.969,
-    "close": 3595.0,
+    "close": 3657.60009765625,
     "asof": "2026-11-26"
    },
    "nq": {
@@ -5414,6 +5414,6 @@
  "log": [
   "tv: 3 month(s) refreshed, 3597 releases with a consensus surprise",
   "markets: gold, nq, usd, y2, gold15m, gold2h, nq15m, nq2h",
-  "model: fit in 2s; proven: labor:y2"
+  "model: fit in 1s; proven: labor:y2"
  ]
 }
