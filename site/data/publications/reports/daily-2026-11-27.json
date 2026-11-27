@@ -1,0 +1,86 @@
+{
+  "version": 1,
+  "id": "daily-2026-11-27",
+  "kind": "daily",
+  "title": "Daily financial intelligence — 2026-11-27",
+  "generated_at": "2026-11-27T12:50:28+00:00",
+  "sources": [
+    {
+      "path": "macro/current.json",
+      "asof": "2026-11-27",
+      "sha256": "aca7cdcd35084305de11887b3918eb9c0f3ebf06499cc7b456e13521dba0fd2d"
+    },
+    {
+      "path": "signals/current.json",
+      "asof": "2026-11-27T12:50:27+00:00",
+      "sha256": "c14279741916087a0dbddda077ee71aae1637b6e61a1ac0a717331a619e3002e"
+    },
+    {
+      "path": "relationships/current.json",
+      "asof": "2026-11-27",
+      "sha256": "d1e1d913f51731188bd585c47b5ce81701e07ce386bedacdd676d7dfb4920ed5"
+    },
+    {
+      "path": "open/current.json",
+      "asof": "2026-11-27T12:50:28.902889+00:00",
+      "sha256": "28896a95843e047d48eb34e1986978331cd7c7bfcc10b33a58df0189d5f493f1"
+    }
+  ],
+  "sections": [
+    {
+      "title": "Macroeconomic conditions — 2026-11-27",
+      "lines": [
+        "D-GROWTH — Growth momentum: 75.84/100. Observations: INDPRO 2026-10-01, RRSFS 2026-09-01.",
+        "D-INFLATION — Inflation pressure: 77.50/100. Observations: CPIAUCSL 2026-09-01, PCEPI 2026-10-01.",
+        "D-STRESS — Financial stress: 65.97/100. Observations: NFCI 2026-11-20, STLFSI4 2026-11-20.",
+        "D-LIQUIDITY — Monetary conditions proxy (easier = higher): 37.54/100. Observations: DFII10 2026-11-24, DFF 2026-11-24.",
+        "D-RISK — Risk appetite proxy (VIX, inverted): 10.95/100. Observations: VIXCLS 2026-11-24.",
+        "D-CREDIT — Credit stress: 93.40/100. Observations: BAMLH0A0HYM2 2026-11-24, BAMLC0A0CM 2026-11-24."
+      ]
+    },
+    {
+      "title": "Statistical early warnings",
+      "lines": [
+        "2 active monitoring conditions; 4 unavailable rules. A threshold alert is not a prediction.",
+        "Weak risk appetite proxy: 10.95/100 (elevated). First detected 2026-11-24T11:22:57+00:00.",
+        "Elevated credit stress: 93.40/100 (extreme). First detected 2026-11-24T11:22:57+00:00."
+      ]
+    },
+    {
+      "title": "Cross-market relationships",
+      "lines": [
+        "66 of 66 pairs available; 10 available pairs have monitoring flags.",
+        "VIX / 2-year Treasury yield: correlation shift; 60-observation correlation -0.30; shift -0.63; residual z -0.12; latest matched end 2026-11-24.",
+        "S&P 500 futures / Euro FX futures: correlation shift; 60-observation correlation -0.03; shift -0.41; residual z 0.59; latest matched end 2026-11-25.",
+        "S&P 500 futures / High-yield credit spread: correlation shift; 60-observation correlation -0.58; shift -0.42; residual z 1.13; latest matched end 2026-11-24.",
+        "S&P 500 futures / VIX: correlation shift; 60-observation correlation -0.77; shift -0.62; residual z -0.56; latest matched end 2026-11-24.",
+        "Nasdaq futures / Euro FX futures: correlation shift; 60-observation correlation -0.15; shift -0.47; residual z 0.57; latest matched end 2026-11-25.",
+        "Nasdaq futures / High-yield credit spread: correlation shift; 60-observation correlation -0.56; shift -0.43; residual z 0.72; latest matched end 2026-11-24.",
+        "Nasdaq futures / VIX: correlation shift; 60-observation correlation -0.72; shift -0.61; residual z -1.14; latest matched end 2026-11-24.",
+        "Russell 2000 futures / VIX: correlation shift; 60-observation correlation -0.68; shift -0.57; residual z 0.38; latest matched end 2026-11-24.",
+        "Dow futures / High-yield credit spread: correlation shift; 60-observation correlation -0.47; shift -0.40; residual z 1.69; latest matched end 2026-11-24.",
+        "Dow futures / VIX: correlation shift; 60-observation correlation -0.66; shift -0.55; residual z 0.53; latest matched end 2026-11-24."
+      ]
+    },
+    {
+      "title": "Forecast accountability",
+      "lines": [
+        "48 recorded daily forecasts in scope; 7 verified resolved. Counts are not a measure of all possible scheduled forecasts.",
+        "late: 9",
+        "unverified: 22",
+        "verified pending: 8",
+        "verified resolved: 7",
+        "void: 2",
+        "6E: verified N=1; Brier 0.2500; baseline 0.2500; Brier skill 0.0000.",
+        "BTC: verified N=0; Brier Unavailable; baseline Unavailable; Brier skill Unavailable.",
+        "CL: verified N=1; Brier 0.2237; baseline 0.2237; Brier skill 0.0000.",
+        "ES: verified N=1; Brier 0.2970; baseline 0.2970; Brier skill 0.0000.",
+        "GOLD: verified N=1; Brier 0.2372; baseline 0.2372; Brier skill 0.0000.",
+        "NQ: verified N=1; Brier 0.2959; baseline 0.2959; Brier skill 0.0000.",
+        "RTY: verified N=1; Brier 0.2323; baseline 0.2323; Brier skill 0.0000.",
+        "YM: verified N=1; Brier 0.2052; baseline 0.2052; Brier skill 0.0000."
+      ]
+    }
+  ],
+  "limitations": "Deterministic snapshot reports, not trading recommendations. Observation dates differ by source. Historical results and descriptive monitoring are not validated forecasts. Source hashes identify inputs at generation time; linked live data may later change."
+}

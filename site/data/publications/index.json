@@ -2,6 +2,14 @@
   "version": 1,
   "reports": [
     {
+      "id": "daily-2026-11-27",
+      "kind": "daily",
+      "title": "Daily financial intelligence — 2026-11-27",
+      "generated_at": "2026-11-27T12:50:28+00:00",
+      "sha256": "2a43168b82c6afe2a8c9598035ddd2af253c89f45e619863b3cae8176682526e",
+      "path": "reports/daily-2026-11-27.json"
+    },
+    {
       "id": "daily-2026-11-26",
       "kind": "daily",
       "title": "Daily financial intelligence — 2026-11-26",
