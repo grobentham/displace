@@ -1,12 +1,6 @@
 {
-  "asof": "2026-11-26",
+  "asof": "2026-11-27",
   "days": [
-    {
-      "date": "2026-11-26",
-      "status": "halt",
-      "name": "Thanksgiving",
-      "hours": "Holiday halt begins 13:00 New York"
-    },
     {
       "date": "2026-11-27",
       "status": "early",

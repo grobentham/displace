@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-25",
+ "updated": "2026-11-27",
  "through": "2027-04-07",
  "events": [
   {
@@ -1051,7 +1051,18 @@
    "src": "University of Michigan",
    "note": "",
    "id": "20270108-umich-consumer-sentiment-preliminary-jan",
-   "metric": "UMich consumer sentiment index"
+   "metric": "UMich consumer sentiment index",
+   "previous": "48.0",
+   "components": [
+    {
+     "label": "Consumer sentiment",
+     "previous": "48.0"
+    },
+    {
+     "label": "1-yr inflation expectations",
+     "previous": "4.7%"
+    }
+   ]
   },
   {
    "date": "2027-01-13",

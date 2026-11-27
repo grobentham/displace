@@ -1,12 +1,8 @@
 {
- "week": "Nov 26–Dec 4",
- "asof": "2026-11-26",
- "summary": "3 high-impact releases: ISM Manufacturing PMI (Tue), ISM Services PMI (Thu), Non-farm payrolls (Fri). The next Fed decision is Dec 8–9, 13 days from today.",
+ "week": "Nov 27–Dec 4",
+ "asof": "2026-11-27",
+ "summary": "3 high-impact releases: ISM Manufacturing PMI (Tue), ISM Services PMI (Thu), Non-farm payrolls (Fri). The next Fed decision is Dec 8–9, 12 days from today.",
  "days": [
-  {
-   "d": "Thu Nov 26",
-   "t": "Thanksgiving: US markets closed."
-  },
   {
    "d": "Fri Nov 27",
    "t": "Day after Thanksgiving: shortened session."

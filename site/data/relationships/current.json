@@ -1,7 +1,7 @@
 {
   "version": 1,
   "plan_hash": "a8dc61414d06615434a79f48a5b0462827637614f1e8ba1b72be36995de28b4c",
-  "asof": "2026-11-26",
+  "asof": "2026-11-27",
   "series": [
     {
       "id": "nq",
@@ -95,7 +95,7 @@
       "b": "es",
       "status": "available",
       "latest": "2026-11-25",
-      "age_days": 1,
+      "age_days": 2,
       "paired_n": 5614,
       "correlations": {
         "20": 0.9733,
@@ -119,7 +119,7 @@
       "b": "ym",
       "status": "available",
       "latest": "2026-11-25",
-      "age_days": 1,
+      "age_days": 2,
       "paired_n": 5260,
       "correlations": {
         "20": 0.7903,
@@ -143,7 +143,7 @@
       "b": "rty",
       "status": "available",
       "latest": "2026-11-25",
-      "age_days": 1,
+      "age_days": 2,
       "paired_n": 1993,
       "correlations": {
         "20": 0.8857,
@@ -167,7 +167,7 @@
       "b": "gold",
       "status": "available",
       "latest": "2026-11-25",
-      "age_days": 1,
+      "age_days": 2,
       "paired_n": 2804,
       "correlations": {
         "20": 0.4979,
@@ -191,7 +191,7 @@
       "b": "cl",
       "status": "available",
       "latest": "2026-11-25",
-      "age_days": 1,
+      "age_days": 2,
       "paired_n": 5584,
       "correlations": {
         "20": -0.4513,
@@ -215,7 +215,7 @@
       "b": "6e",
       "status": "available",
       "latest": "2026-11-25",
-      "age_days": 1,
+      "age_days": 2,
       "paired_n": 5598,
       "correlations": {
         "20": -0.258,
@@ -241,7 +241,7 @@
       "b": "btc",
       "status": "available",
       "latest": "2026-11-25",
-      "age_days": 1,
+      "age_days": 2,
       "paired_n": 1898,
       "correlations": {
         "20": 0.7894,
@@ -265,7 +265,7 @@
       "b": "VIXCLS",
       "status": "available",
       "latest": "2026-11-24",
-      "age_days": 2,
+      "age_days": 3,
       "paired_n": 3067,
       "correlations": {
         "20": -0.9129,
@@ -291,7 +291,7 @@
       "b": "BAMLH0A0HYM2",
       "status": "available",
       "latest": "2026-11-24",
-      "age_days": 2,
+      "age_days": 3,
       "paired_n": 529,
       "correlations": {
         "20": -0.7893,
@@ -317,7 +317,7 @@
       "b": "DGS2",
       "status": "available",
       "latest": "2026-11-24",
-      "age_days": 2,
+      "age_days": 3,
       "paired_n": 4774,
       "correlations": {
         "20": 0.4682,
@@ -341,7 +341,7 @@
       "b": "DTWEXBGS",
       "status": "available",
       "latest": "2026-11-20",
-      "age_days": 6,
+      "age_days": 7,
       "paired_n": 3701,
       "correlations": {
         "20": -0.0224,
@@ -365,7 +365,7 @@
       "b": "ym",
       "status": "available",
       "latest": "2026-11-25",
-      "age_days": 1,
+      "age_days": 2,
       "paired_n": 5260,
       "correlations": {
         "20": 0.9002,
@@ -389,7 +389,7 @@
       "b": "rty",
       "status": "available",
       "latest": "2026-11-25",
-      "age_days": 1,
+      "age_days": 2,
       "paired_n": 1993,
       "correlations": {
         "20": 0.9342,
@@ -413,7 +413,7 @@
       "b": "gold",
       "status": "available",
       "latest": "2026-11-25",
-      "age_days": 1,
+      "age_days": 2,
       "paired_n": 2804,
       "correlations": {
         "20": 0.5493,
@@ -437,7 +437,7 @@
       "b": "cl",
       "status": "available",
       "latest": "2026-11-25",
-      "age_days": 1,
+      "age_days": 2,
       "paired_n": 5584,
       "correlations": {
         "20": -0.5102,
@@ -461,7 +461,7 @@
       "b": "6e",
       "status": "available",
       "latest": "2026-11-25",
-      "age_days": 1,
+      "age_days": 2,
       "paired_n": 5598,
       "correlations": {
         "20": -0.1449,
@@ -487,7 +487,7 @@
       "b": "btc",
       "status": "available",
       "latest": "2026-11-25",
-      "age_days": 1,
+      "age_days": 2,
       "paired_n": 1898,
       "correlations": {
         "20": 0.8063,
@@ -511,7 +511,7 @@
       "b": "VIXCLS",
       "status": "available",
       "latest": "2026-11-24",
-      "age_days": 2,
+      "age_days": 3,
       "paired_n": 3067,
       "correlations": {
         "20": -0.9615,
@@ -537,7 +537,7 @@
       "b": "BAMLH0A0HYM2",
       "status": "available",
       "latest": "2026-11-24",
-      "age_days": 2,
+      "age_days": 3,
       "paired_n": 529,
       "correlations": {
         "20": -0.8077,
@@ -563,7 +563,7 @@
       "b": "DGS2",
       "status": "available",
       "latest": "2026-11-24",
-      "age_days": 2,
+      "age_days": 3,
       "paired_n": 4774,
       "correlations": {
         "20": 0.4886,
@@ -587,7 +587,7 @@
       "b": "DTWEXBGS",
       "status": "available",
       "latest": "2026-11-20",
-      "age_days": 6,
+      "age_days": 7,
       "paired_n": 3701,
       "correlations": {
         "20": -0.1222,
@@ -611,7 +611,7 @@
       "b": "rty",
       "status": "available",
       "latest": "2026-11-25",
-      "age_days": 1,
+      "age_days": 2,
       "paired_n": 1993,
       "correlations": {
         "20": 0.8903,
@@ -635,7 +635,7 @@
       "b": "gold",
       "status": "available",
       "latest": "2026-11-25",
-      "age_days": 1,
+      "age_days": 2,
       "paired_n": 2804,
       "correlations": {
         "20": 0.5572,
@@ -659,7 +659,7 @@
       "b": "cl",
       "status": "available",
       "latest": "2026-11-25",
-      "age_days": 1,
+      "age_days": 2,
       "paired_n": 5238,
       "correlations": {
         "20": -0.5936,
@@ -683,7 +683,7 @@
       "b": "6e",
       "status": "available",
       "latest": "2026-11-25",
-      "age_days": 1,
+      "age_days": 2,
       "paired_n": 5260,
       "correlations": {
         "20": 0.1176,
@@ -707,7 +707,7 @@
       "b": "btc",
       "status": "available",
       "latest": "2026-11-25",
-      "age_days": 1,
+      "age_days": 2,
       "paired_n": 1898,
       "correlations": {
         "20": 0.7031,
@@ -731,7 +731,7 @@
       "b": "VIXCLS",
       "status": "available",
       "latest": "2026-11-24",
-      "age_days": 2,
+      "age_days": 3,
       "paired_n": 3067,
       "correlations": {
         "20": -0.901,
@@ -757,7 +757,7 @@
       "b": "BAMLH0A0HYM2",
       "status": "available",
       "latest": "2026-11-24",
-      "age_days": 2,
+      "age_days": 3,
       "paired_n": 529,
       "correlations": {
         "20": -0.7162,
@@ -783,7 +783,7 @@
       "b": "DGS2",
       "status": "available",
       "latest": "2026-11-24",
-      "age_days": 2,
+      "age_days": 3,
       "paired_n": 4459,
       "correlations": {
         "20": 0.4522,
@@ -807,7 +807,7 @@
       "b": "DTWEXBGS",
       "status": "available",
       "latest": "2026-11-20",
-      "age_days": 6,
+      "age_days": 7,
       "paired_n": 3701,
       "correlations": {
         "20": -0.2759,
@@ -831,7 +831,7 @@
       "b": "gold",
       "status": "available",
       "latest": "2026-11-25",
-      "age_days": 1,
+      "age_days": 2,
       "paired_n": 1884,
       "correlations": {
         "20": 0.457,
@@ -855,7 +855,7 @@
       "b": "cl",
       "status": "available",
       "latest": "2026-11-25",
-      "age_days": 1,
+      "age_days": 2,
       "paired_n": 1991,
       "correlations": {
         "20": -0.5102,
@@ -879,7 +879,7 @@
       "b": "6e",
       "status": "available",
       "latest": "2026-11-25",
-      "age_days": 1,
+      "age_days": 2,
       "paired_n": 1993,
       "correlations": {
         "20": 0.0224,
@@ -903,7 +903,7 @@
       "b": "btc",
       "status": "available",
       "latest": "2026-11-25",
-      "age_days": 1,
+      "age_days": 2,
       "paired_n": 1898,
       "correlations": {
         "20": 0.7463,
@@ -927,7 +927,7 @@
       "b": "VIXCLS",
       "status": "available",
       "latest": "2026-11-24",
-      "age_days": 2,
+      "age_days": 3,
       "paired_n": 1691,
       "correlations": {
         "20": -0.9518,
@@ -953,7 +953,7 @@
       "b": "BAMLH0A0HYM2",
       "status": "available",
       "latest": "2026-11-24",
-      "age_days": 2,
+      "age_days": 3,
       "paired_n": 529,
       "correlations": {
         "20": -0.7163,
@@ -977,7 +977,7 @@
       "b": "DGS2",
       "status": "available",
       "latest": "2026-11-24",
-      "age_days": 2,
+      "age_days": 3,
       "paired_n": 1679,
       "correlations": {
         "20": 0.4933,
@@ -1001,7 +1001,7 @@
       "b": "DTWEXBGS",
       "status": "available",
       "latest": "2026-11-20",
-      "age_days": 6,
+      "age_days": 7,
       "paired_n": 1655,
       "correlations": {
         "20": 0.0203,
@@ -1025,7 +1025,7 @@
       "b": "cl",
       "status": "available",
       "latest": "2026-11-25",
-      "age_days": 1,
+      "age_days": 2,
       "paired_n": 2802,
       "correlations": {
         "20": -0.6344,
@@ -1049,7 +1049,7 @@
       "b": "6e",
       "status": "available",
       "latest": "2026-11-25",
-      "age_days": 1,
+      "age_days": 2,
       "paired_n": 2804,
       "correlations": {
         "20": 0.1137,
@@ -1073,7 +1073,7 @@
       "b": "btc",
       "status": "available",
       "latest": "2026-11-25",
-      "age_days": 1,
+      "age_days": 2,
       "paired_n": 1805,
       "correlations": {
         "20": 0.6292,
@@ -1097,7 +1097,7 @@
       "b": "VIXCLS",
       "status": "available",
       "latest": "2026-11-24",
-      "age_days": 2,
+      "age_days": 3,
       "paired_n": 2390,
       "correlations": {
         "20": -0.447,
@@ -1121,7 +1121,7 @@
       "b": "BAMLH0A0HYM2",
       "status": "available",
       "latest": "2026-11-24",
-      "age_days": 2,
+      "age_days": 3,
       "paired_n": 529,
       "correlations": {
         "20": -0.4909,
@@ -1145,7 +1145,7 @@
       "b": "DGS2",
       "status": "available",
       "latest": "2026-11-24",
-      "age_days": 2,
+      "age_days": 3,
       "paired_n": 2369,
       "correlations": {
         "20": 0.1017,
@@ -1169,7 +1169,7 @@
       "b": "DTWEXBGS",
       "status": "available",
       "latest": "2026-11-20",
-      "age_days": 6,
+      "age_days": 7,
       "paired_n": 2325,
       "correlations": {
         "20": -0.377,
@@ -1193,7 +1193,7 @@
       "b": "6e",
       "status": "available",
       "latest": "2026-11-25",
-      "age_days": 1,
+      "age_days": 2,
       "paired_n": 5571,
       "correlations": {
         "20": -0.1721,
@@ -1217,7 +1217,7 @@
       "b": "btc",
       "status": "available",
       "latest": "2026-11-25",
-      "age_days": 1,
+      "age_days": 2,
       "paired_n": 1896,
       "correlations": {
         "20": -0.4488,
@@ -1241,7 +1241,7 @@
       "b": "VIXCLS",
       "status": "available",
       "latest": "2026-11-24",
-      "age_days": 2,
+      "age_days": 3,
       "paired_n": 3066,
       "correlations": {
         "20": 0.5547,
@@ -1265,7 +1265,7 @@
       "b": "BAMLH0A0HYM2",
       "status": "available",
       "latest": "2026-11-24",
-      "age_days": 2,
+      "age_days": 3,
       "paired_n": 529,
       "correlations": {
         "20": 0.3954,
@@ -1289,7 +1289,7 @@
       "b": "DGS2",
       "status": "available",
       "latest": "2026-11-24",
-      "age_days": 2,
+      "age_days": 3,
       "paired_n": 4759,
       "correlations": {
         "20": -0.2906,
@@ -1313,7 +1313,7 @@
       "b": "DTWEXBGS",
       "status": "available",
       "latest": "2026-11-20",
-      "age_days": 6,
+      "age_days": 7,
       "paired_n": 3699,
       "correlations": {
         "20": 0.2115,
@@ -1337,7 +1337,7 @@
       "b": "btc",
       "status": "available",
       "latest": "2026-11-25",
-      "age_days": 1,
+      "age_days": 2,
       "paired_n": 1898,
       "correlations": {
         "20": -0.1335,
@@ -1361,7 +1361,7 @@
       "b": "VIXCLS",
       "status": "available",
       "latest": "2026-11-24",
-      "age_days": 2,
+      "age_days": 3,
       "paired_n": 3067,
       "correlations": {
         "20": 0.093,
@@ -1385,7 +1385,7 @@
       "b": "BAMLH0A0HYM2",
       "status": "available",
       "latest": "2026-11-24",
-      "age_days": 2,
+      "age_days": 3,
       "paired_n": 529,
       "correlations": {
         "20": 0.1357,
@@ -1409,7 +1409,7 @@
       "b": "DGS2",
       "status": "available",
       "latest": "2026-11-24",
-      "age_days": 2,
+      "age_days": 3,
       "paired_n": 4763,
       "correlations": {
         "20": -0.1658,
@@ -1433,7 +1433,7 @@
       "b": "DTWEXBGS",
       "status": "available",
       "latest": "2026-11-20",
-      "age_days": 6,
+      "age_days": 7,
       "paired_n": 3701,
       "correlations": {
         "20": -0.409,
@@ -1457,7 +1457,7 @@
       "b": "VIXCLS",
       "status": "available",
       "latest": "2026-11-24",
-      "age_days": 2,
+      "age_days": 3,
       "paired_n": 1612,
       "correlations": {
         "20": -0.7396,
@@ -1481,7 +1481,7 @@
       "b": "BAMLH0A0HYM2",
       "status": "available",
       "latest": "2026-11-24",
-      "age_days": 2,
+      "age_days": 3,
       "paired_n": 529,
       "correlations": {
         "20": -0.682,
@@ -1505,7 +1505,7 @@
       "b": "DGS2",
       "status": "available",
       "latest": "2026-11-24",
-      "age_days": 2,
+      "age_days": 3,
       "paired_n": 1601,
       "correlations": {
         "20": 0.3101,
@@ -1529,7 +1529,7 @@
       "b": "DTWEXBGS",
       "status": "available",
       "latest": "2026-11-20",
-      "age_days": 6,
+      "age_days": 7,
       "paired_n": 1579,
       "correlations": {
         "20": -0.11,
@@ -1553,7 +1553,7 @@
       "b": "BAMLH0A0HYM2",
       "status": "available",
       "latest": "2026-11-24",
-      "age_days": 2,
+      "age_days": 3,
       "paired_n": 760,
       "correlations": {
         "20": 0.7755,
@@ -1577,7 +1577,7 @@
       "b": "DGS2",
       "status": "available",
       "latest": "2026-11-24",
-      "age_days": 2,
+      "age_days": 3,
       "paired_n": 4147,
       "correlations": {
         "20": -0.5745,
@@ -1603,7 +1603,7 @@
       "b": "DTWEXBGS",
       "status": "available",
       "latest": "2026-11-20",
-      "age_days": 6,
+      "age_days": 7,
       "paired_n": 4081,
       "correlations": {
         "20": 0.0867,
@@ -1627,7 +1627,7 @@
       "b": "DGS2",
       "status": "available",
       "latest": "2026-11-24",
-      "age_days": 2,
+      "age_days": 3,
       "paired_n": 712,
       "correlations": {
         "20": -0.6569,
@@ -1651,7 +1651,7 @@
       "b": "DTWEXBGS",
       "status": "available",
       "latest": "2026-11-20",
-      "age_days": 6,
+      "age_days": 7,
       "paired_n": 709,
       "correlations": {
         "20": -0.0716,
@@ -1675,7 +1675,7 @@
       "b": "DTWEXBGS",
       "status": "available",
       "latest": "2026-11-20",
-      "age_days": 6,
+      "age_days": 7,
       "paired_n": 5123,
       "correlations": {
         "20": 0.3095,
