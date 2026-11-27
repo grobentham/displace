@@ -1,5 +1,5 @@
 {
- "last_seen": "2026-11-27T01:40:33+00:00",
+ "last_seen": "2026-11-27T21:43:21+00:00",
  "records": {
   "2026-11-25|nq|drive-v2": {
    "date": "2026-11-25",
@@ -107,6 +107,18 @@
    },
    "market": "nq",
    "name": "drive-v2",
+   "note": "No trade today: Day after Thanksgiving, a short session (CME closes NQ at 13:15 New York, before the plan's exits). Iron Brain's tests leave out shortened sessions.",
+   "state": "none"
+  },
+  "2026-11-27|nq|orb-0930": {
+   "date": "2026-11-27",
+   "first_seen": "2026-11-27T21:43:21+00:00",
+   "id": "orb-0930",
+   "lock": {
+    "lockedAt": "2026-11-27 00:00"
+   },
+   "market": "nq",
+   "name": "ORB 09:30 (15-min range)",
    "note": "No trade today: Day after Thanksgiving, a short session (CME closes NQ at 13:15 New York, before the plan's exits). Iron Brain's tests leave out shortened sessions.",
    "state": "none"
   },
