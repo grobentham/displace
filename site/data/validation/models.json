@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "asof": "2026-11-27T15:25:25.907563+00:00",
+  "asof": "2026-11-27T19:35:45.766677+00:00",
   "plan_hash": "883ea066e20c4960c2c8f5afcace0852441d07e6c1a18d1e0b1c45eba76618cc",
   "markets": {
     "nq": {
@@ -30,7 +30,7 @@
         "coverage_old": 0.797,
         "width": 1.042,
         "width_old": 1.174,
-        "n": 3230,
+        "n": 3231,
         "since": 2012
       },
       "original_tier": "base"
@@ -62,7 +62,7 @@
         "coverage_old": 0.778,
         "width": 1.032,
         "width_old": 1.172,
-        "n": 3230,
+        "n": 3231,
         "since": 2012
       },
       "original_tier": "base"
@@ -91,10 +91,10 @@
       "original_range_stats": {
         "gain": 0.199,
         "coverage": 0.796,
-        "coverage_old": 0.789,
+        "coverage_old": 0.79,
         "width": 1.046,
         "width_old": 1.166,
-        "n": 3230,
+        "n": 3231,
         "since": 2012
       },
       "original_tier": "base"
@@ -126,7 +126,7 @@
         "coverage_old": 0.816,
         "width": 0.981,
         "width_old": 1.113,
-        "n": 1494,
+        "n": 1495,
         "since": 2020
       },
       "original_tier": "base"
@@ -222,7 +222,7 @@
         "coverage_old": 0.758,
         "width": 0.921,
         "width_old": 0.935,
-        "n": 3230,
+        "n": 3231,
         "since": 2012
       },
       "original_tier": "base"
@@ -249,12 +249,12 @@
       "raw_n": 1937,
       "invalid_ohlc": 0,
       "original_range_stats": {
-        "gain": 0.11,
-        "coverage": 0.841,
-        "coverage_old": 0.862,
-        "width": 1.261,
+        "gain": 0.118,
+        "coverage": 0.84,
+        "coverage_old": 0.861,
+        "width": 1.26,
         "width_old": 1.371,
-        "n": 1275,
+        "n": 1276,
         "since": 2021
       },
       "original_tier": "base"
@@ -477,18 +477,18 @@
       "historical_candidate": false,
       "proven": false,
       "historical_metrics": {
-        "calls": 23,
-        "hits": 11,
-        "rate": 0.478,
-        "pval": 0.6611802577972412,
-        "brierSkill": 0.003,
-        "brierSkillBase": 0.0269,
-        "baseBrier": 0.256015,
+        "calls": 29,
+        "hits": 16,
+        "rate": 0.552,
+        "pval": 0.355535551905632,
+        "brierSkill": 0.013,
+        "brierSkillBase": 0.0386,
+        "baseBrier": 0.256544,
         "halves": [
-          0.273,
-          0.667
+          0.357,
+          0.733
         ],
-        "recent": 0.5,
+        "recent": 0.7,
         "tested": 181
       }
     },
