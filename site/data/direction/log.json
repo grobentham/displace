@@ -65,7 +65,9 @@
    "tier": "hist",
    "logged": "2026-11-25T08:55-05:00",
    "eligible": false,
-   "evaluation_basis": "release-window historical observation"
+   "evaluation_basis": "release-window historical observation",
+   "move": -2.0,
+   "hit": false
   },
   {
    "id": "20261125-initial-jobless-claims-moved-to-wednesda",

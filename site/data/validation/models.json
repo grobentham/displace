@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "asof": "2026-11-27T22:48:43.009848+00:00",
+  "asof": "2026-11-27T23:37:13.300175+00:00",
   "plan_hash": "883ea066e20c4960c2c8f5afcace0852441d07e6c1a18d1e0b1c45eba76618cc",
   "markets": {
     "nq": {
@@ -335,14 +335,14 @@
         "rate": 0.353,
         "pval": 0.9282684326171875,
         "brierSkill": -0.003,
-        "brierSkillBase": -0.0084,
-        "baseBrier": 0.248703,
+        "brierSkillBase": -0.0094,
+        "baseBrier": 0.248477,
         "halves": [
           0.5,
           0.222
         ],
         "recent": 0.353,
-        "tested": 253
+        "tested": 254
       }
     },
     {
@@ -461,14 +461,14 @@
         "rate": 0.581,
         "pval": 0.0009805865155501537,
         "brierSkill": 0.01,
-        "brierSkillBase": 0.012,
-        "baseBrier": 0.250493,
+        "brierSkillBase": 0.0119,
+        "baseBrier": 0.250498,
         "halves": [
           0.628,
           0.534
         ],
         "recent": 0.5,
-        "tested": 1037
+        "tested": 1038
       }
     },
     {
@@ -587,14 +587,14 @@
         "rate": 0.56,
         "pval": 0.07660747338006633,
         "brierSkill": 0.006,
-        "brierSkillBase": -0.0001,
-        "baseBrier": 0.248455,
+        "brierSkillBase": 0.0002,
+        "baseBrier": 0.248521,
         "halves": [
           0.57,
           0.55
         ],
         "recent": 0.65,
-        "tested": 878
+        "tested": 879
       }
     },
     {
@@ -839,14 +839,14 @@
         "rate": 0.0,
         "pval": 1.0,
         "brierSkill": -0.019,
-        "brierSkillBase": -0.0149,
-        "baseBrier": 0.250887,
+        "brierSkillBase": -0.017,
+        "baseBrier": 0.250382,
         "halves": [
           0.0,
           0.0
         ],
         "recent": 0.0,
-        "tested": 82
+        "tested": 83
       }
     }
   ],

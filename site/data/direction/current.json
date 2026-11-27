@@ -1,5 +1,5 @@
 {
- "asof": "2026-11-27T17:48-05:00",
+ "asof": "2026-11-27T18:36-05:00",
  "version": 4,
  "assets": {
   "gold": "Gold, close",
@@ -891,7 +891,7 @@
    "y2": {
     "b": 0.1759,
     "k": 0.45,
-    "n": 313,
+    "n": 314,
     "since": "2011-02-17",
     "bt": {
      "calls": 17,
@@ -899,14 +899,14 @@
      "rate": 0.353,
      "pval": 0.9282684326171875,
      "brierSkill": -0.003,
-     "brierSkillBase": -0.0084,
-     "baseBrier": 0.248703,
+     "brierSkillBase": -0.0094,
+     "baseBrier": 0.248477,
      "halves": [
       0.5,
       0.222
      ],
      "recent": 0.353,
-     "tested": 253
+     "tested": 254
     },
     "proven": false,
     "why": "too few tested calls",
@@ -1035,9 +1035,9 @@
     "historical_candidate": false
    },
    "y2": {
-    "b": 0.179,
+    "b": 0.1765,
     "k": 0.65,
-    "n": 1099,
+    "n": 1100,
     "since": "2010-04-01",
     "bt": {
      "calls": 377,
@@ -1045,14 +1045,14 @@
      "rate": 0.581,
      "pval": 0.0009805865155501537,
      "brierSkill": 0.01,
-     "brierSkillBase": 0.012,
-     "baseBrier": 0.250493,
+     "brierSkillBase": 0.0119,
+     "baseBrier": 0.250498,
      "halves": [
       0.628,
       0.534
      ],
      "recent": 0.5,
-     "tested": 1037
+     "tested": 1038
     },
     "proven": false,
     "why": "Historical candidate; qualification suspended pending point-in-time and prospective validation",
@@ -1181,9 +1181,9 @@
     "historical_candidate": false
    },
    "y2": {
-    "b": 0.2417,
+    "b": 0.2422,
     "k": 0.8,
-    "n": 939,
+    "n": 940,
     "since": "2011-01-05",
     "bt": {
      "calls": 159,
@@ -1191,14 +1191,14 @@
      "rate": 0.56,
      "pval": 0.07660747338006633,
      "brierSkill": 0.006,
-     "brierSkillBase": -0.0001,
-     "baseBrier": 0.248455,
+     "brierSkillBase": 0.0002,
+     "baseBrier": 0.248521,
      "halves": [
       0.57,
       0.55
      ],
      "recent": 0.65,
-     "tested": 878
+     "tested": 879
     },
     "proven": false,
     "why": "not significant after correcting for the number of rules tested",
@@ -1473,9 +1473,9 @@
     "historical_candidate": false
    },
    "y2": {
-    "b": 0.1555,
-    "k": 0.15,
-    "n": 142,
+    "b": 0.1332,
+    "k": 0.05,
+    "n": 143,
     "since": "2011-02-24",
     "bt": {
      "calls": 5,
@@ -1483,14 +1483,14 @@
      "rate": 0.0,
      "pval": 1.0,
      "brierSkill": -0.019,
-     "brierSkillBase": -0.0149,
-     "baseBrier": 0.250887,
+     "brierSkillBase": -0.017,
+     "baseBrier": 0.250382,
      "halves": [
       0.0,
       0.0
      ],
      "recent": 0.0,
-     "tested": 82
+     "tested": 83
     },
     "proven": false,
     "why": "too few tested calls",
@@ -1807,8 +1807,8 @@
       "med": -3.0
      },
      "inline": {
-      "n": 13,
-      "up": 0.615,
+      "n": 14,
+      "up": 0.571,
       "med": 1.0
      },
      "cool": {
@@ -2135,8 +2135,8 @@
     },
     "y2": {
      "hot": {
-      "n": 218,
-      "up": 0.546,
+      "n": 219,
+      "up": 0.543,
       "med": 1.0
      },
      "inline": {
@@ -2613,8 +2613,8 @@
       "med": 1.0
      },
      "inline": {
-      "n": 81,
-      "up": 0.667,
+      "n": 82,
+      "up": 0.659,
       "med": 1.0
      },
      "cool": {
@@ -3385,8 +3385,8 @@
     },
     "y2": {
      "hot": {
-      "n": 45,
-      "up": 0.556,
+      "n": 46,
+      "up": 0.543,
       "med": 1.0
      },
      "inline": {

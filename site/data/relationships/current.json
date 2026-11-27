@@ -316,23 +316,23 @@
       "a": "nq",
       "b": "DGS2",
       "status": "available",
-      "latest": "2026-11-24",
-      "age_days": 3,
-      "paired_n": 4774,
+      "latest": "2026-11-25",
+      "age_days": 2,
+      "paired_n": 4775,
       "correlations": {
-        "20": 0.4682,
-        "60": 0.3196,
-        "252": 0.1804
+        "20": 0.4594,
+        "60": 0.324,
+        "252": 0.1786
       },
-      "prior60": 0.0854,
-      "shift60": 0.2342,
+      "prior60": 0.0956,
+      "shift60": 0.2284,
       "divergence": {
-        "z": 0.4295,
-        "observed": 0.0,
-        "fitted": -2.484673,
-        "beta": 1.004289,
+        "z": -0.1703,
+        "observed": -2.0,
+        "fitted": -1.019405,
+        "beta": 0.998631,
         "training_n": 60,
-        "training_end": "2026-11-23"
+        "training_end": "2026-11-24"
       },
       "flags": []
     },
@@ -560,23 +560,23 @@
       "a": "es",
       "b": "DGS2",
       "status": "available",
-      "latest": "2026-11-24",
-      "age_days": 3,
-      "paired_n": 4774,
+      "latest": "2026-11-25",
+      "age_days": 2,
+      "paired_n": 4775,
       "correlations": {
-        "20": 0.4886,
-        "60": 0.3542,
-        "252": 0.1716
+        "20": 0.4811,
+        "60": 0.3671,
+        "252": 0.1683
       },
-      "prior60": 0.0442,
-      "shift60": 0.31,
+      "prior60": 0.0372,
+      "shift60": 0.3299,
       "divergence": {
-        "z": 0.2408,
-        "observed": 0.0,
-        "fitted": -1.377787,
-        "beta": 1.664213,
+        "z": -0.1893,
+        "observed": -2.0,
+        "fitted": -0.924127,
+        "beta": 1.689131,
         "training_n": 60,
-        "training_end": "2026-11-23"
+        "training_end": "2026-11-24"
       },
       "flags": []
     },
@@ -780,23 +780,23 @@
       "a": "ym",
       "b": "DGS2",
       "status": "available",
-      "latest": "2026-11-24",
-      "age_days": 3,
-      "paired_n": 4459,
+      "latest": "2026-11-25",
+      "age_days": 2,
+      "paired_n": 4460,
       "correlations": {
-        "20": 0.4522,
-        "60": 0.3395,
-        "252": 0.1363
+        "20": 0.441,
+        "60": 0.3481,
+        "252": 0.1315
       },
-      "prior60": -0.0239,
-      "shift60": 0.3634,
+      "prior60": -0.027,
+      "shift60": 0.3751,
       "divergence": {
-        "z": -0.1525,
-        "observed": 0.0,
-        "fitted": 0.877436,
-        "beta": 1.779531,
+        "z": -0.3807,
+        "observed": -2.0,
+        "fitted": 0.175761,
+        "beta": 1.795436,
         "training_n": 60,
-        "training_end": "2026-11-23"
+        "training_end": "2026-11-24"
       },
       "flags": []
     },
@@ -974,23 +974,23 @@
       "a": "rty",
       "b": "DGS2",
       "status": "available",
-      "latest": "2026-11-24",
-      "age_days": 3,
-      "paired_n": 1679,
+      "latest": "2026-11-25",
+      "age_days": 2,
+      "paired_n": 1680,
       "correlations": {
-        "20": 0.4933,
-        "60": 0.3341,
-        "252": 0.1442
+        "20": 0.4867,
+        "60": 0.3443,
+        "252": 0.1388
       },
-      "prior60": 0.081,
-      "shift60": 0.2531,
+      "prior60": 0.0742,
+      "shift60": 0.2701,
       "divergence": {
-        "z": -0.0756,
-        "observed": 0.0,
-        "fitted": 0.43474,
-        "beta": 1.60211,
+        "z": -0.4482,
+        "observed": -2.0,
+        "fitted": 0.567107,
+        "beta": 1.585615,
         "training_n": 60,
-        "training_end": "2026-11-23"
+        "training_end": "2026-11-24"
       },
       "flags": []
     },
@@ -1142,23 +1142,23 @@
       "a": "gold",
       "b": "DGS2",
       "status": "available",
-      "latest": "2026-11-24",
-      "age_days": 3,
-      "paired_n": 2369,
+      "latest": "2026-11-25",
+      "age_days": 2,
+      "paired_n": 2370,
       "correlations": {
-        "20": 0.1017,
-        "60": 0.1236,
-        "252": 0.0437
+        "20": 0.0911,
+        "60": 0.1219,
+        "252": 0.0468
       },
-      "prior60": -0.0767,
-      "shift60": 0.2003,
+      "prior60": -0.0716,
+      "shift60": 0.1935,
       "divergence": {
-        "z": 0.314,
-        "observed": 0.0,
-        "fitted": -1.899349,
-        "beta": 0.474393,
+        "z": -0.1748,
+        "observed": -2.0,
+        "fitted": -0.94572,
+        "beta": 0.434062,
         "training_n": 60,
-        "training_end": "2026-11-23"
+        "training_end": "2026-11-24"
       },
       "flags": []
     },
@@ -1286,23 +1286,23 @@
       "a": "cl",
       "b": "DGS2",
       "status": "available",
-      "latest": "2026-11-24",
-      "age_days": 3,
-      "paired_n": 4759,
+      "latest": "2026-11-25",
+      "age_days": 2,
+      "paired_n": 4760,
       "correlations": {
-        "20": -0.2906,
-        "60": -0.0328,
-        "252": 0.0743
+        "20": -0.2698,
+        "60": -0.0352,
+        "252": 0.0713
       },
-      "prior60": 0.2278,
-      "shift60": -0.2606,
+      "prior60": 0.2203,
+      "shift60": -0.2555,
       "divergence": {
-        "z": 0.1417,
-        "observed": 0.0,
-        "fitted": -0.864195,
-        "beta": -0.062412,
+        "z": -0.2028,
+        "observed": -2.0,
+        "fitted": -0.768059,
+        "beta": -0.069786,
         "training_n": 60,
-        "training_end": "2026-11-23"
+        "training_end": "2026-11-24"
       },
       "flags": []
     },
@@ -1406,23 +1406,23 @@
       "a": "6e",
       "b": "DGS2",
       "status": "available",
-      "latest": "2026-11-24",
-      "age_days": 3,
-      "paired_n": 4763,
+      "latest": "2026-11-25",
+      "age_days": 2,
+      "paired_n": 4764,
       "correlations": {
-        "20": -0.1658,
-        "60": -0.1113,
-        "252": -0.0937
+        "20": -0.1625,
+        "60": -0.0917,
+        "252": -0.0903
       },
-      "prior60": -0.1959,
-      "shift60": 0.0846,
+      "prior60": -0.2238,
+      "shift60": 0.1321,
       "divergence": {
-        "z": 0.3138,
-        "observed": 0.0,
-        "fitted": -1.902512,
-        "beta": -1.958386,
+        "z": -0.1765,
+        "observed": -2.0,
+        "fitted": -0.934306,
+        "beta": -1.887396,
         "training_n": 60,
-        "training_end": "2026-11-23"
+        "training_end": "2026-11-24"
       },
       "flags": []
     },
@@ -1502,23 +1502,23 @@
       "a": "btc",
       "b": "DGS2",
       "status": "available",
-      "latest": "2026-11-24",
-      "age_days": 3,
-      "paired_n": 1601,
+      "latest": "2026-11-25",
+      "age_days": 2,
+      "paired_n": 1602,
       "correlations": {
-        "20": 0.3101,
-        "60": 0.1555,
-        "252": 0.0863
+        "20": 0.2842,
+        "60": 0.1621,
+        "252": 0.082
       },
-      "prior60": 0.1349,
-      "shift60": 0.0206,
+      "prior60": 0.1241,
+      "shift60": 0.038,
       "divergence": {
-        "z": 0.2491,
-        "observed": 0.0,
-        "fitted": -1.502349,
-        "beta": 0.340178,
+        "z": -0.286,
+        "observed": -2.0,
+        "fitted": -0.283294,
+        "beta": 0.347116,
         "training_n": 60,
-        "training_end": "2026-11-23"
+        "training_end": "2026-11-24"
       },
       "flags": []
     },

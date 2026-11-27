@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "asof": "2026-11-27T22:48:41.010009+00:00",
+  "asof": "2026-11-27T23:37:11.284342+00:00",
   "scope": "Recorded forecasts only; not all possible scheduled forecasts. No receipt before the target start means no prospective credit.",
   "forecast_counts": {
     "void": 2,
@@ -1803,7 +1803,7 @@
   "event_observations": {
     "total": 5,
     "historical_only": 5,
-    "historical_resolved": 4,
+    "historical_resolved": 5,
     "source": "direction/log.json",
     "policy": "Post-release reaction windows are historical observations, excluded from prospective accuracy."
   },
