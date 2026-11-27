@@ -1,13 +1,13 @@
 {
   "version": 1,
-  "asof": "2026-11-27T19:35:43.961450+00:00",
+  "asof": "2026-11-27T20:22:50.796474+00:00",
   "scope": "Recorded forecasts only; not all possible scheduled forecasts. No receipt before the target start means no prospective credit.",
   "forecast_counts": {
     "void": 2,
     "late": 9,
     "unknown_eligibility": 0,
-    "unverified": 28,
-    "verified_pending": 2,
+    "unverified": 22,
+    "verified_pending": 8,
     "verified_resolved": 13,
     "verified_invalid_outcome": 0,
     "verified_overdue": 0
@@ -1519,9 +1519,12 @@
         "close": 1.0944
       },
       "id": "dc9e45e245d5c8b06c25d213612c0f7f1cb354d6f877ee18041b60f98ff4427a",
-      "status": "unverified",
+      "status": "verified_pending",
       "source": "bias/log.json",
-      "receipt": null,
+      "receipt": {
+        "published_at": "2026-11-27T19:36:46.862976+00:00",
+        "run": "46057363660"
+      },
       "target_start": "2026-11-29T18:00:00-05:00"
     },
     {
@@ -1550,9 +1553,12 @@
         "close": 59885.0
       },
       "id": "d7273ba45031283e9362fdadf11e09c787cb275ef616489b1d7455b33eaccd67",
-      "status": "unverified",
+      "status": "verified_pending",
       "source": "bias/log.json",
-      "receipt": null,
+      "receipt": {
+        "published_at": "2026-11-27T19:36:46.862976+00:00",
+        "run": "46057363660"
+      },
       "target_start": "2026-11-29T18:00:00-05:00"
     },
     {
@@ -1581,9 +1587,12 @@
         "close": 7308.25
       },
       "id": "5c5a224c5ea0480ef0cd5b3a2b1dd44ed0e10850bfa3377f0b0b46e253fa5b50",
-      "status": "unverified",
+      "status": "verified_pending",
       "source": "bias/log.json",
-      "receipt": null,
+      "receipt": {
+        "published_at": "2026-11-27T19:36:46.862976+00:00",
+        "run": "46057363660"
+      },
       "target_start": "2026-11-29T18:00:00-05:00"
     },
     {
@@ -1612,9 +1621,12 @@
         "close": 26765.0
       },
       "id": "a3036290473ad66f0234f316a903218349dd3473ca75e3232ac5b3360082a690",
-      "status": "unverified",
+      "status": "verified_pending",
       "source": "bias/log.json",
-      "receipt": null,
+      "receipt": {
+        "published_at": "2026-11-27T19:36:46.862976+00:00",
+        "run": "46057363660"
+      },
       "target_start": "2026-11-29T18:00:00-05:00"
     },
     {
@@ -1643,9 +1655,12 @@
         "close": 2754.399902
       },
       "id": "eacca3a1dfe96506fd13db1d8c7d755578b1da69daf503a2113b30bec6cf7b49",
-      "status": "unverified",
+      "status": "verified_pending",
       "source": "bias/log.json",
-      "receipt": null,
+      "receipt": {
+        "published_at": "2026-11-27T19:36:46.862976+00:00",
+        "run": "46057363660"
+      },
       "target_start": "2026-11-29T18:00:00-05:00"
     },
     {
@@ -1674,9 +1689,12 @@
         "close": 50821.0
       },
       "id": "51cd9b2eaf2cf809f36f709da95b9ca64fee90ad20801b11335f3e2db69a65be",
-      "status": "unverified",
+      "status": "verified_pending",
       "source": "bias/log.json",
-      "receipt": null,
+      "receipt": {
+        "published_at": "2026-11-27T19:36:46.862976+00:00",
+        "run": "46057363660"
+      },
       "target_start": "2026-11-29T18:00:00-05:00"
     }
   ],
