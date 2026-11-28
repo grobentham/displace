@@ -1,5 +1,5 @@
 {
- "asof": "2026-11-28T04:04:41+00:00",
+ "asof": "2026-11-28T04:17:01+00:00",
  "last_seen": "2026-11-28T01:24:38+00:00",
  "limitations": [
   "The witness reads every 10 minutes from 09:20 to 13:00 New York, then hourly to 17:00; a trade that starts and finishes between two readings is unwitnessed, not counted.",
