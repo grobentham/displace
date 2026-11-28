@@ -1,8 +1,8 @@
 {
   "version": 1,
   "plan_hash": "0df5c39c6368d3795ef4e33ce5579e538d37614c520ed17d5c883231cfa8a93d",
-  "asof": "2026-11-27T23:37:10+00:00",
-  "macro_asof": "2026-11-27",
+  "asof": "2026-11-28T02:09:38+00:00",
+  "macro_asof": "2026-11-28",
   "policy": "Descriptive monitoring only, not a forecast. Trigger on a fresh available macro index reaching a specified score; clear only after the separate exit threshold. First observation already beyond the threshold is an initial detection, not evidence of a new crossing. Missing or stale input suspends evaluation without clearing an active condition. All transitions recorded at observation time in UTC; current-vintage revisions can alter scores. Thresholds are policy choices, not empirically validated probabilities.",
   "states": [
     {
@@ -115,24 +115,24 @@
       "extreme": 10,
       "active": false,
       "first_detected": null,
-      "last_evaluated": "2026-11-25T23:45:22+00:00",
-      "last_fingerprint": "13a15cd54c881a69c66e124c274505e7da3928ea87d8837e8b79fc8412c0198b",
+      "last_evaluated": "2026-11-28T02:09:38+00:00",
+      "last_fingerprint": "18046e10f153d899eae3c39f5f9ed51b05df343ec789a7fa8ba40966e3e0ef34",
       "severity": null,
-      "score": 37.54,
+      "score": 37.84,
       "status": "normal",
       "evidence": [
         {
           "id": "DFII10",
-          "observation_date": "2026-11-24",
-          "value": 2.79,
-          "score": 1.71,
+          "observation_date": "2026-11-25",
+          "value": 2.73,
+          "score": 2.38,
           "source": "https://fred.stlouisfed.org/series/DFII10"
         },
         {
           "id": "DFF",
-          "observation_date": "2026-11-24",
+          "observation_date": "2026-11-26",
           "value": 3.88,
-          "score": 73.37,
+          "score": 73.29,
           "source": "https://fred.stlouisfed.org/series/DFF"
         }
       ]
@@ -147,24 +147,24 @@
       "extreme": 90,
       "active": false,
       "first_detected": null,
-      "last_evaluated": "2026-11-25T23:45:22+00:00",
-      "last_fingerprint": "13a15cd54c881a69c66e124c274505e7da3928ea87d8837e8b79fc8412c0198b",
+      "last_evaluated": "2026-11-28T02:09:38+00:00",
+      "last_fingerprint": "18046e10f153d899eae3c39f5f9ed51b05df343ec789a7fa8ba40966e3e0ef34",
       "severity": null,
-      "score": 37.54,
+      "score": 37.84,
       "status": "normal",
       "evidence": [
         {
           "id": "DFII10",
-          "observation_date": "2026-11-24",
-          "value": 2.79,
-          "score": 1.71,
+          "observation_date": "2026-11-25",
+          "value": 2.73,
+          "score": 2.38,
           "source": "https://fred.stlouisfed.org/series/DFII10"
         },
         {
           "id": "DFF",
-          "observation_date": "2026-11-24",
+          "observation_date": "2026-11-26",
           "value": 3.88,
-          "score": 73.37,
+          "score": 73.29,
           "source": "https://fred.stlouisfed.org/series/DFF"
         }
       ]
@@ -179,17 +179,17 @@
       "extreme": 10,
       "active": true,
       "first_detected": "2026-11-24T11:22:57+00:00",
-      "last_evaluated": "2026-11-25T23:45:22+00:00",
-      "last_fingerprint": "42e20504f697b960181c37aaeefe00c17b53474b16acfb65a160e88385ebda8a",
+      "last_evaluated": "2026-11-28T02:09:38+00:00",
+      "last_fingerprint": "cb0a54e657ed5e2db36cf31ca8d898e09d8457ba4fc4ad5b352c0969e65b47dc",
       "severity": "elevated",
-      "score": 10.95,
+      "score": 10.24,
       "status": "active",
       "evidence": [
         {
           "id": "VIXCLS",
-          "observation_date": "2026-11-24",
-          "value": 26.36,
-          "score": 10.95,
+          "observation_date": "2026-11-26",
+          "value": 26.8,
+          "score": 10.24,
           "source": "https://fred.stlouisfed.org/series/VIXCLS"
         }
       ]
@@ -204,17 +204,17 @@
       "extreme": 90,
       "active": false,
       "first_detected": null,
-      "last_evaluated": "2026-11-25T23:45:22+00:00",
-      "last_fingerprint": "42e20504f697b960181c37aaeefe00c17b53474b16acfb65a160e88385ebda8a",
+      "last_evaluated": "2026-11-28T02:09:38+00:00",
+      "last_fingerprint": "cb0a54e657ed5e2db36cf31ca8d898e09d8457ba4fc4ad5b352c0969e65b47dc",
       "severity": null,
-      "score": 10.95,
+      "score": 10.24,
       "status": "normal",
       "evidence": [
         {
           "id": "VIXCLS",
-          "observation_date": "2026-11-24",
-          "value": 26.36,
-          "score": 10.95,
+          "observation_date": "2026-11-26",
+          "value": 26.8,
+          "score": 10.24,
           "source": "https://fred.stlouisfed.org/series/VIXCLS"
         }
       ]
@@ -229,24 +229,24 @@
       "extreme": 90,
       "active": true,
       "first_detected": "2026-11-24T11:22:57+00:00",
-      "last_evaluated": "2026-11-25T23:45:22+00:00",
-      "last_fingerprint": "8f0a77cffd7a72211837b4623aa584b7f73ea80ddea253220ed04367782b753c",
+      "last_evaluated": "2026-11-28T02:09:38+00:00",
+      "last_fingerprint": "ad7e68cbd0d7119929df59aef6cabaa024b3a53add731f3f714d44ac12b58a96",
       "severity": "extreme",
-      "score": 93.4,
+      "score": 94.6,
       "status": "active",
       "evidence": [
         {
           "id": "BAMLH0A0HYM2",
-          "observation_date": "2026-11-24",
-          "value": 3.72,
-          "score": 97.13,
+          "observation_date": "2026-11-26",
+          "value": 3.77,
+          "score": 97.8,
           "source": "https://fred.stlouisfed.org/series/BAMLH0A0HYM2"
         },
         {
           "id": "BAMLC0A0CM",
-          "observation_date": "2026-11-24",
-          "value": 0.98,
-          "score": 89.67,
+          "observation_date": "2026-11-26",
+          "value": 0.99,
+          "score": 91.4,
           "source": "https://fred.stlouisfed.org/series/BAMLC0A0CM"
         }
       ]
